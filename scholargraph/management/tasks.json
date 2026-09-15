@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T20:50:00+07:00",
+  "updated_at": "2026-09-15T22:58:03+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -192,7 +192,7 @@
       "status": "DONE",
       "role": "D/S",
       "owner": "codex/current-session",
-      "session_id": "SESSION-20260915-009",
+      "session_id": "SESSION-20260915-010",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-004",
@@ -210,35 +210,54 @@
         "tests/unit/test_schemas.py",
         "management/reviews/SG-006-REVIEW-PACKET.md",
         "management/reviews/SG-006-REVIEW-20260915.md",
-        "management/logs/SESSION-20260915-009.md"
+        "management/reviews/SG-006-CODEX-REVIEW-20260915.md",
+        "management/reviews/SG-006-RE-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-009.md",
+        "management/logs/SESSION-20260915-010.md"
       ],
       "verification": [
         "2026-09-15T20:43:38+07:00: pytest tests/unit/test_schemas.py -v passed 28/28 tests in 0.45s.",
         "2026-09-15T20:44:15+07:00: pytest tests -q passed 34/34 tests in 0.17s across all modules.",
         "2026-09-15T20:46:00+07:00: artifact review PASS in management/reviews/SG-006-REVIEW-20260915.md; no P0-P2 findings.",
-        "2026-09-15T20:49:00+07:00: scripts/check_project.ps1 exit 0; schemas, interfaces, fixtures and architecture documented."
+        "2026-09-15T20:49:00+07:00: scripts/check_project.ps1 exit 0; schemas, interfaces, fixtures and architecture documented.",
+        "2026-09-15T21:03:36+07:00: Codex review report CHANGES_REQUIRED (2 P1, 3 P2) recorded in management/reviews/SG-006-CODEX-REVIEW-20260915.md.",
+        "2026-09-15T21:15:39+07:00: pytest tests/unit/test_schemas.py -v passed 36/36 tests in 0.32s covering F1-F5 fixes.",
+        "2026-09-15T21:16:27+07:00: pytest tests -q passed 42/42 tests in 0.29s across all modules.",
+        "2026-09-15T21:18:00+07:00: re-review PASS in management/reviews/SG-006-RE-REVIEW-20260915.md; all 5 findings (2 P1, 3 P2) resolved."
       ],
       "claimed_paths": [],
-      "note": "Schemas and boundary interfaces complete. Ranker strictly forbidden from qrels; null policies consistent with protocol v1."
+      "note": "Schemas, interfaces, fixtures and architecture updated and verified PASS after addressing Codex review F1-F5."
     },
     {
       "id": "SG-007",
       "title": "Runner và run manifest",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-019",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-006"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py",
+        "scripts/run_runner_smoke.py",
+        "artifacts/reports/sg007_smoke_20260915.json",
+        "docs/RUNNER_GUIDE.md",
+        "management/reviews/SG-007-CLOSEOUT-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-019.md"
+      ],
+      "verification": [
+        "2026-09-15: pytest chính thức toàn bộ suite: 78 passed in 21.81s, exit 0; Python 3.12.14, pytest 8.4.2, pydantic 2.13.5, httpx 0.28.1.",
+        "Fresh-context reviewer /root/sg007_closeout_review (gpt-6-astra high): PASS trên runner 5F2D7F76... / tests FA1A65BF...; pytest riêng 23 passed, 4 whitespace persistence/export probes và 4 freeze mutation checks PASS. Đóng F1/F2/F3/F4.",
+        "scripts/run_runner_smoke.py: PASS 9/9 checks; run COMPLETED và FAILED, manifest/hashes/seed/hardware/command/rankings/per-query, resume/integrity/export/no-overwrite; synthetic=true, không phải retrieval quality."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Đã hoàn tất SG-007 sau correction whitespace credential và review độc lập PASS. Parser xử lý credential syntax xác định, không cam kết phát hiện mọi secret trong văn xuôi. SG-008 chưa bắt đầu."
     },
     {
       "id": "SG-008",
@@ -265,20 +284,33 @@
       "title": "Tải và đóng băng BEIR",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "/root/sg009_beir_ingest",
+      "session_id": "SESSION-20260915-011-BEIR",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-005",
         "SG-006"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/ingest/beir_loader.py",
+        "tests/unit/test_beir_loader.py",
+        "data/manifests/beir_scifact.json",
+        "data/manifests/beir_scidocs.json",
+        "data/raw/beir/",
+        "management/logs/SESSION-20260915-011-BEIR.md",
+        "management/reviews/SG-007-009-PRECHECK-20260915.md"
+      ],
+      "verification": [
+        "2026-09-15T21:33:51+07:00: official BEIR archive MD5 matched catalog: SciFact 5f7d1de60b170fc8027bb7898e2efca1; SCIDOCS 38121350fc3a4d2f48850f6aff52e4a9.",
+        "2026-09-15T21:33:51+07:00: offline smoke loaded SciFact train/test (5183 corpus; 809/919 and 300/339 query/qrel rows) and SCIDOCS test (25657 corpus; 1000/29928); SCIDOCS dev was rejected.",
+        "2026-09-15T21:46:00+07:00: fresh-context pre-review PASS; source hashes, provenance, offline loader, split policy and ID round-trip verified. Raw anomaly: 344 SCIDOCS documents have empty abstract/text and remains unmodified for SG-010 audit.",
+        "2026-09-15T21:40:00+07:00: scripts/check_project.ps1 exit 0 before closeout."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Official BEIR snapshots frozen with verified archive hashes. Pytest unavailable in the worker runtime; source/import/JSON/full-loader smoke and fresh-context review passed."
     },
     {
       "id": "SG-010",
@@ -345,20 +377,37 @@
       "title": "OpenAlex pilot có resume",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "/root/sg013_openalex_pilot",
+      "session_id": "SESSION-20260915-013-OPENALEX-FIX",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-005",
         "SG-006"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex.py",
+        "data/raw/openalex/",
+        "data/manifests/openalex_pilot.json",
+        "artifacts/reports/openalex_pilot.json",
+        "artifacts/reports/openalex_pilot_correction.json",
+        "management/logs/SESSION-20260915-011-OPENALEX.md",
+        "management/logs/SESSION-20260915-013-OPENALEX-FIX.md",
+        "management/reviews/SG-013-REVIEW-20260915.md",
+        "management/reviews/SG-013-FINAL-RE-REVIEW-20260915.md"
+      ],
+      "verification": [
+        "2026-09-15T21:00:00+07:00: worker pilot produced an immutable local OpenAlex extraction with 2,000 unique works across 20 cached pages; raw works SHA-256 3f301e4fc6c9b0de1fa95f736d0ceff2fa6fac137c086e0716fc3afe761c4980.",
+        "2026-09-15T22:00:00+07:00: worker correction reported 8/8 SG-013 regression tests and 70/70 full-suite tests passed; raw snapshot, manifest and original report were not overwritten.",
+        "2026-09-15T22:13:27+07:00: versioned correction artifact recorded actual venue coverage 1627/2000 = 0.8135 while preserving source report/raw/manifest hashes.",
+        "2026-09-15T22:20:20+07:00: fresh-context final re-review PASS; F1-F3 probes, correction provenance, raw snapshot counts and graph evidence verified. Reviewer could not independently run pytest/httpx in its runtime and did not claim to do so.",
+        "2026-09-15T22:20:20+07:00: scripts/check_project.ps1 exit 0 before closeout."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "OpenAlex pilot complete after F1-F3 fixes and versioned correction of the original report's venue field. Evidence remains graph-feasibility input only: 190 internal edges, 1779 isolated nodes and no year cohort above 2; it does not clear SG-014."
     },
     {
       "id": "SG-014",

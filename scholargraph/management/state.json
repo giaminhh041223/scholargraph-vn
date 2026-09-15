@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T20:50:00+07:00",
+  "updated_at": "2026-09-15T23:01:46+07:00",
   "phase": "M1",
-  "stage": "sg006_done_sg007_ready",
+  "stage": "sg007_done_evaluator_ready",
   "active_tasks": [],
-  "next_task_id": "SG-007",
-  "last_session_id": "SESSION-20260915-009",
-  "last_session_log": "management/logs/SESSION-20260915-009.md",
+  "next_task_id": "SG-008",
+  "last_session_id": "SESSION-20260915-019",
+  "last_session_log": "management/logs/SESSION-20260915-019.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -53,13 +53,13 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-15T20:50:00+07:00",
+    "checked_at": "2026-09-15T23:01:46+07:00",
     "command": ".\\scripts\\check_project.ps1",
     "exit_code": 0,
     "task_count": 50,
-    "local_links_checked": 194,
+    "local_links_checked": 197,
     "model_routes_checked": 50,
     "logical_chat_lanes": 7,
-    "scope": "SG-006 DONE with complete schemas, interfaces, fixtures, and architecture documentation; 28 unit tests PASS; 34 full suite tests PASS. Next task: SG-007."
+    "scope": "SG-007 DONE; 78 official pytest cases PASS; fresh-context runner review PASS (23 pytest cases plus independent probes); synthetic smoke 9/9 PASS. Project checker: 50 tasks, 197 local links, 50 routes, 7 lanes, 23 sessions; DONE=10, TODO=36, DEFERRED=4. Next: SG-008, not started."
   }
 }

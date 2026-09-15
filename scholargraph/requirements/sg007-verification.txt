@@ -1,0 +1,5 @@
+# Direct dependencies exercised by SG-007 verification (Python 3.12.14).
+# Not a full application or transitive dependency lock.
+pydantic==2.13.5
+pytest==8.4.2
+httpx==0.28.1

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T20:50:00+07:00",
+  "updated_at": "2026-09-15T22:58:03+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [],
@@ -112,6 +112,264 @@
       "actual_reasoning": "high",
       "log_path": "management/logs/SESSION-20260915-009.md",
       "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-010",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-006"
+      ],
+      "actual_model": "Gemini 3.8 Flash",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-010.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-011-RUNNER",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-RUNNER.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-BEIR",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg009_beir_ingest",
+      "task_ids": [
+        "SG-009"
+      ],
+      "actual_model": "gpt-5.6-terra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-BEIR.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/beir_loader.py",
+        "tests/unit/test_beir_loader.py",
+        "data/manifests/beir_scifact.json",
+        "data/manifests/beir_scidocs.json",
+        "data/raw/beir/"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-OPENALEX",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_openalex_pilot",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-OPENALEX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex.py",
+        "data/manifests/openalex_pilot.json",
+        "artifacts/reports/openalex_pilot.json",
+        "data/raw/openalex/"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-PRECHECK",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_sg009_precheck",
+      "task_ids": [
+        "SG-007",
+        "SG-009"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-007-009-PRECHECK-20260915.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-009-PRECHECK-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-012-RUNNER-FIX",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-012-RUNNER-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-012-OPENALEX-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_review",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-012-OPENALEX-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-013-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-013-OPENALEX-FIX",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_openalex_pilot",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-013-OPENALEX-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex.py",
+        "artifacts/reports/openalex_pilot_correction.json"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-014-RUNNER-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_sg009_precheck",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-014-RUNNER-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-015-RUNNER-SECRET-FIX",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-015-RUNNER-SECRET-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-016-RUNNER-FINAL-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_final_rereview",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-016-RUNNER-FINAL-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-FINAL-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-017-OPENALEX-FINAL-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_final_review",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-017-OPENALEX-FINAL-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-013-FINAL-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-018-RUNNER-SECRET-ESCALATION",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_secret_escalation",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-018-RUNNER-SECRET-ESCALATION.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_escalated"
+    },
+    {
+      "session_id": "SESSION-20260915-019",
+      "chat_id": "C",
+      "app_thread_id": "01a0a48c-c264-7e50-aadf-a1b7f91e7994",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-019.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-019-RUNNER-CLOSEOUT-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_closeout_review",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-019-RUNNER-CLOSEOUT-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "fresh_context_reviewer"
     }
   ],
   "lanes": [

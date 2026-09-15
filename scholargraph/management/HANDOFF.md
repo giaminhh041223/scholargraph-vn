@@ -1,51 +1,34 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-007
+NEXT_TASK: SG-008
 
-- Phiên: SESSION-20260915-009; múi giờ Asia/Saigon (UTC+07:00).
-- SG-006: **DONE**. Data schemas, boundary interfaces, synthetic fixtures và tài liệu kiến trúc đã hoàn tất; review PASS không có finding P0–P2.
-- SG-000 đến SG-006: **DONE** (7 tasks). SG-007 (Runner và run manifest) đủ dependencies và sẵn sàng (TODO).
-- Phiên coordinator kiêm worker lane D đã hoàn tất; không còn active assignment hoặc file bị lock.
+## Trạng thái — 2026-09-15T22:58:03+07:00
 
-## Đầu ra và bằng chứng SG-006
+- SG-007 **DONE**: runner, provenance, resume, export và terminal integrity đã nghiệm thu; F1/F2/F3/F4 được reviewer độc lập đóng trên snapshot cuối.
+- SG-000 đến SG-007, SG-009, SG-013 DONE. SG-008 vẫn TODO, chưa triển khai evaluator trong phiên này.
+- Phiên coordinator SESSION-20260915-019 hoàn tất. Không còn active assignment.
+- Tiếp nhận hợp lệ từ task ứng dụng đã idle và worker018 đã bàn giao; không chiếm việc dựa vào tuổi timestamp.
+- Các checkpoint sửa SG-007 trước đây được giữ trong logs011/012/015/018 và các review cũ; xem [log closeout](logs/SESSION-20260915-019.md) để có kết quả cuối.
 
-- [Data Schemas](../src/scholargraph/data/schemas.py): Định nghĩa Pydantic v2 cho `Paper`, `CitationEdge`, `Query`, `Qrel`, `RankedDocument`, `RankingResult`, `RunManifest`.
-  - Phân biệt rõ Paper ID (canonical), DOI (định dạng regex `10.xxxx/...`), Query ID, và Qrel Label.
-  - Bắt lỗi: ID/title rỗng, năm ngoài khoảng [1900, 2100], điểm không hữu hạn (NaN/Inf), self-loop citation (`source_id == target_id`), duplicate doc_id trong ranking.
-  - Sắp xếp canonical: điểm giảm dần, ties phá bằng doc_id tăng dần theo Unicode code points.
-  - Hỗ trợ xuất định dạng dòng chuẩn TREC qua `to_trec_lines()`.
-  - Xử lý namespace ID (`parse_namespace_id`, `make_canonical_id`).
-  - Null policy: `abstract` rỗng -> `""`; `year` thiếu -> `None` (cấm tự tiện điền median); `doi` thiếu -> `None`.
-- [Data Access Interfaces](../src/scholargraph/data/interfaces.py):
-  - Định nghĩa `BaseRanker` và `BaseEvaluator`.
-  - Nghiệm thu quan trọng: `BaseRanker` kiểm tra chặt chẽ và từ chối nhận `qrels`/`labels` ở cả constructor và phương thức `rank()`, ném ra `DataLeakageError` nhằm ngăn rò rỉ dữ liệu.
-- [Package init](../src/scholargraph/data/__init__.py): Re-export đầy đủ schemas, interfaces và helper functions.
-- [Synthetic Fixtures](../tests/fixtures/):
-  - `synthetic_papers.jsonl`: 6 paper nhân tạo có trích dẫn chéo, phủ các ca đủ metadata, thiếu abstract, thiếu năm (`synthetic=true`).
-  - `synthetic_queries.json`: 3 truy vấn mẫu (Anh và Việt).
-  - `synthetic_qrels.json`: 5 nhãn qrels ground-truth.
-  - `synthetic_manifest.json`: Ví dụ run manifest.
-- [Tài liệu Kiến trúc](../docs/ARCHITECTURE.md):
-  - Sơ đồ Mermaid luồng dữ liệu (Data Flow) từ Raw Corpus -> Masking/Split -> Retrieval/Ranker -> Evaluator.
-  - Ranh giới bảo vệ chống rò rỉ dữ liệu giữa Ranker, Split Builder và Evaluator.
-  - Hướng dẫn phân biệt ID vs DOI vs Query ID vs Label.
-  - Chính sách giá trị thiếu và quy tắc Namespace ID.
-- [Unit Tests](../tests/unit/test_schemas.py): 28 test cases kiểm thử chi tiết mọi validation, tie-breaking, TREC format, DataLeakageError và fixture loading.
-- [Review Packet](reviews/SG-006-REVIEW-PACKET.md) và [Báo cáo Review](reviews/SG-006-REVIEW-20260915.md): Review PASS, xác nhận đầy đủ SHA-256 các artifact.
-- [Log phiên](logs/SESSION-20260915-009.md): Ghi nhận chi tiết diễn biến triển khai.
+## Bằng chứng SG-007
 
-## Kiểm tra đã chạy
+- [Runner](../src/scholargraph/evaluation/runner.py), [kiểm thử](../tests/unit/test_run_integrity.py), [hướng dẫn](../docs/RUNNER_GUIDE.md).
+- [Fresh-context review cuối](reviews/SG-007-CLOSEOUT-REVIEW-20260915.md): PASS ở mục re-review cuối; phần CHANGES_REQUIRED phía trên là lịch sử snapshot cũ.
+- [Smoke report](../artifacts/reports/sg007_smoke_20260915.json): 9/9 PASS; hai run COMPLETED/FAILED và exports còn ở artifacts/runs, có manifest SHA-256. Tất cả synthetic, không phải kết quả benchmark.
+- Pytest chính thức toàn bộ suite: **78 passed in 21.81s**. Reviewer chạy riêng integrity: **23 passed in 17.77s**, thêm 4 whitespace probes và 4 freeze mutations PASS.
+- Correction cuối tiêu thụ whitespace LF/CRLF quanh explicit credential delimiter/value, tránh lưu secret qua command, metadata, log, error và export.
+- Môi trường .venv riêng dùng system-site-packages để tái sử dụng runtime; phiên bản kiểm thử ghi trong report/hướng dẫn. Đây chưa phải môi trường tái lập đầy đủ cho toàn ứng dụng.
+- Parser không cam kết phát hiện mọi secret tùy ý trong văn xuôi. Code provenance giữ khai báo caller; caller chịu trách nhiệm cung cấp snapshot thật.
 
-- `pytest tests/unit/test_schemas.py -v`: 28/28 passed in 0.45s.
-- `pytest tests -q`: 34/34 passed in 0.17s across the entire project.
-- `powershell -ExecutionPolicy Bypass -File .\scripts\check_project.ps1`: exit code 0.
-  - 50 tasks; dependency acyclic; state consistent.
-  - 50 model routes match matrix; 7 logical lanes; 8 registered sessions.
-  - Board: DONE=7, TODO=39, DEFERRED=4.
+## Bảo toàn đầu ra ngoài SG-007
 
-## Bước tiếp tục chính xác
+- SG-009 DONE: official archive hashes và loader offline đã được phiên trước kiểm tra; 344 SCIDOCS abstract/text rỗng giữ nguyên để SG-010 audit.
+- SG-013 DONE theo review cuối phiên trước; snapshot 2.000 works bất biến. openalex_pilot_correction.json thay riêng số venue sai: 1.627/2.000 (81,35%); không sửa raw snapshot.
+- Các implementation/evidence SG-009/013 chưa commit từ phiên trước được giữ nguyên ngoài commit SG-007. Shared board lưu trạng thái hiện có; không suy từ board rằng các file này đã vào Git.
+- Protocol v1 đã được người dùng duyệt, không đổi. Official deadline/rubric vẫn ở open questions.
 
-1. SG-006 đã hoàn tất (DONE).
-2. Task tiếp theo là **SG-007 — Runner và run manifest** (Mốc: M1, Vai trò: S, Ước tính: 2 giờ-người, Phụ thuộc: SG-006).
-3. Đọc task card SG-007 trong `docs/TASKS.md`: triển khai `src/scholargraph/evaluation/runner.py`, cơ chế băm code/config/data/model, ghi nhận phần cứng/seed, xuất manifest và chạy smoke run không ghi đè (immutability).
-4. Giữ vững các ranh giới và gate downstream (SG-008 Evaluator, SG-009 Ingestion, SG-014 Graph gate, v.v.).
+## Bước tiếp theo khi được giao
+
+1. Đọc SG-008 card/routing và protocol phần evaluator/tie handling.
+2. Xác minh dependency SG-006/007 DONE và snapshot thật, sau đó claim SG-008 qua coordinator.
+3. Kiểm chứng evaluator bằng golden fixtures và đối chiếu công cụ tham chiếu; không dùng smoke metric SG-007 làm chất lượng retrieval.
