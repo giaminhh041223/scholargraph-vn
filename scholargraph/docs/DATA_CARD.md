@@ -1,8 +1,8 @@
 # Data Card — ScholarGraph VN (Tuyến A: BEIR SciFact & SCIDOCS)
 
 - **Mã task:** SG-010 — Audit chất lượng dữ liệu.
-- **Ngày biên soạn:** 2026-09-15.
-- **Phiên bản:** 1.0.0 (Đóng băng sau SG-009 và audit SG-010).
+- **Ngày biên soạn:** 2026-09-15 (Cập nhật chuẩn hóa: 2026-09-16).
+- **Phiên bản:** 1.0.1 (Khắc phục theo review độc lập Codex F1–F5).
 - **Hợp đồng nghiên cứu liên quan:** [RESEARCH_PROTOCOL.md](RESEARCH_PROTOCOL.md) (Giao thức v1), [configs/protocol_v1.json](../configs/protocol_v1.json).
 - **Báo cáo máy đọc:** [artifacts/reports/beir_data_audit.json](../artifacts/reports/beir_data_audit.json).
 - **Manifests nguồn:** [data/manifests/beir_scifact.json](../data/manifests/beir_scifact.json), [data/manifests/beir_scidocs.json](../data/manifests/beir_scidocs.json).
@@ -24,18 +24,18 @@ Mục đích sử dụng: Đánh giá khả năng tìm kiếm thông tin khoa h�
 - **URL lưu trữ chính thức:**
   - SciFact: `https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip`
   - SCIDOCS: `https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip`
-- **Bản quyền:**
-  - SciFact: CC BY-SA 4.0 (Wadden et al., EMNLP 2020).
-  - SCIDOCS: CC0 / Open Academic Data (Cohan et al., ACL 2020).
-  - BEIR: Apache-2.0 License (Thakur et al., NeurIPS 2021).
+- **Bản quyền chi tiết theo thành phần dữ liệu:**
+  - **SciFact:** Claims và evidence annotations thuộc giấy phép **CC BY 4.0**; corpus abstracts thuộc giấy phép **ODC-By 1.0** (theo [SciFact License](https://github.com/allenai/scifact/blob/master/LICENSE.md); Wadden et al., EMNLP 2020).
+  - **SCIDOCS:** Toàn bộ dataset thuộc giấy phép **CC BY 4.0** (theo [SCIDOCS License](https://github.com/allenai/scidocs/blob/master/LICENSE); Cohan et al., ACL 2020). Người sử dụng có nghĩa vụ trích dẫn và ghi nhận tác giả (attribution), không phải CC0 public domain.
+  - **BEIR Code Package:** Thuộc giấy phép mã nguồn mở **Apache-2.0** (Thakur et al., NeurIPS 2021).
 
 ### 2.2 Đóng băng và Checksums
-Dữ liệu thô được tải về, kiểm tra mã băm và giải nén bất biến tại thư mục `data/raw/beir/`:
+Dữ liệu thô được tải về, kiểm tra mã băm và giải nén bất biến tại thư mục `data/raw/beir/` (đối chiếu hoàn toàn khớp với manifests nguồn):
 
-| Dataset | Kích thước archive | Archive MD5 (Catalog) | Archive SHA-256 | Corpus SHA-256 | Queries SHA-256 |
-|---|---:|---|---|---|---|
-| **SciFact** | 2.816.079 B | `5f7d1de60b170fc8027bb7898e2efca1` | `4ba436eb46ef27945d8b28cf99fe25cb4812f86236bca487ce5a21dbbc5f891a` | `dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6` | `8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313` |
-| **SCIDOCS** | 142.471.588 B | `38121350fc3a4d2f48850f6aff52e4a9` | `105faeb49e29a8a7db3005a76e7373ae4e84b8061d4791530e386866b8e8f81e` | `142aa7ce0ee0b9eeceec17e3f8be35ebba05459378120b08080ee11db9d2ba94` | `da7ad2a25528f8fbf4c86beee2ca3930a0827289ee761a29f8f2e46b0a8807d9` |
+| Dataset | Kích thước archive | Archive MD5 (Catalog) | Archive SHA-256 | Corpus SHA-256 | Queries SHA-256 | Qrels SHA-256 |
+|---|---:|---|---|---|---|---|
+| **SciFact** | 2.816.079 B | `5f7d1de60b170fc8027bb7898e2efca1` | `536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165` | `dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6` | `8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313` | `train`: `a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d`<br>`test`: `0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c` |
+| **SCIDOCS** | 142.471.588 B | `38121350fc3a4d2f48850f6aff52e4a9` | `96640201687767c9b1fcc5af7a80b90fb325b37fa25329c2586c25edcfa17ef1` | `328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc` | `3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6` | `test`: `dcd3d7f77417294bb6f338537f3c28d8a5ea72b30fe6633f407fa85528767e35` |
 
 ---
 
@@ -57,19 +57,19 @@ Dữ liệu thô được tải về, kiểm tra mã băm và giải nén bất 
 
 ## 4. Thống kê độ dài văn bản (Lexical Length Distributions)
 
-Được đo lường bằng chuẩn tokenizer của Giao thức v1 (`(?u)\b\w+\b` trên chuỗi casefold Unicode):
+Được đo lường chính xác bằng tokenizer chuẩn của Giao thức v1 (`(?u)\b\w+\b` trên chuỗi casefold Unicode, không stemming, không bỏ stopword) và lưu trữ đồng bộ trong báo cáo máy đọc [artifacts/reports/beir_data_audit.json](../artifacts/reports/beir_data_audit.json):
 
 ### 4.1 SciFact (5.183 documents, 1.109 queries)
-- **Document Title:** Min: 1 | Max: 42 | Mean: 13,57 ± 5,05 | Median: 13 | P90: 20 tokens.
-- **Document Abstract (Text):** Min: 30 | Max: 1.556 | Mean: 211,75 ± 90,25 | Median: 200 | P90: 312 tokens.
-- **Combined Text (`title + " " + abstract`):** Min: 38 | Max: 1.575 | Mean: 225,33 ± 91,69 | Median: 213 | P90: 328 tokens.
-- **Query Text:** Min: 4 | Max: 33 | Mean: 12,98 ± 4,38 | Median: 12 | P90: 19 tokens.
+- **Document Title:** Min: 1 | Max: 42 | Mean: 13,572 ± 5,049 | Median: 13,0 | P25: 10,0 | P75: 17,0 | P90: 20,0 tokens.
+- **Document Abstract (Text):** Min: 30 | Max: 1.556 | Mean: 211,753 ± 90,246 | Median: 200,0 | P25: 153,0 | P75: 258,0 | P90: 312,0 tokens.
+- **Combined Text (`title + " " + abstract`):** Min: 38 | Max: 1.575 | Mean: 225,325 ± 91,692 | Median: 213,0 | P25: 166,0 | P75: 273,0 | P90: 328,0 tokens.
+- **Query Text (1.109 queries):** Min: 3 | Max: 41 | Mean: 12,904 ± 5,038 | Median: 12,0 | P25: 9,0 | P75: 16,0 | P90: 20,0 tokens.
 
 ### 4.2 SCIDOCS (25.657 documents, 1.000 queries)
-- **Document Title:** Min: 1 | Max: 43 | Mean: 9,38 ± 4,11 | Median: 9 | P90: 15 tokens.
-- **Document Abstract (Text):** Min: 0 (344 docs) | Max: 1.189 | Mean: 173,20 ± 84,40 | Median: 164 | P90: 279 tokens.
-- **Combined Text:** Min: 1 | Max: 1.199 | Mean: 182,44 ± 84,98 | Median: 173 | P90: 288 tokens.
-- **Query Text:** Min: 1 | Max: 29 | Mean: 9,33 ± 3,89 | Median: 9 | P90: 15 tokens.
+- **Document Title:** Min: 2 | Max: 48 | Mean: 9,950 ± 3,868 | Median: 9,0 | P25: 7,0 | P75: 12,0 | P90: 15,0 tokens.
+- **Document Abstract (Text):** Min: 0 (344 docs) | Max: 1.919 | Mean: 172,230 ± 118,062 | Median: 156,0 | P25: 118,0 | P75: 202,0 | P90: 256,0 tokens.
+- **Combined Text:** Min: 2 | Max: 1.923 | Mean: 182,179 ± 118,402 | Median: 166,0 | P25: 127,0 | P75: 213,0 | P90: 267,0 tokens.
+- **Query Text (1.000 queries):** Min: 2 | Max: 30 | Mean: 9,976 ± 3,549 | Median: 10,0 | P25: 7,0 | P75: 12,0 | P90: 14,0 tokens.
 
 ---
 
@@ -79,7 +79,7 @@ Kết quả kiểm tra tự động chạy bởi `src/scholargraph/ingest/beir_a
 
 ### 5.1 Tính duy nhất và Toàn vẹn tham chiếu (Referential Integrity)
 - **ID Uniqueness:** 100% ID của corpus và queries là duy nhất, không trùng lặp (SciFact: 5.183 docs, 1.109 queries; SCIDOCS: 25.657 docs, 1.000 queries).
-- **ID Namespacing:** Ánh xạ lossless hai chiều `beir:<dataset>:<raw_id>` ↔ `raw_id` đạt 100% chính xác.
+- **ID Namespacing:** Ánh xạ lossless hai chiều `beir:<dataset>:<raw_id>` ↔ `raw_id` đạt 100% chính xác trên toàn bộ 100% tài liệu và câu truy vấn.
 - **Orphan IDs:** Zero (0) orphan queries, Zero (0) orphan documents trong toàn bộ qrels.
 - **Duplicate / Conflicting Qrels:** Zero (0) cặp `(query-id, doc-id)` trùng lặp hoặc xung đột điểm số.
 
@@ -87,8 +87,8 @@ Kết quả kiểm tra tự động chạy bởi `src/scholargraph/ingest/beir_a
 - **Mô tả:** Trong snapshot chính thức của BEIR SCIDOCS, có đúng **344 tài liệu** chỉ có tiêu đề (`title`), còn phần tóm tắt (`text`) là chuỗi rỗng (`""`).
 - **Tác động tới Qrels:**
   - Toàn bộ **344 tài liệu này đều xuất hiện trong tập qrels test** của SCIDOCS.
-  - Trong đó, có đúng **115 tài liệu mang nhãn liên quan dương tính (`score = 1`)** đối với các câu truy vấn tương ứng.
-  - 229 tài liệu còn lại mang nhãn không liên quan (`score = 0`).
+  - Trong đó, có đúng **115 tài liệu mang nhãn liên quan dương tính (`score = 1`)** đối với các câu truy vấn tương ứng (tổng cộng 187 cặp query-doc dương tính).
+  - 229 tài liệu còn lại chỉ mang nhãn không liên quan (`score = 0`) (tổng cộng 279 cặp query-doc nhãn 0).
 - **Xử lý theo Giao thức v1:**
   - **TUYỆT ĐỐI KHÔNG LỌC BỎ:** Theo quy tắc liêm chính học thuật (Protocol v1 Section 2 & Section 3), benchmark thô phải được bảo toàn nguyên vẹn. Việc âm thầm loại bỏ 344 tài liệu này sẽ làm sai lệch không gian tìm kiếm, phóng đại điểm số một cách giả tạo và phá vỡ tính tái lập với các công trình BEIR quốc tế.
   - **Cách thức biểu diễn:** Trình nạp dữ liệu `BeirLoader` biểu diễn các tài liệu này với `title = raw_title`, `abstract = ""`. Khi đánh chỉ mục lexical/dense, văn bản đầu vào là chính tiêu đề của tài liệu.
@@ -108,7 +108,8 @@ Kết quả kiểm tra tự động chạy bởi `src/scholargraph/ingest/beir_a
 
 ## 6. Tuân thủ Giao thức Nghiên cứu (Research Protocol Compliance)
 
-1. **Không lọc dữ liệu ngầm (No Silent Filtering):** Toàn bộ 5.183 văn bản SciFact và 25.657 văn bản SCIDOCS được đưa vào candidate universe của mọi retriever (TF-IDF, BM25, Dense, RRF).
+Dưới đây là các yêu cầu bắt buộc của Giao thức nghiên cứu v1 (Protocol v1) được bảo đảm và xác thực qua Auditor:
+1. **Không lọc dữ liệu ngầm (No Silent Filtering):** Toàn bộ 5.183 văn bản SciFact và 25.657 văn bản SCIDOCS bắt buộc phải được đưa vào candidate universe của mọi retriever (TF-IDF, BM25, Dense, RRF).
 2. **Không rò rỉ nhãn (No Label Leakage):** Qrels chỉ được cung cấp cho Evaluator để tính toán metric (nDCG@10, Recall@100, MRR@10, MAP@100, P@5). Bộ tìm kiếm (Indexers / Retrievers) hoàn toàn không được tiếp cận qrels.
 3. **Tính tái lập (Reproducibility):** Mọi mã nguồn xử lý và đánh giá đọc dữ liệu offline từ snapshot đã đóng băng, không tải lại qua mạng.
 

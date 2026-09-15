@@ -2,7 +2,9 @@
   "schema_version": 1,
   "task": "SG-010",
   "title": "BEIR Data Quality and Integrity Audit",
-  "audit_timestamp": "2026-09-15T23:50:00+07:00",
+  "audit_timestamp": "2026-09-16T01:02:53.202904+07:00",
+  "audit_passed": true,
+  "errors": [],
   "datasets": {
     "scifact": {
       "dataset": "scifact",
@@ -16,7 +18,7 @@
       },
       "id_integrity": {
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scifact:5560962"
+        "namespace_sample": "beir:scifact:38882175"
       },
       "corpus_audit": {
         "total_documents": 5183,
@@ -259,7 +261,7 @@
       },
       "id_integrity": {
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scidocs:78b7a8acf5da38537f78fba56aefadab0bf3e7e1"
+        "namespace_sample": "beir:scidocs:8925a583cad259d60f63f236302fbc5ac8277e14"
       },
       "corpus_audit": {
         "total_documents": 25657,
@@ -880,6 +882,7 @@
   },
   "cross_split_checks": {
     "scifact_train_vs_test": {
+      "status": "PASS",
       "train_queries_count": 809,
       "test_queries_count": 300,
       "query_id_overlap_count": 0,
@@ -898,7 +901,7 @@
       ],
       "shared_relevant_documents_count": 181,
       "shared_relevant_documents_ratio": 0.6396,
-      "verdict": "Disjoint query ID namespace (0 overlapping IDs); exactly 2 queries have identical text between train and test in official BEIR. Shared corpus is standard IR setup."
+      "verdict": "PASS (with documented upstream anomaly): Disjoint query ID namespace (0 overlapping IDs); exactly 2 queries have identical text between train and test in official BEIR. Shared corpus is standard IR setup."
     }
   },
   "anomalies_summary": {
@@ -1052,6 +1055,7 @@
     "no_test_filtering": true,
     "immutable_raw_benchmark": true,
     "lossless_canonical_namespacing": true,
-    "lexical_tokenizer_verified": "Unicode casefold + (?u)\\b\\w+\\b"
+    "lexical_tokenizer_verified": "Unicode casefold + (?u)\\b\\w+\\b",
+    "all_integrity_checks_passed": true
   }
 }

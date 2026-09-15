@@ -2,34 +2,32 @@
 
 NEXT_TASK: SG-011
 
-## Trạng thái — 2026-09-16T00:05:00+07:00
+## Trạng thái — 2026-09-16T01:10:00+07:00
 
-- SG-010 **DONE**: Audit chất lượng dữ liệu BEIR (SciFact và SCIDOCS) hoàn tất toàn diện; báo cáo [beir_data_audit.json](../artifacts/reports/beir_data_audit.json), [DATA_CARD.md](../docs/DATA_CARD.md) và bộ kiểm thử [test_data_integrity.py](../tests/unit/test_data_integrity.py) đã nghiệm thu; fresh-context review [SG-010-REVIEW-20260915.md](reviews/SG-010-REVIEW-20260915.md) đạt **PASS** (0 findings).
+- SG-010 **DONE**: Đã hoàn thành audit chất lượng dữ liệu BEIR và **khắc phục toàn bộ 5 phát hiện (1 P1, 4 P2) từ bản review độc lập của Codex**. Báo cáo tái nghiệm thu [SG-010-RE-REVIEW-20260916.md](reviews/SG-010-RE-REVIEW-20260916.md) đạt **PASS** trên snapshot mới.
 - SG-000 đến SG-007, SG-009, SG-010, SG-013 đều đã **DONE**.
 - Task **SG-008** giữ nguyên trạng thái **TODO** (hoãn thực hiện theo chỉ đạo trực tiếp của người dùng: *"Khoan không động vào task SG-008 nhé"*).
-- Task **SG-012** (BM25 pilot thật) phụ thuộc `[SG-008, SG-010, SG-011]`. Vì SG-008 bị hoãn và SG-011 chưa làm, SG-012 chưa thể chạy pilot metric thật. Tuy nhiên thiết kế kiến trúc BM25 và chiến lược pilot đã được phân tích hoàn chỉnh.
-- Task **SG-011** (Split và leakage checks) phụ thuộc `[SG-004, SG-010]` $\to$ Hiện đã **đủ 100% điều kiện tiên quyết để triển khai ngay**.
-- Phiên coordinator/worker SESSION-20260915-020 hoàn tất; không còn active assignment.
-- Toàn bộ suite test dự án: **88 passed in 26.42s** (10/10 test cases integrity mới PASS).
+- Task **SG-012** (BM25 pilot thật) phụ thuộc `[SG-008, SG-010, SG-011]`. Do SG-008 tạm hoãn và SG-011 chưa thực hiện, SG-012 chưa thể chạy pilot metric thật. Kiến trúc BM25 positive-IDF theo Protocol v1 đã sẵn sàng.
+- Task **SG-011** (Split và leakage checks) phụ thuộc `[SG-004, SG-010]` $\to$ **Đã đủ 100% điều kiện tiên quyết để thực hiện ngay lập tức**.
+- Phiên coordinator/worker SESSION-20260916-021 hoàn tất; không còn active assignment.
+- Toàn bộ suite test dự án: **91 passed in 22.22s** (13/13 test cases integrity mới PASS bao gồm 5 negative synthetic tests).
 
-## Bằng chứng và Phát hiện chính của SG-010
+## Bằng chứng và Khắc phục chính của SG-010
 
 - **Mã nguồn và Báo cáo:**
   - [src/scholargraph/ingest/beir_audit.py](../src/scholargraph/ingest/beir_audit.py)
   - [artifacts/reports/beir_data_audit.json](../artifacts/reports/beir_data_audit.json)
   - [docs/DATA_CARD.md](../docs/DATA_CARD.md)
   - [tests/unit/test_data_integrity.py](../tests/unit/test_data_integrity.py)
-- **Toàn vẹn tham chiếu & ID:** 100% ID duy nhất, không orphan queries/corpus IDs trong qrels, không duplicate qrels, ánh xạ canonical round-trip đạt 100%.
-- **Dị thường SCIDOCS (344 documents thiếu abstract):**
-  - Trong 25.657 documents của SCIDOCS, đúng 344 documents có abstract rỗng (chỉ có tiêu đề).
-  - Cả 344 documents đều được đánh giá trong tập qrels test; trong đó có đúng **115 documents mang nhãn liên quan dương tính (`score = 1`)**.
-  - Tuân thủ Giao thức v1: giữ nguyên vẹn 100% trong benchmark, không lọc bỏ ngầm, lập chỉ mục bằng tiêu đề.
-- **Dị thường SciFact (Trùng lặp truy vấn Train–Test upstream):**
-  - Không gian ID phân tách hoàn toàn (0 overlapping IDs).
-  - Có 2 câu truy vấn trong tập test trùng 100% văn bản với 2 câu trong tập train upstream của BEIR:
-    - Test `1292` & Train `1291` (*"There is no association between HNF4A mutations and diabetes risks."*) $\to$ doc `56893404`.
-    - Test `870` & Train `871` (*"Obesity decreases life quality."*) $\to$ doc `195689316`.
-  - Đã ghi nhận minh bạch trong Data Card và report để phòng ngừa rủi ro rò rỉ khi phân tích lỗi per-query.
+  - [management/reviews/SG-010-REVIEW-PACKET.md](reviews/SG-010-REVIEW-PACKET.md)
+  - [management/reviews/SG-010-CODEX-REVIEW-20260916.md](reviews/SG-010-CODEX-REVIEW-20260916.md)
+  - [management/reviews/SG-010-RE-REVIEW-20260916.md](reviews/SG-010-RE-REVIEW-20260916.md)
+- **Các điểm đã khắc phục theo review Codex:**
+  1. **F1 [P1]:** Auditor chuyển đổi toàn bộ cơ chế sang đánh giá động (tính toán `audit_passed`, danh sách `errors`, trạng thái `referential_integrity_status` theo các bộ đếm vi phạm thực tế); CLI thoát mã lỗi 1 khi dữ liệu có lỗi; kiểm tra canonical roundtrip 100% ID.
+  2. **F2 [P2]:** Tái cấu trúc kiểm thử tự động, loại bỏ đọc JSON tĩnh; bổ sung 5 negative tests với synthetic fixtures kiểm chứng việc bắt lỗi duplicate, orphan, conflict và rò rỉ ID; chủ động chạy live auditor trên dữ liệu thật ra thư mục tạm.
+  3. **F3 [P2]:** Sửa 4 mã băm SHA-256 trong bảng 2.2 của Data Card khớp hoàn toàn với snapshot đóng băng và manifests.
+  4. **F4 [P2]:** Đồng bộ toàn bộ số liệu min, max, mean, std, median, percentiles trong Section 4 của Data Card khớp với báo cáo máy đọc và tokenizer Protocol v1.
+  5. **F5 [P2]:** Chính xác hóa giấy phép bản quyền: SciFact (CC BY 4.0 / ODC-By 1.0), SCIDOCS (CC BY 4.0 - yêu cầu attribution, không phải CC0), BEIR package (Apache-2.0).
 
 ## Bước tiếp theo khi được giao
 

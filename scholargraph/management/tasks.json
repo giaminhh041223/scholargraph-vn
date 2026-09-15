@@ -320,7 +320,7 @@
       "status": "DONE",
       "role": "D/R",
       "owner": "codex/current-session",
-      "session_id": "SESSION-20260915-020",
+      "session_id": "SESSION-20260916-021",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-009"
@@ -333,16 +333,19 @@
         "docs/DATA_CARD.md",
         "management/reviews/SG-010-REVIEW-PACKET.md",
         "management/reviews/SG-010-REVIEW-20260915.md",
-        "management/logs/SESSION-20260915-020.md"
+        "management/reviews/SG-010-CODEX-REVIEW-20260916.md",
+        "management/reviews/SG-010-RE-REVIEW-20260916.md",
+        "management/logs/SESSION-20260915-020.md",
+        "management/logs/SESSION-20260916-021.md"
       ],
       "verification": [
-        "2026-09-16T00:00:05+07:00: pytest tests/unit/test_data_integrity.py -v passed 10/10 tests in 3.79s.",
-        "2026-09-16T00:00:55+07:00: pytest tests -q passed 88/88 tests in 26.42s across the full project test suite.",
-        "2026-09-16T00:03:34+07:00: fresh-context review PASS in management/reviews/SG-010-REVIEW-20260915.md; no P0-P2 findings.",
-        "2026-09-16T00:01:46+07:00: scripts/check_project.ps1 exit 0; 202 local Markdown links verified."
+        "2026-09-16T01:05:47+07:00: pytest tests/unit/test_data_integrity.py -v passed 13/13 tests in 20.56s covering pure unit, negative synthetic corrupted fixtures, live auditor execution, and Data Card consistency.",
+        "2026-09-16T01:06:29+07:00: pytest tests -q passed 91/91 tests in 22.22s across the full project test suite.",
+        "2026-09-16T01:07:55+07:00: fresh-context re-review PASS in management/reviews/SG-010-RE-REVIEW-20260916.md; all findings F1-F5 closed.",
+        "2026-09-16T01:09:00+07:00: scripts/check_project.ps1 exit 0; local Markdown links and state consistent."
       ],
       "claimed_paths": [],
-      "note": "Hoàn tất audit chất lượng dữ liệu BEIR. Phát hiện 344 documents SCIDOCS thiếu abstract (115 mang nhãn positive trong test qrels) và 2 query trùng lặp text upstream trong SciFact. Bảo toàn nguyên vẹn raw benchmark theo Protocol v1."
+      "note": "Hoàn tất audit chất lượng dữ liệu BEIR và khắc phục toàn bộ các phát hiện F1-F5 từ review Codex. Kiểm tra động tính toàn vẹn tham chiếu, bổ sung negative synthetic tests, chuẩn hóa SHA-256, thống kê độ dài và bản quyền trong Data Card."
     },
     {
       "id": "SG-011",

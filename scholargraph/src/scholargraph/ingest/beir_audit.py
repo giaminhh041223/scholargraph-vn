@@ -15,10 +15,12 @@ raw benchmarks.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 import json
 import math
 from pathlib import Path
 import re
+import sys
 from typing import Any, Dict, List, Mapping, Sequence
 
 from scholargraph.ingest.beir_loader import (
@@ -351,13 +353,13 @@ def audit_single_dataset(dataset_dir: Path, dataset_name: str) -> dict[str, Any]
             if line.strip():
                 query_raw_ids.add(json.loads(line)["_id"])
                 
-    # 3. Canonical ID mapping round-trip verification
+    # 3. Canonical ID mapping round-trip verification (100% exhaustive check)
     roundtrip_mismatches = 0
-    for rid in list(corpus_raw_ids)[:1000]:
+    for rid in sorted(corpus_raw_ids):
         cid = canonical_beir_id(dataset_name, rid)
         if raw_beir_id(dataset_name, cid) != rid:
             roundtrip_mismatches += 1
-    for rid in list(query_raw_ids)[:1000]:
+    for rid in sorted(query_raw_ids):
         cid = canonical_beir_id(dataset_name, rid)
         if raw_beir_id(dataset_name, cid) != rid:
             roundtrip_mismatches += 1
@@ -465,7 +467,22 @@ def audit_scifact_train_test_overlap(raw_root: Path) -> dict[str, Any]:
                 "query_text": query_texts[qid],
             })
 
+    if overlap_qids:
+        overlap_status = "FAIL"
+        verdict = f"FAIL: Detected {len(overlap_qids)} overlapping query IDs between train and test splits."
+    elif overlap_texts:
+        overlap_status = "PASS"
+        verdict = (
+            f"PASS (with documented upstream anomaly): Disjoint query ID namespace (0 overlapping IDs); "
+            f"exactly {len(overlap_texts)} queries have identical text between train and test in official BEIR. "
+            "Shared corpus is standard IR setup."
+        )
+    else:
+        overlap_status = "PASS"
+        verdict = "PASS: Strictly disjoint query sets; shared corpus is standard IR setup."
+
     return {
+        "status": overlap_status,
         "train_queries_count": len(train_qids),
         "test_queries_count": len(test_qids),
         "query_id_overlap_count": len(overlap_qids),
@@ -473,10 +490,7 @@ def audit_scifact_train_test_overlap(raw_root: Path) -> dict[str, Any]:
         "query_text_exact_overlap_details": overlap_details,
         "shared_relevant_documents_count": len(shared_relevant_docs),
         "shared_relevant_documents_ratio": round(len(shared_relevant_docs) / len(test_docs), 4) if test_docs else 0.0,
-        "verdict": (
-            "Disjoint query ID namespace (0 overlapping IDs); exactly 2 queries have identical text "
-            "between train and test in official BEIR. Shared corpus is standard IR setup."
-        ),
+        "verdict": verdict,
     }
 
 
@@ -493,7 +507,9 @@ def run_full_beir_audit(
         "schema_version": 1,
         "task": "SG-010",
         "title": "BEIR Data Quality and Integrity Audit",
-        "audit_timestamp": "2026-09-15T23:50:00+07:00",
+        "audit_timestamp": datetime.now(timezone.utc).astimezone().isoformat(),
+        "audit_passed": True,
+        "errors": [],
         "datasets": {},
         "cross_split_checks": {},
         "anomalies_summary": {},
@@ -544,14 +560,63 @@ def run_full_beir_audit(
                 "This is an inherent property of the upstream benchmark and is documented rather than filtered."
             ),
         },
-        "referential_integrity_status": "100% PASS; zero orphan queries, zero orphan documents, zero duplicate qrel rows.",
+        "referential_integrity_status": "",
     }
+
+    # 5. Dynamic integrity gate evaluation
+    integrity_errors: list[str] = []
+    for d_name, d_data in report["datasets"].items():
+        c_audit = d_data["corpus_audit"]
+        if c_audit["duplicate_raw_ids_count"] > 0:
+            integrity_errors.append(f"{d_name}: {c_audit['duplicate_raw_ids_count']} duplicate corpus ID(s)")
+        if c_audit["missingness"]["empty_both_count"] > 0:
+            integrity_errors.append(f"{d_name}: {c_audit['missingness']['empty_both_count']} document(s) missing both title and text")
+            
+        q_audit = d_data["queries_audit"]
+        if q_audit["duplicate_raw_ids_count"] > 0:
+            integrity_errors.append(f"{d_name}: {q_audit['duplicate_raw_ids_count']} duplicate query ID(s)")
+            
+        id_int = d_data["id_integrity"]
+        if id_int["canonical_roundtrip_mismatches"] > 0:
+            integrity_errors.append(f"{d_name}: {id_int['canonical_roundtrip_mismatches']} canonical roundtrip mismatch(es)")
+            
+        for split_name, s_audit in d_data["splits_audit"].items():
+            ref = s_audit["referential_integrity"]
+            if ref["orphan_query_ids_count"] > 0:
+                integrity_errors.append(f"{d_name} ({split_name}): {ref['orphan_query_ids_count']} orphan query ID(s) in qrels")
+            if ref["orphan_corpus_ids_count"] > 0:
+                integrity_errors.append(f"{d_name} ({split_name}): {ref['orphan_corpus_ids_count']} orphan corpus ID(s) in qrels")
+            if ref["duplicate_pairs_count"] > 0:
+                integrity_errors.append(f"{d_name} ({split_name}): {ref['duplicate_pairs_count']} duplicate qrel pair(s)")
+            if ref["conflicting_scores_count"] > 0:
+                integrity_errors.append(f"{d_name} ({split_name}): {ref['conflicting_scores_count']} conflicting qrel score(s)")
+                
+        for split_name, l_ver in d_data["loader_verification"].items():
+            if l_ver["status"] != "PASS":
+                integrity_errors.append(f"{d_name} ({split_name}): loader verification failed ({l_ver.get('error')})")
+
+    scifact_overlap = report["cross_split_checks"].get("scifact_train_vs_test", {})
+    if scifact_overlap.get("status") == "FAIL":
+        integrity_errors.append(f"SciFact: {scifact_overlap.get('query_id_overlap_count', 0)} overlapping query IDs between train and test")
+
+    audit_passed = (len(integrity_errors) == 0)
+    report["audit_passed"] = audit_passed
+    report["errors"] = integrity_errors
+    if audit_passed:
+        report["anomalies_summary"]["referential_integrity_status"] = (
+            "100% PASS; zero orphan queries, zero orphan documents, zero duplicate qrel rows."
+        )
+    else:
+        report["anomalies_summary"]["referential_integrity_status"] = (
+            f"FAIL: {len(integrity_errors)} integrity violation(s) detected: {'; '.join(integrity_errors)}"
+        )
     
     report["protocol_compliance"] = {
         "no_test_filtering": True,
         "immutable_raw_benchmark": True,
         "lossless_canonical_namespacing": True,
         "lexical_tokenizer_verified": "Unicode casefold + (?u)\\b\\w+\\b",
+        "all_integrity_checks_passed": audit_passed,
     }
     
     # Save to disk
@@ -562,9 +627,13 @@ def run_full_beir_audit(
 
 
 if __name__ == "__main__":
-    import sys
     print("Running BEIR data quality audit...")
     res = run_full_beir_audit()
+    if not res.get("audit_passed", False):
+        print(f"AUDIT FAILED: {len(res.get('errors', []))} error(s) detected!", file=sys.stderr)
+        for err in res.get("errors", []):
+            print(f"  - {err}", file=sys.stderr)
+        sys.exit(1)
     print("Audit finished successfully! Output written to artifacts/reports/beir_data_audit.json")
     print("Summary:")
     print("  SciFact corpus:", res["datasets"]["scifact"]["corpus_audit"]["total_documents"])
