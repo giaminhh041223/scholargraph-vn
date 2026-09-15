@@ -5,7 +5,7 @@ Phiên bản: `sg002-v1`
 Ngày audit local: 2026-09-15
 
 Task: SG-002
-Trạng thái: local audit và CPU pilot đã hoàn tất; GPU cloud chưa đo.
+Trạng thái: local audit, CPU pilot và Colab GPU pilot đã hoàn tất; SG-002 đủ điều kiện DONE.
 
 ## 1. Kết luận vận hành
 
@@ -55,11 +55,33 @@ Run `sg002-20260915T050847Z` đã encode đủ 1.000 văn bản fixture tổng h
 
 Đây là baseline compute bằng MiniLM trên fixture tổng hợp, không phải bằng chứng chất lượng retrieval và không được dùng để cam kết tốc độ model cuối. GPU peak memory để `null` và cloud status để `not_run`, đúng với môi trường CPU-only.
 
-## 4. Thiết kế pilot 1.000 văn bản
+## 4. Kết quả Colab GPU pilot đã chạy
+
+Người dùng chạy cùng notebook trên Google Colab và bàn giao report cùng file embedding. Run `sg002-20260915T054427Z` đã được kiểm tra độc lập: input hash giống CPU pilot, output có đủ 1.000 vector hữu hạn và SHA-256 trong report khớp file `.npy`.
+
+| Chỉ số | Kết quả đã đo |
+|---|---:|
+| GPU / VRAM | Tesla T4 / 15.360 MiB theo `nvidia-smi` |
+| Runtime | Linux; Python 3.13.15; PyTorch 2.11.0+cu128; CUDA 12.8 |
+| Model/revision | `sentence-transformers/all-MiniLM-L6-v2` / `1110a243fdf4706b3f48f1d95db1a4f5529b4d41` |
+| Device / batch / max length | CUDA / 32 / 256 |
+| Model load | 2,24 giây |
+| Encode 1.000 văn bản | 0,9385 giây |
+| Throughput | 1.065,48 documents/second |
+| Peak CUDA allocated / reserved | 255.432.192 / 306.184.192 byte, khoảng 243,6 / 292 MiB |
+| Embedding | `[1000, 384]`, float32, normalized |
+| Dự toán 10K / 20K / 50K, gồm 25% overhead | 11,73 / 23,46 / 58,66 giây |
+| Tăng tốc so với CPU pilot | khoảng 23,43 lần theo documents/second |
+
+Kết quả cho thấy free T4 dư khả năng cho smoke MiniLM 1.000 mẫu. Chưa thuê GPU ở thời điểm này; model khoa học cuối tại SG-017 vẫn phải chạy pilot riêng vì dimension, tokenizer và độ dài đầu vào có thể khác.
+
+## 5. Thiết kế pilot 1.000 văn bản
 
 ### Mục tiêu
 
 Đo model load time, encode time, documents/second, batch size, embedding shape/file size, process RAM và CUDA peak memory nếu thật sự chạy trên CUDA. Sau đó ước lượng thời gian 10K/20K/50K bằng cùng pipeline.
+
+Encoding ở đây chỉ là forward pass của model pretrained để biến văn bản thành vector; không cập nhật trọng số và không phải training/fine-tuning. Vì vậy thời gian pilot chỉ dự toán bước tạo embedding, không đại diện cho chi phí huấn luyện.
 
 ### Cấu hình mặc định
 
@@ -85,7 +107,7 @@ Với tốc độ pilot `r` documents/second:
 
 Chỉ dùng phép ngoại suy cho cùng model, max length, batch/device và distribution độ dài tương đương. Không lấy tốc độ MiniLM để cam kết tốc độ SPECTER2 hoặc model SG-017.
 
-## 5. Cách chạy
+## 6. Cách chạy
 
 ### Local CPU — kiểm tra notebook
 
@@ -123,7 +145,7 @@ python scripts/run_compute_smoke.py
 3. Xác nhận `device=cuda`, GPU name và VRAM trong report, rồi Run All.
 4. Lưu output version và tải report/embeddings về. Tài liệu Kaggle cho biết GPU miễn phí có thể phải chờ khi bận; không ghi P100/T4 nếu report thực tế không xác nhận. [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)
 
-## 6. Shard, resume và storage cho core
+## 7. Shard, resume và storage cho core
 
 - Đơn vị shard mặc định: 1.000 document trong giai đoạn pilot; có thể tăng 2.000–5.000 sau khi biết VRAM/RAM và thời gian mỗi shard.
 - Tên: `embeddings/{dataset_id}/{model_revision}/shard-00000.npy` kèm `shard-00000.json`.
@@ -133,7 +155,7 @@ python scripts/run_compute_smoke.py
 - Lưu notebook runtime trên disk tạm để encode nhanh, nhưng đồng bộ report/manifest/shard hoàn tất sang nơi bền vững trước khi phiên cloud kết thúc.
 - Dự kiến embeddings float32 20K × 384 của MiniLM khoảng 30,7 MB; 20K × 768 khoảng 61,4 MB. Index, model và corpus là phần riêng, nên giữ tối thiểu 10 GB trống trên D cho core; đây là budget vận hành, không phải dung lượng đã sử dụng.
 
-## 7. Cổng quyết định thuê GPU
+## 8. Cổng quyết định thuê GPU
 
 Không thuê ở SG-002 nếu free GPU chạy được pilot và dự toán 20K nằm trong một phiên an toàn. Chỉ lập đề xuất thuê khi có ít nhất một trong các bằng chứng:
 
@@ -144,7 +166,7 @@ Không thuê ở SG-002 nếu free GPU chạy được pilot và dự toán 20K 
 
 Đề xuất thuê phải ghi GPU, VRAM, đơn giá hiện hành, số giờ, storage/egress và mức trần chi phí; người dùng duyệt trước. Không dùng benchmark web thay cho pilot của chính pipeline.
 
-## 8. Trạng thái nghiệm thu SG-002
+## 9. Trạng thái nghiệm thu SG-002
 
 | Hạng mục | Trạng thái hiện tại |
 |---|---|
@@ -152,8 +174,8 @@ Không thuê ở SG-002 nếu free GPU chạy được pilot và dự toán 20K 
 | GPU local/VRAM qua nvidia-smi | VERIFIED, nhưng PyTorch CPU-only |
 | Notebook 1.000 mẫu + validation | VERIFIED bằng runner plain-Python, exit code 0 |
 | CPU docs/second và RAM | VERIFIED — 45,48 docs/s; RSS tăng khoảng 115,3 MiB |
-| Colab/Kaggle GPU name, docs/second, peak VRAM | UNVERIFIED — cần một run thật |
-| Account quota | UNVERIFIED — chỉ tài khoản người dùng/runtime thực tế xác nhận được |
+| Colab GPU name, docs/second, peak VRAM | VERIFIED — Tesla T4; 1.065,48 docs/s; peak allocated khoảng 243,6 MiB |
+| Account access | VERIFIED bằng run Colab; quota dài hạn vẫn động và không được Colab công bố cố định |
 | Shard/resume/storage plan | DOCUMENTED |
 
-SG-002 không được DONE chỉ từ cấu hình local. Nếu CPU run hoàn tất nhưng chưa có cloud GPU, task chuyển BLOCKED hoặc REVIEW có blocker rõ tùy kết quả; không điền số GPU từ quảng cáo/provider docs.
+SG-002 đủ điều kiện DONE: số CPU/GPU đều đến từ run thật, phần chưa xác minh được nêu rõ, file embedding khớp checksum và compute plan đã có dự toán cùng chiến lược shard/resume. Kết quả không được dùng làm retrieval-quality evidence hoặc đại diện cho model cuối trước SG-017.

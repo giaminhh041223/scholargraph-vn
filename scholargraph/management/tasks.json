@@ -63,7 +63,7 @@
       "title": "Khảo sát local và GPU pilot",
       "phase": "M1",
       "priority": "CORE",
-      "status": "BLOCKED",
+      "status": "DONE",
       "role": "D/S",
       "owner": "codex/current-session",
       "session_id": "SESSION-20260915-005",
@@ -71,22 +71,25 @@
       "dependencies": [
         "SG-000"
       ],
-      "blocked_reason": "Actual Colab/Kaggle GPU run has not been executed: the user-account accelerator session must return GPU name, peak VRAM and documents/second. Local PyTorch is CPU-only even though nvidia-smi sees an MX550.",
+      "blocked_reason": null,
       "evidence": [
         "docs/COMPUTE_PLAN.md",
         "notebooks/compute_smoke.ipynb",
         "artifacts/reports/compute_pilot.json",
+        "artifacts/reports/compute_pilot.local_cpu.json",
         "scripts/run_compute_smoke.py",
         "tests/test_compute_pilot.py",
         "management/logs/SESSION-20260915-005.md"
       ],
       "verification": [
         "Local CPU pilot encoded exactly 1,000 documents at 45.48 docs/s; embedding shape [1000, 384] and SHA-256 matched the saved file.",
-        "pytest tests -q: 5 passed.",
-        "scripts/check_project.ps1 passed before closeout; final result recorded in SESSION-20260915-005.md."
+        "Colab GPU pilot encoded exactly 1,000 documents on Tesla T4 at 1065.48 docs/s; peak CUDA allocated/reserved was 255432192/306184192 bytes.",
+        "GPU embedding SHA-256 in compute_pilot.json matched the uploaded .npy file.",
+        "pytest tests -q: 6 passed.",
+        "scripts/check_project.ps1 passed at SG-002 closeout; final result recorded in SESSION-20260915-005.md."
       ],
       "claimed_paths": [],
-      "note": "Local audit, reproducible CPU pilot, estimates and shard/resume plan are complete. Resume SG-002 by running the same notebook on an actual Colab/Kaggle GPU and replacing the report with verified CUDA measurements."
+      "note": "Local audit, CPU baseline, actual Colab Tesla T4 pilot, estimates and shard/resume/storage plan are complete. MiniLM smoke establishes compute feasibility only; rerun the selected scientific model after SG-017."
     },
     {
       "id": "SG-003",

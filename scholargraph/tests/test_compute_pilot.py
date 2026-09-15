@@ -27,7 +27,7 @@ def test_compute_notebook_is_a_plain_python_sg002_pilot() -> None:
     assert not any(line.lstrip().startswith(("%", "!")) for line in code.splitlines())
 
 
-def test_cpu_report_is_consistent_and_does_not_fake_gpu_metrics() -> None:
+def test_compute_report_is_consistent_and_device_metrics_are_truthful() -> None:
     report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
     measurement = report["measurement"]
 
@@ -48,6 +48,28 @@ def test_cpu_report_is_consistent_and_does_not_fake_gpu_metrics() -> None:
         assert report["cloud_gpu"]["status"] == "not_run"
         assert measurement["gpu_peak_allocated_bytes"] is None
         assert measurement["gpu_peak_reserved_bytes"] is None
+    else:
+        assert report["environment"]["device"] == "cuda"
+        assert report["environment"]["cuda_available"] is True
+        assert report["environment"]["gpu_name"]
+        assert report["environment"]["gpu_total_memory_bytes"] > 0
+        assert report["status"] == "completed_gpu"
+        assert report["cloud_gpu"]["status"] == "measured_in_this_run"
+        assert measurement["gpu_peak_allocated_bytes"] > 0
+        assert measurement["gpu_peak_reserved_bytes"] >= measurement["gpu_peak_allocated_bytes"]
+
+
+def test_preserved_cpu_baseline_remains_distinct_from_gpu_result() -> None:
+    cpu_report_path = REPORT_PATH.with_name("compute_pilot.local_cpu.json")
+    cpu_report = json.loads(cpu_report_path.read_text(encoding="utf-8"))
+    gpu_report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+
+    assert cpu_report["environment"]["device"] == "cpu"
+    assert cpu_report["status"] == "completed_local_cpu_gpu_pending"
+    assert gpu_report["environment"]["device"] == "cuda"
+    assert gpu_report["status"] == "completed_gpu"
+    assert cpu_report["input"]["sha256"] == gpu_report["input"]["sha256"]
+    assert cpu_report["model"]["resolved_revision"] == gpu_report["model"]["resolved_revision"]
 
 
 def test_report_estimates_apply_the_documented_overhead() -> None:
