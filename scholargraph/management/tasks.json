@@ -63,10 +63,10 @@
       "title": "Khảo sát local và GPU pilot",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "role": "D/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-005",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-000"
@@ -74,8 +74,12 @@
       "blocked_reason": null,
       "evidence": [],
       "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "claimed_paths": [
+        "docs/COMPUTE_PLAN.md",
+        "notebooks/compute_smoke.ipynb",
+        "artifacts/reports/compute_pilot.json"
+      ],
+      "note": "Local audit and portable 1,000-document encoding pilot in progress; cloud GPU facts remain unverified until an actual Kaggle/Colab run."
     },
     {
       "id": "SG-003",

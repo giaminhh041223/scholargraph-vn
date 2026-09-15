@@ -50,24 +50,3 @@ page_20.png
 
 # Raw logs
 *.log
-
-# Isolate root E-COMASPECT files from ScholarGraph repository
-/src/
-/data/
-/tests/
-/notebooks/
-/scripts/
-/docs/
-/slides_01/
-/slides_02/
-/conftest.py
-/run_pipeline.py
-/start_system.*
-/docker-compose.yml
-/Dockerfile
-/.dockerignore
-/requirements.txt
-/README.md
-/extracted_L01.txt
-/L05-*.txt
-

@@ -9,4 +9,4 @@ Dự án mới được đặt tại [scholargraph/](scholargraph/README.md).
 - [Bàn giao cho phiên tiếp theo](scholargraph/management/HANDOFF.md)
 - [Giao thức thực nghiệm](scholargraph/docs/RESEARCH_PROTOCOL.md)
 
-Các tài liệu môn và E-COMASPECT hiện có vẫn nằm ở thư mục gốc.
+Các tài liệu bài giảng môn học vẫn nằm ở thư mục gốc.

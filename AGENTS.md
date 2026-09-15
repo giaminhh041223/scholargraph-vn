@@ -2,8 +2,8 @@
 
 ## Scope
 - Workspace: `D:/Web_mining_20261`.
-- ScholarGraph VN lives in `scholargraph/`. Existing root `src/`, `data/`, `tests/`, `README.md`, notebooks, checkpoints and lecture files belong to the earlier E-COMASPECT work.
-- For a ScholarGraph task, work inside `scholargraph/`; do not mix its datasets, results or dependencies with E-COMASPECT.
+- ScholarGraph VN lives in `scholargraph/`. Dự án cũ E-COMASPECT đã được xóa bỏ theo yêu cầu của người dùng; thư mục gốc chỉ giữ tài liệu bài giảng môn học và các điểm vào của ScholarGraph.
+- Toàn bộ công việc thực hiện bên trong `scholargraph/`.
 - The user's current request determines scope. A saved plan is context, not permission to execute the entire backlog.
 - Respect system/developer instructions and the user's latest corrections.
 

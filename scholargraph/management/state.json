@@ -1,13 +1,15 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T11:40:00+07:00",
+  "updated_at": "2026-09-15T11:48:51+07:00",
   "phase": "M1",
-  "stage": "package_and_git_ready_compute_next",
-  "active_tasks": [],
+  "stage": "compute_pilot_in_progress",
+  "active_tasks": [
+    "SG-002"
+  ],
   "next_task_id": "SG-002",
-  "last_session_id": "SESSION-20260915-004",
-  "last_session_log": "management/logs/SESSION-20260915-004.md",
+  "last_session_id": "SESSION-20260915-005",
+  "last_session_log": "management/logs/SESSION-20260915-005.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",

@@ -2,9 +2,9 @@
 
 NEXT_TASK: SG-002
 
-- Phiên gần nhất: SESSION-20260915-004.
+- Phiên hiện tại: SESSION-20260915-005.
 - Múi giờ làm việc: Asia/Saigon, UTC+07:00.
-- Giai đoạn: M1 — SG-001 DONE; SG-005 DONE; package Python và Git repository đã sẵn sàng. Task tiếp theo SG-002.
+- Giai đoạn: M1 — SG-002 IN_PROGRESS; đang đo local và chuẩn bị pilot GPU 1.000 tài liệu.
 
 ## Bối cảnh đã chốt
 Người dùng chọn ScholarGraph, yêu cầu plan từng task và rules/log để tiếp nối. Sau đó xác nhận còn khoảng 7 tuần, 2 người, phần triển khai nhờ agent; GPU qua Kaggle/Colab, có thể cân nhắc thuê nếu cần.
@@ -51,4 +51,3 @@ SG-002 — khảo sát local và GPU pilot.
 - Runtime Python 3.13.0 và Git 2.40+ đã xác minh hoạt động tốt trên hệ thống.
 - Cấu hình `.gitignore` đảm bảo không trộn lẫn và không làm ảnh hưởng đến mã nguồn/dữ liệu cũ của E-COMASPECT.
 - Không có run/GPU process của ScholarGraph đang chạy.
-
