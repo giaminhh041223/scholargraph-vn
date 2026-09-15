@@ -1,13 +1,24 @@
 """ScholarGraph VN — Abstract interfaces and contracts for data access and evaluation boundaries.
 
-Following Research Protocol v1:
+Following Research Protocol v1 (docs/RESEARCH_PROTOCOL.md, configs/protocol_v1.json):
 - Rankers are strictly forbidden from receiving relevance judgments (qrels),
   held-out edges, or any test-label derived features.
 - Evaluators are the sole components authorized to read qrels alongside run outputs.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Mapping, Optional, Sequence
+from typing import Any, Dict, FrozenSet, Mapping, Optional, Sequence
+
+
+FORBIDDEN_RELEVANCE_KEYS: FrozenSet[str] = frozenset({
+    "qrels",
+    "labels",
+    "ground_truth",
+    "heldout_edges",
+    "test_labels",
+    "heldout_positive_counts",
+    "human_labels",
+})
 
 
 class DataLeakageError(Exception):
@@ -17,39 +28,49 @@ class DataLeakageError(Exception):
 class BaseRanker(ABC):
     """Base interface for all retrieval and ranking components in ScholarGraph VN.
     
-    A ranker may accept queries, eligible candidate pools, corpus text, and permitted
-    observed graph edges. It MUST NEVER accept qrels or ground truth relevance labels.
+    Enforces the Template Method Pattern:
+    - Public method `rank()` performs strict data leakage checks before delegating.
+    - Subclasses MUST implement internal hook `_rank()`, not override `rank()`.
     """
 
     def __init__(self, **kwargs: Any) -> None:
-        if "qrels" in kwargs or "labels" in kwargs:
-            raise DataLeakageError(
-                "Ranker constructor received forbidden relevance data ('qrels' or 'labels'). "
-                "Rankers must not access ground truth labels!"
-            )
+        for key in kwargs:
+            if key.lower() in FORBIDDEN_RELEVANCE_KEYS:
+                raise DataLeakageError(
+                    f"Ranker constructor received forbidden relevance data ('{key}'). "
+                    "Rankers must not access ground truth labels or held-out evaluation edges!"
+                )
 
-    @abstractmethod
     def rank(
         self,
         query: Any,
         candidate_ids: Optional[Sequence[str]] = None,
         **kwargs: Any,
     ) -> Any:
-        """Produce a ranked list of candidates for a given query.
+        """Public entry point for ranking candidates for a query.
         
-        Args:
-            query: Query instance.
-            candidate_ids: Optional restricted universe of eligible document IDs.
-            **kwargs: Extra non-privileged ranking parameters.
+        Strictly inspects parameters for forbidden ground truth keys before
+        delegating to the internal `_rank()` implementation hook.
 
         Raises:
-            DataLeakageError: If 'qrels' or 'labels' are present in kwargs.
+            DataLeakageError: If any forbidden relevance key is passed.
         """
-        if "qrels" in kwargs or "labels" in kwargs:
-            raise DataLeakageError(
-                "Ranker.rank() received forbidden relevance data ('qrels' or 'labels'). "
-                "Rankers must not access ground truth labels!"
-            )
+        for key in kwargs:
+            if key.lower() in FORBIDDEN_RELEVANCE_KEYS:
+                raise DataLeakageError(
+                    f"Ranker.rank() received forbidden relevance data ('{key}'). "
+                    "Rankers must not access ground truth labels or held-out evaluation edges!"
+                )
+        return self._rank(query=query, candidate_ids=candidate_ids, **kwargs)
+
+    @abstractmethod
+    def _rank(
+        self,
+        query: Any,
+        candidate_ids: Optional[Sequence[str]] = None,
+        **kwargs: Any,
+    ) -> Any:
+        """Internal ranking implementation hook to be overridden by subclasses."""
 
 
 class BaseEvaluator(ABC):

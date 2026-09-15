@@ -75,8 +75,10 @@ Theo quy định tại Mục 2 của [RESEARCH_PROTOCOL.md](RESEARCH_PROTOCOL.md
 | **Evaluator** | Đầu ra xếp hạng của Ranker (`RankingResult`), tập nhãn chân lý (`Qrel`), danh sách query ID chính thức. | Không chỉnh sửa ranking của Ranker; không chia sẻ nhãn cho ranker trước hoặc trong khi chạy. |
 
 ### Cơ chế bảo vệ trong mã nguồn:
-- Interface `BaseRanker` trong `src/scholargraph/data/interfaces.py` kiểm tra các đối số khởi tạo và phương thức `rank()`.
-- Nếu phát hiện bất kỳ tham số nào chứa `qrels` hoặc `labels`, hệ thống sẽ kích hoạt ngoại lệ `DataLeakageError` và hủy quá trình chạy ngay lập tức.
+- Interface `BaseRanker` trong `src/scholargraph/data/interfaces.py` áp dụng **Template Method Pattern**:
+  - Phương thức công khai `rank()` đóng vai trò cổng kiểm soát duy nhất, duyệt qua danh sách khóa bị cấm `FORBIDDEN_RELEVANCE_KEYS` (`qrels`, `labels`, `ground_truth`, `heldout_edges`, `test_labels`, `human_labels`).
+  - Nếu phát hiện bất kỳ tham số nào chứa dữ liệu nhãn hoặc cạnh held-out, ngoại lệ `DataLeakageError` sẽ lập tức được kích hoạt.
+  - Subclass chỉ cài đặt hook nội bộ `_rank()` và không thể vô hiệu hóa cơ chế bảo vệ kể cả khi quên gọi `super()`.
 
 ---
 
@@ -131,10 +133,10 @@ Mỗi dòng kết quả xuất ra theo chuẩn quốc tế TREC:
 ```text
 <query_id> Q0 <doc_id> <rank> <score> <run_id>
 ```
-Trong đó:
-- `Q0`: hằng số quy ước TREC.
-- `rank`: thứ hạng từ 1 đến N.
-- `score`: điểm số định dạng số thực 6 chữ số thập phân (hoặc điểm nguyên giảm dần nghiêm ngặt theo protocol §6.1 khi chuyển giao cho trec_eval).
+Theo quy định tại Protocol §6.1 và `protocol_v1.json`:
+- Công cụ `trec_eval` tự động sắp xếp lại theo score giảm dần và khi bằng điểm sẽ phá hòa bằng `doc_id` giảm dần (ngược với quy ước chuẩn hóa của hệ thống).
+- Do đó, phương thức `to_trec_lines()` mặc định xuất **điểm giảm dần nghiêm ngặt**: `score = N - rank + 1` (với $N$ là tổng số ứng viên). Cách này triệt tiêu hoàn toàn hiện tượng ties trong file TREC, bảo đảm `trec_eval` tôn trọng chính xác 100% thứ tự của `RankingResult`.
+- Điểm số nguyên bản của từng phương pháp (`raw scores`) được lưu trữ độc lập trong artifact kết quả để phục vụ phân tích chi tiết.
 
 ### 6.3 Run Manifest
 Mỗi lượt chạy thực nghiệm sinh ra một bản ghi `RunManifest` (`artifacts/runs/RUN-*.json`) chứa:
@@ -144,3 +146,4 @@ Mỗi lượt chạy thực nghiệm sinh ra một bản ghi `RunManifest` (`art
 - `parameters`: Toàn bộ siêu tham số của mô hình (ví dụ: $k_1, b, \gamma, \lambda$).
 - `hardware_info`: Thông tin thiết bị phần cứng (CPU, GPU, RAM, phiên bản OS).
 - `metrics`: Các chỉ số đo lường do Evaluator ghi nhận.
+- `synthetic`: Cờ boolean bắt buộc (`synthetic=True` cho các run thử nghiệm từ fixture dữ liệu nhân tạo; cấm đưa vào các bảng báo cáo học thuật).

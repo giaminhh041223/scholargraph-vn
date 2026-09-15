@@ -4,7 +4,8 @@ Compliant with Research Protocol v1 (docs/RESEARCH_PROTOCOL.md, configs/protocol
 - Clear distinction between canonical Paper ID, DOI, Query ID, and Qrel Label.
 - Strict validation of IDs, years, scores, self-loops, and ranking ties.
 - Null policy: empty string for missing abstract; None for missing year (no median imputation).
-- Synthetic flag policy: fixture data marked with synthetic=True.
+- Synthetic flag policy: fixture data and synthetic runs marked with synthetic=True.
+- TREC serialization: strictly decreasing order scores (N - rank + 1) per protocol §6.1.
 """
 
 from __future__ import annotations
@@ -40,13 +41,20 @@ def parse_namespace_id(prefixed_id: str) -> Tuple[str, str]:
     """Parse a namespaced ID (e.g. 'openalex:W12345' or 'beir:scifact:doc1') into (namespace, raw_id).
     
     If no namespace delimiter ':' is present, defaults to namespace 'default'.
+    Both namespace and raw_id must be non-empty and non-whitespace.
     """
     if not prefixed_id or not prefixed_id.strip():
         raise ValueError("ID must not be empty or whitespace.")
     prefixed_id = prefixed_id.strip()
     if ":" in prefixed_id:
         parts = prefixed_id.split(":", 1)
-        return parts[0], parts[1]
+        ns = parts[0].strip()
+        raw = parts[1].strip()
+        if not ns or not raw:
+            raise ValueError(
+                f"Invalid namespaced ID '{prefixed_id}': both namespace and raw_id must be non-empty."
+            )
+        return ns, raw
     return "default", prefixed_id
 
 
@@ -127,6 +135,23 @@ class CitationEdge(BaseModel):
     target_id: str = Field(..., min_length=1, description="Cited paper canonical ID")
     year: Optional[int] = Field(default=None, description="Source paper publication year for temporal cutoff")
     synthetic: bool = Field(default=False, description="True if synthetic fixture data")
+
+    @field_validator("source_id", "target_id")
+    @classmethod
+    def check_non_empty_edge_id(cls, v: str) -> str:
+        s = v.strip()
+        if not s:
+            raise ValueError("Edge paper ID must not be empty or whitespace.")
+        return s
+
+    @field_validator("year")
+    @classmethod
+    def validate_edge_year_range(cls, v: Optional[int]) -> Optional[int]:
+        if v is None:
+            return None
+        if v < 1900 or v > 2100:
+            raise ValueError(f"Citation edge year {v} is outside plausible scientific range [1900, 2100].")
+        return v
 
     @model_validator(mode="after")
     def validate_no_self_loop(self) -> CitationEdge:
@@ -210,6 +235,14 @@ class RankingResult(BaseModel):
     query_id: str = Field(..., min_length=1, description="Query ID")
     candidates: List[RankedDocument] = Field(default_factory=list, description="Ordered candidate list")
 
+    @field_validator("query_id")
+    @classmethod
+    def check_query_id(cls, v: str) -> str:
+        s = v.strip()
+        if not s:
+            raise ValueError("query_id must not be empty or whitespace.")
+        return s
+
     @model_validator(mode="after")
     def validate_unique_docs_and_canonical_order(self) -> RankingResult:
         seen = set()
@@ -224,6 +257,21 @@ class RankingResult(BaseModel):
                 raise ValueError(
                     f"Inconsistent rank at index {idx}: item rank is {item.rank}, expected {idx + 1}."
                 )
+            # Enforce canonical ordering on direct initialization / deserialization:
+            # 1. score descending
+            # 2. doc_id ascending (Unicode code points)
+            if idx > 0:
+                prev = self.candidates[idx - 1]
+                if item.score > prev.score:
+                    raise ValueError(
+                        f"Non-canonical order at index {idx}: score {item.score} > previous score {prev.score}. "
+                        "Candidates must be ordered by score descending."
+                    )
+                if item.score == prev.score and item.doc_id <= prev.doc_id:
+                    raise ValueError(
+                        f"Non-canonical tie order at index {idx}: tied score {item.score} but doc_id '{item.doc_id}' "
+                        f"<= previous doc_id '{prev.doc_id}'. Tied candidates must be broken by doc_id ascending."
+                    )
         return self
 
     @classmethod
@@ -238,8 +286,6 @@ class RankingResult(BaseModel):
         1. score descending
         2. doc_id ascending by Unicode code points (lexicographical)
         """
-        # Sort key: (-score, doc_id)
-        # Note: -score works because score is guaranteed to be finite
         sorted_items = sorted(
             scored_candidates,
             key=lambda item: (-item[1], item[0]),
@@ -255,11 +301,29 @@ class RankingResult(BaseModel):
         ]
         return cls(query_id=query_id, candidates=ranked)
 
-    def to_trec_lines(self, run_id: str = "scholargraph") -> List[str]:
-        """Serialize ranking to standard TREC run format: query_id Q0 doc_id rank score run_id."""
+    def to_trec_lines(
+        self,
+        run_id: str = "scholargraph",
+        strictly_decreasing_scores: bool = True,
+    ) -> List[str]:
+        """Serialize ranking to standard TREC run format: query_id Q0 doc_id rank score run_id.
+        
+        Per Research Protocol §6.1 and configs/protocol_v1.json:
+        trec_eval sorts by score descending and breaks ties by doc_id descending, which reverses
+        our canonical doc_id ascending tie-breaker.
+        When strictly_decreasing_scores=True (default), output score is strictly decreasing:
+            score = N - rank + 1
+        This completely prevents ties in TREC files and guarantees trec_eval respects the exact
+        canonical ordering of RankingResult. Raw scores are preserved separately in the artifact.
+        """
+        n_candidates = len(self.candidates)
         lines = []
         for doc in self.candidates:
-            lines.append(f"{self.query_id} Q0 {doc.doc_id} {doc.rank} {doc.score:.6f} {run_id}")
+            if strictly_decreasing_scores:
+                trec_score = float(n_candidates - doc.rank + 1)
+            else:
+                trec_score = doc.score
+            lines.append(f"{self.query_id} Q0 {doc.doc_id} {doc.rank} {trec_score:.6f} {run_id}")
         return lines
 
 
@@ -282,6 +346,7 @@ class RunManifest(BaseModel):
     parameters: Dict[str, Any] = Field(default_factory=dict, description="Hyperparameters and run options")
     hardware_info: Dict[str, Any] = Field(default_factory=dict, description="CPU/GPU and OS environment details")
     metrics: Optional[Dict[str, float]] = Field(default=None, description="Aggregate metric results")
+    synthetic: bool = Field(default=False, description="True if synthetic fixture run; excluded from research tables")
     error_message: Optional[str] = Field(default=None, description="Failure details if status is FAILED")
 
     @field_validator("run_id")
