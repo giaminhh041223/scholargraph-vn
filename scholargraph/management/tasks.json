@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T17:43:01.9334233+07:00",
+  "updated_at": "2026-09-15T20:50:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -189,20 +189,37 @@
       "title": "Schema và interface",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-009",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-004",
         "SG-005"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/data/schemas.py",
+        "src/scholargraph/data/interfaces.py",
+        "docs/ARCHITECTURE.md",
+        "tests/fixtures/synthetic_papers.jsonl",
+        "tests/fixtures/synthetic_queries.json",
+        "tests/fixtures/synthetic_qrels.json",
+        "tests/fixtures/synthetic_manifest.json",
+        "tests/unit/test_schemas.py",
+        "management/reviews/SG-006-REVIEW-PACKET.md",
+        "management/reviews/SG-006-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-009.md"
+      ],
+      "verification": [
+        "2026-09-15T20:43:38+07:00: pytest tests/unit/test_schemas.py -v passed 28/28 tests in 0.45s.",
+        "2026-09-15T20:44:15+07:00: pytest tests -q passed 34/34 tests in 0.17s across all modules.",
+        "2026-09-15T20:46:00+07:00: artifact review PASS in management/reviews/SG-006-REVIEW-20260915.md; no P0-P2 findings.",
+        "2026-09-15T20:49:00+07:00: scripts/check_project.ps1 exit 0; schemas, interfaces, fixtures and architecture documented."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Schemas and boundary interfaces complete. Ranker strictly forbidden from qrels; null policies consistent with protocol v1."
     },
     {
       "id": "SG-007",

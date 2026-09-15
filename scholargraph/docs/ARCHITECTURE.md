@@ -1,92 +1,146 @@
-# Kiến trúc dự kiến và hợp đồng dữ liệu
+# Kiến trúc hệ thống — ScholarGraph VN
 
-Đây là thiết kế triển khai; các module bên dưới chưa được tạo.
+Phiên bản: 1.0.0  
+Task mốc: SG-006 (Milestone M1)  
+Tài liệu liên quan: [Kế hoạch tổng thể](MASTER_PLAN.md), [Giao thức nghiên cứu v1](RESEARCH_PROTOCOL.md), [Hợp đồng JSON v1](../configs/protocol_v1.json).
 
-## 1. Lựa chọn kỹ thuật ban đầu
+---
 
-- Python trong môi trường riêng, thử Python 3.11 nếu phù hợp thư viện; version chốt sau SG-002/SG-005.
-- JSONL/Parquet cho corpus, SQLite cho metadata/demo, sparse matrix cho graph.
-- Lexical index BM25/TF-IDF; dense encoding batch + vector index. Dùng exact search khi corpus nhỏ, đánh giá ANN recall trước dùng approximate search.
-- NetworkX cho pilot/kiểm chứng, sparse implementation nếu profile chỉ ra cần thiết.
-- FastAPI + giao diện nhẹ; frontend chọn ở SG-005 theo khả năng nhóm. Không cần database graph hoặc vector service trả phí ở MVP.
-- CLI evaluation độc lập UI; không gọi API ngoài trong benchmark offline.
+## 1. Tổng quan hệ thống
 
-## 2. Luồng dữ liệu
+ScholarGraph VN là hệ thống tìm kiếm và gợi ý bài báo khoa học kết hợp cả **nội dung văn bản (lexical BM25, dense semantic embeddings)** và **cấu trúc đồ thị trích dẫn (Personalized PageRank, Age adjustment)**, hỗ trợ đánh giá truy vấn đa ngữ (Anh và Việt).
 
-BEIR → immutable snapshot → validator → lexical/dense index → text rankers → TREC run → evaluator.
+Kiến trúc hệ thống được thiết kế theo nguyên tắc:
+1. **Ranh giới dữ liệu độc lập và chống rò rỉ (Data Leakage Protection)**: Phân tách rõ ràng giữa module sinh kết quả tìm kiếm (Ranker) và module đánh giá chất lượng (Evaluator).
+2. **Khả năng tái lập cao (Reproducibility)**: Mọi thực nghiệm (run) đều được gắn manifest định danh, băm toàn vẹn (data hash, config hash, split hash).
+3. **Data Contracts chặt chẽ**: Dữ liệu trao đổi giữa các thành phần tuân theo Pydantic v2 schemas với validation nghiêm ngặt.
 
-OpenAlex → resumable ingestion → normalized papers + citations → graph audit/masking → graph snapshot → PPR/reranker → run → evaluator.
+---
 
-API/UI dùng cùng dịch vụ retrieval đã được benchmark; snapshot demo có manifest riêng. Nhãn qrels không đi vào indexer hoặc dịch vụ production.
+## 2. Sơ đồ kiến trúc luồng dữ liệu (Data Flow)
 
-## 3. Cấu trúc sẽ triển khai ở SG-005
+```mermaid
+flowchart TD
+    subgraph DataLayer["1. Tầng Dữ liệu & Tiền xử lý (Data Layer)"]
+        RawCorpus["Raw Corpus (OpenAlex / BEIR)"] --> Ingestion["Data Ingestion & Validation"]
+        Ingestion --> CorpusStore["Paper Store (Paper Schema)"]
+        Ingestion --> GraphStore["Citation Graph (CitationEdge Schema)"]
+    end
 
-```text
-scholargraph/
-  AGENTS.md
-  README.md
-  docs/
-  management/
-    tasks.json
-    state.json
-    HANDOFF.md
-    DECISIONS.md
-    logs/
-    templates/
-  scripts/check_project.ps1        # đã có ở bước planning
-  pyproject.toml                  # tương lai
-  configs/                        # dataset, model, graph, experiment
-  src/scholargraph/
-    ingest/
-    data/
-    retrieval/
-    graph/
-    evaluation/
-    api/
-  ui/
-  tests/
-    unit/
-    integration/
-    fixtures/
-  data/raw/                       # bất biến; không version raw lớn
-  data/processed/
-  artifacts/indexes/
-  artifacts/runs/
-  artifacts/reports/
+    subgraph SplitMasking["2. Tách dữ liệu & Che đồ thị (Trusted Split Builder)"]
+        GraphStore --> Masking["Masking Engine (Loại bỏ cạnh dev/test held-out)"]
+        Masking --> MaskedGraph["Masked Induced Graph (cutoff theo năm)"]
+        Masking --> QrelsStore["Qrels / Ground Truth Store (Chỉ Evaluator đọc)"]
+    end
+
+    subgraph RetrievalLayer["3. Tìm kiếm & Xếp hạng (Ranker Layer)"]
+        QueryInput["Query (Query Schema)"]
+        CorpusStore --> BM25["BM25 Lexical Retriever"]
+        CorpusStore --> Dense["Dense Semantic Retriever"]
+        QueryInput --> BM25
+        QueryInput --> Dense
+        BM25 --> Top100BM25["Top 100 BM25"]
+        Dense --> Top100Dense["Top 100 Dense"]
+        Top100BM25 & Top100Dense --> RRF["Reciprocal Rank Fusion (k=60)"]
+        RRF --> C100["Tập ứng viên C100"]
+        C100 --> Seeds["Top 20 Seeds cho PPR"]
+        Seeds & MaskedGraph --> PPR["Personalized PageRank"]
+        C100 & PPR --> Fusion["Min-Max Normalization & Fusion (gamma)"]
+        Fusion --> AgeAdjust["Age Freshness Adjustment (lambda)"]
+        AgeAdjust --> RankingOutput["RankingResult (RankedDocument list)"]
+    end
+
+    subgraph EvalLayer["4. Đánh giá & Báo cáo (Evaluator Layer)"]
+        RankingOutput --> Evaluator["Evaluator Engine"]
+        QrelsStore --> Evaluator
+        Evaluator --> MetricsReport["nDCG@10, Recall@100, MRR@10, MAP@100"]
+        Evaluator --> RunManifest["Run Manifest (JSON)"]
+    end
+
+    style QrelsStore fill:#ffdddd,stroke:#ff0000,stroke-width:2px;
+    style RetrievalLayer fill:#eef9ff,stroke:#0066cc,stroke-width:2px;
+    style Evaluator fill:#e6ffe6,stroke:#009900,stroke-width:2px;
 ```
 
-## 4. Schema tối thiểu
+---
 
-| Entity | Trường cần có | Quy tắc |
+## 3. Ranh giới dữ liệu và nguyên tắc chống rò rỉ (Data Leakage Boundaries)
+
+Theo quy định tại Mục 2 của [RESEARCH_PROTOCOL.md](RESEARCH_PROTOCOL.md):
+
+| Thành phần | Dữ liệu được phép đọc | Dữ liệu tuyệt đối CẤM |
 |---|---|---|
-| Paper | id, source, source_id, title, abstract, year, doi, topics, source_url, retrieved_at | ID namespace; null khác chuỗi rỗng; giữ bản raw |
-| Citation | citing_id, cited_id, source, snapshot_id | Có hướng; không tự sinh từ qrels |
-| Query | query_id, text, language, task_type, seed_paper_id | seed_paper_id chỉ cho paper-to-paper |
-| Qrel | query_id, doc_id, relevance, label_source, split | evaluator-only; label scale có tài liệu |
-| Ranking | query_id, doc_id, rank, score, run_id | rank unique; score hữu hạn; doc ID thuộc candidate universe |
-| Explanation | text_score, graph_score, graph_path, metadata_status | Nguồn score rõ; không dùng làm bằng chứng paper đúng |
-| Manifest | dataset_id, source_url, revision, retrieved_at, checksum, counts, license, transformations | Không dùng ID snapshot mơ hồ |
-| Run | id, status, config_hash, data_hash, graph_hash, model_revision, code_version | completed chỉ khi outputs và checks đủ |
+| **Ranker / Retriever** | Corpus văn bản (`title`, `abstract`), `Query`, masked graph đã che, danh sách ứng viên hợp lệ. | **Qrels**, nhãn liên quan (`relevance labels`), các cạnh held-out trong dev/test, feature suy ra từ nhãn. |
+| **Split Builder / Auditor** | Đọc corpus, references, metadata năm để tạo masked graph và tách tập held-out. | Không xuất danh sách qrels hoặc gợi ý đáp án sang Ranker. |
+| **Evaluator** | Đầu ra xếp hạng của Ranker (`RankingResult`), tập nhãn chân lý (`Qrel`), danh sách query ID chính thức. | Không chỉnh sửa ranking của Ranker; không chia sẻ nhãn cho ranker trước hoặc trong khi chạy. |
 
-## 5. Interface cần ổn định
+### Cơ chế bảo vệ trong mã nguồn:
+- Interface `BaseRanker` trong `src/scholargraph/data/interfaces.py` kiểm tra các đối số khởi tạo và phương thức `rank()`.
+- Nếu phát hiện bất kỳ tham số nào chứa `qrels` hoặc `labels`, hệ thống sẽ kích hoạt ngoại lệ `DataLeakageError` và hủy quá trình chạy ngay lập tức.
 
-- Ingestor: tải/cache/resume → manifest + raw snapshot.
-- Validator: kiểm tra schema/ID/qrels/time → report.
-- Retriever: `search(query, top_k, filters)` → list kết quả.
-- Recommender: `recommend(paper_id, top_k, filters)` → list bỏ self.
-- Reranker: nhận query, candidates, graph context được phép; không nhận qrels.
-- Evaluator: nhận qrels + runfile + metric config; không thay đổi ranking.
-- API trả snapshot_id, method_id và metadata thiếu; lỗi phụ thuộc không được thay bằng dữ liệu bịa.
-- Benchmark UI chỉ đọc completed run manifest.
+---
 
-## 6. Kiểm thử quan trọng
+## 4. Phân biệt các định danh (Identifiers)
 
-- DOI dedup/mapping không nhập nhằng; mọi transformation có audit.
-- Download bị ngắt resume không làm mất/trùng records.
-- qrels ID tồn tại; split group không chồng; labels không lọt ranker.
-- Mask held-out cạnh/cạnh đảo và recompute graph features.
-- PPR trên toy graph có đáp án kỳ vọng; không nối node giả khi missing.
-- Metrics so với evaluator chuẩn và case tie/zero relevant/no results.
-- Hybrid dùng common candidates đúng ablation; graph isolated fallback minh bạch.
-- API/UI trả metadata và nguồn khớp snapshot.
-- Offline smoke test không gọi mạng; thiếu model/index trả lỗi hữu ích.
+Trong nghiên cứu truy hồi thông tin và khai phá web, việc nhầm lẫn giữa các loại định danh dẫn đến sai lệch dữ liệu nghiêm trọng:
+
+1. **Paper ID (Canonical Document ID)**:
+   - Là khóa chính duy nhất của một bài báo trong snapshot dữ liệu (ví dụ: `openalex:W2741809807` hoặc `scifact:42`).
+   - Luôn tồn tại với mọi tài liệu trong hệ thống.
+2. **DOI (Digital Object Identifier)**:
+   - Là định danh xuất bản học thuật quốc tế (ví dụ: `10.1145/3397271.3401075`).
+   - **Không phải bài báo nào cũng có DOI** (nhiều bài báo chỉ có ID nội bộ của kho lưu trữ).
+   - Được định dạng chuẩn qua hàm kiểm tra `validate_doi()`. Tuyệt đối không dùng DOI thay thế Paper ID khi liên kết đồ thị hoặc đánh giá.
+3. **Query ID**:
+   - Là mã định danh duy nhất của một nhu cầu tìm kiếm (ví dụ: `scifact_dev:q101`, `vn:q01`).
+   - Không được trùng với Paper ID.
+4. **Qrel Label (Relevance Grade)**:
+   - Là mức độ phù hợp của tài liệu đối với truy vấn (thang điểm: 0 - Không liên quan, 1 - Liên quan một phần, 2 - Trực tiếp giải quyết nhu cầu).
+   - Chỉ thuộc về bảng đánh giá `Qrel`, không gắn cố định vào Paper.
+
+---
+
+## 5. Quy tắc Namespace ID và Chính sách giá trị thiếu (Null Policy)
+
+### 5.1 Namespace ID
+Để tích hợp nhiều nguồn dữ liệu (OpenAlex, BEIR SciFact, BEIR SCIDOCS, Vietnamese custom queries) mà không xung đột khóa chính:
+- Định dạng chuẩn: `<namespace>:<raw_id>` (ví dụ: `openalex:W12345`, `beir_scifact:42`, `synth:paper_001`).
+- Các hàm tiện ích: `make_canonical_id(namespace, raw_id)` và `parse_namespace_id(canonical_id)`.
+
+### 5.2 Chính sách giá trị thiếu (Null Policy)
+| Trường | Trạng thái thiếu | Xử lý hệ thống | Ràng buộc học thuật |
+|---|---|---|---|
+| `abstract` | `None` / rỗng | Tự động chuyển thành `""` (chuỗi rỗng). | Không làm crash indexer; ghi nhận tỷ lệ coverage trong audit. |
+| `year` | `None` | Giữ nguyên `None`. | **Tuyệt đối không điền giá trị trung bình/trung vị (no median imputation)**. Trong Tuyến B (OpenAlex citation holdout), bài báo thiếu năm bị loại khỏi tập ứng viên hợp lệ $U(u)$ theo protocol §4/§5.4. |
+| `doi` | `None` / rỗng | Giữ nguyên `None`. | Không ảnh hưởng đến index văn bản hay đồ thị trích dẫn. |
+| `score` | `NaN` / `Inf` | **Bị từ chối (báo lỗi validation)**. | Điểm số xếp hạng bắt buộc phải là số thực hữu hạn (`finite float`). |
+| `references` | rỗng | Danh sách rỗng `[]`. | Nút đóng vai trò dangling node trong Personalized PageRank (được xử lý phân phối lại xác suất theo protocol §5.3). |
+
+---
+
+## 6. Hợp đồng Xếp hạng và Run Manifest (Ranking & Run Contracts)
+
+### 6.1 Quy tắc thứ tự chuẩn hóa (Canonical Tie-breaking)
+Khi hai tài liệu có điểm số bằng nhau trong danh sách xếp hạng:
+1. Ưu tiên điểm số giảm dần (`score` descending).
+2. Khi điểm bằng nhau, phá hòa bằng **mã tài liệu tăng dần theo mã Unicode code points** (`doc_id` ascending).
+3. Đảm bảo tính tất định 100% giữa các lần chạy khác nhau trên các môi trường tính toán khác nhau.
+
+### 6.2 Định dạng kết quả (TREC Run Format)
+Mỗi dòng kết quả xuất ra theo chuẩn quốc tế TREC:
+```text
+<query_id> Q0 <doc_id> <rank> <score> <run_id>
+```
+Trong đó:
+- `Q0`: hằng số quy ước TREC.
+- `rank`: thứ hạng từ 1 đến N.
+- `score`: điểm số định dạng số thực 6 chữ số thập phân (hoặc điểm nguyên giảm dần nghiêm ngặt theo protocol §6.1 khi chuyển giao cho trec_eval).
+
+### 6.3 Run Manifest
+Mỗi lượt chạy thực nghiệm sinh ra một bản ghi `RunManifest` (`artifacts/runs/RUN-*.json`) chứa:
+- `run_id`: Tên mã chạy chuẩn hóa (`RUN-YYYYMMDD-HHMMSS-method-dataset-split`).
+- `config_hash`: Băm SHA-256 của file cấu hình thực nghiệm.
+- `data_hash` & `split_hash`: Băm toàn vẹn dữ liệu và phân chia tập train/dev/test.
+- `parameters`: Toàn bộ siêu tham số của mô hình (ví dụ: $k_1, b, \gamma, \lambda$).
+- `hardware_info`: Thông tin thiết bị phần cứng (CPU, GPU, RAM, phiên bản OS).
+- `metrics`: Các chỉ số đo lường do Evaluator ghi nhận.
