@@ -85,10 +85,11 @@ Kết quả kiểm tra tự động chạy bởi `src/scholargraph/ingest/beir_a
 
 ### 5.2 Dị thường 1: 344 tài liệu SCIDOCS thiếu Abstract (Empty Text Anomaly)
 - **Mô tả:** Trong snapshot chính thức của BEIR SCIDOCS, có đúng **344 tài liệu** chỉ có tiêu đề (`title`), còn phần tóm tắt (`text`) là chuỗi rỗng (`""`).
-- **Tác động tới Qrels:**
-  - Toàn bộ **344 tài liệu này đều xuất hiện trong tập qrels test** của SCIDOCS.
-  - Trong đó, có đúng **115 tài liệu mang nhãn liên quan dương tính (`score = 1`)** đối với các câu truy vấn tương ứng (tổng cộng 187 cặp query-doc dương tính).
-  - 229 tài liệu còn lại chỉ mang nhãn không liên quan (`score = 0`) (tổng cộng 279 cặp query-doc nhãn 0).
+- **Tác động tới Qrels (Phân rã chính xác theo nhóm tài liệu và cặp đánh giá):**
+  - Toàn bộ **344 tài liệu này đều xuất hiện trong tập qrels test** của SCIDOCS (tổng cộng 466 cặp query-document đánh giá: 187 cặp nhãn 1 và 279 cặp nhãn 0).
+  - **Nhóm tài liệu có nhãn dương tính (`score = 1`):** Đúng **115 tài liệu** xuất hiện trong ít nhất một cặp dương tính (tổng cộng 187 cặp query-doc nhãn 1). Trong số 115 tài liệu này, có 15 tài liệu đồng thời xuất hiện trong 17 cặp mang nhãn 0 với các query khác.
+  - **Nhóm tài liệu chỉ mang nhãn không liên quan (`score = 0`):** **229 tài liệu còn lại** hoàn toàn chỉ xuất hiện với nhãn 0 (tổng cộng 262 cặp query-doc nhãn 0).
+  - **Tổng hợp nhãn 0:** Tổng số cặp query-doc mang nhãn 0 trên toàn bộ 344 tài liệu là đúng **279 cặp** ($262 + 17 = 279$).
 - **Xử lý theo Giao thức v1:**
   - **TUYỆT ĐỐI KHÔNG LỌC BỎ:** Theo quy tắc liêm chính học thuật (Protocol v1 Section 2 & Section 3), benchmark thô phải được bảo toàn nguyên vẹn. Việc âm thầm loại bỏ 344 tài liệu này sẽ làm sai lệch không gian tìm kiếm, phóng đại điểm số một cách giả tạo và phá vỡ tính tái lập với các công trình BEIR quốc tế.
   - **Cách thức biểu diễn:** Trình nạp dữ liệu `BeirLoader` biểu diễn các tài liệu này với `title = raw_title`, `abstract = ""`. Khi đánh chỉ mục lexical/dense, văn bản đầu vào là chính tiêu đề của tài liệu.

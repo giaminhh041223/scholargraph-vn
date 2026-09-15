@@ -2,7 +2,7 @@
   "schema_version": 1,
   "task": "SG-010",
   "title": "BEIR Data Quality and Integrity Audit",
-  "audit_timestamp": "2026-09-16T01:02:53.202904+07:00",
+  "audit_timestamp": "2026-09-16T01:52:12.647092+07:00",
   "audit_passed": true,
   "errors": [],
   "datasets": {
@@ -18,7 +18,7 @@
       },
       "id_integrity": {
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scifact:38882175"
+        "namespace_sample": "beir:scifact:6171953"
       },
       "corpus_audit": {
         "total_documents": 5183,
@@ -178,7 +178,14 @@
             "empty_text_docs_in_qrels_count": 0,
             "empty_text_docs_in_qrels": [],
             "empty_text_docs_positive_count": 0,
-            "empty_text_docs_positive": []
+            "empty_text_docs_positive": [],
+            "empty_text_docs_zero_only_count": 0,
+            "empty_text_docs_both_count": 0,
+            "empty_text_positive_pairs_count": 0,
+            "empty_text_zero_pairs_count": 0,
+            "empty_text_zero_pairs_in_zero_only_docs_count": 0,
+            "empty_text_zero_pairs_in_positive_docs_count": 0,
+            "empty_text_total_pairs_count": 0
           }
         },
         "train": {
@@ -229,7 +236,14 @@
             "empty_text_docs_in_qrels_count": 0,
             "empty_text_docs_in_qrels": [],
             "empty_text_docs_positive_count": 0,
-            "empty_text_docs_positive": []
+            "empty_text_docs_positive": [],
+            "empty_text_docs_zero_only_count": 0,
+            "empty_text_docs_both_count": 0,
+            "empty_text_positive_pairs_count": 0,
+            "empty_text_zero_pairs_count": 0,
+            "empty_text_zero_pairs_in_zero_only_docs_count": 0,
+            "empty_text_zero_pairs_in_positive_docs_count": 0,
+            "empty_text_total_pairs_count": 0
           }
         }
       },
@@ -261,7 +275,7 @@
       },
       "id_integrity": {
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scidocs:8925a583cad259d60f63f236302fbc5ac8277e14"
+        "namespace_sample": "beir:scidocs:4b9ac9e1493b11f0af0c65c7a291eb61f33678b6"
       },
       "corpus_audit": {
         "total_documents": 25657,
@@ -865,7 +879,14 @@
               "f4f3a10d96e0b6d134e7e347e1727b7438d4006f",
               "f69c83aab19183795af7612c3f224b5e116f242a",
               "fd7725988e6b6a44d14e41c36d718bf0033f5b3c"
-            ]
+            ],
+            "empty_text_docs_zero_only_count": 229,
+            "empty_text_docs_both_count": 15,
+            "empty_text_positive_pairs_count": 187,
+            "empty_text_zero_pairs_count": 279,
+            "empty_text_zero_pairs_in_zero_only_docs_count": 262,
+            "empty_text_zero_pairs_in_positive_docs_count": 17,
+            "empty_text_total_pairs_count": 466
           }
         }
       },
@@ -1026,11 +1047,11 @@
         "f69c83aab19183795af7612c3f224b5e116f242a",
         "fd7725988e6b6a44d14e41c36d718bf0033f5b3c"
       ],
-      "explanation": "In the official SCIDOCS BEIR snapshot, exactly 344 documents contain title only (abstract/text is empty string). All 344 of these documents appear in the official test split qrels, and exactly 115 of them are labeled as positive relevant (score=1), while the other 229 have score=0. Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents are indexed using title alone and are NOT filtered out."
+      "explanation": "In the official SCIDOCS BEIR snapshot, 344 document(s) contain title only (abstract/text is empty string). All 344 of these documents appear in the test split qrels: 115 document(s) have positive relevance (score=1, 187 pair(s)); 229 document(s) appear exclusively with zero relevance (score=0, 262 pair(s)); and 15 document(s) with positives also appear in 17 zero-relevance pair(s), yielding a total of 466 judgment pair(s) (187 positive, 279 zero). Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents are indexed using title alone and are NOT filtered out."
     },
     "scifact_empty_text_documents": {
       "total_empty_abstract_docs": 0,
-      "explanation": "All 5,183 SciFact documents have non-empty title and abstract."
+      "explanation": "All 5,183 SciFact documents have both non-empty title and abstract."
     },
     "scifact_train_test_query_leakage": {
       "query_id_overlap_count": 0,
@@ -1047,7 +1068,7 @@
           "query_text": "obesity decreases life quality."
         }
       ],
-      "explanation": "In official SciFact BEIR split, exactly 2 queries in test share identical text with queries in train: Test 1292 matches Train 1291 ('there is no association between hnf4a mutations and diabetes risks.'), and Test 870 matches Train 871 ('obesity decreases life quality.'). Both point to the exact same relevant documents. This is an inherent property of the upstream benchmark and is documented rather than filtered."
+      "explanation": "Detected 2 exact query text overlap(s) between SciFact train and test splits (status: PASS): Test 1292 matches Train 1291 ('there is no association between hnf4a mutations and diabetes risks.'); Test 870 matches Train 871 ('obesity decreases life quality.'). Shared relevant documents count across splits: 181. This is an inherent property of the upstream benchmark and is documented rather than filtered."
     },
     "referential_integrity_status": "100% PASS; zero orphan queries, zero orphan documents, zero duplicate qrel rows."
   },

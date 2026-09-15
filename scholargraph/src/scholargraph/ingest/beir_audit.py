@@ -254,6 +254,10 @@ def audit_raw_qrels(
     
     empty_text_docs_in_qrels: set[str] = set()
     empty_text_docs_positive_in_qrels: set[str] = set()
+    empty_text_docs_zero_in_qrels: set[str] = set()
+    empty_text_positive_pairs_count = 0
+    empty_text_zero_pairs_count = 0
+    empty_text_zero_pairs_by_doc: dict[str, int] = {}
 
     with qrels_path.open("r", encoding="utf-8") as handle:
         header = handle.readline().strip().split("\t")
@@ -297,10 +301,23 @@ def audit_raw_qrels(
                 empty_text_docs_in_qrels.add(c_id)
                 if score > 0:
                     empty_text_docs_positive_in_qrels.add(c_id)
+                    empty_text_positive_pairs_count += 1
+                else:
+                    empty_text_docs_zero_in_qrels.add(c_id)
+                    empty_text_zero_pairs_count += 1
+                    empty_text_zero_pairs_by_doc[c_id] = empty_text_zero_pairs_by_doc.get(c_id, 0) + 1
 
     # Queries with zero positive qrels
     queries_evaluated = set(per_query_total.keys())
     zero_positive_queries = [q for q in queries_evaluated if q not in per_query_positives]
+
+    # Partition empty text docs impact
+    zero_only_docs = empty_text_docs_zero_in_qrels - empty_text_docs_positive_in_qrels
+    both_pos_zero_docs = empty_text_docs_zero_in_qrels.intersection(empty_text_docs_positive_in_qrels)
+    empty_text_zero_pairs_in_zero_only = sum(
+        empty_text_zero_pairs_by_doc.get(d, 0) for d in zero_only_docs
+    )
+    empty_text_zero_pairs_in_pos_docs = empty_text_zero_pairs_count - empty_text_zero_pairs_in_zero_only
 
     return {
         "total_rows": total_qrel_rows,
@@ -327,6 +344,13 @@ def audit_raw_qrels(
             "empty_text_docs_in_qrels": sorted(list(empty_text_docs_in_qrels)),
             "empty_text_docs_positive_count": len(empty_text_docs_positive_in_qrels),
             "empty_text_docs_positive": sorted(list(empty_text_docs_positive_in_qrels)),
+            "empty_text_docs_zero_only_count": len(zero_only_docs),
+            "empty_text_docs_both_count": len(both_pos_zero_docs),
+            "empty_text_positive_pairs_count": empty_text_positive_pairs_count,
+            "empty_text_zero_pairs_count": empty_text_zero_pairs_count,
+            "empty_text_zero_pairs_in_zero_only_docs_count": empty_text_zero_pairs_in_zero_only,
+            "empty_text_zero_pairs_in_positive_docs_count": empty_text_zero_pairs_in_pos_docs,
+            "empty_text_total_pairs_count": empty_text_positive_pairs_count + empty_text_zero_pairs_count,
         },
     }
 
@@ -526,39 +550,90 @@ def run_full_beir_audit(
     report["cross_split_checks"]["scifact_train_vs_test"] = audit_scifact_train_test_overlap(root)
     
     # 4. Summary of critical findings & anomalies
+    scidocs_corpus_size = report["datasets"]["scidocs"]["corpus_audit"]["total_documents"]
     scidocs_empty_text_count = report["datasets"]["scidocs"]["corpus_audit"]["missingness"]["empty_or_missing_text_count"]
-    scidocs_qrel_impact = report["datasets"]["scidocs"]["splits_audit"]["test"]["empty_text_docs_impact"]
-    
+    scidocs_test_audit = report["datasets"]["scidocs"]["splits_audit"].get("test", {})
+    scidocs_qrel_impact = scidocs_test_audit.get("empty_text_docs_impact", {})
+
+    if scidocs_empty_text_count == 0:
+        scidocs_explanation = (
+            f"All {scidocs_corpus_size:,} SCIDOCS documents have both non-empty title and abstract text."
+        )
+    else:
+        in_qrels_count = scidocs_qrel_impact.get("empty_text_docs_in_qrels_count", 0)
+        pos_docs_count = scidocs_qrel_impact.get("empty_text_docs_positive_count", 0)
+        zero_only_docs_count = scidocs_qrel_impact.get("empty_text_docs_zero_only_count", in_qrels_count - pos_docs_count)
+        both_docs_count = scidocs_qrel_impact.get("empty_text_docs_both_count", 0)
+        pos_pairs_count = scidocs_qrel_impact.get("empty_text_positive_pairs_count", 0)
+        zero_pairs_count = scidocs_qrel_impact.get("empty_text_zero_pairs_count", 0)
+        zero_in_zero_only = scidocs_qrel_impact.get("empty_text_zero_pairs_in_zero_only_docs_count", 0)
+        zero_in_both = scidocs_qrel_impact.get("empty_text_zero_pairs_in_positive_docs_count", 0)
+        total_pairs = scidocs_qrel_impact.get("empty_text_total_pairs_count", pos_pairs_count + zero_pairs_count)
+
+        scidocs_explanation = (
+            f"In the official SCIDOCS BEIR snapshot, {scidocs_empty_text_count} document(s) contain title only "
+            f"(abstract/text is empty string). All {in_qrels_count} of these documents appear in the test split qrels: "
+            f"{pos_docs_count} document(s) have positive relevance (score=1, {pos_pairs_count} pair(s)); "
+            f"{zero_only_docs_count} document(s) appear exclusively with zero relevance (score=0, {zero_in_zero_only} pair(s))"
+            + (f"; and {both_docs_count} document(s) with positives also appear in {zero_in_both} zero-relevance pair(s)" if both_docs_count > 0 else "")
+            + f", yielding a total of {total_pairs} judgment pair(s) ({pos_pairs_count} positive, {zero_pairs_count} zero). "
+            f"Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents are indexed "
+            f"using title alone and are NOT filtered out."
+        )
+
+    scifact_corpus_size = report["datasets"]["scifact"]["corpus_audit"]["total_documents"]
+    scifact_empty_count = report["datasets"]["scifact"]["corpus_audit"]["missingness"]["empty_or_missing_text_count"]
+    if scifact_empty_count == 0:
+        scifact_empty_explanation = f"All {scifact_corpus_size:,} SciFact documents have both non-empty title and abstract."
+    else:
+        scifact_empty_explanation = f"Found {scifact_empty_count:,} SciFact documents with empty abstract/text out of {scifact_corpus_size:,} total documents."
+
+    overlap_audit = report["cross_split_checks"]["scifact_train_vs_test"]
+    exact_overlap_count = overlap_audit["query_text_exact_overlap_count"]
+    id_overlap_count = overlap_audit["query_id_overlap_count"]
+    overlapping_queries = overlap_audit["query_text_exact_overlap_details"]
+    shared_rel_docs_count = overlap_audit.get("shared_relevant_documents_count", 0)
+
+    if exact_overlap_count == 0 and id_overlap_count == 0:
+        scifact_leakage_explanation = (
+            f"No query ID overlap and no query text exact overlap detected between SciFact train and test splits "
+            f"(status: {overlap_audit['status']}). {overlap_audit['verdict']}"
+        )
+    elif exact_overlap_count > 0 and id_overlap_count == 0:
+        pair_details = [
+            f"Test {p['test_query_id']} matches Train {p['train_query_id']} ({p['query_text']!r})"
+            for p in overlapping_queries
+        ]
+        pairs_str = "; ".join(pair_details)
+        scifact_leakage_explanation = (
+            f"Detected {exact_overlap_count} exact query text overlap(s) between SciFact train and test splits "
+            f"(status: {overlap_audit['status']}): {pairs_str}. "
+            f"Shared relevant documents count across splits: {shared_rel_docs_count}. "
+            f"This is an inherent property of the upstream benchmark and is documented rather than filtered."
+        )
+    else:
+        scifact_leakage_explanation = (
+            f"CRITICAL: Detected {id_overlap_count} overlapping query IDs between train and test splits. "
+            f"{overlap_audit['verdict']}"
+        )
+
     report["anomalies_summary"] = {
         "scidocs_empty_abstract_documents": {
             "total_empty_abstract_docs": scidocs_empty_text_count,
-            "appears_in_test_qrels": scidocs_qrel_impact["empty_text_docs_in_qrels_count"],
-            "appears_as_positive_in_test_qrels": scidocs_qrel_impact["empty_text_docs_positive_count"],
-            "positive_doc_ids": scidocs_qrel_impact["empty_text_docs_positive"],
-            "explanation": (
-                f"In the official SCIDOCS BEIR snapshot, exactly {scidocs_empty_text_count} documents contain title only "
-                f"(abstract/text is empty string). All {scidocs_qrel_impact['empty_text_docs_in_qrels_count']} of these "
-                f"documents appear in the official test split qrels, and exactly {scidocs_qrel_impact['empty_text_docs_positive_count']} "
-                f"of them are labeled as positive relevant (score=1), while the other "
-                f"{scidocs_qrel_impact['empty_text_docs_in_qrels_count'] - scidocs_qrel_impact['empty_text_docs_positive_count']} "
-                f"have score=0. Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents "
-                f"are indexed using title alone and are NOT filtered out."
-            ),
+            "appears_in_test_qrels": scidocs_qrel_impact.get("empty_text_docs_in_qrels_count", 0),
+            "appears_as_positive_in_test_qrels": scidocs_qrel_impact.get("empty_text_docs_positive_count", 0),
+            "positive_doc_ids": scidocs_qrel_impact.get("empty_text_docs_positive", []),
+            "explanation": scidocs_explanation,
         },
         "scifact_empty_text_documents": {
-            "total_empty_abstract_docs": report["datasets"]["scifact"]["corpus_audit"]["missingness"]["empty_or_missing_text_count"],
-            "explanation": "All 5,183 SciFact documents have non-empty title and abstract.",
+            "total_empty_abstract_docs": scifact_empty_count,
+            "explanation": scifact_empty_explanation,
         },
         "scifact_train_test_query_leakage": {
-            "query_id_overlap_count": report["cross_split_checks"]["scifact_train_vs_test"]["query_id_overlap_count"],
-            "query_text_exact_overlap_count": report["cross_split_checks"]["scifact_train_vs_test"]["query_text_exact_overlap_count"],
-            "overlapping_queries": report["cross_split_checks"]["scifact_train_vs_test"]["query_text_exact_overlap_details"],
-            "explanation": (
-                "In official SciFact BEIR split, exactly 2 queries in test share identical text with queries in train: "
-                "Test 1292 matches Train 1291 ('there is no association between hnf4a mutations and diabetes risks.'), "
-                "and Test 870 matches Train 871 ('obesity decreases life quality.'). Both point to the exact same relevant documents. "
-                "This is an inherent property of the upstream benchmark and is documented rather than filtered."
-            ),
+            "query_id_overlap_count": id_overlap_count,
+            "query_text_exact_overlap_count": exact_overlap_count,
+            "overlapping_queries": overlapping_queries,
+            "explanation": scifact_leakage_explanation,
         },
         "referential_integrity_status": "",
     }
