@@ -2,51 +2,40 @@
 
 NEXT_TASK: SG-004
 
-- Phiên hiện tại: SESSION-20260915-007; SG-003 DONE, SG-004 đã mở dependency nhưng chưa bắt đầu.
-- Múi giờ: Asia/Saigon, UTC+07:00.
-- Giai đoạn: M1 — sẵn sàng nhận SG-004, protocol nghiên cứu v1.
+- Phiên: SESSION-20260915-008; múi giờ Asia/Saigon (UTC+07:00).
+- SG-004: REVIEW, **artifact và fresh-context review đã hoàn tất, chờ project owner duyệt protocol cụ thể**.
+- SG-000/001/002/003/005: DONE. SG-006 và các task downstream chưa bắt đầu.
+- Coordinator C duy nhất ghi shared state; support Sol High và reviewer Astra High đã hoàn tất, không còn sửa file.
 
-## Bối cảnh đã chốt
+## Đầu ra và bằng chứng SG-004
 
-ScholarGraph VN có 2 thành viên, dùng agent hỗ trợ triển khai, mục tiêu hoàn thành core trước 2026-10-31 và giữ tháng 11 làm buffer. GPU dùng Kaggle/Colab; chỉ thuê khi pilot của model cuối chứng minh cần thiết. Deadline/rubric chính thức của môn vẫn chưa được cung cấp.
+- [Protocol v1](../docs/RESEARCH_PROTOCOL.md) và [JSON contract](../configs/protocol_v1.json): đủ RQ→data/labels/method/metric, split/candidates, primary comparisons/ablations, graph gate và pending freeze.
+- A: BEIR text riêng; SciFact official train mang role internal dev, SCIDOCS dùng transfer config khóa trước test.
+- B: warm-start citation holdout, mask dev/test và reverse trước features, cutoff graph theo năm; rerank cùng C100. Graph gate/years/data/model còn chờ downstream.
+- C: một cấu hình dịch/encoder pin trước pool; chấm dev trước, giữ ba fixed methods, freeze trước test annotation. 30 query; upper bound 300 dev + 600 test = 900 cặp, khoảng 600 là dự trù chưa đo.
+- JSON runnable=false: đây là design contract, không phải final run config hoặc bằng chứng SG-027 đã freeze.
+- [Source audit dossier](reviews/SG-004-SOURCE-AUDIT.md): bản pre hữu ích để dựng khung; cần sửa linear nDCG, MRR/ties, temporal attribution, masking và pooling/statistics. Không có phép đo phần trăm thời gian tiết kiệm.
+- [Review packet và hashes](reviews/SG-004-REVIEW-PACKET.md), [review cuối](reviews/SG-004-REVIEW-20260915.md): Astra High fresh-context review; vòng 1 có một P2 về C dev pool/tuning; đã sửa và re-review PASS, không còn P0–P2.
+- [ADR-012](DECISIONS.md) đang proposed chờ owner; [log phiên](logs/SESSION-20260915-008.md) ghi checks và lịch sử sửa.
 
-## Trạng thái chính
+## Kiểm tra đã chạy
 
-- SG-000, SG-001, SG-002, SG-003 và SG-005: DONE.
-- SG-003: ma trận 12 primary sources và BibTeX đã qua fresh-context artifact review, không có finding P0–P2. Project owner miễn hoạt động hai thành viên đọc sâu ba paper; deviation ghi tại ADR-011. Không ghi rằng hoạt động đọc đã hoàn tất.
-- CPU pilot SG-002: 1.000 fixture tổng hợp, MiniLM, batch 8, 21,99 giây, 45,48 docs/s.
-- Colab pilot SG-002: Tesla T4 15.360 MiB, batch 32, 0,9385 giây, 1.065,48 docs/s, peak allocated/reserved khoảng 243,6/292 MiB.
-- CPU và GPU dùng cùng input hash và model revision. Cả hai file embedding khớp SHA-256 trong report; GPU nhanh hơn khoảng 23,43 lần.
-- Đây là compute feasibility, không phải retrieval-quality evidence. Model cuối tại SG-017 phải pilot lại.
-- Không có bằng chứng cần thuê GPU ở thời điểm hiện tại.
-- Bộ test SG-002 trước đó: 6/6 pass; không chạy lại trong SG-003 vì chỉ sửa tài liệu/điều phối. Kết quả checker SG-003 ghi tại log phiên 006.
+- JSON parse/contract spot checks PASS; C pool bound khớp 300+600=900; 49 task records khác giữ nguyên.
+- git diff --check exit 0; chỉ cảnh báo line endings.
+- scripts/check_project.ps1 exit 0 sau viết lại HANDOFF: 50 tasks/routes, 188 local links, 7 lanes, 7 registered sessions. Board: DONE=5, REVIEW=1, TODO=40, DEFERRED=4. Các kết quả 193 links trước đó là checkpoint cũ có thật.
+- Không chạy dataset, benchmark, evaluator parity hoặc graph pilot trong SG-004; các gate đã chỉ rõ task chịu trách nhiệm. Không có retrieval metric mới.
 
-## Task tiếp theo
+## Bước tiếp tục chính xác
 
-1. SG-004 — Protocol nghiên cứu v1 hiện TODO và đã đủ dependency từ SG-001 + SG-003.
-2. Chưa nhận task, chưa gán owner/session/claimed paths và chưa sửa protocol.
-3. Khi người dùng giao thực hiện, coordinator nhận SG-004 theo task card rồi mới bắt đầu.
+1. Nhận xác nhận project owner đối với artifact hiện tại (câu hỏi đã gửi trong phiên). Không suy approval từ tool accepted hay yêu cầu ban đầu “hoàn thành”.
+2. Nếu duyệt: ghi bằng chứng/time trong log và verification, chấp thuận ADR-012, SG-004 DONE, clear active assignment/claimed paths, state next SG-006; chạy checker và lưu commit theo scope.
+3. Nếu yêu cầu sửa: sửa đúng phần, đánh giá ảnh hưởng, chốt snapshot/re-review nếu cần. Không tự waive human gate.
+4. SG-006 chỉ sẵn sàng sau SG-004 DONE; không tự triển khai backlog khi chưa được giao.
 
-Không có active assignment. Không thay đổi scope/protocol hoặc tuyên bố thuật toán mới/SOTA. TextTAGC chỉ được kiểm tra abstract/metadata, không full text.
+## Bối cảnh còn hiệu lực
 
-## Tệp cần đọc
+2 thành viên; target core 2026-10-31, tháng11 buffer; deadline/rubric/chính sách môn còn Q-001 chưa có nguồn. SG-003 DONE theo board và ADR-011 (hoạt động đọc sâu được owner miễn, không ghi là đã đọc); một số mô tả trạng thái trong artifact lịch sử SG-003 là tại thời điểm soạn.
 
-- [Tổng quan và lịch đọc SG-003](../docs/RELATED_WORK.md)
-- [Thư mục trích dẫn](../docs/references.bib)
-- [Gói review SG-003 và prompt](reviews/SG-003-REVIEW-PACKET.md)
-- [Báo cáo review SG-003](reviews/SG-003-REVIEW-20260915.md)
-- [Nhật ký SG-003](logs/SESSION-20260915-006.md)
-- [Nhật ký closeout](logs/SESSION-20260915-007.md)
-- [Quyết định và deviation](DECISIONS.md)
-- [Master plan](../docs/MASTER_PLAN.md)
-- [Task cards](../docs/TASKS.md)
-- [Research protocol](../docs/RESEARCH_PROTOCOL.md)
-- [Model từng ID](../docs/TASK_MODEL_MATRIX.md)
-- [Chiến lược chat](../docs/MODEL_AND_CHAT_STRATEGY.md)
+CPU/Colab-T4 compute pilot SG-002 là feasibility trên fixture tổng hợp, không chứng minh retrieval quality hoặc chọn model cuối; xem log SESSION-20260915-005 và COMPUTE_PLAN. Cảnh báo NumPy/SciPy cần xử lý trước main experiments. Không có Python/GPU process ScholarGraph được quan sát đầu phiên; không khởi chạy run dài phiên này.
 
-## Lưu ý vận hành
-
-- Cache Hugging Face và embedding `.npy` không commit; hai report JSON CPU/GPU được giữ làm bằng chứng.
-- Python local có cảnh báo NumPy 2.4.6/SciPy không tương thích; khóa environment trước thí nghiệm khoa học chính thức.
-- Không có run/GPU process ScholarGraph đang chạy.
-- SG-004 chỉ được mở trên board; chưa có công việc implementation nào được thực hiện.
+Tài liệu bài giảng untracked tại workspace root ngoài scope được giữ nguyên. Các thay đổi SG-004 chỉ nằm trong scholargraph/.

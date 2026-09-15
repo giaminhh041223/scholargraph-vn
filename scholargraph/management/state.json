@@ -1,13 +1,15 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T16:42:00+07:00",
+  "updated_at": "2026-09-15T17:38:14.2190159+07:00",
   "phase": "M1",
-  "stage": "research_protocol_ready_not_started",
-  "active_tasks": [],
+  "stage": "research_protocol_awaiting_owner_approval",
+  "active_tasks": [
+    "SG-004"
+  ],
   "next_task_id": "SG-004",
-  "last_session_id": "SESSION-20260915-007",
-  "last_session_log": "management/logs/SESSION-20260915-007.md",
+  "last_session_id": "SESSION-20260915-008",
+  "last_session_log": "management/logs/SESSION-20260915-008.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -53,13 +55,13 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-15T16:42:00+07:00",
+    "checked_at": "2026-09-15T17:38:14.2190159+07:00",
     "command": ".\\scripts\\check_project.ps1",
     "exit_code": 0,
     "task_count": 50,
-    "local_links_checked": 187,
+    "local_links_checked": 188,
     "model_routes_checked": 50,
     "logical_chat_lanes": 7,
-    "scope": "SG-003 closeout: fresh-context artifact review PASS; project owner explicitly waived the pending two-member reading activity without claiming it was completed. DONE=5, TODO=41, DEFERRED=4; SG-004 ready and not started."
+    "scope": "SG-004 final checkpoint: design artifacts and fresh-context re-review PASS; project checker exit0 with 188 local links after HANDOFF rewrite; REVIEW awaiting explicit project-owner approval."
   }
 }

@@ -44,7 +44,7 @@ Mỗi thay đổi phương pháp/phạm vi quan trọng thêm ADR mới. Không 
 
 ## Mẫu ADR tiếp theo
 
-ID: ADR-011
+ID: ADR-013
 Ngày:
 Trạng thái: proposed / accepted / superseded
 Task liên quan:
@@ -96,3 +96,14 @@ Thay thế ADR nào (nếu có):
 **Nguồn:** project owner yêu cầu bỏ qua hoạt động hai thành viên đọc sâu RW02, RW06 và RW10, chuyển SG-003 thành DONE và mở SG-004 nhưng chưa triển khai.
 **Quyết định:** chấp nhận fresh-context review PASS làm gate kiểm tra artifact. Miễn phần đọc sâu ba paper của hai thành viên như một deviation có chủ ý; không ghi hoặc suy rằng hoạt động này đã hoàn tất.
 **Hệ quả:** SG-003 chuyển DONE. SG-004 đủ dependency và là task kế tiếp ở trạng thái TODO, chưa owner/session/claimed paths. Rủi ro còn lại là hai thành viên có thể chưa giải thích sâu RRF, SciRepEval và time-balanced centrality khi bảo vệ; có thể đọc bù sau nếu cần.
+
+## ADR-012 — 2026-09-15 — Thiết kế protocol v1 và tiếp nhận dossier SG-004
+
+**Trạng thái:** proposed for project-owner approval; artifact phải qua fresh-context review trước closeout.
+**Phạm vi:** SG-004, không thực thi các task downstream hoặc freeze final run.
+**Nguồn:** scope SG-001 đã duyệt, literature SG-003, protocol dự thảo và bản pre Gemini do người dùng cung cấp. Source audit bằng Sol High kiểm chứng BEIR/trec_eval từ primary source; pre chỉ là đề xuất, không phải bằng chứng thực nghiệm.
+**Lựa chọn v1:** giữ A/B/C riêng; mỗi RQ có nhãn/method/metric/comparison; A dùng toàn bộ official SciFact train làm internal dev vì core không train model (thay bản nháp tách một phần train), SCIDOCS dùng cấu hình transfer đã khóa. B giữ warm-start observed/heldout 20%, mask cả dev/test và reverse, graph theo cutoff, rerank cùng C100; graph go/no-go và years chờ SG-014. Tuổi dùng một post-fusion exponential freshness variant, loại missing-year khỏi B; không nhận là tái lập CiteRank/time-balanced centrality. C pool ba method, 30 query, 10/20 split, hai người chấm; 600 cặp là dự trù, upper bound 900 trước dedup.
+**Evaluator:** nDCG linear gain theo trec_eval; MAP cutoff chia tổng relevant; MRR@10 có adapter đúng cutoff và total order khi ties. Paired percentile CI 95%, 10.000 bootstrap theo query group; không tự suy p-value hoặc formal significance từ CI chưa điều chỉnh nhiều so sánh.
+**Sửa sau review vòng 1:** bỏ relevance-grid C 3×3 vì dev pool của cấu hình đã chọn tạo vòng phụ thuộc chọn config/nhãn và thiếu coverage cho trial khác. Core pin 1 translation + 1 encoder trước relevance pooling bằng technical dev pilot; chấm 10 dev trước, chọn default method trong 3 fixed methods, giữ nguyên cấu hình/primary comparison rồi freeze trước chấm 20 test. Upper bound vẫn 300 dev + 600 test = 900 unique pairs; mở grid sau cần ADR và ngân sách dev pool riêng.
+**Cấu hình:** protocol_v1.json là machine-readable design contract, runnable=false. Model, hashes, cohort years, resolved tuning và freeze evidence phải chốt ở các gate tương ứng; không điền giả. Thay phương pháp sau thiết kế cần amendment có lý do trước test.
+**Hệ quả:** chỉ đánh dấu SG-004 DONE khi acceptance, fresh-context artifact review và xác nhận của project owner có bằng chứng. Không coi lời yêu cầu thực hiện task là đã đọc/duyệt lựa chọn cụ thể vừa được tạo.

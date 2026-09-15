@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T16:42:00+07:00",
+  "updated_at": "2026-09-15T17:37:00.5115669+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -105,8 +105,20 @@
         "SG-001"
       ],
       "blocked_reason": null,
-      "evidence": ["docs/RELATED_WORK.md", "docs/references.bib", "management/reviews/SG-003-REVIEW-PACKET.md", "management/reviews/SG-003-REVIEW-20260915.md", "management/logs/SESSION-20260915-006.md", "management/logs/SESSION-20260915-007.md"],
-      "verification": ["12 primary-source rows and 12 unique bibliography keys checked against author/publisher/arXiv sources; TextTAGC abstract-only access disclosed.", "PowerShell structural bibliography checks and RRF arithmetic passed; no BibTeX compilation claimed.", "2026-09-15: fresh-context review PASS for artifact snapshot; no P0-P2 findings; report management/reviews/SG-003-REVIEW-20260915.md.", "2026-09-15: project owner explicitly waived the two-member three-paper reading activity and requested SG-003 DONE. The reading is not claimed as completed; deviation recorded in ADR-011 and SESSION-20260915-007."],
+      "evidence": [
+        "docs/RELATED_WORK.md",
+        "docs/references.bib",
+        "management/reviews/SG-003-REVIEW-PACKET.md",
+        "management/reviews/SG-003-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-006.md",
+        "management/logs/SESSION-20260915-007.md"
+      ],
+      "verification": [
+        "12 primary-source rows and 12 unique bibliography keys checked against author/publisher/arXiv sources; TextTAGC abstract-only access disclosed.",
+        "PowerShell structural bibliography checks and RRF arithmetic passed; no BibTeX compilation claimed.",
+        "2026-09-15: fresh-context review PASS for artifact snapshot; no P0-P2 findings; report management/reviews/SG-003-REVIEW-20260915.md.",
+        "2026-09-15: project owner explicitly waived the two-member three-paper reading activity and requested SG-003 DONE. The reading is not claimed as completed; deviation recorded in ADR-011 and SESSION-20260915-007."
+      ],
       "claimed_paths": [],
       "note": "DONE with project-owner-approved deviation: fresh-context artifact review passed; the two-member three-paper reading activity was explicitly waived, not completed. SG-004 is ready but remains TODO/unclaimed."
     },
@@ -115,20 +127,38 @@
       "title": "Protocol nghiên cứu v1",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-008",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-001",
         "SG-003"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "docs/RESEARCH_PROTOCOL.md",
+        "configs/protocol_v1.json",
+        "management/reviews/SG-004-SOURCE-AUDIT.md",
+        "management/reviews/SG-004-REVIEW-PACKET.md",
+        "management/logs/SESSION-20260915-008.md",
+        "management/reviews/SG-004-REVIEW-20260915.md"
+      ],
+      "verification": [
+        "2026-09-15T17:29:52.3803311+07:00: JSON contract checks PASS; git diff --check exit 0; project checker exit 0, 193 local links before reviewer registration.",
+        "Fresh-context artifact review đang thực hiện; human approval của protocol cụ thể chưa có.",
+        "2026-09-15T17:37:00.5115669+07:00: Fresh-context Astra High review and P2 re-review PASS on protocol 90E6B80F5C54B8A4BC445FAFFAACA9D7174F9024CB551FEB9CC86E489B093351 / config 8B9BE0EA50C79462B6736DB5C392EAD093A4F7F78732914902E1EE81D9B02306; no open P0-P2.",
+        "2026-09-15T17:37:00.5115669+07:00: C bounds validated 300 dev + 600 test = 900; other 49 task records unchanged. Human approval requested, not yet received."
+      ],
+      "claimed_paths": [
+        "docs/RESEARCH_PROTOCOL.md",
+        "configs/protocol_v1.json",
+        "management/DECISIONS.md",
+        "management/reviews/SG-004-REVIEW-PACKET.md",
+        "management/logs/SESSION-20260915-008.md"
+      ],
+      "note": "Design artifacts and fresh-context review complete; awaiting project-owner approval before DONE. No downstream task started."
     },
     {
       "id": "SG-005",

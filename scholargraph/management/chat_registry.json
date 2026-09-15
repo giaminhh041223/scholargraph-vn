@@ -1,16 +1,24 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T16:42:00+07:00",
+  "updated_at": "2026-09-15T17:38:14.2190159+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "SG-004",
+      "session_id": "SESSION-20260915-008",
+      "chat_id": "C"
+    }
+  ],
   "sessions": [
     {
       "session_id": "SESSION-20260915-006",
       "chat_id": "R",
       "app_thread_id": null,
-      "task_ids": ["SG-003"],
+      "task_ids": [
+        "SG-003"
+      ],
       "actual_model": null,
       "actual_reasoning": null,
       "log_path": "management/logs/SESSION-20260915-006.md",
@@ -20,7 +28,10 @@
       "session_id": "SESSION-20260915-007",
       "chat_id": "C",
       "app_thread_id": "01a0a33b-d3c6-7210-8124-de2d3147f156",
-      "task_ids": ["SG-003", "SG-004"],
+      "task_ids": [
+        "SG-003",
+        "SG-004"
+      ],
       "actual_model": "gpt-5",
       "actual_reasoning": null,
       "log_path": "management/logs/SESSION-20260915-007.md",
@@ -49,6 +60,52 @@
       "actual_reasoning": null,
       "log_path": "management/logs/SESSION-20260915-005.md",
       "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-008",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-008.md",
+      "status": "checkpoint"
+    },
+    {
+      "session_id": "SESSION-20260915-008-SOURCE",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg004_source_audit",
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-004-SUBAGENTS.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-004-SOURCE-AUDIT.md"
+      ],
+      "role": "support_source_audit"
+    },
+    {
+      "session_id": "SESSION-20260915-008-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg004_final_review",
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-004-SUBAGENTS.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-004-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
     }
   ],
   "lanes": [
@@ -64,7 +121,7 @@
         "management/chat_registry.json"
       ],
       "app_thread_id": null,
-      "status": "idle"
+      "status": "active"
     },
     {
       "chat_id": "R",
@@ -118,7 +175,7 @@
       "purpose": "Đọc acceptance và bằng chứng ở context mới; không sửa implementation được review.",
       "shared_control_files": [],
       "app_thread_id": null,
-      "status": "not_created"
+      "status": "idle"
     }
   ]
 }
