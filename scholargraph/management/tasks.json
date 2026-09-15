@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T17:37:00.5115669+07:00",
+  "updated_at": "2026-09-15T17:43:01.9334233+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -127,7 +127,7 @@
       "title": "Protocol nghiên cứu v1",
       "phase": "M1",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R",
       "owner": "codex/current-session",
       "session_id": "SESSION-20260915-008",
@@ -149,16 +149,12 @@
         "2026-09-15T17:29:52.3803311+07:00: JSON contract checks PASS; git diff --check exit 0; project checker exit 0, 193 local links before reviewer registration.",
         "Fresh-context artifact review đang thực hiện; human approval của protocol cụ thể chưa có.",
         "2026-09-15T17:37:00.5115669+07:00: Fresh-context Astra High review and P2 re-review PASS on protocol 90E6B80F5C54B8A4BC445FAFFAACA9D7174F9024CB551FEB9CC86E489B093351 / config 8B9BE0EA50C79462B6736DB5C392EAD093A4F7F78732914902E1EE81D9B02306; no open P0-P2.",
-        "2026-09-15T17:37:00.5115669+07:00: C bounds validated 300 dev + 600 test = 900; other 49 task records unchanged. Human approval requested, not yet received."
+        "2026-09-15T17:37:00.5115669+07:00: C bounds validated 300 dev + 600 test = 900; other 49 task records unchanged. Human approval requested, not yet received.",
+        "2026-09-15T17:40:52.6906333+07:00: Project owner explicitly approved the reviewed artifact with message \"Duyệt protocol v1\" in this task. Protocol/config SHA-256 still match the PASS re-review snapshot; human approval gate satisfied.",
+        "2026-09-15T17:43:01.9334233+07:00: Closeout scripts/check_project.ps1 exit0; 50 tasks/routes, 188 local links, 7 lanes/sessions; DONE=6, TODO=40, DEFERRED=4; SG-006 next and not started. git diff --check exit0."
       ],
-      "claimed_paths": [
-        "docs/RESEARCH_PROTOCOL.md",
-        "configs/protocol_v1.json",
-        "management/DECISIONS.md",
-        "management/reviews/SG-004-REVIEW-PACKET.md",
-        "management/logs/SESSION-20260915-008.md"
-      ],
-      "note": "Design artifacts and fresh-context review complete; awaiting project-owner approval before DONE. No downstream task started."
+      "claimed_paths": [],
+      "note": "Protocol v1 accepted by project owner after fresh-context review PASS. Design task DONE; executable model/data/freeze gates remain with downstream tasks. SG-006 ready, not started."
     },
     {
       "id": "SG-005",

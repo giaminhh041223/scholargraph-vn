@@ -99,7 +99,7 @@ Thay thế ADR nào (nếu có):
 
 ## ADR-012 — 2026-09-15 — Thiết kế protocol v1 và tiếp nhận dossier SG-004
 
-**Trạng thái:** proposed for project-owner approval; artifact phải qua fresh-context review trước closeout.
+**Trạng thái:** accepted; project owner xác nhận “Duyệt protocol v1”, ghi nhận lúc 2026-09-15T17:40:52.6906333+07:00, sau fresh-context review và re-review PASS. Trước xác nhận này ADR ở trạng thái proposed.
 **Phạm vi:** SG-004, không thực thi các task downstream hoặc freeze final run.
 **Nguồn:** scope SG-001 đã duyệt, literature SG-003, protocol dự thảo và bản pre Gemini do người dùng cung cấp. Source audit bằng Sol High kiểm chứng BEIR/trec_eval từ primary source; pre chỉ là đề xuất, không phải bằng chứng thực nghiệm.
 **Lựa chọn v1:** giữ A/B/C riêng; mỗi RQ có nhãn/method/metric/comparison; A dùng toàn bộ official SciFact train làm internal dev vì core không train model (thay bản nháp tách một phần train), SCIDOCS dùng cấu hình transfer đã khóa. B giữ warm-start observed/heldout 20%, mask cả dev/test và reverse, graph theo cutoff, rerank cùng C100; graph go/no-go và years chờ SG-014. Tuổi dùng một post-fusion exponential freshness variant, loại missing-year khỏi B; không nhận là tái lập CiteRank/time-balanced centrality. C pool ba method, 30 query, 10/20 split, hai người chấm; 600 cặp là dự trù, upper bound 900 trước dedup.
