@@ -1,10 +1,10 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-003
+NEXT_TASK: SG-004
 
-- Phiên hiện tại: SESSION-20260915-006; SG-003 REVIEW, worker đã bàn giao artifact.
+- Phiên hiện tại: SESSION-20260915-007; SG-003 DONE, SG-004 đã mở dependency nhưng chưa bắt đầu.
 - Múi giờ: Asia/Saigon, UTC+07:00.
-- Giai đoạn: M1 — chờ review riêng và xác nhận đọc paper của SG-003.
+- Giai đoạn: M1 — sẵn sàng nhận SG-004, protocol nghiên cứu v1.
 
 ## Bối cảnh đã chốt
 
@@ -12,8 +12,8 @@ ScholarGraph VN có 2 thành viên, dùng agent hỗ trợ triển khai, mục t
 
 ## Trạng thái chính
 
-- SG-000, SG-001, SG-002 và SG-005: DONE.
-- SG-003: có ma trận 12 primary sources, BibTeX, synthesis/giới hạn novelty, ví dụ RRF/PPR và lịch đọc cho hai người. Chưa có review report riêng; chưa xác nhận hoạt động đọc của hai thành viên.
+- SG-000, SG-001, SG-002, SG-003 và SG-005: DONE.
+- SG-003: ma trận 12 primary sources và BibTeX đã qua fresh-context artifact review, không có finding P0–P2. Project owner miễn hoạt động hai thành viên đọc sâu ba paper; deviation ghi tại ADR-011. Không ghi rằng hoạt động đọc đã hoàn tất.
 - CPU pilot SG-002: 1.000 fixture tổng hợp, MiniLM, batch 8, 21,99 giây, 45,48 docs/s.
 - Colab pilot SG-002: Tesla T4 15.360 MiB, batch 32, 0,9385 giây, 1.065,48 docs/s, peak allocated/reserved khoảng 243,6/292 MiB.
 - CPU và GPU dùng cùng input hash và model revision. Cả hai file embedding khớp SHA-256 trong report; GPU nhanh hơn khoảng 23,43 lần.
@@ -23,18 +23,21 @@ ScholarGraph VN có 2 thành viên, dùng agent hỗ trợ triển khai, mục t
 
 ## Task tiếp theo
 
-1. Review SG-003 ở context riêng theo prompt trong gói review; reviewer chỉ ghi report riêng, không sửa artifact/shared board. Chưa tạo reviewer hoặc phiên app mới.
-2. Hai thành viên đọc RRF, SciRepEval và time-balanced centrality theo §7 của RELATED_WORK, bổ sung ghi chú hiểu bài. Không dùng AI review thay bằng chứng con người đọc.
-3. Coordinator xử lý findings và cập nhật gate. Chỉ khi acceptance và review đạt mới chuyển SG-003 DONE rồi nhận SG-004 — Research questions/hypotheses. SG-004 hiện vẫn TODO, chưa đủ dependency.
+1. SG-004 — Protocol nghiên cứu v1 hiện TODO và đã đủ dependency từ SG-001 + SG-003.
+2. Chưa nhận task, chưa gán owner/session/claimed paths và chưa sửa protocol.
+3. Khi người dùng giao thực hiện, coordinator nhận SG-004 theo task card rồi mới bắt đầu.
 
-Worker đã nhả claimed paths; không có active assignment. Không thay đổi scope/protocol hoặc tuyên bố thuật toán mới/SOTA. TextTAGC chỉ được kiểm tra abstract/metadata, không full text.
+Không có active assignment. Không thay đổi scope/protocol hoặc tuyên bố thuật toán mới/SOTA. TextTAGC chỉ được kiểm tra abstract/metadata, không full text.
 
 ## Tệp cần đọc
 
 - [Tổng quan và lịch đọc SG-003](../docs/RELATED_WORK.md)
 - [Thư mục trích dẫn](../docs/references.bib)
 - [Gói review SG-003 và prompt](reviews/SG-003-REVIEW-PACKET.md)
+- [Báo cáo review SG-003](reviews/SG-003-REVIEW-20260915.md)
 - [Nhật ký SG-003](logs/SESSION-20260915-006.md)
+- [Nhật ký closeout](logs/SESSION-20260915-007.md)
+- [Quyết định và deviation](DECISIONS.md)
 - [Master plan](../docs/MASTER_PLAN.md)
 - [Task cards](../docs/TASKS.md)
 - [Research protocol](../docs/RESEARCH_PROTOCOL.md)
@@ -46,3 +49,4 @@ Worker đã nhả claimed paths; không có active assignment. Không thay đổ
 - Cache Hugging Face và embedding `.npy` không commit; hai report JSON CPU/GPU được giữ làm bằng chứng.
 - Python local có cảnh báo NumPy 2.4.6/SciPy không tương thích; khóa environment trước thí nghiệm khoa học chính thức.
 - Không có run/GPU process ScholarGraph đang chạy.
+- SG-004 chỉ được mở trên board; chưa có công việc implementation nào được thực hiện.

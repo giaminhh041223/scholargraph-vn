@@ -88,3 +88,11 @@ Thay thế ADR nào (nếu có):
 **Minh bạch review:** không có review report riêng tồn tại trước closeout; ghi xác nhận trực tiếp của project owner là human review confirmation và thực hiện acceptance audit. Không gọi đó là independent model audit.
 **Yêu cầu còn mở:** deadline chính thức, rubric/weights, format nộp, chính sách AI/pretrained/external data và quy định nhóm vẫn OPEN/PARTIAL; phải cập nhật khi có nguồn và trước SG-045.
 **Hệ quả:** SG-001 có thể DONE; next SG-002. Nếu lịch chính thức sớm hơn target, lịch chính thức ưu tiên và phải cập nhật state/ADR.
+
+## ADR-011 — 2026-09-15 — Miễn hoạt động đọc sâu của SG-003
+
+**Trạng thái:** accepted.
+**Task liên quan:** SG-003; mở dependency SG-004.
+**Nguồn:** project owner yêu cầu bỏ qua hoạt động hai thành viên đọc sâu RW02, RW06 và RW10, chuyển SG-003 thành DONE và mở SG-004 nhưng chưa triển khai.
+**Quyết định:** chấp nhận fresh-context review PASS làm gate kiểm tra artifact. Miễn phần đọc sâu ba paper của hai thành viên như một deviation có chủ ý; không ghi hoặc suy rằng hoạt động này đã hoàn tất.
+**Hệ quả:** SG-003 chuyển DONE. SG-004 đủ dependency và là task kế tiếp ở trạng thái TODO, chưa owner/session/claimed paths. Rủi ro còn lại là hai thành viên có thể chưa giải thích sâu RRF, SciRepEval và time-balanced centrality khi bảo vệ; có thể đọc bù sau nếu cần.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T10:19:49+07:00",
+  "updated_at": "2026-09-15T16:42:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -96,7 +96,7 @@
       "title": "Related work và novelty",
       "phase": "M1",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R",
       "owner": "codex/current-session",
       "session_id": "SESSION-20260915-006",
@@ -105,10 +105,10 @@
         "SG-001"
       ],
       "blocked_reason": null,
-      "evidence": ["docs/RELATED_WORK.md", "docs/references.bib", "management/reviews/SG-003-REVIEW-PACKET.md", "management/logs/SESSION-20260915-006.md"],
-      "verification": ["12 primary-source rows and 12 unique bibliography keys checked against author/publisher/arXiv sources; TextTAGC abstract-only access disclosed.", "PowerShell structural bibliography checks and RRF arithmetic passed; no BibTeX compilation claimed.", "Fresh-context review pending; two-member reading of three papers pending. Project-checker result recorded in session log."],
+      "evidence": ["docs/RELATED_WORK.md", "docs/references.bib", "management/reviews/SG-003-REVIEW-PACKET.md", "management/reviews/SG-003-REVIEW-20260915.md", "management/logs/SESSION-20260915-006.md", "management/logs/SESSION-20260915-007.md"],
+      "verification": ["12 primary-source rows and 12 unique bibliography keys checked against author/publisher/arXiv sources; TextTAGC abstract-only access disclosed.", "PowerShell structural bibliography checks and RRF arithmetic passed; no BibTeX compilation claimed.", "2026-09-15: fresh-context review PASS for artifact snapshot; no P0-P2 findings; report management/reviews/SG-003-REVIEW-20260915.md.", "2026-09-15: project owner explicitly waived the two-member three-paper reading activity and requested SG-003 DONE. The reading is not claimed as completed; deviation recorded in ADR-011 and SESSION-20260915-007."],
       "claimed_paths": [],
-      "note": "Research artifacts ready for fresh-context review. Complete independent review and both members' three-paper reading activity before DONE; SG-004 remains TODO pending SG-003."
+      "note": "DONE with project-owner-approved deviation: fresh-context artifact review passed; the two-member three-paper reading activity was explicitly waived, not completed. SG-004 is ready but remains TODO/unclaimed."
     },
     {
       "id": "SG-004",
