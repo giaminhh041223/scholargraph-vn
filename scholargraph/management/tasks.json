@@ -1,0 +1,1023 @@
+{
+  "schema_version": 1,
+  "project": "ScholarGraph VN",
+  "updated_at": "2026-09-15T10:19:49+07:00",
+  "tasks": [
+    {
+      "id": "SG-000",
+      "title": "Thiết lập kế hoạch, rules và log",
+      "phase": "M0",
+      "priority": "CORE",
+      "status": "DONE",
+      "role": "C",
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-001",
+      "estimate_human_hours": 0,
+      "dependencies": [],
+      "blocked_reason": null,
+      "evidence": [
+        "docs/MASTER_PLAN.md",
+        "docs/TASKS.md",
+        "AGENTS.md",
+        "management/HANDOFF.md",
+        "management/logs/SESSION-20260915-001.md",
+        "scripts/check_project.ps1"
+      ],
+      "verification": [
+        "2026-09-15T10:16:46+07:00: scripts/check_project.ps1 exit 0; 50 task cards, acyclic dependencies, state consistency and 79 local links checked.",
+        "2026-09-15T10:19:49+07:00: closeout check exit 0, DONE=1, TODO=45, DEFERRED=4; 79 local links valid."
+      ],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-001",
+      "title": "Chốt scope và yêu cầu môn",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "DONE",
+      "role": "R/C",
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-003",
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-000"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "docs/SCOPE.md",
+        "docs/RUBRIC_MAP.md",
+        "management/reviews/SG-001-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-003.md"
+      ],
+      "verification": [
+        "2026-09-15T11:00:35+07:00: project checker exit 0 after draft; 160 local Markdown links valid, 50 routes consistent.",
+        "Content audit: 4 RQs, 8 official-input items with owner/status, 12 provisional quality criteria; no invented grading weights or benchmark results.",
+        "2026-09-15: project owner confirmed review complete and authorized closeout; coordinator acceptance audit PASS in management/reviews/SG-001-REVIEW-20260915.md."
+      ],
+      "claimed_paths": [],
+      "note": "Scope accepted for implementation. Internal target 2026-10-31 with November buffer; official deadline/rubric/AI policy remain tracked OPEN/PARTIAL and do not imply official compliance."
+    },
+    {
+      "id": "SG-002",
+      "title": "Khảo sát local và GPU pilot",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-000"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-003",
+      "title": "Related work và novelty",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 5,
+      "dependencies": [
+        "SG-001"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-004",
+      "title": "Protocol nghiên cứu v1",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-001",
+        "SG-003"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-005",
+      "title": "Package, môi trường và Git local",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "DONE",
+      "role": "S",
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-004",
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-001"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "pyproject.toml",
+        "src/scholargraph/__init__.py",
+        "docs/ENVIRONMENT.md",
+        ".gitignore"
+      ],
+      "verification": [
+        "2026-09-15T11:35:59+07:00: python -c import check passed, version 0.1.0.",
+        "2026-09-15T11:36:19+07:00: pytest passed 2/2 tests in 0.46s (test_package_import, test_submodules_import).",
+        "2026-09-15T11:37:22+07:00: git repository initialized at workspace root with clean status ignoring E-COMASPECT binaries and large datasets."
+      ],
+      "claimed_paths": [],
+      "note": "Package scaffold and local git repository established. Offline frontend choice documented."
+    },
+    {
+      "id": "SG-006",
+      "title": "Schema và interface",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-004",
+        "SG-005"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-007",
+      "title": "Runner và run manifest",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-006"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-008",
+      "title": "Kiểm chứng evaluator",
+      "phase": "M1",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-006",
+        "SG-007"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-009",
+      "title": "Tải và đóng băng BEIR",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-005",
+        "SG-006"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-010",
+      "title": "Audit chất lượng dữ liệu",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-009"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-011",
+      "title": "Split và leakage checks",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-004",
+        "SG-010"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-012",
+      "title": "BM25 pilot thật",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-008",
+        "SG-010",
+        "SG-011"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-013",
+      "title": "OpenAlex pilot có resume",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-005",
+        "SG-006"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-014",
+      "title": "Graph feasibility gate",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-011",
+        "SG-013"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-015",
+      "title": "Snapshot OpenAlex core",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-013",
+        "SG-014"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-016",
+      "title": "Graph và masked split",
+      "phase": "M2",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-014",
+        "SG-015"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-017",
+      "title": "Chọn dense model",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-003",
+        "SG-005",
+        "SG-011"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-018",
+      "title": "Lexical baselines",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-012"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-019",
+      "title": "Encoding shard và dense index",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-002",
+        "SG-010",
+        "SG-015",
+        "SG-017"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-020",
+      "title": "Hybrid RRF",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-018",
+        "SG-019"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-021",
+      "title": "Candidate recall",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-020"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-022",
+      "title": "Graph baselines",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-016"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-023",
+      "title": "Personalized PageRank",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "D/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-021",
+        "SG-022"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-024",
+      "title": "Age adjustment",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-023"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-025",
+      "title": "Reranking integration",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-020",
+        "SG-023",
+        "SG-024"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-026",
+      "title": "Dev tuning có budget",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-011",
+        "SG-025"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-027",
+      "title": "Main freeze",
+      "phase": "M4",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/C",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-008",
+        "SG-026"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-028",
+      "title": "Final runs",
+      "phase": "M6",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-027"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-029",
+      "title": "Ablation và robustness",
+      "phase": "M6",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-028"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-030",
+      "title": "Thống kê và error analysis",
+      "phase": "M6",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-029"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-031",
+      "title": "Query Việt và annotation guide",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/H",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-011",
+        "SG-015"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-032",
+      "title": "Cross-lingual baselines",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-017",
+        "SG-020",
+        "SG-031"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-033",
+      "title": "Pool và nhãn hai người",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "H",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 16,
+      "dependencies": [
+        "SG-025",
+        "SG-031",
+        "SG-032"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-034",
+      "title": "Freeze và final VN eval",
+      "phase": "M6",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-027",
+        "SG-032",
+        "SG-033"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-035",
+      "title": "API search/metadata",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-006",
+        "SG-015",
+        "SG-020"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-036",
+      "title": "UI search/recommend",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-025",
+        "SG-035"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-037",
+      "title": "Citation graph UI",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S/D",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-016",
+        "SG-036"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-038",
+      "title": "Offline và xuất tham khảo",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-036"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-039",
+      "title": "Integration checks",
+      "phase": "M5",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-037",
+        "SG-038"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-040",
+      "title": "Performance profiling",
+      "phase": "M6",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-028",
+        "SG-039"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-041",
+      "title": "Packaging và tái lập",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-040"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-042",
+      "title": "Tái lập chéo và audit",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-030",
+        "SG-034",
+        "SG-041"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-043",
+      "title": "Báo cáo học thuật",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 7,
+      "dependencies": [
+        "SG-030",
+        "SG-034",
+        "SG-040"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-044",
+      "title": "Slides và diễn tập",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-043"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-045",
+      "title": "Gói nộp và handoff cuối",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "C",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-042",
+        "SG-044"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": ""
+    },
+    {
+      "id": "SG-046",
+      "title": "Stretch: cross-encoder",
+      "phase": "M8",
+      "priority": "STRETCH",
+      "status": "DEFERRED",
+      "role": "S/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-027"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Ngoài core 7 tuần; chỉ mở khi có nguồn lực và protocol phù hợp."
+    },
+    {
+      "id": "SG-047",
+      "title": "Stretch: fine-tuning",
+      "phase": "M8",
+      "priority": "STRETCH",
+      "status": "DEFERRED",
+      "role": "R/S",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 6,
+      "dependencies": [
+        "SG-026"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Ngoài core 7 tuần; chỉ mở khi có nguồn lực và protocol phù hợp."
+    },
+    {
+      "id": "SG-048",
+      "title": "Stretch: SciRepEval task",
+      "phase": "M8",
+      "priority": "STRETCH",
+      "status": "DEFERRED",
+      "role": "R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 4,
+      "dependencies": [
+        "SG-027"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Ngoài core 7 tuần; chỉ mở khi có nguồn lực và protocol phù hợp."
+    },
+    {
+      "id": "SG-049",
+      "title": "Stretch: TREC-COVID",
+      "phase": "M8",
+      "priority": "STRETCH",
+      "status": "DEFERRED",
+      "role": "S/R",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 3,
+      "dependencies": [
+        "SG-027"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Ngoài core 7 tuần; chỉ mở khi có nguồn lực và protocol phù hợp."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Large binaries & lecture files from root / earlier E-COMASPECT
+*.pt
+*.bin
+*.pth
+*.onnx
+*.pdf
+page_20.png
+
+# Raw logs
+*.log
+
+# Isolate root E-COMASPECT files from ScholarGraph repository
+/src/
+/data/
+/tests/
+/notebooks/
+/scripts/
+/docs/
+/slides_01/
+/slides_02/
+/conftest.py
+/run_pipeline.py
+/start_system.*
+/docker-compose.yml
+/Dockerfile
+/.dockerignore
+/requirements.txt
+/README.md
+/extracted_L01.txt
+/L05-*.txt
+

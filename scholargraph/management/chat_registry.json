@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "project": "ScholarGraph VN",
+  "updated_at": "2026-09-15T11:15:52+07:00",
+  "mode": "logical_lanes_only_no_threads_created",
+  "single_writer_coordinator": "C",
+  "active_assignments": [],
+  "sessions": [
+    {
+      "session_id": "SESSION-20260915-003",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-001"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-003.md",
+      "status": "completed"
+    }
+  ],
+  "lanes": [
+    {
+      "chat_id": "C",
+      "name": "Điều phối",
+      "default_profile": "S_H",
+      "purpose": "Điều phối scope, dependency, phân công, nhận bàn giao; không chứa log thử nghiệm dài.",
+      "shared_control_files": [
+        "management/tasks.json",
+        "management/state.json",
+        "management/HANDOFF.md",
+        "management/chat_registry.json"
+      ],
+      "app_thread_id": null,
+      "status": "idle"
+    },
+    {
+      "chat_id": "R",
+      "name": "Nghiên cứu và đánh giá",
+      "default_profile": "A_H",
+      "purpose": "Protocol, literature, leakage, evaluator, tuning, thống kê, VN labels.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "D",
+      "name": "Dữ liệu và môi trường",
+      "default_profile": "S_H",
+      "purpose": "Môi trường, schema, ingestion, audit và masked graph.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "M",
+      "name": "Retrieval và thuật toán graph",
+      "default_profile": "S_H",
+      "purpose": "Baselines, encoding, RRF, PPR và reranking.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "P",
+      "name": "Ứng dụng và hiệu năng",
+      "default_profile": "T_H",
+      "purpose": "API, UI, offline, integration và profiling.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "W",
+      "name": "Báo cáo và tái lập",
+      "default_profile": "S_H",
+      "purpose": "Packaging, audit, report, slides và diễn tập.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "V",
+      "name": "Review độc lập theo phiên",
+      "default_profile": "A_H",
+      "purpose": "Đọc acceptance và bằng chứng ở context mới; không sửa implementation được review.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    }
+  ]
+}

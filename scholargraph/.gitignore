@@ -1,0 +1,30 @@
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Large datasets & raw snapshots (keep directory structure with .gitkeep)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Large artifacts & indexes
+artifacts/indexes/*
+!artifacts/indexes/.gitkeep
+artifacts/runs/*
+!artifacts/runs/.gitkeep
+artifacts/reports/*
+!artifacts/reports/.gitkeep
+
+# Temporary pilot downloads
+tmp/
+*.tmp
