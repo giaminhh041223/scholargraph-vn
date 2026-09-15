@@ -1,11 +1,21 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T12:48:35+07:00",
+  "updated_at": "2026-09-15T13:09:15+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [],
   "sessions": [
+    {
+      "session_id": "SESSION-20260915-006",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "task_ids": ["SG-003"],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-006.md",
+      "status": "checkpoint"
+    },
     {
       "session_id": "SESSION-20260915-003",
       "chat_id": "C",
@@ -53,7 +63,7 @@
       "purpose": "Protocol, literature, leakage, evaluator, tuning, thống kê, VN labels.",
       "shared_control_files": [],
       "app_thread_id": null,
-      "status": "not_created"
+      "status": "idle"
     },
     {
       "chat_id": "D",

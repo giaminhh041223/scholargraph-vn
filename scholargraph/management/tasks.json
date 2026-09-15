@@ -96,19 +96,19 @@
       "title": "Related work và novelty",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-006",
       "estimate_human_hours": 5,
       "dependencies": [
         "SG-001"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": ["docs/RELATED_WORK.md", "docs/references.bib", "management/reviews/SG-003-REVIEW-PACKET.md", "management/logs/SESSION-20260915-006.md"],
+      "verification": ["12 primary-source rows and 12 unique bibliography keys checked against author/publisher/arXiv sources; TextTAGC abstract-only access disclosed.", "PowerShell structural bibliography checks and RRF arithmetic passed; no BibTeX compilation claimed.", "Fresh-context review pending; two-member reading of three papers pending. Project-checker result recorded in session log."],
       "claimed_paths": [],
-      "note": ""
+      "note": "Research artifacts ready for fresh-context review. Complete independent review and both members' three-paper reading activity before DONE; SG-004 remains TODO pending SG-003."
     },
     {
       "id": "SG-004",
