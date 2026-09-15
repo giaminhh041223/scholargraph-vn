@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T22:58:03+07:00",
+  "updated_at": "2026-09-15T23:28:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -317,19 +317,32 @@
       "title": "Audit chất lượng dữ liệu",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260915-020",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-009"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/ingest/beir_audit.py",
+        "tests/unit/test_data_integrity.py",
+        "artifacts/reports/beir_data_audit.json",
+        "docs/DATA_CARD.md",
+        "management/reviews/SG-010-REVIEW-PACKET.md",
+        "management/reviews/SG-010-REVIEW-20260915.md",
+        "management/logs/SESSION-20260915-020.md"
+      ],
+      "verification": [
+        "2026-09-16T00:00:05+07:00: pytest tests/unit/test_data_integrity.py -v passed 10/10 tests in 3.79s.",
+        "2026-09-16T00:00:55+07:00: pytest tests -q passed 88/88 tests in 26.42s across the full project test suite.",
+        "2026-09-16T00:03:34+07:00: fresh-context review PASS in management/reviews/SG-010-REVIEW-20260915.md; no P0-P2 findings.",
+        "2026-09-16T00:01:46+07:00: scripts/check_project.ps1 exit 0; 202 local Markdown links verified."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Hoàn tất audit chất lượng dữ liệu BEIR. Phát hiện 344 documents SCIDOCS thiếu abstract (115 mang nhãn positive trong test qrels) và 2 query trùng lặp text upstream trong SciFact. Bảo toàn nguyên vẹn raw benchmark theo Protocol v1."
     },
     {
       "id": "SG-011",
