@@ -24,6 +24,10 @@ artifacts/runs/*
 !artifacts/runs/.gitkeep
 artifacts/reports/*
 !artifacts/reports/.gitkeep
+!artifacts/reports/*.json
+
+# Downloaded model/tokenizer cache is reproducible and too large for Git
+artifacts/cache/
 
 # Temporary pilot downloads
 tmp/

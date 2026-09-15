@@ -1,53 +1,48 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-002
+NEXT_TASK: SG-003
 
-- Phiên hiện tại: SESSION-20260915-005.
+- Phiên gần nhất: SESSION-20260915-005.
 - Múi giờ làm việc: Asia/Saigon, UTC+07:00.
-- Giai đoạn: M1 — SG-002 IN_PROGRESS; đang đo local và chuẩn bị pilot GPU 1.000 tài liệu.
+- Giai đoạn: M1 — SG-002 đã hoàn tất phần local và đang BLOCKED ở phép đo GPU cloud; SG-003 là task tiếp theo không phụ thuộc blocker này.
 
 ## Bối cảnh đã chốt
-Người dùng chọn ScholarGraph, yêu cầu plan từng task và rules/log để tiếp nối. Sau đó xác nhận còn khoảng 7 tuần, 2 người, phần triển khai nhờ agent; GPU qua Kaggle/Colab, có thể cân nhắc thuê nếu cần.
 
-Ngày 2026-09-15, project owner xác nhận SG-001 hoàn tất. Tiếp đó SG-005 đã triển khai thành công: cấu trúc package Python, file cấu hình, tài liệu môi trường, unit test và Git local repository tại thư mục gốc.
+ScholarGraph VN có 2 thành viên, dùng agent hỗ trợ triển khai, mục tiêu hoàn thành core trước 2026-10-31 và giữ tháng 11 làm buffer. GPU dự kiến dùng Kaggle/Colab; chỉ thuê GPU sau khi pilot thực tế chứng minh cần thiết. Deadline/rubric chính thức của môn vẫn chưa được cung cấp.
 
-## Đã tạo
-- Root AGENTS, SCHOLARGRAPH entry point và root `.gitignore`.
-- ScholarGraph AGENTS, master plan 7 tuần, 50 task (46 core gồm setup, 4 stretch).
-- Protocol riêng cho BEIR text, OpenAlex graph, query Việt; graph leakage gate.
-- Registry, state, decision log, templates và checker chỉ đọc.
-- Bổ sung routing model/reviewer đủ 50 ID, bảng tra cứu, 7 lane chat logic.
-- SG-001 tạo/duyệt SCOPE và RUBRIC_MAP.
-- SG-005 tạo `pyproject.toml`, `requirements.txt`, `requirements-dev.txt`, cấu trúc module `src/scholargraph/`, tests `conftest.py`, `test_package.py`, tài liệu `docs/ENVIRONMENT.md`, `scholargraph/.gitignore` và khởi tạo local Git repository tại thư mục gốc workspace.
+## Trạng thái chính
 
-## Kết quả kiểm tra và trạng thái
-- SG-000 DONE: có file kế hoạch/rules/log và checker đã chạy thành công.
-- SG-001 DONE: problem, 4 RQ, core/non-core, mapping chất lượng và deadline nội bộ đã chốt.
-- SG-005 DONE: package import được, pytest pass 2/2 tests, git repository hoạt động với trạng thái sạch (loại trừ các file nhị phân lớn của E-COMASPECT).
-- 43 task core triển khai ở TODO; 4 stretch DEFERRED; không có task IN_PROGRESS sau bàn giao.
-- Kiểm tra tự động bằng `scripts/check_project.ps1` exit code 0.
+- SG-000, SG-001 và SG-005: DONE.
+- SG-002: BLOCKED có chủ đích, không phải lỗi implementation. Local audit, notebook, CPU pilot, dự toán và shard/resume plan đã xong; thiếu một run CUDA thật trên tài khoản Colab/Kaggle.
+- CPU pilot SG-002: 1.000 fixture tổng hợp, MiniLM revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`, batch 8, 21,99 giây, 45,48 docs/s, embedding `[1000, 384]`; checksum file khớp report.
+- GPU local: hệ điều hành thấy MX550 2 GB, nhưng PyTorch hiện tại là CPU-only; GPU throughput/peak VRAM không được suy đoán.
+- Bộ test: 5/5 pass. Project checker pass trước checkpoint.
 
-## Bước tiếp theo
-SG-002 — khảo sát local và GPU pilot.
-1. Nhận task/session mới, lane D; model đề xuất Sol High, self-check allowed.
-2. Xác minh runtime/RAM/disk local và khả năng dùng Kaggle/Colab; không suy quota từ kế hoạch.
-3. Tạo COMPUTE_PLAN, notebook encode 1.000 mẫu và compute_pilot report theo card.
-4. SG-003 (Related work) cũng đã mở dependency và có thể làm song song nếu phân công phù hợp.
+## Cách mở blocker SG-002
+
+1. Mở `notebooks/compute_smoke.ipynb` trên Colab hoặc Kaggle và bật GPU.
+2. Run All; chỉ nhận kết quả nếu report ghi `device=cuda` và có GPU name/peak VRAM/docs-second.
+3. Đưa `artifacts/reports/compute_pilot.json` về workspace, chạy test/checker và chuyển SG-002 sang review/closeout.
+4. Nếu chưa có cloud session, tiếp tục SG-003; không cần chờ SG-002.
+
+## Task tiếp theo
+
+SG-003 — Related work và novelty. Đọc task card/routing, claim lane R, thu thập nguồn học thuật có thể kiểm chứng và tạo synthesis gắn với RQ/scope. Không thay đổi protocol hay claim novelty chỉ dựa trên blog/marketing.
 
 ## Tệp cần đọc
+
+- [Compute plan và hướng dẫn GPU](../docs/COMPUTE_PLAN.md)
+- [Notebook pilot](../notebooks/compute_smoke.ipynb)
+- [CPU report](../artifacts/reports/compute_pilot.json)
+- [Nhật ký SG-002](logs/SESSION-20260915-005.md)
 - [Master plan](../docs/MASTER_PLAN.md)
 - [Task cards](../docs/TASKS.md)
-- [Protocol](../docs/RESEARCH_PROTOCOL.md)
-- [Decisions](DECISIONS.md)
+- [Research protocol](../docs/RESEARCH_PROTOCOL.md)
 - [Model từng ID](../docs/TASK_MODEL_MATRIX.md)
 - [Chiến lược chat](../docs/MODEL_AND_CHAT_STRATEGY.md)
-- [Scope đang review](../docs/SCOPE.md)
-- [Rubric map](../docs/RUBRIC_MAP.md)
-- [Hướng dẫn môi trường](../docs/ENVIRONMENT.md)
-- [Nhật ký gần nhất](logs/SESSION-20260915-004.md)
 
-## Môi trường và lưu ý
-- Git repository đã được khởi tạo tại workspace root; commit lịch sử theo từng task.
-- Runtime Python 3.13.0 và Git 2.40+ đã xác minh hoạt động tốt trên hệ thống.
-- Cấu hình `.gitignore` đảm bảo không trộn lẫn và không làm ảnh hưởng đến mã nguồn/dữ liệu cũ của E-COMASPECT.
-- Không có run/GPU process của ScholarGraph đang chạy.
+## Lưu ý vận hành
+
+- Cache Hugging Face và embedding `.npy` không commit; report JSON được giữ làm bằng chứng.
+- Python local có cảnh báo NumPy 2.4.6/SciPy không tương thích; khóa environment trước thí nghiệm khoa học chính thức.
+- Không có run/GPU process ScholarGraph đang chạy.

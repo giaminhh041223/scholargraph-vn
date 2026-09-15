@@ -1,13 +1,11 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T11:48:51+07:00",
+  "updated_at": "2026-09-15T12:23:14+07:00",
   "phase": "M1",
-  "stage": "compute_pilot_in_progress",
-  "active_tasks": [
-    "SG-002"
-  ],
-  "next_task_id": "SG-002",
+  "stage": "compute_pilot_blocked_on_cloud_gpu",
+  "active_tasks": [],
+  "next_task_id": "SG-003",
   "last_session_id": "SESSION-20260915-005",
   "last_session_log": "management/logs/SESSION-20260915-005.md",
   "handoff_path": "management/HANDOFF.md",
@@ -49,25 +47,25 @@
     },
     {
       "id": "Q-002",
-      "question": "RAM/disk/runtime local, GPU/quota tài khoản thực tế?",
+      "question": "Local runtime/RAM/disk và CPU pilot đã xác minh; còn thiếu GPU name/VRAM/throughput và quota thực tế từ một run Colab/Kaggle.",
       "owner_role": "D/S",
       "blocks": "Chốt model, budget encoding và compute pilot ở SG-002."
     }
   ],
   "known_limitations": [
-    "Application package scaffold created; dataset ingestion and retrieval models pending.",
+    "Application package scaffold and local CPU compute pilot created; cloud GPU measurement, dataset ingestion and retrieval models pending.",
     "Git repository initialized at workspace root with local version control.",
     "BEIR standard data does not establish a complete permitted citation graph.",
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-15T11:43:34+07:00",
+    "checked_at": "2026-09-15T12:23:14+07:00",
     "command": ".\\scripts\\check_project.ps1",
     "exit_code": 0,
     "task_count": 50,
-    "local_links_checked": 165,
+    "local_links_checked": 166,
     "model_routes_checked": 50,
     "logical_chat_lanes": 7,
-    "scope": "SG-005 closeout passed: 50 tasks and model routes consistent, 165 local links, 7 logical lanes; DONE=3, TODO=43, DEFERRED=4; next SG-002."
+    "scope": "SG-002 checkpoint passed: local CPU pilot and report verified, cloud GPU still blocked; 50 tasks and model routes consistent, 166 local links, 7 logical lanes; DONE=3, BLOCKED=1, TODO=42, DEFERRED=4; next SG-003."
   }
 }
