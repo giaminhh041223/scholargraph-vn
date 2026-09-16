@@ -1,11 +1,131 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-16T22:30:20+07:00",
+  "updated_at": "2026-09-17T01:28:19+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [],
   "sessions": [
+    {
+      "session_id": "SESSION-20260916-033",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg017_qa_reviewer",
+      "task_ids": [
+        "SG-017"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-033.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-032",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg014_engine_reviewer",
+      "task_ids": [
+        "SG-014"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-032.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-031",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg012_eval_reviewer",
+      "task_ids": [
+        "SG-012"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-031.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-030",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg017_model_researcher",
+      "task_ids": [
+        "SG-017"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-030.md",
+      "status": "completed",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "docs/MODEL_CARD.md",
+        "configs/models/",
+        "tests/unit/test_model_config.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260916-029",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg014_graph_curator",
+      "task_ids": [
+        "SG-014"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-029.md",
+      "status": "completed",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "docs/GRAPH_PROTOCOL.md",
+        "artifacts/reports/graph_feasibility.json",
+        "src/scholargraph/graph/feasibility.py",
+        "tests/unit/test_graph_feasibility.py",
+        "management/DECISIONS.md"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260916-028",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg012_engine_worker",
+      "task_ids": [
+        "SG-012"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-028.md",
+      "status": "completed",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/retrieval/bm25.py",
+        "tests/unit/test_bm25_retrieval.py",
+        "artifacts/reports/bm25_pilot.md",
+        "artifacts/reports/bm25_pilot.json"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260916-027",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-012",
+        "SG-014",
+        "SG-017"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-027.md",
+      "status": "completed",
+      "role": "coordinator_orchestrator"
+    },
     {
       "session_id": "SESSION-20260916-026",
       "chat_id": "C",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-16T14:33:07+07:00",
+  "updated_at": "2026-09-17T01:28:19+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -418,10 +418,10 @@
       "title": "BM25 pilot thật",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg012_engine_worker",
+      "session_id": "SESSION-20260916-028",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-008",
@@ -429,10 +429,25 @@
         "SG-011"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/bm25.py",
+        "tests/unit/test_bm25_retrieval.py",
+        "artifacts/reports/bm25_pilot.md",
+        "artifacts/reports/bm25_pilot.json",
+        "artifacts/runs/RUN-20260916-163653-bm25-scifact-dev",
+        "artifacts/runs/RUN-20260916-163629-bm25-scifact-dev",
+        "management/reviews/SG-012-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-028.md",
+        "management/logs/SESSION-20260916-031.md"
+      ],
+      "verification": [
+        "2026-09-16: real run RUN-20260916-163653-bm25-scifact-dev COMPLETED with seal on SciFact dev (809 queries / 919 qrels / 5.183 corpus): nDCG@10 0.6701281168402777, Recall@100 0.9102389781623403, MRR@10 0.6380030215629721, MAP@100 0.6332855229671024, P@5 0.15945611866501855.",
+        "2026-09-16: reproducibility run RUN-20260916-163629: rankings.jsonl + per_query.json byte-identical, metrics bit-exact; 2 historical runs and 1 FAILED run (164606, has error.json) preserved, never overwritten.",
+        "2026-09-16: pytest tests/unit/test_bm25_retrieval.py 36/36 PASS; pytest tests -q 321/321 PASS (204.53s) with the full trio; no old test broken.",
+        "2026-09-17: fresh-context reviewer bn/sg012_eval_reviewer PASS (management/reviews/SG-012-REVIEW-20260916.md): leakage probes (rankings without qrels; inverted-score qrels -> identical rankings, zeroed metrics), independent BM25 re-derivation and metric recomputation <=1e-12, 4/4 adversarial CLI exit 1, hashes match. No P0/P1. P2-1 (canonical-JSON hash naming note) accepted as documented note; P2-2 (stale test count in report) resolved by this entry citing the current 321/321."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop SESSION-20260916-027: claimed by engine worker (lane M). Real BM25 pilot per Protocol v1 bm25 block; no qrels in ranking path."
     },
     {
       "id": "SG-013",
@@ -476,20 +491,34 @@
       "title": "Graph feasibility gate",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg014_graph_curator",
+      "session_id": "SESSION-20260916-029",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-011",
         "SG-013"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/feasibility.py",
+        "tests/unit/test_graph_feasibility.py",
+        "artifacts/reports/graph_feasibility.json",
+        "docs/GRAPH_PROTOCOL.md",
+        "management/DECISIONS.md",
+        "management/reviews/SG-014-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-029.md",
+        "management/logs/SESSION-20260916-032.md"
+      ],
+      "verification": [
+        "2026-09-17: measured gate on immutable pilot snapshot (works.jsonl sha256 3f301e4f...): 2.000 works, 190 internal directed edges, 1.779/2.000 isolated, 4 self-loops, cohort 21 eligible sources with max 2/year << floors 50 test/30 dev -> overall NO_GO (valid measured outcome, exit 0). SCIDOCS metadata.references (20.811 internal edges) rejected as leakage (qrels are citation-derived); SciFact corpus has 0 reference fields.",
+        "2026-09-16: pytest tests/unit/test_graph_feasibility.py 37/37 PASS; pytest tests -q 321/321 PASS.",
+        "2026-09-17: fresh-context reviewer bn/sg014_engine_reviewer PASS (management/reviews/SG-014-REVIEW-20260916.md): independent recount matched 100%, CLI exit-1 probes, ADR-016 append-only verified (+23/-0), no qrels read by feasibility. P2-1 (test helper floors swapped) FIXED; P2-2 (masking_protocol_readiness not gating) FIXED and report regenerated via CLI (overall stays NO_GO); P2-3 (reference-list position latent edge case) documented, non-blocking.",
+        "2026-09-17: ADR-016 recorded: SG-016 stays blocked until the gate re-runs GO on a citation-connected core snapshot; SG-015 scope adjusted accordingly (see tasks.json note)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Gate NO_GO là kết quả đo được (không phải run failure); ADR-016 chốt masking/holdout và yêu cầu SG-015. SG-016 blocked đến khi gate GO trên snapshot core."
     },
     {
       "id": "SG-015",
@@ -509,7 +538,7 @@
       "evidence": [],
       "verification": [],
       "claimed_paths": [],
-      "note": ""
+      "note": "ADR-016 mục 7: scope điều chỉnh — sampling phải cho snapshot có kết nối trích dẫn (expansion referenced_works/cited_by hoặc cohort venue/năm), giữ nguyên floors 50 test/30 dev/2 refs/100 novel-candidates, pin manifest trước khi tải; sau khi tải chạy lại graph gate, SG-016 chỉ mở khi GO."
     },
     {
       "id": "SG-016",
@@ -536,10 +565,10 @@
       "title": "Chọn dense model",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg017_model_researcher",
+      "session_id": "SESSION-20260916-030",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-003",
@@ -547,10 +576,21 @@
         "SG-011"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "docs/MODEL_CARD.md",
+        "configs/models/dense_encoder.json",
+        "tests/unit/test_model_config.py",
+        "management/reviews/SG-017-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-030.md",
+        "management/logs/SESSION-20260916-033.md"
+      ],
+      "verification": [
+        "2026-09-16: core encoder selected: BAAI/bge-base-en-v1.5 @ revision a5beb1e3e68b9ab74eb54cfd186867f64f240e1a, CLS pooling, 768 dims, max_length 512, MIT license, query-only prefix; shortlist (3 <= protocol budget): bge-base (core), bge-small (light option), all-MiniLM-L6-v2 (compute baseline). No benchmark numbers in the card (measurement is SG-019/SG-026).",
+        "2026-09-16: pytest tests/unit/test_model_config.py 34/34 PASS; pytest tests -q 321/321 PASS.",
+        "2026-09-17: fresh-context reviewer bn/sg017_qa_reviewer PASS (management/reviews/SG-017-REVIEW-20260916.md): 3/3 WebFetch source probes matched (HF sha + license + pooling config), 31/31 negative probes (fail-loud config validation), overlap disclosure per candidate with explicit unknowns, no fabricated facts. P2 notes carried to SG-019: record tokenizer revision in shard manifest; implement fail-loud CLI reading configs/models/."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop SESSION-20260916-027: claimed by research worker (lane R). Selection only; no dense encoding run (SG-019 scope)."
     },
     {
       "id": "SG-018",

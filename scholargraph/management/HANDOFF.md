@@ -1,6 +1,16 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-012
+NEXT_TASK: SG-018
+
+## Orchestrator loop: SG-012 + SG-014 + SG-017 DONE — 2026-09-17T01:28:19+07:00
+
+- Người dùng phát chỉ thị orchestrator (chạy tự động toàn bộ task còn lại theo DAG, scope chỉ `bn`, runtime `.venv`, xoay vòng review độc lập, log đặt `management/logs/` thay vì `management/sessions/` để khớp checker). Vòng 1 triển khai bộ ba unblocked bằng 3 subagent worker song song + 3 subagent reviewer fresh-context; tất cả **PASS, không P0/P1**; **pytest 321/321** (214 cũ + 36 BM25 + 37 feasibility + 34 model config); checker PASS (287 links, 41 sessions).
+- **SG-012 DONE** (engine worker `bn/sg012_engine_worker`): BM25 Protocol v1 positive-IDF, CLI exit 1 khi lỗi, ranking path không đọc qrels. Run thật `RUN-20260916-163653-bm25-scifact-dev` (SciFact dev 809/919/5.183): **nDCG@10 0.6701, Recall@100 0.9102, MRR@10 0.6380**; rerun `163629` byte-identical. Review PASS sau probe leakage (qrels đảo điểm vẫn rankings identical), tái tính metric độc lập ≤1e-12, 4/4 adversarial exit 1.
+- **SG-014 DONE** (curator `bn/sg014_graph_curator`): tái đếm khớp (190 cạnh, 1.779 isolated, **4 self-loops mới phát hiện**), SCIDOCS references bị loại vì leakage (qrels là dẫn xuất citation), cohort 21 nguồn max 2/năm << floor 50/30 → **gate NO_GO** (kết quả đo được, exit 0). Đã có `docs/GRAPH_PROTOCOL.md` (mask H_dev ∪ H_test ∪ reverse, cutoff year(u)) và **ADR-016**. Review PASS tái đếm độc lập khớp 100%; 2 P2 đã sửa (floors helper, masking criterion gating) + tái sinh report (vẫn NO_GO).
+- **SG-017 DONE** (researcher `bn/sg017_model_researcher`): chốt core encoder **BAAI/bge-base-en-v1.5** @ `a5beb1e3e68b9ab74eb54cfd186867f64f240e1a`, CLS/768/512, MIT, prefix query-only; shortlist 3; overlap công bố, không chứa benchmark. Review PASS 3/3 WebFetch probe. P2 ghi chú cho SG-019: pin tokenizer revision vào shard manifest; CLI đọc config phải fail-loud.
+- **Tiếp theo:** `SG-018` (Lexical baselines, deps SG-012 DONE) và `SG-015` (Snapshot OpenAlex core — **scope đã điều chỉnh theo ADR-016 mục 7**: sampling phải ra snapshot có kết nối trích dẫn, giữ floors 50/30/2/100, pin manifest trước tải; xong phải chạy lại graph gate). **SG-016 bị chặn đến khi gate GO.** SG-019 unblocked sau SG-015 (deps SG-002/010/015/017).
+- Vòng lặp orchestrator vẫn đang theo chỉ thị của người dùng: quét DAG → giao worker theo lane (S→engine, D→curator, R→researcher) → review chéo (coder engine → reviewer researcher/gatekeeper; coder curator → reviewer engine; coder researcher → reviewer gatekeeper) → 4 cổng bảo mật (leakage, dữ liệu thật, pytest toàn suite ≥214+new, checker) → sync board → lặp. Subagent hạ tầng có lúc lỗi "Model request failed"/captcha — retry được; nếu liên tục lỗi, coordinator làm trực tiếp vai worker + tự kiểm theo ADR-013 và ghi rõ (không tự nhận reviewer độc lập).
+- [Log điều phối](logs/SESSION-20260916-027.md); logs worker 028/029/030; logs reviewer 031/032/033; reviews SG-012/014/017-REVIEW-20260916.md.
 
 ## Môi trường bn thiết lập xong — 2026-09-16T22:30:20+07:00
 
