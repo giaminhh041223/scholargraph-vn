@@ -1,0 +1,42 @@
+[
+  {
+    "query_id": "synth:q_01",
+    "doc_id": "synth:paper_002",
+    "score": 2,
+    "iteration": 0,
+    "annotator_id": null,
+    "synthetic": true
+  },
+  {
+    "query_id": "synth:q_01",
+    "doc_id": "synth:paper_004",
+    "score": 1,
+    "iteration": 0,
+    "annotator_id": null,
+    "synthetic": true
+  },
+  {
+    "query_id": "synth:q_02",
+    "doc_id": "synth:paper_001",
+    "score": 2,
+    "iteration": 0,
+    "annotator_id": null,
+    "synthetic": true
+  },
+  {
+    "query_id": "synth:q_02",
+    "doc_id": "synth:paper_003",
+    "score": 1,
+    "iteration": 0,
+    "annotator_id": null,
+    "synthetic": true
+  },
+  {
+    "query_id": "synth:q_03",
+    "doc_id": "synth:paper_001",
+    "score": 2,
+    "iteration": 0,
+    "annotator_id": "annotator_01",
+    "synthetic": true
+  }
+]

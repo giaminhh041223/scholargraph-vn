@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "project": "ScholarGraph VN",
+  "updated_at": "2026-09-15T10:42:23+07:00",
+  "mode": "advisory_not_runtime_configuration",
+  "strategy": "balanced_quality_first",
+  "verified_on": "2026-09-15",
+  "official_model_source": "https://developers.openai.com/api/docs/models",
+  "availability_basis": "Current Codex host tool catalog; recheck when starting a future session.",
+  "task_registry_path": "management/tasks.json",
+  "chat_registry_path": "management/chat_registry.json",
+  "profiles": {
+    "A_H": {
+      "model": "gpt-6-astra",
+      "reasoning": "high"
+    },
+    "A_X": {
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh"
+    },
+    "S_H": {
+      "model": "gpt-5.6-sol",
+      "reasoning": "high"
+    },
+    "S_M": {
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium"
+    },
+    "T_H": {
+      "model": "gpt-5.6-terra",
+      "reasoning": "high"
+    },
+    "T_M": {
+      "model": "gpt-5.6-terra",
+      "reasoning": "medium"
+    },
+    "L_M": {
+      "model": "gpt-5.6-luna",
+      "reasoning": "medium"
+    }
+  },
+  "assistant_only_profiles": [
+    "L_M"
+  ],
+  "defaults": {
+    "coordinator_profile": "S_H",
+    "routine_coordination_profile": "S_M",
+    "review_chat_id": "V",
+    "maximum_simultaneous_implementation_writers": 1,
+    "recommended_active_chats": 3,
+    "tasks_per_session": [
+      1,
+      3
+    ],
+    "human_checkpoint": "Cuối task: giải thích thuật toán, ví dụ, kiểm tra, một hạn chế; người phụ trách đọc và hỏi lại.",
+    "fallback_policy": "Không âm thầm đổi model. Ghi model thực tế nếu xác minh được; người dùng chọn fallback. Giữ review và human gates."
+  },
+  "tasks": [
+    {
+      "task_id": "SG-000",
+      "primary_profile": "S_H",
+      "chat_id": "C",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Điều phối hồ sơ; mapping không ghi lại model đã dùng ở phiên cũ."
+    },
+    {
+      "task_id": "SG-001",
+      "primary_profile": "S_H",
+      "chat_id": "C",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Chốt phạm vi vừa sức và đối chiếu rubric thật."
+    },
+    {
+      "task_id": "SG-002",
+      "primary_profile": "S_H",
+      "chat_id": "D",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Chẩn đoán runtime, đo pilot và phục hồi notebook."
+    },
+    {
+      "task_id": "SG-003",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Đọc nguồn gốc, phân biệt khoảng trống nghiên cứu với tích hợp kỹ thuật."
+    },
+    {
+      "task_id": "SG-004",
+      "primary_profile": "A_X",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Thiết kế câu hỏi, split, metric và giả thuyết có thể bác bỏ."
+    },
+    {
+      "task_id": "SG-005",
+      "primary_profile": "T_H",
+      "chat_id": "D",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Scaffold và môi trường theo scope; không cần suy luận nghiên cứu dài."
+    },
+    {
+      "task_id": "SG-006",
+      "primary_profile": "S_H",
+      "chat_id": "D",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Data contract ảnh hưởng nhiều module và tính tái lập."
+    },
+    {
+      "task_id": "SG-007",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Runner, provenance và resume phải nhất quán."
+    },
+    {
+      "task_id": "SG-008",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Evaluator sai làm mất giá trị toàn bộ bảng kết quả."
+    },
+    {
+      "task_id": "SG-009",
+      "primary_profile": "T_H",
+      "chat_id": "D",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Tải theo spec, checksum, license và split gốc."
+    },
+    {
+      "task_id": "SG-010",
+      "primary_profile": "S_H",
+      "chat_id": "D",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Audit trùng lặp và chất lượng trước khi chạy baseline."
+    },
+    {
+      "task_id": "SG-011",
+      "primary_profile": "A_X",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Leakage trực tiếp và gián tiếp qua text, graph, pretrained."
+    },
+    {
+      "task_id": "SG-012",
+      "primary_profile": "T_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "BM25 pilot theo evaluator đã kiểm chứng."
+    },
+    {
+      "task_id": "SG-013",
+      "primary_profile": "S_H",
+      "chat_id": "D",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "API ingestion, phân trang, resume và quota có nhiều lỗi biên."
+    },
+    {
+      "task_id": "SG-014",
+      "primary_profile": "A_X",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Quyết định graph protocol khả thi trước khi đầu tư compute."
+    },
+    {
+      "task_id": "SG-015",
+      "primary_profile": "T_H",
+      "chat_id": "D",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Mở rộng pipeline đã qua pilot, không đổi protocol."
+    },
+    {
+      "task_id": "SG-016",
+      "primary_profile": "S_H",
+      "chat_id": "D",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Triển khai masking graph; reviewer kiểm tra rò rỉ cạnh/feature."
+    },
+    {
+      "task_id": "SG-017",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Trade-off mô hình embedding, overlap, license và GPU."
+    },
+    {
+      "task_id": "SG-018",
+      "primary_profile": "T_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Lexical baselines chuẩn với cấu hình cố định."
+    },
+    {
+      "task_id": "SG-019",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Batching GPU, shards, ID alignment, resume và index."
+    },
+    {
+      "task_id": "SG-020",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "RRF cần kiểm tra hợp nhất rank, ties và missing candidates."
+    },
+    {
+      "task_id": "SG-021",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Phân biệt lỗi candidate generation với reranking."
+    },
+    {
+      "task_id": "SG-022",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Chiều cạnh, coupling và normalization phải có toy tests."
+    },
+    {
+      "task_id": "SG-023",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "PPR cần convergence, dangling-node và seed correctness."
+    },
+    {
+      "task_id": "SG-024",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Age adjustment phải tách bias, confounding và relevance."
+    },
+    {
+      "task_id": "SG-025",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Ghép text/graph và explanation theo interface đã chốt."
+    },
+    {
+      "task_id": "SG-026",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Tuning budget và kiểm soát lựa chọn trên dev."
+    },
+    {
+      "task_id": "SG-027",
+      "primary_profile": "A_X",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Freeze trước test là mốc học thuật không được bỏ qua."
+    },
+    {
+      "task_id": "SG-028",
+      "primary_profile": "S_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Thực thi config frozen; không điều chỉnh từ kết quả test."
+    },
+    {
+      "task_id": "SG-029",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Ablation phải cô lập thành phần và so sánh công bằng."
+    },
+    {
+      "task_id": "SG-030",
+      "primary_profile": "A_X",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Paired bootstrap, uncertainty, effect size và phân tích lỗi."
+    },
+    {
+      "task_id": "SG-031",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Rubric truy vấn Việt và hướng dẫn nhãn cần người xác nhận."
+    },
+    {
+      "task_id": "SG-032",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Baseline cross-lingual có provenance và ngân sách bằng nhau."
+    },
+    {
+      "task_id": "SG-033",
+      "primary_profile": "T_H",
+      "chat_id": "R",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "AI chỉ chuẩn bị công cụ/pool ẩn danh; hai người tự gán nhãn."
+    },
+    {
+      "task_id": "SG-034",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Freeze VN, giới hạn pooling và đánh giá trên nhãn người."
+    },
+    {
+      "task_id": "SG-035",
+      "primary_profile": "T_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "API theo schema đã duyệt; không tự đổi pipeline."
+    },
+    {
+      "task_id": "SG-036",
+      "primary_profile": "T_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "UI theo acceptance, trạng thái thiếu dữ liệu và luồng demo."
+    },
+    {
+      "task_id": "SG-037",
+      "primary_profile": "T_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Graph UI bounded nodes và phân biệt chiều cited/citing."
+    },
+    {
+      "task_id": "SG-038",
+      "primary_profile": "T_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Offline/export dùng metadata thật; không điền DOI giả."
+    },
+    {
+      "task_id": "SG-039",
+      "primary_profile": "S_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Kiểm tra tích hợp và failure paths xuyên module."
+    },
+    {
+      "task_id": "SG-040",
+      "primary_profile": "S_H",
+      "chat_id": "P",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Đo latency toàn tuyến, cold start, RAM và corpus size."
+    },
+    {
+      "task_id": "SG-041",
+      "primary_profile": "T_H",
+      "chat_id": "W",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Đóng gói theo runbook và kiểm tra máy sạch."
+    },
+    {
+      "task_id": "SG-042",
+      "primary_profile": "A_H",
+      "chat_id": "W",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Người còn lại thực sự chạy tái lập; AI chỉ hỗ trợ audit."
+    },
+    {
+      "task_id": "SG-043",
+      "primary_profile": "A_H",
+      "chat_id": "W",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Tổng hợp claim từ evidence và nêu giới hạn trung thực."
+    },
+    {
+      "task_id": "SG-044",
+      "primary_profile": "S_H",
+      "chat_id": "W",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Agent hỗ trợ câu chuyện/Q&A; cả hai người tự diễn tập."
+    },
+    {
+      "task_id": "SG-045",
+      "primary_profile": "T_H",
+      "chat_id": "C",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Checklist gói nộp; người dùng duyệt, không tự gửi bài."
+    },
+    {
+      "task_id": "SG-046",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Stretch cross-encoder chỉ mở sau quyết định scope/compute."
+    },
+    {
+      "task_id": "SG-047",
+      "primary_profile": "A_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Fine-tuning có rủi ro leakage, budget và quá tải lịch."
+    },
+    {
+      "task_id": "SG-048",
+      "primary_profile": "A_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Benchmark mới có protocol và labels khác; giữ ngoài core."
+    },
+    {
+      "task_id": "SG-049",
+      "primary_profile": "S_H",
+      "chat_id": "R",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": true,
+      "rationale": "Thêm benchmark chỉ khi còn thời gian và được mở scope."
+    }
+  ]
+}

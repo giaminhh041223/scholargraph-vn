@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "run_id": "sg002-20260915T054427Z",
+  "task_id": "SG-002",
+  "status": "completed_gpu",
+  "started_and_finished_in_notebook": true,
+  "finished_at_utc": "2026-09-15T05:44:27.666603+00:00",
+  "purpose": "Compute throughput and memory pilot only; not retrieval quality evidence.",
+  "input": {
+    "kind": "deterministic_synthetic_compute_fixture",
+    "seed": 0,
+    "synthetic": true,
+    "documents": 1000,
+    "sha256": "966a6ac9df1881f0a794af667b54c4918bac1420238c259372d0d8de600669d6",
+    "word_length_p50": 57.0,
+    "word_length_p95": 83.0
+  },
+  "model": {
+    "id": "sentence-transformers/all-MiniLM-L6-v2",
+    "requested_revision": "main",
+    "resolved_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "selection_status": "smoke_only_not_final_sg017",
+    "max_seq_length": 256
+  },
+  "environment": {
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "torch_cuda_build": "12.8",
+    "transformers": "5.16.1",
+    "sentence_transformers": "5.7.0",
+    "logical_cpu_count": 2,
+    "physical_cpu_count": 1,
+    "ram_total_bytes": 13605830656,
+    "ram_available_before_bytes": 9676877824,
+    "project_disk_total_bytes": 120942624768,
+    "project_disk_free_before_bytes": 69903880192,
+    "device": "cuda",
+    "cuda_available": true,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_bytes": 15637086208,
+    "nvidia_smi_before": {
+      "available": true,
+      "returncode": 0,
+      "rows": [
+        "Tesla T4, 580.82.07, 15360, 319, 14594, 0, 60"
+      ],
+      "stderr": ""
+    },
+    "nvidia_smi_after": {
+      "available": true,
+      "returncode": 0,
+      "rows": [
+        "Tesla T4, 580.82.07, 15360, 423, 14490, 53, 62"
+      ],
+      "stderr": ""
+    }
+  },
+  "measurement": {
+    "batch_size": 32,
+    "warmup_documents": 16,
+    "model_load_seconds": 2.236491963999981,
+    "encode_seconds": 0.9385456520000162,
+    "documents_per_second": 1065.4782725475593,
+    "process_rss_before_bytes": 1566535680,
+    "process_rss_after_bytes": 1581494272,
+    "process_rss_delta_bytes": 14958592,
+    "gpu_peak_allocated_bytes": 255432192,
+    "gpu_peak_reserved_bytes": 306184192,
+    "embedding_shape": [
+      1000,
+      384
+    ],
+    "embedding_dtype": "float32",
+    "embedding_file_bytes": 1536128,
+    "embedding_sha256": "9be3d9c3b08e028af2f00384dee8679b4fab41666c6d06eb5f8e4177fc31aa31",
+    "norm_min": 0.9999999403953552,
+    "norm_max": 1.0000001192092896
+  },
+  "estimates_from_this_run": {
+    "10000_documents": {
+      "seconds_raw": 9.385456520000162,
+      "seconds_with_25pct_overhead": 11.731820650000202
+    },
+    "20000_documents": {
+      "seconds_raw": 18.770913040000323,
+      "seconds_with_25pct_overhead": 23.463641300000404
+    },
+    "50000_documents": {
+      "seconds_raw": 46.92728260000081,
+      "seconds_with_25pct_overhead": 58.65910325000101
+    }
+  },
+  "cloud_gpu": {
+    "provider": null,
+    "status": "measured_in_this_run",
+    "account_quota": "not_verified"
+  },
+  "limitations": [
+    "Synthetic fixture measures compute behavior only and cannot support retrieval-quality claims.",
+    "The default smoke model is not the final scientific retriever; rerun after SG-017 with the selected model.",
+    "Free Colab/Kaggle hardware and quota are dynamic; report only the accelerator actually observed."
+  ]
+}

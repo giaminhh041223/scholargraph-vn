@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "project": "ScholarGraph VN",
+  "updated_at": "2026-09-16T22:30:20+07:00",
+  "phase": "M2",
+  "stage": "sg010_adversarial_review_pass_done",
+  "active_tasks": [],
+  "next_task_id": "SG-012",
+  "last_session_id": "SESSION-20260916-026",
+  "last_session_log": "management/logs/SESSION-20260916-026.md",
+  "handoff_path": "management/HANDOFF.md",
+  "task_registry_path": "management/tasks.json",
+  "model_routing_path": "management/model_routing.json",
+  "chat_registry_path": "management/chat_registry.json",
+  "confirmed_constraints": {
+    "weeks_remaining_approx": 7,
+    "human_members": 2,
+    "agent_assisted": true,
+    "gpu_sources": [
+      "Kaggle",
+      "Colab"
+    ],
+    "paid_gpu": "consider_only_after_pilot_and_user_budget_decision",
+    "internal_target_date": "2026-10-31",
+    "planning_buffer_end": "2026-11-30",
+    "official_deadline": null,
+    "schedule_policy": "Finish core early; reserve November for defects, rubric changes, reproducibility and defense rehearsal."
+  },
+  "planning_assumptions": {
+    "hours_per_person_per_week": [
+      12,
+      15
+    ],
+    "core_human_hours": 142,
+    "openalex_core_target": [
+      10000,
+      20000
+    ],
+    "vn_query_target": 30
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Ngày/giờ nộp chính thức, rubric/weights, format và chính sách AI/pretrained/external-data của môn? Mốc nội bộ đã chốt 2026-10-31, buffer đến 2026-11-30.",
+      "owner_role": "R/C",
+      "blocks": "Tuyên bố tuân thủ rubric và SG-045; không chặn các task core theo scope đã duyệt."
+    }
+  ],
+  "known_limitations": [
+    "Application package and CPU/Colab-T4 compute pilots completed; dataset ingestion and final retrieval-model measurements remain pending.",
+    "Git repository initialized at the bn workspace root with local version control; bn is an independent clone of the original scholargraph workspace.",
+    "BEIR standard data does not establish a complete permitted citation graph.",
+    "Human time estimates assume agent assistance; annotation effort must be measured."
+  ],
+  "last_verification": {
+    "checked_at": "2026-09-16T22:30:20+07:00",
+    "command": "./scripts/check_project.ps1",
+    "exit_code": 0,
+    "task_count": 50,
+    "local_links_checked": 263,
+    "model_routes_checked": 50,
+    "logical_chat_lanes": 7,
+    "registered_sessions": 34,
+    "scope": "bn environment setup (SESSION-20260916-026): clone of scholargraph verified with pytest 214/214 PASS in bn venv (Python 3.12.14) and check_project.ps1 PASS. Board unchanged: SG-010 DONE, SG-008 DONE; next SG-012, not started."
+  }
+}

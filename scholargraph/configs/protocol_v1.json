@@ -1,0 +1,744 @@
+{
+  "schema_version": 1,
+  "protocol_id": "scholargraph-research-v1",
+  "protocol_version": "1.0.0",
+  "designed_at": "2026-09-15T17:28:21+07:00",
+  "status": "design_contract_not_final_run_freeze",
+  "runnable": false,
+  "authoritative_document": "docs/RESEARCH_PROTOCOL.md",
+  "scope_document": "docs/SCOPE.md",
+  "final_test_requires": [
+    "resolved_run_config",
+    "track_freeze_evidence",
+    "data_and_split_hashes",
+    "model_and_evaluator_revisions",
+    "leakage_audit_pass"
+  ],
+  "research_questions": [
+    {
+      "id": "RQ1",
+      "tracks": [
+        "A"
+      ],
+      "data": "BEIR SciFact and SCIDOCS official qrels",
+      "primary_comparisons": [
+        "A-scifact-rrf-bm25",
+        "A-scidocs-rrf-bm25"
+      ],
+      "secondary_comparison": "hybrid_rrf - dense",
+      "primary_metric": "ndcg_at_10"
+    },
+    {
+      "id": "RQ2",
+      "tracks": [
+        "B"
+      ],
+      "data": "OpenAlex heldout citation proxy qrels",
+      "primary_comparisons": [
+        "B-ppr-rrf"
+      ],
+      "primary_metric": "ndcg_at_10"
+    },
+    {
+      "id": "RQ3",
+      "tracks": [
+        "B"
+      ],
+      "data": "same B labels and publication years",
+      "primary_comparisons": [
+        "B-age-ppr"
+      ],
+      "primary_metric": "ndcg_at_10",
+      "diagnostics": [
+        "age_exposure_at_10",
+        "age_bucket_support",
+        "candidate_recall_at_100"
+      ]
+    },
+    {
+      "id": "RQ4",
+      "tracks": [
+        "C"
+      ],
+      "data": "two human annotators, adjudicated 0/1/2",
+      "primary_comparisons": [
+        "C-hybrid-translated"
+      ],
+      "primary_metric": "pooled_ndcg_at_10",
+      "claim_limit": "within-Vietnamese method comparison; no measured Vietnamese-versus-English loss"
+    }
+  ],
+  "primary_comparisons": [
+    {
+      "id": "A-scifact-rrf-bm25",
+      "track": "A",
+      "dataset": "scifact",
+      "treatment": "hybrid_rrf",
+      "control": "bm25"
+    },
+    {
+      "id": "A-scidocs-rrf-bm25",
+      "track": "A",
+      "dataset": "scidocs",
+      "treatment": "hybrid_rrf",
+      "control": "bm25"
+    },
+    {
+      "id": "B-ppr-rrf",
+      "track": "B",
+      "treatment": "hybrid_ppr",
+      "control": "hybrid_rrf"
+    },
+    {
+      "id": "B-age-ppr",
+      "track": "B",
+      "treatment": "hybrid_ppr_age",
+      "control": "hybrid_ppr"
+    },
+    {
+      "id": "C-hybrid-translated",
+      "track": "C",
+      "treatment": "vn_hybrid_rrf",
+      "control": "translated_bm25"
+    }
+  ],
+  "data_access": {
+    "ranker_allowed": [
+      "corpus",
+      "query_text",
+      "track_permitted_observed_inputs",
+      "masked_cutoff_graph"
+    ],
+    "ranker_forbidden": [
+      "qrels",
+      "heldout_edges",
+      "human_labels",
+      "test_label_derived_features",
+      "heldout_positive_counts"
+    ],
+    "trusted_split_builder_and_auditor": "may read labels to construct/mask/audit; must not expose labels to ranker",
+    "tuning": "dev metrics only, returned by evaluator",
+    "raw_snapshots": "immutable_with_manifest_and_checksums",
+    "synthetic_data": "fixtures_only_excluded_from_research_tables",
+    "test_label_access": "evaluator after freeze; structural audit only before freeze"
+  },
+  "evaluation": {
+    "primary_metric": "ndcg_at_10",
+    "secondary_metrics": [
+      "recall_at_100",
+      "mrr_at_10",
+      "map_at_100",
+      "precision_at_5"
+    ],
+    "ndcg": {
+      "gain": "linear_relevance",
+      "discount": "1/log2(rank+1)",
+      "cutoff": 10,
+      "idcg_universe": "all_query_qrels",
+      "trec_eval": "ndcg_cut_10"
+    },
+    "recall": {
+      "cutoff": 100,
+      "relevance_threshold": 1,
+      "denominator": "all_positive_qrels",
+      "trec_eval": "recall_100"
+    },
+    "mrr": {
+      "cutoff": 10,
+      "relevance_threshold": 1,
+      "beir_custom": "MRR@10",
+      "trec_eval_adapter": "recip_rank_on_explicit_top_10_run"
+    },
+    "map": {
+      "cutoff": 100,
+      "relevance_threshold": 1,
+      "denominator": "all_positive_qrels",
+      "trec_eval": "map_cut_100"
+    },
+    "precision": {
+      "cutoff": 5,
+      "denominator": 5,
+      "trec_eval": "P_5"
+    },
+    "aggregation": "arithmetic_macro_over_all_frozen_split_query_ids",
+    "missing_run_query": "zero_keep_in_macro",
+    "no_positive_query": "zero_keep_in_macro_report_count",
+    "unjudged": "zero_gain_keep_unjudged_status",
+    "canonical_order": [
+      "score_descending",
+      "canonical_doc_id_ascending_unicode_code_points"
+    ],
+    "trec_serialization": "strictly_decreasing_order_scores_N_minus_rank_plus_1; preserve_raw_scores_separately",
+    "reject": [
+      "duplicate_ranking_ids",
+      "duplicate_or_conflicting_qrels",
+      "nonfinite_score",
+      "document_outside_universe",
+      "positive_qrel_outside_eligible_universe"
+    ],
+    "oracle_ndcg_at_10": "best_order_of_C100_using_full_qrels_IDCG",
+    "evaluator_revision": null,
+    "fixture_gate": "SG-008 hand calculation and primary evaluator equivalence"
+  },
+  "retrieval": {
+    "full_corpus_index": true,
+    "per_retriever_depth": 100,
+    "rrf_union_maximum": 200,
+    "final_depth": 100,
+    "lexical": {
+      "text_fields": [
+        "title",
+        "abstract"
+      ],
+      "field_joiner": " ",
+      "missing_field": "empty_string_report_coverage",
+      "tokenizer": {
+        "case": "unicode_casefold",
+        "pattern": "(?u)\\b\\w+\\b",
+        "stopwords": false,
+        "stemming": false
+      },
+      "tfidf": {
+        "tf": "1+ln(f) for f>0",
+        "idf": "ln((N+1)/(df+1))+1",
+        "normalization": "l2",
+        "similarity": "cosine",
+        "empty_vector_score": 0
+      },
+      "bm25": {
+        "k1": 1.5,
+        "b": 0.75,
+        "idf": "ln(1+(N-df+0.5)/(df+0.5))",
+        "query_terms": "unique_tokens",
+        "empty_corpus": "fail"
+      }
+    },
+    "dense": {
+      "similarity": "cosine",
+      "l2_normalize": true,
+      "model_id": null,
+      "revision": null,
+      "adapter": null,
+      "prefix": null,
+      "max_length": null,
+      "missing_embedding": "fail_not_drop_document",
+      "selection_gate": "SG-017"
+    },
+    "rrf": {
+      "k": 60,
+      "rank_origin": 1,
+      "missing_contribution": 0,
+      "equal_weights": true
+    }
+  },
+  "tracks": {
+    "A": {
+      "name": "official_beir_text",
+      "allow_graph": false,
+      "allow_external_metadata": false,
+      "allow_age": false,
+      "allow_query_translation": false,
+      "methods": [
+        "tfidf",
+        "bm25",
+        "dense",
+        "hybrid_rrf"
+      ],
+      "datasets": {
+        "scifact": {
+          "source": "official_BEIR_archive",
+          "dev_source_split": "train",
+          "internal_dev_rule": "all_official_train_no_gradient_training",
+          "test_source_split": "test",
+          "archive_sha256": null,
+          "split_manifest": null
+        },
+        "scidocs": {
+          "source": "official_BEIR_archive",
+          "dev_source_split": null,
+          "test_source_split": "test",
+          "configuration_policy": "transfer_frozen_SciFact_dev_config_before_either_test",
+          "archive_sha256": null,
+          "split_manifest": null
+        }
+      },
+      "candidates": "full_official_corpus",
+      "self_match": "exclude_identical_query_document_id_per_BEIR; audit_positive_qrel_conflicts",
+      "reporting": "separate_dataset_tables_no_graph_or_external_enrichment"
+    },
+    "B": {
+      "name": "openalex-citation-holdout-v1",
+      "enabled_after": "SG-014_go_and_SG-016_mask_audit",
+      "interpretation": "warm_start_publication_year_constrained_retrospective_citation_recommendation",
+      "query_text_fields": [
+        "title",
+        "abstract"
+      ],
+      "qrel_scale": [
+        0,
+        1
+      ],
+      "uncited": "unjudged_proxy_not_verified_negative",
+      "target_corpus_size": [
+        10000,
+        20000
+      ],
+      "pilot_size": [
+        1000,
+        3000
+      ],
+      "snapshot_manifest": null,
+      "graph_gate": {
+        "audit_fields": [
+          "text_year_reference_coverage",
+          "doi_id_mapping",
+          "external_edges",
+          "isolated_nodes",
+          "degree_components",
+          "cohort_support",
+          "resource_cost",
+          "masking_provenance"
+        ],
+        "minimum_dev_queries": 30,
+        "minimum_test_queries": 50,
+        "minimum_eligible_references": 2,
+        "minimum_novel_candidates_per_query": 100,
+        "maximum_dev_queries": 100,
+        "maximum_test_queries": 200,
+        "test_year_rule": "latest_completed_year_before_snapshot_year_with_at_least_50_eligible_sources",
+        "dev_year_rule": "latest_year_before_test_year_with_at_least_30_eligible_sources",
+        "query_selection": "sha256(seed|canonical_source_id)_ascending_then_id",
+        "no_go": "record_evidence_and_ADR_scope_decision_no_automatic_protocol_substitution",
+        "test_year": null,
+        "dev_year": null,
+        "decision": null
+      },
+      "split": {
+        "seed": 20260915,
+        "heldout_fraction": 0.2,
+        "minimum_observed": 1,
+        "minimum_heldout": 1,
+        "eligible_reference_rule": "mapped_unique_nonself_canonical_target_with_known_year_lte_source_year",
+        "edge_sort": "sha256(UTF8('20260915|u|v'))_ascending_then_target_id",
+        "heldout_count": "min(R-1,max(1,ceil(0.2*R)))",
+        "heldout_selection": "first_h_sorted_references",
+        "mask_scope": [
+          "all_dev_heldout_edges",
+          "all_test_heldout_edges",
+          "reverse_counterparts"
+        ],
+        "query_groups": "canonical_source_identity_no_group_across_splits",
+        "split_manifest": null
+      },
+      "candidates": {
+        "universe": "all_canonical_snapshot_papers_with_year_lte_source_year",
+        "exclude": [
+          "self_and_canonical_duplicates",
+          "observed_references"
+        ],
+        "negative_sampling": false,
+        "rerank_set": "C100_top100_of_hybrid_rrf",
+        "rerank_methods": [
+          "hybrid_rrf",
+          "hybrid_global",
+          "hybrid_ppr",
+          "hybrid_ppr_age"
+        ],
+        "seed_set": "top20_of_hybrid_rrf_C100",
+        "expansion_enabled": false,
+        "global_pagerank_standalone_universe": "full_eligible_universe"
+      },
+      "graph": {
+        "directed": true,
+        "weighted": false,
+        "edge_direction": "citing_to_cited",
+        "reverse_augmentation": false,
+        "cutoff": "induced_nodes_year_lte_source_year_after_joint_dev_test_masking",
+        "recompute_after_masking": [
+          "pagerank",
+          "ppr",
+          "degree",
+          "coupling",
+          "co_citation",
+          "graph_embeddings"
+        ],
+        "forbidden_features": [
+          "current_cited_by_count",
+          "raw_unmasked_degree",
+          "future_node_paths",
+          "heldout_labels"
+        ],
+        "cache_identity": [
+          "masked_graph_hash",
+          "publication_year_cutoff"
+        ],
+        "missing_year": "exclude_from_B_not_impute",
+        "pagerank": {
+          "alpha": 0.85,
+          "initial_distribution": "v",
+          "dangling_distribution": "v",
+          "global_personalization": "uniform_over_eligible_graph_nodes",
+          "ppr_personalization": "normalized_rrf_scores_on_top20_seeds",
+          "seed_count": 20,
+          "global_l1_tolerance": 1e-8,
+          "max_iterations": 200,
+          "networkx_tol": "global_l1_tolerance/number_of_nodes",
+          "nonconvergence": "run_failed"
+        }
+      },
+      "fusion": {
+        "normalization": "per_query_minmax_on_C100",
+        "constant_vector": 0,
+        "missing_graph_score": "zero_report_count_and_reason",
+        "formula": "(1-gamma)*norm(rrf)+gamma*norm(ppr)",
+        "gamma_candidates": [
+          0,
+          0.1,
+          0.2,
+          0.3
+        ],
+        "selected_gamma": null,
+        "hybrid_global": "replace_ppr_with_global_score_keep_selected_ppr_gamma"
+      },
+      "age": {
+        "variant": "post_fusion_exponential_freshness",
+        "formula": "fusion_score*exp(-lambda*max(0,source_year-document_year))",
+        "reference_year": "source_publication_year",
+        "missing_year": "exclude_not_impute",
+        "lambda_candidates": [
+          0,
+          0.01,
+          0.03,
+          0.05,
+          0.1
+        ],
+        "selected_lambda": null,
+        "no_age_control": 0,
+        "selection_gate": "SG-024_formula_confirmation_then_SG-026_dev_selection",
+        "exposure": {
+          "cutoff": 10,
+          "buckets_years": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              11,
+              null
+            ]
+          ],
+          "rank_weight": "1/log2(rank+1)",
+          "denominator": "sum_discount_of_actual_returned_top10",
+          "empty_list": 0,
+          "report_universes": [
+            "eligible_universe",
+            "C100",
+            "top10"
+          ],
+          "bucket_recall_without_positive": "undefined_with_support"
+        }
+      }
+    },
+    "C": {
+      "name": "internal_vietnamese_to_english_pooled",
+      "corpus": "pinned_English_OpenAlex_snapshot",
+      "corpus_manifest": null,
+      "query_counts": {
+        "dev": 10,
+        "test": 20,
+        "total": 30
+      },
+      "split": "query_family_intent_groups_no_paraphrase_overlap",
+      "dev_annotation_pilot_queries": 5,
+      "methods": [
+        "original_vi_bm25",
+        "translated_bm25",
+        "multilingual_dense",
+        "vn_hybrid_rrf"
+      ],
+      "hybrid_components": [
+        "translated_bm25",
+        "multilingual_dense"
+      ],
+      "pool": {
+        "methods": [
+          "translated_bm25",
+          "multilingual_dense",
+          "vn_hybrid_rrf"
+        ],
+        "depth": 10,
+        "deduplicate": true,
+        "unique_pair_upper_bound": 900,
+        "target_pairs_estimate": 600,
+        "annotators_per_pair": 2,
+        "judgment_upper_bound": 1800,
+        "system_provenance_blinded": true,
+        "shuffle_seed": 20260915,
+        "reduction_policy": "uniform_before_test_annotation_with_ADR",
+        "dev_unique_pair_upper_bound": 300,
+        "test_unique_pair_upper_bound": 600
+      },
+      "labels": {
+        "scale": [
+          0,
+          1,
+          2
+        ],
+        "meaning": [
+          "irrelevant",
+          "partially_relevant",
+          "directly_relevant"
+        ],
+        "insufficient_information": "unjudged",
+        "original_labels_preserved": true,
+        "adjudication": "after_independent_labels"
+      },
+      "agreement": {
+        "metric": "linearly_weighted_cohen_kappa",
+        "weights": "1-abs(a-b)/2",
+        "timing": "before_adjudication",
+        "population": "pairs_with_two_valid_labels",
+        "report": [
+          "pair_count",
+          "raw_agreement",
+          "confusion_matrix"
+        ],
+        "degenerate": "undefined"
+      },
+      "translation": {
+        "provider": null,
+        "model_or_version": null,
+        "cache_hash": null,
+        "selection_gate": "SG-032",
+        "selection_policy": "one_fixed_config_before_relevance_pooling_no_paid_LLM_dependency"
+      },
+      "multilingual_dense": {
+        "model_id": null,
+        "revision": null,
+        "prefix": null,
+        "selection_gate": "SG-032",
+        "selection_policy": "one_fixed_config_before_relevance_pooling"
+      },
+      "freeze_sequence": [
+        "SG-031_query_split_instructions",
+        "SG-032_pin_one_translation_and_one_encoder_via_technical_dev_pilot",
+        "SG-033_pool_and_annotate_10_dev_queries_first_including_5_query_pilot",
+        "select_default_from_3_fixed_methods_on_dev_preserve_configs_and_primary_comparison",
+        "record_config_hash_and_decision_before_creating_and_annotating_20_test_queries",
+        "SG-033_fixed_config_test_pool_with_embargoed_labels",
+        "SG-034_verify_freeze_hashes_before_evaluator_reads_test_labels"
+      ],
+      "metrics": {
+        "primary": "pooled_ndcg_at_10",
+        "secondary": [
+          "precision_at_5",
+          "mrr_at_10",
+          "pooled_recall_at_100",
+          "pooled_map_at_100"
+        ],
+        "coverage_cutoffs": [
+          5,
+          10,
+          100
+        ],
+        "full_corpus_recall_claim": false
+      },
+      "optional_graph": "diagnostic_only_if_preregistered_before_pool_and_gate_coverage_passes",
+      "query_manifest": null,
+      "pool_manifest": null,
+      "qrels_manifest": null
+    }
+  },
+  "statistics": {
+    "estimand": "macro_query_mean_treatment_minus_control",
+    "bootstrap": {
+      "paired": true,
+      "resamples": 10000,
+      "seed": 20260915,
+      "unit": "query_group",
+      "group_rule": "canonical_source_or_query_family_singleton_otherwise",
+      "sampling": "sample_same_number_of_groups_with_replacement_include_all_queries_recompute_query_macro",
+      "confidence_level": 0.95,
+      "interval": "percentile",
+      "quantile_interpolation": "linear",
+      "group_membership_hash": null
+    },
+    "multiple_comparisons": "pointwise_unadjusted_CIs_no_formal_significance_claims",
+    "p_values": false,
+    "secondary_analyses": "exploratory",
+    "relative_delta_zero_control": "undefined",
+    "stochastic_components_minimum_seeds": 3,
+    "deterministic_repeated_seeds_for_quality_ci": false
+  },
+  "tuning": {
+    "objective": "dev_ndcg_at_10",
+    "test_feedback_allowed": false,
+    "lexical_and_rrf": "fixed_defaults",
+    "dense_shortlist_max_configs": 3,
+    "dense_selection": {
+      "A": "SciFact_dev",
+      "B": "B_dev_task_appropriate_adapter",
+      "tie_break": "preregistered_config_id_lexicographic"
+    },
+    "B": {
+      "gamma_trials": 4,
+      "lambda_trials": 5,
+      "sequence": "select_gamma_then_lambda_with_gamma_fixed",
+      "tie_break": "smaller_parameter",
+      "global_control_gamma": "same_as_ppr"
+    },
+    "C": {
+      "maximum_translation_configs": 1,
+      "maximum_multilingual_configs": 1,
+      "maximum_hybrid_pairs": 1,
+      "parameter_selection": "task_fit_license_resources_and_technical_dev_pilot_before_relevance_pooling",
+      "relevance_grid_search": false,
+      "default_method_candidates": [
+        "translated_bm25",
+        "multilingual_dense",
+        "vn_hybrid_rrf"
+      ],
+      "default_method_selection": "pooled_dev_ndcg_at_10_after_dev_annotation_before_test_annotation",
+      "tie_break": "preregistered_method_id_lexicographic",
+      "preserve_all_fixed_configs_and_primary_comparisons": true,
+      "expanding_search": "requires_ADR_with_full_trial_dev_pool_and_separate_annotation_budget_before_test"
+    },
+    "record_all_trials_and_failures": true
+  },
+  "ablations": {
+    "A": [
+      "tfidf",
+      "bm25",
+      "dense",
+      "hybrid_rrf"
+    ],
+    "B_same_C100": [
+      "hybrid_rrf",
+      "hybrid_global",
+      "hybrid_ppr",
+      "hybrid_ppr_age"
+    ],
+    "B_standalone_diagnostic": [
+      "global_pagerank"
+    ],
+    "C": [
+      "original_vi_bm25",
+      "translated_bm25",
+      "multilingual_dense",
+      "vn_hybrid_rrf"
+    ],
+    "fixed_between_B_ablations": [
+      "C100",
+      "masked_graph_cutoff",
+      "selected_ppr_gamma"
+    ],
+    "age_control_lambda": 0,
+    "expansion": "disabled_requires_ADR_and_separate_table"
+  },
+  "unresolved_gates": [
+    {
+      "id": "evaluator",
+      "tasks": [
+        "SG-008"
+      ],
+      "required": [
+        "revision",
+        "hand_calculated_fixture_equivalence",
+        "tie_serialization"
+      ]
+    },
+    {
+      "id": "A_data",
+      "tasks": [
+        "SG-009",
+        "SG-010",
+        "SG-011"
+      ],
+      "required": [
+        "archive_hashes",
+        "split_ids_and_groups",
+        "self_duplicate_audit",
+        "leakage_audit"
+      ]
+    },
+    {
+      "id": "B_graph",
+      "tasks": [
+        "SG-013",
+        "SG-014",
+        "SG-016"
+      ],
+      "required": [
+        "snapshot_filters",
+        "coverage_go_no_go",
+        "cohort_years_ids",
+        "masked_graph_hashes"
+      ]
+    },
+    {
+      "id": "model",
+      "tasks": [
+        "SG-017"
+      ],
+      "required": [
+        "model_revisions_adapters",
+        "license_overlap",
+        "compute_pilot"
+      ]
+    },
+    {
+      "id": "AB_final",
+      "tasks": [
+        "SG-026",
+        "SG-027"
+      ],
+      "required": [
+        "resolved_config",
+        "tuning_registry",
+        "freeze_evidence"
+      ]
+    },
+    {
+      "id": "C_final",
+      "tasks": [
+        "SG-031",
+        "SG-032",
+        "SG-033",
+        "SG-034"
+      ],
+      "required": [
+        "queries_groups",
+        "translation_encoder",
+        "pool_labels_agreement",
+        "embargo_and_freeze_evidence"
+      ]
+    }
+  ],
+  "run_evidence": {
+    "id_pattern": "RUN-YYYYMMDD-HHMMSS-method-dataset-split[-unique_suffix]",
+    "required": [
+      "protocol_and_resolved_config_hashes",
+      "data_split_group_candidate_graph_hashes",
+      "model_revision_adapter_tokenizer",
+      "translation_cache_if_applicable",
+      "code_commit_and_dirty_source_hash",
+      "hardware_environment_lock",
+      "seeds_command",
+      "timezone_timestamps_status",
+      "ranking_raw_scores",
+      "per_query_and_aggregate_metrics",
+      "logs"
+    ],
+    "publish_metrics_only_for": "completed_validated_runs",
+    "overwrite_completed_runs": false,
+    "evaluator_bug_after_test": "preserve_invalid_runs_version_fix_and_fair_rerun_all_affected_systems_no_test_tuning"
+  }
+}

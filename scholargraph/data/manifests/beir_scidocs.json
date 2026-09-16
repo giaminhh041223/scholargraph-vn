@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "frozen_raw_snapshot",
+  "dataset": "BEIR SCIDOCS",
+  "dataset_id": "scidocs",
+  "synthetic": false,
+  "retrieved_at": "2026-09-15T21:27:49+07:00",
+  "source": {
+    "archive_url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip",
+    "source_catalog_url": "https://github.com/beir-cellar/beir/wiki/Datasets-available",
+    "source_revision": {
+      "archive_last_modified": "2021-03-01T23:10:59Z",
+      "archive_etag": "603d7483-87df1a4",
+      "published_md5": "38121350fc3a4d2f48850f6aff52e4a9"
+    }
+  },
+  "license": {
+    "dataset_license": "CC BY 4.0",
+    "upstream_license_url": "https://github.com/allenai/scidocs/blob/master/LICENSE",
+    "archive_contains_license_file": false,
+    "use_note": "The BEIR catalog states that users remain responsible for permission and attribution for the underlying dataset."
+  },
+  "storage": {
+    "archive_path": "data/raw/beir/scidocs.zip",
+    "extracted_path": "data/raw/beir/scidocs",
+    "archive_sha256": "96640201687767c9b1fcc5af7a80b90fb325b37fa25329c2586c25edcfa17ef1",
+    "archive_md5": "38121350fc3a4d2f48850f6aff52e4a9",
+    "files": {
+      "corpus.jsonl": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+      "queries.jsonl": "3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6",
+      "qrels/test.tsv": "dcd3d7f77417294bb6f338537f3c28d8a5ea72b30fe6633f407fa85528767e35"
+    }
+  },
+  "counts": {
+    "corpus": 25657,
+    "queries_all": 1000,
+    "splits": {
+      "test": {
+        "role": "official_test",
+        "queries": 1000,
+        "qrel_rows": 29928,
+        "qrel_score_counts": {"0": 25000, "1": 4928}
+      }
+    },
+    "absent_splits": ["train", "dev"]
+  },
+  "loader_contract": {
+    "module": "scholargraph.ingest.beir_loader.BeirLoader",
+    "id_namespace": "beir:scidocs:<raw_beir_id>",
+    "raw_id_mapping": "lossless; raw IDs are retained in Query.metadata.beir_raw_id",
+    "query_selection": "load(dataset, split) returns only queries occurring in that split's qrels",
+    "network_policy": "loader reads only this frozen local snapshot and never downloads",
+    "split_policy": "No official SCIDOCS dev split is created; only the official archive test split exists."
+  },
+  "integrity_verification": {
+    "method": "archive MD5 matched the BEIR catalog value; SHA-256 calculated locally for archive and extracted source files",
+    "verified_at": "2026-09-15T21:33:00+07:00"
+  }
+}

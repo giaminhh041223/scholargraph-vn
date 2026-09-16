@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task": "SG-011",
+  "policy_name": "ScholarGraph Official Split & Leakage Policy v1",
+  "created_at": "2026-09-16T07:25:00+07:00",
+  "description": "Rigorous split definitions, query group isolation, and anti-leakage guards for ScholarGraph VN.",
+  "authoritative_protocol": "configs/protocol_v1.json",
+  "tracks": {
+    "A": {
+      "name": "official_beir_text",
+      "datasets": {
+        "scifact": {
+          "corpus_path": "data/raw/beir/scifact/corpus.jsonl",
+          "total_documents": 5183,
+          "splits": {
+            "dev": {
+              "source_split": "train",
+              "role": "development_and_tuning",
+              "query_path": "data/raw/beir/scifact/queries.jsonl",
+              "qrels_path": "data/raw/beir/scifact/qrels/train.tsv",
+              "query_count": 809,
+              "qrel_count": 919,
+              "manifest_path": "data/splits/scifact_dev.json"
+            },
+            "test": {
+              "source_split": "test",
+              "role": "final_evaluation_locked",
+              "query_path": "data/raw/beir/scifact/queries.jsonl",
+              "qrels_path": "data/raw/beir/scifact/qrels/test.tsv",
+              "query_count": 300,
+              "qrel_count": 339,
+              "manifest_path": "data/splits/scifact_test.json"
+            }
+          },
+          "documented_upstream_anomalies": [
+            {
+              "test_query_id": "1292",
+              "train_query_id": "1291",
+              "query_text": "there is no association between hnf4a mutations and diabetes risks.",
+              "shared_relevant_doc_id": "56893404"
+            },
+            {
+              "test_query_id": "870",
+              "train_query_id": "871",
+              "query_text": "obesity decreases life quality.",
+              "shared_relevant_doc_id": "195689316"
+            }
+          ]
+        },
+        "scidocs": {
+          "corpus_path": "data/raw/beir/scidocs/corpus.jsonl",
+          "total_documents": 25657,
+          "splits": {
+            "test": {
+              "source_split": "test",
+              "role": "final_evaluation_locked",
+              "query_path": "data/raw/beir/scidocs/queries.jsonl",
+              "qrels_path": "data/raw/beir/scidocs/qrels/test.tsv",
+              "query_count": 1000,
+              "qrel_count": 29928,
+              "manifest_path": "data/splits/scidocs_test.json"
+            }
+          },
+          "dev_policy": "transfer_frozen_SciFact_dev_config_before_either_test"
+        }
+      }
+    },
+    "B": {
+      "name": "openalex-citation-holdout-v1",
+      "status": "pending_sg014_sg016",
+      "strategy": "retrospective_heldout_citations_by_publication_year"
+    }
+  },
+  "invariants": {
+    "disjoint_query_id_namespaces": true,
+    "no_test_labels_in_ranker": true,
+    "no_test_tuning": true,
+    "no_silent_candidate_filtering": true,
+    "shared_corpus_standard_ir": true
+  }
+}

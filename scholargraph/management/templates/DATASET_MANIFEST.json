@@ -1,0 +1,25 @@
+{
+  "template": true,
+  "dataset_id": null,
+  "source_url": null,
+  "source_revision": null,
+  "retrieved_at": null,
+  "license": null,
+  "source_snapshot_id": null,
+  "files": [],
+  "counts": {
+    "documents": null,
+    "queries": null,
+    "qrels": null,
+    "nodes": null,
+    "edges": null
+  },
+  "schema_version": null,
+  "transformations": [],
+  "exclusions": [],
+  "missingness": null,
+  "split_policy": null,
+  "graph_masking_policy": null,
+  "synthetic": false,
+  "notes": []
+}

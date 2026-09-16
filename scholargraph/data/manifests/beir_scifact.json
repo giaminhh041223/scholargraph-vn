@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "frozen_raw_snapshot",
+  "dataset": "BEIR SciFact",
+  "dataset_id": "scifact",
+  "synthetic": false,
+  "retrieved_at": "2026-09-15T21:27:49+07:00",
+  "source": {
+    "archive_url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+    "source_catalog_url": "https://github.com/beir-cellar/beir/wiki/Datasets-available",
+    "source_revision": {
+      "archive_last_modified": "2021-04-20T14:21:44Z",
+      "archive_etag": "607ee378-2af84f",
+      "published_md5": "5f7d1de60b170fc8027bb7898e2efca1"
+    }
+  },
+  "license": {
+    "dataset_components": {
+      "claims_and_evidence_annotations": "CC BY 4.0",
+      "corpus_abstracts": "ODC-By 1.0"
+    },
+    "upstream_license_url": "https://github.com/allenai/scifact/blob/master/LICENSE.md",
+    "archive_contains_license_file": false,
+    "use_note": "The BEIR catalog states that users remain responsible for permission and attribution for the underlying dataset."
+  },
+  "storage": {
+    "archive_path": "data/raw/beir/scifact.zip",
+    "extracted_path": "data/raw/beir/scifact",
+    "archive_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+    "archive_md5": "5f7d1de60b170fc8027bb7898e2efca1",
+    "files": {
+      "corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+      "queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+      "qrels/train.tsv": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+      "qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c"
+    }
+  },
+  "counts": {
+    "corpus": 5183,
+    "queries_all": 1109,
+    "splits": {
+      "train": {
+        "role": "internal_dev",
+        "queries": 809,
+        "qrel_rows": 919,
+        "qrel_score_counts": {"1": 919}
+      },
+      "test": {
+        "role": "official_test",
+        "queries": 300,
+        "qrel_rows": 339,
+        "qrel_score_counts": {"1": 339}
+      }
+    }
+  },
+  "loader_contract": {
+    "module": "scholargraph.ingest.beir_loader.BeirLoader",
+    "id_namespace": "beir:scifact:<raw_beir_id>",
+    "raw_id_mapping": "lossless; raw IDs are retained in Query.metadata.beir_raw_id",
+    "query_selection": "load(dataset, split) returns only queries occurring in that split's qrels",
+    "network_policy": "loader reads only this frozen local snapshot and never downloads"
+  },
+  "integrity_verification": {
+    "method": "archive MD5 matched the BEIR catalog value; SHA-256 calculated locally for archive and extracted source files",
+    "verified_at": "2026-09-15T21:33:00+07:00"
+  }
+}

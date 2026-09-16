@@ -1,0 +1,67 @@
+{
+  "task_id": "SG-007",
+  "created_at": "2026-09-15T15:57:44.492068+00:00",
+  "synthetic": true,
+  "status": "PASS",
+  "scope": "Storage acceptance only; no retrieval quality measured",
+  "checks": {
+    "resume_running": true,
+    "completed_write_rejected": true,
+    "completed_resume_rejected": true,
+    "export_overwrite_rejected": true,
+    "completed_manifest_unchanged": true,
+    "failed_error_recorded": true,
+    "failed_resume_rejected": true,
+    "failed_secret_redacted": true,
+    "artifact_and_seal_integrity": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "pydantic": "2.13.5",
+    "pytest": "8.4.2",
+    "httpx": "0.28.1"
+  },
+  "code_provenance": {
+    "commit": "e63d84c90fff10c223db18248010ec3b64cba572",
+    "dirty": true,
+    "snapshot_sha256": {
+      "src/scholargraph/evaluation/runner.py": "5f2d7f76d06d6e7d64c68077ce98108a0a07b897e8cb29d3818dfe1c30171aba",
+      "src/scholargraph/data/schemas.py": "fd82d3dd69376904b34d33efd812f949ff1ea58a681b8969d22e24ba0bbd4291",
+      "scripts/run_runner_smoke.py": "a54c36a19fe83eeb7ac888d5b5667128e85e115202728250d07e84599688a69f"
+    }
+  },
+  "runs": [
+    {
+      "run_id": "RUN-20260915-155744-storage-smoke-synthetic-sg007-dev",
+      "status": "COMPLETED",
+      "path": "artifacts/runs/SG007-SMOKE-20260915-155744-e5a520c8/runs/RUN-20260915-155744-storage-smoke-synthetic-sg007-dev",
+      "manifest_sha256": "e739ea3abe50d3391e27450e69c5740b52e6291e9c219c8b5465af16808633bd",
+      "hashes": {
+        "code": "eedf480bc91022d1adb58fcec8875d7d9c684ba4ee5c20dd47f7dfb5af0eb84b",
+        "config": "a280401ca12f7a244b307e6705b546d0d2e6bc33e2c19aefe26e2b0aacb07900",
+        "data": "25f06b05ec64c3019e6341c14bd9a5b4978adf6665f620914bcd1dbdddb04829",
+        "model": "85ec402e65a1d7c0d63180cc579289b4ec46226f261ec33774eca7d21e8719db",
+        "protocol": "cec3466ba4b462faabfb3d389ad90ad237c2fc47d0725eca7c6bd96bf19afd2e",
+        "split": "18a551c6165abb4f4c427c8ec66d6c70c5ed65496b48b38b3b69ef64714fb2dd"
+      }
+    },
+    {
+      "run_id": "RUN-20260915-155745-storage-smoke-synthetic-sg007-dev",
+      "status": "FAILED",
+      "path": "artifacts/runs/SG007-SMOKE-20260915-155744-e5a520c8/runs/RUN-20260915-155745-storage-smoke-synthetic-sg007-dev",
+      "manifest_sha256": "1e2ce017590a6c3962441b0585280137097909d7c9efbb89bc8be3ac02032e98",
+      "hashes": {
+        "code": "eedf480bc91022d1adb58fcec8875d7d9c684ba4ee5c20dd47f7dfb5af0eb84b",
+        "config": "a280401ca12f7a244b307e6705b546d0d2e6bc33e2c19aefe26e2b0aacb07900",
+        "data": "25f06b05ec64c3019e6341c14bd9a5b4978adf6665f620914bcd1dbdddb04829",
+        "model": "85ec402e65a1d7c0d63180cc579289b4ec46226f261ec33774eca7d21e8719db",
+        "protocol": "cec3466ba4b462faabfb3d389ad90ad237c2fc47d0725eca7c6bd96bf19afd2e",
+        "split": "18a551c6165abb4f4c427c8ec66d6c70c5ed65496b48b38b3b69ef64714fb2dd"
+      }
+    }
+  ],
+  "exports": [
+    "artifacts/runs/SG007-SMOKE-20260915-155744-e5a520c8/exports/completed",
+    "artifacts/runs/SG007-SMOKE-20260915-155744-e5a520c8/exports/failed"
+  ]
+}

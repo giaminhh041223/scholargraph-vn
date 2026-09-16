@@ -1,0 +1,149 @@
+# Nhật ký quyết định
+
+Mỗi thay đổi phương pháp/phạm vi quan trọng thêm ADR mới. Không ghi đè quyết định cũ; ghi mục thay thế và lý do.
+
+## ADR-001 — 2026-09-15 — Khu vực ScholarGraph độc lập
+
+**Trạng thái:** accepted for planning.
+**Bối cảnh:** workspace có E-COMASPECT, lecture files, checkpoints và dữ liệu cũ; chưa có Git.
+**Quyết định:** đặt dự án tại `scholargraph/`; root AGENTS dẫn sang đây.
+**Hệ quả:** môi trường/data/results riêng; không dùng kết quả cũ làm benchmark mới.
+
+## ADR-002 — 2026-09-15 — Lịch dựa trên giả định
+
+**Trạng thái:** provisional.
+**Quyết định:** 12 tuần, 3 người × 10 giờ/tuần; các task ghi giờ-người và role.
+**Chưa biết:** deadline, nhân sự, GPU, rubric.
+**Cập nhật khi:** người dùng cung cấp thông tin hoặc SG-001/SG-002 xác minh.
+**Hệ quả:** tuần tương đối, không tự đặt deadline lịch.
+
+## ADR-003 — 2026-09-15 — Tách text benchmark và graph evaluation
+
+**Trạng thái:** accepted for planning; graph protocol chọn ở SG-014.
+**Lý do:** BEIR qrels không phải graph features; bổ sung citation có nguy cơ chứa đáp án.
+**Quyết định:** tuyến A benchmark text nguyên bản; tuyến B OpenAlex custom protocol có masking; bảng external enrichment nếu có phải riêng.
+**Hệ quả:** không tuyên bố score graph là official BEIR khi inputs khác.
+
+## ADR-004 — 2026-09-15 — Registry và bàn giao trên đĩa
+
+**Trạng thái:** accepted.
+**Quyết định:** task specs ở TASKS.md; mutable status/evidence ở tasks.json; state.json chỉ điều phối; mỗi phiên có log và HANDOFF.
+**Hệ quả:** đọc bằng chứng trước tiếp nối, một người điều phối board; kiểm tra tự động read-only.
+
+## ADR-005 — 2026-09-15 — Định nghĩa đóng góp nghiên cứu
+
+**Trạng thái:** accepted for planning.
+**Quyết định:** kiểm nghiệm hybrid retrieval + graph + tuổi paper; chưa claim novelty/SOTA hay tăng 3–5%.
+**Hệ quả:** kết quả âm vẫn có giá trị nếu protocol chặt và phân tích đầy đủ.
+
+## ADR-006 — 2026-09-15 — Tiếng Việt có đánh giá riêng
+
+**Trạng thái:** accepted for planning.
+**Quyết định:** VN nghĩa giao diện và query Việt → corpus Anh; cần model/cách dịch phù hợp và pooled human labels.
+**Hệ quả:** English benchmark không chứng minh khả năng cross-lingual; 50 query là mục tiêu timebox, giảm quy mô phải ghi rõ.
+
+## Mẫu ADR tiếp theo
+
+ID: ADR-015
+Ngày:
+Trạng thái: proposed / accepted / superseded
+Task liên quan:
+Bối cảnh:
+Các lựa chọn:
+Quyết định và bằng chứng:
+Hệ quả:
+Thay thế ADR nào (nếu có):
+
+## ADR-007 — 2026-09-15 — 7 tuần, 2 người, agent hỗ trợ
+
+**Trạng thái:** accepted; thay thế giả định lịch ở ADR-002.
+**Nguồn:** người dùng xác nhận còn khoảng 7 tuần, có 2 người, dùng Kaggle/Colab và sẽ cân nhắc thuê GPU nếu cần.
+**Quyết định:** 7 tuần với tuần 7 dự phòng/bảo vệ; 10–20K OpenAlex core; pretrained inference, fine-tune để stretch. Dự trù 12–15 giờ/người/tuần, cần theo dõi tải công việc thực tế.
+**Cộng tác:** agent hỗ trợ module/checks; hai người chịu trách nhiệm nhãn, insight, review và nội dung bảo vệ. Không coi phân vai là đã tạo task/agent hay cấp quyền chi tiền.
+**Hệ quả:** GPU profiling/resume vào tuần 1–2; chưa thuê; kết quả âm vẫn được báo cáo.
+
+## ADR-008 — 2026-09-15 — Giới hạn annotation và bỏ phụ thuộc GPU khỏi scaffold
+
+**Trạng thái:** accepted for planning; thu gọn mục tiêu annotation ở ADR-006.
+**Quyết định:** core VN khoảng 30 query, 10 dev/20 test, pool top-10 từ 3 phương pháp, mục tiêu khoảng 600 cặp unique. SG-033 dự trù 16 giờ-người, cập nhật từ pilot 5 query. Có thể tăng 50 query nếu còn nguồn lực; luôn báo hạn chế cỡ mẫu/pooling.
+**Lý do:** hai người cần đọc paper và gán nhãn thật trong 7 tuần; agent không thay thế được nhãn người.
+**Phụ thuộc:** SG-005 cần SG-001, không chờ toàn bộ GPU pilot SG-002; setup local có thể bắt đầu độc lập. Encoding SG-019 vẫn cần compute pilot hoàn tất.
+**Hệ quả:** tổng core 142 giờ-người có agent hỗ trợ; tiếp tục việc local được nếu tài khoản notebook chưa sẵn.
+
+## ADR-009 — 2026-09-15 — Model routing và bàn giao theo lane
+
+**Trạng thái:** accepted for workflow; không phải quyền chạy toàn bộ backlog.
+**Nguồn:** người dùng yêu cầu gán model cho các ID và chiến lược cửa sổ chat; đối chiếu OpenAI Docs và model catalog của host hiện tại.
+**Quyết định:** routing đủ SG-000–049 với primary/review profile, reasoning, lane và human gate. Astra cho phương pháp/gates/thống kê, Sol cho pipeline khó/điều phối, Terra cho triển khai rõ spec; Luna chỉ hỗ trợ cơ học. Chưa có benchmark model trên dự án.
+**Cửa sổ:** 7 lane logic, chỉ mở khi cần; thường C + một worker + V. Mỗi phiên 1–3 task liên quan, bàn giao trên đĩa trước đổi context. Review học thuật dùng context mới và snapshot xác định; nhãn và nghiệm thu con người không được thay bằng AI.
+**Quyền ghi:** làm rõ ADR-004: coordinator duy nhất ghi shared board/state/HANDOFF/chat registry. Worker/reviewer có log/report riêng. Một phiên độc lập có thể kiêm điều phối nếu không có coordinator khác.
+**Hệ quả:** thêm routing/matrix, chiến lược, templates, tra cứu task và validator. Không đổi dependency/lịch core, không mở thread/agent, không đổi model runtime, không mua compute. Actual model/session chỉ ghi khi xác minh được.
+
+## ADR-010 — 2026-09-15 — Chấp thuận scope và đẩy mốc hoàn thành sớm
+
+**Trạng thái:** accepted.
+**Task liên quan:** SG-001; ảnh hưởng lịch toàn bộ core.
+**Nguồn:** người dùng xác nhận task đã được review, yêu cầu đánh giá/hoàn tất và cho phép thời hạn linh động miễn trước tháng 12/2026, ưu tiên làm sớm để dành thời gian cho học phần khác.
+**Quyết định:** chấp thuận problem, 4 RQ và core/non-core trong SCOPE để triển khai. Đặt target nội bộ 2026-10-31; giữ 2026-11-01–2026-11-30 làm buffer cho lỗi, rubric mới, tái lập và bảo vệ. Không mở stretch chỉ vì có buffer.
+**Minh bạch review:** không có review report riêng tồn tại trước closeout; ghi xác nhận trực tiếp của project owner là human review confirmation và thực hiện acceptance audit. Không gọi đó là independent model audit.
+**Yêu cầu còn mở:** deadline chính thức, rubric/weights, format nộp, chính sách AI/pretrained/external data và quy định nhóm vẫn OPEN/PARTIAL; phải cập nhật khi có nguồn và trước SG-045.
+**Hệ quả:** SG-001 có thể DONE; next SG-002. Nếu lịch chính thức sớm hơn target, lịch chính thức ưu tiên và phải cập nhật state/ADR.
+
+## ADR-011 — 2026-09-15 — Miễn hoạt động đọc sâu của SG-003
+
+**Trạng thái:** accepted.
+**Task liên quan:** SG-003; mở dependency SG-004.
+**Nguồn:** project owner yêu cầu bỏ qua hoạt động hai thành viên đọc sâu RW02, RW06 và RW10, chuyển SG-003 thành DONE và mở SG-004 nhưng chưa triển khai.
+**Quyết định:** chấp nhận fresh-context review PASS làm gate kiểm tra artifact. Miễn phần đọc sâu ba paper của hai thành viên như một deviation có chủ ý; không ghi hoặc suy rằng hoạt động này đã hoàn tất.
+**Hệ quả:** SG-003 chuyển DONE. SG-004 đủ dependency và là task kế tiếp ở trạng thái TODO, chưa owner/session/claimed paths. Rủi ro còn lại là hai thành viên có thể chưa giải thích sâu RRF, SciRepEval và time-balanced centrality khi bảo vệ; có thể đọc bù sau nếu cần.
+
+## ADR-012 — 2026-09-15 — Thiết kế protocol v1 và tiếp nhận dossier SG-004
+
+**Trạng thái:** accepted; project owner xác nhận “Duyệt protocol v1”, ghi nhận lúc 2026-09-15T17:40:52.6906333+07:00, sau fresh-context review và re-review PASS. Trước xác nhận này ADR ở trạng thái proposed.
+**Phạm vi:** SG-004, không thực thi các task downstream hoặc freeze final run.
+**Nguồn:** scope SG-001 đã duyệt, literature SG-003, protocol dự thảo và bản pre Gemini do người dùng cung cấp. Source audit bằng Sol High kiểm chứng BEIR/trec_eval từ primary source; pre chỉ là đề xuất, không phải bằng chứng thực nghiệm.
+**Lựa chọn v1:** giữ A/B/C riêng; mỗi RQ có nhãn/method/metric/comparison; A dùng toàn bộ official SciFact train làm internal dev vì core không train model (thay bản nháp tách một phần train), SCIDOCS dùng cấu hình transfer đã khóa. B giữ warm-start observed/heldout 20%, mask cả dev/test và reverse, graph theo cutoff, rerank cùng C100; graph go/no-go và years chờ SG-014. Tuổi dùng một post-fusion exponential freshness variant, loại missing-year khỏi B; không nhận là tái lập CiteRank/time-balanced centrality. C pool ba method, 30 query, 10/20 split, hai người chấm; 600 cặp là dự trù, upper bound 900 trước dedup.
+**Evaluator:** nDCG linear gain theo trec_eval; MAP cutoff chia tổng relevant; MRR@10 có adapter đúng cutoff và total order khi ties. Paired percentile CI 95%, 10.000 bootstrap theo query group; không tự suy p-value hoặc formal significance từ CI chưa điều chỉnh nhiều so sánh.
+**Sửa sau review vòng 1:** bỏ relevance-grid C 3×3 vì dev pool của cấu hình đã chọn tạo vòng phụ thuộc chọn config/nhãn và thiếu coverage cho trial khác. Core pin 1 translation + 1 encoder trước relevance pooling bằng technical dev pilot; chấm 10 dev trước, chọn default method trong 3 fixed methods, giữ nguyên cấu hình/primary comparison rồi freeze trước chấm 20 test. Upper bound vẫn 300 dev + 600 test = 900 unique pairs; mở grid sau cần ADR và ngân sách dev pool riêng.
+**Cấu hình:** protocol_v1.json là machine-readable design contract, runnable=false. Model, hashes, cohort years, resolved tuning và freeze evidence phải chốt ở các gate tương ứng; không điền giả. Thay phương pháp sau thiết kế cần amendment có lý do trước test.
+**Hệ quả:** chỉ đánh dấu SG-004 DONE khi acceptance, fresh-context artifact review và xác nhận của project owner có bằng chứng. Không coi lời yêu cầu thực hiện task là đã đọc/duyệt lựa chọn cụ thể vừa được tạo.
+
+## ADR-013 — 2026-09-16 — Tiêu chuẩn chống Silent Bypass và Bắt buộc Adversarial/Negative Testing
+
+**Trạng thái:** accepted.
+**Phạm vi:** Toàn bộ các module ingest, audit, retrieval, evaluation, graph và webapp (áp dụng bắt buộc từ SG-010 trở đi).
+**Nguồn:** Đúc kết từ các vòng review độc lập của Codex (SG-006, SG-007, SG-010 L1/L2) và phản ánh trực tiếp từ Project Owner về chất lượng thực thi.
+**Bối cảnh:** Các task trước đây thường chỉ pass trên "happy path" (dữ liệu chuẩn), nhưng dễ mắc lỗi silent bypass (dùng `.get()` mặc định làm trôi qua lỗi khi thiếu split bắt buộc), thiếu kiểm tra biên (boundary), hoặc narrative suy đoán sai lệch so với dữ liệu thực tế.
+**Quyết định kỹ thuật:**
+1. **Chống Silent Bypass (No Silent Bypass):** Tuyệt đối không dùng `.get()` mặc định hoặc giá trị fallback để che giấu việc thiếu tài nguyên, thiếu split, hoặc thiếu trường bắt buộc. Khi có lỗi, hệ thống phải báo FAIL rõ ràng, ghi nhận error chi tiết và CLI bắt buộc phải thoát với mã nonzero (1). Tuyệt đối không thay thế phép đo chưa thực hiện bằng 0 hay chuỗi rỗng.
+2. **Bắt buộc Adversarial / Negative Testing:** Mọi module trước khi được nghiệm thu DONE bắt buộc phải có test cases phá hủy trong thư mục tạm:
+   - Thiếu tài nguyên bắt buộc (missing files/splits).
+   - Dữ liệu khuyết thiếu/dị dạng (text-only, title-only, format sai, score ngoài biên).
+   - Kiểm tra rò rỉ nhãn (leakage across splits).
+   - Kiểm tra thực tế CLI subprocess exit code 1 khi có lỗi.
+3. **Đồng bộ 1:1 Narrative và Dữ liệu:** Mọi câu văn trong log/report/Data Card phải xuất phát từ logic toán học chặt chẽ trên toàn bộ biến đếm thực tế; không suy đoán một chiều.
+4. **Tự phản biện trước khi bàn giao:** Đóng vai trò "adversary" để tự tìm cách bẻ gãy mã nguồn trước khi báo hoàn tất.
+**Hệ quả:** Mọi task downstream (bắt đầu từ SG-012 BM25) chỉ được xem là đạt điều kiện hoàn thành khi đã vượt qua cả positive tests và negative/adversarial tests.
+
+## ADR-014 — 2026-09-16 — Report SG-010 phân biệt chưa đo và quan sát bằng 0
+
+**Trạng thái:** accepted; triển khai ADR-013 theo yêu cầu review/sửa SG-010 của người dùng.
+**Phạm vi:** SG-010 mở lại để review và khắc phục; không đổi metric, benchmark raw hoặc split policy.
+**Bằng chứng:** Adversarial CLI trong session025 tái hiện positive self-qrel/ID whitespace được chấp nhận, failed resources ghi số 0 giả; thống kê positive-per-query bỏ query toàn nhãn 0.
+**Quyết định:** Auditor revision `sg010-2.0.0`, report `schema_version=2`. Component có `status=PASS/FAIL`; khi không thể đo thì scalar/group measurements là `null` và có `error`. Required split thiếu vẫn có entry FAIL. Count 0 chỉ dùng cho tập quan sát thực; thống kê rỗng có count 0 nhưng mean/percentile null. Query toàn nhãn 0 thuộc split vẫn tham gia thống kê positive count.
+**Kiểm soát:** Parser không coercion ID/type lỗi, chặn JSON duplicate keys/NaN và score ngoài 0/1/2. Gate chặn positive self-qrel; cross-split ID overlap FAIL, normalized-text overlap báo anomaly với mọi cặp khớp, không tự đổi raw/split. Output không được trỏ vào raw; hash input trước/sau kiểm tra không đổi. Narrative không suy provenance chính thức từ counts hoặc nhận đã kiểm chứng retriever khi mới audit data.
+**Tương thích:** Consumer report phải kiểm tra version/status trước đọc measurements, không dùng `null` như 0. Không hồi tố sửa lịch sử report cũ; bản trước session025 được giữ ở `artifacts/reports/sg010_pre_session025.json`. Chỉ DONE sau tests, fresh-context review và continuity checker đạt.
+
+## ADR-015 — 2026-09-16 — Môi trường làm việc độc lập `bn` (bản clone ScholarGraph)
+
+**Trạng thái:** accepted; thực hiện theo yêu cầu trực tiếp của người dùng.
+**Phạm vi:** Chỉ workspace `D:/Web_mining_20261/bn`; không sửa bất kỳ file nào ngoài `bn/`. Không đổi trạng thái board, metric, protocol hay raw data.
+**Bối cảnh:** Người dùng yêu cầu một folder riêng tên `bn` để làm việc độc lập, clone `scholargraph/` và `AGENTS.md` vào đó, set up môi trường giao task/nhận task theo đúng chuẩn đã thiết lập của ScholarGraph.
+**Quyết định kỹ thuật:**
+1. Clone toàn bộ `scholargraph/` bằng robocopy (6.227 file, 548,23 MB, FAILED=0), loại trừ `.venv/`, `.pytest_cache/`, `__pycache__/`, `tmp/`, `*.pyc` — là thành phần môi trường/tạm, không phải dự án.
+2. `AGENTS.md` gốc (workspace và scholargraph) được clone nguyên văn trừ mục Scope: workspace của môi trường này là `D:/Web_mining_20261/bn`, mọi phiên chỉ làm việc trong `bn/`. Mọi quy tắc chống silent bypass, adversarial testing, checkpoint, review giữ nguyên hiệu lực.
+3. Venv bn tạo mới bằng đúng runtime Python 3.12.14 của bản gốc với `--system-site-packages` (venv không relocatable nên không copy); cài `requirements-dev.txt` + `pytrec_eval-terrier==0.5.10` để đạt parity với SG-008. `rank-bm25` sẵn sàng cho SG-012.
+4. Copy thêm `SCHOLARGRAPH.md` và 8 file bài giảng được `docs/SCOPE.md` dẫn link vào `bn/` để continuity checker xanh mà không phải sửa nội dung docs (giữ 1:1 narrative với bản gốc).
+5. Git local riêng cho `bn` (không nhúng vào repo workspace gốc); board 50 task và lịch sử quản trị được giữ nguyên như snapshot gốc.
+**Bằng chứng:** `pytest tests -q` trong bn: 214/214 passed (97.31s, exit 0); `scripts/check_project.ps1` trong bn: PASS (263 links, 50 routes, 7 lanes, 34 sessions). Chi tiết trong [log SESSION-20260916-026](logs/SESSION-20260916-026.md).
+**Hệ quả:** Các phiên trong `bn` tiếp tục ScholarGraph từ trạng thái hiện có (next SG-012) trong phạm vi thư mục `bn` only; kết quả thí nghiệm của `bn` không được gán cho workspace gốc và ngược lại, trừ khi được người dùng đồng bộ rõ ràng.

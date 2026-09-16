@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "description": "SG-008: dữ liệu tổng hợp tính tay, không phải điểm benchmark.",
+  "cases": [
+    {
+      "id": "graded_linear",
+      "query_ids": [
+        "q"
+      ],
+      "corpus_ids": [
+        "d0",
+        "d1",
+        "d2",
+        "d3",
+        "d9"
+      ],
+      "qrels": {
+        "q": {
+          "d0": 0,
+          "d1": 1,
+          "d2": 2,
+          "d3": 1
+        }
+      },
+      "runs": {
+        "q": [
+          [
+            "d1",
+            4
+          ],
+          [
+            "d9",
+            3
+          ],
+          [
+            "d2",
+            2
+          ],
+          [
+            "d0",
+            1
+          ]
+        ]
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0.6387878864795979,
+          "Recall@100": 0.6666666666666666,
+          "MRR@10": 1,
+          "MAP@100": 0.5555555555555556,
+          "P@5": 0.4
+        }
+      },
+      "derivation": "DCG=1/log2(2)+2/log2(4)=2; IDCG=2+1/log2(3)+1/log2(4); AP=(1+2/3)/3=5/9; P@5=2/5. Gain exponential would differ."
+    },
+    {
+      "id": "ties",
+      "query_ids": [
+        "q"
+      ],
+      "corpus_ids": [
+        "a",
+        "b"
+      ],
+      "qrels": {
+        "q": {
+          "a": 0,
+          "b": 2
+        }
+      },
+      "runs": {
+        "q": [
+          [
+            "b",
+            5
+          ],
+          [
+            "a",
+            5
+          ]
+        ]
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0.6309297535714575,
+          "Recall@100": 1,
+          "MRR@10": 0.5,
+          "MAP@100": 0.5,
+          "P@5": 0.2
+        }
+      },
+      "derivation": "Equal scores canonicalize as a,b. Only b relevant at rank2; strict TREC scores=2,1 preserve that order."
+    },
+    {
+      "id": "short",
+      "query_ids": [
+        "q"
+      ],
+      "corpus_ids": [
+        "a",
+        "b"
+      ],
+      "qrels": {
+        "q": {
+          "a": 1,
+          "b": 2
+        }
+      },
+      "runs": {
+        "q": [
+          [
+            "a",
+            1
+          ]
+        ]
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0.38009376671593426,
+          "Recall@100": 0.5,
+          "MRR@10": 1,
+          "MAP@100": 0.5,
+          "P@5": 0.2
+        }
+      },
+      "derivation": "One retrieved positive of two; P@5 uses 5, not returned length1. IDCG includes unretrieved grade2."
+    },
+    {
+      "id": "empty_missing_no_positive",
+      "query_ids": [
+        "empty",
+        "missing",
+        "zero",
+        "unjudged"
+      ],
+      "corpus_ids": [
+        "a",
+        "b"
+      ],
+      "qrels": {
+        "empty": {
+          "a": 1
+        },
+        "missing": {
+          "a": 2
+        },
+        "zero": {
+          "a": 0
+        },
+        "unjudged": {}
+      },
+      "runs": {
+        "empty": [],
+        "zero": [
+          [
+            "a",
+            1
+          ]
+        ],
+        "unjudged": [
+          [
+            "b",
+            1
+          ]
+        ]
+      },
+      "expected": {
+        "empty": {
+          "nDCG@10": 0,
+          "Recall@100": 0,
+          "MRR@10": 0,
+          "MAP@100": 0,
+          "P@5": 0
+        },
+        "missing": {
+          "nDCG@10": 0,
+          "Recall@100": 0,
+          "MRR@10": 0,
+          "MAP@100": 0,
+          "P@5": 0
+        },
+        "zero": {
+          "nDCG@10": 0,
+          "Recall@100": 0,
+          "MRR@10": 0,
+          "MAP@100": 0,
+          "P@5": 0
+        },
+        "unjudged": {
+          "nDCG@10": 0,
+          "Recall@100": 0,
+          "MRR@10": 0,
+          "MAP@100": 0,
+          "P@5": 0
+        }
+      },
+      "derivation": "All four locked queries contribute zeros; missing ranking differs from present empty; zero and unjudged have no positives."
+    },
+    {
+      "id": "map_denominator_101",
+      "generator": {
+        "kind": "all_positive",
+        "corpus_size": 101,
+        "ranking_size": 100
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 1,
+          "Recall@100": 0.9900990099009901,
+          "MRR@10": 1,
+          "MAP@100": 0.9900990099009901,
+          "P@5": 1
+        }
+      },
+      "derivation": "101 positive qrels, first100 all relevant; AP numerator100 divided by all101 positives, not min(100,101)."
+    },
+    {
+      "id": "boundary_10",
+      "generator": {
+        "kind": "single_positive",
+        "corpus_size": 101,
+        "ranking_size": 101,
+        "positive_rank": 10
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0.2890648263178879,
+          "Recall@100": 1,
+          "MRR@10": 0.1,
+          "MAP@100": 0.1,
+          "P@5": 0
+        }
+      },
+      "derivation": "Only relevant at rank10. Recall/AP cutoff100 and reciprocal rank/nDCG cutoff10 are applied independently."
+    },
+    {
+      "id": "boundary_11",
+      "generator": {
+        "kind": "single_positive",
+        "corpus_size": 101,
+        "ranking_size": 101,
+        "positive_rank": 11
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0,
+          "Recall@100": 1,
+          "MRR@10": 0,
+          "MAP@100": 0.09090909090909091,
+          "P@5": 0
+        }
+      },
+      "derivation": "Only relevant at rank11. Recall/AP cutoff100 and reciprocal rank/nDCG cutoff10 are applied independently."
+    },
+    {
+      "id": "boundary_100",
+      "generator": {
+        "kind": "single_positive",
+        "corpus_size": 101,
+        "ranking_size": 101,
+        "positive_rank": 100
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0,
+          "Recall@100": 1,
+          "MRR@10": 0,
+          "MAP@100": 0.01,
+          "P@5": 0
+        }
+      },
+      "derivation": "Only relevant at rank100. Recall/AP cutoff100 and reciprocal rank/nDCG cutoff10 are applied independently."
+    },
+    {
+      "id": "boundary_101",
+      "generator": {
+        "kind": "single_positive",
+        "corpus_size": 101,
+        "ranking_size": 101,
+        "positive_rank": 101
+      },
+      "expected": {
+        "q": {
+          "nDCG@10": 0,
+          "Recall@100": 0,
+          "MRR@10": 0,
+          "MAP@100": 0,
+          "P@5": 0
+        }
+      },
+      "derivation": "Only relevant at rank101. Recall/AP cutoff100 and reciprocal rank/nDCG cutoff10 are applied independently."
+    }
+  ]
+}

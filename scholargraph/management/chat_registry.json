@@ -1,0 +1,596 @@
+{
+  "schema_version": 1,
+  "project": "ScholarGraph VN",
+  "updated_at": "2026-09-16T22:30:20+07:00",
+  "mode": "logical_lanes_only_no_threads_created",
+  "single_writer_coordinator": "C",
+  "active_assignments": [],
+  "sessions": [
+    {
+      "session_id": "SESSION-20260916-026",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-026.md",
+      "status": "completed",
+      "role": "coordinator_and_worker_environment_setup"
+    },
+    {
+      "session_id": "SESSION-20260916-024",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-024.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260916-023",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-011"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-023.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260916-022-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg008_fresh_review",
+      "task_ids": [
+        "SG-008"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-022-REVIEW.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-022-REFERENCE",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg008_reference_tests",
+      "task_ids": [
+        "SG-008"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-022-REFERENCE.md",
+      "status": "completed",
+      "role": "reference_and_tests_worker"
+    },
+    {
+      "session_id": "SESSION-20260916-022",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-008"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-022.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-006",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-003"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-006.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-007",
+      "chat_id": "C",
+      "app_thread_id": "01a0a33b-d3c6-7210-8124-de2d3147f156",
+      "task_ids": [
+        "SG-003",
+        "SG-004"
+      ],
+      "actual_model": "gpt-5",
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-007.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-003",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-001"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-003.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-005",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-002"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-005.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-008",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-008.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-008-SOURCE",
+      "chat_id": "R",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg004_source_audit",
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-004-SUBAGENTS.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-004-SOURCE-AUDIT.md"
+      ],
+      "role": "support_source_audit"
+    },
+    {
+      "session_id": "SESSION-20260915-008-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg004_final_review",
+      "task_ids": [
+        "SG-004"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-004-SUBAGENTS.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-004-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-009",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-006"
+      ],
+      "actual_model": "Gemini 3.8 Flash",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-009.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-010",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-006"
+      ],
+      "actual_model": "Gemini 3.8 Flash",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-010.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-011-RUNNER",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-RUNNER.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-BEIR",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg009_beir_ingest",
+      "task_ids": [
+        "SG-009"
+      ],
+      "actual_model": "gpt-5.6-terra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-BEIR.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/beir_loader.py",
+        "tests/unit/test_beir_loader.py",
+        "data/manifests/beir_scifact.json",
+        "data/manifests/beir_scidocs.json",
+        "data/raw/beir/"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-OPENALEX",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_openalex_pilot",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-011-OPENALEX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex.py",
+        "data/manifests/openalex_pilot.json",
+        "artifacts/reports/openalex_pilot.json",
+        "data/raw/openalex/"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260915-011-PRECHECK",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_sg009_precheck",
+      "task_ids": [
+        "SG-007",
+        "SG-009"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/reviews/SG-007-009-PRECHECK-20260915.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-009-PRECHECK-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-012-RUNNER-FIX",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-012-RUNNER-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-012-OPENALEX-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_review",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-012-OPENALEX-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-013-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-013-OPENALEX-FIX",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_openalex_pilot",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-013-OPENALEX-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex.py",
+        "artifacts/reports/openalex_pilot_correction.json"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-014-RUNNER-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_sg009_precheck",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-014-RUNNER-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-015-RUNNER-SECRET-FIX",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_runner",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-5.6-sol",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-015-RUNNER-SECRET-FIX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260915-016-RUNNER-FINAL-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_final_rereview",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-016-RUNNER-FINAL-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-007-FINAL-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-017-OPENALEX-FINAL-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg013_final_review",
+      "task_ids": [
+        "SG-013"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-017-OPENALEX-FINAL-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [
+        "management/reviews/SG-013-FINAL-RE-REVIEW-20260915.md"
+      ],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-018-RUNNER-SECRET-ESCALATION",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_secret_escalation",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-018-RUNNER-SECRET-ESCALATION.md",
+      "status": "completed",
+      "claimed_paths": [
+        "src/scholargraph/evaluation/runner.py",
+        "tests/unit/test_run_integrity.py"
+      ],
+      "role": "implementation_worker_escalated"
+    },
+    {
+      "session_id": "SESSION-20260915-019",
+      "chat_id": "C",
+      "app_thread_id": "01a0a48c-c264-7e50-aadf-a1b7f91e7994",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-019.md",
+      "status": "completed"
+    },
+    {
+      "session_id": "SESSION-20260915-019-RUNNER-CLOSEOUT-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg007_closeout_review",
+      "task_ids": [
+        "SG-007"
+      ],
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260915-019-RUNNER-CLOSEOUT-REVIEW.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260915-020",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260915-020.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260916-021",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-021.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "implementation_worker_correction"
+    },
+    {
+      "session_id": "SESSION-20260916-025",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-025.md",
+      "status": "completed",
+      "role": "coordinator_and_corrective_worker",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-025-ADVERSARIAL",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg008_reference_tests",
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-025-ADVERSARIAL.md",
+      "status": "completed",
+      "role": "adversarial_test_worker",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260916-025-REVIEW",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "/root/sg008_fresh_review",
+      "task_ids": [
+        "SG-010"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260916-025-REVIEW.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    }
+  ],
+  "lanes": [
+    {
+      "chat_id": "C",
+      "name": "Điều phối",
+      "default_profile": "S_H",
+      "purpose": "Điều phối scope, dependency, phân công, nhận bàn giao; không chứa log thử nghiệm dài.",
+      "shared_control_files": [
+        "management/tasks.json",
+        "management/state.json",
+        "management/HANDOFF.md",
+        "management/chat_registry.json"
+      ],
+      "app_thread_id": null,
+      "status": "idle"
+    },
+    {
+      "chat_id": "R",
+      "name": "Nghiên cứu và đánh giá",
+      "default_profile": "A_H",
+      "purpose": "Protocol, literature, leakage, evaluator, tuning, thống kê, VN labels.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "idle"
+    },
+    {
+      "chat_id": "D",
+      "name": "Dữ liệu và môi trường",
+      "default_profile": "S_H",
+      "purpose": "Môi trường, schema, ingestion, audit và masked graph.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "idle"
+    },
+    {
+      "chat_id": "M",
+      "name": "Retrieval và thuật toán graph",
+      "default_profile": "S_H",
+      "purpose": "Baselines, encoding, RRF, PPR và reranking.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "P",
+      "name": "Ứng dụng và hiệu năng",
+      "default_profile": "T_H",
+      "purpose": "API, UI, offline, integration và profiling.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "W",
+      "name": "Báo cáo và tái lập",
+      "default_profile": "S_H",
+      "purpose": "Packaging, audit, report, slides và diễn tập.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "not_created"
+    },
+    {
+      "chat_id": "V",
+      "name": "Review độc lập theo phiên",
+      "default_profile": "A_H",
+      "purpose": "Đọc acceptance và bằng chứng ở context mới; không sửa implementation được review.",
+      "shared_control_files": [],
+      "app_thread_id": null,
+      "status": "idle"
+    }
+  ]
+}

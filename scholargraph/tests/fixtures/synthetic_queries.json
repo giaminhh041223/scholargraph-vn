@@ -1,0 +1,32 @@
+[
+  {
+    "id": "synth:q_01",
+    "text": "hybrid retrieval reciprocal rank fusion bm25 dense",
+    "language": "en",
+    "metadata": {
+      "query_family": "hybrid_search",
+      "split": "dev"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synth:q_02",
+    "text": "personalized pagerank citation graph recommendation",
+    "language": "en",
+    "metadata": {
+      "query_family": "graph_recommendation",
+      "split": "test"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synth:q_03",
+    "text": "tìm kiếm bài báo kết hợp đồ thị trích dẫn và nội dung",
+    "language": "vi",
+    "metadata": {
+      "query_family": "vietnamese_cross_lingual",
+      "split": "dev"
+    },
+    "synthetic": true
+  }
+]
