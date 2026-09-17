@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T01:05:00+07:00",
+  "updated_at": "2026-09-18T01:10:00+07:00",
   "phase": "M3",
   "stage": "takeover_sg019_reopened_encoding_in_progress",
   "active_tasks": [
     "SG-050",
     "SG-026"
   ],
-  "next_task_id": "SG-036",
+  "next_task_id": "SG-037",
   "last_session_id": "SESSION-20260917-053",
   "last_session_log": "management/logs/SESSION-20260917-053.md",
   "handoff_path": "management/HANDOFF.md",

@@ -1,11 +1,18 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-036
+NEXT_TASK: SG-037
 
 ## SG-035 DONE, SG-036 + SG-026 song song — 2026-09-17T19:40:00+07:00
 
 - **SG-035 DONE**: API 4 routes trên data thật, 9/9 tests, fresh PASS (debt → SG-036/039).
 - **SG-036 IN_PROGRESS** (UI, lane P). **SG-026 IN_PROGRESS** (lane R: A xong, B chờ encode OpenAlex resume + human).
+
+## SG-036 DONE, SG-031 DONE, SG-050 encode — 2026-09-18T01:10:00+07:00
+
+- **SG-036 DONE**: UI hoàn tất (code phiên 052 + test 9/9 + checker 2/2 khớp 1/2); review fresh-context PASS không P0/P1; P2-1/P2-2 đã sửa; P2-3 (hai thành viên kiểm chứng 5 query UI) đưa vào checklist closeout.
+- **SG-031 DONE**: 30 query Việt được project owner duyệt nguyên bản qua question tool (ghi nhận trong manifest `provenance.human_approval`); ANNOTATION_GUIDE.md hoàn chỉnh; mở khóa SG-032.
+- **SG-050 IN_PROGRESS**: encode OpenAlex text-subset 16/19 shards (~10,5 phút/shard đo thật) rồi tự sang SCIDOCS; còn ~4-5 giờ; xong sẽ index/verify/profile → review → DONE → mở khóa SG-026 B trials.
+- Tiếp quản coordinator session 053; ADR-017 chính thức hóa; task SG-050 tạo mới theo đúng quy tắc dependency.
 
 ## SG-025 DONE (2 vòng review), SG-026 đang làm — 2026-09-17T17:30:00+07:00
 
