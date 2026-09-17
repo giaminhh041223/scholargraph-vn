@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T02:35:00+07:00",
+  "updated_at": "2026-09-18T04:00:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -44,7 +44,8 @@
       "task_ids": [
         "SG-050",
         "SG-026",
-        "SG-037"
+        "SG-037",
+        "SG-038"
       ],
       "actual_model": null,
       "actual_reasoning": null,

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T02:35:00+07:00",
+  "updated_at": "2026-09-18T04:00:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1176,19 +1176,33 @@
       "title": "Offline và xuất tham khảo",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (coordinator-as-worker)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-036"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "docs/DEMO_SCRIPT.md",
+        "configs/demo.json",
+        "artifacts/reports/offline_smoke.md",
+        "artifacts/reports/demo_references.json",
+        "scripts/export_references.py",
+        "scripts/offline_smoke.py",
+        "tests/unit/test_demo_export.py",
+        "management/logs/SESSION-20260917-053.md"
+      ],
+      "verification": [
+        "2026-09-18T03:43+07:00: offline smoke 13/13 PASS with HF_HUB_OFFLINE=1/TRANSFORMERS_OFFLINE=1 set before HF import — health, 5 pinned queries (top-1 identical to twice-verified SG-036 set), paper null year/doi, recommend self-exclusion, graph hub truncated=true with real message (5341 neighbors > cap 30), export subprocess exit 0, missing policy (with_doi=2, missing_doi=2, missing_year=2), no CDN references.",
+        "2026-09-18T03:55+07:00: pytest tests/unit/test_demo_export.py 7/7 PASS; tests/unit/test_vn_queries.py updated to approved-status contract (6/6).",
+        "2026-09-18: export script bugs found by own smoke and fixed (splitlines split on U+2028 inside JSON abstract strings; trailing-newline false positive) — fail-loud CLI exit 1 on unknown IDs verified by test.",
+        "2026-09-18: export runs as standalone script (no app.py/service.py modification — those files under SG-036/037 review snapshot)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Export qua script standalone (không sửa app.py/service.py đang ở review cho SG-036/037)."
     },
     {
       "id": "SG-039",

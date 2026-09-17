@@ -24,9 +24,12 @@ def manifest() -> dict:
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
 
 
-def test_status_is_explicit_draft(manifest):
-    assert manifest["status"] == "draft_pending_human_approval"
-    assert manifest["provenance"]["human_approval"] is None
+def test_status_is_explicitly_approved(manifest):
+    # Human gate satisfied 2026-09-17 (project owner approved all 30 queries
+    # without edits via in-session question tool; recorded in provenance).
+    assert manifest["status"] in ("approved_no_edits", "approved_with_edits")
+    approval = manifest["provenance"]["human_approval"]
+    assert approval and approval.get("approved_at") and approval.get("decision")
     assert "NOT derived from any qrels entry" in manifest["provenance"]["method"]
 
 
