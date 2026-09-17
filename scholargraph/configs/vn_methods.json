@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "vn_methods_config",
+  "task_id": "SG-032",
+  "created_at": "2026-09-18T04:35:00+07:00",
+  "status": "translation_pinned_dense_pending_corpus_encode",
+  "protocol_reference": {
+    "track": "VN (Protocol v1 section 7)",
+    "pool_methods": [
+      "translated_bm25",
+      "multilingual_dense",
+      "vn_hybrid_rrf"
+    ],
+    "non_pool_diagnostic": "original_vi_bm25",
+    "selection_policy": "one_fixed_config_before_relevance_pooling_no_paid_LLM_dependency"
+  },
+  "translation": {
+    "provider": "local_opus_mt",
+    "model_id": "Helsinki-NLP/opus-mt-vi-en",
+    "revision_pin": "c8d2853e77f5fae31124d993e0b35176b1c8914e",
+    "paid_llm_dependency": false,
+    "cache": {
+      "path": "data/processed/vn/translations_cache.json",
+      "policy": "one translation per query, cached deterministically (greedy decode, seed fixed); re-run reproduces byte-identical cache"
+    },
+    "disclosure": "machine translation quality limits recorded in vn_dev_pilot.md; technical terms / code-switching checked on 5 dev pilot queries"
+  },
+  "multilingual_dense": {
+    "selection_gate": "SG-032 dev pilot on 5 annotation_pilot queries",
+    "candidates": [
+      {
+        "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "dims": 384,
+        "max_length": 128,
+        "license": "Apache-2.0",
+        "note": "light; distills multilingual knowledge; 128-token limit truncates long abstracts"
+      },
+      {
+        "model_id": "intfloat/multilingual-e5-base",
+        "dims": 768,
+        "max_length": 512,
+        "license": "MIT",
+        "note": "stronger cross-lingual retrieval; requires query:/passage: prefixes"
+      }
+    ],
+    "decision": null,
+    "decision_criteria": "technical pilot on 5 annotation_pilot queries: translation quality, term/code-switching handling, retrieval sanity (top-1 descriptively); NO relevance metrics yet — VN labels arrive at SG-033. Final method confirmation for track C evaluation happens with labels at SG-026 track C.",
+    "corpus_encode_scope": "scifact corpus (5183) mandatory; openalex/scidocs deferred to compute plan decision after pilot"
+  },
+  "original_vi_bm25": {
+    "policy": "diagnostic only — Vietnamese tokens against English corpus under protocol tokenizer; expected near-zero lexical overlap; reported with coverage limits, never a pool method"
+  },
+  "vn_hybrid_rrf": {
+    "k": 60,
+    "components": [
+      "translated_bm25",
+      "multilingual_dense"
+    ],
+    "weights": "equal (protocol rrf.equal_weights)"
+  },
+  "freeze_sequence_note": "SG-031_query_split_instructions (approved 2026-09-17) -> SG-032 pins ONE translation + ONE multilingual config -> relevance pooling (SG-033) only after pin"
+}

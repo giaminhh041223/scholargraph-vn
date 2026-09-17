@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T04:00:00+07:00",
+  "updated_at": "2026-09-18T04:30:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1016,10 +1016,10 @@
       "title": "Cross-lingual baselines",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (coordinator-as-worker; light parts now, multilingual encode after SG-050)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-017",
@@ -1029,8 +1029,15 @@
       "blocked_reason": null,
       "evidence": [],
       "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "claimed_paths": [
+        "src/scholargraph/retrieval/cross_lingual.py",
+        "configs/vn_methods.json",
+        "artifacts/reports/vn_dev_pilot.md",
+        "data/processed/vn/",
+        "artifacts/cache/",
+        "tests/unit/test_cross_lingual.py"
+      ],
+      "note": "Light parts (translation pin + cache + raw BM25) during SG-050 encode; multilingual corpus encode serialized after."
     },
     {
       "id": "SG-033",
