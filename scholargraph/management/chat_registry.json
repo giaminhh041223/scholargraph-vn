@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T01:12:00+07:00",
+  "updated_at": "2026-09-18T02:35:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -12,6 +12,11 @@
     },
     {
       "task_id": "SG-026",
+      "session_id": "SESSION-20260917-053",
+      "chat_id": "C"
+    },
+    {
+      "task_id": "SG-037",
       "session_id": "SESSION-20260917-053",
       "chat_id": "C"
     }
@@ -39,7 +44,7 @@
       "task_ids": [
         "SG-050",
         "SG-026",
-        "SG-036"
+        "SG-037"
       ],
       "actual_model": null,
       "actual_reasoning": null,

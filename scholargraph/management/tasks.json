@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T01:05:00+07:00",
+  "updated_at": "2026-09-18T02:35:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1145,18 +1145,29 @@
       "title": "Citation graph UI",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "S/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (implementation from closed window absorbed; takeover session 053)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-016",
         "SG-036"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/api/graph_service.py",
+        "ui/graph/graph.js",
+        "ui/graph/graph.css",
+        "tests/unit/test_graph_ui.py",
+        "artifacts/reports/graph_ui_smoke.md",
+        "management/logs/SESSION-20260917-053.md"
+      ],
+      "verification": [
+        "2026-09-18T02:30+07:00: pytest tests/unit/test_graph_ui.py 19/19 PASS (36.5s) — run by takeover coordinator on absorbed implementation.",
+        "2026-09-18: graph_ui_smoke.md present (real API smoke by the implementing window; re-verification by independent reviewer pending dispatch).",
+        "2026-09-18: implementation authored by the now-closed parallel window (uncommitted work absorbed at user-confirmed handover; file mtimes 01:56-02:19)."
+      ],
       "claimed_paths": [],
       "note": ""
     },

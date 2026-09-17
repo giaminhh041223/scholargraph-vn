@@ -11,14 +11,22 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
 
+from scholargraph.api.graph_service import (
+    GraphService,
+    GraphServiceError,
+    read_manifest_snapshot,
+)
 from scholargraph.api.service import SearchService, ServiceError
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 app = FastAPI(title="ScholarGraph VN", version="0.1.0")
 app.mount("/static", StaticFiles(directory=PROJECT_ROOT / "ui" / "static"), name="static")
+app.mount("/graph-static", StaticFiles(directory=PROJECT_ROOT / "ui" / "graph"),
+          name="graph-static")
 templates = Jinja2Templates(directory=PROJECT_ROOT / "ui" / "templates")
 _service: SearchService | None = None
+_graph_service: GraphService | None = None
 
 
 def get_service() -> SearchService:
@@ -71,3 +79,37 @@ def recommend(doc_id: str, top_k: int = 10) -> dict[str, Any]:
     except ServiceError as exc:
         code = 404 if str(exc).startswith("Unknown document") else 400
         raise HTTPException(status_code=code, detail=str(exc))
+
+
+# --- Citation graph UI (task SG-037) — additive; existing routes untouched ---
+
+def get_graph_service() -> GraphService:
+    global _graph_service
+    if _graph_service is None:
+        try:
+            _graph_service = GraphService(PROJECT_ROOT)
+        except Exception as exc:  # noqa: BLE001 - startup boundary
+            raise HTTPException(status_code=500, detail=f"Graph service unavailable: {exc}")
+    return _graph_service
+
+
+@app.get("/graph", include_in_schema=False)
+def graph_page(request: Request) -> Any:
+    try:
+        ctx = read_manifest_snapshot(PROJECT_ROOT)
+    except GraphServiceError as exc:
+        raise HTTPException(status_code=500, detail=f"Graph service unavailable: {exc}")
+    ctx["snapshot_date"] = ctx["retrieved_completed_at"]
+    return templates.TemplateResponse(request, "graph.html", ctx)
+
+
+@app.get("/graph/{doc_id}")
+def graph_neighborhood(doc_id: str, mode: str = "evaluated", hop: int = 1,
+                       cap: int = 30) -> dict[str, Any]:
+    try:
+        return get_graph_service().neighborhood(doc_id, mode=mode, hop=hop, cap=cap)
+    except GraphServiceError as exc:
+        message = str(exc)
+        if message.startswith("Unknown document"):
+            raise HTTPException(status_code=404, detail=message)
+        raise HTTPException(status_code=400, detail=message)

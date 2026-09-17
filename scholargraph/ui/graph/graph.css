@@ -1,0 +1,177 @@
+/* ScholarGraph VN — Citation graph UI (SG-037). Offline only, no CDN. */
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+header {
+  background: #1e3a8a;
+  color: #fff;
+  padding: 12px 20px;
+}
+header h1 { margin: 0 0 4px; font-size: 20px; }
+header .sub { margin: 0; font-size: 13px; opacity: 0.9; }
+main { padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+
+#graph-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+#graph-form input[type="text"] { flex: 1 1 260px; }
+#graph-form input, #graph-form select {
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#graph-form button {
+  background: #1d4ed8;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#graph-form button:hover { background: #1e40af; }
+
+#status { min-height: 20px; font-size: 14px; margin: 10px 0; }
+#status.error { color: #b91c1c; }
+#status.warning { color: #92400e; }
+
+#viz {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+}
+#graph-wrap {
+  flex: 1 1 auto;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#graph-svg { width: 100%; height: 560px; display: block; }
+
+#detail {
+  flex: 0 0 320px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  overflow-y: auto;
+  max-height: 560px;
+}
+#detail h3 { margin: 0 0 6px; font-size: 15px; }
+#detail .meta { color: #64748b; font-size: 12px; }
+#detail .abstract { font-size: 13px; color: #334155; }
+#detail h4 { margin: 12px 0 4px; font-size: 13px; }
+#detail ul { margin: 0; padding-left: 16px; }
+#detail li { margin-bottom: 4px; font-size: 13px; }
+#detail a, #node-list a, .clickable { color: #1d4ed8; cursor: pointer; }
+#detail button {
+  margin-top: 8px;
+  background: #0f766e;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#panels { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+#node-list, #legend, #provenance {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  flex: 1 1 320px;
+  font-size: 13px;
+}
+#node-list table { border-collapse: collapse; width: 100%; }
+#node-list th, #node-list td {
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 3px 6px;
+}
+#node-list th { color: #64748b; font-weight: 600; }
+.badge {
+  display: inline-block;
+  border: 1px solid #7c3aed;
+  color: #7c3aed;
+  border-radius: 10px;
+  font-size: 11px;
+  padding: 0 6px;
+}
+#legend ul { margin: 6px 0 0; padding-left: 18px; }
+#legend li { margin-bottom: 6px; }
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+.swatch.center { background: #1d4ed8; }
+.swatch.cites { background: #d97706; }
+.swatch.cited_by { background: #059669; }
+.swatch.both { background: #0d9488; }
+.swatch.multi_hop { background: #94a3b8; }
+.swatch.query_ring {
+  background: #fff;
+  border: 2px dashed #7c3aed;
+}
+.arrow { display: inline-block; width: 26px; height: 0; border-top: 2px solid; vertical-align: 3px; margin-right: 6px; position: relative; }
+.arrow.cites { border-color: #d97706; }
+.arrow.cited_by { border-color: #059669; }
+.arrow.other { border-color: #94a3b8; }
+.arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  border: 4px solid transparent;
+}
+.arrow.cites::after { border-left-color: #d97706; }
+.arrow.cited_by::after { border-left-color: #059669; }
+.arrow.other::after { border-left-color: #94a3b8; }
+
+#provenance code { font-size: 11px; word-break: break-all; }
+#provenance ul { margin: 6px 0 0; padding-left: 18px; }
+
+footer {
+  margin-top: 18px;
+  padding: 10px 20px;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* SVG elements */
+.node-circle { stroke: #fff; stroke-width: 1; cursor: pointer; }
+.node-circle.center { stroke: #0f172a; stroke-width: 2; }
+.node-ring { fill: none; stroke: #7c3aed; stroke-width: 2; stroke-dasharray: 4 3; pointer-events: none; }
+.edge.cites { stroke: #d97706; stroke-opacity: 0.75; }
+.edge.cited_by { stroke: #059669; stroke-opacity: 0.75; }
+.edge.other { stroke: #94a3b8; stroke-opacity: 0.6; }
+.edge { stroke-width: 1.6; }
+.edge.bold { stroke-width: 2.4; }
+.node-label {
+  font-size: 11px;
+  fill: #0f172a;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+}
