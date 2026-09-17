@@ -1259,9 +1259,12 @@ def build_report(
         },
         "decision": dict(decision),
         "known_limitations": [
-            "The audited snapshot is a 2,000-work seeded topic sample; its sparsity is "
-            "measured evidence for this snapshot only and is not an estimate for any "
-            "other sampling strategy.",
+            (
+                f"The audited snapshot is a {snapshot_stats['counts']['works']}-work sample "
+                "from the pinned manifest sampling plan; its sparsity is "
+                "measured evidence for this snapshot only and is not an estimate for any "
+                "other sampling strategy."
+            ),
             "OpenAlex referenced_works contains only references OpenAlex successfully "
             "matched to another work.",
             "The novel-candidate universe is a pre-split conservative lower bound "

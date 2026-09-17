@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T01:28:19+07:00",
+  "updated_at": "2026-09-17T04:35:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -525,20 +525,37 @@
       "title": "Snapshot OpenAlex core",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg015_core_curator",
+      "session_id": "SESSION-20260917-036",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-013",
         "SG-014"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "data/manifests/openalex_core.json",
+        "data/processed/openalex/",
+        "data/raw/openalex_core/",
+        "artifacts/reports/openalex_quality.json",
+        "artifacts/reports/graph_feasibility_core.json",
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex_core.py",
+        "management/reviews/SG-015-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-036.md",
+        "management/logs/SESSION-20260917-038.md"
+      ],
+      "verification": [
+        "2026-09-17: citation-connected snapshot 18.251 unique works (2.000 pilot embedded unchanged + 115 hubs + 14.958 cohort-only + 1.178 extension), 104 polite-pool requests (80 v1 + 15 probe + 9 v2), 89 pages cached with per-page hashes; manifest pinned BEFORE fetch (plan fingerprints v1 03b28664..., v2 cb63697d...; recomputed and matched).",
+        "2026-09-17: measured graph: 26.516 internal directed edges, 2.324/18.251 isolated (12,73%), largest weak component 15.848, 163 self-loops recorded for SG-016 masking; transformations counted: DOI normalized 16.713 (coverage 91,57%), 870.549 reference IDs canonicalized; missing recorded not dropped (DOI 1.538, abstract 5.367, year 22).",
+        "2026-09-17: graph gate on core: overall GO (test_year 2025: 579 eligible >= 50; dev_year 2024: 563 >= 30; novel-candidates min 206 >= 100; provenance + masking readiness GO). SG-016 unblocked per ADR-016. Selection bias of cites:<hubs> sampling disclosed in known_limitations; snapshot must not be treated as topic-representative.",
+        "2026-09-17: pytest tests/unit/test_openalex_core.py 27/27 PASS; pytest tests -q 388/388 PASS; pilot data/raw/openalex/ hash unchanged (works.jsonl 3f301e4f...); v1 NO_GO gate outcome preserved as pinned evidence in manifest v1_gate_evidence.",
+        "2026-09-17: fresh-context reviewer bn/sg015_engine_reviewer PASS (management/reviews/SG-015-REVIEW-20260917.md): independent recount matched 100% (edges/isolated/self-loops/DOI/eligible/novel), fingerprints recomputed, gate CLI re-run diff=0 outside measured_at/command/path, tampered-manifest CLI exit 1. P2-1 static known_limitations string FIXED by coordinator (feasibility.py snapshot-aware; both gate reports regenerated, decisions unchanged); P2-2 title-field label note recorded for consumers; P2-3 future superseded reports to keep versioned paths; P2-4 selection bias disclosed."
+      ],
       "claimed_paths": [],
-      "note": "ADR-016 mục 7: scope điều chỉnh — sampling phải cho snapshot có kết nối trích dẫn (expansion referenced_works/cited_by hoặc cohort venue/năm), giữ nguyên floors 50 test/30 dev/2 refs/100 novel-candidates, pin manifest trước khi tải; sau khi tải chạy lại graph gate, SG-016 chỉ mở khi GO."
+      "note": "Orchestrator loop-2 SESSION-20260917-034: curator (lane D). ADR-016 muc 7: citation-connected sampling, floors 50/30/2/100, pin manifest before fetch, re-run gate on core snapshot."
     },
     {
       "id": "SG-016",
@@ -597,19 +614,34 @@
       "title": "Lexical baselines",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg018_engine_worker",
+      "session_id": "SESSION-20260917-035",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-012"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/tfidf.py",
+        "tests/unit/test_lexical.py",
+        "artifacts/reports/lexical_dev.md",
+        "artifacts/reports/lexical_dev.json",
+        "artifacts/runs/RUN-20260916-191127-tfidf-scifact-dev",
+        "artifacts/runs/RUN-20260916-191054-tfidf-scifact-dev",
+        "management/reviews/SG-018-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-035.md",
+        "management/logs/SESSION-20260917-037.md"
+      ],
+      "verification": [
+        "2026-09-17: real run RUN-20260916-191127-tfidf-scifact-dev COMPLETED with seal (index_hash ff36599b...) on SciFact dev 809/919/5.183: TF-IDF nDCG@10 0.6509, Recall@100 0.9124, MRR@10 0.6139 vs BM25 0.6701/0.9102/0.6380; input sha256 set byte-identical to BM25 run RUN-20260916-163653 (same inputs/candidates acceptance proven by hashes).",
+        "2026-09-17: reproducibility run RUN-20260916-191054: rankings.jsonl + per_query.json byte-identical, metrics bit-exact.",
+        "2026-09-17: pytest tests/unit/test_lexical.py 40/40 PASS; pytest tests -q 388/388 PASS (361 pre-existing + 27 SG-015 landed in parallel; no old test broken).",
+        "2026-09-17: fresh-context reviewer bn/sg018_eval_reviewer PASS (management/reviews/SG-018-REVIEW-20260917.md): independent formula + metric recomputation <=1e-12, index_hash recomputed independently, leakage probes (inverted qrels -> byte-identical rankings, zeroed metrics; missing qrels -> exit 1), 4/4 adversarial CLI exit 1, bm25.py hash unchanged vs SG-012 seal. P2-info test-count note resolved by this entry; lexical_dev.md untracked per repo artifacts/reports policy (JSON tracked)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop-2 SESSION-20260917-034: engine worker (lane M). TF-IDF + BM25 same inputs/candidates; reuse bm25.py tokenization read-only."
     },
     {
       "id": "SG-019",

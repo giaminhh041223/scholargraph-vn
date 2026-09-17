@@ -1,6 +1,15 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-018
+NEXT_TASK: SG-016
+
+## Orchestrator loop-2: SG-018 + SG-015 DONE, graph gate GO — 2026-09-17T04:35:00+07:00
+
+- Vòng 2 triển khai 2 task song song bằng subagent worker + 2 reviewer fresh-context; **pytest 388/388** (321 + 40 TF-IDF + 27 openalex-core); checker PASS (288 links, 46 sessions); DONE=18.
+- **SG-018 DONE** (`bn/sg018_engine_worker`): TF-IDF Protocol v1 (tf 1+ln f, idf ≥1, l2, cosine, empty_vector_score=0) tái sử dụng tokenizer bm25.py qua import (bm25.py hash nguyên vẹn). Run thật `RUN-20260916-191127-tfidf-scifact-dev`: **TF-IDF nDCG@10 0.6509 / Recall@100 0.9124 / MRR@10 0.6139** vs BM25 0.6701/0.9102/0.6380 trên inputs byte-identical (chứng minh bằng sha256); rerun byte-identical. Review PASS (tái tính metric ≤1e-12, leakage probes).
+- **SG-015 DONE** (`bn/sg015_core_curator`, scope ADR-016 §7): snapshot citation-connected **18.251 works** (2.000 pilot nguyên vẹn + 115 hubs + 14.958 cohort + 1.178 extension), 104 requests polite-pool, pin manifest TRƯỚC fetch (fingerprint v1/v2 tái tính khớp). Đồ thị đo được: **26.516 cạnh nội bộ, isolated 12,73%**, 163 self-loops. **Gate trên core = GO** (test_year 2025: 579≥50, dev_year 2024: 563≥30, novel min 206≥100) → **SG-016 đã mở khóa**. Selection bias (cites:hubs) đã khai báo — không coi snapshot là mẫu đại diện topic. Review PASS (tái đếm 100%, gate CLI re-run diff=0).
+- P2 xử lý: SG-014 module `feasibility.py` fixed snapshot-aware (`known_limitations`), cả 2 gate report tái sinh (NO_GO/GO giữ nguyên); các P2 khác là ghi chú cho SG-016 (label `openalex_works_with_title` đếm title unique; superseded report giữ path có version từ giờ; self-loops + cạnh đảo phải xử lý theo GRAPH_PROTOCOL).
+- **Tiếp theo:** `SG-016` (Graph & masked split — deps DONE; ràng buộc chỉ thị đặc biệt: verify không có cạnh trích dẫn hai chiều undirected và LOẠI TOÀN BỘ cạnh thuộc test set khỏi adjacency dùng cho PPR) và `SG-019` (Encoding shard & dense index — deps SG-002/010/015/017 DONE; nhớ 2 yêu cầu SG-017 review: pin tokenizer revision vào shard manifest + CLI đọc configs/models/ phải fail-loud). SG-019 cần tải weights bge-base-en-v1.5 (network OK).
+- Sau đó: SG-020 (cần SG-018+SG-019), SG-021, SG-022 (cần SG-016), SG-031 (cần SG-011+SG-015) đều sẽ unblocked theo DAG.
 
 ## Orchestrator loop: SG-012 + SG-014 + SG-017 DONE — 2026-09-17T01:28:19+07:00
 

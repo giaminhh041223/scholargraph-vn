@@ -1,11 +1,98 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T01:28:19+07:00",
+  "updated_at": "2026-09-17T04:35:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [],
   "sessions": [
+    {
+      "session_id": "SESSION-20260917-038",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg015_engine_reviewer",
+      "task_ids": [
+        "SG-015"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-038.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-037",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg018_eval_reviewer",
+      "task_ids": [
+        "SG-018"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-037.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-036",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg015_core_curator",
+      "task_ids": [
+        "SG-015"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-036.md",
+      "status": "completed",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "data/manifests/openalex_core.json",
+        "data/processed/openalex/",
+        "data/raw/openalex_core/",
+        "artifacts/reports/openalex_quality.json",
+        "artifacts/reports/graph_feasibility_core.json",
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex_core.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-035",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg018_engine_worker",
+      "task_ids": [
+        "SG-018"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-035.md",
+      "status": "completed",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/retrieval/tfidf.py",
+        "tests/unit/test_lexical.py",
+        "artifacts/reports/lexical_dev.md",
+        "artifacts/reports/lexical_dev.json"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-034",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-018",
+        "SG-015"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-034.md",
+      "status": "completed",
+      "role": "coordinator_orchestrator"
+    },
     {
       "session_id": "SESSION-20260916-033",
       "chat_id": "V",

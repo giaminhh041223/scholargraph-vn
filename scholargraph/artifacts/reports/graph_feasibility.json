@@ -245,7 +245,7 @@
     ]
   },
   "known_limitations": [
-    "The audited snapshot is a 2,000-work seeded topic sample; its sparsity is measured evidence for this snapshot only and is not an estimate for any other sampling strategy.",
+    "The audited snapshot is a 2000-work sample from the pinned manifest sampling plan; its sparsity is measured evidence for this snapshot only and is not an estimate for any other sampling strategy.",
     "OpenAlex referenced_works contains only references OpenAlex successfully matched to another work.",
     "The novel-candidate universe is a pre-split conservative lower bound (all valid-year works with year <= source year, minus self, minus all internal references of the source).",
     "BEIR reference-field findings are structural only; no qrels, queries, or relevance labels were read by this module."
@@ -288,7 +288,7 @@
       }
     }
   },
-  "measured_at": "2026-09-16T18:22:44.134566+00:00",
+  "measured_at": "2026-09-17T00:14:16.990957+00:00",
   "module": {
     "id": "sg014-graph-feasibility",
     "version": "1.0.0"
