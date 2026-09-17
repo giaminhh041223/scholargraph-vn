@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T23:35:00+07:00",
+  "updated_at": "2026-09-17T23:55:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -985,7 +985,7 @@
       "title": "Query Việt và annotation guide",
       "phase": "M5",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R/H",
       "owner": "bn/orchestrator_C (draft prepared; human gate pending)",
       "session_id": "SESSION-20260917-053",
@@ -1005,7 +1005,8 @@
         "2026-09-17T23:35+07:00: draft manifest 30 queries (10 dev / 20 test; 5 dev pilot) per Protocol v1 counts; intent families wholly assigned to one split (no paraphrase overlap); query texts drafted from topic taxonomy, not from qrels docs; duplicate-text check in tests.",
         "2026-09-17T23:35+07:00: pytest tests/unit/test_vn_queries.py 6/6 PASS.",
         "2026-09-17: docs/ANNOTATION_GUIDE.md rubric 0/1/2 with worked examples, unjudged rule, 2-annotator kappa workflow per protocol pool/labels config.",
-        "PENDING HUMAN GATE (routing human_approval_required=true; card assigns query writing to the two members): project owner must review/edit the draft queries, then approval recorded in manifest provenance.human_approval before SG-032/SG-033 consume."
+        "PENDING HUMAN GATE (routing human_approval_required=true; card assigns query writing to the two members): project owner must review/edit the draft queries, then approval recorded in manifest provenance.human_approval before SG-032/SG-033 consume.",
+        "2026-09-17T23:55:00+07:00: human approval gate satisfied — project owner approved all 30 queries without edits via in-session question tool ('Duyệt nguyên bản 30 query'); manifest status updated to approved_no_edits with approval recorded in provenance.human_approval. SG-032/SG-033 may consume."
       ],
       "claimed_paths": [],
       "note": ""

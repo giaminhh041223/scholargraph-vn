@@ -3,7 +3,7 @@
   "artifact_kind": "vn_query_manifest",
   "task_id": "SG-031",
   "created_at": "2026-09-17T23:25:00+07:00",
-  "status": "draft_pending_human_approval",
+  "status": "approved_no_edits",
   "protocol_reference": {
     "query_counts": {
       "dev": 10,
@@ -21,7 +21,13 @@
   "provenance": {
     "drafted_by": "bn/orchestrator_C (session SESSION-20260917-053) per MASTER DIRECTIVE",
     "method": "Topic taxonomy drafted from general scientific knowledge mapped to SciFact (biomed) and SCIDOCS (scientometrics) domains; NOT derived from any qrels entry or corpus document; each intent family is assigned wholly to one split (no paraphrase across splits).",
-    "human_approval": null,
+    "human_approval": {
+      "approver": "project owner (both members represented by single owner account)",
+      "decision": "Duyệt nguyên bản 30 query",
+      "method": "in-session question tool (AskUserQuestion), answer recorded verbatim",
+      "approved_at": "2026-09-17T23:55:00+07:00",
+      "edits": "none"
+    },
     "note": "Card SG-031 assigns query writing to the two human members; this manifest is an agent DRAFT for the human gate to edit/approve. Approval, edits and finalization must be recorded here before SG-032/SG-033 consume it."
   },
   "counts": {
