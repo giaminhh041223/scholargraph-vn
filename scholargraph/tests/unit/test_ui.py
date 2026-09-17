@@ -102,8 +102,9 @@ def test_recommend_excludes_self(client):
 
 
 def test_no_results_path_is_200_empty(client):
-    r = client.get("/search", params={"q": "zzqqxxyy nonexistent topic string", "method": "bm25", "top_k": 5})
+    # 'zxqvkjwx' tokenizes to a single token present in zero documents, so the
+    # positive-score BM25 ranking returns an empty list (same probe as ui_smoke.py).
+    r = client.get("/search", params={"q": "zxqvkjwx", "method": "bm25", "top_k": 5})
     assert r.status_code == 200
     body = r.json()
-    # 'nonexistent' tokenizes, so this may legitimately match nothing.
-    assert isinstance(body["results"], list)
+    assert body["results"] == []

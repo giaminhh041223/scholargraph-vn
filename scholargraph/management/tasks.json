@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T23:55:00+07:00",
+  "updated_at": "2026-09-18T01:05:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1109,7 +1109,7 @@
       "title": "UI search/recommend",
       "phase": "M5",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S",
       "owner": "bn/orchestrator_C (completed work from interrupted session 052; takeover)",
       "session_id": "SESSION-20260917-053",
@@ -1133,7 +1133,9 @@
       "verification": [
         "2026-09-17 (session 052, interrupted): UI implemented over real API (TestClient); smoke list PASS (index 200, static offline no-CDN, search bm25/dense/hybrid, detail, related, no-results, error state, missing-metadata wording); 5-query self-check recorded (checker 1/2).",
         "2026-09-17T23:05+07:00 (session 053 takeover): tests/unit/test_ui.py 9/9 PASS (128s) — template render, static offline, health counts 5183 + revision pin, real bm25 search fields, zero-token/top_k 400, paper null year/doi never fabricated, 404 unknown, recommend self-exclusion, no-results 200.",
-        "2026-09-17T23:10+07:00: checker 2/2 independent re-run of the 5 queries — identical top-1 IDs and scores to checker 1/2 (deterministic backends); paper+recommend OK, self excluded. Two-member human verification of the 5 queries remains for the project owner at closeout (card acceptance)."
+        "2026-09-17T23:10+07:00: checker 2/2 independent re-run of the 5 queries — identical top-1 IDs and scores to checker 1/2 (deterministic backends); paper+recommend OK, self excluded. Two-member human verification of the 5 queries remains for the project owner at closeout (card acceptance).",
+        "2026-09-18T00:55+07:00: fresh-context reviewer bn/sg036_ui_reviewer PASS (management/reviews/SG-036-REVIEW-20260917.md), no P0/P1: 3/5 query re-runs matched report byte-level, no hard-coded results, no XSS vector (innerHTML only clears containers), test_ui 9/9, checker PASS.",
+        "2026-09-18T01:05+07:00: P2-1 fixed (service._paper title-missing semantics annotated per ADR-013), P2-2 fixed (no-results test asserts empty list with the ui_smoke probe 'zxqvkjwx'); test_ui re-run 9/9 PASS (78.47s). P2-3: two-member human verification of the 5 UI queries queued for project owner at final closeout. P2-4 info noted."
       ],
       "claimed_paths": [],
       "note": ""

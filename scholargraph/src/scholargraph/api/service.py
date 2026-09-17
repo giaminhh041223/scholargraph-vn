@@ -78,7 +78,10 @@ class SearchService:
     def _paper(self, doc_id: str) -> dict[str, Any]:
         if doc_id not in self._texts:
             raise ServiceError(f"Unknown document: {doc_id}")
-        title, text = self._titles.get(doc_id, ""), self._texts[doc_id]
+        # A missing title is recorded missing data (rendered downstream as null,
+        # never a fabricated value); doc_id presence is enforced via _texts above.
+        title = self._titles.get(doc_id, "")
+        text = self._texts[doc_id]
         abstract = text[len(title) + 1:] if title and text.startswith(title + " ") else text
         return {"doc_id": doc_id, "title": title or None,
                 "abstract": abstract or None, "year": None, "doi": None,
