@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T10:42:23+07:00",
+  "updated_at": "2026-09-17T22:29:57+07:00",
   "mode": "advisory_not_runtime_configuration",
   "strategy": "balanced_quality_first",
   "verified_on": "2026-09-15",
@@ -505,6 +505,15 @@
       "review_mode": "fresh_context_required",
       "human_approval_required": true,
       "rationale": "Thêm benchmark chỉ khi còn thời gian và được mở scope."
+    },
+    {
+      "task_id": "SG-050",
+      "primary_profile": "T_H",
+      "chat_id": "M",
+      "review_profile": "S_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Resume sharded encoding theo manifest đã pin; xác nhận checksum/ID alignment."
     }
   ]
 }

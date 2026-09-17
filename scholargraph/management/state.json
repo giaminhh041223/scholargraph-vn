@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T04:35:00+07:00",
-  "phase": "M2",
-  "stage": "sg018_sg015_done_graph_gate_go",
-  "active_tasks": [],
-  "next_task_id": "SG-016",
-  "last_session_id": "SESSION-20260917-034",
-  "last_session_log": "management/logs/SESSION-20260917-034.md",
+  "updated_at": "2026-09-17T22:29:57+07:00",
+  "phase": "M3",
+  "stage": "takeover_sg019_reopened_encoding_in_progress",
+  "active_tasks": [
+    "SG-050",
+    "SG-026",
+    "SG-036"
+  ],
+  "next_task_id": "SG-036",
+  "last_session_id": "SESSION-20260917-053",
+  "last_session_log": "management/logs/SESSION-20260917-053.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -53,7 +57,7 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-17T04:35:00+07:00",
+    "checked_at": "2026-09-17T14:00:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
     "task_count": 50,
@@ -61,6 +65,6 @@
     "model_routes_checked": 50,
     "logical_chat_lanes": 7,
     "registered_sessions": 46,
-    "scope": "Orchestrator loop-2: SG-018 (TF-IDF vs BM25 same inputs, byte-identical rerun) and SG-015 (18.251-work citation-connected core, gate GO) implemented by subagent workers, fresh-context reviews PASS (no P0/P1), P2-1 fixed; pytest 388/388. Next SG-016 (unblocked; deps SG-014+SG-015 DONE), SG-019 also unblocked."
+    "scope": "SG-016 DONE (fresh PASS + human approval in-session). SG-019 DONE. Next SG-020/SG-031 unblocked, SG-022 unblocked."
   }
 }

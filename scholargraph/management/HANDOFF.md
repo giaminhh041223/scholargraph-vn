@@ -1,6 +1,48 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-016
+NEXT_TASK: SG-036
+
+## SG-035 DONE, SG-036 + SG-026 song song — 2026-09-17T19:40:00+07:00
+
+- **SG-035 DONE**: API 4 routes trên data thật, 9/9 tests, fresh PASS (debt → SG-036/039).
+- **SG-036 IN_PROGRESS** (UI, lane P). **SG-026 IN_PROGRESS** (lane R: A xong, B chờ encode OpenAlex resume + human).
+
+## SG-025 DONE (2 vòng review), SG-026 đang làm — 2026-09-17T17:30:00+07:00
+
+- **SG-025 DONE**: rerank RRF+graph+age trên C100 cố định, 18/18 tests, v2 PASS.
+- **SG-026 IN_PROGRESS** (dev tuning có budget, cần human approval khi xong).
+
+## SG-024 DONE (human duyệt), SG-025 đang làm — 2026-09-17T16:45:00+07:00
+
+- **SG-024 DONE**: 14/14 tests, 2 vòng review, human approval in-session.
+- **SG-025 IN_PROGRESS** (reranking integration, deps SG-020+023+024 DONE).
+
+## SG-023 DONE, SG-024 đang làm — 2026-09-17T16:00:00+07:00
+
+- **SG-023 DONE** sau 2 vòng review (P1 inf + 6 P2 đã sửa, v1.1.0, 16/16 tests).
+- **SG-024 IN_PROGRESS** (age adjustment, cần human approval khi xong).
+
+## SG-022 DONE, tiếp SG-023 — 2026-09-17T15:30:00+07:00
+
+- **SG-022 DONE** sau 2 vòng review: PageRank global + coupling trên masked graph thật (18251/26186, iters 71, mass 1.0).
+- **Tiếp theo:** `SG-023` (PPR, deps SG-021+SG-022 DONE → unblocked). `SG-031` vẫn unblocked song song (cần human viết query).
+
+## SG-021 DONE, tiếp SG-031/SG-022 — 2026-09-17T15:00:00+07:00
+
+- **SG-021 DONE** sau 2 vòng review (v1 FAIL 2 P1 → sửa → v2 PASS): audit thật 809 queries BM25 0.9102/TF-IDF 0.9124 bit-exact, union full 0.9180, dense null chua_do, 10 examples + 6 rescued, provenance inputs+sha.
+- **Tiếp theo:** `SG-031` (VN queries, deps SG-011+SG-015 DONE) và `SG-022` (graph baselines, deps SG-016 DONE).
+
+## SG-020 DONE, tiếp SG-021/SG-031 — 2026-09-17T14:20:00+07:00
+
+- **SG-020 DONE**: Hybrid RRF k=60, 15/15 tests, fresh review PASS không P0/P1.
+- **Tiếp theo khả thi:** `SG-021` (deps SG-020 DONE), `SG-031` (deps SG-011+SG-015 DONE), `SG-022` (deps SG-016 DONE).
+
+## Closeout SG-016 REVIEW + SG-019 DONE, mở SG-020 — 2026-09-17T13:40:00+07:00
+
+- **SG-019 DONE** (worker `bn/sg019_dense_encoder`): dense bge-base-en-v1.5 @a5beb1e3, 61/61 tests PASS, scifact 5183/5183 COMPLETED 6 shards, embeddings (5183,768) L2, index COMPLETED, verify 6/6 PASS, `artifacts/reports/encoding_profile.json` đã sinh (totals khớp), CLI fail-loud exit 1. Review fresh-context PASS không P0/P1 (2 P2 info). Không cần human gate.
+- **SG-016 REVIEW** (worker `bn/sg016_graph_builder`): build directed + holdout + mask 2 chiều đúng protocol, 38/38 tests PASS, premask 26516/postmask 26186/mask 660/heldout 330/queries test200+dev100, audit 15/15 PASS, residual 2 chiều 0/0, raw không đổi. Review fresh-context PASS không P0/P1 (3 P2 notes). Còn chờ **human approval** theo routing trước DONE.
+- Board: SG-019 DONE, SG-016 REVIEW (evidence/verification đã điền), state next SG-020, active [SG-016] (chờ human). Registry: 041 completed, 040 checkpoint, +2 review sessions.
+- **Tiếp theo khả thi:** `SG-020` (deps SG-018+SG-019 DONE → unblocked), `SG-031` (deps SG-011+SG-015 DONE → unblocked). `SG-022` vẫn blocked đến khi SG-016 DONE (cần human duyệt).
 
 ## Orchestrator loop-2: SG-018 + SG-015 DONE, graph gate GO — 2026-09-17T04:35:00+07:00
 

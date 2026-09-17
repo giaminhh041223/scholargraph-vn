@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "config_id": "age-adjustment-v1",
+  "task_id": "SG-024",
+  "created_at": "2026-09-17T16:10:00+07:00",
+  "status": "formula_confirmed_selection_deferred_to_sg026",
+  "formula": "F_age(d) = F(d) * exp(-lambda * max(0, year(u) - year(d)))",
+  "lambda_grid": [0.0, 0.01, 0.03, 0.05, 0.1],
+  "reference_time": "source_publication_year_not_machine_clock",
+  "year_bounds": {"min": 1900, "max": 2100, "pinned_in": "src/scholargraph/graph/age_adjustment.py YEAR_MIN/YEAR_MAX"},
+  "caller_contract": "caller pre-filters universe to year<=year(u); future docs keep weight 1.0 per spec if passed",
+  "exposure_reporting": "RQ3 reporting MUST use rank-discounted exposure_b@10 per protocol 6.3 (exposure_at_10); mass-share exposure_by_gap is SG-024 analysis only",
+  "missing_year_policy": "excluded_from_line_B_never_imputed",
+  "future_doc_policy": "weight_1.0_no_boost_no_penalty",
+  "scope_note": "Post-fusion freshness adaptation only; not CiteRank/time-balanced centrality; no fairness or debiasing claim from exposure shifts."
+}

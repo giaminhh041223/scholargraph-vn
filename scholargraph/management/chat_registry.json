@@ -1,11 +1,99 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-17T04:35:00+07:00",
+  "updated_at": "2026-09-17T23:15:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "SG-050",
+      "session_id": "SESSION-20260917-053",
+      "chat_id": "C"
+    },
+    {
+      "task_id": "SG-026",
+      "session_id": "SESSION-20260917-053",
+      "chat_id": "C"
+    },
+    {
+      "task_id": "SG-036",
+      "session_id": "SESSION-20260917-053",
+      "chat_id": "C"
+    }
+  ],
   "sessions": [
+    {
+      "session_id": "SESSION-20260917-055",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg036_ui_reviewer",
+      "task_ids": [
+        "SG-036"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-055.md",
+      "status": "active",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-053",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-050",
+        "SG-026",
+        "SG-036"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-053.md",
+      "status": "active",
+      "role": "coordinator_takeover_and_worker"
+    },
+    {
+      "session_id": "SESSION-20260917-041",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg019_dense_encoder",
+      "task_ids": [
+        "SG-019"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-041.md",
+      "status": "completed",
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260917-040",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "bn/sg016_graph_builder",
+      "task_ids": [
+        "SG-016"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-040.md",
+      "status": "completed",
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260917-039",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-016",
+        "SG-019"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-039.md",
+      "status": "completed",
+      "role": "coordinator_orchestrator"
+    },
     {
       "session_id": "SESSION-20260917-038",
       "chat_id": "V",
@@ -728,6 +816,192 @@
       "status": "completed",
       "role": "fresh_context_reviewer",
       "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-042-REVIEW-SG016",
+      "chat_id": "V",
+      "agent_task_name": "fresh_reviewer_sg016",
+      "task_ids": [
+        "SG-016"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/reviews/SG-016-REVIEW-20260917.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-043-REVIEW-SG019",
+      "chat_id": "V",
+      "agent_task_name": "fresh_reviewer_sg019",
+      "task_ids": [
+        "SG-019"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/reviews/SG-019-REVIEW-20260917.md",
+      "status": "completed",
+      "role": "fresh_context_reviewer",
+      "claimed_paths": []
+    },
+    {
+      "session_id": "SESSION-20260917-044",
+      "chat_id": "M",
+      "agent_task_name": "sg020_hybrid_worker",
+      "task_ids": [
+        "SG-020"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-044.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/retrieval/hybrid.py",
+        "configs/hybrid.json",
+        "tests/unit/test_rrf.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-045",
+      "chat_id": "R",
+      "agent_task_name": "sg021_candidate_worker",
+      "task_ids": [
+        "SG-021"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-045.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/retrieval/candidates.py",
+        "configs/candidate_policy.json",
+        "tests/unit/test_candidates.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-046",
+      "chat_id": "D",
+      "agent_task_name": "sg022_graph_worker",
+      "task_ids": [
+        "SG-022"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-046.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/graph/baselines.py",
+        "tests/unit/test_graph_baselines.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-047",
+      "chat_id": "M",
+      "agent_task_name": "sg023_ppr_worker",
+      "task_ids": [
+        "SG-023"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-047.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/graph/ppr.py",
+        "configs/ppr.json",
+        "tests/unit/test_ppr_reference.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-048",
+      "chat_id": "R",
+      "agent_task_name": "sg024_age_worker",
+      "task_ids": [
+        "SG-024"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-048.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/graph/age_adjustment.py",
+        "configs/age_adjustment.json",
+        "docs/AGE_ANALYSIS.md"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-049",
+      "chat_id": "M",
+      "agent_task_name": "sg025_rerank_worker",
+      "task_ids": [
+        "SG-025"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-049.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/retrieval/rerank.py",
+        "tests/integration/test_reranking.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-050",
+      "chat_id": "R",
+      "agent_task_name": "sg026_tuning_worker",
+      "task_ids": [
+        "SG-026"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-050.md",
+      "status": "interrupted",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "configs/tuning_space.json",
+        "artifacts/reports/dev_selection.md"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-051",
+      "chat_id": "P",
+      "agent_task_name": "sg035_api_worker",
+      "task_ids": [
+        "SG-035"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-051.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "src/scholargraph/api/service.py",
+        "src/scholargraph/api/app.py",
+        "tests/integration/test_api.py"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260917-052",
+      "chat_id": "P",
+      "agent_task_name": "sg036_ui_worker",
+      "task_ids": [
+        "SG-036"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260917-052.md",
+      "status": "interrupted",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "ui/",
+        "artifacts/reports/ui_smoke.md"
+      ]
     }
   ],
   "lanes": [

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-024",
+  "module_version": "sg024-1.0.0",
+  "command": [
+    "scripts/age_exposure_audit.py"
+  ],
+  "generated_at": "2026-09-17T07:40:14.345975+00:00",
+  "inputs": {
+    "works": {
+      "path": "data/processed/openalex/works.jsonl",
+      "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+    },
+    "split": {
+      "path": "data/processed/graph/split_queries.json",
+      "sha256": "5b61de56e5008b77999ee6cbd4ec9bc573d24afd82175ceedaed11f115d5b3b7"
+    }
+  },
+  "universe": {
+    "works": 18251,
+    "valid_year": 18226,
+    "missing_year": 22,
+    "out_of_range_year": 3,
+    "queries": 300,
+    "pairs": 5133600
+  },
+  "method": "uniform fused=1.0 isolates the age-weight effect; NOT a relevance measurement",
+  "lambda_grid": [
+    0.0,
+    0.01,
+    0.03,
+    0.05,
+    0.1
+  ],
+  "exposure": {
+    "0.0": {
+      "top10_0-2y": 0.1,
+      "top10_3-5y": 0.2,
+      "top10_6-10y": 0.0,
+      "top10_gt10y": 0.7,
+      "exposure_b_at_10_mean": {
+        "0-2y": 0.06749441069083588,
+        "3-5y": 0.15245634059013935,
+        "6-10y": 0.0,
+        ">=11y": 0.7800492487190323
+      }
+    },
+    "0.01": {
+      "top10_0-2y": 1.0,
+      "top10_3-5y": 0.0,
+      "top10_6-10y": 0.0,
+      "top10_gt10y": 0.0,
+      "exposure_b_at_10_mean": {
+        "0-2y": 1.0000000000000122,
+        "3-5y": 0.0,
+        "6-10y": 0.0,
+        ">=11y": 0.0
+      }
+    },
+    "0.03": {
+      "top10_0-2y": 1.0,
+      "top10_3-5y": 0.0,
+      "top10_6-10y": 0.0,
+      "top10_gt10y": 0.0,
+      "exposure_b_at_10_mean": {
+        "0-2y": 1.0000000000000122,
+        "3-5y": 0.0,
+        "6-10y": 0.0,
+        ">=11y": 0.0
+      }
+    },
+    "0.05": {
+      "top10_0-2y": 1.0,
+      "top10_3-5y": 0.0,
+      "top10_6-10y": 0.0,
+      "top10_gt10y": 0.0,
+      "exposure_b_at_10_mean": {
+        "0-2y": 1.0000000000000122,
+        "3-5y": 0.0,
+        "6-10y": 0.0,
+        ">=11y": 0.0
+      }
+    },
+    "0.1": {
+      "top10_0-2y": 1.0,
+      "top10_3-5y": 0.0,
+      "top10_6-10y": 0.0,
+      "top10_gt10y": 0.0,
+      "exposure_b_at_10_mean": {
+        "0-2y": 1.0000000000000122,
+        "3-5y": 0.0,
+        "6-10y": 0.0,
+        ">=11y": 0.0
+      }
+    }
+  }
+}

@@ -170,3 +170,22 @@ Thay thế ADR nào (nếu có):
 **Hệ quả:** Tuyến B chưa thể tạo masked split trên dữ liệu hiện có; không hạ floor, không thay nhãn, không tự đổi protocol sau khi xem kết quả. SG-015 giữ dependency `SG-013, SG-014` nhưng phạm vi được điều chỉnh như mục 7; SG-016 chỉ bắt đầu sau gate GO trên snapshot core. BEIR enrichment bị loại vĩnh viễn khỏi Tuyến B trừ khi có ADR mới với evidence mapping/leakage riêng. Tuyến A và Tuyến C không bị ảnh hưởng; Tuyến C vẫn tiếp tục khi có snapshot text hợp lệ theo Protocol v1 §7.
 
 **Thay thế ADR nào (nếu có):** không thay thế; chuyên mục hóa và bổ sung chi tiết thi hành cho ADR-003/ADR-012 (quyết định graph protocol và go/no-go trước đó giao cho SG-014).
+
+## ADR-017 — 2026-09-17T22:29:57+07:00 — Works không text bị loại khỏi dense universe (đề xuất, chờ human duyệt)
+
+**Trạng thái:** proposed; người phụ trách duyệt mới có hiệu lực (ảnh hưởng protocol-adjacent policy + chạm phạm vi SG-019 đã DONE).
+**Task liên quan:** SG-026 (B trials), SG-019 (follow-up additive).
+**Bối cảnh:** `dense encode --corpus openalex_core` FAIL đúng thiết kế tại work `openalex:W126924136` (dòng 29): không title lẫn abstract. Rà toàn snapshot: chỉ **1 work** textless (6 works thiếu title còn lại vẫn có abstract_inverted_index). Policy `missing_embedding=fail_not_drop_document` cấm drop ngầm.
+**Các lựa chọn:** (a) giữ FAIL — B-track dense vĩnh viễn không chạy được; (b) encode chuỗi rỗng — vi phạm L2/cosine và policy; (c) loại tường minh 7 works khỏi DENSE universe, giữ guard fail trong encoder (chọn).
+**Quyết định (đề xuất):** dense universe OpenAlex = 18.250 works có text; 1 work textless bị loại khỏi dense candidate universe với counts/ID ghi trong manifest + report (không im lặng); lexical vẫn phủ qua empty-string policy; encoder giữ nguyên fail-loud; thay đổi code cộng thêm (spec entry + subset builder + tests), không sửa hành vi hiện có; SG-019 mở lại review delta trước khi encode production.
+**Hệ quả:** B-dev trials chạy được sau khi human duyệt ADR này.
+
+
+## ADR-017 — 2026-09-17 — Mở lại SG-019 và chính sách loại tường minh cho work thiếu text
+
+**Trạng thái:** accepted; người dùng phê duyệt trực tiếp (chuyển quyền coordinator + duyệt mở lại SG-019).
+**Phạm vi:** SG-019 (đóng DONE trước đó chỉ phủ SciFact); encoding corpus OpenAlex; không đổi protocol hay raw data.
+**Bối cảnh:** Acceptance SG-019 yêu cầu encode theo từng corpus manifest, nhưng bản DONE trước chỉ có SciFact 5.183 docs. Encode OpenAlex bị chặn bởi `missing_embedding=fail_not_drop_document` tại work `openalex:W126924136` (thiếu cả title lẫn abstract). Session trước đã tạo text-subset `data/processed/openalex/works_text.jsonl` (18.250 = 18.251 − 1) kèm manifest `openalex_core_text.json` (counts: parent 18.251, text_works 18.250, excluded 1) và đề xuất ADR này; encode dừng ở 2/19 shards. SCIDOCS chưa encode.
+**Quyết định:** (1) Mở lại SG-019 về IN_PROGRESS; hoàn tất encode OpenAlex text-subset (19 shards) và SCIDOCS (26 shards; work thiếu abstract dùng title — combined text không rỗng, không vi phạm fail_not_drop_document), rồi review lại trước khi DONE mới. (2) Chính sách loại tường minh: work không có sự kết hợp title+abstract nào bị LOẠI KHỎI encoding corpus với exclusion list + count trong manifest (hiện 1/18.251); đây là recorded transformation theo ADR-013 — không phải silent drop; mọi consumer phải đọc exclusion từ manifest. (3) Không hạ điều kiện protocol `missing_embedding=fail_not_drop_document`.
+**Bằng chứng:** manifest `data/manifests/openalex_core_text.json` (fingerprint, counts); shard manifests namespace `openalex_core_text`; `data/processed/openalex/works.jsonl` sha256 `04e7008e...` bất biến.
+**Hệ quả:** Vector dense cho OpenAlex chỉ phủ 18.250/18.251 works; consumer (SG-020/023/025/026) phải đối chiếu exclusion khi mapping doc-ID. SG-026 phần B tiếp tục chờ encode đầy đủ như note đã ghi.

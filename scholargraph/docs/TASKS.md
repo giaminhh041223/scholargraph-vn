@@ -1392,3 +1392,29 @@ R = Research/Evaluation; D = Data/Graph; S = Search/System; H = hai người gá
 - Không proxy đánh giá VN.
 
 **Hai bạn cần hiểu:** Hiểu domain shift và số query ít.
+
+<a id="sg-050"></a>
+
+## SG-050 — Hoàn tất dense encoding OpenAlex text-subset + SCIDOCS
+
+- Mốc: M3; tuần: 3; ưu tiên: CORE.
+- Vai trò: S; dự trù: 2 giờ-người.
+- Phụ thuộc: SG-019.
+
+**Việc phải làm**
+
+1. Encode nốt OpenAlex text-subset (18.250 docs, namespace `openalex_core_text`, tiếp 2/19 shards đã pin).
+2. Encode SCIDOCS (25.657 docs; work thiếu abstract dùng title — combined không rỗng).
+3. Exact index + verify + profile cho đủ 3 corpus; exclusion 1 work tường minh theo ADR-017.
+
+**Đầu ra dự kiến**
+
+- `artifacts/indexes/` (openalex_core_text + scidocs)
+- `artifacts/reports/encoding_profile.json` (đủ 3 corpus)
+
+**Nghiệm thu**
+
+- Checksum/ID alignment từng shard; resume không trộn config.
+- Profile đo thật, GPU ghi not_measured_local.
+
+**Hai bạn cần hiểu:** Vector trả về thuộc work nào và exclusion ảnh hưởng mapping thế nào.

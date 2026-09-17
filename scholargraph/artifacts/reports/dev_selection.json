@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-026",
+  "split": "scifact_dev_809_queries",
+  "track_A_dev": {
+    "bm25_positive_idf": {
+      "metrics": {
+        "MAP@100": 0.6332855229671024,
+        "MRR@10": 0.6380030215629721,
+        "P@5": 0.15945611866501855,
+        "Recall@100": 0.9102389781623403,
+        "nDCG@10": 0.6701281168402777
+      },
+      "run": "RUN-20260916-163653-bm25-scifact-dev"
+    },
+    "tfidf_protocol": {
+      "metrics": {
+        "MAP@100": 0.6081059939291319,
+        "MRR@10": 0.6138996801852179,
+        "P@5": 0.1572311495673671,
+        "Recall@100": 0.9124021425628348,
+        "nDCG@10": 0.6508945723920592
+      },
+      "run": "RUN-20260916-191127-tfidf-scifact-dev"
+    },
+    "dense_bge-base-en-v1.5": {
+      "metrics": {
+        "nDCG@10": 0.770859858840113,
+        "Recall@100": 0.9723939019365472,
+        "MRR@10": 0.7378970706535601,
+        "MAP@100": 0.731216027661343,
+        "P@5": 0.18442521631644007
+      },
+      "report": "artifacts/reports/dense_dev_scifact.json"
+    },
+    "hybrid_rrf_k60": {
+      "metrics": {
+        "nDCG@10": 0.7435158461531806,
+        "Recall@100": 0.9701277297074579,
+        "MRR@10": 0.7139531461533933,
+        "MAP@100": 0.707125489555104,
+        "P@5": 0.18022249690976516
+      },
+      "report": "artifacts/reports/hybrid_dev_scifact.json"
+    }
+  },
+  "conclusion_A": "dense alone leads dev nDCG@10; hybrid_rrf does not beat dense alone (negative result recorded)",
+  "track_B_grid": {
+    "status": "chua_do_thieu_pipeline",
+    "trials": 0,
+    "space": "configs/tuning_space.json"
+  },
+  "track_C": {
+    "status": "cho_SG-031_032_033"
+  },
+  "test_use": "forbidden_for_selection"
+}

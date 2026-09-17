@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "encoding_profile",
+  "task_id": "SG-019",
+  "module_version": "sg019-1.0.0",
+  "generated_at": "2026-09-17T13:31:15+07:00",
+  "protocol": {
+    "similarity": "cosine",
+    "l2_normalize": true,
+    "missing_embedding": "fail_not_drop_document"
+  },
+  "encoder": {
+    "config_id": "dense-encoder-v1",
+    "config_path": "configs/models/dense_encoder.json",
+    "config_sha256": "b54c27e15e0ba23ce4da001af3e2f57ffb8bbffd761a0e5a6e477ea81e195fc0",
+    "config_hash": "7b854f6c2d4bbd71cc2522195cb7e4842779f87c0561d75d1e0267b2e021d8fd",
+    "model_id": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "tokenizer_revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "pooling": "cls",
+    "embedding_dimension": 768,
+    "max_length": 512,
+    "prefix": "Represent this sentence for searching relevant passages: ",
+    "prefix_scope": "query_only",
+    "license": "MIT"
+  },
+  "model_snapshot": {
+    "snapshot_path": "D:\\Web_mining_20261\\bn\\scholargraph\\artifacts\\cache\\models--BAAI--bge-base-en-v1.5\\snapshots\\a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "snapshot_commit": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "weights_file": "model.safetensors",
+    "tokenizer_files_present": [
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "vocab.txt",
+      "special_tokens_map.json"
+    ],
+    "files_sha256": {
+      "config.json": "bc00af31a4a31b74040d73370aa83b62da34c90b75eb77bfa7db039d90abd591",
+      "model.safetensors": "c7c1988aae201f80cf91a5dbbd5866409503b89dcaba877ca6dba7dd0a5167d7",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "sentence_bert_config.json": "84e39fda68ccbff05bfa723ae9c0e70e23e2ec373b76e0f8c6e71af72a693cbf",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "remote_api_sha_verification": "match",
+    "remote_api_sha": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "verified_at": "2026-09-17T12:26:13+07:00"
+  },
+  "environment": {
+    "device": "cpu",
+    "python_version": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy_version": "2.3.5",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "5.17.0",
+    "gpu": "not_measured_local",
+    "gpu_note": "This machine has no CUDA-capable PyTorch build; VRAM was not measured and no GPU number is fabricated."
+  },
+  "order_policy": "Documents sorted by canonical ID ascending; shards are contiguous slices of shard_size; row order in every .npy equals the manifest doc_ids order; the exact index concatenates shards in that order.",
+  "corpora": {
+    "scifact": {
+      "namespace": "bge-base-en-v1.5__a5beb1e3",
+      "status": "COMPLETED",
+      "resume_point": null,
+      "expected_documents": 5183,
+      "encoded_documents": 5183,
+      "shards": {
+        "size": 1000,
+        "total": 6,
+        "completed": 6,
+        "skipped_resume_verified": 4,
+        "reencoded_orphans": 0,
+        "checksums_verified": 6
+      },
+      "throughput": {
+        "encode_seconds_total_this_run": 978.116948,
+        "model_load_seconds": null,
+        "docs_per_second_this_run": 1.2095
+      },
+      "batch_size": 16,
+      "ram": {
+        "peak_rss_bytes": 1196711936,
+        "measurement": "process peak working set (Windows psapi) or ru_maxrss"
+      },
+      "device": "cpu",
+      "gpu": "not_measured_local",
+      "truncation": {
+        "max_length": 512,
+        "documents_measured": 5183,
+        "documents_over_limit": 455,
+        "truncation_rate": 0.087787,
+        "token_length": {
+          "min": 70,
+          "mean": 337.194,
+          "p50": 316,
+          "p95": 567,
+          "p99": 760,
+          "max": 1939
+        },
+        "measurement_seconds": 1.7943
+      },
+      "corpus": {
+        "source_path": "D:\\Web_mining_20261\\bn\\scholargraph\\data\\raw\\beir\\scifact\\corpus.jsonl",
+        "source_sha256": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+        "manifest_path": "D:\\Web_mining_20261\\bn\\scholargraph\\data\\manifests\\beir_scifact.json",
+        "expected_count_manifest": 5183,
+        "missing_title_count": 0,
+        "missing_abstract_count": 0
+      },
+      "runs": [
+        {
+          "finished_at": "2026-09-17T12:36:27+07:00",
+          "encoded_shards": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "skipped_completed_shards": 2,
+          "reencoded_orphan_shards": 0
+        },
+        {
+          "finished_at": "2026-09-17T12:43:25+07:00",
+          "encoded_shards": [
+            4,
+            5
+          ],
+          "skipped_completed_shards": 4,
+          "reencoded_orphan_shards": 0
+        }
+      ],
+      "index": {
+        "path": "D:/Web_mining_20261/bn/scholargraph/artifacts/indexes/scifact/bge-base-en-v1.5__a5beb1e3/embeddings.npy",
+        "sha256": "67d2e184e949f5a7a11e0a482e5cee642bc093c74e5ee3300cb7ea9b8df5d9fa",
+        "doc_ids_sha256": "0b68ef50b41d2c94c31c4e82c9c23e294edeec25f8e723f53b5545153adab0de",
+        "doc_count": 5183,
+        "ann_used": false
+      }
+    }
+  },
+  "totals": {
+    "documents_expected": 5183,
+    "documents_encoded": 5183,
+    "shards_total": 6,
+    "shards_completed": 6,
+    "encode_seconds_total": 978.116948
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "artifact_type": "graph_masked_split_audit",
+  "beir_labels_used": false,
+  "checks": [
+    {
+      "check_id": "input_provenance",
+      "decision": "PASS",
+      "measured": {
+        "gate_decision": "GO",
+        "snapshot_id": "openalex-core-03b28664fca6",
+        "snapshot_year": 2026,
+        "works_sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+      },
+      "requirement": "works.jsonl sha256 matches the snapshot manifest and the gate report",
+      "source": "ADR-016; docs/GRAPH_PROTOCOL.md §5"
+    },
+    {
+      "check_id": "artifact_hashes_match_manifest",
+      "decision": "PASS",
+      "measured": {
+        "adjacency_masked": true,
+        "adjacency_premask": true,
+        "features_cutoff_degree": true,
+        "features_degree_masked": true,
+        "holdout_edges": true,
+        "mask_edges": true,
+        "split_queries": true
+      },
+      "requirement": "every artifact hash/byte count recorded in the graph manifest matches the file on disk",
+      "source": "docs/GRAPH_PROTOCOL.md §4.5/§6"
+    },
+    {
+      "check_id": "premask_adjacency_replay",
+      "decision": "PASS",
+      "measured": {
+        "endpoints_in_snapshot": true,
+        "recount_edges": 26516,
+        "self_loops": 0,
+        "sorted_canonical": true,
+        "stored_edges": 26516,
+        "stored_lines": 26516
+      },
+      "requirement": "stored pre-mask adjacency equals the independent recount from works.jsonl (unique, sorted, in-snapshot endpoints, no self-loops)",
+      "source": "docs/GRAPH_PROTOCOL.md §1"
+    },
+    {
+      "check_id": "holdout_split_replay",
+      "decision": "PASS",
+      "measured": {
+        "all_sources_match_formula": true,
+        "recount_holdout_edges": 330,
+        "selected_queries_checked": 300,
+        "split_payload_identical": true,
+        "stored_holdout_edges": 330
+      },
+      "requirement": "stored holdout edges and split payload equal the deterministic replay from works.jsonl + protocol seed (per-query h = min(R-1, max(1, ceil(0.2R))), H ∪ O = R(u), H ∩ O = ∅)",
+      "source": "docs/GRAPH_PROTOCOL.md §2; configs/protocol_v1.json tracks.B.split"
+    },
+    {
+      "check_id": "mask_edges_replay",
+      "decision": "PASS",
+      "measured": {
+        "expected_mask_edges": 660,
+        "holdout_edges": 330,
+        "stored_mask_edges": 660
+      },
+      "requirement": "stored mask equals H_dev ∪ H_test ∪ reverse counterparts exactly",
+      "source": "docs/GRAPH_PROTOCOL.md §4.1 (mask_scope)"
+    },
+    {
+      "check_id": "two_way_heldout_residual",
+      "decision": "PASS",
+      "measured": {
+        "examples_reverse_direction": [],
+        "examples_same_direction": [],
+        "residual_reverse_direction": 0,
+        "residual_same_direction": 0
+      },
+      "requirement": "no held-out edge and no reverse counterpart survives in G_mask in EITHER direction (PPR transmits along Pᵀ, so one direction is not enough)",
+      "source": "docs/GRAPH_PROTOCOL.md §4.2/§4.5"
+    },
+    {
+      "check_id": "masked_adjacency_set_identity",
+      "decision": "PASS",
+      "measured": {
+        "masked_edges": 26186,
+        "premask_edges": 26516,
+        "removed_edges": 330,
+        "removed_subset_of_mask": true,
+        "self_loop_residue": 0,
+        "sorted_canonical": true
+      },
+      "requirement": "G_mask equals E_pre \\ M exactly (no other edge removed, none added), stored canonically sorted, zero self-loops",
+      "source": "docs/GRAPH_PROTOCOL.md §4.2"
+    },
+    {
+      "check_id": "edge_accounting",
+      "decision": "PASS",
+      "measured": {
+        "difference": 330,
+        "postmask_edges": 26186,
+        "premask_edges": 26516,
+        "removed_edges": 330
+      },
+      "requirement": "|E_pre| - |E_mask| equals the number of edges removed by the mask, 1:1",
+      "source": "SG-016 acceptance: counts khớp 1:1"
+    },
+    {
+      "check_id": "reciprocal_pair_accounting",
+      "decision": "PASS",
+      "measured": {
+        "heldout_edges_whose_reverse_is_an_internal_edge": 0,
+        "pair_count_identity": true,
+        "reciprocal_pairs_postmask": 23,
+        "reciprocal_pairs_premask": 23,
+        "reciprocal_pairs_with_heldout_direction": 0,
+        "remaining_pairs_free_of_mask": true
+      },
+      "requirement": "every remaining reciprocal pair has no direction inside the mask, and the post-mask pair count equals pre-mask pairs minus heldout-affected pairs (GRAPH_PROTOCOL §1.3 keeps non-heldout reciprocal edges; heldout ones are masked both ways)",
+      "source": "docs/GRAPH_PROTOCOL.md §1.3/§4; SESSION-20260917-039 special instruction"
+    },
+    {
+      "check_id": "manifest_counts_consistent",
+      "decision": "PASS",
+      "measured": {
+        "fields_checked": 29,
+        "mismatches": {}
+      },
+      "requirement": "every count in the graph manifest equals the independent recount from works.jsonl + stored artifacts (1:1 narrative contract)",
+      "source": "ADR-013 §3 (narrative 1:1 với biến đếm)"
+    },
+    {
+      "check_id": "degree_features_recomputed_from_masked",
+      "decision": "PASS",
+      "measured": {
+        "in_degree_match": true,
+        "masked_edge_count": 26186,
+        "out_degree_match": true,
+        "premask_minus_mask_incidence_identity": true,
+        "sum_in_degree": 26186,
+        "sum_out_degree": 26186
+      },
+      "requirement": "stored degree features equal a recount from adjacency_masked.tsv (not from the pre-mask graph), sums equal |E_mask|, and each masked degree equals the pre-mask degree minus the masked-edge incidence",
+      "source": "docs/GRAPH_PROTOCOL.md §4.3/§4.4 (recompute_after_masking)"
+    },
+    {
+      "check_id": "cutoff_features_recomputed_from_masked",
+      "decision": "PASS",
+      "measured": {
+        "expected_lines": 300,
+        "identical": true,
+        "mismatches": [],
+        "stored_lines": 300
+      },
+      "requirement": "per-query cutoff features equal a recount of the year<=year(u) induced subgraph of G_mask (test cohort first, selection order); truncated graphs never exceed G_mask",
+      "source": "docs/GRAPH_PROTOCOL.md §3.2/§4.3"
+    },
+    {
+      "check_id": "cohort_floors_and_caps",
+      "decision": "PASS",
+      "measured": {
+        "caps": {
+          "maximum_dev_queries": 100,
+          "maximum_test_queries": 200
+        },
+        "dev_year": 2024,
+        "eligible_sources_by_cohort": {
+          "dev": 563,
+          "test": 579
+        },
+        "minimum_dev_queries": 30,
+        "minimum_eligible_references": 2,
+        "minimum_novel_candidates_per_query": 100,
+        "minimum_test_queries": 50,
+        "novel_candidates_min_selected": {
+          "dev": 15357,
+          "test": 17962
+        },
+        "selected_queries": {
+          "dev": 100,
+          "test": 200
+        },
+        "test_year": 2025
+      },
+      "requirement": "cohort sizes, selected query counts and per-query novel candidates meet the pinned Protocol v1 floors (50 test / 30 dev / 2 refs / 100 candidates) and caps",
+      "source": "configs/protocol_v1.json tracks.B.graph_gate (ADR-016: floors unchanged)"
+    },
+    {
+      "check_id": "query_selection_determinism",
+      "decision": "PASS",
+      "measured": {
+        "deterministic_order": true,
+        "seed": 20260915
+      },
+      "requirement": "selected query IDs are in ascending SHA-256(seed|canonical_source_id) order and reproduce byte-identically on replay",
+      "source": "docs/GRAPH_PROTOCOL.md §2.6"
+    },
+    {
+      "check_id": "label_access_contract",
+      "decision": "PASS",
+      "measured": {
+        "cited_by_count_used_as_feature": false,
+        "edge_source": "referenced_works only",
+        "features_derived_from": "adjacency_masked.tsv",
+        "qrels_or_beir_labels_used": false,
+        "trusted_artifacts": [
+          "data/processed/graph/holdout_edges.tsv",
+          "data/processed/graph/mask_edges.tsv"
+        ]
+      },
+      "requirement": "no qrels/BEIR labels read; holdout edges live only in trusted artifacts; all features derived from adjacency_masked.tsv",
+      "source": "Protocol v1 §2/§5 data_access; docs/GRAPH_PROTOCOL.md preamble"
+    }
+  ],
+  "command": [
+    "--works",
+    "data/processed/openalex/works.jsonl",
+    "--manifest",
+    "data/manifests/openalex_core.json",
+    "--protocol",
+    "configs/protocol_v1.json",
+    "--gate-report",
+    "artifacts/reports/graph_feasibility_core.json",
+    "--protocol-doc",
+    "docs/GRAPH_PROTOCOL.md",
+    "--out-dir",
+    "data/processed/graph",
+    "--graph-manifest",
+    "data/manifests/graph_core.json",
+    "--audit",
+    "artifacts/reports/graph_audit.json"
+  ],
+  "errors": [],
+  "measured_at": "2026-09-17T04:30:22.025120+00:00",
+  "measured_summary": {
+    "holdout_edges": 330,
+    "mask_edges": 660,
+    "masked_edges": 26186,
+    "premask_edges": 26516,
+    "selected_queries": {
+      "dev": 100,
+      "test": 200
+    },
+    "two_way_residual": {
+      "reverse_direction": 0,
+      "same_direction": 0
+    }
+  },
+  "module": {
+    "id": "sg016-graph-build",
+    "version": "1.0.0"
+  },
+  "provenance": {
+    "gate_report": {
+      "path": "artifacts/reports/graph_feasibility_core.json",
+      "sha256": "c5b4b11b1d62fc7463697c6df17033d0946033a39c223e5f191ab363a96ec5a9"
+    },
+    "graph_manifest": {
+      "path": "data/manifests/graph_core.json"
+    },
+    "graph_protocol_doc": {
+      "path": "docs/GRAPH_PROTOCOL.md",
+      "sha256": "e5d5eec1c55dc59c2dbd2128f2ea7b593a3575a6dfdc77bede8691703a1b6134"
+    },
+    "protocol_config": {
+      "path": "configs/protocol_v1.json",
+      "sha256": "8b9be0ea50c79462b6736db5c392ead093a4f7f78732914902e1ee81d9b02306"
+    },
+    "snapshot_manifest": {
+      "path": "data/manifests/openalex_core.json",
+      "sha256": "e0df3f9cd9b257a2b874794ec3c0c91f380f0aca317d0d2b66bf8862504261c8"
+    },
+    "works_jsonl": {
+      "path": "data/processed/openalex/works.jsonl",
+      "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+    }
+  },
+  "qrels_used": false,
+  "runtime": {
+    "platform": "win32",
+    "python": "3.12.14"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "task_id": "SG-016"
+}

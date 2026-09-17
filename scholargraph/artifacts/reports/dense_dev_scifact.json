@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-026",
+  "generated_at": "2026-09-17T08:02:21.198903+00:00",
+  "dataset": "scifact",
+  "split": "dev",
+  "top_k": 100,
+  "sealed_run": false,
+  "note": "Dev-selection evidence only; sealed final runs belong to SG-028.",
+  "inputs": {
+    "split_manifest": {
+      "path": "data\\splits\\scifact_dev.json",
+      "sha256": "65977e95d7eb36d3f929a3e99b27f1e21875c1d6e87d1766f2a3848f57fef1f7"
+    },
+    "index_manifest": {
+      "schema_version": 1,
+      "artifact_kind": "dense_exact_index",
+      "module_version": "sg019-1.0.0",
+      "corpus_id": "scifact",
+      "namespace": "bge-base-en-v1.5__a5beb1e3",
+      "doc_count": 5183,
+      "embedding_dimension": 768,
+      "dtype": "float32",
+      "l2_normalized": true,
+      "similarity": "cosine",
+      "ann": {
+        "used": false,
+        "recall_audit": "not_applicable_exact_index"
+      },
+      "model": {
+        "id": "BAAI/bge-base-en-v1.5",
+        "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+        "pooling": "cls",
+        "max_length": 512
+      },
+      "config_hash": "7b854f6c2d4bbd71cc2522195cb7e4842779f87c0561d75d1e0267b2e021d8fd",
+      "corpus": {
+        "source_path": "D:\\Web_mining_20261\\bn\\scholargraph\\data\\raw\\beir\\scifact\\corpus.jsonl",
+        "source_sha256": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+        "manifest_path": "D:\\Web_mining_20261\\bn\\scholargraph\\data\\manifests\\beir_scifact.json"
+      },
+      "shards": [
+        {
+          "shard_name": "shard-00000",
+          "doc_count": 1000,
+          "sha256": "21d7716f29b0f846b0554d4f4df28c83f88ba6f12134c1f847e5ea1437dc26fd",
+          "manifest_sha256": "27b689a95a9c401e628b39285df2f84e853e32fc62023ec1103959eff962ff7f"
+        },
+        {
+          "shard_name": "shard-00001",
+          "doc_count": 1000,
+          "sha256": "760dac33e9046b2803049d0b69b93b644866626465721d8e4db5bb4bd5d12863",
+          "manifest_sha256": "1db794008ceeae640e3b1c7c920dff59c87340919a669a9eadf24f9e41408266"
+        },
+        {
+          "shard_name": "shard-00002",
+          "doc_count": 1000,
+          "sha256": "73b2186a73745f63a798711b5dbbc06672c26ff557693deff679915649f02d60",
+          "manifest_sha256": "7ecd7374a36298657e4bb3b6c10cc58f3897237e9cc1607b30cc1caf00847fef"
+        },
+        {
+          "shard_name": "shard-00003",
+          "doc_count": 1000,
+          "sha256": "44e70dba72abaf0b44a90c2eae2aef12f237afda4e80a99034bad7c2d9a8690c",
+          "manifest_sha256": "21fabd56d2b90378fd1a1fe61633ccdf54922c3dff59b23440b22b211f5501aa"
+        },
+        {
+          "shard_name": "shard-00004",
+          "doc_count": 1000,
+          "sha256": "32328b5c20622a15174eb6cb81c87b0781a4f6a6547f2471d7723f4b590c82dc",
+          "manifest_sha256": "e5d116712db526800fc2b958007fe6740a9b2460400ba6af40cd9fe30020312b"
+        },
+        {
+          "shard_name": "shard-00005",
+          "doc_count": 183,
+          "sha256": "e550b3caa651a5d0df779a3a74af315792502335f2421d6db004286f54cf0b64",
+          "manifest_sha256": "47e5a2c73f59e49470ac4382218f2503e72c36c2e7d08996b3f07f077a394a24"
+        }
+      ],
+      "artifacts": {
+        "embeddings": {
+          "path": "D:/Web_mining_20261/bn/scholargraph/artifacts/indexes/scifact/bge-base-en-v1.5__a5beb1e3/embeddings.npy",
+          "sha256": "67d2e184e949f5a7a11e0a482e5cee642bc093c74e5ee3300cb7ea9b8df5d9fa"
+        },
+        "doc_ids": {
+          "path": "D:/Web_mining_20261/bn/scholargraph/artifacts/indexes/scifact/bge-base-en-v1.5__a5beb1e3/doc_ids.json",
+          "sha256": "0b68ef50b41d2c94c31c4e82c9c23e294edeec25f8e723f53b5545153adab0de"
+        }
+      },
+      "created_at": "2026-09-17T13:28:46+07:00",
+      "status": "COMPLETED"
+    },
+    "model_snapshot": {
+      "snapshot_path": "D:\\Web_mining_20261\\bn\\scholargraph\\artifacts\\cache\\models--BAAI--bge-base-en-v1.5\\snapshots\\a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+      "snapshot_commit": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+      "weights_file": "model.safetensors",
+      "tokenizer_files_present": [
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "vocab.txt",
+        "special_tokens_map.json"
+      ],
+      "files_sha256": {
+        "config.json": "bc00af31a4a31b74040d73370aa83b62da34c90b75eb77bfa7db039d90abd591",
+        "model.safetensors": "c7c1988aae201f80cf91a5dbbd5866409503b89dcaba877ca6dba7dd0a5167d7",
+        "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+        "sentence_bert_config.json": "84e39fda68ccbff05bfa723ae9c0e70e23e2ec373b76e0f8c6e71af72a693cbf",
+        "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+        "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+        "tokenizer_config.json": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "remote_api_sha_verification": "not_attempted",
+      "remote_api_sha": null,
+      "verified_at": "2026-09-17T15:00:21+07:00"
+    },
+    "encode_seconds": 82.28330612182617
+  },
+  "metrics": {
+    "nDCG@10": 0.770859858840113,
+    "Recall@100": 0.9723939019365472,
+    "MRR@10": 0.7378970706535601,
+    "MAP@100": 0.731216027661343,
+    "P@5": 0.18442521631644007
+  },
+  "rankings": "artifacts\\runs\\dense_dev_scifact\\rankings.jsonl",
+  "rankings_sha256": "cd5255757c05bfa88aa39fdc0e071150b283d370a6b134eb559135c6d0524553"
+}
