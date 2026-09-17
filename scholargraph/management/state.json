@@ -1,13 +1,14 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T04:00:00+07:00",
+  "updated_at": "2026-09-18T04:05:00+07:00",
   "phase": "M3",
   "stage": "takeover_sg019_reopened_encoding_in_progress",
   "active_tasks": [
     "SG-050",
     "SG-026",
-    "SG-037"
+    "SG-037",
+    "SG-038"
   ],
   "next_task_id": "SG-037",
   "last_session_id": "SESSION-20260917-053",
