@@ -2,6 +2,17 @@
 
 NEXT_TASK: SG-037
 
+## Takeover 2 + SG-036/031 DONE + SG-038 REVIEW — 2026-09-18T04:30:00+07:00
+
+- Người dùng xác nhận (lần 2) cửa sổ song song đã đóng, session 053 coordinator duy nhất. Cửa sổ kia từng commit c485252/ed02c09/717f636 (đóng SG-036 DONE với review riêng + P2 fixes; để dở SG-037).
+- **SG-036 DONE**: reviewer độc lập (session 055) tái xác minh trên HEAD sau P2-fix — PASS không P0/P1; chỉ còn P2 human "hai thành viên kiểm chứng 5 query" chờ owner ở closeout.
+- **SG-031 DONE**: 30 query VN được owner duyệt nguyên bản qua question tool (23:55), manifest `approved_no_edits` + approval trong provenance.
+- **SG-037 REVIEW**: công dở graph UI của cửa sổ kia được hấp thụ (graph_service.py, ui/graph/, 19/19 tests, smoke report); reviewer bị chặn 'user concurrency limit exceeded' x4 — **retry khi hạ tầng hồi phục**.
+- **SG-038 REVIEW** (mới, làm trực tiếp): export_references.py (missing policy null/[không có], không bịa), offline_smoke.py 13/13 PASS với HF_HUB_OFFLINE=1, configs/demo.json pin snapshot + 5 query đã kiểm chứng, docs/DEMO_SCRIPT.md kịch bản 5 phút; smoke tự bắt và sửa 2 bug thật (U+2028 splitlines, trailing newline); tests 7/7.
+- **SG-050 IN_PROGRESS**: OpenAlex text-subset 19/19 shards + index COMPLETED + verify PASS; SCIDOCS 9/26 encode chạy nền (chuỗi cũ chết 01:30 EXIT=127 — đã relaunch 04:00). Khi xong: `dense index --corpus scidocs` + verify + profile 3 corpus → REVIEW → reviewer.
+- **SG-026 IN_PROGRESS**: A xong (dense 0.7709 / hybrid 0.7435 — kết quả âm hybrid<dense ghi nhận trung thực); B = 20 điểm gamma×lambda frozen trong configs/tuning_space.json, chạy được khi SCIDOCS encode xong; **human gate** khi xong.
+- Bài học hạ tầng: subagent lỗi ~60% dispatch tối nay (Model request failed / captcha / inactive 600s / concurrency limit) — retry có khoảng nghỉ; nếu bế tắc coordinator làm trực tiếp + tự kiểm ADR-013 và ghi rõ, không tự nhận reviewer độc lập.
+
 ## SG-035 DONE, SG-036 + SG-026 song song — 2026-09-17T19:40:00+07:00
 
 - **SG-035 DONE**: API 4 routes trên data thật, 9/9 tests, fresh PASS (debt → SG-036/039).
