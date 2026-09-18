@@ -3,7 +3,7 @@
   "artifact_kind": "vn_methods_config",
   "task_id": "SG-032",
   "created_at": "2026-09-18T04:35:00+07:00",
-  "status": "translation_pinned_dense_pending_corpus_encode",
+  "status": "translation_and_multilingual_pinned_pending_review",
   "protocol_reference": {
     "track": "VN (Protocol v1 section 7)",
     "pool_methods": [
@@ -43,7 +43,16 @@
         "note": "stronger cross-lingual retrieval; requires query:/passage: prefixes"
       }
     ],
-    "decision": null,
+    "decision": {
+      "pinned_model_id": "intfloat/multilingual-e5-base",
+      "pinned_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+      "pinned_at": "2026-09-19T01:40:00+07:00",
+      "rationale": "Both candidates fully encoded on SciFact corpus. e5-base chosen: 512-token max_length avoids MiniLM's 128-token abstract truncation (significant information loss on scientific abstracts); pilot top-1s converge on 2/5 queries, diverge on 3 with no labels to adjudicate — empirical relevance comparison deferred to SG-026 track C once SG-033 labels exist. MiniLM kept as fallback with full index already built.",
+      "indexes": {
+        "e5": "artifacts/indexes/multilingual/intfloat-multilingual-e5-base__d1287505",
+        "minilm_fallback": "artifacts/indexes/multilingual/paraphrase-multilingual-MiniLM-L12-v2__e8f8c211"
+      }
+    },
     "decision_criteria": "technical pilot on 5 annotation_pilot queries: translation quality, term/code-switching handling, retrieval sanity (top-1 descriptively); NO relevance metrics yet — VN labels arrive at SG-033. Final method confirmation for track C evaluation happens with labels at SG-026 track C.",
     "corpus_encode_scope": "scifact corpus (5183) mandatory; openalex/scidocs deferred to compute plan decision after pilot"
   },
