@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-19T02:20:00+07:00",
+  "updated_at": "2026-09-18T22:55:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -866,7 +866,7 @@
       "title": "Dev tuning có budget",
       "phase": "M4",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R/S",
       "owner": "bn/orchestrator_C (takeover from coordinator/worker-single-chat)",
       "session_id": "SESSION-20260917-053",
@@ -891,10 +891,11 @@
         "2026-09-18T22:10+07:00: Track B chạy thật qua harness scripts/run_b_dev.py: 20/20 trials COMPLETED, 0 FAILED; best gamma=0.3/lambda=0.0 với dev nDCG@10=0.1310 (dev-selection registry — KHÔNG sealed; sealed final runs thuộc SG-028). Finding âm: lambda=0 tốt hơn age adjustment trong grid — chuyển SG-029 ablation.",
         "2026-09-18: dev_selection.md cập nhật đầy đủ A + B; track C (3 method VN) chờ SG-032 multilingual encode + nhãn SG-033.",
         "HUMAN GATE PENDING: routing SG-026 human_approval_required=true — owner duyệt selection trước SG-027 Main Freeze.",
-        "2026-09-18T22:50+07:00: fresh-context reviewer PASS không P0/P1 (management/reviews/SG-026-REVIEW-20260918.md vòng 4): tái chạy full harness bit-identical lần 3; grid khớp 20 điểm frozen; dev∩test=0; G_mask-only; oracle ceiling ~0.355 → 0.131 là độ khó task. P2-1: registry cần provenance seed/hash block trước SG-028. P2-3: chuẩn hóa canonical registry = b_dev_trials.json (run1 bit-identical, đã ghi chú)."
+        "2026-09-18T22:50+07:00: fresh-context reviewer PASS không P0/P1 (management/reviews/SG-026-REVIEW-20260918.md vòng 4): tái chạy full harness bit-identical lần 3; grid khớp 20 điểm frozen; dev∩test=0; G_mask-only; oracle ceiling ~0.355 → 0.131 là độ khó task. P2-1: registry cần provenance seed/hash block trước SG-028. P2-3: chuẩn hóa canonical registry = b_dev_trials.json (run1 bit-identical, đã ghi chú).",
+        "2026-09-18T22:55:00+07:00: HUMAN GATE satisfied — project owner approved the dev tuning selection (gamma=0.3, lambda=0.0) via in-session question tool ('Duyệt SG-026'), second ask after the first went unanswered. Routing human_approval_required=true satisfied; SG-027 unblocked."
       ],
       "claimed_paths": [],
-      "note": "A+B xong, review PASS; human gate (owner duyệt selection gamma=0.3/lambda=0.0) pending — SG-027 chờ gate này."
+      "note": "DONE: A+B dev selection (best gamma=0.3/lambda=0.0) human-approved; review PASS vòng 4."
     },
     {
       "id": "SG-027",

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-19T02:20:00+07:00",
+  "updated_at": "2026-09-18T22:55:00+07:00",
   "phase": "M3",
-  "stage": "sg032_done_sg026_human_pending",
+  "stage": "sg026_done_sg027_freeze_next",
   "active_tasks": [
-    "SG-026"
+    "SG-032"
   ],
-  "next_task_id": "SG-026",
+  "next_task_id": "SG-027",
   "last_session_id": "SESSION-20260917-053",
   "last_session_log": "management/logs/SESSION-20260917-053.md",
   "handoff_path": "management/HANDOFF.md",
