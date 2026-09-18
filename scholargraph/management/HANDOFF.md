@@ -2,6 +2,13 @@
 
 NEXT_TASK: SG-026
 
+## SG-032 DONE — 2026-09-19T02:25:00+07:00
+
+- **SG-032 DONE** (commit e65c0a0): fresh review PASS không P0/P1; pin e5-base được xác nhận định lượng (98,8% docs vượt 128-token MiniLM). DONE=34, REVIEW=1 (SG-026 human gate), TODO=12.
+- **Carry-forward cho SG-033:** (1) encode OpenAlex 18.250 docs bằng e5 (adapter schema OpenAlex — encode_corpus_multilingual hiện đọc schema SciFact; ước tính ~4,1h) TRƯỚC khi tạo pool; (2) MT quality inventory đầy đủ hơn (case suy giảm: test:007 'publicationopen a cappella', test:003 'preventental'); (3) cache mismatch check text_vi + prefix enforcement (P2-2/P2-4).
+- **SG-026 human gate vẫn chờ owner duyệt selection gamma=0.3/lambda=0.0** → mở SG-027 (routing: human_approval=true — freeze cần duyệt riêng).
+- DAG còn lại: SG-027 (gate) → SG-028 → SG-029 → SG-030 (gate) → SG-033 (gate: 2 người gán nhãn — dừng bắt buộc) → SG-034 (gate) → SG-040 → SG-041 → SG-042 (gate) → SG-043 (gate) → SG-044 (gate) → SG-045 (gate).
+
 ## SG-026 review PASS (human gate pending) + SG-032 gần xong — 2026-09-19T01:00:00+07:00
 
 - **SG-026 REVIEW, human gate PENDING**: B trials 20/20 COMPLETED (best gamma=0.3/lambda=0.0, dev nDCG@10=0.1310); fresh reviewer PASS không P0/P1 — tái chạy bit-identical lần 3, oracle ceiling ~0.355 (0.131 là độ khó task); P2-2 wording sealed-run đã sửa. **Cần owner duyệt selection** (câu hỏi đã gửi, chưa trả lời) trước SG-027.
