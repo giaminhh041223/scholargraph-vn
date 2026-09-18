@@ -1,15 +1,10 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T04:30:00+07:00",
+  "updated_at": "2026-09-18T14:15:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
-    {
-      "task_id": "SG-050",
-      "session_id": "SESSION-20260917-053",
-      "chat_id": "C"
-    },
     {
       "task_id": "SG-026",
       "session_id": "SESSION-20260917-053",
@@ -1003,6 +998,23 @@
       "claimed_paths": [
         "ui/",
         "artifacts/reports/ui_smoke.md"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260918-054",
+      "chat_id": "P",
+      "agent_task_name": "sg039_integration_worker",
+      "task_ids": [
+        "SG-039"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260918-054.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": [
+        "scripts/integration_checks.py",
+        "tests/integration/test_integration.py"
       ]
     }
   ],

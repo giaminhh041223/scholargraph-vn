@@ -13,7 +13,7 @@ Mở `http://127.0.0.1:8080` trong trình duyệt.
 
 ## Phút 0–1: Tìm kiếm 3 phương thức
 
-Dùng đúng 5 query đã pin trong `configs/demo.json` (đã được kiểm chứng 2 lần độc lập ở SG-036):
+Dùng tập 5 query đã pin trong `configs/demo.json` (đã được kiểm chứng 2 lần độc lập ở SG-036); demo trực tiếp 3 query dưới đây:
 
 1. `diabetes treatment options` — **BM25** → chú ý điểm BM25 (thang ~10) và method ID trên mỗi card.
 2. `cancer immunotherapy` — **Hybrid RRF** → điểm RRF (thang ~0,03 — khác thang BM25, giải thích khi demo).

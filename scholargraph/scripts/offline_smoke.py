@@ -81,7 +81,7 @@ def main() -> int:
     payload = json.loads(out.read_text(encoding="utf-8"))
     missing = [r for r in payload["records"] if r["doi"] is None or r["year"] is None]
     check("export missing policy", len(payload["records"]) == 4 and len(missing) >= 2
-          and all(r["citation_text"].count("[không có]") >= 0 for r in payload["records"]),
+          and all(r["citation_text"].count("[không có]") >= 1 for r in missing),
           f"counts={payload['counts']}")
 
     # 6. offline proof: UI assets reference no CDN

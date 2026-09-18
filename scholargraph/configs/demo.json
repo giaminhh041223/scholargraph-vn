@@ -44,6 +44,6 @@
     "env": ["HF_HUB_OFFLINE=1", "TRANSFORMERS_OFFLINE=1"],
     "no_cdn": true,
     "missing_metadata": "null/[không có] — never fabricated",
-    "note": "5 demo queries reuse the twice-verified SG-036 set; export IDs cover both corpora and both missing-metadata cases (SciFact: no year/DOI; OpenAlex Preface W1003264260: no DOI)."
+    "note": "5 demo queries reuse the twice-verified SG-036 set; export IDs cover both corpora and both missing-metadata cases (SciFact records: no year/DOI; OpenAlex records carry real DOI/year, e.g. Preface W1003264260 doi 10.1017/cbo9780511809071.001 year 2008)."
   }
 }

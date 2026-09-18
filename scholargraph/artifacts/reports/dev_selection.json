@@ -46,9 +46,19 @@
   },
   "conclusion_A": "dense alone leads dev nDCG@10; hybrid_rrf does not beat dense alone (negative result recorded)",
   "track_B_grid": {
-    "status": "chua_do_thieu_pipeline",
-    "trials": 0,
-    "space": "configs/tuning_space.json"
+    "status": "completed_20_trials_dev100",
+    "trials": 20,
+    "failed": 0,
+    "registry": "artifacts/reports/b_trials_dev.json",
+    "candidate_recall_at_100_all_variants": 0.2908,
+    "best_trial_id": "hybrid_ppr_g0.3_l0.0",
+    "best_config": {
+      "gamma": 0.3,
+      "lambda": 0.0
+    },
+    "best_dev_ndcg_at_10": 0.13103199755444994,
+    "global_control_note": "hybrid_global_g0.3_l0.01 reaches 0.1341 >= ppr best 0.1310 (diagnostic, not grid trial)",
+    "elapsed_seconds": 398.776832818985
   },
   "track_C": {
     "status": "cho_SG-031_032_033"

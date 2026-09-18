@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T04:30:00+07:00",
+  "updated_at": "2026-09-18T14:45:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -880,28 +880,30 @@
         "configs/tuning_space.json",
         "src/scholargraph/evaluation/tuning.py",
         "tests/unit/test_tuning.py",
+        "src/scholargraph/graph/b_track.py",
+        "tests/unit/test_b_track.py",
+        "scripts/run_b_dev.py",
         "scripts/dense_dev_retrieval.py",
         "scripts/score_rankings.py",
         "artifacts/reports/dense_dev_scifact.json",
         "artifacts/reports/hybrid_dev_scifact.json",
+        "artifacts/reports/b_trials_dev.json",
         "artifacts/reports/dev_selection.md",
         "artifacts/reports/dev_selection.json",
-        "scripts/build_openalex_text_subset.py",
-        "scripts/age_exposure_audit.py",
-        "tests/unit/test_text_subset.py",
-        "management/DECISIONS.md",
-        "management/logs/SESSION-20260917-050.md"
+        "management/reviews/SG-026-REVIEW-20260918.md",
+        "management/logs/SESSION-20260917-050.md",
+        "management/logs/SESSION-20260918-056.md"
       ],
       "verification": [
-        "2026-09-17: pytest test_tuning 12/12 + test_text_subset 4/4 PASS; A-dev real numbers persisted with hashes; 2 fresh reviews (v2 re-review conditional).",
-        "2026-09-17: B 0/20 trials pending OpenAlex dense (ADR-017 proposed, subset 18250 built, encode pilot 2000 docs @3.99/s resume-ready). Human approval pending with B completion."
+        "2026-09-18: A-dev real (dense 0.7709 > hybrid 0.7435); B 100/100 COMPLETED 20/20 trials, best hybrid_ppr_g0.3_l0.0 nDCG 0.1310; pytest 21/21.",
+        "2026-09-18: fresh review v3 conditional PASS (no P0; P2 fixed). Human approval pending."
       ],
       "claimed_paths": [
         "configs/tuning_space.json",
         "artifacts/reports/dev_selection.md",
         "management/logs/SESSION-20260917-050.md"
       ],
-      "note": "IN_PROGRESS: A done real, B grid frozen+harness ready, trials await full OpenAlex encode + human approval."
+      "note": "IN_PROGRESS: implementation+reviews complete; awaiting human approval of gamma=0.3/lambda=0.0 selection."
     },
     {
       "id": "SG-027",
@@ -1152,7 +1154,7 @@
       "title": "Citation graph UI",
       "phase": "M5",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S/D",
       "owner": "bn/orchestrator_C (implementation from closed window absorbed; takeover session 053)",
       "session_id": "SESSION-20260917-053",
@@ -1168,12 +1170,14 @@
         "ui/graph/graph.css",
         "tests/unit/test_graph_ui.py",
         "artifacts/reports/graph_ui_smoke.md",
-        "management/logs/SESSION-20260917-053.md"
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-037-REVIEW-20260918.md"
       ],
       "verification": [
         "2026-09-18T02:30+07:00: pytest tests/unit/test_graph_ui.py 19/19 PASS (36.5s) — run by takeover coordinator on absorbed implementation.",
         "2026-09-18: graph_ui_smoke.md present (real API smoke by the implementing window; re-verification by independent reviewer pending dispatch).",
-        "2026-09-18: implementation authored by the now-closed parallel window (uncommitted work absorbed at user-confirmed handover; file mtimes 01:56-02:19)."
+        "2026-09-18: implementation authored by the now-closed parallel window (uncommitted work absorbed at user-confirmed handover; file mtimes 01:56-02:19).",
+        "2026-09-18: fresh-context review PASS no P0/P1 (3 P2-info). No human gate per routing."
       ],
       "claimed_paths": [],
       "note": ""
@@ -1183,7 +1187,7 @@
       "title": "Offline và xuất tham khảo",
       "phase": "M5",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S",
       "owner": "bn/orchestrator_C (coordinator-as-worker)",
       "session_id": "SESSION-20260917-053",
@@ -1200,13 +1204,15 @@
         "scripts/export_references.py",
         "scripts/offline_smoke.py",
         "tests/unit/test_demo_export.py",
-        "management/logs/SESSION-20260917-053.md"
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-038-REVIEW-20260918.md"
       ],
       "verification": [
         "2026-09-18T03:43+07:00: offline smoke 13/13 PASS with HF_HUB_OFFLINE=1/TRANSFORMERS_OFFLINE=1 set before HF import — health, 5 pinned queries (top-1 identical to twice-verified SG-036 set), paper null year/doi, recommend self-exclusion, graph hub truncated=true with real message (5341 neighbors > cap 30), export subprocess exit 0, missing policy (with_doi=2, missing_doi=2, missing_year=2), no CDN references.",
         "2026-09-18T03:55+07:00: pytest tests/unit/test_demo_export.py 7/7 PASS; tests/unit/test_vn_queries.py updated to approved-status contract (6/6).",
         "2026-09-18: export script bugs found by own smoke and fixed (splitlines split on U+2028 inside JSON abstract strings; trailing-newline false positive) — fail-loud CLI exit 1 on unknown IDs verified by test.",
-        "2026-09-18: export runs as standalone script (no app.py/service.py modification — those files under SG-036/037 review snapshot)."
+        "2026-09-18: export runs as standalone script (no app.py/service.py modification — those files under SG-036/037 review snapshot).",
+        "2026-09-18: fresh-context review PASS no P0/P1; 3 P2 nits fixed opportunistically + smoke re-run 13/13. No human gate per routing."
       ],
       "claimed_paths": [],
       "note": "Export qua script standalone (không sửa app.py/service.py đang ở review cho SG-036/037)."
@@ -1216,18 +1222,27 @@
       "title": "Integration checks",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260918-054",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-037",
         "SG-038"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "scripts/integration_checks.py",
+        "tests/integration/test_integration.py",
+        "artifacts/reports/integration_checks.md",
+        "management/reviews/SG-039-REVIEW-20260918.md",
+        "management/logs/SESSION-20260918-054.md"
+      ],
+      "verification": [
+        "2026-09-18: pytest 4/4 PASS; integration script 28/28 PASS exit 0.",
+        "2026-09-18: fresh review v1 FAIL (3 P1+3 P2) -> fixed -> v2 conditional PASS -> fixes verified 28/28."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -1432,7 +1447,7 @@
       "title": "Hoàn tất dense encoding OpenAlex text-subset + SCIDOCS",
       "phase": "M3",
       "priority": "CORE",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "role": "S",
       "owner": "bn/orchestrator_C (coordinator-as-worker, takeover)",
       "session_id": "SESSION-20260917-053",
@@ -1441,18 +1456,26 @@
         "SG-019"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [
-        "src/scholargraph/retrieval/dense.py",
-        "tests/unit/test_embedding_manifest.py",
-        "notebooks/encode_corpus.ipynb",
-        "artifacts/reports/encoding_profile.json",
-        "artifacts/indexes/",
-        "data/manifests/encoding_shards/",
+      "evidence": [
         "data/manifests/openalex_core_text.json",
-        "management/logs/SESSION-20260917-053.md"
+        "data/processed/openalex/works_text.jsonl",
+        "data/manifests/encoding_shards/openalex_core_text/",
+        "data/manifests/encoding_shards/scidocs/",
+        "artifacts/indexes/openalex_core_text/bge-base-en-v1.5__a5beb1e3/",
+        "artifacts/indexes/scidocs/bge-base-en-v1.5__a5beb1e3/",
+        "artifacts/reports/encoding_profile.json",
+        "scripts/build_openalex_text_subset.py",
+        "tests/unit/test_text_subset.py",
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-050-REVIEW-20260918.md"
       ],
+      "verification": [
+        "2026-09-18: openalex_core_text 19/19 shards + exact index COMPLETED + verify PASS; scidocs 26/26 shards COMPLETED (25657 docs) + index COMPLETED + verify 26/26 PASS; encoding_profile.json covers 3 corpora.",
+        "2026-09-18: pytest tests/unit/test_text_subset.py 4/4 PASS.",
+        "2026-09-18: fresh-context review pending (infra blocked earlier); see HANDOFF NEXT_TASK.",
+        "2026-09-18: fresh-context review PASS no P0/P1 (3 P2-info non-blocking). No human gate per routing."
+      ],
+      "claimed_paths": [],
       "note": "Created per ADR-017: finish OpenAlex text-subset (2/19 shards) + SCIDOCS (0/26) encoding, exact indexes, profile; explicit 1-work exclusion per openalex_core_text.json manifest."
     }
   ]

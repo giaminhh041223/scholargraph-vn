@@ -1,6 +1,26 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-037
+NEXT_TASK: SG-026
+
+## SG-039 DONE, tiếp SG-026 B trials — 2026-09-18T14:15:00+07:00
+
+- **SG-039 DONE** sau 2 vòng review (v1 FAIL 3 P1+3 P2 → sửa → v2 conditional PASS → fixes verified 28/28 + 4/4 tests).
+- Board: DONE=33, IN_PROGRESS=2 (SG-026, SG-032), REVIEW=0, TODO=12. Checker PASS.
+- **Tiếp theo:** `SG-026` B 20 trials (vectors OpenAlex/SCIDOCS đã sẵn) + `SG-032` song song. SG-033 của owner.
+
+## SG-037 + SG-038 DONE, tiếp SG-039 — 2026-09-18T11:00:00+07:00
+
+- **SG-037 DONE**: fresh review PASS (19/19 tests, evaluated/snapshot hash khớp, không leakage holdout/qrels). 3 P2-info.
+- **SG-038 DONE**: fresh review PASS (7/7 tests, offline 13/13); 3 P2 nits đã sửa + smoke tái chạy.
+- Board: DONE=32, IN_PROGRESS=2 (SG-026, SG-032), REVIEW=0, TODO=13. Checker PASS.
+- **Tiếp theo:** `SG-039` (deps SG-037+SG-038 DONE → unblocked). SG-026 B trials song song khi pipeline B-dev sẵn.
+
+## SG-050 DONE, retry reviewers SG-037/038 — 2026-09-18T10:45:00+07:00
+
+- **SG-050 DONE**: fresh review PASS không P0/P1 (3 P2-info). OpenAlex 19/19 + SCIDOCS 26/26 + profile 3 corpora (totals 49090/51 shards). Không human gate.
+- Board: DONE=30, IN_PROGRESS=2 (SG-026, SG-032), REVIEW=2 (SG-037, SG-038), TODO=13. Checker PASS.
+- Sửa lệch board: state.active_tasks bổ sung SG-037/038 (REVIEW), gỡ assignment SG-050 sau DONE.
+- **Tiếp theo:** retry reviewer SG-037 + SG-038 (lần trước chặn concurrency) → SG-026 B trials (vectors đã sẵn) → SG-032 → SG-027… SG-033 của owner.
 
 ## Takeover 2 + SG-036/031 DONE + SG-038 REVIEW — 2026-09-18T04:30:00+07:00
 
