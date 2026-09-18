@@ -47,7 +47,7 @@
       "pinned_model_id": "intfloat/multilingual-e5-base",
       "pinned_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
       "pinned_at": "2026-09-19T01:40:00+07:00",
-      "rationale": "Both candidates fully encoded on SciFact corpus. e5-base chosen: 512-token max_length avoids MiniLM's 128-token abstract truncation (significant information loss on scientific abstracts); pilot top-1s converge on 2/5 queries, diverge on 3 with no labels to adjudicate — empirical relevance comparison deferred to SG-026 track C once SG-033 labels exist. MiniLM kept as fallback with full index already built.",
+      "rationale": "Both candidates fully encoded on SciFact corpus. e5-base chosen: 512-token max_length avoids MiniLM's 128-token abstract truncation (significant information loss on scientific abstracts); pilot top-1s converge on 2/5 queries, diverge on 3 with no labels to adjudicate — empirical relevance comparison deferred to SG-033 (pooled dev nDCG@10 method selection) / SG-034 freeze once labels exist. MiniLM kept as fallback with full index already built.",
       "indexes": {
         "e5": "artifacts/indexes/multilingual/intfloat-multilingual-e5-base__d1287505",
         "minilm_fallback": "artifacts/indexes/multilingual/paraphrase-multilingual-MiniLM-L12-v2__e8f8c211"

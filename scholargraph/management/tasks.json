@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-19T01:40:00+07:00",
+  "updated_at": "2026-09-19T02:20:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1009,7 +1009,7 @@
       "title": "Cross-lingual baselines",
       "phase": "M5",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S/R",
       "owner": "bn/orchestrator_C (coordinator-as-worker; light parts now, multilingual encode after SG-050)",
       "session_id": "SESSION-20260917-053",
@@ -1037,10 +1037,11 @@
         "2026-09-18: original_vi_bm25 diagnostic 30 queries, 0 zero-token, 18/30 nonzero top-1 (cognate overlap) — diagnostic only, never a pool method.",
         "2026-09-19T01:35+07:00: BOTH multilingual candidates fully encoded on SciFact (MiniLM 5183 @ 7.758 docs/s 384d; e5-base 5183 @ 1.253 docs/s 768d); pilot comparison recorded in vn_dev_pilot.md.",
         "2026-09-19T01:40+07:00: pinned intfloat/multilingual-e5-base @ d1287505 (512-token, no abstract truncation); MiniLM full index kept as fallback. NO relevance metrics claimed (VN labels arrive at SG-033).",
-        "2026-09-18: pytest tests/unit/test_cross_lingual.py 5/5 PASS (draft-manifest rejection, cache-hit no-model, empty-translation rejection, CLI exit 1)."
+        "2026-09-18: pytest tests/unit/test_cross_lingual.py 5/5 PASS (draft-manifest rejection, cache-hit no-model, empty-translation rejection, CLI exit 1).",
+        "2026-09-19T02:15+07:00: fresh-context reviewer PASS không P0/P1 (management/reviews/SG-032-REVIEW-20260919.md): draft-manifest CLI exit 1, cache-hit không tải model + sha256 identical, 30/30 entry khớp manifest, 4/4 sha256 index tái tính khớp, 5/5 tests. Định lượng xác nhận pin e5: 98,8% (5.123/5.183) docs SciFact vượt 128-token MiniLM (median 356). P2 đã xử lý: P2-1 cross-ref sửa; P2-2 mismatch check + P2-4 prefix enforcement = ghi chú cho giai đoạn pool (SG-033); P2-6 MT quality inventory đầy đủ trước SG-033; P2-7 encode OpenAlex-e5 ~4,1h là prerequisite của SG-033 pool (chưa chạy)."
       ],
       "claimed_paths": [],
-      "note": "Light parts (translation pin + cache + raw BM25) during SG-050 encode; multilingual corpus encode serialized after."
+      "note": "Translation + multilingual pinned; full OpenAlex e5 encode (~4,1h) là prerequisite của SG-033 pool — ghi trong HANDOFF."
     },
     {
       "id": "SG-033",

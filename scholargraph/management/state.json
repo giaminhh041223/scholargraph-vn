@@ -1,12 +1,11 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-19T01:40:00+07:00",
+  "updated_at": "2026-09-19T02:20:00+07:00",
   "phase": "M3",
-  "stage": "sg026_review_pass_human_pending_sg032_multilingual_pending",
+  "stage": "sg032_done_sg026_human_pending",
   "active_tasks": [
-    "SG-026",
-    "SG-032"
+    "SG-026"
   ],
   "next_task_id": "SG-026",
   "last_session_id": "SESSION-20260917-053",
