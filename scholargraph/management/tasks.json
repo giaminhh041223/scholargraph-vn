@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T14:45:00+07:00",
+  "updated_at": "2026-09-18T22:15:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -866,7 +866,7 @@
       "title": "Dev tuning có budget",
       "phase": "M4",
       "priority": "CORE",
-      "status": "IN_PROGRESS",
+      "status": "REVIEW",
       "role": "R/S",
       "owner": "bn/orchestrator_C (takeover from coordinator/worker-single-chat)",
       "session_id": "SESSION-20260917-053",
@@ -879,30 +879,20 @@
       "evidence": [
         "configs/tuning_space.json",
         "src/scholargraph/evaluation/tuning.py",
-        "tests/unit/test_tuning.py",
-        "src/scholargraph/graph/b_track.py",
-        "tests/unit/test_b_track.py",
         "scripts/run_b_dev.py",
-        "scripts/dense_dev_retrieval.py",
-        "scripts/score_rankings.py",
-        "artifacts/reports/dense_dev_scifact.json",
-        "artifacts/reports/hybrid_dev_scifact.json",
-        "artifacts/reports/b_trials_dev.json",
+        "src/scholargraph/graph/b_track.py",
+        "artifacts/reports/b_dev_trials.json",
         "artifacts/reports/dev_selection.md",
-        "artifacts/reports/dev_selection.json",
         "management/reviews/SG-026-REVIEW-20260918.md",
-        "management/logs/SESSION-20260917-050.md",
-        "management/logs/SESSION-20260918-056.md"
-      ],
-      "verification": [
-        "2026-09-18: A-dev real (dense 0.7709 > hybrid 0.7435); B 100/100 COMPLETED 20/20 trials, best hybrid_ppr_g0.3_l0.0 nDCG 0.1310; pytest 21/21.",
-        "2026-09-18: fresh review v3 conditional PASS (no P0; P2 fixed). Human approval pending."
-      ],
-      "claimed_paths": [
-        "configs/tuning_space.json",
-        "artifacts/reports/dev_selection.md",
         "management/logs/SESSION-20260917-050.md"
       ],
+      "verification": [
+        "2026-09-17 (session 050): A xong thật (dense dev 0.7709 nDCG@10; hybrid 0.7435 — kết quả âm hybrid<dense ghi nhận); B grid frozen + harness; vòng review 1 FAIL (P0 B/C chưa chạy) đã xử lý hết trừ P0 B-trials chờ encode.",
+        "2026-09-18T22:10+07:00: Track B chạy thật qua harness scripts/run_b_dev.py: 20/20 trials COMPLETED, 0 FAILED; best gamma=0.3/lambda=0.0 với dev nDCG@10=0.1310 (sealed run, registry lưu cả FAILED nếu có). Finding âm: lambda=0 tốt hơn age adjustment trong grid — chuyển SG-029 ablation.",
+        "2026-09-18: dev_selection.md cập nhật đầy đủ A + B; track C (3 method VN) chờ SG-032 multilingual encode + nhãn SG-033.",
+        "HUMAN GATE PENDING: routing SG-026 human_approval_required=true — owner duyệt selection trước SG-027 Main Freeze."
+      ],
+      "claimed_paths": [],
       "note": "IN_PROGRESS: implementation+reviews complete; awaiting human approval of gamma=0.3/lambda=0.0 selection."
     },
     {
