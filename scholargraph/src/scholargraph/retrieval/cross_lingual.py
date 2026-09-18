@@ -300,6 +300,83 @@ def pilot_search_multilingual(cfg_path: Path, index_dir: Path,
             "results": results}
 
 
+def encode_openalex_multilingual(cfg_path: Path, works_path: Path, output_dir: Path,
+                                 batch_size: int = 16) -> dict[str, Any]:
+    """Encode the processed OpenAlex text-subset (18.250 works) with a pinned
+    multilingual encoder — SG-033 pool prerequisite (reviewer P2-7).
+
+    Text composition mirrors dense.py's OpenAlex handling (title + reconstructed
+    abstract; fail on empty). IDs are canonical ``openalex:W...``. Writes the
+    same index manifest contract as encode_corpus_multilingual.
+    """
+    import hashlib
+    import time
+
+    import numpy as np
+
+    from scholargraph.retrieval.dense import _openalex_document_text
+
+    cfg = _load_multilingual_config(cfg_path)
+    _require_file(works_path, "processed OpenAlex text subset")
+    doc_ids: list[str] = []
+    texts: list[str] = []
+    for lineno, line in enumerate(works_path.read_text(encoding="utf-8").rstrip("\n").split("\n"), 1):
+        if not line.strip():
+            raise CrossLingualError(f"Blank line in {works_path} at {lineno}")
+        row = json.loads(line)
+        raw_id = str(row["id"]).rsplit("/", 1)[-1]
+        canonical = f"openalex:{raw_id}"
+        text, _, _ = _openalex_document_text(row, canonical, works_path, lineno)
+        if not text.strip():
+            raise CrossLingualError(f"Empty text for {canonical} at line {lineno}")
+        doc_ids.append(canonical)
+        texts.append(text)
+    if not doc_ids:
+        raise CrossLingualError(f"Works file is empty: {works_path}")
+
+    snapshot_dir = cfg.get("snapshot_local")
+    snap = PROJECT_ROOT / snapshot_dir / "snapshots" / cfg["revision"] if snapshot_dir else None
+    encoder = MultilingualEncoder(cfg, snap)
+    started = time.perf_counter()
+    vectors = encoder.encode(texts, is_query=False, batch_size=batch_size)
+    elapsed = time.perf_counter() - started
+    matrix = np.asarray(vectors, dtype=np.float32)
+    if matrix.shape != (len(doc_ids), cfg["embedding_dimension"]):
+        raise CrossLingualError(f"Unexpected embedding shape {matrix.shape}")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    npy_path = output_dir / "embeddings.npy"
+    ids_path = output_dir / "doc_ids.json"
+    np.save(npy_path, matrix)
+    ids_path.write_text(json.dumps(doc_ids, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    def sha256(p: Path) -> str:
+        return hashlib.sha256(p.read_bytes()).hexdigest()
+
+    manifest = {
+        "schema_version": 1,
+        "artifact_kind": "multilingual_embedding_index",
+        "task_id": "SG-033-prerequisite (SG-032 reviewer P2-7)",
+        "model_id": cfg["model_id"],
+        "model_revision": cfg["revision"],
+        "pooling": cfg["pooling"],
+        "embedding_dimension": cfg["embedding_dimension"],
+        "max_length": cfg["max_length"],
+        "doc_count": len(doc_ids),
+        "throughput_docs_per_second": round(len(doc_ids) / elapsed, 3),
+        "encode_seconds": round(elapsed, 3),
+        "gpu": "not_measured_local",
+        "corpus_sha256": sha256(works_path),
+        "embeddings_sha256": sha256(npy_path),
+        "doc_ids_sha256": sha256(ids_path),
+        "config_sha256": sha256(cfg_path),
+        "status": "COMPLETED",
+    }
+    (output_dir / "index_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    return manifest
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Cross-lingual VN tools (SG-032).")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -321,6 +398,11 @@ def main(argv: list[str] | None = None) -> int:
     pilot.add_argument("--index-dir", type=Path, required=True)
     pilot.add_argument("--manifest", type=Path, default=PROJECT_ROOT / "data/annotations/vn_query_manifest.json")
     pilot.add_argument("--top-k", type=int, default=5)
+    oa = sub.add_parser("encode-openalex")
+    oa.add_argument("--config", type=Path, required=True)
+    oa.add_argument("--works", type=Path, default=PROJECT_ROOT / "data/processed/openalex/works_text.jsonl")
+    oa.add_argument("--output-dir", type=Path, required=True)
+    oa.add_argument("--batch-size", type=int, default=16)
     args = parser.parse_args(argv)
     try:
         if args.command == "translate":
@@ -335,6 +417,11 @@ def main(argv: list[str] | None = None) -> int:
             manifest = encode_corpus_multilingual(args.config, args.corpus, args.output_dir,
                                                   batch_size=args.batch_size, max_docs=args.max_docs)
             print(f"Multilingual encode: {manifest['doc_count']} docs, "
+                  f"{manifest['throughput_docs_per_second']} docs/s -> {args.output_dir}")
+        elif args.command == "encode-openalex":
+            manifest = encode_openalex_multilingual(args.config, args.works, args.output_dir,
+                                                    batch_size=args.batch_size)
+            print(f"OpenAlex multilingual encode: {manifest['doc_count']} docs, "
                   f"{manifest['throughput_docs_per_second']} docs/s -> {args.output_dir}")
         else:
             results = pilot_search_multilingual(args.config, args.index_dir, args.manifest, args.top_k)
