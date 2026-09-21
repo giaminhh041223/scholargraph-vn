@@ -1,6 +1,22 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-028
+NEXT_TASK: SG-029
+
+## SG-029 REVIEW (tự kiểm) — 2026-09-21T19:30:00+07:00
+
+- **SG-029 REVIEW** (session 061): A1 age on/off (lambda=0 tốt nhất, suy giảm đơn điệu),
+  A2 no-graph (trích registry), A3 RRF k=30/60/100 (k=60 khớp sealed bit-exact).
+  R1/R2/R3 buckets + R4 costs + R5 failures 0/0. Tests 11/11. Không select trên test.
+- **Cần fresh-context review trước DONE** (không human gate). SG-030 chưa mở được
+  (deps SG-029 chưa DONE).
+- Board: DONE=37, REVIEW=1 (SG-029), TODO=9, DEFERRED=4. Checker PASS (sẽ chạy).
+
+## SG-028 DONE + SG-029 mở — 2026-09-21T18:30:00+07:00
+
+- **SG-028 DONE**: owner duyệt qua question tool (tiền lệ SG-027: chấp nhận tự kiểm).
+- **SG-029 IN_PROGRESS** (session 061): ablations định sẵn trong freeze (age on/off,
+  RRF k, graph variants) + robustness buckets + costs/failures. Không select trên test.
+- Board: DONE=37, IN_PROGRESS=1 (SG-029), TODO=9, DEFERRED=4.
 
 ## SG-028 REVIEW (tự kiểm) — 2026-09-21T18:00:00+07:00
 

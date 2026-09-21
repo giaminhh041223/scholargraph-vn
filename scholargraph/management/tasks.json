@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T18:00:00+07:00",
+  "updated_at": "2026-09-21T19:30:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -941,7 +941,7 @@
       "title": "Final runs",
       "phase": "M6",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R/S",
       "owner": "coordinator/worker-single-chat",
       "session_id": "SESSION-20260921-060",
@@ -965,7 +965,8 @@
       "verification": [
         "2026-09-21T18:00:00+07:00: 7 sealed track-A test runs COMPLETED final_test=true (SciFact 300q: bm25 0.6647 / tfidf 0.6327 / dense 0.7404 / hybrid 0.7204; SCIDOCS 1000q: bm25 0.1521 / dense 0.2172 / hybrid 0.1976 nDCG@10) + track-B test200 sealed (ppr 0.1004 / global 0.1082, frozen g0.3/l0.0, no test tuning). Track C VN chua do (SG-033).",
         "2026-09-21T18:00:00+07:00: pytest tests/unit/test_final_runs.py 12/12 PASS; regression bm25/lexical/rrf 91/91 PASS; CLI unsealed-test exit 1 (bm25+tfidf); policy checks (NaN/query/universe/dup) enforced at run + registry time.",
-        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-21T18:30:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-028 DONE') with self-check-only disclosure (same precedent as SG-027). Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-029 unblocked."
       ],
       "claimed_paths": [
         "artifacts/reports/main_results.md",
@@ -982,19 +983,39 @@
       "title": "Ablation và robustness",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-061",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-028"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "artifacts/reports/ablation.json",
+        "artifacts/reports/ablation.md",
+        "artifacts/reports/ablation_age.json",
+        "artifacts/reports/ablation_rrfk.json",
+        "artifacts/reports/robustness.json",
+        "artifacts/reports/robustness.md",
+        "scripts/run_ablation.py",
+        "tests/unit/test_ablation.py",
+        "management/logs/SESSION-20260921-061.md"
+      ],
+      "verification": [
+        "2026-09-21T19:30:00+07:00: A1 age on/off test200 (ppr/global x lambda 0/0.01/0.03/0.1 @g0.3): lambda=0 tot nhat, suy giam don dieu; A2 no-graph trich registry; A3 RRF k=30/60/100 (k60 khop sealed bit-exact; k it anh huong). Tat ca arms trong prespecified set, khong select tren test.",
+        "2026-09-21T19:30:00+07:00: R1/R2/R3 buckets (query length, missing abstract, node degree) + R4 costs + R5 failures (0/0, measured). pytest tests/unit/test_ablation.py 11/11 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "scripts/run_ablation.py",
+        "artifacts/reports/ablation.json",
+        "artifacts/reports/robustness.json",
+        "tests/unit/test_ablation.py",
+        "management/logs/SESSION-20260921-061.md"
+      ],
+      "note": "Ablation + robustness tren sealed test; VN per-intent doi nhan SG-033."
     },
     {
       "id": "SG-030",
