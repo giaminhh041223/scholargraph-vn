@@ -1,6 +1,22 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-030
+NEXT_TASK: SG-033
+
+## SG-040 REVIEW; SG-033 pool prep tiếp — 2026-09-21T21:15:00+07:00
+
+- **SG-040 REVIEW** (session 063): cold 14.6s/RSS 895MB, warm P50/P95 đầy đủ,
+  track-B ~1.7s/query (vượt budget 500ms — báo thật), concurrency 1.84x.
+  Tests 7/7. Cần fresh review trước DONE (không human gate).
+- **Tiếp theo SG-033** (deps SG-025+SG-031+SG-032 DONE): agent dựng pools mù từ
+  3 methods + scaffolding chấm; NHÃN do 2 người gán (human gate, ~16h).
+- Board: DONE=38, REVIEW=2 (SG-030 human gate, SG-040), TODO=7, DEFERRED=4.
+
+## SG-040 mở song song human gate SG-030 — 2026-09-21T20:30:00+07:00
+
+- SG-030 REVIEW chờ human gate (2 người đọc packets + duyệt) — không chặn nhánh app.
+- **SG-040 IN_PROGRESS** (session 063, deps SG-028+SG-039 DONE): profiling end-to-end
+  thật (cold/warm/P50/P95/RAM/index/concurrency), mục tiêu 500ms báo thật.
+- Board: DONE=38, REVIEW=1 (SG-030), IN_PROGRESS=1 (SG-040), TODO=7, DEFERRED=4.
 
 ## SG-030 REVIEW + human gate — 2026-09-21T20:15:00+07:00
 

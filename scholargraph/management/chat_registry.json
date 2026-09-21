@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T20:15:00+07:00",
+  "updated_at": "2026-09-21T21:15:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -9,9 +9,27 @@
       "task_id": "SG-030",
       "session_id": "SESSION-20260921-062",
       "chat_id": "C"
+    },
+    {
+      "task_id": "SG-040",
+      "session_id": "SESSION-20260921-063",
+      "chat_id": "C"
     }
   ],
   "sessions": [
+    {
+      "session_id": "SESSION-20260921-063",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-040"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260921-063.md",
+      "status": "checkpoint",
+      "role": "coordinator_and_implementation_worker"
+    },
     {
       "session_id": "SESSION-20260921-062",
       "chat_id": "C",

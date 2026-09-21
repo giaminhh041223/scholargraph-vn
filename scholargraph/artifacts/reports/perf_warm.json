@@ -1,0 +1,162 @@
+{
+  "workload": {
+    "scifact": {
+      "n_queries": 20,
+      "query_ids": [
+        "beir:scifact:1",
+        "beir:scifact:100",
+        "beir:scifact:1012",
+        "beir:scifact:1014",
+        "beir:scifact:1019",
+        "beir:scifact:1020",
+        "beir:scifact:1021",
+        "beir:scifact:1024",
+        "beir:scifact:1029",
+        "beir:scifact:1041",
+        "beir:scifact:1049",
+        "beir:scifact:1062",
+        "beir:scifact:1086",
+        "beir:scifact:1088",
+        "beir:scifact:1089",
+        "beir:scifact:1099",
+        "beir:scifact:1100",
+        "beir:scifact:1104",
+        "beir:scifact:1107",
+        "beir:scifact:1110"
+      ]
+    },
+    "scidocs": {
+      "n_queries": 10,
+      "query_ids": [
+        "beir:scidocs:01273bd34dacfe9ef887b320f36934d2f9fa9b34",
+        "beir:scidocs:012e396b02aa584cb74a65ae14af355e7c897858",
+        "beir:scidocs:01d208b33561362f7714f714d3bc4a1f7aa1637c",
+        "beir:scidocs:0210b3fe6f7173c86936b5dd9261bc0be0c45652",
+        "beir:scidocs:0229829e9a1eed5769a2b5eccddcaa7cd9460b92",
+        "beir:scidocs:027e7780dbda48d99f3654e77b4a63063224950e",
+        "beir:scidocs:02c9fe33a5d8cb94373cea20a53f01e0a0e70f7f",
+        "beir:scidocs:030ff7012b92b805a60976f8dbd6a08c1cecebe6",
+        "beir:scidocs:031a0f18d46b8e006eb4262233f7734fe4505c21",
+        "beir:scidocs:033897d56c7cf4f084dec1fad072f1a6aca65c6e"
+      ]
+    }
+  },
+  "methods": {
+    "scifact": {
+      "dense_batch_encode_s": 0.7894050000031712,
+      "bm25_search_per_query": {
+        "n": 20,
+        "mean_s": 0.018725894999442973,
+        "min_s": 0.0015239999993355013,
+        "p50_s": 0.017754650001734262,
+        "p95_s": 0.04024504499830073,
+        "max_s": 0.044108599999162834
+      },
+      "tfidf_search_per_query": {
+        "n": 20,
+        "mean_s": 0.04099641500142752,
+        "min_s": 0.0038700000004610047,
+        "p50_s": 0.02075775000048452,
+        "p95_s": 0.05642699000600291,
+        "max_s": 0.473953699998674
+      },
+      "dense_encode_per_query_amortized": {
+        "n": 20,
+        "mean_s": 0.03947025000015856,
+        "min_s": 0.03947025000015856,
+        "p50_s": 0.03947025000015856,
+        "p95_s": 0.03947025000015856,
+        "max_s": 0.03947025000015856
+      },
+      "dense_search_per_query": {
+        "n": 20,
+        "mean_s": 0.001210390000414918,
+        "min_s": 0.0009674999964772724,
+        "p50_s": 0.001126650004152907,
+        "p95_s": 0.0013824600002408274,
+        "max_s": 0.0030479999986710027
+      },
+      "rrf_fuse_per_query": {
+        "n": 20,
+        "mean_s": 0.00025822000097832645,
+        "min_s": 0.00023180000425782055,
+        "p50_s": 0.00025290000121458434,
+        "p95_s": 0.000292690000787843,
+        "max_s": 0.00029630000062752515
+      },
+      "hybrid_full_per_query_s": {
+        "n": 20,
+        "mean_s": 0.020194505000836215,
+        "min_s": 0.0029147000022931024,
+        "p50_s": 0.01914595000562258,
+        "p95_s": 0.04149502499712981,
+        "max_s": 0.045346800005063415
+      }
+    },
+    "scidocs": {
+      "dense_batch_encode_s": 0.36007499999686843,
+      "bm25_search_per_query": {
+        "n": 10,
+        "mean_s": 0.528488790000847,
+        "min_s": 0.09459200000128476,
+        "p50_s": 0.17312115000095218,
+        "p95_s": 1.5109023750028427,
+        "max_s": 1.536545400005707
+      },
+      "tfidf_search_per_query": {
+        "n": 10,
+        "mean_s": 0.2627738100003626,
+        "min_s": 0.09696960000292165,
+        "p50_s": 0.14358254999751807,
+        "p95_s": 0.8479166750010323,
+        "max_s": 1.3865039000011166
+      },
+      "dense_encode_per_query_amortized": {
+        "n": 10,
+        "mean_s": 0.036007499999686846,
+        "min_s": 0.036007499999686846,
+        "p50_s": 0.036007499999686846,
+        "p95_s": 0.036007499999686846,
+        "max_s": 0.036007499999686846
+      },
+      "dense_search_per_query": {
+        "n": 10,
+        "mean_s": 0.00619968000028166,
+        "min_s": 0.0052324999996926636,
+        "p50_s": 0.005618300001515308,
+        "p95_s": 0.009110910000526922,
+        "max_s": 0.011830800001916941
+      },
+      "rrf_fuse_per_query": {
+        "n": 10,
+        "mean_s": 0.0002914600001531653,
+        "min_s": 0.00024640000629005954,
+        "p50_s": 0.0002988499982166104,
+        "p95_s": 0.00032865499997569714,
+        "max_s": 0.00033229999826289713
+      },
+      "hybrid_full_per_query_s": {
+        "n": 10,
+        "mean_s": 0.5349799300012819,
+        "min_s": 0.10059699999692384,
+        "p50_s": 0.17917409999790834,
+        "p95_s": 1.516730955003004,
+        "max_s": 1.5424539000086952
+      }
+    }
+  },
+  "build": {
+    "scifact": {
+      "bm25_index_build_s": 1.0978580999944825,
+      "tfidf_index_build_s": 1.4889695000019856,
+      "corpus_docs": 5183,
+      "dense_stack_load_s": 12.057227099998272
+    },
+    "scidocs": {
+      "bm25_index_build_s": 5.907876599994779,
+      "tfidf_index_build_s": 8.741453600006935,
+      "corpus_docs": 25657,
+      "dense_stack_load_s": 1.746458599998732
+    }
+  }
+}

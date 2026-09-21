@@ -1,0 +1,6 @@
+{
+  "load_stack_s": 14.628315700007079,
+  "first_query_end_to_end_s": 0.054961600006208755,
+  "fused_depth": 100,
+  "peak_rss_bytes": 895029248
+}

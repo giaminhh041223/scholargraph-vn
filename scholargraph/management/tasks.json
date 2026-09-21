@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T20:15:00+07:00",
+  "updated_at": "2026-09-21T21:15:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1336,20 +1336,37 @@
       "title": "Performance profiling",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-063",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-028",
         "SG-039"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "src/scholargraph/evaluation/performance.py",
+        "scripts/profile_performance.py",
+        "artifacts/reports/performance.json",
+        "artifacts/reports/performance.md",
+        "tests/unit/test_performance.py",
+        "management/logs/SESSION-20260921-063.md"
+      ],
+      "verification": [
+        "2026-09-21T21:15:00+07:00: Cold fresh-interpreter (load 14.6s warm-cache; 78.6s lan dau kem HF fetch; first query 0.05s; RSS 895MB) + warm 20 SciFact/10 SCIDOCS per-method P50/P95 + track-B stages (c100_ppr mean 1.68s) + concurrency 1.84x + index sizes. Tat ca la inference that.",
+        "2026-09-21T21:15:00+07:00: Budget 500ms bao that: SCIDOCS lexical p95 + track-B vuot (ghi ro, khong toi uu). pytest tests/unit/test_performance.py 7/7 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "src/scholargraph/evaluation/performance.py",
+        "scripts/profile_performance.py",
+        "artifacts/reports/performance.json",
+        "tests/unit/test_performance.py",
+        "management/logs/SESSION-20260921-063.md"
+      ],
+      "note": "Profile that thi; SG-041 mo khi SG-040 DONE."
     },
     {
       "id": "SG-041",
