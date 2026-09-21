@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T19:30:00+07:00",
+  "updated_at": "2026-09-21T20:15:00+07:00",
   "phase": "M6",
-  "stage": "sg029_review_pending_fresh_review",
+  "stage": "sg030_review_human_gate_pending",
   "active_tasks": [
-    "SG-029"
+    "SG-030"
   ],
-  "next_task_id": "SG-029",
-  "last_session_id": "SESSION-20260921-061",
-  "last_session_log": "management/logs/SESSION-20260921-061.md",
+  "next_task_id": "SG-030",
+  "last_session_id": "SESSION-20260921-062",
+  "last_session_log": "management/logs/SESSION-20260921-062.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -55,10 +55,10 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-21T19:30:00+07:00",
+    "checked_at": "2026-09-21T20:15:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
     "task_count": 51,
-    "scope": "SG-029 REVIEW (ablation+robustness, 11/11 tests; fresh review pending). DONE=37, REVIEW=1, TODO=9."
+    "scope": "SG-030 REVIEW (24 bootstrap CIs + 24 packets, 8/8 tests; human gate: 2-member reading + approval). DONE=38, REVIEW=1, TODO=8."
   }
 }

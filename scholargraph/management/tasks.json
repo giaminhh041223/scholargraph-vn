@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T19:30:00+07:00",
+  "updated_at": "2026-09-21T20:15:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -983,7 +983,7 @@
       "title": "Ablation và robustness",
       "phase": "M6",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R/D",
       "owner": "coordinator/worker-single-chat",
       "session_id": "SESSION-20260921-061",
@@ -1006,7 +1006,8 @@
       "verification": [
         "2026-09-21T19:30:00+07:00: A1 age on/off test200 (ppr/global x lambda 0/0.01/0.03/0.1 @g0.3): lambda=0 tot nhat, suy giam don dieu; A2 no-graph trich registry; A3 RRF k=30/60/100 (k60 khop sealed bit-exact; k it anh huong). Tat ca arms trong prespecified set, khong select tren test.",
         "2026-09-21T19:30:00+07:00: R1/R2/R3 buckets (query length, missing abstract, node degree) + R4 costs + R5 failures (0/0, measured). pytest tests/unit/test_ablation.py 11/11 PASS.",
-        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-21T19:45:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-029 DONE') with self-check-only disclosure. Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-030 unblocked."
       ],
       "claimed_paths": [
         "scripts/run_ablation.py",
@@ -1022,19 +1023,38 @@
       "title": "Thống kê và error analysis",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-062",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-029"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "src/scholargraph/evaluation/statistics.py",
+        "scripts/run_statistics.py",
+        "artifacts/reports/statistics.json",
+        "artifacts/reports/statistics.md",
+        "artifacts/reports/error_packets.json",
+        "docs/ERROR_ANALYSIS.md",
+        "tests/unit/test_statistics.py",
+        "management/logs/SESSION-20260921-062.md"
+      ],
+      "verification": [
+        "2026-09-21T20:15:00+07:00: 24 paired bootstrap CIs (B=10000, seed 20260915, 95% percentile, theo protocol; khong p-value): dense>bm25 ca 2 corpus (CI loai 0); hybrid-vs-dense SciFact CI chua 0 (khong ket luan); SCIDOCS hybrid<dense; ppr-vs-global chua 0.",
+        "2026-09-21T20:15:00+07:00: 24 error packets san sang cho 2 nguoi doc (12 SciFact + 6 SCIDOCS + 6 track B) + checklist trong docs/ERROR_ANALYSIS.md. pytest tests/unit/test_statistics.py 8/8 PASS.",
+        "PENDING HUMAN GATE (routing human_approval_required=true): (1) hai thanh vien doc 24 packets + ghi joint note; (2) owner duyet. Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "src/scholargraph/evaluation/statistics.py",
+        "scripts/run_statistics.py",
+        "artifacts/reports/statistics.json",
+        "tests/unit/test_statistics.py",
+        "management/logs/SESSION-20260921-062.md"
+      ],
+      "note": "Stats + packets xong; cho 2 nguoi doc loi + owner duyet (human gate)."
     },
     {
       "id": "SG-031",

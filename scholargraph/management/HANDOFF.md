@@ -1,6 +1,22 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-029
+NEXT_TASK: SG-030
+
+## SG-030 REVIEW + human gate — 2026-09-21T20:15:00+07:00
+
+- **SG-030 REVIEW** (session 062): 24 paired bootstrap CIs (B=10k, seed 20260915,
+  95% percentile; không p-value). dense>bm25 cả 2 corpus; hybrid-vs-dense SciFact
+  CI chứa 0; ppr-vs-global chứa 0. 24 error packets sẵn sàng.
+- **HUMAN GATE (2 việc của 2 bạn):** (1) cả hai đọc 24 packets + joint note trong
+  `docs/ERROR_ANALYSIS.md`; (2) owner duyệt SG-030. Sau đó mới mở SG-033 (nhãn).
+- Board: DONE=38, REVIEW=1 (SG-030), TODO=8, DEFERRED=4. Checker PASS (sẽ chạy).
+
+## SG-029 DONE + SG-030 mở — 2026-09-21T19:45:00+07:00
+
+- **SG-029 DONE**: owner duyệt qua question tool (tiền lệ tự kiểm).
+- **SG-030 IN_PROGRESS** (session 062): paired bootstrap CI 95%/10k theo protocol +
+  error packets 20-30 ca cho 2 người đọc (human gate) + owner duyệt.
+- Board: DONE=38, IN_PROGRESS=1 (SG-030), TODO=8, DEFERRED=4.
 
 ## SG-029 REVIEW (tự kiểm) — 2026-09-21T19:30:00+07:00
 
