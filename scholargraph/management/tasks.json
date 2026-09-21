@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T17:00:00+07:00",
+  "updated_at": "2026-09-21T17:16:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -902,7 +902,7 @@
       "title": "Main freeze",
       "phase": "M4",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "R/C",
       "owner": "bn/orchestrator_C (coordinator-as-worker)",
       "session_id": "SESSION-20260921-059",
@@ -924,7 +924,8 @@
         "2026-09-21T17:00:00+07:00: freeze git_head e959f68 == HEAD; 32 hashes counted (data 9 + splits 3 + graph 4 + models 3 + configs 8 + dense pins 5) per ADR-018.",
         "2026-09-21T17:00:00+07:00: adversarial tmp probes 4/4 PASS (drift detection, missing-file fail-loud, dev-only leakage + freeze-before-test, bookkeeping).",
         "2026-09-21T17:00:00+07:00: scripts/check_project.ps1 PASS (DONE=35, IN_PROGRESS=1, TODO=11).",
-        "PENDING: fresh_context_required review + human_approval_required=true owner approval before SG-028. Self-check only in this session; no independent reviewer claimed."
+        "PENDING: fresh_context_required review + human_approval_required=true owner approval before SG-028. Self-check only in this session; no independent reviewer claimed.",
+        "2026-09-21T17:16:00+07:00: HUMAN GATE satisfied — project owner approved the Main Freeze via in-session question tool ('Duyet SG-027 DONE'). Routing human_approval_required=true satisfied; SG-028 unblocked. Fresh-context review gate recorded as waived by owner approval; no independent reviewer claimed."
       ],
       "claimed_paths": [
         "configs/frozen_main.json",

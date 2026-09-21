@@ -1,6 +1,15 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-027
+NEXT_TASK: SG-028
+
+## SG-027 DONE (owner duyệt) — 2026-09-21T17:16:00+07:00
+
+- **SG-027 DONE**: owner duyệt freeze qua question tool ('Duyệt SG-027 DONE') sau khi
+  được thông báo rõ chỉ có tự kiểm (9/9 tests + 4/4 probes, không reviewer độc lập).
+  Human gate thỏa; **SG-028 Final runs unblocked**.
+- Board: DONE=36, TODO=11, DEFERRED=4. Checker PASS. Không còn assignment active.
+- Tiếp theo: `SG-028` (chạy frozen methods từng protocol, lưu TREC/per-query/aggregate).
+  SG-033 vẫn chờ 2 người gán nhãn (không thuộc phiên này).
 
 ## SG-027 REVIEW (tự kiểm) — 2026-09-21T17:00:00+07:00
 
