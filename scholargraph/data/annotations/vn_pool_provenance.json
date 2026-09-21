@@ -1,0 +1,2294 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-033",
+  "generated_at": "2026-09-21T16:54:15.832278+00:00",
+  "sealed_for": "SG-034 analysis only — hidden during labeling",
+  "seed": 20260915,
+  "depth": 10,
+  "provenance": {
+    "vn:dev:001": {
+      "openalex:W4389093114": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3133519121": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3141717099": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4327899675": [
+        "translated_bm25"
+      ],
+      "openalex:W3214507200": [
+        "translated_bm25"
+      ],
+      "openalex:W4366551350": [
+        "translated_bm25"
+      ],
+      "openalex:W2529354470": [
+        "translated_bm25"
+      ],
+      "openalex:W2891643155": [
+        "translated_bm25"
+      ],
+      "openalex:W4411673697": [
+        "translated_bm25"
+      ],
+      "openalex:W3172076064": [
+        "translated_bm25"
+      ],
+      "openalex:W4401547382": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4415358428": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4392236416": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4402220266": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4387084854": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4287854764": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4376113402": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3170061265": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4387614756": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4417489201": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402898309": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:002": {
+      "openalex:W4211112851": [
+        "translated_bm25"
+      ],
+      "openalex:W2911527275": [
+        "translated_bm25"
+      ],
+      "openalex:W4378228851": [
+        "translated_bm25"
+      ],
+      "openalex:W4388499754": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4395070800": [
+        "translated_bm25"
+      ],
+      "openalex:W4399300348": [
+        "translated_bm25"
+      ],
+      "openalex:W4311505210": [
+        "translated_bm25"
+      ],
+      "openalex:W4408175731": [
+        "translated_bm25"
+      ],
+      "openalex:W4392201430": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3100708820": [
+        "translated_bm25"
+      ],
+      "openalex:W4389547830": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3161900642": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3138205321": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4319068083": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4411418564": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3021066313": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4366525959": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4319082940": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4400031869": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4214509810": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4214767656": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401555602": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3156224748": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386417184": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3005901674": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:003": {
+      "openalex:W3190090328": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3006863666": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386893095": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4405997304": [
+        "translated_bm25"
+      ],
+      "openalex:W4309739381": [
+        "translated_bm25"
+      ],
+      "openalex:W4235449594": [
+        "translated_bm25"
+      ],
+      "openalex:W3196576658": [
+        "translated_bm25"
+      ],
+      "openalex:W4413323436": [
+        "translated_bm25"
+      ],
+      "openalex:W1488358594": [
+        "translated_bm25"
+      ],
+      "openalex:W2133676034": [
+        "translated_bm25"
+      ],
+      "openalex:W4205503877": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4200373041": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4388219750": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4280550048": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3130558257": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4404285128": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3213398408": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3139319073": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4295681497": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4388067414": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4387266791": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2088351047": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:004": {
+      "openalex:W4313414369": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4405524706": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3177118919": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4366957262": [
+        "translated_bm25"
+      ],
+      "openalex:W2026016723": [
+        "translated_bm25"
+      ],
+      "openalex:W4408153241": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386028990": [
+        "translated_bm25"
+      ],
+      "openalex:W4401251185": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401251207": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3040314783": [
+        "translated_bm25"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W1980714004": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W1964991726": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2734698323": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4232725947": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7160462182": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W2089007864": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W1995624221": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W1480687347": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4415924971": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:005": {
+      "openalex:W3004085829": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7136376314": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2916240996": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4396608433": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4319781029": [
+        "translated_bm25"
+      ],
+      "openalex:W2161059653": [
+        "translated_bm25"
+      ],
+      "openalex:W4386729270": [
+        "translated_bm25"
+      ],
+      "openalex:W4378233777": [
+        "translated_bm25"
+      ],
+      "openalex:W4371785051": [
+        "translated_bm25"
+      ],
+      "openalex:W7162833419": [
+        "translated_bm25"
+      ],
+      "openalex:W4385573609": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2995214047": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4392902227": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4392902241": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4214933304": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4402747738": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3030133709": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W1807420371": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4367146566": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W2090602322": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4211230355": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:006": {
+      "openalex:W4323031833": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4414476246": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4224929142": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4406661293": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393862227": [
+        "translated_bm25"
+      ],
+      "openalex:W4392881890": [
+        "translated_bm25"
+      ],
+      "openalex:W7129380070": [
+        "translated_bm25"
+      ],
+      "openalex:W3010398207": [
+        "translated_bm25"
+      ],
+      "openalex:W7131758091": [
+        "translated_bm25"
+      ],
+      "openalex:W4323662930": [
+        "translated_bm25"
+      ],
+      "openalex:W4402220266": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W1964991726": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4416396107": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2010840650": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4413025875": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7206801929": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4414764873": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3170061265": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3048469880": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4399665479": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4378516263": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:007": {
+      "openalex:W4309736004": [
+        "translated_bm25"
+      ],
+      "openalex:W4414618918": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4296990080": [
+        "translated_bm25"
+      ],
+      "openalex:W4308727034": [
+        "translated_bm25"
+      ],
+      "openalex:W4310490426": [
+        "translated_bm25"
+      ],
+      "openalex:W3119357638": [
+        "translated_bm25"
+      ],
+      "openalex:W7144099956": [
+        "translated_bm25"
+      ],
+      "openalex:W4241707254": [
+        "translated_bm25"
+      ],
+      "openalex:W3214507200": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3035361739": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3099972023": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4404285128": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3113950957": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3126678455": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4231582519": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3085825554": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4390979806": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4297093311": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402426105": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3198460693": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3216984101": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3112800536": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3048879013": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:008": {
+      "openalex:W3216247144": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3215218816": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3194644054": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4413025072": [
+        "translated_bm25"
+      ],
+      "openalex:W4220944089": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4226325130": [
+        "translated_bm25"
+      ],
+      "openalex:W4404263922": [
+        "translated_bm25"
+      ],
+      "openalex:W4389519127": [
+        "translated_bm25"
+      ],
+      "openalex:W4353109195": [
+        "translated_bm25"
+      ],
+      "openalex:W7125947234": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3139319073": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4253177099": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393321320": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4415156723": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7128623584": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4281659506": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4254287474": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3010226827": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3210307996": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4360859287": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:009": {
+      "openalex:W3138205321": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4297458461": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4318541376": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3160735230": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3153228281": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4223605206": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3021619624": [
+        "translated_bm25"
+      ],
+      "openalex:W3208289046": [
+        "translated_bm25"
+      ],
+      "openalex:W4313492007": [
+        "translated_bm25"
+      ],
+      "openalex:W3164288247": [
+        "translated_bm25"
+      ],
+      "openalex:W4392773076": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4415131507": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3007095655": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4281659506": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4403990196": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4406795697": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:dev:010": {
+      "openalex:W2766393917": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2767325740": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4409942617": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4280548928": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3176327488": [
+        "translated_bm25"
+      ],
+      "openalex:W1815347410": [
+        "translated_bm25"
+      ],
+      "openalex:W4379645494": [
+        "translated_bm25"
+      ],
+      "openalex:W3104207208": [
+        "translated_bm25"
+      ],
+      "openalex:W4308976246": [
+        "translated_bm25"
+      ],
+      "openalex:W4281743154": [
+        "translated_bm25"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4411709179": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4283160522": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4382468081": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4294349118": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4382996882": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7127288205": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4399777907": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3016462384": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4392773076": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4302012799": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:001": {
+      "openalex:W4386945278": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3127164240": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3136164205": [
+        "translated_bm25"
+      ],
+      "openalex:W7134847038": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4406205595": [
+        "translated_bm25"
+      ],
+      "openalex:W3043172995": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4405949718": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4413181613": [
+        "translated_bm25"
+      ],
+      "openalex:W7127647679": [
+        "translated_bm25"
+      ],
+      "openalex:W3117206776": [
+        "translated_bm25"
+      ],
+      "openalex:W4283516814": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4382776092": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4388944527": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4407585537": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4401547382": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4414764873": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3003018218": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4323662930": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:002": {
+      "openalex:W3138205321": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4404185697": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4410587223": [
+        "translated_bm25"
+      ],
+      "openalex:W4297458461": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4223605206": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393850205": [
+        "translated_bm25"
+      ],
+      "openalex:W4313485199": [
+        "translated_bm25"
+      ],
+      "openalex:W4415300147": [
+        "translated_bm25"
+      ],
+      "openalex:W4410881560": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401317952": [
+        "translated_bm25"
+      ],
+      "openalex:W4414764873": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4311255638": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4285588130": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4411918751": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4395007500": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4253177099": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4416396107": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4406795697": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4413308493": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3133519121": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4310184741": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4327811512": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4403184708": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3118526518": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:003": {
+      "openalex:W4394874527": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4323314079": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3192842223": [
+        "translated_bm25"
+      ],
+      "openalex:W4414761462": [
+        "translated_bm25"
+      ],
+      "openalex:W3181599436": [
+        "translated_bm25"
+      ],
+      "openalex:W4408880971": [
+        "translated_bm25"
+      ],
+      "openalex:W4388673675": [
+        "translated_bm25"
+      ],
+      "openalex:W4212978291": [
+        "translated_bm25"
+      ],
+      "openalex:W4392346236": [
+        "translated_bm25"
+      ],
+      "openalex:W4366084601": [
+        "translated_bm25"
+      ],
+      "openalex:W4284694594": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3160767347": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4220654714": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4253177099": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4401198335": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4297495940": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4409323492": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4380087918": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3133519121": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4285588130": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4399379316": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4405781666": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4293530383": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4380264658": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3010226827": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:004": {
+      "openalex:W3120977657": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4415432614": [
+        "translated_bm25"
+      ],
+      "openalex:W4401300796": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4312304546": [
+        "translated_bm25"
+      ],
+      "openalex:W4407555395": [
+        "translated_bm25"
+      ],
+      "openalex:W3196118804": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4410901866": [
+        "translated_bm25"
+      ],
+      "openalex:W4385349689": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4322706808": [
+        "translated_bm25"
+      ],
+      "openalex:W4367550006": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4312196572": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4396506287": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4391768603": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4402220266": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4377094006": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4211190202": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4281659506": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4224273198": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386417184": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4323031833": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4289654640": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:005": {
+      "openalex:W3130558257": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4280550048": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3006863666": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3080791042": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402920617": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386893095": [
+        "translated_bm25"
+      ],
+      "openalex:W4286494054": [
+        "translated_bm25"
+      ],
+      "openalex:W4392008303": [
+        "translated_bm25"
+      ],
+      "openalex:W4401168854": [
+        "translated_bm25"
+      ],
+      "openalex:W4212978291": [
+        "translated_bm25"
+      ],
+      "openalex:W4205503877": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4200373041": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4411918751": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4404285128": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4295681497": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3118526518": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3049321748": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4388219750": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385259099": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4387395221": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:006": {
+      "openalex:W2766393917": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2767325740": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4353081311": [
+        "translated_bm25"
+      ],
+      "openalex:W3085747564": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3133952572": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3094144049": [
+        "translated_bm25"
+      ],
+      "openalex:W970275373": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4394922444": [
+        "translated_bm25"
+      ],
+      "openalex:W4414704255": [
+        "translated_bm25"
+      ],
+      "openalex:W4312210978": [
+        "translated_bm25"
+      ],
+      "openalex:W3037078219": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385574327": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4391983718": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W2620887933": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4391424494": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3135847883": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7164347219": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3198415313": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3094135119": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4385756462": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:007": {
+      "openalex:W2336831300": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3176327488": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4252348984": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4214612112": [
+        "translated_bm25"
+      ],
+      "openalex:W4235475292": [
+        "translated_bm25"
+      ],
+      "openalex:W2070264227": [
+        "translated_bm25"
+      ],
+      "openalex:W4251437589": [
+        "translated_bm25"
+      ],
+      "openalex:W4240718444": [
+        "translated_bm25"
+      ],
+      "openalex:W4242409237": [
+        "translated_bm25"
+      ],
+      "openalex:W4234888786": [
+        "translated_bm25"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2886955910": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2083858805": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2061067736": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4313256688": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4406687051": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3213099165": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2091002342": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4415046980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4205678521": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W2141653139": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3197236654": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:008": {
+      "openalex:W7207709124": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2099739120": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393138722": [
+        "translated_bm25"
+      ],
+      "openalex:W4402581259": [
+        "translated_bm25"
+      ],
+      "openalex:W2005647671": [
+        "translated_bm25"
+      ],
+      "openalex:W4280506036": [
+        "translated_bm25"
+      ],
+      "openalex:W249509517": [
+        "translated_bm25"
+      ],
+      "openalex:W2079013705": [
+        "translated_bm25"
+      ],
+      "openalex:W3213898752": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2263624911": [
+        "translated_bm25"
+      ],
+      "openalex:W4386411968": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4386566438": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126336057": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W1997432734": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4405280094": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4289276093": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3114582376": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4396877899": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3193673569": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W593914218": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4391957085": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4412401937": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2165902260": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4281263087": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3211695117": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:009": {
+      "openalex:W3004114204": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402288687": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7161958250": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3084923820": [
+        "translated_bm25"
+      ],
+      "openalex:W4360617463": [
+        "translated_bm25"
+      ],
+      "openalex:W4391168569": [
+        "translated_bm25"
+      ],
+      "openalex:W4386417211": [
+        "translated_bm25"
+      ],
+      "openalex:W4323833155": [
+        "translated_bm25"
+      ],
+      "openalex:W3080432310": [
+        "translated_bm25"
+      ],
+      "openalex:W2158835682": [
+        "translated_bm25"
+      ],
+      "openalex:W3135714317": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7161297345": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4293545873": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3040729127": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3037903309": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7135493371": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4401043597": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385573712": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4289861417": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4384068096": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401820536": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:010": {
+      "openalex:W3201302602": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4403553593": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401161129": [
+        "translated_bm25"
+      ],
+      "openalex:W4206206083": [
+        "translated_bm25"
+      ],
+      "openalex:W2105157020": [
+        "translated_bm25"
+      ],
+      "openalex:W4399205872": [
+        "translated_bm25"
+      ],
+      "openalex:W3129134261": [
+        "translated_bm25"
+      ],
+      "openalex:W3023534206": [
+        "translated_bm25"
+      ],
+      "openalex:W3176127324": [
+        "translated_bm25"
+      ],
+      "openalex:W1988711048": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W1486033873": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4392773076": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3133952572": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W1554506751": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3037078219": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3135847883": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3120851275": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4295453813": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3180841593": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4389301654": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3097485556": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4407122152": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2731385229": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4383959354": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:011": {
+      "openalex:W4396608433": [
+        "translated_bm25"
+      ],
+      "openalex:W3134069009": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4380687221": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4386030531": [
+        "translated_bm25"
+      ],
+      "openalex:W2797891952": [
+        "translated_bm25"
+      ],
+      "openalex:W4406458928": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3179945325": [
+        "translated_bm25"
+      ],
+      "openalex:W3201302602": [
+        "translated_bm25"
+      ],
+      "openalex:W4285194641": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3206380387": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4213316513": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4391721197": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4310364510": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3210307996": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4416031714": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385226213": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4281762223": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4393408900": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3005901674": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3198252989": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3201551569": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:012": {
+      "openalex:W4394575897": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3163637628": [
+        "translated_bm25"
+      ],
+      "openalex:W4393383996": [
+        "translated_bm25"
+      ],
+      "openalex:W4415001557": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3036659011": [
+        "translated_bm25"
+      ],
+      "openalex:W3014382184": [
+        "translated_bm25"
+      ],
+      "openalex:W4320507225": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4308486813": [
+        "translated_bm25"
+      ],
+      "openalex:W4320726752": [
+        "translated_bm25"
+      ],
+      "openalex:W3013536404": [
+        "translated_bm25"
+      ],
+      "openalex:W4205503877": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4405781666": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4321769485": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4404285128": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3118526518": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3035880085": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4406447276": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4403990196": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4403860516": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3112925755": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4223918432": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4409438895": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3036583493": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:013": {
+      "openalex:W4406407313": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4313414369": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3040314783": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2399484104": [
+        "translated_bm25"
+      ],
+      "openalex:W4402693825": [
+        "translated_bm25"
+      ],
+      "openalex:W4416887663": [
+        "translated_bm25"
+      ],
+      "openalex:W4403553593": [
+        "translated_bm25"
+      ],
+      "openalex:W4406085363": [
+        "translated_bm25"
+      ],
+      "openalex:W4408153241": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401161129": [
+        "translated_bm25"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4392773076": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4410078855": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4415924971": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4225536321": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3005901674": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4405524706": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4415983600": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4319082940": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402743471": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4414638043": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:014": {
+      "openalex:W3215218816": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3194644054": [
+        "translated_bm25"
+      ],
+      "openalex:W4392881890": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4413025072": [
+        "translated_bm25"
+      ],
+      "openalex:W4220944089": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7125947234": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4416252120": [
+        "translated_bm25"
+      ],
+      "openalex:W4413982547": [
+        "translated_bm25"
+      ],
+      "openalex:W3212879407": [
+        "translated_bm25"
+      ],
+      "openalex:W4252427250": [
+        "translated_bm25"
+      ],
+      "openalex:W4206181061": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4393098468": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4281659506": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4288067784": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4397049601": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402220266": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4414484564": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4311255638": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3200937053": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3113505813": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393321320": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4408663251": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4393241381": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4288758076": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:015": {
+      "openalex:W4406407313": [
+        "translated_bm25"
+      ],
+      "openalex:W4399365836": [
+        "translated_bm25"
+      ],
+      "openalex:W4383497679": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3210857026": [
+        "translated_bm25"
+      ],
+      "openalex:W2399484104": [
+        "translated_bm25"
+      ],
+      "openalex:W3135028031": [
+        "translated_bm25"
+      ],
+      "openalex:W4410188574": [
+        "translated_bm25"
+      ],
+      "openalex:W4308727034": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4310490426": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4321789105": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W2164544342": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4405113218": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4200493178": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W1964991726": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4308687068": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3038616631": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4323031833": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2058302527": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3139319073": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385226213": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4309736004": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4402426105": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4389455268": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:016": {
+      "openalex:W4402220266": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4394874527": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4411673697": [
+        "translated_bm25"
+      ],
+      "openalex:W3139654928": [
+        "translated_bm25"
+      ],
+      "openalex:W3170061265": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7117464239": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4376113402": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4396694361": [
+        "translated_bm25"
+      ],
+      "openalex:W4220958062": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199229491": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4415358428": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4411918751": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4253177099": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4387592320": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4310184741": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4323921104": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4387614756": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4406503084": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4399665479": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:017": {
+      "openalex:W3034506286": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4319781029": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3171131018": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3083979605": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4323668127": [
+        "translated_bm25"
+      ],
+      "openalex:W3081243492": [
+        "translated_bm25"
+      ],
+      "openalex:W3154000428": [
+        "translated_bm25"
+      ],
+      "openalex:W4411184221": [
+        "translated_bm25"
+      ],
+      "openalex:W3128119963": [
+        "translated_bm25"
+      ],
+      "openalex:W4226331877": [
+        "translated_bm25"
+      ],
+      "openalex:W4206143587": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2002547600": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4327912210": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4413973327": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3093105030": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4396896562": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4396698482": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7120511715": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7142073398": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4411472469": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4395451248": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:018": {
+      "openalex:W4360617282": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4385799539": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3106809994": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3024478371": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3144558234": [
+        "translated_bm25"
+      ],
+      "openalex:W3031031194": [
+        "translated_bm25"
+      ],
+      "openalex:W4396232287": [
+        "translated_bm25"
+      ],
+      "openalex:W2507740821": [
+        "translated_bm25"
+      ],
+      "openalex:W4311487515": [
+        "translated_bm25"
+      ],
+      "openalex:W4284990544": [
+        "translated_bm25"
+      ],
+      "openalex:W7164347219": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4390141881": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4367146566": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3199066980": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W2328409093": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4401009896": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4385573466": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4387849088": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W3094430118": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7172422244": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W970275373": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3166336242": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:019": {
+      "openalex:W4248173379": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4379191927": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4308728310": [
+        "translated_bm25"
+      ],
+      "openalex:W4385351752": [
+        "translated_bm25"
+      ],
+      "openalex:W4281392476": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3165528579": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4254349437": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4405782650": [
+        "translated_bm25"
+      ],
+      "openalex:W3211695117": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W7113652971": [
+        "translated_bm25"
+      ],
+      "openalex:W4401132085": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4282571011": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4411128906": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4403336400": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4382725419": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4367186552": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3193488692": [
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3200293699": [
+        "vn_hybrid_rrf"
+      ]
+    },
+    "vn:test:020": {
+      "openalex:W4231441946": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4385740148": [
+        "multilingual_dense_e5",
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3084886934": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4401612481": [
+        "translated_bm25"
+      ],
+      "openalex:W3161849626": [
+        "translated_bm25"
+      ],
+      "openalex:W4392436736": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W3035012228": [
+        "translated_bm25"
+      ],
+      "openalex:W3206895341": [
+        "translated_bm25",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4406714956": [
+        "translated_bm25"
+      ],
+      "openalex:W4225312687": [
+        "translated_bm25"
+      ],
+      "openalex:W7126227821": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4403736885": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4414013542": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4416031714": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4407221202": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4409729137": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4387528463": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4412658264": [
+        "multilingual_dense_e5"
+      ],
+      "openalex:W4312210978": [
+        "multilingual_dense_e5",
+        "vn_hybrid_rrf"
+      ],
+      "openalex:W4406753543": [
+        "vn_hybrid_rrf"
+      ]
+    }
+  }
+}

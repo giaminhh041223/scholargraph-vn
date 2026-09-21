@@ -2,6 +2,15 @@
 
 NEXT_TASK: SG-033
 
+## SG-033 pool xong, chờ nhãn người — 2026-09-21T22:00:00+07:00
+
+- **SG-033 IN_PROGRESS** (session 064, tooling): pool mù 30 query (10 dev/20 test),
+  662 cặp (≤900); template nhãn + agreement script; tests 6/6.
+- **HUMAN WORK (2 bạn):** chấm dev pool → SG-034 → chấm test pool; kappa trước
+  adjudication; ~16h dự trù. Agent không bịa nhãn.
+- Board: DONE=38, REVIEW=2 (SG-030 human gate, SG-040), IN_PROGRESS=1 (SG-033),
+  TODO=6, DEFERRED=4.
+
 ## SG-040 REVIEW; SG-033 pool prep tiếp — 2026-09-21T21:15:00+07:00
 
 - **SG-040 REVIEW** (session 063): cold 14.6s/RSS 895MB, warm P50/P95 đầy đủ,

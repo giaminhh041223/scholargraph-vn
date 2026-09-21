@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T21:15:00+07:00",
+  "updated_at": "2026-09-21T22:00:00+07:00",
   "phase": "M6",
-  "stage": "sg040_review_sg033_pool_next",
+  "stage": "sg033_pool_done_labels_pending",
   "active_tasks": [
     "SG-030",
+    "SG-033",
     "SG-040"
   ],
   "next_task_id": "SG-033",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T21:15:00+07:00",
+  "updated_at": "2026-09-21T22:00:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1131,21 +1131,39 @@
       "title": "Pool và nhãn hai người",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "role": "H",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat (tooling only; labels by 2 members)",
+      "session_id": "SESSION-20260921-064",
       "estimate_human_hours": 16,
       "dependencies": [
         "SG-025",
         "SG-031",
         "SG-032"
       ],
-      "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "blocked_reason": "Nhan relevance do 2 nguoi gan (human gate); agent chi dung pool mu + cong cu.",
+      "evidence": [
+        "scripts/build_vn_pool.py",
+        "scripts/score_vn_agreement.py",
+        "data/annotations/vn_pool.json",
+        "data/annotations/vn_pool_provenance.json",
+        "data/annotations/vn_labels.jsonl",
+        "tests/unit/test_vn_pool.py",
+        "management/logs/SESSION-20260921-064.md"
+      ],
+      "verification": [
+        "2026-09-21T22:00:00+07:00: Pool mu 30 query (10 dev/20 test), 662 cap duy nhat (<=900, khong can cat giam): top-10 x 3 methods (translated_bm25, multilingual_dense_e5, vn_hybrid_rrf) tren OpenAlex 18.250 works, dedup, shuffle seed 20260915, khong method/score trong dong pool.",
+        "2026-09-21T22:00:00+07:00: Template vn_labels.jsonl 662 dong label=null + score_vn_agreement.py (kappa co trong so, raw agreement, confusion; exit 1 khi chua xong). pytest tests/unit/test_vn_pool.py 6/6 PASS.",
+        "PENDING HUMAN WORK: 2 nguoi cham dev pool truoc (SG-034 chon default) roi test pool; kappa truoc adjudication; agent khong bao gio bia nhan."
+      ],
+      "claimed_paths": [
+        "scripts/build_vn_pool.py",
+        "scripts/score_vn_agreement.py",
+        "data/annotations/vn_pool.json",
+        "tests/unit/test_vn_pool.py",
+        "management/logs/SESSION-20260921-064.md"
+      ],
+      "note": "Agent: pool mu + scaffolding. Nhan + kappa + adjudication: 2 nguoi (gate)."
     },
     {
       "id": "SG-034",
