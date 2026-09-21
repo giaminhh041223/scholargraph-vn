@@ -1,0 +1,19 @@
+{
+  "artifact_kind": "final_test_freeze",
+  "task_id": "SG-028",
+  "status": "FROZEN",
+  "generated_at": "2026-09-21T10:40:36.086227+00:00",
+  "frozen_manifest": "configs/frozen_main.json",
+  "frozen_manifest_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+  "track": "A",
+  "method": "hybrid",
+  "dataset": "scidocs",
+  "split": "test",
+  "resolved_config_hash": "2b2d31ac51be9b192ec73fa61cb6c29a0af4bace7c49a1d43bee82d24ff3b15c",
+  "data_hash": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+  "split_hash": "6b97c7b43b6633577ee404e100a4039a0b3adbce23fd4308c77d1c8d5a932372",
+  "model_hash": "d256ffa21d708e1cb163f29bf1d235365ef9e0267f2d4e980851e7eca5873741",
+  "model_id": "hybrid-rrf-k60",
+  "model_revision": "sg020-1.0.0",
+  "evaluator_revision": "sg008-1.0.0"
+}

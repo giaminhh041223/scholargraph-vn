@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T17:16:00+07:00",
+  "updated_at": "2026-09-21T18:00:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -941,19 +941,41 @@
       "title": "Final runs",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-060",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-027"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "artifacts/reports/main_results.md",
+        "artifacts/reports/main_run_registry.json",
+        "artifacts/reports/b_trials_test.json",
+        "artifacts/final_test/",
+        "scripts/run_final.py",
+        "src/scholargraph/evaluation/sealed.py",
+        "src/scholargraph/retrieval/bm25.py",
+        "src/scholargraph/retrieval/tfidf.py",
+        "tests/unit/test_final_runs.py",
+        "management/logs/SESSION-20260921-060.md"
+      ],
+      "verification": [
+        "2026-09-21T18:00:00+07:00: 7 sealed track-A test runs COMPLETED final_test=true (SciFact 300q: bm25 0.6647 / tfidf 0.6327 / dense 0.7404 / hybrid 0.7204; SCIDOCS 1000q: bm25 0.1521 / dense 0.2172 / hybrid 0.1976 nDCG@10) + track-B test200 sealed (ppr 0.1004 / global 0.1082, frozen g0.3/l0.0, no test tuning). Track C VN chua do (SG-033).",
+        "2026-09-21T18:00:00+07:00: pytest tests/unit/test_final_runs.py 12/12 PASS; regression bm25/lexical/rrf 91/91 PASS; CLI unsealed-test exit 1 (bm25+tfidf); policy checks (NaN/query/universe/dup) enforced at run + registry time.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "artifacts/reports/main_results.md",
+        "artifacts/reports/main_run_registry.json",
+        "scripts/run_final.py",
+        "src/scholargraph/evaluation/sealed.py",
+        "tests/unit/test_final_runs.py",
+        "management/logs/SESSION-20260921-060.md"
+      ],
+      "note": "Sealed final runs A+B xong (7+2 arms); track C chua do. REVIEW sau tu kiem; can fresh review truoc DONE."
     },
     {
       "id": "SG-029",

@@ -64,8 +64,13 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from scholargraph.data.schemas import RankingResult
-from scholargraph.evaluation.metrics import ProtocolEvaluator
-from scholargraph.evaluation.runner import RunStore, sha256_value
+from scholargraph.evaluation.metrics import EVALUATOR_VERSION, ProtocolEvaluator
+from scholargraph.evaluation.runner import FinalTestGateError, RunStore, sha256_value
+from scholargraph.evaluation.sealed import (
+    TRACK_A_LEAKAGE_NOTES,
+    build_final_test_evidence,
+    load_verified_freeze,
+)
 from scholargraph.ingest.beir_loader import sha256_file
 from scholargraph.retrieval.bm25 import (
     BM25ConfigError,
@@ -577,6 +582,8 @@ def run_tfidf_pilot(
     protocol_path: Path | str,
     output_dir: Path | str,
     synthetic: bool = False,
+    sealed: bool = False,
+    project_root: Path | str | None = None,
 ) -> dict[str, Any]:
     """Run the full TF-IDF pilot for one dataset split and return a run summary.
 
@@ -589,6 +596,9 @@ def run_tfidf_pilot(
     preserved error; any failure exits the CLI with code 1. ``synthetic=True``
     marks the run manifest as fixture data (tests only); it must never be set
     for benchmark measurements.
+    ``sealed=True`` (SG-028) seals a locked TEST run behind the runner
+    final-test gate (verified SG-027 freeze + evidence artifacts). Unsealed
+    runs on a test split are refused loudly.
     """
     config = load_protocol_tfidf_config(Path(protocol_path))
     try:
@@ -611,7 +621,14 @@ def run_tfidf_pilot(
 
     store = RunStore(Path(output_dir))
     command = [sys.executable, "-m", "scholargraph.retrieval.tfidf", *sys.argv[1:]]
+    root = Path(project_root) if project_root is not None else Path(data_root).resolve().parents[2]
+    if split.strip().lower() == "test" and not synthetic and not sealed:
+        raise FinalTestGateError(
+            "Locked test runs must be sealed (sealed=True with a verified SG-027 freeze); "
+            "refusing an unsealed test run."
+        )
     resolved_config: dict[str, Any] = {
+        "resolved": sealed,
         "method": "tfidf",
         "dataset": dataset,
         "split": split,
@@ -656,6 +673,25 @@ def run_tfidf_pilot(
         "shares_bm25_inputs": True,
         "module_version": MODULE_VERSION,
     }
+    model = {"id": "tfidf-protocol-v1", "revision": MODULE_VERSION}
+    freeze_evidence: dict[str, Any] | None = None
+    if sealed:
+        freeze, freeze_sha = load_verified_freeze(root)
+        freeze_evidence = build_final_test_evidence(
+            project_root=root,
+            freeze=freeze,
+            freeze_sha256=freeze_sha,
+            track="A",
+            method="tfidf",
+            dataset=dataset,
+            split=split,
+            resolved_config=resolved_config,
+            data_source=corpus_path,
+            split_definition=Path(splits_dir) / f"{dataset}_{split}.json",
+            model=model,
+            evaluator_revision=EVALUATOR_VERSION,
+            leakage_notes=TRACK_A_LEAKAGE_NOTES,
+        )
     handle = store.create(
         method="tfidf",
         dataset=dataset,
@@ -664,11 +700,13 @@ def run_tfidf_pilot(
         data_source=corpus_path,
         split_definition=Path(splits_dir) / f"{dataset}_{split}.json",
         code_source=Path(__file__),
-        model={"id": "tfidf-protocol-v1", "revision": MODULE_VERSION},
+        model=model,
         seed=PROTOCOL_SEED,
         command=command,
         protocol_source=Path(protocol_path),
         synthetic=synthetic,
+        final_test=sealed,
+        freeze_evidence=freeze_evidence,
         extra_hash_sources={
             "queries_file": manifest.queries_path,
             "qrels_file": manifest.qrels_path,
@@ -860,6 +898,11 @@ def build_argument_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Mark the run manifest synthetic=True (fixture/testing use only; never for benchmarks).",
     )
+    parser.add_argument(
+        "--sealed",
+        action="store_true",
+        help="Seal a locked TEST run behind the final-test gate (SG-028; requires the SG-027 freeze).",
+    )
     return parser
 
 
@@ -875,6 +918,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             protocol_path=Path(args.protocol),
             output_dir=Path(args.output_dir),
             synthetic=args.synthetic,
+            sealed=args.sealed,
         )
     except Exception as exc:  # noqa: BLE001 - CLI boundary: report and fail loudly
         print(f"FAIL: {type(exc).__name__}: {exc}", file=sys.stderr)

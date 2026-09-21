@@ -2,6 +2,19 @@
 
 NEXT_TASK: SG-028
 
+## SG-028 REVIEW (tự kiểm) — 2026-09-21T18:00:00+07:00
+
+- **SG-028 REVIEW** (session 060): 7 sealed track-A runs + track-B test200 COMPLETED
+  (final_test=true, freeze evidence). SciFact test nDCG@10: bm25 0.6647 / tfidf 0.6327
+  / dense 0.7404 / hybrid 0.7204 (hybrid<dense giữ trung thực). SCIDOCS test:
+  bm25 0.1521 / dense 0.2172 / hybrid 0.1976. Track B: ppr 0.1004 / global 0.1082
+  (frozen g0.3/l0.0, không tune trên test). Track C VN chưa đo (chờ SG-033).
+- Mới: `sealed.py` (final-test gate), `--sealed` cho bm25/tfidf (unsealed test → exit 1),
+  `run_final.py`, tests 12/12, `main_run_registry.json` + `main_results.md`. Hồi quy 91/91.
+- **Cần fresh-context review trước DONE** (không human gate). SG-029/SG-030 chưa mở được
+  (checker: deps SG-028 chưa DONE).
+- Board: DONE=36, REVIEW=1 (SG-028), TODO=10, DEFERRED=4. Checker PASS.
+
 ## SG-027 DONE (owner duyệt) — 2026-09-21T17:16:00+07:00
 
 - **SG-027 DONE**: owner duyệt freeze qua question tool ('Duyệt SG-027 DONE') sau khi
