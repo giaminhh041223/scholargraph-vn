@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-18T22:55:00+07:00",
+  "updated_at": "2026-09-21T17:00:00+07:00",
   "phase": "M3",
-  "stage": "sg026_done_sg027_freeze_next",
+  "stage": "sg027_main_freeze_review",
   "active_tasks": [
-    "SG-032"
+    "SG-027"
   ],
   "next_task_id": "SG-027",
-  "last_session_id": "SESSION-20260917-053",
-  "last_session_log": "management/logs/SESSION-20260917-053.md",
+  "last_session_id": "SESSION-20260921-059",
+  "last_session_log": "management/logs/SESSION-20260921-059.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -55,10 +55,10 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-18T10:45:00+07:00",
+    "checked_at": "2026-09-21T17:00:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
     "task_count": 51,
-    "scope": "SG-050 DONE (fresh PASS). OpenAlex 19/19 + SCIDOCS 26/26 + profile 3 corpora. SG-026 B trials unblocked."
+    "scope": "SG-027 REVIEW (self-check 9/9 + probes 4/4; fresh review + human gate pending). DONE=35, IN_PROGRESS=0, REVIEW=1, TODO=11."
   }
 }

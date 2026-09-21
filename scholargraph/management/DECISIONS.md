@@ -189,3 +189,13 @@ Thay thế ADR nào (nếu có):
 **Quyết định:** (1) Mở lại SG-019 về IN_PROGRESS; hoàn tất encode OpenAlex text-subset (19 shards) và SCIDOCS (26 shards; work thiếu abstract dùng title — combined text không rỗng, không vi phạm fail_not_drop_document), rồi review lại trước khi DONE mới. (2) Chính sách loại tường minh: work không có sự kết hợp title+abstract nào bị LOẠI KHỎI encoding corpus với exclusion list + count trong manifest (hiện 1/18.251); đây là recorded transformation theo ADR-013 — không phải silent drop; mọi consumer phải đọc exclusion từ manifest. (3) Không hạ điều kiện protocol `missing_embedding=fail_not_drop_document`.
 **Bằng chứng:** manifest `data/manifests/openalex_core_text.json` (fingerprint, counts); shard manifests namespace `openalex_core_text`; `data/processed/openalex/works.jsonl` sha256 `04e7008e...` bất biến.
 **Hệ quả:** Vector dense cho OpenAlex chỉ phủ 18.250/18.251 works; consumer (SG-020/023/025/026) phải đối chiếu exclusion khi mapping doc-ID. SG-026 phần B tiếp tục chờ encode đầy đủ như note đã ghi.
+
+
+## ADR-018 — 2026-09-19T22:22:02+07:00 — Main Freeze trước final runs
+
+**Trạng thái:** accepted; freeze manifest tạo bởi SG-027, chờ human gate của owner trước SG-028 (routing human_approval_required=true).
+**Phạm vi:** Toàn bộ data, split, graph, model configs, evaluator, selection được khóa trong `configs/frozen_main.json` (32 hash + git HEAD); narrative trong `docs/MAIN_FREEZE.md`.
+**Bối cảnh:** Card SG-027 + chỉ thị người dùng yêu cầu khóa hash trước final runs; SG-026 selection đã human-approve; SG-033 prerequisite (OpenAlex-e5 index 18.250 docs) đã encode xong 19:22 cùng ngày.
+**Quyết định:** (1) Primary comparison chốt: track A (bm25/tfidf/dense/hybrid), track B (control + PPR best gamma=0.3/lambda=0.0), track C VN (translated_bm25/multilingual_dense_e5/vn_hybrid_rrf; original_vi_bm25 diagnostic). (2) Ablations định sẵn cho SG-029. (3) Quy tắc sau freeze: mọi thay đổi phải bump schema_version + ADR; tuning trên test cấm vĩnh viễn; final runs phải dẫn freeze sha256 trong run manifest.
+**Bằng chứng:** `configs/frozen_main.json` (32 hash); `tests/unit/test_main_freeze.py` đối chiếu freeze↔file thật (phát hiện drift); encode OpenAlex-e5 18.250 docs hoàn tất 19:22 (sha256 trong freeze).
+**Hệ quả:** SG-028 final runs chỉ chạy trên freeze này; kết quả test từ đây có giá trị học thuật "chưa từng thấy test".
