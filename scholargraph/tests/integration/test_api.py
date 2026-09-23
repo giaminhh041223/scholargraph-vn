@@ -74,3 +74,14 @@ def test_recommend_excludes_self() -> None:
     ids = [x["doc_id"] for x in r.json()["results"]]
     assert first not in ids and len(ids) == 5
     assert client.get("/recommend/beir:scifact:0").status_code == 404
+
+
+def test_hybrid_zero_overlap_falls_back_dense_only() -> None:
+    # Zero BM25 token overlap (nonsense probe) must NOT 500: the service falls
+    # back to the dense order with an honest method label (SG-036 UI bugfix).
+    r = client.get("/search", params={"q": "zxqvkjwx", "method": "hybrid", "top_k": 3})
+    assert r.status_code == 200
+    body = r.json()
+    assert "fallback-dense-only" in body["method"]
+    assert len(body["results"]) == 3
+    assert all("fallback" in row["method"] for row in body["results"])

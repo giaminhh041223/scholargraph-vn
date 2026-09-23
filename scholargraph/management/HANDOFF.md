@@ -2,6 +2,16 @@
 
 NEXT_TASK: SG-041
 
+## Fix UI 500 query Việt zero-overlap — 2026-09-23T16:00:00+07:00
+
+- **Bug thật từ click-test của owner:** query Việt không trùng token corpus Anh
+  (vd "ngôn ngữ lớn") → BM25 rỗng → `rrf_fuse` từ chối → API 500 → UI "Failed to fetch".
+- **Sửa ở app layer** (`api/service.py`, không đụng contract rrf k=60):
+  hybrid rỗng 1 phía → fallback phía còn lại, method ghi rõ
+  (`+fallback-dense-only`); rỗng cả 2 → results rỗng 200.
+- Test hồi quy mới trong `test_api.py` (10/10 PASS). `run_demo.bat` chờ /health
+  thật (retry 4 phút) thay vì 45s cố định. Server fix đã live, worktree sẽ commit.
+
 ## SG-041 REVIEW; chờ human gates — 2026-09-23T14:30:00+07:00
 
 - **SG-041 REVIEW** (session 065): requirements.lock (80 pins), verify_release PASS

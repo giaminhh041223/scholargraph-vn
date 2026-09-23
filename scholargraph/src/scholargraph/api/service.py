@@ -96,6 +96,7 @@ class SearchService:
         top_k = self._require_top_k(top_k)
         if not tokenize(query):
             raise ServiceError("Query has zero tokens under the protocol tokenizer")
+        method_id = METHOD_IDS[method]
         if method == "bm25":
             hits = self.bm25.rank(query, top_k=top_k)
             rows = [{"doc_id": d, "score": s, "method": METHOD_IDS["bm25"]} for d, s in hits]
@@ -107,15 +108,33 @@ class SearchService:
             b = self.bm25.rank(query, top_k=100)
             vec = self._encoder.encode(apply_query_prefix([query], self._dense_config.prefix))[0]
             d = self.index.search(vec, top_k=100)
-            fused = rrf_fuse([x[0] for x in b], [x[0] for x in d])[:top_k]
-            rows = [{"doc_id": r["doc_id"], "score": r["rrf"],
-                     "method": METHOD_IDS["hybrid"]} for r in fused]
+            if b and d:
+                fused = rrf_fuse([x[0] for x in b], [x[0] for x in d])[:top_k]
+                rows = [{"doc_id": r["doc_id"], "score": r["rrf"],
+                         "method": METHOD_IDS["hybrid"]} for r in fused]
+                method_id = METHOD_IDS["hybrid"]
+            elif d:
+                # Lexical side empty (e.g. zero token overlap, common for
+                # Vietnamese queries): fall back to the dense order, labelled
+                # honestly instead of failing. rrf_fuse itself stays strict.
+                rows = [{"doc_id": doc, "score": s,
+                         "method": METHOD_IDS["dense"] + "+hybrid-fallback-lexical-empty"}
+                        for doc, s in d[:top_k]]
+                method_id = METHOD_IDS["hybrid"] + "+fallback-dense-only"
+            elif b:
+                rows = [{"doc_id": doc, "score": s,
+                         "method": METHOD_IDS["bm25"] + "+hybrid-fallback-dense-empty"}
+                        for doc, s in b[:top_k]]
+                method_id = METHOD_IDS["hybrid"] + "+fallback-lexical-only"
+            else:
+                rows = []
+                method_id = METHOD_IDS["hybrid"] + "+both-sides-empty"
         for r in rows:
             paper = self._paper(r["doc_id"])
             r["title"] = paper["title"]
             abs_ = paper["abstract"] or ""
             r["snippet"] = (abs_[:200] + "…") if len(abs_) > 200 else (abs_ or None)
-        return {"query": query, "method": METHOD_IDS[method], "snapshot": SNAPSHOT_ID,
+        return {"query": query, "method": method_id, "snapshot": SNAPSHOT_ID,
                 "results": rows}
 
     def paper(self, doc_id: str) -> dict[str, Any]:
