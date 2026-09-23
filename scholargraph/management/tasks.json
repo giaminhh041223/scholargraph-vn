@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-21T22:00:00+07:00",
+  "updated_at": "2026-09-23T14:00:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1354,7 +1354,7 @@
       "title": "Performance profiling",
       "phase": "M6",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S",
       "owner": "coordinator/worker-single-chat",
       "session_id": "SESSION-20260921-063",
@@ -1375,7 +1375,8 @@
       "verification": [
         "2026-09-21T21:15:00+07:00: Cold fresh-interpreter (load 14.6s warm-cache; 78.6s lan dau kem HF fetch; first query 0.05s; RSS 895MB) + warm 20 SciFact/10 SCIDOCS per-method P50/P95 + track-B stages (c100_ppr mean 1.68s) + concurrency 1.84x + index sizes. Tat ca la inference that.",
         "2026-09-21T21:15:00+07:00: Budget 500ms bao that: SCIDOCS lexical p95 + track-B vuot (ghi ro, khong toi uu). pytest tests/unit/test_performance.py 7/7 PASS.",
-        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-23T14:00:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-040 DONE') with self-check-only disclosure. SG-041 unblocked."
       ],
       "claimed_paths": [
         "src/scholargraph/evaluation/performance.py",
@@ -1391,19 +1392,38 @@
       "title": "Packaging và tái lập",
       "phase": "M7",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260923-065",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-040"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "docs/REPRODUCE.md",
+        "docs/RELEASE_MANIFEST.md",
+        "requirements.lock",
+        "scripts/run_demo.ps1",
+        "scripts/verify_release.py",
+        "tests/unit/test_packaging.py",
+        "management/logs/SESSION-20260923-065.md"
+      ],
+      "verification": [
+        "2026-09-23T14:30:00+07:00: verify_release.py PASS (33 freeze files, snapshots, CLI imports); RELEASE_MANIFEST sinh tu hash live; requirements.lock 80 pins; run_demo.ps1 CHAY THAT (DEMO OK, offline 13/13).",
+        "2026-09-23T14:30:00+07:00: pytest tests/unit/test_packaging.py 7/7 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "docs/REPRODUCE.md",
+        "docs/RELEASE_MANIFEST.md",
+        "scripts/run_demo.ps1",
+        "scripts/verify_release.py",
+        "tests/unit/test_packaging.py",
+        "management/logs/SESSION-20260923-065.md"
+      ],
+      "note": "Packaging xong + thu that; can fresh review truoc DONE."
     },
     {
       "id": "SG-042",

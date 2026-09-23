@@ -1,6 +1,16 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-033
+NEXT_TASK: SG-041
+
+## SG-041 REVIEW; chờ human gates — 2026-09-23T14:30:00+07:00
+
+- **SG-041 REVIEW** (session 065): requirements.lock (80 pins), verify_release PASS
+  (33 files), RELEASE_MANIFEST sinh từ hash live, REPRODUCE.md, run_demo.ps1 CHẠY
+  THẬT (DEMO OK, offline 13/13). Tests 7/7. Cần fresh review trước DONE.
+- **Human gates còn lại:** SG-030 (2 người đọc packets + duyệt), SG-033 (nhãn 2 người
+  ~16h) → SG-034 → SG-042 → SG-043 → SG-044 → SG-045.
+- Board: DONE=39, REVIEW=2 (SG-030 human gate, SG-041), IN_PROGRESS=1 (SG-033 labels),
+  TODO=5, DEFERRED=4.
 
 ## SG-033 pool xong, chờ nhãn người — 2026-09-21T22:00:00+07:00
 
