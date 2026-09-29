@@ -1,18 +1,17 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-29T12:20:00+07:00",
+  "updated_at": "2026-09-29T12:58:00+07:00",
   "phase": "M7",
-  "stage": "g0_complete_g1_sg052_in_progress",
+  "stage": "g2_closeout_ready_for_g3_merge",
   "active_tasks": [
     "SG-030",
     "SG-033",
-    "SG-041",
-    "SG-052"
+    "SG-041"
   ],
-  "next_task_id": "SG-052",
-  "last_session_id": "SESSION-20260929-067-CODEX",
-  "last_session_log": "management/logs/SESSION-20260929-067-CODEX.md",
+  "next_task_id": "SG-051",
+  "last_session_id": "SESSION-20260929-070-GEMINI",
+  "last_session_log": "management/logs/SESSION-20260929-070-GEMINI.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -58,10 +57,10 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-29T12:20:00+07:00",
+    "checked_at": "2026-09-29T12:58:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
     "task_count": 53,
-    "scope": "G0 complete: .gitattributes renormalized, backup zip verified, SG-051/SG-052 registered, ADR-019 added; starting G1 (CX-1, GM-1..3)."
+    "scope": "G1 & G2 complete: SG-052 DONE, SG-041 pre-merge fixes committed, GM-1..GM-3 reviews PASS (SG-027/028/029/030/040/052), 734 tests PASS, verify_release PASS; ready for G3 merge (SG-051)."
   }
 }

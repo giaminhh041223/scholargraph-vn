@@ -1,6 +1,14 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-052
+NEXT_TASK: SG-051
+
+## G1 & G2 Hoàn tất (SG-052 DONE, GM-1..GM-3 Reviews PASS, sẵn sàng G3 Merge) — 2026-09-29T12:58:00+07:00
+
+- **CX-1 (`SG-052` + sửa `SG-041`):** Hoàn tất và commit (`86b570f`, `bf2e351`, `65a4dc1`, `914b6ab`, [log 067](logs/SESSION-20260929-067-CODEX.md)). `test_text_subset.py` cô lập sang `tmp_path` (không chạm `works_text.jsonl`), bổ sung 2 test fallback hybrid còn thiếu trong `test_api.py`, sửa header bảng A2 trong `scripts/run_ablation.py` & `artifacts/reports/ablation.md`, sửa `run_demo.bat:23` + xóa `scholargraph/1`, thêm `--extra-index-url https://download.pytorch.org/whl/cpu` vào `requirements.lock`, chuẩn hóa đường dẫn tương đối trong `REPRODUCE.md` và `DEMO_SCRIPT.md`. Suite đầy đủ: **734 passed**.
+- **GM-1 (`SG-027`, `SG-028`):** Review hồi tố độc lập **PASS** ([SG-027-REVIEW-20260929.md](reviews/SG-027-REVIEW-20260929.md), [SG-028-REVIEW-20260929.md](reviews/SG-028-REVIEW-20260929.md), [log 068](logs/SESSION-20260929-068-GEMINI.md)). 33/33 tệp freeze + 5 index manifests khớp hash; 45/45 con số (7 run Track A × 5 metric + 2 nhánh Track B × 5 metric) tính lại độc lập ngoài dự án khớp tuyệt đối (`|diff| = 0.00e+00`).
+- **GM-2 (`SG-029`, `SG-030`):** Review độc lập **PASS** ([SG-029-REVIEW-20260929.md](reviews/SG-029-REVIEW-20260929.md), [SG-030-REVIEW-20260929.md](reviews/SG-030-REVIEW-20260929.md), [log 069](logs/SESSION-20260929-069-GEMINI.md)). Tự re-fuse `RRF k=30,60,100` khớp tuyệt đối; tự chạy paired bootstrap (`B=10000, seed=20260915`) khớp bit-identical 24/24 hàng. `SG-030` giữ `REVIEW` chờ human gate (2 thành viên đọc 24 error packets).
+- **GM-3 (`SG-040`, `SG-052`, `dcca385`):** Review độc lập **PASS** ([SG-040-REVIEW-20260929.md](reviews/SG-040-REVIEW-20260929.md), [SG-052-REVIEW-20260929.md](reviews/SG-052-REVIEW-20260929.md), [log 070](logs/SESSION-20260929-070-GEMINI.md)). Kiểm chứng `attrib +R` trên `works_text.jsonl` + `openalex_core_text.json` khi chạy `pytest tests/unit/test_text_subset.py` (5/5 PASS). **SG-052 DONE**.
+- **Tiếp theo:** Thực hiện G3 (`SG-051` — hợp nhất `bn` sang bản chính `D:\Web_mining_20261`).
 
 ## G0 Hoàn tất (.gitattributes, backup, SG-051/SG-052, ADR-019) — 2026-09-29T12:19:00+07:00
 

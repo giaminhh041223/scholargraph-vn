@@ -917,7 +917,8 @@
         "docs/MAIN_FREEZE.md",
         "tests/unit/test_main_freeze.py",
         "management/DECISIONS.md",
-        "management/logs/SESSION-20260921-059.md"
+        "management/logs/SESSION-20260921-059.md",
+        "management/reviews/SG-027-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-21T17:00:00+07:00: pytest tests/unit/test_main_freeze.py 9/9 PASS (structure, data/split/graph/model/config hashes, 5 dense pins, translation cache, dev-registry selection, 3-track comparison).",
@@ -925,7 +926,8 @@
         "2026-09-21T17:00:00+07:00: adversarial tmp probes 4/4 PASS (drift detection, missing-file fail-loud, dev-only leakage + freeze-before-test, bookkeeping).",
         "2026-09-21T17:00:00+07:00: scripts/check_project.ps1 PASS (DONE=35, IN_PROGRESS=1, TODO=11).",
         "PENDING: fresh_context_required review + human_approval_required=true owner approval before SG-028. Self-check only in this session; no independent reviewer claimed.",
-        "2026-09-21T17:16:00+07:00: HUMAN GATE satisfied — project owner approved the Main Freeze via in-session question tool ('Duyet SG-027 DONE'). Routing human_approval_required=true satisfied; SG-028 unblocked. Fresh-context review gate recorded as waived by owner approval; no independent reviewer claimed."
+        "2026-09-21T17:16:00+07:00: HUMAN GATE satisfied — project owner approved the Main Freeze via in-session question tool ('Duyet SG-027 DONE'). Routing human_approval_required=true satisfied; SG-028 unblocked. Fresh-context review gate recorded as waived by owner approval; no independent reviewer claimed.",
+        "2026-09-29: Retrospective independent review PASS (GM-1, SESSION-20260929-068-GEMINI): 33/33 freeze files + 5 index manifests + 7 final_test freeze files verified; git DAG order confirmed."
       ],
       "claimed_paths": [
         "configs/frozen_main.json",
@@ -960,13 +962,15 @@
         "src/scholargraph/retrieval/bm25.py",
         "src/scholargraph/retrieval/tfidf.py",
         "tests/unit/test_final_runs.py",
-        "management/logs/SESSION-20260921-060.md"
+        "management/logs/SESSION-20260921-060.md",
+        "management/reviews/SG-028-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-21T18:00:00+07:00: 7 sealed track-A test runs COMPLETED final_test=true (SciFact 300q: bm25 0.6647 / tfidf 0.6327 / dense 0.7404 / hybrid 0.7204; SCIDOCS 1000q: bm25 0.1521 / dense 0.2172 / hybrid 0.1976 nDCG@10) + track-B test200 sealed (ppr 0.1004 / global 0.1082, frozen g0.3/l0.0, no test tuning). Track C VN chua do (SG-033).",
         "2026-09-21T18:00:00+07:00: pytest tests/unit/test_final_runs.py 12/12 PASS; regression bm25/lexical/rrf 91/91 PASS; CLI unsealed-test exit 1 (bm25+tfidf); policy checks (NaN/query/universe/dup) enforced at run + registry time.",
         "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
-        "2026-09-21T18:30:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-028 DONE') with self-check-only disclosure (same precedent as SG-027). Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-029 unblocked."
+        "2026-09-21T18:30:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-028 DONE') with self-check-only disclosure (same precedent as SG-027). Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-029 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-1, SESSION-20260929-068-GEMINI): 7 Track A runs x 5 metrics + 2 Track B arms x 5 metrics (45/45 values) independently recomputed with 0.00e+00 diff."
       ],
       "claimed_paths": [
         "artifacts/reports/main_results.md",
@@ -1001,13 +1005,15 @@
         "artifacts/reports/robustness.md",
         "scripts/run_ablation.py",
         "tests/unit/test_ablation.py",
-        "management/logs/SESSION-20260921-061.md"
+        "management/logs/SESSION-20260921-061.md",
+        "management/reviews/SG-029-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-21T19:30:00+07:00: A1 age on/off test200 (ppr/global x lambda 0/0.01/0.03/0.1 @g0.3): lambda=0 tot nhat, suy giam don dieu; A2 no-graph trich registry; A3 RRF k=30/60/100 (k60 khop sealed bit-exact; k it anh huong). Tat ca arms trong prespecified set, khong select tren test.",
         "2026-09-21T19:30:00+07:00: R1/R2/R3 buckets (query length, missing abstract, node degree) + R4 costs + R5 failures (0/0, measured). pytest tests/unit/test_ablation.py 11/11 PASS.",
         "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
-        "2026-09-21T19:45:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-029 DONE') with self-check-only disclosure. Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-030 unblocked."
+        "2026-09-21T19:45:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-029 DONE') with self-check-only disclosure. Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-030 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-2, SESSION-20260929-069-GEMINI): all ablation/robustness variants pre-specified; RRF k=30,60,100 independently re-fused with 0.00e+00 diff; Table A2 header fixed."
       ],
       "claimed_paths": [
         "scripts/run_ablation.py",
@@ -1040,12 +1046,14 @@
         "artifacts/reports/error_packets.json",
         "docs/ERROR_ANALYSIS.md",
         "tests/unit/test_statistics.py",
-        "management/logs/SESSION-20260921-062.md"
+        "management/logs/SESSION-20260921-062.md",
+        "management/reviews/SG-030-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-21T20:15:00+07:00: 24 paired bootstrap CIs (B=10000, seed 20260915, 95% percentile, theo protocol; khong p-value): dense>bm25 ca 2 corpus (CI loai 0); hybrid-vs-dense SciFact CI chua 0 (khong ket luan); SCIDOCS hybrid<dense; ppr-vs-global chua 0.",
         "2026-09-21T20:15:00+07:00: 24 error packets san sang cho 2 nguoi doc (12 SciFact + 6 SCIDOCS + 6 track B) + checklist trong docs/ERROR_ANALYSIS.md. pytest tests/unit/test_statistics.py 8/8 PASS.",
-        "PENDING HUMAN GATE (routing human_approval_required=true): (1) hai thanh vien doc 24 packets + ghi joint note; (2) owner duyet. Self-check only; no independent reviewer claimed."
+        "PENDING HUMAN GATE (routing human_approval_required=true): (1) hai thanh vien doc 24 packets + ghi joint note; (2) owner duyet. Self-check only; no independent reviewer claimed.",
+        "2026-09-29: Independent technical review PASS (GM-2, SESSION-20260929-069-GEMINI): 24/24 paired bootstrap CIs (B=10000, seed=20260915) bit-identical; 24 error packets verified. Human gate (2 members reading packets) remains pending."
       ],
       "claimed_paths": [
         "src/scholargraph/evaluation/statistics.py",
@@ -1370,13 +1378,15 @@
         "artifacts/reports/performance.json",
         "artifacts/reports/performance.md",
         "tests/unit/test_performance.py",
-        "management/logs/SESSION-20260921-063.md"
+        "management/logs/SESSION-20260921-063.md",
+        "management/reviews/SG-040-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-21T21:15:00+07:00: Cold fresh-interpreter (load 14.6s warm-cache; 78.6s lan dau kem HF fetch; first query 0.05s; RSS 895MB) + warm 20 SciFact/10 SCIDOCS per-method P50/P95 + track-B stages (c100_ppr mean 1.68s) + concurrency 1.84x + index sizes. Tat ca la inference that.",
         "2026-09-21T21:15:00+07:00: Budget 500ms bao that: SCIDOCS lexical p95 + track-B vuot (ghi ro, khong toi uu). pytest tests/unit/test_performance.py 7/7 PASS.",
         "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
-        "2026-09-23T14:00:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-040 DONE') with self-check-only disclosure. SG-041 unblocked."
+        "2026-09-23T14:00:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-040 DONE') with self-check-only disclosure. SG-041 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-3, SESSION-20260929-070-GEMINI): performance.md matches performance.json and disk index sizes; over-budget metrics honestly reported."
       ],
       "claimed_paths": [
         "src/scholargraph/evaluation/performance.py",
@@ -1646,7 +1656,7 @@
       "title": "Vệ sinh test và phủ fallback API",
       "phase": "M7",
       "priority": "CORE",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "role": "S",
       "owner": "codex/cx-1",
       "session_id": "SESSION-20260929-067-CODEX",
@@ -1656,15 +1666,21 @@
         "SG-050"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [
+      "evidence": [
         "scripts/build_openalex_text_subset.py",
         "tests/unit/test_text_subset.py",
         "tests/integration/test_api.py",
         "scripts/run_ablation.py",
-        "artifacts/reports/ablation.md"
+        "tests/unit/test_ablation.py",
+        "artifacts/reports/ablation.md",
+        "management/logs/SESSION-20260929-067-CODEX.md",
+        "management/reviews/SG-052-REVIEW-20260929.md"
       ],
+      "verification": [
+        "2026-09-29: test_text_subset isolated to tmp_path (5/5 PASS even with works_text.jsonl + openalex_core_text.json set ReadOnly); 3/3 hybrid fallback branches covered in test_api.py; Table A2 header fixed; full pytest 734 passed.",
+        "2026-09-29: Independent review PASS (GM-3, SESSION-20260929-070-GEMINI, management/reviews/SG-052-REVIEW-20260929.md)."
+      ],
+      "claimed_paths": [],
       "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): cô lập test_text_subset không ghi đè dữ liệu freeze, phủ đủ test 3 nhánh fallback hybrid và sửa header bảng A2."
     }
   ]
