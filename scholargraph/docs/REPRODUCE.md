@@ -29,7 +29,7 @@ snapshot models, notebooks, CLI modules và file demo — thiếu gì báo FAIL 
 
 ```powershell
 $env:PYTHONPATH='src'
-# Kiểm thử toàn suite (kỳ vọng 722 passed)
+# Kiểm thử toàn suite (kỳ vọng 734 passed)
 .venv\Scripts\python.exe -m pytest tests -q
 # Final runs đã seal — KHÔNG chạy lại để "cải thiện số"; chỉ kiểm tra registry:
 .venv\Scripts\python.exe scripts/run_final.py --only registry
