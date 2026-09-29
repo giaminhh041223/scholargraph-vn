@@ -2,6 +2,18 @@
 
 NEXT_TASK: SG-034
 
+## G4 Phần Agent Hoàn tất (`CX-3`, `CX-4`, `GM-6` sẵn sàng 100%; chờ cổng con người `H-1`..`H-3`) — 2026-09-29T16:19:00+07:00
+
+- **CX-3 (`SG-034` CLI — [log 073](logs/SESSION-20260929-073-CODEX.md)):** Đã xây dựng [run_vn_eval.py](../scripts/run_vn_eval.py) với 2 pha tách biệt (`--phase freeze-dev` chỉ đọc dev, chọn cấu hình qua `select_best` và ghi `configs/frozen_vn.json` với `human_approved=false`; `--phase eval-test` bắt buộc `human_approved=true` rồi mới chấm test 1 lần và xuất `vn_results.json/.md`). Kèm 5 kiểm thử đơn vị & phá hủy trong [test_vn_eval.py](../tests/unit/test_vn_eval.py).
+- **CX-4 (`SG-042` / `SG-043` Tooling & Figures — [log 073](logs/SESSION-20260929-073-CODEX.md)):**
+  - [build_evidence_index.py](../scripts/build_evidence_index.py) $\to$ sinh [evidence_index.json](../artifacts/reports/evidence_index.json) ánh xạ 1:1 toàn bộ 7 run Track A, 2 nhánh Track B, Ablation A1/A3, Robustness R1–R5, 24 khoảng tin cậy Paired Bootstrap, số đo hiệu năng `SG-040` và 8 khẳng định (`CLM-001`..`CLM-008`).
+  - [compare_reproduction.py](../scripts/compare_reproduction.py): Công cụ đối chiếu tái lập chéo của thành viên thứ hai theo ngưỡng `1e-4` (bắt buộc `--reproducer` là con người, từ chối tên AI).
+  - [generate_figures.py](../scripts/generate_figures.py) $\to$ sinh 4 biểu đồ SVG trong `reports/figures/`.
+  - [verify_claims.py](../scripts/verify_claims.py): Kiểm chứng tự động khớp 1:1 giữa báo cáo, checklist và `evidence_index.json` (**PASS**).
+  - Bổ sung 15 kiểm thử mới (`test_vn_eval.py`, `test_reproduction_audit.py`, `test_claims_verifier.py` — tất cả PASS).
+- **GM-6 (`SG-043` / `SG-044` / `SG-045` Drafts — [log 074](logs/SESSION-20260929-074-GEMINI.md)):** Đã hoàn tất bản thảo [final_report.md](../reports/final_report.md), [CLAIMS_CHECKLIST.md](../docs/CLAIMS_CHECKLIST.md), [defense_slides.md](../reports/defense_slides.md), [DEFENSE_QA.md](../docs/DEFENSE_QA.md) (18 câu hỏi phản biện), [rehearsal_notes.md](../artifacts/reports/rehearsal_notes.md), [SUBMISSION_CHECKLIST.md](../docs/SUBMISSION_CHECKLIST.md), và [release_audit.md](../artifacts/reports/release_audit.md).
+- **Việc còn lại của 2 thành viên con người (`H-1`, `H-2`, `H-3`):** Xem hướng dẫn từng lệnh trong [SUBMISSION_CHECKLIST.md](../docs/SUBMISSION_CHECKLIST.md).
+
 ## G3 Hoàn tất (Hợp nhất `bn` → `D:\Web_mining_20261`, SG-051 DONE, SG-041 DONE) — 2026-09-29T13:30:00+07:00
 
 - **SG-051 (`G3 Merge` + `CX-2`):** Đã hợp nhất lịch sử `bn` (`c820aef`) vào `D:\Web_mining_20261` (`6e3b70e`), giữ nguyên vẹn toàn bộ commit `e959f68` và `dcca385`, đồng bộ `artifacts/` và `data/` bằng `robocopy`, khôi phục `AGENTS.md` về `D:/Web_mining_20261` (`2d01b70`). Đã dựng `.venv` mới tinh tại `D:\Web_mining_20261\scholargraph\.venv`, chạy `pip install -r requirements.lock` (`exit 0`), `pip check` (`exit 0`), `verify_release.py` (`PASS`), `run_final.py --only registry` (`exit 0`, khớp bit-identical), `run_statistics.py` (`exit 0`, khớp bit-identical), `scripts/run_demo.ps1` (`13/13 PASS, DEMO OK`), và `pytest tests -q` (**734 passed**). Ghi nhận tại [SESSION-20260929-071-CODEX.md](logs/SESSION-20260929-071-CODEX.md).

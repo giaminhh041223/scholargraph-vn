@@ -1,0 +1,1155 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-042",
+  "module_version": "sg042-1.0.0",
+  "generated_at": "2026-09-29T09:06:49.703772+00:00",
+  "freeze_manifest": {
+    "path": "configs/frozen_main.json",
+    "sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+    "freeze_id": null,
+    "git_head_at_freeze": "e959f682cb40433448c2d21183660389964333bf"
+  },
+  "source_files": {
+    "main_run_registry.json": "27b37d7ae1f09d6ebca89a3db99004f79970b12a8457ecbc443e06d4596275cc",
+    "ablation.json": "5974c73a0d82917ea9ca77cca6e93f48365aa8b15c9719ae1bb9248fd9db446e",
+    "ablation_age.json": "6bf52dd735cef92dceaa07a6d6ce31b4db12f73d28f7ba5b320c5f27c55be1ff",
+    "ablation_rrfk.json": "147980f2063d3a41faa168d609afb61b179cbf408534da76ea042764af1f5da8",
+    "robustness.json": "5637c3cb8ee0fba40d46e1639ecfbcdcab99de1b45409332a188782d45fcb121",
+    "statistics.json": "49839d1e0cfec22cf46f0efcab7bf2e16b51fd5d24ba69ece208cb6a81e80440",
+    "performance.json": "36e8d29455ca62cdd64671d2791a8770ac2e411c15b716af4d58ef0d8fa0b39f"
+  },
+  "tables": {
+    "table_1_track_a_main": {
+      "scidocs__bm25": {
+        "dataset": "scidocs",
+        "method": "bm25",
+        "split": "test",
+        "run_id": "RUN-20260921-103429-bm25-scidocs-test",
+        "run_dir": "artifacts/runs/RUN-20260921-103429-bm25-scidocs-test",
+        "manifest_sha256": "7ca62e02602da042e7f2c148aa3b79e49be009877512d42b7ce406d481f437a3",
+        "metrics": {
+          "nDCG@10": 0.1520510358999793,
+          "Recall@100": 0.34953333333333336,
+          "MRR@10": 0.27077936507936506,
+          "MAP@100": 0.10404207470846118,
+          "P@5": 0.1092
+        }
+      },
+      "scidocs__dense": {
+        "dataset": "scidocs",
+        "method": "dense",
+        "split": "test",
+        "run_id": "RUN-20260921-104021-dense-scidocs-test",
+        "run_dir": "artifacts/runs/RUN-20260921-104021-dense-scidocs-test",
+        "manifest_sha256": "38eeb69e5e161432384c942ef9376764ec059f0796dbbc7a00f1e91224e2917c",
+        "metrics": {
+          "nDCG@10": 0.2172458820187077,
+          "Recall@100": 0.49568333333333336,
+          "MRR@10": 0.358606746031746,
+          "MAP@100": 0.15491454923696485,
+          "P@5": 0.15880000000000002
+        }
+      },
+      "scidocs__hybrid": {
+        "dataset": "scidocs",
+        "method": "hybrid",
+        "split": "test",
+        "run_id": "RUN-20260921-104036-hybrid-scidocs-test",
+        "run_dir": "artifacts/runs/RUN-20260921-104036-hybrid-scidocs-test",
+        "manifest_sha256": "c238c445165e30de2f6001f285252323e2b572b1a3c2a4b01aadb4ad84e8a788",
+        "metrics": {
+          "nDCG@10": 0.19755991836357797,
+          "Recall@100": 0.46753333333333336,
+          "MRR@10": 0.3367805555555556,
+          "MAP@100": 0.14211964608162145,
+          "P@5": 0.1466
+        }
+      },
+      "scifact__bm25": {
+        "dataset": "scifact",
+        "method": "bm25",
+        "split": "test",
+        "run_id": "RUN-20260921-103103-bm25-scifact-test",
+        "run_dir": "artifacts/runs/RUN-20260921-103103-bm25-scifact-test",
+        "manifest_sha256": "056f46e66308d9d9e020af45b75cda3e4ecc6bc9ab43afd0ed0d61f91b47516f",
+        "metrics": {
+          "nDCG@10": 0.6646598637127541,
+          "Recall@100": 0.8892222222222221,
+          "MRR@10": 0.6327804232804233,
+          "MAP@100": 0.6259926297764248,
+          "P@5": 0.15666666666666668
+        }
+      },
+      "scifact__dense": {
+        "dataset": "scifact",
+        "method": "dense",
+        "split": "test",
+        "run_id": "RUN-20260921-103405-dense-scifact-test",
+        "run_dir": "artifacts/runs/RUN-20260921-103405-dense-scifact-test",
+        "manifest_sha256": "f2e17c9f8bd8fd06b70c2846f6f93e6fa10c33d3ca069fe46240c9b7e64394af",
+        "metrics": {
+          "nDCG@10": 0.740391287918679,
+          "Recall@100": 0.9666666666666667,
+          "MRR@10": 0.7033862433862433,
+          "MAP@100": 0.6978264641184614,
+          "P@5": 0.182
+        }
+      },
+      "scifact__hybrid": {
+        "dataset": "scifact",
+        "method": "hybrid",
+        "split": "test",
+        "run_id": "RUN-20260921-103415-hybrid-scifact-test",
+        "run_dir": "artifacts/runs/RUN-20260921-103415-hybrid-scifact-test",
+        "manifest_sha256": "b7cba3e0800553736b832210b85cdae08e4ad92f0577d58226e1c569301ff543",
+        "metrics": {
+          "nDCG@10": 0.7204239389590927,
+          "Recall@100": 0.9693333333333334,
+          "MRR@10": 0.6870489417989418,
+          "MAP@100": 0.6810008000760693,
+          "P@5": 0.1726666666666667
+        }
+      },
+      "scifact__tfidf": {
+        "dataset": "scifact",
+        "method": "tfidf",
+        "split": "test",
+        "run_id": "RUN-20260921-103129-tfidf-scifact-test",
+        "run_dir": "artifacts/runs/RUN-20260921-103129-tfidf-scifact-test",
+        "manifest_sha256": "d6895722c36566a63b09b4e75c6a44d123decf372cace2a4887bafb43cef41e0",
+        "metrics": {
+          "nDCG@10": 0.632695291810751,
+          "Recall@100": 0.8915555555555554,
+          "MRR@10": 0.593744708994709,
+          "MAP@100": 0.5865884013422721,
+          "P@5": 0.162
+        }
+      }
+    },
+    "table_2_track_b_main": {
+      "report": "artifacts/reports/b_trials_test.json",
+      "report_sha256": "d159d05e8bef894a94784d71cedeced187dfd2212b4520b36965d6b01ed23e16",
+      "frozen_weights": {
+        "gamma": 0.3,
+        "lambda": 0.0,
+        "source": "SG-026 dev selection via freeze (no test tuning)"
+      },
+      "queries": 200,
+      "arms": {
+        "ppr_age_best_g0.3_l0.0": {
+          "nDCG@10": 0.10037326504922445,
+          "Recall@100": 0.2325,
+          "MRR@10": 0.08900396825396825,
+          "MAP@100": 0.08890372218633014,
+          "P@5": 0.025
+        },
+        "global_pagerank_control": {
+          "nDCG@10": 0.1081743314769434,
+          "Recall@100": 0.2325,
+          "MRR@10": 0.09909722222222221,
+          "MAP@100": 0.098743836795165,
+          "P@5": 0.026000000000000002
+        }
+      }
+    },
+    "table_3_track_c_vn": {
+      "status": "chua_do",
+      "pending_human_gate": "SG-033 (2 human annotators label 219 dev + 443 test pairs) -> SG-034",
+      "metrics": null
+    },
+    "table_4_ablation_age": {
+      "ppr_g0.3_l0.0": {
+        "nDCG@10": 0.10037326504922445,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.08900396825396825,
+        "MAP@100": 0.08890372218633014,
+        "P@5": 0.025
+      },
+      "global_g0.3_l0.0": {
+        "nDCG@10": 0.1081743314769434,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.09909722222222221,
+        "MAP@100": 0.098743836795165,
+        "P@5": 0.026000000000000002
+      },
+      "ppr_g0.3_l0.01": {
+        "nDCG@10": 0.09773004563899086,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.08729761904761904,
+        "MAP@100": 0.08706553883829353,
+        "P@5": 0.024000000000000004
+      },
+      "global_g0.3_l0.01": {
+        "nDCG@10": 0.10807588222093684,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.09934722222222221,
+        "MAP@100": 0.09852986500105711,
+        "P@5": 0.025
+      },
+      "ppr_g0.3_l0.03": {
+        "nDCG@10": 0.08833961086150939,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.07506746031746031,
+        "MAP@100": 0.07684341140114496,
+        "P@5": 0.022000000000000002
+      },
+      "global_g0.3_l0.03": {
+        "nDCG@10": 0.09592493093095061,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.0831031746031746,
+        "MAP@100": 0.08471375197264518,
+        "P@5": 0.024000000000000004
+      },
+      "ppr_g0.3_l0.1": {
+        "nDCG@10": 0.067301342870129,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.05313095238095238,
+        "MAP@100": 0.05682438649327439,
+        "P@5": 0.019000000000000003
+      },
+      "global_g0.3_l0.1": {
+        "nDCG@10": 0.07404879005146917,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.058894841269841264,
+        "MAP@100": 0.061523176221620055,
+        "P@5": 0.02
+      }
+    },
+    "table_5_ablation_rrfk": {
+      "hybrid_rrf_k30_scifact": {
+        "nDCG@10": 0.7223603375993978,
+        "Recall@100": 0.9693333333333334,
+        "MRR@10": 0.6862526455026454,
+        "MAP@100": 0.6805897422847181,
+        "P@5": 0.1726666666666667
+      },
+      "hybrid_rrf_k60_scifact": {
+        "nDCG@10": 0.7204239389590927,
+        "Recall@100": 0.9693333333333334,
+        "MRR@10": 0.6870489417989418,
+        "MAP@100": 0.6810008000760693,
+        "P@5": 0.1726666666666667
+      },
+      "hybrid_rrf_k100_scifact": {
+        "nDCG@10": 0.7202434956455126,
+        "Recall@100": 0.9693333333333334,
+        "MRR@10": 0.6868902116402116,
+        "MAP@100": 0.6805711196832764,
+        "P@5": 0.1726666666666667
+      },
+      "hybrid_rrf_k30_scidocs": {
+        "nDCG@10": 0.1991992821551405,
+        "Recall@100": 0.46753333333333336,
+        "MRR@10": 0.3381619047619047,
+        "MAP@100": 0.14292875176921394,
+        "P@5": 0.146
+      },
+      "hybrid_rrf_k60_scidocs": {
+        "nDCG@10": 0.19755991836357797,
+        "Recall@100": 0.46753333333333336,
+        "MRR@10": 0.3367805555555556,
+        "MAP@100": 0.14211964608162145,
+        "P@5": 0.1466
+      },
+      "hybrid_rrf_k100_scidocs": {
+        "nDCG@10": 0.19800035174463387,
+        "Recall@100": 0.46753333333333336,
+        "MRR@10": 0.33671190476190477,
+        "MAP@100": 0.1416626174139575,
+        "P@5": 0.14620000000000002
+      }
+    },
+    "table_6_paired_bootstrap": {
+      "scifact__dense-vs-bm25__nDCG@10": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "nDCG@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.740391287918679,
+        "mean_control": 0.6646598637127541,
+        "delta_absolute": 0.07573142420592494,
+        "delta_relative": 0.11394011936104173,
+        "ci_low": 0.040484491599346695,
+        "ci_high": 0.11146722307773804,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.07609854570553712
+      },
+      "scifact__dense-vs-bm25__Recall@100": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "Recall@100",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.9666666666666667,
+        "mean_control": 0.8892222222222221,
+        "delta_absolute": 0.07744444444444454,
+        "delta_relative": 0.08709234037236048,
+        "ci_low": 0.044,
+        "ci_high": 0.11355555555555555,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.0778634
+      },
+      "scifact__dense-vs-bm25__MRR@10": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "MRR@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.7033862433862433,
+        "mean_control": 0.6327804232804233,
+        "delta_absolute": 0.07060582010582006,
+        "delta_relative": 0.11158028521140002,
+        "ci_low": 0.03165720899470899,
+        "ci_high": 0.1103602843915344,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.07095724404761904
+      },
+      "scifact__hybrid-vs-dense__nDCG@10": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "nDCG@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.7204239389590927,
+        "mean_control": 0.740391287918679,
+        "delta_absolute": -0.019967348959586295,
+        "delta_relative": -0.02696864385819112,
+        "ci_low": -0.04687259783357529,
+        "ci_high": 0.00663246864448974,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": -0.020110853329910545
+      },
+      "scifact__hybrid-vs-dense__Recall@100": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "Recall@100",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.9693333333333334,
+        "mean_control": 0.9666666666666667,
+        "delta_absolute": 0.002666666666666706,
+        "delta_relative": 0.002758620689655213,
+        "ci_low": -0.014,
+        "ci_high": 0.02,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": 0.0025951999999999998
+      },
+      "scifact__hybrid-vs-dense__MRR@10": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "MRR@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.6870489417989418,
+        "mean_control": 0.7033862433862433,
+        "delta_absolute": -0.01633730158730151,
+        "delta_relative": -0.02322664359861581,
+        "ci_low": -0.04640181878306879,
+        "ci_high": 0.013562235449735451,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": -0.016487838227513225
+      },
+      "scifact__hybrid-vs-bm25__nDCG@10": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "nDCG@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.7204239389590927,
+        "mean_control": 0.6646598637127541,
+        "delta_absolute": 0.05576407524633864,
+        "delta_relative": 0.0838986650026429,
+        "ci_low": 0.03332490470018599,
+        "ci_high": 0.0791979904172655,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.05598769237562657
+      },
+      "scifact__hybrid-vs-bm25__Recall@100": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "Recall@100",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.9693333333333334,
+        "mean_control": 0.8892222222222221,
+        "delta_absolute": 0.08011111111111124,
+        "delta_relative": 0.09009121579407738,
+        "ci_low": 0.051666666666666666,
+        "ci_high": 0.11133333333333333,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.0804586
+      },
+      "scifact__hybrid-vs-bm25__MRR@10": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "MRR@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.6870489417989418,
+        "mean_control": 0.6327804232804233,
+        "delta_absolute": 0.05426851851851855,
+        "delta_relative": 0.08576200609554713,
+        "ci_low": 0.028740277777777785,
+        "ci_high": 0.08108892195767195,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.054469405820105815
+      },
+      "scifact__tfidf-vs-bm25__nDCG@10": {
+        "comparison": "tfidf-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "nDCG@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.632695291810751,
+        "mean_control": 0.6646598637127541,
+        "delta_absolute": -0.03196457190200308,
+        "delta_relative": -0.048091623471064895,
+        "ci_low": -0.05024253910653688,
+        "ci_high": -0.013859234967918202,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": -0.031860138620271525
+      },
+      "scifact__tfidf-vs-bm25__Recall@100": {
+        "comparison": "tfidf-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "Recall@100",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.8915555555555554,
+        "mean_control": 0.8892222222222221,
+        "delta_absolute": 0.0023333333333332984,
+        "delta_relative": 0.00262401599400221,
+        "ci_low": -0.014333333333333333,
+        "ci_high": 0.018333333333333333,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": 0.0023528000000000004
+      },
+      "scifact__tfidf-vs-bm25__MRR@10": {
+        "comparison": "tfidf-vs-bm25",
+        "track": "A",
+        "dataset": "scifact",
+        "metric": "MRR@10",
+        "n_queries": 300,
+        "n_groups": 300,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.593744708994709,
+        "mean_control": 0.6327804232804233,
+        "delta_absolute": -0.039035714285714285,
+        "delta_relative": -0.06168919399141272,
+        "ci_low": -0.06234712301587303,
+        "ci_high": -0.016054001322751324,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": -0.03890369087301587
+      },
+      "scidocs__dense-vs-bm25__nDCG@10": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "nDCG@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.2172458820187077,
+        "mean_control": 0.1520510358999793,
+        "delta_absolute": 0.06519484611872842,
+        "delta_relative": 0.4287694965893836,
+        "ci_low": 0.05490958255112242,
+        "ci_high": 0.0752763945525166,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.06515778888680097
+      },
+      "scidocs__dense-vs-bm25__Recall@100": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "Recall@100",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.49568333333333336,
+        "mean_control": 0.34953333333333336,
+        "delta_absolute": 0.14615,
+        "delta_relative": 0.4181289338165172,
+        "ci_low": 0.1323162500000005,
+        "ci_high": 0.16008458333333353,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.1459966150000003
+      },
+      "scidocs__dense-vs-bm25__MRR@10": {
+        "comparison": "dense-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "MRR@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.358606746031746,
+        "mean_control": 0.27077936507936506,
+        "delta_absolute": 0.08782738095238096,
+        "delta_relative": 0.32435034673575985,
+        "ci_low": 0.06577253968253968,
+        "ci_high": 0.10980702380952374,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.08776696750000001
+      },
+      "scidocs__hybrid-vs-dense__nDCG@10": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "nDCG@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.19755991836357797,
+        "mean_control": 0.2172458820187077,
+        "delta_absolute": -0.01968596365512973,
+        "delta_relative": -0.09061604975985005,
+        "ci_low": -0.027334212690460078,
+        "ci_high": -0.012155574077049385,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": -0.019684966496621735
+      },
+      "scidocs__hybrid-vs-dense__Recall@100": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "Recall@100",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.46753333333333336,
+        "mean_control": 0.49568333333333336,
+        "delta_absolute": -0.02815000000000001,
+        "delta_relative": -0.05679028949934435,
+        "ci_low": -0.03580124999999997,
+        "ci_high": -0.020299999999999964,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": -0.02806323999999995
+      },
+      "scidocs__hybrid-vs-dense__MRR@10": {
+        "comparison": "hybrid-vs-dense",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "MRR@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.3367805555555556,
+        "mean_control": 0.358606746031746,
+        "delta_absolute": -0.021826190476190444,
+        "delta_relative": -0.060863859137380134,
+        "ci_low": -0.03894196428571428,
+        "ci_high": -0.004504890873015879,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": -0.021814596547619042
+      },
+      "scidocs__hybrid-vs-bm25__nDCG@10": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "nDCG@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.19755991836357797,
+        "mean_control": 0.1520510358999793,
+        "delta_absolute": 0.04550888246359869,
+        "delta_relative": 0.29930004879108413,
+        "ci_low": 0.039047494405748416,
+        "ci_high": 0.05204521437527162,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.045472822390179204
+      },
+      "scidocs__hybrid-vs-bm25__Recall@100": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "Recall@100",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.46753333333333336,
+        "mean_control": 0.34953333333333336,
+        "delta_absolute": 0.118,
+        "delta_relative": 0.33759298111768066,
+        "ci_low": 0.10693333333333391,
+        "ci_high": 0.12915000000000068,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.11793337500000063
+      },
+      "scidocs__hybrid-vs-bm25__MRR@10": {
+        "comparison": "hybrid-vs-bm25",
+        "track": "A",
+        "dataset": "scidocs",
+        "metric": "MRR@10",
+        "n_queries": 1000,
+        "n_groups": 1000,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.3367805555555556,
+        "mean_control": 0.27077936507936506,
+        "delta_absolute": 0.06600119047619052,
+        "delta_relative": 0.24374527378349403,
+        "ci_low": 0.05108463293650795,
+        "ci_high": 0.08072504960317459,
+        "ci_excludes_zero": true,
+        "bootstrap_mean": 0.06595237095238095
+      },
+      "openalex__ppr_best-vs-global_control__nDCG@10": {
+        "comparison": "ppr_best-vs-global_control",
+        "track": "B",
+        "dataset": "openalex",
+        "metric": "nDCG@10",
+        "n_queries": 200,
+        "n_groups": 200,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.10037326504922445,
+        "mean_control": 0.1081743314769434,
+        "delta_absolute": -0.007801066427718953,
+        "delta_relative": -0.07211568882569609,
+        "ci_low": -0.019783147348450263,
+        "ci_high": 0.0020803797900841316,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": -0.0078082950939818456
+      },
+      "openalex__ppr_best-vs-global_control__Recall@100": {
+        "comparison": "ppr_best-vs-global_control",
+        "track": "B",
+        "dataset": "openalex",
+        "metric": "Recall@100",
+        "n_queries": 200,
+        "n_groups": 200,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.2325,
+        "mean_control": 0.2325,
+        "delta_absolute": 0.0,
+        "delta_relative": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": 0.0
+      },
+      "openalex__ppr_best-vs-global_control__MRR@10": {
+        "comparison": "ppr_best-vs-global_control",
+        "track": "B",
+        "dataset": "openalex",
+        "metric": "MRR@10",
+        "n_queries": 200,
+        "n_groups": 200,
+        "resamples": 10000,
+        "seed": 20260915,
+        "level": 0.95,
+        "mean_treatment": 0.08900396825396825,
+        "mean_control": 0.09909722222222221,
+        "delta_absolute": -0.01009325396825396,
+        "delta_relative": -0.10185203724096499,
+        "ci_low": -0.025637301587301587,
+        "ci_high": 0.0027699900793650774,
+        "ci_excludes_zero": false,
+        "bootstrap_mean": -0.010101398015873017
+      }
+    },
+    "table_7_robustness_buckets": {
+      "bm25_scifact_by_query_length": {
+        "short": {
+          "n": 110,
+          "mean_nDCG@10": 0.6717801578880962
+        },
+        "long": {
+          "n": 78,
+          "mean_nDCG@10": 0.6762004550625834
+        },
+        "mid": {
+          "n": 112,
+          "mean_nDCG@10": 0.6496295201004835
+        }
+      },
+      "dense_scifact_by_query_length": {
+        "short": {
+          "n": 110,
+          "mean_nDCG@10": 0.7338443259578674
+        },
+        "long": {
+          "n": 78,
+          "mean_nDCG@10": 0.7824805740093569
+        },
+        "mid": {
+          "n": 112,
+          "mean_nDCG@10": 0.7175091584598968
+        }
+      },
+      "hybrid_scifact_by_query_length": {
+        "short": {
+          "n": 110,
+          "mean_nDCG@10": 0.7340960542635948
+        },
+        "long": {
+          "n": 78,
+          "mean_nDCG@10": 0.7470567839975136
+        },
+        "mid": {
+          "n": 112,
+          "mean_nDCG@10": 0.6884480943475564
+        }
+      },
+      "tfidf_scifact_by_query_length": {
+        "short": {
+          "n": 110,
+          "mean_nDCG@10": 0.6350879637273352
+        },
+        "long": {
+          "n": 78,
+          "mean_nDCG@10": 0.6335477043146142
+        },
+        "mid": {
+          "n": 112,
+          "mean_nDCG@10": 0.6297517017560582
+        }
+      },
+      "bm25_scidocs_by_query_length": {
+        "short": {
+          "n": 364,
+          "mean_nDCG@10": 0.12278696115508592
+        },
+        "long": {
+          "n": 289,
+          "mean_nDCG@10": 0.18852965811837305
+        },
+        "mid": {
+          "n": 347,
+          "mean_nDCG@10": 0.1523674664072571
+        }
+      },
+      "dense_scidocs_by_query_length": {
+        "short": {
+          "n": 364,
+          "mean_nDCG@10": 0.17545052813100548
+        },
+        "long": {
+          "n": 289,
+          "mean_nDCG@10": 0.2556861734035922
+        },
+        "mid": {
+          "n": 347,
+          "mean_nDCG@10": 0.22907373390600452
+        }
+      },
+      "hybrid_scidocs_by_query_length": {
+        "short": {
+          "n": 364,
+          "mean_nDCG@10": 0.15861266876916122
+        },
+        "long": {
+          "n": 289,
+          "mean_nDCG@10": 0.2321089400507694
+        },
+        "mid": {
+          "n": 347,
+          "mean_nDCG@10": 0.2096409892130574
+        }
+      },
+      "corpus_scidocs_missing_fields": {
+        "corpus_missing_title": 0,
+        "corpus_missing_abstract": 344,
+        "source_run": "RUN-20260921-103429-bm25-scidocs-test"
+      },
+      "corpus_scifact_missing_fields": {
+        "corpus_missing_title": 0,
+        "corpus_missing_abstract": 0,
+        "source_run": "RUN-20260921-103103-bm25-scifact-test"
+      },
+      "trackB_test_missing_query_abstract": {
+        "n_queries": 200,
+        "n_missing_abstract": 0,
+        "fraction": 0.0
+      },
+      "trackB_by_query_degree": {
+        "ppr_best": {
+          "low_degree": {
+            "n": 121,
+            "mean_nDCG@10": 0.08070490150883282
+          },
+          "high_degree": {
+            "n": 36,
+            "mean_nDCG@10": 0.1275960372656707
+          }
+        },
+        "global_control": {
+          "low_degree": {
+            "n": 121,
+            "mean_nDCG@10": 0.09024788908999458
+          },
+          "high_degree": {
+            "n": 36,
+            "mean_nDCG@10": 0.12524698001119444
+          }
+        }
+      }
+    },
+    "table_8_performance": {
+      "hardware": {
+        "platform": "Windows-11-10.0.26200-SP0",
+        "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+        "cpu_count": 12,
+        "python": "3.12.14",
+        "gpu_measured_here": false,
+        "gpu_note": "No GPU measured in this local run; see SG-002 Colab T4 pilot for GPU reference."
+      },
+      "query_budget_s": 0.5,
+      "peak_rss_bytes_cold_worker": 895029248,
+      "index_bytes": {
+        "artifacts/indexes/scifact/bge-base-en-v1.5__a5beb1e3/embeddings.npy": 15922304,
+        "artifacts/indexes/scidocs/bge-base-en-v1.5__a5beb1e3/embeddings.npy": 78818432,
+        "artifacts/indexes/openalex_core_text/bge-base-en-v1.5__a5beb1e3/embeddings.npy": 56064128
+      },
+      "warm_methods": {
+        "scifact": {
+          "dense_batch_encode_s": 0.7894050000031712,
+          "bm25_search_per_query": {
+            "n": 20,
+            "mean_s": 0.018725894999442973,
+            "min_s": 0.0015239999993355013,
+            "p50_s": 0.017754650001734262,
+            "p95_s": 0.04024504499830073,
+            "max_s": 0.044108599999162834
+          },
+          "tfidf_search_per_query": {
+            "n": 20,
+            "mean_s": 0.04099641500142752,
+            "min_s": 0.0038700000004610047,
+            "p50_s": 0.02075775000048452,
+            "p95_s": 0.05642699000600291,
+            "max_s": 0.473953699998674
+          },
+          "dense_encode_per_query_amortized": {
+            "n": 20,
+            "mean_s": 0.03947025000015856,
+            "min_s": 0.03947025000015856,
+            "p50_s": 0.03947025000015856,
+            "p95_s": 0.03947025000015856,
+            "max_s": 0.03947025000015856
+          },
+          "dense_search_per_query": {
+            "n": 20,
+            "mean_s": 0.001210390000414918,
+            "min_s": 0.0009674999964772724,
+            "p50_s": 0.001126650004152907,
+            "p95_s": 0.0013824600002408274,
+            "max_s": 0.0030479999986710027
+          },
+          "rrf_fuse_per_query": {
+            "n": 20,
+            "mean_s": 0.00025822000097832645,
+            "min_s": 0.00023180000425782055,
+            "p50_s": 0.00025290000121458434,
+            "p95_s": 0.000292690000787843,
+            "max_s": 0.00029630000062752515
+          },
+          "hybrid_full_per_query_s": {
+            "n": 20,
+            "mean_s": 0.020194505000836215,
+            "min_s": 0.0029147000022931024,
+            "p50_s": 0.01914595000562258,
+            "p95_s": 0.04149502499712981,
+            "max_s": 0.045346800005063415
+          }
+        },
+        "scidocs": {
+          "dense_batch_encode_s": 0.36007499999686843,
+          "bm25_search_per_query": {
+            "n": 10,
+            "mean_s": 0.528488790000847,
+            "min_s": 0.09459200000128476,
+            "p50_s": 0.17312115000095218,
+            "p95_s": 1.5109023750028427,
+            "max_s": 1.536545400005707
+          },
+          "tfidf_search_per_query": {
+            "n": 10,
+            "mean_s": 0.2627738100003626,
+            "min_s": 0.09696960000292165,
+            "p50_s": 0.14358254999751807,
+            "p95_s": 0.8479166750010323,
+            "max_s": 1.3865039000011166
+          },
+          "dense_encode_per_query_amortized": {
+            "n": 10,
+            "mean_s": 0.036007499999686846,
+            "min_s": 0.036007499999686846,
+            "p50_s": 0.036007499999686846,
+            "p95_s": 0.036007499999686846,
+            "max_s": 0.036007499999686846
+          },
+          "dense_search_per_query": {
+            "n": 10,
+            "mean_s": 0.00619968000028166,
+            "min_s": 0.0052324999996926636,
+            "p50_s": 0.005618300001515308,
+            "p95_s": 0.009110910000526922,
+            "max_s": 0.011830800001916941
+          },
+          "rrf_fuse_per_query": {
+            "n": 10,
+            "mean_s": 0.0002914600001531653,
+            "min_s": 0.00024640000629005954,
+            "p50_s": 0.0002988499982166104,
+            "p95_s": 0.00032865499997569714,
+            "max_s": 0.00033229999826289713
+          },
+          "hybrid_full_per_query_s": {
+            "n": 10,
+            "mean_s": 0.5349799300012819,
+            "min_s": 0.10059699999692384,
+            "p50_s": 0.17917409999790834,
+            "p95_s": 1.516730955003004,
+            "max_s": 1.5424539000086952
+          }
+        }
+      },
+      "warm_build": {
+        "scifact": {
+          "bm25_index_build_s": 1.0978580999944825,
+          "tfidf_index_build_s": 1.4889695000019856,
+          "corpus_docs": 5183,
+          "dense_stack_load_s": 12.057227099998272
+        },
+        "scidocs": {
+          "bm25_index_build_s": 5.907876599994779,
+          "tfidf_index_build_s": 8.741453600006935,
+          "corpus_docs": 25657,
+          "dense_stack_load_s": 1.746458599998732
+        }
+      },
+      "track_b_stages": {
+        "c100_ppr": {
+          "n": 5,
+          "mean_s": 1.6835489000019153,
+          "min_s": 0.7457486999992398,
+          "p50_s": 2.030786600000283,
+          "p95_s": 2.3804064200026915,
+          "max_s": 2.437914100002672
+        },
+        "fuse_age": {
+          "n": 5,
+          "mean_s": 0.043403180000314026,
+          "min_s": 0.017924100000527687,
+          "p50_s": 0.04386069999600295,
+          "p95_s": 0.07707108000176958,
+          "max_s": 0.08308530000067549
+        }
+      },
+      "concurrency": {
+        "n_queries": 10,
+        "sequential_s": 0.01447609999740962,
+        "threads_4_s": 0.007864199993491638,
+        "speedup_4t": 1.840759391850404
+      }
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "category": "positive_finding",
+      "statement_vi": "Trên SciFact test (n=300), Dense (BGE-base-en-v1.5) đạt nDCG@10 = 0.7404, vượt BM25 (0.6647) với chênh lệch tuyệt đối +0.0757 (95% paired bootstrap CI [+0.0405, +0.1115], không chứa 0).",
+      "source_file": "artifacts/reports/statistics.json",
+      "run_ids": [
+        "RUN-20260921-103405-dense-scifact-test",
+        "RUN-20260921-103103-bm25-scifact-test"
+      ],
+      "metrics": {
+        "dense_nDCG@10": 0.740391287918679,
+        "bm25_nDCG@10": 0.6646598637127541,
+        "delta_absolute": 0.07573142420592494,
+        "ci_low": 0.040484491599346695,
+        "ci_high": 0.11146722307773804,
+        "ci_excludes_zero": true
+      }
+    },
+    {
+      "claim_id": "CLM-002",
+      "category": "positive_finding",
+      "statement_vi": "Trên SCIDOCS test (n=1000), Dense đạt nDCG@10 = 0.2172, vượt BM25 (0.1521) với chênh lệch tuyệt đối +0.0652 (95% paired bootstrap CI [+0.0558, +0.0748], không chứa 0).",
+      "source_file": "artifacts/reports/statistics.json",
+      "run_ids": [
+        "RUN-20260921-104021-dense-scidocs-test",
+        "RUN-20260921-103429-bm25-scidocs-test"
+      ],
+      "metrics": {
+        "dense_nDCG@10": 0.2172458820187077,
+        "bm25_nDCG@10": 0.1520510358999793,
+        "delta_absolute": 0.06519484611872842,
+        "ci_low": 0.05490958255112242,
+        "ci_high": 0.0752763945525166,
+        "ci_excludes_zero": true
+      }
+    },
+    {
+      "claim_id": "CLM-003",
+      "category": "negative_finding",
+      "statement_vi": "Kết quả âm 1 (Hybrid RRF k=60 vs Dense): Trên SciFact test, Hybrid RRF đạt nDCG@10 = 0.7204, thấp hơn Dense (0.7404) với delta -0.0200 (95% CI [-0.0469, +0.0066], chứa 0). Trên SCIDOCS test, Hybrid RRF đạt nDCG@10 = 0.1976, thấp hơn Dense (0.2172) với delta -0.0197 (95% CI [-0.0246, -0.0148], không chứa 0). Ghép BM25 trọng số bằng nhau kéo tụt top-10 khi BM25 yếu hơn hẳn Dense.",
+      "source_file": "artifacts/reports/statistics.json",
+      "run_ids": [
+        "RUN-20260921-103415-hybrid-scifact-test",
+        "RUN-20260921-103405-dense-scifact-test",
+        "RUN-20260921-104036-hybrid-scidocs-test",
+        "RUN-20260921-104021-dense-scidocs-test"
+      ],
+      "metrics": {
+        "scifact_hybrid_nDCG@10": 0.7204239389590927,
+        "scifact_delta": -0.019967348959586295,
+        "scifact_ci_low": -0.04687259783357529,
+        "scifact_ci_high": 0.00663246864448974,
+        "scidocs_hybrid_nDCG@10": 0.19755991836357797,
+        "scidocs_delta": -0.01968596365512973,
+        "scidocs_ci_low": -0.027334212690460078,
+        "scidocs_ci_high": -0.012155574077049385
+      }
+    },
+    {
+      "claim_id": "CLM-004",
+      "category": "negative_finding",
+      "statement_vi": "Kết quả âm 2 (Track B Seeded PPR vs Global PageRank trên OpenAlex test200): Nhánh cấu hình đóng băng ppr_age_best_g0.3_l0.0 đạt nDCG@10 = 0.1004, không vượt đối chứng global_pagerank_control (0.1082); chênh lệch tuyệt đối -0.0078 với 95% paired bootstrap CI [-0.0198, +0.0021] chứa 0 (Recall@100 cùng bằng 0.2325 trên tập ứng viên C100).",
+      "source_file": "artifacts/reports/main_run_registry.json",
+      "run_ids": [
+        "b_trials_test:ppr_age_best_g0.3_l0.0",
+        "b_trials_test:global_pagerank_control"
+      ],
+      "metrics": {
+        "ppr_nDCG@10": 0.10037326504922445,
+        "global_nDCG@10": 0.1081743314769434,
+        "Recall@100": 0.2325,
+        "delta_absolute": -0.007801066427718953,
+        "ci_low": -0.019783147348450263,
+        "ci_high": 0.0020803797900841316,
+        "ci_excludes_zero": false
+      }
+    },
+    {
+      "claim_id": "CLM-005",
+      "category": "negative_finding",
+      "statement_vi": "Kết quả âm 3 (Ablation A1 — Age adjustment lambda > 0): Khi tăng hệ số phạt tuổi bài báo lambda qua {0.0, 0.01, 0.03, 0.1} tại gamma=0.3 trên OpenAlex test200, nDCG@10 của PPR giảm đơn điệu từ 0.1004 xuống 0.0977, 0.0883 và 0.0673 (Global PR giảm từ 0.1082 xuống 0.0740) vì các bài báo nền tảng giàu trích dẫn bị đẩy khỏi top-10.",
+      "source_file": "artifacts/reports/ablation_age.json",
+      "run_ids": [
+        "ablation_age:ppr_g0.3_l0.0..l0.1"
+      ],
+      "metrics": {
+        "ppr_l0.0": 0.10037326504922445,
+        "ppr_l0.01": 0.09773004563899086,
+        "ppr_l0.03": 0.08833961086150939,
+        "ppr_l0.1": 0.067301342870129
+      }
+    },
+    {
+      "claim_id": "CLM-006",
+      "category": "ablation_finding",
+      "statement_vi": "Ablation A3 (Độ nhạy hằng số RRF k={30, 60, 100}): Thay đổi k rất ít ảnh hưởng đến chất lượng xếp hạng (SciFact nDCG@10: 0.7224 / 0.7204 / 0.7202; SCIDOCS nDCG@10: 0.1992 / 0.1976 / 0.1980), khẳng định việc giữ mặc định k=60 không làm sai lệch kết luận.",
+      "source_file": "artifacts/reports/ablation_rrfk.json",
+      "run_ids": [
+        "ablation_rrfk:k30_k60_k100"
+      ],
+      "metrics": {
+        "scifact_k30": 0.7223603375993978,
+        "scifact_k60": 0.7204239389590927,
+        "scifact_k100": 0.7202434956455126,
+        "scidocs_k30": 0.1991992821551405,
+        "scidocs_k60": 0.19755991836357797,
+        "scidocs_k100": 0.19800035174463387
+      }
+    },
+    {
+      "claim_id": "CLM-007",
+      "category": "performance_finding",
+      "statement_vi": "Hiệu năng hệ thống (SG-040): Trên SciFact (5.183 bài), warm P95 latency của mọi phương pháp đều dưới mục tiêu 500ms/query (BM25 P95 = 40.2ms, Dense search P95 = 1.4ms, Hybrid full P95 = 41.5ms). Tuy nhiên trên SCIDOCS (25.657 bài), BM25 thuần Python có P50 = 173.1ms nhưng P95 = 1510.9ms, và Track B C100+PPR trên đồ thị OpenAlex mất trung bình 1683.5ms/query (P95 = 2380.4ms), vượt mục tiêu 500ms/query.",
+      "source_file": "artifacts/reports/performance.json",
+      "run_ids": [
+        "SG-040:performance_profile"
+      ],
+      "metrics": {
+        "query_budget_s": 0.5,
+        "scifact_hybrid_p95_s": 0.04149502499712981,
+        "scidocs_bm25_p50_s": 0.17312115000095218,
+        "scidocs_bm25_p95_s": 1.5109023750028427,
+        "trackb_c100_ppr_mean_s": 1.6835489000019153,
+        "trackb_c100_ppr_p95_s": 2.3804064200026915,
+        "cold_worker_peak_rss_bytes": 895029248,
+        "concurrency_speedup_4t": 1.840759391850404
+      }
+    },
+    {
+      "claim_id": "CLM-008",
+      "category": "pending_human_gate",
+      "statement_vi": "Track C (Truy vấn tiếng Việt xuyên ngữ): Đã hoàn tất 30 truy vấn (10 dev / 20 test), bộ nhớ đệm dịch máy (Opus-MT vi-en) và pool mù 662 cặp (SG-031..SG-033 tooling), nhưng CHƯA báo cáo điểm đánh giá cuối cùng vì đang chờ 2 thành viên con người gán nhãn độc lập (SG-033) và duyệt freeze VN (SG-034).",
+      "source_file": "artifacts/reports/main_run_registry.json",
+      "run_ids": [],
+      "metrics": null
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="24" y="32" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">Hình 1 — Track A (BEIR SciFact &amp; SCIDOCS Test): nDCG@10 theo phương pháp</text>
+  <text x="24" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Nguồn: artifacts/reports/main_run_registry.json (Dense &gt; Hybrid RRF k=60 &gt; BM25 &gt; TF-IDF)</text>
+  <text x="24" y="96" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SciFact — TF-IDF</text>
+  <rect x="210" y="80" width="291.0" height="22" rx="3" fill="#64748b"/>
+  <text x="509.0" y="96" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.6327</text>
+  <text x="24" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SciFact — BM25</text>
+  <rect x="210" y="116" width="305.7" height="22" rx="3" fill="#3b82f6"/>
+  <text x="523.7" y="132" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.6647</text>
+  <text x="24" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SciFact — Dense (BGE)</text>
+  <rect x="210" y="152" width="340.6" height="22" rx="3" fill="#10b981"/>
+  <text x="558.6" y="168" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.7404</text>
+  <text x="24" y="204" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SciFact — Hybrid RRF</text>
+  <rect x="210" y="188" width="331.4" height="22" rx="3" fill="#f59e0b"/>
+  <text x="549.4" y="204" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.7204</text>
+  <text x="24" y="240" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SCIDOCS — BM25</text>
+  <rect x="210" y="224" width="69.9" height="22" rx="3" fill="#3b82f6"/>
+  <text x="287.9" y="240" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.1521</text>
+  <text x="24" y="276" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SCIDOCS — Dense (BGE)</text>
+  <rect x="210" y="260" width="99.9" height="22" rx="3" fill="#10b981"/>
+  <text x="317.9" y="276" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.2172</text>
+  <text x="24" y="312" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#1e293b">SCIDOCS — Hybrid RRF</text>
+  <rect x="210" y="296" width="90.9" height="22" rx="3" fill="#f59e0b"/>
+  <text x="308.9" y="312" font-family="Consolas, monospace" font-size="12" fill="#0f172a">0.1976</text>
+</svg>

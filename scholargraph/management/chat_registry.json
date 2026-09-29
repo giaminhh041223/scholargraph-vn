@@ -1215,6 +1215,59 @@
       "status": "completed",
       "claimed_paths": [],
       "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260929-073-CODEX",
+      "chat_id": "W",
+      "app_thread_id": null,
+      "agent_task_name": "cx3_cx4_g4_tooling_worker",
+      "task_ids": [
+        "SG-034",
+        "SG-042",
+        "SG-043"
+      ],
+      "actual_model": "gpt-5.4-codex",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260929-073-CODEX.md",
+      "status": "completed",
+      "claimed_paths": [
+        "scripts/run_vn_eval.py",
+        "scripts/build_evidence_index.py",
+        "scripts/compare_reproduction.py",
+        "scripts/generate_figures.py",
+        "scripts/verify_claims.py",
+        "artifacts/reports/evidence_index.json",
+        "reports/figures/",
+        "tests/unit/test_vn_eval.py",
+        "tests/unit/test_reproduction_audit.py",
+        "tests/unit/test_claims_verifier.py"
+      ],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260929-074-GEMINI",
+      "chat_id": "W",
+      "app_thread_id": null,
+      "agent_task_name": "gm6_report_slides_qa_author",
+      "task_ids": [
+        "SG-043",
+        "SG-044",
+        "SG-045"
+      ],
+      "actual_model": "gemini-3.1-pro",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260929-074-GEMINI.md",
+      "status": "completed",
+      "claimed_paths": [
+        "reports/final_report.md",
+        "docs/CLAIMS_CHECKLIST.md",
+        "reports/defense_slides.md",
+        "docs/DEFENSE_QA.md",
+        "artifacts/reports/rehearsal_notes.md",
+        "docs/SUBMISSION_CHECKLIST.md",
+        "artifacts/reports/release_audit.md"
+      ],
+      "role": "implementation_worker"
     }
   ],
   "lanes": [

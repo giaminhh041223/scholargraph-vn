@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="24" y="32" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">Hình 2 — Track B (OpenAlex Test 200 queries): Seeded PPR vs Global PageRank</text>
+  <text x="24" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Cấu hình đóng băng gamma=0.3, lambda=0.0; 95% CI của nDCG@10 [-0.0198, +0.0021] chứa 0</text>
+  <text x="24" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">nDCG@10</text>
+  <rect x="160" y="82" width="140.5" height="14" rx="2" fill="#2563eb"/>
+  <text x="308.5" y="93" font-family="Consolas, monospace" font-size="11" fill="#1e3a8a">PPR: 0.1004</text>
+  <rect x="160" y="100" width="151.4" height="14" rx="2" fill="#64748b"/>
+  <text x="319.4" y="111" font-family="Consolas, monospace" font-size="11" fill="#334155">Global PR: 0.1082</text>
+  <text x="24" y="146" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Recall@100</text>
+  <rect x="160" y="128" width="325.5" height="14" rx="2" fill="#2563eb"/>
+  <text x="493.5" y="139" font-family="Consolas, monospace" font-size="11" fill="#1e3a8a">PPR: 0.2325</text>
+  <rect x="160" y="146" width="325.5" height="14" rx="2" fill="#64748b"/>
+  <text x="493.5" y="157" font-family="Consolas, monospace" font-size="11" fill="#334155">Global PR: 0.2325</text>
+  <text x="24" y="192" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">MRR@10</text>
+  <rect x="160" y="174" width="124.6" height="14" rx="2" fill="#2563eb"/>
+  <text x="292.6" y="185" font-family="Consolas, monospace" font-size="11" fill="#1e3a8a">PPR: 0.0890</text>
+  <rect x="160" y="192" width="138.7" height="14" rx="2" fill="#64748b"/>
+  <text x="306.7" y="203" font-family="Consolas, monospace" font-size="11" fill="#334155">Global PR: 0.0991</text>
+  <text x="24" y="238" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">MAP@100</text>
+  <rect x="160" y="220" width="124.5" height="14" rx="2" fill="#2563eb"/>
+  <text x="292.5" y="231" font-family="Consolas, monospace" font-size="11" fill="#1e3a8a">PPR: 0.0889</text>
+  <rect x="160" y="238" width="138.2" height="14" rx="2" fill="#64748b"/>
+  <text x="306.2" y="249" font-family="Consolas, monospace" font-size="11" fill="#334155">Global PR: 0.0987</text>
+  <text x="24" y="284" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">P@5</text>
+  <rect x="160" y="266" width="35.0" height="14" rx="2" fill="#2563eb"/>
+  <text x="203.0" y="277" font-family="Consolas, monospace" font-size="11" fill="#1e3a8a">PPR: 0.0250</text>
+  <rect x="160" y="284" width="36.4" height="14" rx="2" fill="#64748b"/>
+  <text x="204.4" y="295" font-family="Consolas, monospace" font-size="11" fill="#334155">Global PR: 0.0260</text>
+</svg>

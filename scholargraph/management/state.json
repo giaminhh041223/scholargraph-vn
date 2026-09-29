@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-29T13:31:00+07:00",
+  "updated_at": "2026-09-29T16:19:00+07:00",
   "phase": "M7",
-  "stage": "g3_complete_g4_in_progress",
+  "stage": "g4_agent_deliverables_complete_awaiting_human_gates",
   "active_tasks": [
     "SG-030",
     "SG-033"
   ],
   "next_task_id": "SG-034",
-  "last_session_id": "SESSION-20260929-072-GEMINI",
-  "last_session_log": "management/logs/SESSION-20260929-072-GEMINI.md",
+  "last_session_id": "SESSION-20260929-074-GEMINI",
+  "last_session_log": "management/logs/SESSION-20260929-074-GEMINI.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -56,10 +56,10 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-29T13:31:00+07:00",
+    "checked_at": "2026-09-29T16:19:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
     "task_count": 53,
-    "scope": "G3 complete: bn merged into main repo (D:/Web_mining_20261), fresh .venv verified, SG-041 and SG-051 DONE (DONE=42). Starting G4 agent deliverables (CX-4, GM-6)."
+    "scope": "G0-G4 agent work 100% complete: CX-3/CX-4 tooling (run_vn_eval.py, build_evidence_index.py, compare_reproduction.py, generate_figures.py, verify_claims.py) + 15 new unit/adversarial tests (total 749 passed) + GM-6 drafts (final_report.md, CLAIMS_CHECKLIST.md, defense_slides.md, DEFENSE_QA.md, SUBMISSION_CHECKLIST.md, release_audit.md). Awaiting human gates H-1 (SG-030), H-2 (SG-033), H-3 (SG-034..SG-045)."
   }
 }
