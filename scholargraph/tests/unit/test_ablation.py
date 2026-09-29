@@ -105,3 +105,25 @@ def test_live_ablation_arms_within_prespecified_plan():
     from scholargraph.evaluation.sealed import _sha_file
     assert age["freeze_sha256"] == _sha_file(ROOT / "configs" / "frozen_main.json")
     assert rrf["freeze_sha256"] == _sha_file(ROOT / "configs" / "frozen_main.json")
+
+
+def test_ablation_markdown_table_columns_aligned():
+    lines = run_ablation._build_ablation_lines(
+        "deadbeef",
+        {"arms": {"global_g0.3_l0.0": {"nDCG@10": 0.1, "Recall@100": 0.2, "MRR@10": 0.1}}},
+        {"track_A_runs": [{"method": "bm25", "dataset": "scifact", "metrics": {"nDCG@10": 0.66}, "run_id": "RUN-1"}]},
+        {"arms": {"hybrid_rrf_k60_scifact": {"nDCG@10": 0.72}}},
+    )
+    assert "| arm | dataset | nDCG@10 | run_id |" in lines
+    in_table = False
+    expected_cols = 0
+    for line in lines:
+        if line.startswith("|"):
+            cols = len(line.strip("|").split("|"))
+            if not in_table:
+                in_table = True
+                expected_cols = cols
+            else:
+                assert cols == expected_cols, f"Table column mismatch on line: {line}"
+        else:
+            in_table = False

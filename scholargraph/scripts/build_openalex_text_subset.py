@@ -13,6 +13,7 @@ Exit 1 on any missing/malformed resource, count/order/hash mismatch.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
@@ -38,10 +39,36 @@ def fail(msg: str) -> int:
     return 1
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Build the text-only OpenAlex dense universe (ADR-017).")
+    parser.add_argument(
+        "--parent-manifest",
+        type=Path,
+        default=ROOT / "data" / "manifests" / "openalex_core.json",
+        help="Path to parent OpenAlex core manifest JSON.",
+    )
+    parser.add_argument(
+        "--input-data",
+        type=Path,
+        default=ROOT / "data" / "processed" / "openalex" / "works.jsonl",
+        help="Path to parent OpenAlex works.jsonl.",
+    )
+    parser.add_argument(
+        "--output-data",
+        type=Path,
+        default=ROOT / "data" / "processed" / "openalex" / "works_text.jsonl",
+        help="Path to output works_text.jsonl.",
+    )
+    parser.add_argument(
+        "--output-manifest",
+        type=Path,
+        default=ROOT / "data" / "manifests" / "openalex_core_text.json",
+        help="Path to output openalex_core_text.json manifest.",
+    )
+    args = parser.parse_args(argv)
     try:
-        parent = json.loads((ROOT / "data" / "manifests" / "openalex_core.json").read_text(encoding="utf-8"))
-        src = ROOT / "data" / "processed" / "openalex" / "works.jsonl"
+        parent = json.loads(args.parent_manifest.read_text(encoding="utf-8"))
+        src = args.input_data
         pinned = parent["artifacts"]["works_jsonl"]["sha256"]
         if sha256(src) != pinned:
             return fail("parent snapshot sha256 mismatch; refusing to derive a subset")
@@ -73,7 +100,8 @@ def main() -> int:
         dropped_ids = sorted(d["id"] for d in dropped)
         if dropped_ids != sorted(TEXTLESS_IDS):
             return fail(f"Textless set changed: got {dropped_ids}; pinned expectation differs — needs human review, refusing")
-        out_data = ROOT / "data" / "processed" / "openalex" / "works_text.jsonl"
+        out_data = args.output_data
+        out_data.parent.mkdir(parents=True, exist_ok=True)
         out_data.write_text("".join(kept), encoding="utf-8")
         manifest = {
             "schema_version": 1, "artifact_kind": "openalex_text_subset_manifest",
@@ -90,7 +118,8 @@ def main() -> int:
             "counts": {"parent_works": len(kept) + len(dropped), "text_works": len(kept),
                        "excluded": len(dropped)},
         }
-        out_manifest = ROOT / "data" / "manifests" / "openalex_core_text.json"
+        out_manifest = args.output_manifest
+        out_manifest.parent.mkdir(parents=True, exist_ok=True)
         out_manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps({"subset": len(kept), "excluded": len(dropped),
                           "sha256": manifest["artifacts"]["works_jsonl"]["sha256"]}, indent=2))

@@ -85,3 +85,26 @@ def test_hybrid_zero_overlap_falls_back_dense_only() -> None:
     assert "fallback-dense-only" in body["method"]
     assert len(body["results"]) == 3
     assert all("fallback" in row["method"] for row in body["results"])
+
+
+def test_hybrid_falls_back_lexical_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    from scholargraph.retrieval.dense import ExactDenseIndex
+
+    monkeypatch.setattr(ExactDenseIndex, "search", lambda self, vec, top_k=100, **kw: [])
+    r = client.get("/search", params={"q": "diabetes obesity", "method": "hybrid", "top_k": 3})
+    assert r.status_code == 200
+    body = r.json()
+    assert "fallback-lexical-only" in body["method"]
+    assert len(body["results"]) == 3
+    assert all("hybrid-fallback-dense-empty" in row["method"] for row in body["results"])
+
+
+def test_hybrid_both_sides_empty(monkeypatch: pytest.MonkeyPatch) -> None:
+    from scholargraph.retrieval.dense import ExactDenseIndex
+
+    monkeypatch.setattr(ExactDenseIndex, "search", lambda self, vec, top_k=100, **kw: [])
+    r = client.get("/search", params={"q": "zxqvkjwx", "method": "hybrid", "top_k": 3})
+    assert r.status_code == 200
+    body = r.json()
+    assert "both-sides-empty" in body["method"]
+    assert body["results"] == []

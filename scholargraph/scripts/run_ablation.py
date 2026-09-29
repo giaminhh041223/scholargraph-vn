@@ -418,21 +418,7 @@ def _ndcg10(order: list[str], rel: dict[str, int]) -> float:
     return dcg / idcg
 
 
-def step_reports() -> dict:
-    freeze, freeze_sha = load_verified_freeze(ROOT)
-    reg = _registry()
-    age_path = _out() / "ablation_age.json"
-    rrf_path = _out() / "ablation_rrfk.json"
-    rob_path = _out() / "robustness.json"
-    for p in (age_path, rrf_path, rob_path):
-        if not p.is_file():
-            raise RuntimeError(f"Missing ablation input (run prior steps first): {p.name}")
-    age = json.loads(age_path.read_text(encoding="utf-8"))
-    rrf = json.loads(rrf_path.read_text(encoding="utf-8"))
-    rob = json.loads(rob_path.read_text(encoding="utf-8"))
-    if age.get("freeze_sha256") != freeze_sha or rrf.get("freeze_sha256") != freeze_sha:
-        raise RuntimeError("Ablation inputs sealed on a different freeze; refusing to report.")
-
+def _build_ablation_lines(freeze_sha: str, age: dict, reg: dict, rrf: dict) -> list[str]:
     def fmt(v) -> str:
         return "n/a" if v is None else f"{float(v):.4f}"
 
@@ -450,7 +436,7 @@ def step_reports() -> dict:
     a_lines += ["",
                 "## A2 - no-graph arms (track A sealed registry, referenced)",
                 "",
-                "| arm | dataset | nDCG@10 |",
+                "| arm | dataset | nDCG@10 | run_id |",
                 "|---|---|---|---|"]
     for r in reg["track_A_runs"]:
         if r["method"] in ("bm25", "dense"):
@@ -468,6 +454,38 @@ def step_reports() -> dict:
                 "- Non-improving variants are kept (negative results have value).",
                 "- VN per-intent analysis deferred to SG-030/SG-034 (labels at SG-033).",
                 ""]
+    return a_lines
+
+
+def write_ablation_md() -> Path:
+    _, freeze_sha = load_verified_freeze(ROOT)
+    reg = _registry()
+    age_path = _out() / "ablation_age.json"
+    rrf_path = _out() / "ablation_rrfk.json"
+    age = json.loads(age_path.read_text(encoding="utf-8"))
+    rrf = json.loads(rrf_path.read_text(encoding="utf-8"))
+    if age.get("freeze_sha256") != freeze_sha or rrf.get("freeze_sha256") != freeze_sha:
+        raise RuntimeError("Ablation inputs sealed on a different freeze; refusing to report.")
+    out_md = _out() / "ablation.md"
+    out_md.write_text("\n".join(_build_ablation_lines(freeze_sha, age, reg, rrf)), encoding="utf-8")
+    return out_md
+
+
+def step_reports() -> dict:
+    freeze, freeze_sha = load_verified_freeze(ROOT)
+    reg = _registry()
+    age_path = _out() / "ablation_age.json"
+    rrf_path = _out() / "ablation_rrfk.json"
+    rob_path = _out() / "robustness.json"
+    for p in (age_path, rrf_path, rob_path):
+        if not p.is_file():
+            raise RuntimeError(f"Missing ablation input (run prior steps first): {p.name}")
+    age = json.loads(age_path.read_text(encoding="utf-8"))
+    rrf = json.loads(rrf_path.read_text(encoding="utf-8"))
+    rob = json.loads(rob_path.read_text(encoding="utf-8"))
+    if age.get("freeze_sha256") != freeze_sha or rrf.get("freeze_sha256") != freeze_sha:
+        raise RuntimeError("Ablation inputs sealed on a different freeze; refusing to report.")
+    a_lines = _build_ablation_lines(freeze_sha, age, reg, rrf)
     (_out() / "ablation.md").write_text("\n".join(a_lines), encoding="utf-8")
 
     r_lines = ["# Robustness - sealed buckets, costs, failures (SG-029)", "",
