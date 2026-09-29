@@ -1,0 +1,19 @@
+{
+  "artifact_kind": "final_test_freeze",
+  "task_id": "SG-028",
+  "status": "FROZEN",
+  "generated_at": "2026-09-21T10:34:05.939623+00:00",
+  "frozen_manifest": "configs/frozen_main.json",
+  "frozen_manifest_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+  "track": "A",
+  "method": "dense",
+  "dataset": "scifact",
+  "split": "test",
+  "resolved_config_hash": "41890f75d293c14048816e9aec4f1f63f0a9d5baaed1f67c131b6f2c455d3ac9",
+  "data_hash": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+  "split_hash": "71f2611137df722d7d0d2ba9b403ae696f709e09cf9ee232da4e85b94a4b3cda",
+  "model_hash": "7b8fc6a5cc003a2d4c0b42d53e04b3074c35fcd011129c7558dea1ce1df60aca",
+  "model_id": "BAAI/bge-base-en-v1.5",
+  "model_revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "evaluator_revision": "sg008-1.0.0"
+}

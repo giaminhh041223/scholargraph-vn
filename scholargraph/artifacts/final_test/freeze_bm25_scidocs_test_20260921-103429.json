@@ -1,0 +1,19 @@
+{
+  "artifact_kind": "final_test_freeze",
+  "task_id": "SG-028",
+  "status": "FROZEN",
+  "generated_at": "2026-09-21T10:34:29.883884+00:00",
+  "frozen_manifest": "configs/frozen_main.json",
+  "frozen_manifest_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+  "track": "A",
+  "method": "bm25",
+  "dataset": "scidocs",
+  "split": "test",
+  "resolved_config_hash": "8d7702cf1da04a600a826a893b1199933ffbd6c7c3fb5b4f3627f5f30ed85300",
+  "data_hash": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+  "split_hash": "6b97c7b43b6633577ee404e100a4039a0b3adbce23fd4308c77d1c8d5a932372",
+  "model_hash": "80a580ee79b6daac8e00560d52e6735114c0883502807e6654fc357f2a141391",
+  "model_id": "bm25-protocol-v1",
+  "model_revision": "sg012-1.0.0",
+  "evaluator_revision": "sg008-1.0.0"
+}

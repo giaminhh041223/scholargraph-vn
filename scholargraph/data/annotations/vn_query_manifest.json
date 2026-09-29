@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "vn_query_manifest",
+  "task_id": "SG-031",
+  "created_at": "2026-09-17T23:25:00+07:00",
+  "status": "approved_no_edits",
+  "protocol_reference": {
+    "query_counts": {
+      "dev": 10,
+      "test": 20,
+      "total": 30
+    },
+    "split_rule": "query_family_intent_groups_no_paraphrase_overlap",
+    "dev_annotation_pilot_queries": 5,
+    "labels_scale": [
+      0,
+      1,
+      2
+    ]
+  },
+  "provenance": {
+    "drafted_by": "bn/orchestrator_C (session SESSION-20260917-053) per MASTER DIRECTIVE",
+    "method": "Topic taxonomy drafted from general scientific knowledge mapped to SciFact (biomed) and SCIDOCS (scientometrics) domains; NOT derived from any qrels entry or corpus document; each intent family is assigned wholly to one split (no paraphrase across splits).",
+    "human_approval": {
+      "approver": "project owner (both members represented by single owner account)",
+      "decision": "Duyệt nguyên bản 30 query",
+      "method": "in-session question tool (AskUserQuestion), answer recorded verbatim",
+      "approved_at": "2026-09-17T23:55:00+07:00",
+      "edits": "none"
+    },
+    "note": "Card SG-031 assigns query writing to the two human members; this manifest is an agent DRAFT for the human gate to edit/approve. Approval, edits and finalization must be recorded here before SG-032/SG-033 consume it."
+  },
+  "counts": {
+    "dev": 10,
+    "test": 20,
+    "total": 30,
+    "pilot_dev": 5
+  },
+  "queries": [
+    {
+      "query_id": "vn:dev:001",
+      "split": "dev",
+      "intent_family": "vitamin-d-bone",
+      "topic_domain": "biomed",
+      "text_vi": "Bổ sung vitamin D có giúp ngăn ngừa gãy xương ở người cao tuổi không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn:dev:002",
+      "split": "dev",
+      "intent_family": "probiotic-ibs",
+      "topic_domain": "biomed",
+      "text_vi": "Men vi sinh có giảm triệu chứng hội chứng ruột kích thích không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn:dev:003",
+      "split": "dev",
+      "intent_family": "e-cigarette-cessation",
+      "topic_domain": "biomed",
+      "text_vi": "Thuốc lá điện tử có giúp người hút thuốc bỏ được thuốc lá không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn:dev:004",
+      "split": "dev",
+      "intent_family": "sleep-memory",
+      "topic_domain": "biomed",
+      "text_vi": "Ngủ đủ giấc có cải thiện trí nhớ làm việc không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn:dev:005",
+      "split": "dev",
+      "intent_family": "peer-review-gender-bias",
+      "topic_domain": "scientometrics",
+      "text_vi": "Bình duyệt kiểu double-blind có giảm thiên vị giới khi đánh giá bài báo không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn:dev:006",
+      "split": "dev",
+      "intent_family": "omega3-cognition",
+      "topic_domain": "biomed",
+      "text_vi": "Bổ sung omega-3 có ngăn chặn suy giảm nhận thức ở người lớn tuổi không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:dev:007",
+      "split": "dev",
+      "intent_family": "social-media-anxiety",
+      "topic_domain": "biomed",
+      "text_vi": "Dùng mạng xã hội nhiều có làm tăng lo âu ở thanh thiếu niên không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:dev:008",
+      "split": "dev",
+      "intent_family": "acupuncture-low-back-pain",
+      "topic_domain": "biomed",
+      "text_vi": "Châm cứu có giảm đau lưng dưới mạn tính không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:dev:009",
+      "split": "dev",
+      "intent_family": "intermittent-fasting-weight",
+      "topic_domain": "biomed",
+      "text_vi": "Nhịn ăn gián đoạn có giảm cân hiệu quả như chế độ ăn kiêng liên tục không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:dev:010",
+      "split": "dev",
+      "intent_family": "citation-prediction-features",
+      "topic_domain": "scientometrics",
+      "text_vi": "Những đặc trưng nào của bài báo dự đoán được số trích dẫn trong tương lai?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:001",
+      "split": "test",
+      "intent_family": "statin-diabetes",
+      "topic_domain": "biomed",
+      "text_vi": "Thuốc statin có làm tăng nguy cơ tiểu đường type 2 không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:002",
+      "split": "test",
+      "intent_family": "mediterranean-diet-cardio",
+      "topic_domain": "biomed",
+      "text_vi": "Chế độ ăn Địa Trung Hải có giảm bệnh tim mạch không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:003",
+      "split": "test",
+      "intent_family": "aspirin-colorectal-cancer",
+      "topic_domain": "biomed",
+      "text_vi": "Aspirin liều thấp hằng ngày có phòng ngừa ung thư đại trực tràng không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:004",
+      "split": "test",
+      "intent_family": "exercise-depression",
+      "topic_domain": "biomed",
+      "text_vi": "Tập thể dục aerobic có giảm triệu chứng trầm cảm ở người lớn không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:005",
+      "split": "test",
+      "intent_family": "vaping-lung-injury",
+      "topic_domain": "biomed",
+      "text_vi": "Hút thuốc lá điện tử có liên quan đến tổn thương phổi cấp không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:006",
+      "split": "test",
+      "intent_family": "citation-count-quality",
+      "topic_domain": "scientometrics",
+      "text_vi": "Số lượng trích dẫn có dự đoán được chất lượng lâu dài của bài báo không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:007",
+      "split": "test",
+      "intent_family": "open-access-citations",
+      "topic_domain": "scientometrics",
+      "text_vi": "Xuất bản mở (open access) có làm tăng số trích dẫn của bài báo không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:008",
+      "split": "test",
+      "intent_family": "author-name-disambiguation",
+      "topic_domain": "scientometrics",
+      "text_vi": "Phân biệt tác giả trùng tên trong cơ sở dữ liệu thư mục lượng (bibliometrics) bằng cách nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:009",
+      "split": "test",
+      "intent_family": "retraction-causes",
+      "topic_domain": "scientometrics",
+      "text_vi": "Nguyên nhân phổ biến khiến bài báo khoa học bị rút lại (retraction) là gì?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:010",
+      "split": "test",
+      "intent_family": "manuscript-length-acceptance",
+      "topic_domain": "scientometrics",
+      "text_vi": "Độ dài bài báo có ảnh hưởng đến xác suất được chấp nhận đăng không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:011",
+      "split": "test",
+      "intent_family": "mmr-vaccine-autism",
+      "topic_domain": "biomed",
+      "text_vi": "Vaccine MMR có liên quan đến chứng tự kỷ ở trẻ em không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:012",
+      "split": "test",
+      "intent_family": "coffee-mortality",
+      "topic_domain": "biomed",
+      "text_vi": "Uống cà phê hằng ngày có liên quan đến tử vong toàn phần không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:013",
+      "split": "test",
+      "intent_family": "screen-time-children-sleep",
+      "topic_domain": "biomed",
+      "text_vi": "Thời gian dùng màn hình có ảnh hưởng đến giấc ngủ của trẻ em không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:014",
+      "split": "test",
+      "intent_family": "glucosamine-knee-osteoarthritis",
+      "topic_domain": "biomed",
+      "text_vi": "Glucosamine có cải thiện đau khớp gối do thoái hóa không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:015",
+      "split": "test",
+      "intent_family": "mindfulness-anxiety",
+      "topic_domain": "biomed",
+      "text_vi": "Thiền chánh niệm có giảm lo âu ở người trưởng thành không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:016",
+      "split": "test",
+      "intent_family": "protein-supplement-sarcopenia",
+      "topic_domain": "biomed",
+      "text_vi": "Bổ sung protein có duy trì khối cơ ở người cao tuổi không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:017",
+      "split": "test",
+      "intent_family": "citation-community-structure",
+      "topic_domain": "scientometrics",
+      "text_vi": "Cấu trúc cộng đồng trong đồ thị trích dẫn phản ánh các lĩnh vực nghiên cứu thế nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:018",
+      "split": "test",
+      "intent_family": "preprint-vs-published-quality",
+      "topic_domain": "scientometrics",
+      "text_vi": "Bài báo preprint có chất lượng ngang bài báo đã bình duyệt không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:019",
+      "split": "test",
+      "intent_family": "h-index-limitations",
+      "topic_domain": "scientometrics",
+      "text_vi": "Chỉ số h có hạn chế gì khi đánh giá nhà nghiên cứu?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn:test:020",
+      "split": "test",
+      "intent_family": "air-pollution-asthma-children",
+      "topic_domain": "biomed",
+      "text_vi": "Ô nhiễm không khí có làm tăng triệu chứng hen suyễn ở trẻ em không?",
+      "annotation_pilot": false
+    }
+  ]
+}

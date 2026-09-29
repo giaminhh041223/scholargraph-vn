@@ -1,13 +1,21 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "auditor_revision": "sg010-2.0.0",
+  "auditor_source_sha256": "1c512293fa6670b4451c60c42bec3794320de31ba7863e46ae11fafcd7168c6f",
   "task": "SG-010",
   "title": "BEIR Data Quality and Integrity Audit",
-  "audit_timestamp": "2026-09-16T01:52:12.647092+07:00",
+  "audit_timestamp": "2026-09-16T14:28:37.269635+07:00",
   "audit_passed": true,
   "errors": [],
   "datasets": {
     "scifact": {
       "dataset": "scifact",
+      "errors": [],
+      "required_splits": [
+        "train",
+        "test"
+      ],
+      "missing_required_splits": [],
       "files": {
         "corpus_sha256": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
         "queries_sha256": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
@@ -17,10 +25,12 @@
         }
       },
       "id_integrity": {
+        "status": "PASS",
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scifact:6171953"
+        "namespace_sample": "beir:scifact:10009203"
       },
       "corpus_audit": {
+        "status": "PASS",
         "total_documents": 5183,
         "unique_raw_ids": 5183,
         "duplicate_raw_ids_count": 0,
@@ -82,6 +92,7 @@
         "duplicate_titles_count": 2
       },
       "queries_audit": {
+        "status": "PASS",
         "total_queries": 1109,
         "unique_raw_ids": 1109,
         "duplicate_raw_ids_count": 0,
@@ -131,6 +142,7 @@
       },
       "splits_audit": {
         "test": {
+          "status": "PASS",
           "total_rows": 339,
           "unique_queries_in_qrels": 300,
           "referential_integrity": {
@@ -140,7 +152,8 @@
             "orphan_corpus_ids": [],
             "duplicate_pairs_count": 0,
             "conflicting_scores_count": 0,
-            "self_reference_count": 0
+            "self_reference_count": 0,
+            "positive_self_reference_count": 0
           },
           "score_distribution": {
             "1": 339
@@ -182,6 +195,7 @@
             "empty_text_docs_zero_only_count": 0,
             "empty_text_docs_both_count": 0,
             "empty_text_positive_pairs_count": 0,
+            "empty_text_positive_scores": [],
             "empty_text_zero_pairs_count": 0,
             "empty_text_zero_pairs_in_zero_only_docs_count": 0,
             "empty_text_zero_pairs_in_positive_docs_count": 0,
@@ -189,6 +203,7 @@
           }
         },
         "train": {
+          "status": "PASS",
           "total_rows": 919,
           "unique_queries_in_qrels": 809,
           "referential_integrity": {
@@ -198,7 +213,8 @@
             "orphan_corpus_ids": [],
             "duplicate_pairs_count": 0,
             "conflicting_scores_count": 0,
-            "self_reference_count": 0
+            "self_reference_count": 0,
+            "positive_self_reference_count": 0
           },
           "score_distribution": {
             "1": 919
@@ -240,6 +256,7 @@
             "empty_text_docs_zero_only_count": 0,
             "empty_text_docs_both_count": 0,
             "empty_text_positive_pairs_count": 0,
+            "empty_text_positive_scores": [],
             "empty_text_zero_pairs_count": 0,
             "empty_text_zero_pairs_in_zero_only_docs_count": 0,
             "empty_text_zero_pairs_in_positive_docs_count": 0,
@@ -266,6 +283,11 @@
     },
     "scidocs": {
       "dataset": "scidocs",
+      "errors": [],
+      "required_splits": [
+        "test"
+      ],
+      "missing_required_splits": [],
       "files": {
         "corpus_sha256": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
         "queries_sha256": "3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6",
@@ -274,10 +296,12 @@
         }
       },
       "id_integrity": {
+        "status": "PASS",
         "canonical_roundtrip_mismatches": 0,
-        "namespace_sample": "beir:scidocs:4b9ac9e1493b11f0af0c65c7a291eb61f33678b6"
+        "namespace_sample": "beir:scidocs:000c009765a276d166fc67595e107a9bc44f230d"
       },
       "corpus_audit": {
+        "status": "PASS",
         "total_documents": 25657,
         "unique_raw_ids": 25657,
         "duplicate_raw_ids_count": 0,
@@ -350,6 +374,7 @@
         "duplicate_titles_count": 4
       },
       "queries_audit": {
+        "status": "PASS",
         "total_queries": 1000,
         "unique_raw_ids": 1000,
         "duplicate_raw_ids_count": 0,
@@ -370,6 +395,7 @@
       },
       "splits_audit": {
         "test": {
+          "status": "PASS",
           "total_rows": 29928,
           "unique_queries_in_qrels": 1000,
           "referential_integrity": {
@@ -379,7 +405,8 @@
             "orphan_corpus_ids": [],
             "duplicate_pairs_count": 0,
             "conflicting_scores_count": 0,
-            "self_reference_count": 0
+            "self_reference_count": 0,
+            "positive_self_reference_count": 0
           },
           "score_distribution": {
             "1": 4928,
@@ -883,6 +910,9 @@
             "empty_text_docs_zero_only_count": 229,
             "empty_text_docs_both_count": 15,
             "empty_text_positive_pairs_count": 187,
+            "empty_text_positive_scores": [
+              1
+            ],
             "empty_text_zero_pairs_count": 279,
             "empty_text_zero_pairs_in_zero_only_docs_count": 262,
             "empty_text_zero_pairs_in_positive_docs_count": 17,
@@ -922,7 +952,7 @@
       ],
       "shared_relevant_documents_count": 181,
       "shared_relevant_documents_ratio": 0.6396,
-      "verdict": "PASS (with documented upstream anomaly): Disjoint query ID namespace (0 overlapping IDs); exactly 2 queries have identical text between train and test in official BEIR. Shared corpus is standard IR setup."
+      "verdict": "PASS: Disjoint query IDs; 2 distinct normalized query text overlap(s), 2 matching pair(s). Shared corpus is standard IR setup."
     }
   },
   "anomalies_summary": {
@@ -1047,7 +1077,7 @@
         "f69c83aab19183795af7612c3f224b5e116f242a",
         "fd7725988e6b6a44d14e41c36d718bf0033f5b3c"
       ],
-      "explanation": "In the official SCIDOCS BEIR snapshot, 344 document(s) contain title only (abstract/text is empty string). All 344 of these documents appear in the test split qrels: 115 document(s) have positive relevance (score=1, 187 pair(s)); 229 document(s) appear exclusively with zero relevance (score=0, 262 pair(s)); and 15 document(s) with positives also appear in 17 zero-relevance pair(s), yielding a total of 466 judgment pair(s) (187 positive, 279 zero). Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents are indexed using title alone and are NOT filtered out."
+      "explanation": "In the SCIDOCS dataset snapshot (25,657 docs), 344 document(s) contain title only (abstract/text is missing, null or blank). All 344 of these documents appear in the test split qrels: 115 document(s) have positive relevance (score=1, 187 pair(s)); 229 document(s) appear exclusively with zero relevance (score=0, 262 pair(s)); 15 document(s) with positives also appear in 17 zero-relevance pair(s), yielding a total of 466 judgment pair(s) (187 positive, 279 zero). Per Research Protocol v1, raw benchmark files are preserved unmodified; these documents must be indexed using title alone by downstream retrievers; this audit does not verify index construction."
     },
     "scifact_empty_text_documents": {
       "total_empty_abstract_docs": 0,
@@ -1068,7 +1098,7 @@
           "query_text": "obesity decreases life quality."
         }
       ],
-      "explanation": "Detected 2 exact query text overlap(s) between SciFact train and test splits (status: PASS): Test 1292 matches Train 1291 ('there is no association between hnf4a mutations and diabetes risks.'); Test 870 matches Train 871 ('obesity decreases life quality.'). Shared relevant documents count across splits: 181. This is an inherent property of the upstream benchmark and is documented rather than filtered."
+      "explanation": "Detected 2 exact query text overlap(s) between SciFact train and test splits (status: PASS): Test 1292 matches Train 1291 ('there is no association between hnf4a mutations and diabetes risks.'); Test 870 matches Train 871 ('obesity decreases life quality.'). Shared relevant documents count across splits: 181. This is an observed property of this input snapshot; text overlap must be handled by the split policy before tuning, without modifying raw files."
     },
     "referential_integrity_status": "100% PASS; zero orphan queries, zero orphan documents, zero duplicate qrel rows."
   },
@@ -1078,5 +1108,36 @@
     "lossless_canonical_namespacing": true,
     "lexical_tokenizer_verified": "Unicode casefold + (?u)\\b\\w+\\b",
     "all_integrity_checks_passed": true
+  },
+  "input_integrity": {
+    "before": {
+      "status": "PASS",
+      "sha256": {
+        "scidocs/corpus.jsonl": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+        "scidocs/qrels/test.tsv": "dcd3d7f77417294bb6f338537f3c28d8a5ea72b30fe6633f407fa85528767e35",
+        "scidocs/queries.jsonl": "3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6",
+        "scidocs.zip": "96640201687767c9b1fcc5af7a80b90fb325b37fa25329c2586c25edcfa17ef1",
+        "scifact/corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+        "scifact/qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+        "scifact/qrels/train.tsv": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+        "scifact/queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+        "scifact.zip": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165"
+      }
+    },
+    "after": {
+      "status": "PASS",
+      "sha256": {
+        "scidocs/corpus.jsonl": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+        "scidocs/qrels/test.tsv": "dcd3d7f77417294bb6f338537f3c28d8a5ea72b30fe6633f407fa85528767e35",
+        "scidocs/queries.jsonl": "3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6",
+        "scidocs.zip": "96640201687767c9b1fcc5af7a80b90fb325b37fa25329c2586c25edcfa17ef1",
+        "scifact/corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+        "scifact/qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+        "scifact/qrels/train.tsv": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+        "scifact/queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+        "scifact.zip": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165"
+      }
+    },
+    "unchanged_during_audit": true
   }
 }

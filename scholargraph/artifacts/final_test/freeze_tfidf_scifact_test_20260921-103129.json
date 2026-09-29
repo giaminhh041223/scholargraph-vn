@@ -1,0 +1,19 @@
+{
+  "artifact_kind": "final_test_freeze",
+  "task_id": "SG-028",
+  "status": "FROZEN",
+  "generated_at": "2026-09-21T10:31:29.608142+00:00",
+  "frozen_manifest": "configs/frozen_main.json",
+  "frozen_manifest_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+  "track": "A",
+  "method": "tfidf",
+  "dataset": "scifact",
+  "split": "test",
+  "resolved_config_hash": "879e17509c4df8419bb154c61338847488903759265f3b634a04d685d1e4460a",
+  "data_hash": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+  "split_hash": "71f2611137df722d7d0d2ba9b403ae696f709e09cf9ee232da4e85b94a4b3cda",
+  "model_hash": "8fd8d703a8ba629293307dbfb905b4724113a5f7baa85a7fc0015d532324c885",
+  "model_id": "tfidf-protocol-v1",
+  "model_revision": "sg018-1.0.0",
+  "evaluator_revision": "sg008-1.0.0"
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-15T23:28:00+07:00",
+  "updated_at": "2026-09-29T12:20:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -264,20 +264,40 @@
       "title": "Kiểm chứng evaluator",
       "phase": "M1",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260916-022",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-006",
         "SG-007"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/evaluation/metrics.py",
+        "tests/unit/test_metrics_reference.py",
+        "tests/unit/test_metrics_runner.py",
+        "tests/fixtures/metric_golden.json",
+        "scripts/validate_metrics.py",
+        "requirements/sg008-verification.txt",
+        "docs/EVALUATOR_GUIDE.md",
+        "artifacts/reports/metric_validation.json",
+        "management/reviews/SG-008-REVIEW-PACKET.md",
+        "management/reviews/SG-008-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-022-REVIEW.md",
+        "management/logs/SESSION-20260916-022.md",
+        "management/logs/SESSION-20260916-022-REFERENCE.md"
+      ],
+      "verification": [
+        "2026-09-16: official pytest suite PASS 150/150 in 32.77s, exit 0; includes evaluator/reference and runner integration.",
+        "2026-09-16: scripts/validate_metrics.py PASS 74 comparisons + 38 invalid-input checks; 9 golden scenarios and 40 randomized queries. Max absolute error 1.6653345369377348e-16 < 1e-12; synthetic=true.",
+        "Reference pytrec-eval-terrier==0.5.10 C trec_eval; package/binary/source hashes in metric_validation.json.",
+        "2026-09-16: fresh-context reviewer /root/sg008_fresh_review PASS; 57 targeted tests, 74 comparisons/38 negatives, 500 additional query rows and 10 cutoff/invalid-input probes PASS. All snapshot hashes verified. Human approval pending.",
+        "2026-09-16T07:18:04+07:00: Project owner reviewed session logs, confirmed evaluator acceptance, and explicitly ordered progression to downstream retrieval tasks; human approval gate satisfied."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Implementation, tự kiểm, fresh-context review và human approval đều PASS. Evaluator sg008-1.0.0 chính thức được nghiệm thu để phục vụ các pilot retrieval tiếp theo."
     },
     {
       "id": "SG-009",
@@ -320,7 +340,7 @@
       "status": "DONE",
       "role": "D/R",
       "owner": "codex/current-session",
-      "session_id": "SESSION-20260916-021",
+      "session_id": "SESSION-20260916-025",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-009"
@@ -335,47 +355,73 @@
         "management/reviews/SG-010-REVIEW-20260915.md",
         "management/reviews/SG-010-CODEX-REVIEW-20260916.md",
         "management/reviews/SG-010-RE-REVIEW-20260916.md",
+        "management/reviews/SG-010-LATEST-CODEX-REVIEW-20260916.md",
+        "management/reviews/SG-010-LATEST-REVIEW-RESOLUTION-20260916.md",
         "management/logs/SESSION-20260915-020.md",
-        "management/logs/SESSION-20260916-021.md"
+        "management/logs/SESSION-20260916-021.md",
+        "management/logs/SESSION-20260916-024.md",
+        "tests/unit/test_beir_audit_adversarial.py",
+        "management/reviews/SG-010-SESSION025-PACKET.md",
+        "management/reviews/SG-010-SESSION025-REVIEW.md",
+        "management/reviews/SG-010-SESSION025-RESOLUTION.md",
+        "management/logs/SESSION-20260916-025.md",
+        "management/logs/SESSION-20260916-025-ADVERSARIAL.md",
+        "management/logs/SESSION-20260916-025-REVIEW.md"
       ],
       "verification": [
         "2026-09-16T01:05:47+07:00: pytest tests/unit/test_data_integrity.py -v passed 13/13 tests in 20.56s covering pure unit, negative synthetic corrupted fixtures, live auditor execution, and Data Card consistency.",
         "2026-09-16T01:06:29+07:00: pytest tests -q passed 91/91 tests in 22.22s across the full project test suite.",
         "2026-09-16T01:07:55+07:00: fresh-context re-review PASS in management/reviews/SG-010-RE-REVIEW-20260916.md; all findings F1-F5 closed.",
-        "2026-09-16T01:09:00+07:00: scripts/check_project.ps1 exit 0; local Markdown links and state consistent."
+        "2026-09-16T01:09:00+07:00: scripts/check_project.ps1 exit 0; local Markdown links and state consistent.",
+        "2026-09-16T07:37:00+07:00: resolved findings L1 (missing required splits gate & non-zero CLI exit) and L2 (dynamic narrative for title/abstract fields). Added 2 comprehensive regression tests in test_data_integrity.py (17/17 passed in 31.81s). Full test suite PASS 157/157 in 81.56s.",
+        "2026-09-16T14:33:07+07:00: final pytest tests -q:214 passed in70.31s, exit0; parent adversarial49 passed in23.03s.",
+        "2026-09-16T14:33:07+07:00: fresh-context review /root/sg008_fresh_review PASS; reviewer74 targeted tests passed in60.39s, raw mutation/hardlink probes PASS. Finding P2 missing/null text narrative fixed and rechecked.",
+        "2026-09-16T14:33:07+07:00: live audit CLI exit0; schema2 auditor sg010-2.0.0; 9 raw file hashes unchanged; final source1c512293fa6670b4451c60c42bec3794320de31ba7863e46ae11fafcd7168c6f; report d4a94f0a5bd68a65f7be3b353592d826dad96c28470e49679ffb89154a39b8aa."
       ],
       "claimed_paths": [],
-      "note": "Hoàn tất audit chất lượng dữ liệu BEIR và khắc phục toàn bộ các phát hiện F1-F5 từ review Codex. Kiểm tra động tính toàn vẹn tham chiếu, bổ sung negative synthetic tests, chuẩn hóa SHA-256, thống kê độ dài và bản quyền trong Data Card."
+      "note": "Session025: review và sửa theo Anti-Silent-Bypass; schema2 null cho số đo không thực hiện, strict input/self gate, zero-positive statistics, raw protection và narrative sửa đúng. Full214 tests PASS, fresh-context review PASS; không còn findings mở. Raw giữ nguyên."
     },
     {
       "id": "SG-011",
       "title": "Split và leakage checks",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "codex/current-session",
+      "session_id": "SESSION-20260916-023",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-004",
         "SG-010"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "configs/split_policy.json",
+        "data/splits/scifact_dev.json",
+        "data/splits/scifact_test.json",
+        "data/splits/scidocs_test.json",
+        "src/scholargraph/data/splits.py",
+        "tests/unit/test_split_leakage.py",
+        "artifacts/reports/split_audit.json"
+      ],
+      "verification": [
+        "2026-09-16: pytest tests/unit/test_split_leakage.py -v passed 5/5 tests in 7.35s; disjoint query namespaces, corpus referential integrity, manifest consistency, and negative synthetic leakage detection.",
+        "2026-09-16: generated split manifests in data/splits/ for SciFact dev (809 queries, 919 qrels), SciFact test (300 queries, 339 qrels), and SCIDOCS test (1000 queries, 29928 qrels).",
+        "2026-09-16: split_audit.json verified split_audit_passed=true; 0 overlapping query IDs; all qrels docs exist in corpus universe."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Khóa thành công ranh giới dev/test cho SciFact và SCIDOCS; audit rò rỉ đạt 100% PASS; bảo vệ test labels khỏi ranker."
     },
     {
       "id": "SG-012",
       "title": "BM25 pilot thật",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg012_engine_worker",
+      "session_id": "SESSION-20260916-028",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-008",
@@ -383,10 +429,25 @@
         "SG-011"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/bm25.py",
+        "tests/unit/test_bm25_retrieval.py",
+        "artifacts/reports/bm25_pilot.md",
+        "artifacts/reports/bm25_pilot.json",
+        "artifacts/runs/RUN-20260916-163653-bm25-scifact-dev",
+        "artifacts/runs/RUN-20260916-163629-bm25-scifact-dev",
+        "management/reviews/SG-012-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-028.md",
+        "management/logs/SESSION-20260916-031.md"
+      ],
+      "verification": [
+        "2026-09-16: real run RUN-20260916-163653-bm25-scifact-dev COMPLETED with seal on SciFact dev (809 queries / 919 qrels / 5.183 corpus): nDCG@10 0.6701281168402777, Recall@100 0.9102389781623403, MRR@10 0.6380030215629721, MAP@100 0.6332855229671024, P@5 0.15945611866501855.",
+        "2026-09-16: reproducibility run RUN-20260916-163629: rankings.jsonl + per_query.json byte-identical, metrics bit-exact; 2 historical runs and 1 FAILED run (164606, has error.json) preserved, never overwritten.",
+        "2026-09-16: pytest tests/unit/test_bm25_retrieval.py 36/36 PASS; pytest tests -q 321/321 PASS (204.53s) with the full trio; no old test broken.",
+        "2026-09-17: fresh-context reviewer bn/sg012_eval_reviewer PASS (management/reviews/SG-012-REVIEW-20260916.md): leakage probes (rankings without qrels; inverted-score qrels -> identical rankings, zeroed metrics), independent BM25 re-derivation and metric recomputation <=1e-12, 4/4 adversarial CLI exit 1, hashes match. No P0/P1. P2-1 (canonical-JSON hash naming note) accepted as documented note; P2-2 (stale test count in report) resolved by this entry citing the current 321/321."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop SESSION-20260916-027: claimed by engine worker (lane M). Real BM25 pilot per Protocol v1 bm25 block; no qrels in ranking path."
     },
     {
       "id": "SG-013",
@@ -430,70 +491,113 @@
       "title": "Graph feasibility gate",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg014_graph_curator",
+      "session_id": "SESSION-20260916-029",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-011",
         "SG-013"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/feasibility.py",
+        "tests/unit/test_graph_feasibility.py",
+        "artifacts/reports/graph_feasibility.json",
+        "docs/GRAPH_PROTOCOL.md",
+        "management/DECISIONS.md",
+        "management/reviews/SG-014-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-029.md",
+        "management/logs/SESSION-20260916-032.md"
+      ],
+      "verification": [
+        "2026-09-17: measured gate on immutable pilot snapshot (works.jsonl sha256 3f301e4f...): 2.000 works, 190 internal directed edges, 1.779/2.000 isolated, 4 self-loops, cohort 21 eligible sources with max 2/year << floors 50 test/30 dev -> overall NO_GO (valid measured outcome, exit 0). SCIDOCS metadata.references (20.811 internal edges) rejected as leakage (qrels are citation-derived); SciFact corpus has 0 reference fields.",
+        "2026-09-16: pytest tests/unit/test_graph_feasibility.py 37/37 PASS; pytest tests -q 321/321 PASS.",
+        "2026-09-17: fresh-context reviewer bn/sg014_engine_reviewer PASS (management/reviews/SG-014-REVIEW-20260916.md): independent recount matched 100%, CLI exit-1 probes, ADR-016 append-only verified (+23/-0), no qrels read by feasibility. P2-1 (test helper floors swapped) FIXED; P2-2 (masking_protocol_readiness not gating) FIXED and report regenerated via CLI (overall stays NO_GO); P2-3 (reference-list position latent edge case) documented, non-blocking.",
+        "2026-09-17: ADR-016 recorded: SG-016 stays blocked until the gate re-runs GO on a citation-connected core snapshot; SG-015 scope adjusted accordingly (see tasks.json note)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Gate NO_GO là kết quả đo được (không phải run failure); ADR-016 chốt masking/holdout và yêu cầu SG-015. SG-016 blocked đến khi gate GO trên snapshot core."
     },
     {
       "id": "SG-015",
       "title": "Snapshot OpenAlex core",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg015_core_curator",
+      "session_id": "SESSION-20260917-036",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-013",
         "SG-014"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "data/manifests/openalex_core.json",
+        "data/processed/openalex/",
+        "data/raw/openalex_core/",
+        "artifacts/reports/openalex_quality.json",
+        "artifacts/reports/graph_feasibility_core.json",
+        "src/scholargraph/ingest/openalex.py",
+        "tests/unit/test_openalex_core.py",
+        "management/reviews/SG-015-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-036.md",
+        "management/logs/SESSION-20260917-038.md"
+      ],
+      "verification": [
+        "2026-09-17: citation-connected snapshot 18.251 unique works (2.000 pilot embedded unchanged + 115 hubs + 14.958 cohort-only + 1.178 extension), 104 polite-pool requests (80 v1 + 15 probe + 9 v2), 89 pages cached with per-page hashes; manifest pinned BEFORE fetch (plan fingerprints v1 03b28664..., v2 cb63697d...; recomputed and matched).",
+        "2026-09-17: measured graph: 26.516 internal directed edges, 2.324/18.251 isolated (12,73%), largest weak component 15.848, 163 self-loops recorded for SG-016 masking; transformations counted: DOI normalized 16.713 (coverage 91,57%), 870.549 reference IDs canonicalized; missing recorded not dropped (DOI 1.538, abstract 5.367, year 22).",
+        "2026-09-17: graph gate on core: overall GO (test_year 2025: 579 eligible >= 50; dev_year 2024: 563 >= 30; novel-candidates min 206 >= 100; provenance + masking readiness GO). SG-016 unblocked per ADR-016. Selection bias of cites:<hubs> sampling disclosed in known_limitations; snapshot must not be treated as topic-representative.",
+        "2026-09-17: pytest tests/unit/test_openalex_core.py 27/27 PASS; pytest tests -q 388/388 PASS; pilot data/raw/openalex/ hash unchanged (works.jsonl 3f301e4f...); v1 NO_GO gate outcome preserved as pinned evidence in manifest v1_gate_evidence.",
+        "2026-09-17: fresh-context reviewer bn/sg015_engine_reviewer PASS (management/reviews/SG-015-REVIEW-20260917.md): independent recount matched 100% (edges/isolated/self-loops/DOI/eligible/novel), fingerprints recomputed, gate CLI re-run diff=0 outside measured_at/command/path, tampered-manifest CLI exit 1. P2-1 static known_limitations string FIXED by coordinator (feasibility.py snapshot-aware; both gate reports regenerated, decisions unchanged); P2-2 title-field label note recorded for consumers; P2-3 future superseded reports to keep versioned paths; P2-4 selection bias disclosed."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop-2 SESSION-20260917-034: curator (lane D). ADR-016 muc 7: citation-connected sampling, floors 50/30/2/100, pin manifest before fetch, re-run gate on core snapshot."
     },
     {
       "id": "SG-016",
       "title": "Graph và masked split",
       "phase": "M2",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg016_graph_builder",
+      "session_id": "SESSION-20260917-040",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-014",
         "SG-015"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/build.py",
+        "tests/unit/test_graph_masking.py",
+        "data/manifests/graph_core.json",
+        "artifacts/reports/graph_audit.json",
+        "data/processed/graph/",
+        "management/reviews/SG-016-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-040.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_graph_masking.py 38/38 PASS; CLI build exit 0 premask 26516 postmask 26186 heldout 330 queries test200/dev100; 3x build byte-identical; audit-only 15/15 PASS; two-way residual 0/0; raw works sha unchanged.",
+        "2026-09-17: fresh-context review PASS no P0/P1 (management/reviews/SG-016-REVIEW-20260917.md); 3xP2 notes; human approval pending per routing.",
+        "2026-09-17T14:00:00+07:00: human approval granted by project owner in-session (question tool: 'Phe duyet SG-016 DONE'); routing human gate satisfied. Fresh-context review PASS already recorded."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop-3 SESSION-20260917-039: graph builder (lane D). human_approval_required per routing — DONE chỉ sau human approval thật."
     },
     {
       "id": "SG-017",
       "title": "Chọn dense model",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg017_model_researcher",
+      "session_id": "SESSION-20260916-030",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-003",
@@ -501,39 +605,65 @@
         "SG-011"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "docs/MODEL_CARD.md",
+        "configs/models/dense_encoder.json",
+        "tests/unit/test_model_config.py",
+        "management/reviews/SG-017-REVIEW-20260916.md",
+        "management/logs/SESSION-20260916-030.md",
+        "management/logs/SESSION-20260916-033.md"
+      ],
+      "verification": [
+        "2026-09-16: core encoder selected: BAAI/bge-base-en-v1.5 @ revision a5beb1e3e68b9ab74eb54cfd186867f64f240e1a, CLS pooling, 768 dims, max_length 512, MIT license, query-only prefix; shortlist (3 <= protocol budget): bge-base (core), bge-small (light option), all-MiniLM-L6-v2 (compute baseline). No benchmark numbers in the card (measurement is SG-019/SG-026).",
+        "2026-09-16: pytest tests/unit/test_model_config.py 34/34 PASS; pytest tests -q 321/321 PASS.",
+        "2026-09-17: fresh-context reviewer bn/sg017_qa_reviewer PASS (management/reviews/SG-017-REVIEW-20260916.md): 3/3 WebFetch source probes matched (HF sha + license + pooling config), 31/31 negative probes (fail-loud config validation), overlap disclosure per candidate with explicit unknowns, no fabricated facts. P2 notes carried to SG-019: record tokenizer revision in shard manifest; implement fail-loud CLI reading configs/models/."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop SESSION-20260916-027: claimed by research worker (lane R). Selection only; no dense encoding run (SG-019 scope)."
     },
     {
       "id": "SG-018",
       "title": "Lexical baselines",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg018_engine_worker",
+      "session_id": "SESSION-20260917-035",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-012"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/tfidf.py",
+        "tests/unit/test_lexical.py",
+        "artifacts/reports/lexical_dev.md",
+        "artifacts/reports/lexical_dev.json",
+        "artifacts/runs/RUN-20260916-191127-tfidf-scifact-dev",
+        "artifacts/runs/RUN-20260916-191054-tfidf-scifact-dev",
+        "management/reviews/SG-018-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-035.md",
+        "management/logs/SESSION-20260917-037.md"
+      ],
+      "verification": [
+        "2026-09-17: real run RUN-20260916-191127-tfidf-scifact-dev COMPLETED with seal (index_hash ff36599b...) on SciFact dev 809/919/5.183: TF-IDF nDCG@10 0.6509, Recall@100 0.9124, MRR@10 0.6139 vs BM25 0.6701/0.9102/0.6380; input sha256 set byte-identical to BM25 run RUN-20260916-163653 (same inputs/candidates acceptance proven by hashes).",
+        "2026-09-17: reproducibility run RUN-20260916-191054: rankings.jsonl + per_query.json byte-identical, metrics bit-exact.",
+        "2026-09-17: pytest tests/unit/test_lexical.py 40/40 PASS; pytest tests -q 388/388 PASS (361 pre-existing + 27 SG-015 landed in parallel; no old test broken).",
+        "2026-09-17: fresh-context reviewer bn/sg018_eval_reviewer PASS (management/reviews/SG-018-REVIEW-20260917.md): independent formula + metric recomputation <=1e-12, index_hash recomputed independently, leakage probes (inverted qrels -> byte-identical rankings, zeroed metrics; missing qrels -> exit 1), 4/4 adversarial CLI exit 1, bm25.py hash unchanged vs SG-012 seal. P2-info test-count note resolved by this entry; lexical_dev.md untracked per repo artifacts/reports policy (JSON tracked)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Orchestrator loop-2 SESSION-20260917-034: engine worker (lane M). TF-IDF + BM25 same inputs/candidates; reuse bm25.py tokenization read-only."
     },
     {
       "id": "SG-019",
       "title": "Encoding shard và dense index",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/sg019_dense_encoder",
+      "session_id": "SESSION-20260917-041",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-002",
@@ -542,28 +672,46 @@
         "SG-017"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/dense.py",
+        "tests/unit/test_embedding_manifest.py",
+        "notebooks/encode_corpus.ipynb",
+        "artifacts/reports/encoding_profile.json",
+        "management/reviews/SG-019-REVIEW-20260917.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_embedding_manifest.py 61/61 PASS; scifact 5183/5183 COMPLETED 6 shards embeddings (5183,768) L2; index COMPLETED; verify 6/6 PASS; profile totals match; CLI fail-loud exit 1.",
+        "2026-09-17: fresh-context review PASS no P0/P1 (management/reviews/SG-019-REVIEW-20260917.md); 2xP2 info; no human gate per routing.",
+        "2026-09-17T22:29:57+07:00: user-confirmed review found acceptance partially covered (SciFact only; OpenAlex 2/19 text-subset shards, SCIDOCS 0/26). Per ADR-017 and project rule 'mo lai task HOAC tao task ID moi', remaining encoding split into new task SG-050 (this task's DONE stands for its completed scope; reopen would break SG-020 dependency invariant enforced by check_project.ps1)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "SciFact encoding DONE (6/6 shards, index, verify). OpenAlex text-subset + SCIDOCS completion split into SG-050 per ADR-017 (checker dependency constraint); reopened-then-split per user decision 2026-09-17."
     },
     {
       "id": "SG-020",
       "title": "Hybrid RRF",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-044",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-018",
         "SG-019"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/hybrid.py",
+        "configs/hybrid.json",
+        "tests/unit/test_rrf.py",
+        "management/logs/SESSION-20260917-044.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_rrf.py 15/15 PASS (hand-computed RRF, ties, determinism, leakage, depth limits, CLI exit 1).",
+        "2026-09-17: fresh-context review PASS no P0/P1 (3xP2 info)."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -572,17 +720,27 @@
       "title": "Candidate recall",
       "phase": "M3",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-045",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-020"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/candidates.py",
+        "configs/candidate_policy.json",
+        "tests/unit/test_candidates.py",
+        "artifacts/reports/candidate_audit.md",
+        "artifacts/reports/candidate_audit.json",
+        "management/logs/SESSION-20260917-045.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_candidates.py 14/14 PASS; real audit 809 queries BM25 0.9102/TF-IDF 0.9124 bit-exact vs run manifests; union full-union 0.9180 consistent; dense null chua_do.",
+        "2026-09-17: fresh review v1 FAIL (2 P1) -> fixed (provenance inputs+sha, union label, grade0, blank-line, rescued examples) -> fresh re-review v2 PASS no open P0/P1."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -591,17 +749,26 @@
       "title": "Graph baselines",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-046",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-016"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/baselines.py",
+        "tests/unit/test_graph_baselines.py",
+        "artifacts/reports/graph_baselines.json",
+        "management/reviews/SG-022-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-046.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_graph_baselines.py 15/15 PASS; real masked graph 18251/26186/isolated2325 mass1.0 iters71; CLI fail-loud exit 1.",
+        "2026-09-17: fresh review v1 FAIL (1 P1+4 P2) -> fixed v1.1.0 -> fresh re-review v2 PASS no blockers."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -610,18 +777,27 @@
       "title": "Personalized PageRank",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "D/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-047",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-021",
         "SG-022"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/ppr.py",
+        "configs/ppr.json",
+        "tests/unit/test_ppr_reference.py",
+        "management/reviews/SG-023-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-047.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/unit/test_ppr_reference.py 16/16 PASS incl hand-computed PPR + masked-graph smoke; CLI fail-loud exit 1.",
+        "2026-09-17: fresh review v1 FAIL (1 P1+6 P2) -> fixed v1.1.0 -> evidence re-run PASS per reviewer waiver."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -630,17 +806,29 @@
       "title": "Age adjustment",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-048",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-023"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/graph/age_adjustment.py",
+        "configs/age_adjustment.json",
+        "tests/unit/test_age_adjustment.py",
+        "scripts/age_exposure_audit.py",
+        "artifacts/reports/age_exposure.json",
+        "docs/AGE_ANALYSIS.md",
+        "management/reviews/SG-024-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-048.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest 14/14 PASS; descriptive audit 5133600 pairs with provenance; 2 fresh reviews PASS.",
+        "2026-09-17: human approval granted in-session."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -649,10 +837,10 @@
       "title": "Reranking integration",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-049",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-020",
@@ -660,8 +848,16 @@
         "SG-024"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/rerank.py",
+        "tests/integration/test_reranking.py",
+        "management/reviews/SG-025-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-049.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/integration/test_reranking.py 18/18 PASS; CLI fail-loud exit 1.",
+        "2026-09-17: fresh review v1 FAIL (1 P0+3 P1+7 P2) -> fixed v1.1.0 -> re-review v2 PASS no findings."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -670,115 +866,232 @@
       "title": "Dev tuning có budget",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (takeover from coordinator/worker-single-chat)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-011",
         "SG-025"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "configs/tuning_space.json",
+        "src/scholargraph/evaluation/tuning.py",
+        "scripts/run_b_dev.py",
+        "src/scholargraph/graph/b_track.py",
+        "artifacts/reports/b_dev_trials.json",
+        "artifacts/reports/dev_selection.md",
+        "management/reviews/SG-026-REVIEW-20260918.md",
+        "management/logs/SESSION-20260917-050.md"
+      ],
+      "verification": [
+        "2026-09-17 (session 050): A xong thật (dense dev 0.7709 nDCG@10; hybrid 0.7435 — kết quả âm hybrid<dense ghi nhận); B grid frozen + harness; vòng review 1 FAIL (P0 B/C chưa chạy) đã xử lý hết trừ P0 B-trials chờ encode.",
+        "2026-09-18T22:10+07:00: Track B chạy thật qua harness scripts/run_b_dev.py: 20/20 trials COMPLETED, 0 FAILED; best gamma=0.3/lambda=0.0 với dev nDCG@10=0.1310 (dev-selection registry — KHÔNG sealed; sealed final runs thuộc SG-028). Finding âm: lambda=0 tốt hơn age adjustment trong grid — chuyển SG-029 ablation.",
+        "2026-09-18: dev_selection.md cập nhật đầy đủ A + B; track C (3 method VN) chờ SG-032 multilingual encode + nhãn SG-033.",
+        "HUMAN GATE PENDING: routing SG-026 human_approval_required=true — owner duyệt selection trước SG-027 Main Freeze.",
+        "2026-09-18T22:50+07:00: fresh-context reviewer PASS không P0/P1 (management/reviews/SG-026-REVIEW-20260918.md vòng 4): tái chạy full harness bit-identical lần 3; grid khớp 20 điểm frozen; dev∩test=0; G_mask-only; oracle ceiling ~0.355 → 0.131 là độ khó task. P2-1: registry cần provenance seed/hash block trước SG-028. P2-3: chuẩn hóa canonical registry = b_dev_trials.json (run1 bit-identical, đã ghi chú).",
+        "2026-09-18T22:55:00+07:00: HUMAN GATE satisfied — project owner approved the dev tuning selection (gamma=0.3, lambda=0.0) via in-session question tool ('Duyệt SG-026'), second ask after the first went unanswered. Routing human_approval_required=true satisfied; SG-027 unblocked."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "DONE: A+B dev selection (best gamma=0.3/lambda=0.0) human-approved; review PASS vòng 4."
     },
     {
       "id": "SG-027",
       "title": "Main freeze",
       "phase": "M4",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/C",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (coordinator-as-worker)",
+      "session_id": "SESSION-20260921-059",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-008",
         "SG-026"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "configs/frozen_main.json",
+        "docs/MAIN_FREEZE.md",
+        "tests/unit/test_main_freeze.py",
+        "management/DECISIONS.md",
+        "management/logs/SESSION-20260921-059.md",
+        "management/reviews/SG-027-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-21T17:00:00+07:00: pytest tests/unit/test_main_freeze.py 9/9 PASS (structure, data/split/graph/model/config hashes, 5 dense pins, translation cache, dev-registry selection, 3-track comparison).",
+        "2026-09-21T17:00:00+07:00: freeze git_head e959f68 == HEAD; 32 hashes counted (data 9 + splits 3 + graph 4 + models 3 + configs 8 + dense pins 5) per ADR-018.",
+        "2026-09-21T17:00:00+07:00: adversarial tmp probes 4/4 PASS (drift detection, missing-file fail-loud, dev-only leakage + freeze-before-test, bookkeeping).",
+        "2026-09-21T17:00:00+07:00: scripts/check_project.ps1 PASS (DONE=35, IN_PROGRESS=1, TODO=11).",
+        "PENDING: fresh_context_required review + human_approval_required=true owner approval before SG-028. Self-check only in this session; no independent reviewer claimed.",
+        "2026-09-21T17:16:00+07:00: HUMAN GATE satisfied — project owner approved the Main Freeze via in-session question tool ('Duyet SG-027 DONE'). Routing human_approval_required=true satisfied; SG-028 unblocked. Fresh-context review gate recorded as waived by owner approval; no independent reviewer claimed.",
+        "2026-09-29: Retrospective independent review PASS (GM-1, SESSION-20260929-068-GEMINI): 33/33 freeze files + 5 index manifests + 7 final_test freeze files verified; git DAG order confirmed."
+      ],
+      "claimed_paths": [
+        "configs/frozen_main.json",
+        "docs/MAIN_FREEZE.md",
+        "management/DECISIONS.md",
+        "tests/unit/test_main_freeze.py",
+        "management/logs/SESSION-20260921-059.md"
+      ],
+      "note": "Freeze trước test — routing A_X, human_approval_required=true. REVIEW sau tự kiểm 9/9 + probes 4/4; chờ review độc lập + owner duyệt."
     },
     {
       "id": "SG-028",
       "title": "Final runs",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-060",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-027"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "artifacts/reports/main_results.md",
+        "artifacts/reports/main_run_registry.json",
+        "artifacts/reports/b_trials_test.json",
+        "artifacts/final_test/",
+        "scripts/run_final.py",
+        "src/scholargraph/evaluation/sealed.py",
+        "src/scholargraph/retrieval/bm25.py",
+        "src/scholargraph/retrieval/tfidf.py",
+        "tests/unit/test_final_runs.py",
+        "management/logs/SESSION-20260921-060.md",
+        "management/reviews/SG-028-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-21T18:00:00+07:00: 7 sealed track-A test runs COMPLETED final_test=true (SciFact 300q: bm25 0.6647 / tfidf 0.6327 / dense 0.7404 / hybrid 0.7204; SCIDOCS 1000q: bm25 0.1521 / dense 0.2172 / hybrid 0.1976 nDCG@10) + track-B test200 sealed (ppr 0.1004 / global 0.1082, frozen g0.3/l0.0, no test tuning). Track C VN chua do (SG-033).",
+        "2026-09-21T18:00:00+07:00: pytest tests/unit/test_final_runs.py 12/12 PASS; regression bm25/lexical/rrf 91/91 PASS; CLI unsealed-test exit 1 (bm25+tfidf); policy checks (NaN/query/universe/dup) enforced at run + registry time.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-21T18:30:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-028 DONE') with self-check-only disclosure (same precedent as SG-027). Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-029 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-1, SESSION-20260929-068-GEMINI): 7 Track A runs x 5 metrics + 2 Track B arms x 5 metrics (45/45 values) independently recomputed with 0.00e+00 diff."
+      ],
+      "claimed_paths": [
+        "artifacts/reports/main_results.md",
+        "artifacts/reports/main_run_registry.json",
+        "scripts/run_final.py",
+        "src/scholargraph/evaluation/sealed.py",
+        "tests/unit/test_final_runs.py",
+        "management/logs/SESSION-20260921-060.md"
+      ],
+      "note": "Sealed final runs A+B xong (7+2 arms); track C chua do. REVIEW sau tu kiem; can fresh review truoc DONE."
     },
     {
       "id": "SG-029",
       "title": "Ablation và robustness",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-061",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-028"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "artifacts/reports/ablation.json",
+        "artifacts/reports/ablation.md",
+        "artifacts/reports/ablation_age.json",
+        "artifacts/reports/ablation_rrfk.json",
+        "artifacts/reports/robustness.json",
+        "artifacts/reports/robustness.md",
+        "scripts/run_ablation.py",
+        "tests/unit/test_ablation.py",
+        "management/logs/SESSION-20260921-061.md",
+        "management/reviews/SG-029-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-21T19:30:00+07:00: A1 age on/off test200 (ppr/global x lambda 0/0.01/0.03/0.1 @g0.3): lambda=0 tot nhat, suy giam don dieu; A2 no-graph trich registry; A3 RRF k=30/60/100 (k60 khop sealed bit-exact; k it anh huong). Tat ca arms trong prespecified set, khong select tren test.",
+        "2026-09-21T19:30:00+07:00: R1/R2/R3 buckets (query length, missing abstract, node degree) + R4 costs + R5 failures (0/0, measured). pytest tests/unit/test_ablation.py 11/11 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-21T19:45:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-029 DONE') with self-check-only disclosure. Fresh-context review recorded as waived by owner approval; no independent reviewer claimed. SG-030 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-2, SESSION-20260929-069-GEMINI): all ablation/robustness variants pre-specified; RRF k=30,60,100 independently re-fused with 0.00e+00 diff; Table A2 header fixed."
+      ],
+      "claimed_paths": [
+        "scripts/run_ablation.py",
+        "artifacts/reports/ablation.json",
+        "artifacts/reports/robustness.json",
+        "tests/unit/test_ablation.py",
+        "management/logs/SESSION-20260921-061.md"
+      ],
+      "note": "Ablation + robustness tren sealed test; VN per-intent doi nhan SG-033."
     },
     {
       "id": "SG-030",
       "title": "Thống kê và error analysis",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "R",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-062",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-029"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "src/scholargraph/evaluation/statistics.py",
+        "scripts/run_statistics.py",
+        "artifacts/reports/statistics.json",
+        "artifacts/reports/statistics.md",
+        "artifacts/reports/error_packets.json",
+        "docs/ERROR_ANALYSIS.md",
+        "tests/unit/test_statistics.py",
+        "management/logs/SESSION-20260921-062.md",
+        "management/reviews/SG-030-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-21T20:15:00+07:00: 24 paired bootstrap CIs (B=10000, seed 20260915, 95% percentile, theo protocol; khong p-value): dense>bm25 ca 2 corpus (CI loai 0); hybrid-vs-dense SciFact CI chua 0 (khong ket luan); SCIDOCS hybrid<dense; ppr-vs-global chua 0.",
+        "2026-09-21T20:15:00+07:00: 24 error packets san sang cho 2 nguoi doc (12 SciFact + 6 SCIDOCS + 6 track B) + checklist trong docs/ERROR_ANALYSIS.md. pytest tests/unit/test_statistics.py 8/8 PASS.",
+        "PENDING HUMAN GATE (routing human_approval_required=true): (1) hai thanh vien doc 24 packets + ghi joint note; (2) owner duyet. Self-check only; no independent reviewer claimed.",
+        "2026-09-29: Independent technical review PASS (GM-2, SESSION-20260929-069-GEMINI): 24/24 paired bootstrap CIs (B=10000, seed=20260915) bit-identical; 24 error packets verified. Human gate (2 members reading packets) remains pending."
+      ],
+      "claimed_paths": [
+        "src/scholargraph/evaluation/statistics.py",
+        "scripts/run_statistics.py",
+        "artifacts/reports/statistics.json",
+        "tests/unit/test_statistics.py",
+        "management/logs/SESSION-20260921-062.md"
+      ],
+      "note": "Stats + packets xong; cho 2 nguoi doc loi + owner duyet (human gate)."
     },
     {
       "id": "SG-031",
       "title": "Query Việt và annotation guide",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "R/H",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (draft prepared; human gate pending)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-011",
         "SG-015"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "data/annotations/vn_query_manifest.json",
+        "docs/ANNOTATION_GUIDE.md",
+        "tests/unit/test_vn_queries.py",
+        "management/logs/SESSION-20260917-053.md"
+      ],
+      "verification": [
+        "2026-09-17T23:35+07:00: draft manifest 30 queries (10 dev / 20 test; 5 dev pilot) per Protocol v1 counts; intent families wholly assigned to one split (no paraphrase overlap); query texts drafted from topic taxonomy, not from qrels docs; duplicate-text check in tests.",
+        "2026-09-17T23:35+07:00: pytest tests/unit/test_vn_queries.py 6/6 PASS.",
+        "2026-09-17: docs/ANNOTATION_GUIDE.md rubric 0/1/2 with worked examples, unjudged rule, 2-annotator kappa workflow per protocol pool/labels config.",
+        "PENDING HUMAN GATE (routing human_approval_required=true; card assigns query writing to the two members): project owner must review/edit the draft queries, then approval recorded in manifest provenance.human_approval before SG-032/SG-033 consume.",
+        "2026-09-17T23:55:00+07:00: human approval gate satisfied — project owner approved all 30 queries without edits via in-session question tool ('Duyệt nguyên bản 30 query'); manifest status updated to approved_no_edits with approval recorded in provenance.human_approval. SG-032/SG-033 may consume."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -787,10 +1100,10 @@
       "title": "Cross-lingual baselines",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (coordinator-as-worker; light parts now, multilingual encode after SG-050)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-017",
@@ -798,31 +1111,67 @@
         "SG-031"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/retrieval/cross_lingual.py",
+        "configs/vn_methods.json",
+        "configs/models/multilingual_candidate_minilm.json",
+        "configs/models/multilingual_candidate_e5.json",
+        "data/processed/vn/translations_cache.json",
+        "artifacts/reports/vn_dev_pilot.md",
+        "artifacts/reports/vi_bm25_diagnostic.json",
+        "artifacts/indexes/multilingual/",
+        "tests/unit/test_cross_lingual.py",
+        "management/logs/SESSION-20260917-053.md"
+      ],
+      "verification": [
+        "2026-09-18: translation pinned Helsinki-NLP/opus-mt-vi-en @ c8d2853e (local mirror download, no paid LLM); translations_cache.json 30/30 entries, greedy decode, byte-identical rerun.",
+        "2026-09-18: original_vi_bm25 diagnostic 30 queries, 0 zero-token, 18/30 nonzero top-1 (cognate overlap) — diagnostic only, never a pool method.",
+        "2026-09-19T01:35+07:00: BOTH multilingual candidates fully encoded on SciFact (MiniLM 5183 @ 7.758 docs/s 384d; e5-base 5183 @ 1.253 docs/s 768d); pilot comparison recorded in vn_dev_pilot.md.",
+        "2026-09-19T01:40+07:00: pinned intfloat/multilingual-e5-base @ d1287505 (512-token, no abstract truncation); MiniLM full index kept as fallback. NO relevance metrics claimed (VN labels arrive at SG-033).",
+        "2026-09-18: pytest tests/unit/test_cross_lingual.py 5/5 PASS (draft-manifest rejection, cache-hit no-model, empty-translation rejection, CLI exit 1).",
+        "2026-09-19T02:15+07:00: fresh-context reviewer PASS không P0/P1 (management/reviews/SG-032-REVIEW-20260919.md): draft-manifest CLI exit 1, cache-hit không tải model + sha256 identical, 30/30 entry khớp manifest, 4/4 sha256 index tái tính khớp, 5/5 tests. Định lượng xác nhận pin e5: 98,8% (5.123/5.183) docs SciFact vượt 128-token MiniLM (median 356). P2 đã xử lý: P2-1 cross-ref sửa; P2-2 mismatch check + P2-4 prefix enforcement = ghi chú cho giai đoạn pool (SG-033); P2-6 MT quality inventory đầy đủ trước SG-033; P2-7 encode OpenAlex-e5 ~4,1h là prerequisite của SG-033 pool (chưa chạy)."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Translation + multilingual pinned; full OpenAlex e5 encode (~4,1h) là prerequisite của SG-033 pool — ghi trong HANDOFF."
     },
     {
       "id": "SG-033",
       "title": "Pool và nhãn hai người",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "role": "H",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat (tooling only; labels by 2 members)",
+      "session_id": "SESSION-20260921-064",
       "estimate_human_hours": 16,
       "dependencies": [
         "SG-025",
         "SG-031",
         "SG-032"
       ],
-      "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "blocked_reason": "Nhan relevance do 2 nguoi gan (human gate); agent chi dung pool mu + cong cu.",
+      "evidence": [
+        "scripts/build_vn_pool.py",
+        "scripts/score_vn_agreement.py",
+        "data/annotations/vn_pool.json",
+        "data/annotations/vn_pool_provenance.json",
+        "data/annotations/vn_labels.jsonl",
+        "tests/unit/test_vn_pool.py",
+        "management/logs/SESSION-20260921-064.md"
+      ],
+      "verification": [
+        "2026-09-21T22:00:00+07:00: Pool mu 30 query (10 dev/20 test), 662 cap duy nhat (<=900, khong can cat giam): top-10 x 3 methods (translated_bm25, multilingual_dense_e5, vn_hybrid_rrf) tren OpenAlex 18.250 works, dedup, shuffle seed 20260915, khong method/score trong dong pool.",
+        "2026-09-21T22:00:00+07:00: Template vn_labels.jsonl 662 dong label=null + score_vn_agreement.py (kappa co trong so, raw agreement, confusion; exit 1 khi chua xong). pytest tests/unit/test_vn_pool.py 6/6 PASS.",
+        "PENDING HUMAN WORK: 2 nguoi cham dev pool truoc (SG-034 chon default) roi test pool; kappa truoc adjudication; agent khong bao gio bia nhan."
+      ],
+      "claimed_paths": [
+        "scripts/build_vn_pool.py",
+        "scripts/score_vn_agreement.py",
+        "data/annotations/vn_pool.json",
+        "tests/unit/test_vn_pool.py",
+        "management/logs/SESSION-20260921-064.md"
+      ],
+      "note": "Agent: pool mu + scaffolding. Nhan + kappa + adjudication: 2 nguoi (gate)."
     },
     {
       "id": "SG-034",
@@ -850,10 +1199,10 @@
       "title": "API search/metadata",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260917-051",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-006",
@@ -861,8 +1210,17 @@
         "SG-020"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/api/service.py",
+        "src/scholargraph/api/app.py",
+        "tests/integration/test_api.py",
+        "management/reviews/SG-035-REVIEW-20260917.md",
+        "management/logs/SESSION-20260917-051.md"
+      ],
+      "verification": [
+        "2026-09-17: pytest tests/integration/test_api.py 9/9 PASS on real data.",
+        "2026-09-17: fresh review PASS no blockers (1 P1 + 3 P2 as documented debt)."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -871,18 +1229,34 @@
       "title": "UI search/recommend",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (completed work from interrupted session 052; takeover)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 4,
       "dependencies": [
         "SG-025",
         "SG-035"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "ui/templates/search.html",
+        "ui/static/app.js",
+        "ui/static/style.css",
+        "src/scholargraph/api/app.py",
+        "src/scholargraph/api/service.py",
+        "tests/unit/test_ui.py",
+        "artifacts/reports/ui_smoke.md",
+        "artifacts/reports/ui_5query_check.md",
+        "management/logs/SESSION-20260917-053.md"
+      ],
+      "verification": [
+        "2026-09-17 (session 052, interrupted): UI implemented over real API (TestClient); smoke list PASS (index 200, static offline no-CDN, search bm25/dense/hybrid, detail, related, no-results, error state, missing-metadata wording); 5-query self-check recorded (checker 1/2).",
+        "2026-09-17T23:05+07:00 (session 053 takeover): tests/unit/test_ui.py 9/9 PASS (128s) — template render, static offline, health counts 5183 + revision pin, real bm25 search fields, zero-token/top_k 400, paper null year/doi never fabricated, 404 unknown, recommend self-exclusion, no-results 200.",
+        "2026-09-17T23:10+07:00: checker 2/2 independent re-run of the 5 queries — identical top-1 IDs and scores to checker 1/2 (deterministic backends); paper+recommend OK, self excluded. Two-member human verification of the 5 queries remains for the project owner at closeout (card acceptance).",
+        "2026-09-18T00:55+07:00: fresh-context reviewer bn/sg036_ui_reviewer PASS (management/reviews/SG-036-REVIEW-20260917.md), no P0/P1: 3/5 query re-runs matched report byte-level, no hard-coded results, no XSS vector (innerHTML only clears containers), test_ui 9/9, checker PASS.",
+        "2026-09-18T01:05+07:00: P2-1 fixed (service._paper title-missing semantics annotated per ADR-013), P2-2 fixed (no-results test asserts empty list with the ui_smoke probe 'zxqvkjwx'); test_ui re-run 9/9 PASS (78.47s). P2-3: two-member human verification of the 5 UI queries queued for project owner at final closeout. P2-4 info noted."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -891,18 +1265,31 @@
       "title": "Citation graph UI",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/D",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (implementation from closed window absorbed; takeover session 053)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-016",
         "SG-036"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "src/scholargraph/api/graph_service.py",
+        "ui/graph/graph.js",
+        "ui/graph/graph.css",
+        "tests/unit/test_graph_ui.py",
+        "artifacts/reports/graph_ui_smoke.md",
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-037-REVIEW-20260918.md"
+      ],
+      "verification": [
+        "2026-09-18T02:30+07:00: pytest tests/unit/test_graph_ui.py 19/19 PASS (36.5s) — run by takeover coordinator on absorbed implementation.",
+        "2026-09-18: graph_ui_smoke.md present (real API smoke by the implementing window; re-verification by independent reviewer pending dispatch).",
+        "2026-09-18: implementation authored by the now-closed parallel window (uncommitted work absorbed at user-confirmed handover; file mtimes 01:56-02:19).",
+        "2026-09-18: fresh-context review PASS no P0/P1 (3 P2-info). No human gate per routing."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -911,37 +1298,62 @@
       "title": "Offline và xuất tham khảo",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "bn/orchestrator_C (coordinator-as-worker)",
+      "session_id": "SESSION-20260917-053",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-036"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "docs/DEMO_SCRIPT.md",
+        "configs/demo.json",
+        "artifacts/reports/offline_smoke.md",
+        "artifacts/reports/demo_references.json",
+        "scripts/export_references.py",
+        "scripts/offline_smoke.py",
+        "tests/unit/test_demo_export.py",
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-038-REVIEW-20260918.md"
+      ],
+      "verification": [
+        "2026-09-18T03:43+07:00: offline smoke 13/13 PASS with HF_HUB_OFFLINE=1/TRANSFORMERS_OFFLINE=1 set before HF import — health, 5 pinned queries (top-1 identical to twice-verified SG-036 set), paper null year/doi, recommend self-exclusion, graph hub truncated=true with real message (5341 neighbors > cap 30), export subprocess exit 0, missing policy (with_doi=2, missing_doi=2, missing_year=2), no CDN references.",
+        "2026-09-18T03:55+07:00: pytest tests/unit/test_demo_export.py 7/7 PASS; tests/unit/test_vn_queries.py updated to approved-status contract (6/6).",
+        "2026-09-18: export script bugs found by own smoke and fixed (splitlines split on U+2028 inside JSON abstract strings; trailing-newline false positive) — fail-loud CLI exit 1 on unknown IDs verified by test.",
+        "2026-09-18: export runs as standalone script (no app.py/service.py modification — those files under SG-036/037 review snapshot).",
+        "2026-09-18: fresh-context review PASS no P0/P1; 3 P2 nits fixed opportunistically + smoke re-run 13/13. No human gate per routing."
+      ],
       "claimed_paths": [],
-      "note": ""
+      "note": "Export qua script standalone (không sửa app.py/service.py đang ở review cho SG-036/037)."
     },
     {
       "id": "SG-039",
       "title": "Integration checks",
       "phase": "M5",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S/R",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260918-054",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-037",
         "SG-038"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
+      "evidence": [
+        "scripts/integration_checks.py",
+        "tests/integration/test_integration.py",
+        "artifacts/reports/integration_checks.md",
+        "management/reviews/SG-039-REVIEW-20260918.md",
+        "management/logs/SESSION-20260918-054.md"
+      ],
+      "verification": [
+        "2026-09-18: pytest 4/4 PASS; integration script 28/28 PASS exit 0.",
+        "2026-09-18: fresh review v1 FAIL (3 P1+3 P2) -> fixed -> v2 conditional PASS -> fixes verified 28/28."
+      ],
       "claimed_paths": [],
       "note": ""
     },
@@ -950,39 +1362,78 @@
       "title": "Performance profiling",
       "phase": "M6",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260921-063",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-028",
         "SG-039"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "src/scholargraph/evaluation/performance.py",
+        "scripts/profile_performance.py",
+        "artifacts/reports/performance.json",
+        "artifacts/reports/performance.md",
+        "tests/unit/test_performance.py",
+        "management/logs/SESSION-20260921-063.md",
+        "management/reviews/SG-040-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-21T21:15:00+07:00: Cold fresh-interpreter (load 14.6s warm-cache; 78.6s lan dau kem HF fetch; first query 0.05s; RSS 895MB) + warm 20 SciFact/10 SCIDOCS per-method P50/P95 + track-B stages (c100_ppr mean 1.68s) + concurrency 1.84x + index sizes. Tat ca la inference that.",
+        "2026-09-21T21:15:00+07:00: Budget 500ms bao that: SCIDOCS lexical p95 + track-B vuot (ghi ro, khong toi uu). pytest tests/unit/test_performance.py 7/7 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-23T14:00:00+07:00: Owner-approved DONE via in-session question tool ('Duyet SG-040 DONE') with self-check-only disclosure. SG-041 unblocked.",
+        "2026-09-29: Retrospective independent review PASS (GM-3, SESSION-20260929-070-GEMINI): performance.md matches performance.json and disk index sizes; over-budget metrics honestly reported."
+      ],
+      "claimed_paths": [
+        "src/scholargraph/evaluation/performance.py",
+        "scripts/profile_performance.py",
+        "artifacts/reports/performance.json",
+        "tests/unit/test_performance.py",
+        "management/logs/SESSION-20260921-063.md"
+      ],
+      "note": "Profile that thi; SG-041 mo khi SG-040 DONE."
     },
     {
       "id": "SG-041",
       "title": "Packaging và tái lập",
       "phase": "M7",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "REVIEW",
       "role": "S",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/worker-single-chat",
+      "session_id": "SESSION-20260923-065",
       "estimate_human_hours": 3,
       "dependencies": [
         "SG-040"
       ],
       "blocked_reason": null,
-      "evidence": [],
-      "verification": [],
-      "claimed_paths": [],
-      "note": ""
+      "evidence": [
+        "docs/REPRODUCE.md",
+        "docs/RELEASE_MANIFEST.md",
+        "requirements.lock",
+        "scripts/run_demo.ps1",
+        "scripts/verify_release.py",
+        "tests/unit/test_packaging.py",
+        "management/logs/SESSION-20260923-065.md"
+      ],
+      "verification": [
+        "2026-09-23T14:30:00+07:00: verify_release.py PASS (33 freeze files, snapshots, CLI imports); RELEASE_MANIFEST sinh tu hash live; requirements.lock 80 pins; run_demo.ps1 CHAY THAT (DEMO OK, offline 13/13).",
+        "2026-09-23T14:30:00+07:00: pytest tests/unit/test_packaging.py 7/7 PASS.",
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+      ],
+      "claimed_paths": [
+        "docs/REPRODUCE.md",
+        "docs/RELEASE_MANIFEST.md",
+        "scripts/run_demo.ps1",
+        "scripts/verify_release.py",
+        "tests/unit/test_packaging.py",
+        "management/logs/SESSION-20260923-065.md"
+      ],
+      "note": "Packaging xong + thu that; can fresh review truoc DONE."
     },
     {
       "id": "SG-042",
@@ -1140,6 +1591,97 @@
       "verification": [],
       "claimed_paths": [],
       "note": "Ngoài core 7 tuần; chỉ mở khi có nguồn lực và protocol phù hợp."
+    },
+    {
+      "id": "SG-050",
+      "title": "Hoàn tất dense encoding OpenAlex text-subset + SCIDOCS",
+      "phase": "M3",
+      "priority": "CORE",
+      "status": "DONE",
+      "role": "S",
+      "owner": "bn/orchestrator_C (coordinator-as-worker, takeover)",
+      "session_id": "SESSION-20260917-053",
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-019"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "data/manifests/openalex_core_text.json",
+        "data/processed/openalex/works_text.jsonl",
+        "data/manifests/encoding_shards/openalex_core_text/",
+        "data/manifests/encoding_shards/scidocs/",
+        "artifacts/indexes/openalex_core_text/bge-base-en-v1.5__a5beb1e3/",
+        "artifacts/indexes/scidocs/bge-base-en-v1.5__a5beb1e3/",
+        "artifacts/reports/encoding_profile.json",
+        "scripts/build_openalex_text_subset.py",
+        "tests/unit/test_text_subset.py",
+        "management/logs/SESSION-20260917-053.md",
+        "management/reviews/SG-050-REVIEW-20260918.md"
+      ],
+      "verification": [
+        "2026-09-18: openalex_core_text 19/19 shards + exact index COMPLETED + verify PASS; scidocs 26/26 shards COMPLETED (25657 docs) + index COMPLETED + verify 26/26 PASS; encoding_profile.json covers 3 corpora.",
+        "2026-09-18: pytest tests/unit/test_text_subset.py 4/4 PASS.",
+        "2026-09-18: fresh-context review pending (infra blocked earlier); see HANDOFF NEXT_TASK.",
+        "2026-09-18: fresh-context review PASS no P0/P1 (3 P2-info non-blocking). No human gate per routing."
+      ],
+      "claimed_paths": [],
+      "note": "Created per ADR-017: finish OpenAlex text-subset (2/19 shards) + SCIDOCS (0/26) encoding, exact indexes, profile; explicit 1-work exclusion per openalex_core_text.json manifest."
+    },
+    {
+      "id": "SG-051",
+      "title": "Hợp nhất bn sang bản chính",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "C",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-040",
+        "SG-052"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "docs/MERGE_AND_FINISH_PLAN.md",
+        "management/DECISIONS.md"
+      ],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): hợp nhất lịch sử git và dữ liệu từ bn về bản chính."
+    },
+    {
+      "id": "SG-052",
+      "title": "Vệ sinh test và phủ fallback API",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "DONE",
+      "role": "S",
+      "owner": "codex/cx-1",
+      "session_id": "SESSION-20260929-067-CODEX",
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-036",
+        "SG-050"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "scripts/build_openalex_text_subset.py",
+        "tests/unit/test_text_subset.py",
+        "tests/integration/test_api.py",
+        "scripts/run_ablation.py",
+        "tests/unit/test_ablation.py",
+        "artifacts/reports/ablation.md",
+        "management/logs/SESSION-20260929-067-CODEX.md",
+        "management/reviews/SG-052-REVIEW-20260929.md"
+      ],
+      "verification": [
+        "2026-09-29: test_text_subset isolated to tmp_path (5/5 PASS even with works_text.jsonl + openalex_core_text.json set ReadOnly); 3/3 hybrid fallback branches covered in test_api.py; Table A2 header fixed; full pytest 734 passed.",
+        "2026-09-29: Independent review PASS (GM-3, SESSION-20260929-070-GEMINI, management/reviews/SG-052-REVIEW-20260929.md)."
+      ],
+      "claimed_paths": [],
+      "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): cô lập test_text_subset không ghi đè dữ liệu freeze, phủ đủ test 3 nhánh fallback hybrid và sửa header bảng A2."
     }
   ]
 }

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "demo_config",
+  "task_id": "SG-038",
+  "created_at": "2026-09-18T02:55:00+07:00",
+  "snapshot_pins": {
+    "search_corpus": {
+      "snapshot_id": "beir-scifact-frozen",
+      "corpus_path": "data/raw/beir/scifact/corpus.jsonl",
+      "document_count": 5183
+    },
+    "graph_snapshot": {
+      "manifest": "data/manifests/graph_core.json",
+      "source_snapshot_manifest": "data/manifests/openalex_core.json",
+      "nodes": 18251,
+      "edges_post_mask": 26186
+    },
+    "dense_encoder": {
+      "config": "configs/models/dense_encoder.json",
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+    }
+  },
+  "demo_queries": [
+    {"q": "diabetes treatment options", "method": "bm25", "source": "ui_5query_check checker 1/2 + 2/2 (SG-036)"},
+    {"q": "cancer immunotherapy", "method": "hybrid", "source": "ui_5query_check checker 1/2 + 2/2 (SG-036)"},
+    {"q": "obesity decreases life quality", "method": "dense", "source": "ui_5query_check checker 1/2 + 2/2 (SG-036)"},
+    {"q": "hnf4a mutations diabetes risks", "method": "bm25", "source": "ui_5query_check checker 1/2 + 2/2 (SG-036)"},
+    {"q": "insulin resistance obesity", "method": "dense", "source": "ui_5query_check checker 1/2 + 2/2 (SG-036)"}
+  ],
+  "demo_detail_doc_ids": [
+    "beir:scifact:32909242",
+    "beir:scifact:195352",
+    "openalex:W1678356000",
+    "openalex:W1003264260"
+  ],
+  "export_doc_ids": [
+    "beir:scifact:195352",
+    "beir:scifact:32909242",
+    "openalex:W1678356000",
+    "openalex:W1003264260"
+  ],
+  "offline_policy": {
+    "env": ["HF_HUB_OFFLINE=1", "TRANSFORMERS_OFFLINE=1"],
+    "no_cdn": true,
+    "missing_metadata": "null/[không có] — never fabricated",
+    "note": "5 demo queries reuse the twice-verified SG-036 set; export IDs cover both corpora and both missing-metadata cases (SciFact records: no year/DOI; OpenAlex records carry real DOI/year, e.g. Preface W1003264260 doi 10.1017/cbo9780511809071.001 year 2008)."
+  }
+}

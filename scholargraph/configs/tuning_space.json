@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "config_id": "tuning-space-v1",
+  "task_id": "SG-026",
+  "created_at": "2026-09-17T17:40:00+07:00",
+  "status": "frozen",
+  "protocol_reference": "docs/RESEARCH_PROTOCOL.md section 8.1",
+  "track_A": {
+    "policy": "fixed_defaults_no_grid_search",
+    "configs": ["bm25_positive_idf", "tfidf_protocol", "dense_bge-base", "hybrid_rrf_k60"],
+    "note": "Thay tokenizer/IDF cần amendment trước final test."
+  },
+  "track_B_grid": [
+    {"gamma": 0.0, "lambda": 0.0},
+    {"gamma": 0.0, "lambda": 0.01},
+    {"gamma": 0.0, "lambda": 0.03},
+    {"gamma": 0.0, "lambda": 0.05},
+    {"gamma": 0.0, "lambda": 0.1},
+    {"gamma": 0.1, "lambda": 0.0},
+    {"gamma": 0.1, "lambda": 0.01},
+    {"gamma": 0.1, "lambda": 0.03},
+    {"gamma": 0.1, "lambda": 0.05},
+    {"gamma": 0.1, "lambda": 0.1},
+    {"gamma": 0.2, "lambda": 0.0},
+    {"gamma": 0.2, "lambda": 0.01},
+    {"gamma": 0.2, "lambda": 0.03},
+    {"gamma": 0.2, "lambda": 0.05},
+    {"gamma": 0.2, "lambda": 0.1},
+    {"gamma": 0.3, "lambda": 0.0},
+    {"gamma": 0.3, "lambda": 0.01},
+    {"gamma": 0.3, "lambda": 0.03},
+    {"gamma": 0.3, "lambda": 0.05},
+    {"gamma": 0.3, "lambda": 0.1}
+  ],
+  "track_C": {
+    "policy": "three_fixed_methods_no_relevance_grid",
+    "configs": ["translated_bm25", "multilingual_dense", "vn_hybrid_rrf"],
+    "protocol_basis": "docs/RESEARCH_PROTOCOL.md section 7 pool = union of translated_bm25, multilingual_dense, vn_hybrid_rrf",
+    "non_pool_diagnostic": "original_vi_bm25 (reported with coverage limits, never a pool method)",
+    "tie_rule": "method ID lexicographic"
+  },
+  "selection": {
+    "primary": "dev nDCG@10",
+    "tie_rule_B": "smaller gamma, then smaller lambda",
+    "latency": "tracked_not_selected_on",
+    "test_use": "forbidden_for_selection"
+  },
+  "budget": {
+    "max_trials_B": 20,
+    "note": "Mọi trial (kể cả FAILED) lưu registry; không tune theo exposure."
+  }
+}

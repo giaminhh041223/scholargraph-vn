@@ -1,0 +1,1526 @@
+{
+  "artifacts": {
+    "pilot_works_jsonl": {
+      "bytes": 10713980,
+      "path": "data/raw/openalex/works.jsonl",
+      "sha256": "3f301e4fc6c9b0de1fa95f736d0ceff2fa6fac137c086e0716fc3afe761c4980"
+    },
+    "quality_report": {
+      "path": "artifacts/reports/openalex_quality.json",
+      "sha256": "c57f836f607185e9f88e8c30caeb69c6c72b7feb25636801a5fd2b32208d0766"
+    },
+    "raw_pages": [
+      {
+        "path": "data/raw/openalex_core/pages/page-00001.json",
+        "sha256": "151e8656c187fa8a5189b309ae4cf1c7afba4de3dae8a47f24d28320a46dcad4"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00002.json",
+        "sha256": "e16c24930fbe23312ac192971ba26e0476d2977660576af11effc7ee373602a4"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00003.json",
+        "sha256": "536c79e342ddfbafc4e3fe3df66523a4b349df67d7a059cb0c7013cfa8ff9487"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00004.json",
+        "sha256": "6dc95f2b56923f2424c583350a8a19eff02525b5fe5d779c7c274db396ee38de"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00005.json",
+        "sha256": "bb06b2bf9c544993122ce10d526d2ec979be6b18530f7ae0028fb86ed79f4424"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00006.json",
+        "sha256": "bda0c7ff7c15a115534a372b2ac7cdfa2b1600f3777c9aa9988a2f7df45abfaf"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00007.json",
+        "sha256": "d27238b674931259af1a37b35e388aea0c7d629de565b0222798baff170a8999"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00008.json",
+        "sha256": "eb4f9536b4295d6a195326bbfce3012ba7ad4c7ac4ae6a04da283a2a056317b2"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00009.json",
+        "sha256": "f03edc5fd8dbc04ff1b1a1ea7e71b48f9ee42dd8f8ae297da0d41920a8bce8f2"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00010.json",
+        "sha256": "48f42333b2b20cc9de1c728a38b906046dad6cc901a69af38db1fca5ef0464eb"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00011.json",
+        "sha256": "843518c76ebebe1d55585bf870f9a5fe033ae5e8ec79dfff7a167e0417af8110"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00012.json",
+        "sha256": "f15eecd9b2252442dd2f8213e996d75253b8c1964dc7ce08baedfcb56ee94d96"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00013.json",
+        "sha256": "49f72e53fa0c7d8aa6c69c511f52c778f5142deebfb0b3de91d035dc497b3b9b"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00014.json",
+        "sha256": "d5ce68995d0f8cb6cd8759097a57a032b34f1dad105cdbc943cf1111bd2b0739"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00015.json",
+        "sha256": "2833354ac5368ee063f9e7a06d6648210f0aed3b53bbbd55c643462d0b7f2139"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00016.json",
+        "sha256": "5002bbb2d129dbefd60ebb75294886dd9c4b9f57047080e48b826c78b620eb80"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00017.json",
+        "sha256": "008bc83bcde48f782af0928bf1b1a8ad285ab8b7bc2c8261f228f9b4e9eea071"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00018.json",
+        "sha256": "f4e0b346bf604d34c54de70b24a133aa11a272198b311d21e94c14d786993120"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00019.json",
+        "sha256": "b00fa5deafe75645e3d0f5dd94f831fc44458d58972be281747ae57c738a5466"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00020.json",
+        "sha256": "f5e5ba060fd37e330a16577c708955b3efb52f6305c90757c23e3e4a120520d4"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00021.json",
+        "sha256": "880e1b20b205857d3f47371e455c9a19f90c4c8402080e6a8b16051638b8a3a8"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00022.json",
+        "sha256": "eee8621a875d40fc30b13256f7e7146a8cd016be1175182d2cc1654032a1462b"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00023.json",
+        "sha256": "fe9882f64b7d98e56ef2d66d6dd94a438b747304b4d07842fe9edfa464706386"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00024.json",
+        "sha256": "9fb400be87ccf2f73bf179724361dc16459f7541bbf6ce799141065460eff7dc"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00025.json",
+        "sha256": "427af841ba6847121d649e123b0f42f8c36d048922e6f15129a195598292b4e5"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00026.json",
+        "sha256": "958d46c1103b68c054cc7f4a4485c1764ca387dec8e0d9e301e72453942d94a2"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00027.json",
+        "sha256": "c0a913cc48949c6e70d1391e246c3e62b11c24cfbd428bd13063ff1473ae914d"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00028.json",
+        "sha256": "7c1812b743b3da9e1edf43521a5cb0d98fa2125969a7db69834b8f411ebe4df9"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00029.json",
+        "sha256": "cc742a96a37505bdefd5e4bdfcf988fdfcc9bfb92b7d219c12aec24db6aaa21d"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00030.json",
+        "sha256": "c55cdd25993802c3f5e640c56360a2a5c2519362b1ddde9a8d11081e3496401c"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00031.json",
+        "sha256": "9867055fd51f89e7f5fc83f0d1116302373e246900c81340f03747b50f20e9cf"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00032.json",
+        "sha256": "102e47c3efcc24b8846bb90e79d3d7f8099d2681556e2ec18be6838119fce423"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00033.json",
+        "sha256": "d2853868c8bb1c11f42822aff3a05d55cec6bd658ec59dc3ecd81cdfa8616311"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00034.json",
+        "sha256": "8ba398f1693c9559cfa0696c831d2898e6670711b1a20b653270fb57a9724c7f"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00035.json",
+        "sha256": "3bdb3112c0d8fcea2e094828fe85cb8b6508e14b593dbcf6a92f37d365f67802"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00036.json",
+        "sha256": "6dca96d3ad2cff818ffdaf75cea599c7d23aed4304991c3c69de6e088c828acc"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00037.json",
+        "sha256": "ce18ca1631313ae739f61fe33952049967c0d676729641bafd077f6f24f93314"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00038.json",
+        "sha256": "bb5787fc47c1b52eec15ea2cf6990d4d5bb0df7a80610d66e0f49e1b333ae220"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00039.json",
+        "sha256": "a745e2b1d1221ebf4953f697a167d5bc41391edf29c3d12c6c02ec80732a3d60"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00040.json",
+        "sha256": "d15b35b8a66c1af466d727e0748651b9537594d77f16180b83152ae50b20f9cd"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00041.json",
+        "sha256": "f162c0014c21a9bd210f654eeb2b5fca205f0310c540aadd5ff25697ef8b5c87"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00042.json",
+        "sha256": "1af695520adc178a8114938a315bbef6c2c29615dd73ffc1ed41be91ea6eec93"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00043.json",
+        "sha256": "4707bd9bf948469bf9bc20bd5e6cfc7adbd0195be97213597d4bb56a36226acd"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00044.json",
+        "sha256": "76377f7b79fb86ba80f35076b7eb93c03397de45532216b982231dbec58c37fc"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00045.json",
+        "sha256": "5eb0d9080435c864b791187ec3e7c8d5de3c1349700e5e85d2b94e5c141c466e"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00046.json",
+        "sha256": "4f85511a60f2fa0cd1fd04823c0d8034aa9dcdbde19369d632e1a5a6223e48dc"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00047.json",
+        "sha256": "49b1a0cea028482ff5ea9ab7277cc98374b0ee54debe27b3284a83fc46ca9f91"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00048.json",
+        "sha256": "0f785b718e79f3d6e53f2d3b991b008ce4d607c8ce723f0c4c7d6ffb5a5515db"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00049.json",
+        "sha256": "9d633d3dba1caa254cb146caf5dfd81c0ba5fe02c400380dabb5850dd9c4eaf3"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00050.json",
+        "sha256": "9cee7f0ee49976b16440ea199d9b2890b53113c6c06c297a492b89de109aabac"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00051.json",
+        "sha256": "c07679a21c78fc685e5bd6ad24f336b34d9738d0c0a2724f59b31113cfb41b88"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00052.json",
+        "sha256": "5a53b83bbe1f4599d366e596722433d23b018a63bff9aaa259b8fa8a386742d4"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00053.json",
+        "sha256": "100053f70991049d35d43565384864782d8cffae76bba6afabe35bee83a3ea0e"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00054.json",
+        "sha256": "12b8a01035b2fb288521ef06de6c6bb0ec2b1918c8b0d9ec2215fca1019b4931"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00055.json",
+        "sha256": "c8c8bc0ba12e78fda38591a7fdbf7b6a307681ccb1cb27048511fdc835c17c05"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00056.json",
+        "sha256": "770c183c1a9aa227202754ba0855bde81bc377618fa2fe598a1e7f513f16fe13"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00057.json",
+        "sha256": "a365b3c5a721bed1ac90a91d7729ddd44f7a7bad8f3020ff2303bc308664c870"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00058.json",
+        "sha256": "4cd88621ae2b78b142cb62928a6feb7fa76afe0201510933cbdc924be9dbaf48"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00059.json",
+        "sha256": "df637bab16917027562973e2d75620282dfe4df631675134e4e68b6ed95d4de3"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00060.json",
+        "sha256": "33b7b414c77f3efd4dadc0c5e6bff77aad286f4758f784d19810019975e2a3d6"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00061.json",
+        "sha256": "b3ae19f83db081766b97f363762ca384ddcb7ab65f3cf3d295be1cf47bb1baf6"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00062.json",
+        "sha256": "54d2a674dc82d3c8a0563c4eb1dbd58f150d1e0756d66f7bf49e2b2c60d54387"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00063.json",
+        "sha256": "5247f1d6dbcba89810ae7e1cef33d2299e5c9f9b8fe00377c77b7bfa1a7c00c3"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00064.json",
+        "sha256": "909ca5e14dee7c9e7ceff2040be4e6369589946db8ef63357fe9b6a6af5dec50"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00065.json",
+        "sha256": "56e34883617fc9e862601ec5abaf7d1f7377f2f4c4d180d099beb6078b2f3cff"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00066.json",
+        "sha256": "f223093b49ecc9ff1fc570dad73a1ec0c5b3d4bb3d29abf230532809878972a2"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00067.json",
+        "sha256": "f628ab1d3d18d6185fed1469e17e8c2f73f535b344287fff087057abbd517be7"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00068.json",
+        "sha256": "193a3d0f2e51dc0571e5ab6dbfdeae4324ad3523277cdafc1cf15e1a52d5a2a6"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00069.json",
+        "sha256": "32db6ea70062a0fe514400579253e0bb27a14ecb8d4b3b2908f64b3c0a24aef5"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00070.json",
+        "sha256": "f001448f54dea45768eda84dfe9310f04af5239669d66b1f45489bef49b10bc2"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00071.json",
+        "sha256": "c408192fc2b430e73b65250feb85dd1d8b876c17b863b2fa34f0682d360776d0"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00072.json",
+        "sha256": "c5c2ad6b0bdc25d41352c7cd27456dccab515de505699ccf2d960c5317cfa4d1"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00073.json",
+        "sha256": "bb5394e79a2e1108e525cde51d9dd0a91417034e8e29d4b7ba3a126e85fd7ba5"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00074.json",
+        "sha256": "924183fd7cccb7e614ecf27617a79d880526fa93382736a5749e43e925ca3403"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00075.json",
+        "sha256": "29b3299410c870a4111f964d498d50b6b22bb7a0031c1d77b3e843f54a55edfc"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00076.json",
+        "sha256": "7c5855811564b229d63f033cbd6ff1b048d3431a50ecc6b4edb862e51f78076b"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00077.json",
+        "sha256": "969e1ecf6a15b1a3e3d0ffbdb172a75c82e39c2047478603310a590b60c2abef"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00078.json",
+        "sha256": "588009260cccd6bdd3f7e60024d95bccc50d9436c1d1af847e3bade749e3cb5d"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00079.json",
+        "sha256": "f784d5bd439b5d345d10e7083876193ea041a79ef722a37696d84d77113abf07"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00080.json",
+        "sha256": "8ffcf4fa123842e5caac38b426d7e31239f48e4865a29c829168e7a11c101de9"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00081.json",
+        "sha256": "c07bc46cbef76f79249236a9c04b0b526fa4558fd24304ce0559b1e0af31eebf"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00082.json",
+        "sha256": "80982d3e1f533a28f4eb4714c7780348892026b114b330568b6b358e74c5ffaf"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00083.json",
+        "sha256": "42b15dcbcae4a93fa0b74d20a7024eb39b6ac1d44c3886c5f8ed84919e8477bd"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00084.json",
+        "sha256": "60a16ed0ea50d4ba44062eeace35c9e3a3b353f3881d737a2246f1133c6c5a86"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00085.json",
+        "sha256": "a4dd7dc88585385916b665bca57db4e317c2137f1c12c6baaae3819190a1b6f8"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00086.json",
+        "sha256": "454f8002e3dbf5b4fe41b0b9d3cfc020c6ba76d79f6185d1b93a13fda15ccd00"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00087.json",
+        "sha256": "9eb758d0a358fde00298c1821a7f9c16c4b827fd7c7f3180c1e3b557f4768103"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00088.json",
+        "sha256": "b286d7e212b5a34f7217bed33a9384ed642761285c17a425e80e0ab9721b128b"
+      },
+      {
+        "path": "data/raw/openalex_core/pages/page-00089.json",
+        "sha256": "bf4607a71ab8c63798927d8d2701f7d1f10502846ea0114ebe55114a5083234a"
+      }
+    ],
+    "raw_works_jsonl": {
+      "bytes": 169200524,
+      "path": "data/raw/openalex_core/works.jsonl",
+      "sha256": "4439e21759a03c4452166a2e314486996d68b923461de739fed325562053cf47"
+    },
+    "works_jsonl": {
+      "bytes": 150651587,
+      "path": "data/processed/openalex/works.jsonl",
+      "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+    }
+  },
+  "dataset": "OpenAlex",
+  "execution": {
+    "api_cost_usd_reported_by_meta": 0.008,
+    "cohorts": {
+      "api_records_returned_by_year": {
+        "2020": 2500,
+        "2021": 2500,
+        "2022": 2500,
+        "2023": 2500,
+        "2024": 2500,
+        "2025": 2500
+      },
+      "years_fetched": {
+        "year-2020": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        },
+        "year-2021": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        },
+        "year-2022": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        },
+        "year-2023": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        },
+        "year-2024": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        },
+        "year-2025": {
+          "api_records_returned": 2500,
+          "ended_on_empty_page": null,
+          "ended_reason": "sample_pages_exhausted",
+          "pages_done": 13,
+          "planned_pages": 13,
+          "sample_meta_count": 2500,
+          "unique_records_seen": 2500
+        }
+      }
+    },
+    "duplicates_and_overlaps": {
+      "cohort_records_already_in_hubs": 0,
+      "cohort_records_already_in_pilot": 42,
+      "hub_records_already_in_pilot": 0,
+      "within_cohort_duplicate_records": 0
+    },
+    "fetch_completed_at": "2026-09-16T20:13:30.594122+00:00",
+    "fetch_started_at": "2026-09-16T20:08:32.129396+00:00",
+    "hub_batches": 2,
+    "hub_records_returned": 115,
+    "hubs": {
+      "active_hubs": [
+        "W1956559956",
+        "W1660390307",
+        "W2069870183",
+        "W2047221353",
+        "W2156037541",
+        "W2043909051",
+        "W2066636486",
+        "W2093390569",
+        "W1532325895",
+        "W2152314154",
+        "W1880262756",
+        "W2165612380",
+        "W2325227998",
+        "W1964729842",
+        "W1978394996",
+        "W2164547069",
+        "W4206765718",
+        "W1982889956",
+        "W1992549066",
+        "W4213009331",
+        "W1557757161",
+        "W1854214752",
+        "W2125771191",
+        "W2138621811",
+        "W1482214997",
+        "W2000672666",
+        "W2010210047",
+        "W2169213601",
+        "W1802760973",
+        "W1979459060",
+        "W2099213975",
+        "W2113640060",
+        "W2136542423",
+        "W2154724067",
+        "W2037802158",
+        "W2075893676",
+        "W2105106523",
+        "W2143331230",
+        "W2144211451",
+        "W2153252192",
+        "W4252076394",
+        "W1964348731",
+        "W1968927634",
+        "W2026784708",
+        "W2079168273",
+        "W1972645849",
+        "W1973435495",
+        "W2102775690",
+        "W2104217798",
+        "W2145734075",
+        "W2155355283",
+        "W1597521809",
+        "W2014415866",
+        "W2132314908",
+        "W1969340322",
+        "W2004737172",
+        "W2057323446",
+        "W2070740689",
+        "W2083305840",
+        "W2106630408",
+        "W4246858749",
+        "W86205303",
+        "W168954559",
+        "W1974360117",
+        "W1993320088",
+        "W2007807439",
+        "W2035569891",
+        "W2037140704",
+        "W2048045485",
+        "W2074449313",
+        "W2082729696",
+        "W2098162425",
+        "W2108862644",
+        "W2124449410",
+        "W2149427297",
+        "W2153505326",
+        "W2154739689",
+        "W1495821370",
+        "W1525341925",
+        "W1553682320",
+        "W1570542661",
+        "W1659541576",
+        "W1928047241",
+        "W1982858363",
+        "W2062270497",
+        "W2099391294",
+        "W2109244020",
+        "W2115584760",
+        "W2126348911",
+        "W2153828680",
+        "W3138773240",
+        "W3142744039",
+        "W4240913316",
+        "W4251560691",
+        "W1525595230",
+        "W1564094940",
+        "W1574901103",
+        "W1678356000",
+        "W1965690069",
+        "W1972594981"
+      ],
+      "active_hubs_used": 100,
+      "candidate_count": 120,
+      "exclusions": {
+        "beyond_cap": 14,
+        "paratext": 1,
+        "retracted": 0,
+        "unresolvable": 5,
+        "unresolvable_ids": [
+          "W4285719527",
+          "W2037933327",
+          "W2061503185",
+          "W1967359578",
+          "W1982149803"
+        ],
+        "year_above_max": 0,
+        "year_missing_or_out_of_range": 0
+      },
+      "unique_fetched": 115
+    },
+    "last_rate_limit_headers": {
+      "x-ratelimit-credits-used": "1",
+      "x-ratelimit-limit": "1000",
+      "x-ratelimit-remaining": "903",
+      "x-ratelimit-reset": "13590"
+    },
+    "pages": 80,
+    "retries": 0,
+    "snapshot_composition": {
+      "cohort_only_works": 14958,
+      "hub_works_merged": 115,
+      "pilot_works": 2000,
+      "total_unique_works": 17073
+    },
+    "stopped_early_global_cap": false
+  },
+  "execution_extension": {
+    "completed_at": "2026-09-16T20:44:01.099407+00:00",
+    "duplicates": {
+      "extension_records_already_in_snapshot": 42,
+      "within_extension_duplicates": 0
+    },
+    "new_works_added": 1178,
+    "pages": 9,
+    "pages_source": "counted from cached extension pages (phase==extension); corrected from a stale 0 recorded by the pre-fix fetch_extension finalize; documented in SESSION-20260917-036",
+    "per_bucket": {
+      "1971": {
+        "api_records_returned": 151,
+        "empty": false,
+        "sample_size": 151,
+        "unique_new_records": 146
+      },
+      "1972": {
+        "api_records_returned": 98,
+        "empty": false,
+        "sample_size": 98,
+        "unique_new_records": 97
+      },
+      "1973": {
+        "api_records_returned": 112,
+        "empty": false,
+        "sample_size": 112,
+        "unique_new_records": 110
+      },
+      "1974": {
+        "api_records_returned": 144,
+        "empty": false,
+        "sample_size": 144,
+        "unique_new_records": 140
+      },
+      "1975": {
+        "api_records_returned": 124,
+        "empty": false,
+        "sample_size": 124,
+        "unique_new_records": 119
+      },
+      "1976": {
+        "api_records_returned": 151,
+        "empty": false,
+        "sample_size": 151,
+        "unique_new_records": 141
+      },
+      "1977": {
+        "api_records_returned": 134,
+        "empty": false,
+        "sample_size": 134,
+        "unique_new_records": 131
+      },
+      "1978": {
+        "api_records_returned": 146,
+        "empty": false,
+        "sample_size": 146,
+        "unique_new_records": 144
+      },
+      "1979": {
+        "api_records_returned": 160,
+        "empty": false,
+        "sample_size": 160,
+        "unique_new_records": 150
+      }
+    },
+    "stopped_early_cap": false,
+    "superseded_raw_works_sha256": "16d587a3952ef49453f836c115af5da7e8ca4b5430b0661c60a5b17d1ce403bf",
+    "total_unique_works": 18251
+  },
+  "id_namespace": {
+    "canonical_mapping": "strip URI prefix and prepend openalex:, e.g. openalex:W123",
+    "raw": "OpenAlex URI, e.g. https://openalex.org/W123"
+  },
+  "pilot_input": {
+    "manifest_path": "data/manifests/openalex_pilot.json",
+    "manifest_sha256": "830391357c29ce3e197cd0b4b83eff0c4ce835bd5d59119535e59618962f87b8",
+    "works_path": "data/raw/openalex/works.jsonl",
+    "works_sha256": "3f301e4fc6c9b0de1fa95f736d0ceff2fa6fac137c086e0716fc3afe761c4980"
+  },
+  "planned_at": "2026-09-16T20:08:22.250835+00:00",
+  "planned_v2_at": "2026-09-16T20:43:04.160386+00:00",
+  "postprocess": {
+    "output_order": "canonical ID ascending",
+    "processed_at": "2026-09-16T20:44:25.312968+00:00",
+    "processed_works": 18251
+  },
+  "query_fingerprint": "03b28664fca637eace05c30819571ba33b1529a12c46bd780741cb9189fdb7ed",
+  "retrieved_completed_at": "2026-09-16T20:44:01.099407+00:00",
+  "retrieved_started_at": "2026-09-16T20:08:32.129396+00:00",
+  "sampling_plan": {
+    "cohort_selection": {
+      "empty_first_page_policy": "fatal for a cohort year (unexpectedly empty)",
+      "filter_template": "cites:<active_hubs>,publication_year:<Y>,is_paratext:false",
+      "global_work_cap": 20000,
+      "minimum_snapshot_works": 10000,
+      "paging": "basic_page_over_seeded_sample (verified deterministic)",
+      "per_page": 200,
+      "per_year_sample_cap": 2500,
+      "sample_seed": "20260915",
+      "stop_rule": "a year ends when its sample pages are exhausted or an out-of-sample empty page appears (counted); the whole fetch stops before exceeding global_work_cap; below minimum_snapshot_works the fetch fails loudly",
+      "year_order": [
+        2024,
+        2023,
+        2025,
+        2022,
+        2021,
+        2020
+      ],
+      "year_order_rationale": "most recent years first: highest probability of >= 50 eligible sources per single year (test floor), then earlier years for the dev floor; duplicate priority follows this order",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "dedup_priority": [
+      "pilot",
+      "hubs",
+      "cohorts (year_order, page asc)"
+    ],
+    "fields": [
+      "id",
+      "doi",
+      "title",
+      "publication_year",
+      "abstract_inverted_index",
+      "authorships",
+      "primary_location",
+      "cited_by_count",
+      "referenced_works",
+      "primary_topic",
+      "topics",
+      "updated_date",
+      "type",
+      "language",
+      "is_retracted",
+      "is_paratext"
+    ],
+    "hub_selection": {
+      "active_hub_cap": 100,
+      "active_rule": "fetched successfully; valid publication_year 1900-2100 and <= 2019; is_retracted is not true; is_paratext is not true; ranked order; capped at 100",
+      "candidate_count": 120,
+      "dead_id_policy": "unresolvable IDs are counted and reported, never fatal",
+      "empty_active_hub_policy": "fatal (recruitment filter cannot be empty)",
+      "hub_batches": [
+        [
+          "W4285719527",
+          "W1956559956",
+          "W1660390307",
+          "W2069870183",
+          "W2047221353",
+          "W2156037541",
+          "W2043909051",
+          "W2066636486",
+          "W2093390569",
+          "W1532325895",
+          "W2152314154",
+          "W1880262756",
+          "W2165612380",
+          "W2147152072",
+          "W2325227998",
+          "W1964729842",
+          "W1978394996",
+          "W2164547069",
+          "W4206765718",
+          "W1982889956",
+          "W1992549066",
+          "W4213009331",
+          "W1557757161",
+          "W1854214752",
+          "W2125771191",
+          "W2138621811",
+          "W1482214997",
+          "W2000672666",
+          "W2010210047",
+          "W2169213601",
+          "W1802760973",
+          "W1979459060",
+          "W2099213975",
+          "W2113640060",
+          "W2136542423",
+          "W2154724067",
+          "W2037802158",
+          "W2075893676",
+          "W2105106523",
+          "W2143331230",
+          "W2144211451",
+          "W2153252192",
+          "W4252076394",
+          "W1964348731",
+          "W1968927634",
+          "W2026784708",
+          "W2079168273",
+          "W1972645849",
+          "W1973435495",
+          "W2102775690",
+          "W2104217798",
+          "W2145734075",
+          "W2155355283",
+          "W1597521809",
+          "W2014415866",
+          "W2132314908",
+          "W1969340322",
+          "W2004737172",
+          "W2057323446",
+          "W2070740689",
+          "W2083305840",
+          "W2106630408",
+          "W4246858749",
+          "W86205303",
+          "W168954559",
+          "W1974360117",
+          "W1993320088",
+          "W2007807439",
+          "W2035569891",
+          "W2037140704",
+          "W2048045485",
+          "W2074449313",
+          "W2082729696",
+          "W2098162425",
+          "W2108862644",
+          "W2124449410",
+          "W2149427297",
+          "W2153505326",
+          "W2154739689",
+          "W1495821370",
+          "W1525341925",
+          "W1553682320",
+          "W1570542661",
+          "W1659541576",
+          "W1928047241",
+          "W1982858363",
+          "W2037933327",
+          "W2061503185",
+          "W2062270497",
+          "W2099391294",
+          "W2109244020",
+          "W2115584760",
+          "W2126348911",
+          "W2153828680",
+          "W3138773240",
+          "W3142744039",
+          "W4240913316",
+          "W4251560691",
+          "W1525595230",
+          "W1564094940"
+        ],
+        [
+          "W1574901103",
+          "W1678356000",
+          "W1965690069",
+          "W1967359578",
+          "W1972594981",
+          "W1982149803",
+          "W1988344511",
+          "W1988711048",
+          "W1999047234",
+          "W2008883775",
+          "W2023188792",
+          "W2029009258",
+          "W2074680184",
+          "W2079175517",
+          "W2086253379",
+          "W2090883204",
+          "W2092488901",
+          "W2105157020",
+          "W2113788004",
+          "W2123937625"
+        ]
+      ],
+      "hub_candidates": [
+        {
+          "distinct_pilot_sources": 87,
+          "openalex_id": "W4285719527"
+        },
+        {
+          "distinct_pilot_sources": 40,
+          "openalex_id": "W1956559956"
+        },
+        {
+          "distinct_pilot_sources": 38,
+          "openalex_id": "W1660390307"
+        },
+        {
+          "distinct_pilot_sources": 35,
+          "openalex_id": "W2069870183"
+        },
+        {
+          "distinct_pilot_sources": 33,
+          "openalex_id": "W2047221353"
+        },
+        {
+          "distinct_pilot_sources": 31,
+          "openalex_id": "W2156037541"
+        },
+        {
+          "distinct_pilot_sources": 29,
+          "openalex_id": "W2043909051"
+        },
+        {
+          "distinct_pilot_sources": 29,
+          "openalex_id": "W2066636486"
+        },
+        {
+          "distinct_pilot_sources": 29,
+          "openalex_id": "W2093390569"
+        },
+        {
+          "distinct_pilot_sources": 27,
+          "openalex_id": "W1532325895"
+        },
+        {
+          "distinct_pilot_sources": 27,
+          "openalex_id": "W2152314154"
+        },
+        {
+          "distinct_pilot_sources": 23,
+          "openalex_id": "W1880262756"
+        },
+        {
+          "distinct_pilot_sources": 23,
+          "openalex_id": "W2165612380"
+        },
+        {
+          "distinct_pilot_sources": 22,
+          "openalex_id": "W2147152072"
+        },
+        {
+          "distinct_pilot_sources": 21,
+          "openalex_id": "W2325227998"
+        },
+        {
+          "distinct_pilot_sources": 20,
+          "openalex_id": "W1964729842"
+        },
+        {
+          "distinct_pilot_sources": 20,
+          "openalex_id": "W1978394996"
+        },
+        {
+          "distinct_pilot_sources": 20,
+          "openalex_id": "W2164547069"
+        },
+        {
+          "distinct_pilot_sources": 20,
+          "openalex_id": "W4206765718"
+        },
+        {
+          "distinct_pilot_sources": 19,
+          "openalex_id": "W1982889956"
+        },
+        {
+          "distinct_pilot_sources": 19,
+          "openalex_id": "W1992549066"
+        },
+        {
+          "distinct_pilot_sources": 19,
+          "openalex_id": "W4213009331"
+        },
+        {
+          "distinct_pilot_sources": 18,
+          "openalex_id": "W1557757161"
+        },
+        {
+          "distinct_pilot_sources": 18,
+          "openalex_id": "W1854214752"
+        },
+        {
+          "distinct_pilot_sources": 18,
+          "openalex_id": "W2125771191"
+        },
+        {
+          "distinct_pilot_sources": 18,
+          "openalex_id": "W2138621811"
+        },
+        {
+          "distinct_pilot_sources": 17,
+          "openalex_id": "W1482214997"
+        },
+        {
+          "distinct_pilot_sources": 17,
+          "openalex_id": "W2000672666"
+        },
+        {
+          "distinct_pilot_sources": 17,
+          "openalex_id": "W2010210047"
+        },
+        {
+          "distinct_pilot_sources": 17,
+          "openalex_id": "W2169213601"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W1802760973"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W1979459060"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W2099213975"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W2113640060"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W2136542423"
+        },
+        {
+          "distinct_pilot_sources": 16,
+          "openalex_id": "W2154724067"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2037802158"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2075893676"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2105106523"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2143331230"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2144211451"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W2153252192"
+        },
+        {
+          "distinct_pilot_sources": 15,
+          "openalex_id": "W4252076394"
+        },
+        {
+          "distinct_pilot_sources": 14,
+          "openalex_id": "W1964348731"
+        },
+        {
+          "distinct_pilot_sources": 14,
+          "openalex_id": "W1968927634"
+        },
+        {
+          "distinct_pilot_sources": 14,
+          "openalex_id": "W2026784708"
+        },
+        {
+          "distinct_pilot_sources": 14,
+          "openalex_id": "W2079168273"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W1972645849"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W1973435495"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W2102775690"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W2104217798"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W2145734075"
+        },
+        {
+          "distinct_pilot_sources": 13,
+          "openalex_id": "W2155355283"
+        },
+        {
+          "distinct_pilot_sources": 12,
+          "openalex_id": "W1597521809"
+        },
+        {
+          "distinct_pilot_sources": 12,
+          "openalex_id": "W2014415866"
+        },
+        {
+          "distinct_pilot_sources": 12,
+          "openalex_id": "W2132314908"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W1969340322"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W2004737172"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W2057323446"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W2070740689"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W2083305840"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W2106630408"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W4246858749"
+        },
+        {
+          "distinct_pilot_sources": 11,
+          "openalex_id": "W86205303"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W168954559"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W1974360117"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W1993320088"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2007807439"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2035569891"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2037140704"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2048045485"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2074449313"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2082729696"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2098162425"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2108862644"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2124449410"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2149427297"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2153505326"
+        },
+        {
+          "distinct_pilot_sources": 10,
+          "openalex_id": "W2154739689"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1495821370"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1525341925"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1553682320"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1570542661"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1659541576"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1928047241"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W1982858363"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2037933327"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2061503185"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2062270497"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2099391294"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2109244020"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2115584760"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2126348911"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W2153828680"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W3138773240"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W3142744039"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W4240913316"
+        },
+        {
+          "distinct_pilot_sources": 9,
+          "openalex_id": "W4251560691"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1525595230"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1564094940"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1574901103"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1678356000"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1965690069"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1967359578"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1972594981"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1982149803"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1988344511"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1988711048"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W1999047234"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2008883775"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2023188792"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2029009258"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2074680184"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2079175517"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2086253379"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2090883204"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2092488901"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2105157020"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2113788004"
+        },
+        {
+          "distinct_pilot_sources": 8,
+          "openalex_id": "W2123937625"
+        }
+      ],
+      "hub_id_batch_size": 100,
+      "rank_rule": "distinct_pilot_sources desc, then openalex_id asc",
+      "source": "external referenced_works targets of the pinned pilot snapshot"
+    },
+    "invariants": {
+      "beir_data_used_for_sampling": false,
+      "floors": {
+        "minimum_dev_queries": 30,
+        "minimum_eligible_references": 2,
+        "minimum_novel_candidates_per_query": 100,
+        "minimum_test_queries": 50
+      },
+      "floors_source": "configs/protocol_v1.json tracks.B.graph_gate (ADR-016: unchanged)",
+      "pilot_snapshot_immutable": true,
+      "qrels_used": false
+    },
+    "output_order": "snapshot records sorted by canonical ID ascending",
+    "pilot_embedding": {
+      "mode": "verbatim_no_refetch",
+      "pilot_works_path": "data/raw/openalex/works.jsonl"
+    },
+    "rationale": "ADR-016 §7: the seeded topic pilot was citation-sparse (190 internal edges, 88.95% isolated).  Hubs are the pilot's most referenced external targets; per-year seeded samples of works citing the hubs recruit citing sources whose internal references (hubs, pilot works, other cohort works) supply >= 2 distinct internal references with target year <= source year.  Every Protocol v1 floor stays unchanged.",
+    "strategy": "citation_connected_snowball_from_pinned_pilot_hubs_and_year_cohorts",
+    "transport": {
+      "backoff_initial_seconds": 1.0,
+      "endpoint": "https://api.openalex.org/works",
+      "mailto": "scholargraph-vn@example.org",
+      "max_backoff_seconds": 60.0,
+      "max_retries": 5,
+      "or_filter_limit_verified": 100,
+      "polite_pool": true,
+      "request_interval_seconds": 0.15,
+      "timeout_seconds": 30.0
+    }
+  },
+  "sampling_plan_v2": {
+    "budget": {
+      "global_work_cap": 20000,
+      "max_new_works": 1220,
+      "projected_total_works": 18293
+    },
+    "dedup_priority": "v1 snapshot records win; extension duplicates are dropped and counted",
+    "invariants": {
+      "beir_data_used_for_sampling": false,
+      "floors": {
+        "minimum_dev_queries": 30,
+        "minimum_eligible_references": 2,
+        "minimum_novel_candidates_per_query": 100,
+        "minimum_test_queries": 50
+      },
+      "qrels_used": false,
+      "v1_plan_untouched": true
+    },
+    "reason": "The v1 gate measured minimum_novel_candidates_per_source = NO_GO: 4 eligible source(s) below the pinned floor of 100 novel candidates.  The extension recruits additional works from the SAME pinned pilot topic in older publication-year buckets, raising the cumulative candidate pool for every eligible source.  Floors are unchanged; the v1 plan and its records are untouched.",
+    "recruitment": {
+      "bucket_order": "ascending publication year (oldest first for cap-stop)",
+      "empty_bucket_policy": "recorded and skipped (buckets are depth padding)",
+      "filter_template": "topics.id:T10286,publication_year:<Y>",
+      "first_year": 1971,
+      "last_year": 1979,
+      "paging": "single_page_per_year_bucket",
+      "per_page": 200,
+      "probe": {
+        "note": "pool counts are per-year planning metadata (per_page=1, select=id); no record data entered the snapshot during probing",
+        "pool_counts": {
+          "1965": 51,
+          "1966": 79,
+          "1967": 96,
+          "1968": 113,
+          "1969": 132,
+          "1970": 120,
+          "1971": 151,
+          "1972": 98,
+          "1973": 112,
+          "1974": 144,
+          "1975": 124,
+          "1976": 151,
+          "1977": 134,
+          "1978": 146,
+          "1979": 160
+        },
+        "probed_years": [
+          1965,
+          1966,
+          1967,
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979
+        ]
+      },
+      "sample_seed": "20260915",
+      "topic_id": "T10286",
+      "topic_source": "reused verbatim from the pinned pilot manifest selection.filter",
+      "year_buckets": {
+        "1971": 151,
+        "1972": 98,
+        "1973": 112,
+        "1974": 144,
+        "1975": 124,
+        "1976": 151,
+        "1977": 134,
+        "1978": 146,
+        "1979": 160
+      }
+    },
+    "safety_verification": {
+      "assumption": "recruited works may themselves become eligible only at years >= 1971, where the cumulative lower bound 214 absorbs up to 113 distinct internal references per source; no new eligible source can appear below the first bucket year because recruitment cannot add references to older works",
+      "below_floor_year_fixes": {
+        "1972": {
+          "new_cumulative_lower_bound": 314,
+          "new_universe_lower_bound": 311,
+          "old_cumulative": 65,
+          "old_universe": 62,
+          "satisfied": true
+        },
+        "1975": {
+          "new_cumulative_lower_bound": 707,
+          "new_universe_lower_bound": 704,
+          "old_cumulative": 78,
+          "old_universe": 75,
+          "satisfied": true
+        },
+        "1976": {
+          "new_cumulative_lower_bound": 868,
+          "new_universe_lower_bound": 865,
+          "old_cumulative": 88,
+          "old_universe": 85,
+          "satisfied": true
+        },
+        "1977": {
+          "new_cumulative_lower_bound": 1005,
+          "new_universe_lower_bound": 1002,
+          "old_cumulative": 91,
+          "old_universe": 88,
+          "satisfied": true
+        }
+      },
+      "first_year_cumulative_lower_bound": 214,
+      "max_internal_refs_absorbed_at_first_year": 113,
+      "rule": "universe_new = cumulative_new - 1 - distinct internal references; recruited bucket years raise the cumulative pool for every eligible source with a later-or-equal publication year"
+    },
+    "strategy": "historical_depth_extension_for_novel_candidate_floor",
+    "v1_gate_evidence": {
+      "measured_at": "2026-09-16T20:16:47.021015+00:00",
+      "overall": "NO_GO",
+      "report_path": "artifacts/reports/graph_feasibility_core.json",
+      "report_sha256": "a283330a07516008c6a187fa7f77621a71e29dfc1499fe784102f4565a308f61"
+    },
+    "version": 2
+  },
+  "schema_version": 1,
+  "snapshot_id": "openalex-core-03b28664fca6",
+  "snapshot_kind": "immutable_local_extraction_from_live_api",
+  "source": {
+    "api_documentation": "https://help.openalex.org/api/",
+    "authentication": "anonymous_or_bearer_header; credential_not_persisted",
+    "endpoint": "https://api.openalex.org/works",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "provider": "OpenAlex"
+  },
+  "status": "COMPLETED",
+  "task_id": "SG-015",
+  "v2_fingerprint": "cb63697d054d667f7bb331db36b5380e3c0dbb901d9f9f28ab241bd372df812e"
+}

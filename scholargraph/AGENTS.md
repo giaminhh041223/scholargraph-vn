@@ -1,7 +1,7 @@
 # ScholarGraph — Quy tắc cho mọi phiên làm việc
 
 ## 1. Phạm vi và thứ tự ưu tiên
-- Dự án ở `D:/Web_mining_20261/scholargraph`. Khi mở riêng thư mục này, vẫn giữ nguyên dữ liệu E-COMASPECT ở thư mục cha.
+- Dự án ở `D:/Web_mining_20261/bn/scholargraph` (bản sao làm việc độc lập; mọi quy tắc giữ nguyên, chỉ thay đổi đường dẫn). Mọi phiên làm việc trong môi trường này chỉ hoạt động bên trong `D:/Web_mining_20261/bn`.
 - Chỉ dẫn hệ thống/developer và yêu cầu mới nhất của người dùng được ưu tiên. Kế hoạch là danh mục công việc; thực hiện phần đã được giao.
 - Mỗi task có ID cố định `SG-NNN`. Vai trò trong kế hoạch là vai trò nhóm, không phải lệnh tạo agent hoặc task trong ứng dụng.
 - Không tự tạo subagent, task mới, automation, tài khoản, dịch vụ trả phí hay xuất bản chỉ vì backlog có mục liên quan.
@@ -86,8 +86,11 @@ Timestamp dùng ISO 8601 với múi giờ; ngày làm việc tại Việt Nam UT
 - Log không chứa API key, token hoặc thông tin nhạy cảm. Metadata thiếu phải được hiển thị là thiếu.
 - Không ghi đè run hoàn tất; tạo run ID mới. Run dở có trạng thái rõ để tiếp tục hoặc hủy có ghi nhận.
 - Thêm test khi cần kiểm tra thuật toán, metrics, split, graph, API, resume/download integrity; không viết test chỉ đếm file hay khớp implementation.
+- Chống silent bypass: Không dùng .get() mặc định hay fallback che giấu thành phần bắt buộc thiếu hoặc lỗi. Bắt buộc báo FAIL rõ và CLI thoát mã nonzero (1). Không thay thế phép đo chưa thực hiện bằng 0 hay chuỗi rỗng.
+- Bắt buộc Negative / Adversarial Testing: Phải có test cases phá hủy trên fixture dị dạng trong thư mục tạm (thiếu split/file bắt buộc, dữ liệu khuyết thiếu text/title, rò rỉ nhãn, CLI subprocess exit code 1 khi có lỗi).
+- Đồng bộ 1:1 Narrative và Dữ liệu: Mọi khẳng định trong log/report/Data Card phải khớp toán học với toàn bộ biến đếm thực tế; không suy đoán một chiều.
 - Sau thay đổi tài liệu, kiểm tra liên kết/trạng thái; sau thay đổi mã, chạy test liên quan.
-- Khi có Git: kiểm tra diff đầu phiên; commit nhỏ theo task nếu thuộc phạm vi được giao; không đụng file người khác. Hiện tại chưa có Git, nên không bịa commit hash.
+- Khi có Git: kiểm tra diff đầu phiên; commit nhỏ theo task nếu thuộc phạm vi được giao; không đụng file người khác.
 
 ## 8. Định nghĩa hoàn thành
-Một task chỉ DONE khi: đúng scope, đầu ra có thật, acceptance đạt hoặc deviation được ghi rõ, kiểm tra phù hợp hoàn tất, log và HANDOFF đồng bộ. Hoàn tất task planning không đồng nghĩa hoàn tất ứng dụng.
+Một task chỉ DONE khi: đúng scope, đầu ra có thật, acceptance đạt hoặc deviation được ghi rõ, đã vượt qua cả positive tests lẫn negative/adversarial tests phá hủy, kiểm tra phù hợp hoàn tất, log và HANDOFF đồng bộ. Hoàn tất task planning không đồng nghĩa hoàn tất ứng dụng.

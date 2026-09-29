@@ -1,0 +1,4316 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-033",
+  "module_version": "sg033-1.0.0",
+  "generated_at": "2026-09-21T16:54:15.832278+00:00",
+  "methods": [
+    "translated_bm25",
+    "multilingual_dense_e5",
+    "vn_hybrid_rrf"
+  ],
+  "depth": 10,
+  "seed": 20260915,
+  "dedup": true,
+  "blinded": true,
+  "blinding_note": "Pool rows carry no method/score provenance. Provenance lives ONLY in vn_pool_provenance.json, which must stay hidden until SG-034 analysis.",
+  "inputs": {
+    "vn_query_manifest_sha256": "316b23012790a3168570de2b633a71487808460efbb045b88f7a4165d2b08089",
+    "translations_cache_sha256": "0ccd119d9ca5b6ea641ec27e5e3a7ded1ecf0aaf565de22816e474469202bf5c"
+  },
+  "counts": {
+    "queries": 30,
+    "dev": 10,
+    "test": 20,
+    "unique_pairs": 662
+  },
+  "retrieval": {
+    "translated_bm25": {
+      "index_build_s": 2.4437198638916016,
+      "corpus_docs": 18250,
+      "textless_excluded": [
+        "openalex:W126924136"
+      ]
+    },
+    "multilingual_dense_e5": {
+      "query_encode_s": 0.8786125183105469,
+      "index_docs": 18250,
+      "model_id": "intfloat/multilingual-e5-base",
+      "revision": "d128750597153bb5987e10b1c3493a34e5a4502a"
+    }
+  },
+  "elapsed_seconds": 31.886816024780273,
+  "pools": [
+    {
+      "query_id": "vn:dev:001",
+      "split": "dev",
+      "intent_family": "vitamin-d-bone",
+      "text_vi": "Bổ sung vitamin D có giúp ngăn ngừa gãy xương ở người cao tuổi không?",
+      "text_en": "Does vitamin D supplements help prevent broken bones in older people?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3172076064",
+          "title": "Erratum: Leveraging Flexible Tree Matching to repair broken locators in web automation scripts",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4376113402",
+          "title": "An analysis of the thematic evolution of ageing and healthcare expenditure using word embedding: A scoping review of policy implications",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4415358428",
+          "title": "A machine learning tool for predicting newly diagnosed osteoporosis in primary healthcare in the Stockholm Region",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W3133519121",
+          "title": "Predicting deseasonalised serum 25 hydroxy vitamin D concentrations in the D-Health Trial: An analysis using boosted regression trees",
+          "year": 2021
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4366551350",
+          "title": "“Where is history”: Toward Designing a Voice Assistant to help Older Adults locate Interface Features quickly",
+          "year": 2023
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4402220266",
+          "title": "Quantifying the Enhancement of Sarcopenic Skeletal Muscle Preservation Through a Hybrid Exercise Program: Randomized Controlled Trial",
+          "year": 2024
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4387084854",
+          "title": "The risk factors determined by four machine learning methods for the change of difference of bone mineral density in post-menopausal women after three years follow-up",
+          "year": 2023
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4287854764",
+          "title": "The Defence of 2d Poisoning Attack",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W2891643155",
+          "title": "Research Guides: Resources for Graduate and Ph.D. Students: Databases",
+          "year": 2017
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4411673697",
+          "title": "Understanding the Impact of Street Environments on Traffic Crash Risk from the Perspective of Aging People: An Interpretable Machine Learning Approach",
+          "year": 2025
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3141717099",
+          "title": "Machine learning approaches to constructing predictive models of vitamin D deficiency in a hypertensive population: a comparative study",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3214507200",
+          "title": "Suicide Ideation Detection in Social Media Forums",
+          "year": 2021
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4402898309",
+          "title": "Age-related driver injury occurrence from crashes at curve–grade combined segments",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4392236416",
+          "title": "Ascertaining injury risk issues through big data analysis: text-mining based analysis of national emergency response data",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4389093114",
+          "title": "Mapping the citation network on vitamin D research in Australia: a data-driven approach",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4401547382",
+          "title": "Assessment of fracture risk in diabetic patients",
+          "year": 2024
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4387614756",
+          "title": "Use and benefit of information, communication, and assistive technology among community-dwelling older adults – a cross-sectional study",
+          "year": 2023
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W2529354470",
+          "title": "Does an asia-pacific research area exist from a bibliometric point of view?",
+          "year": 2010
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4327899675",
+          "title": "Osteoid osteoma in the bones of the hand: a systematic literature review",
+          "year": 2023
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3170061265",
+          "title": "Exploring Factors Associated with Subjective Health of Older-Old using ReLU Deep Neural Network and Machine Learning",
+          "year": 2021
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4417489201",
+          "title": "Crossing the digital threshold: An interpretable machine learning model of life satisfaction for older adults in China",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:002",
+      "split": "dev",
+      "intent_family": "probiotic-ibs",
+      "text_vi": "Men vi sinh có giảm triệu chứng hội chứng ruột kích thích không?",
+      "text_en": "Did the bacteria reduce the symptoms of colic syndrome?",
+      "pool_size": 26,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4386417184",
+          "title": "Autonomic function and motor subtypes in Parkinson’s disease: a multicentre cross-sectional study",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3161900642",
+          "title": "Clinical Prevalence of Enhanced Vestibulo-Ocular Reflex Responses on Video Head Impulse Test",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4408175731",
+          "title": "An interpretable machine learning-assisted diagnostic model for Kawasaki disease in children",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4214767656",
+          "title": "Peer Review #1 of \"Dairy management practices associated with multi-drug resistant fecal commensals and Salmonella in cull cows: a machine learning approach (v0.1)\"",
+          "year": 2021
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4319082940",
+          "title": "Machine Learning Predictive Models for Evaluating Risk Factors Affecting Sperm Count: Predictions Based on Health Screening Indicators",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4311505210",
+          "title": "Data mining for prediction and interpretation of bacterial population behavior in food",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W2911527275",
+          "title": "Astmapp: A Platform for Asthma Self-Management",
+          "year": 2020
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4389547830",
+          "title": "Disease- and stage-specific alterations of the oral and fecal microbiota in Alzheimer's disease",
+          "year": 2023
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4378228851",
+          "title": "Urbanisation generates multiple trait syndromes for terrestrial taxa worldwide",
+          "year": 2023
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4395070800",
+          "title": "Mixed bioconvection of nanofluid of oxytactic bacteria through a porous cavity with inlet and outlet under periodic magnetic field using artificial intelligence based on LightGBM algorithm",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3156224748",
+          "title": "Untargeted Metabolomics Insights into Newborns with Congenital Zika Infection",
+          "year": 2021
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4400031869",
+          "title": "Genomic evidence of Escherichia coli gut population diversity translocation in leukemia patients",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4366525959",
+          "title": "An Evaluation Method of Human Gut Microbial Homeostasis by Testing Specific Fecal Microbiota",
+          "year": 2023
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W3021066313",
+          "title": "Cohort-Derived Machine Learning Models for Individual Prediction of Chronic Kidney Disease in People Living With Human Immunodeficiency Virus: A Prospective Multicenter Cohort Study",
+          "year": 2020
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3100708820",
+          "title": "Medical symptom recognition from patient text: An active learning approach for long-tailed multilabel distributions",
+          "year": 2020
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3138205321",
+          "title": "Associations between habitual diet, metabolic disease, and the gut microbiota using latent Dirichlet allocation",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4388499754",
+          "title": "Personalized identification of Autism-related bacteria in the gut microbiome using eXplainable Artificial Intelligence",
+          "year": 2023
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4401555602",
+          "title": "Personalized identification of autism-related bacteria in the gut microbiome using explainable artificial intelligence",
+          "year": 2024
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4399300348",
+          "title": "Prediction models for COVID-19 disease outcomes",
+          "year": 2024
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3005901674",
+          "title": "Shared and distinct resting functional connectivity in children and adults with attention-deficit/hyperactivity disorder",
+          "year": 2020
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4319068083",
+          "title": "Microbial Dynamics in Newly Diagnosed and Treatment Naïve IBD Patients in the Mediterranean",
+          "year": 2023
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4411418564",
+          "title": "Large-scale genomic analysis reveals the distribution and diversity of type VI secretion systems in Escherichia coli",
+          "year": 2025
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4392201430",
+          "title": "Fine-tuning BERT models to extract transcriptional regulatory interactions of bacteria from biomedical literature",
+          "year": 2024
+        },
+        {
+          "position": 25,
+          "doc_id": "openalex:W4211112851",
+          "title": "Decision-Making System for the Diagnosis of Syndrome Based on Traditional Chinese Medicine Knowledge Graph",
+          "year": 2022
+        },
+        {
+          "position": 26,
+          "doc_id": "openalex:W4214509810",
+          "title": "Peer Review #3 of \"Dairy management practices associated with multi-drug resistant fecal commensals and Salmonella in cull cows: a machine learning approach (v0.1)\"",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:003",
+      "split": "dev",
+      "intent_family": "e-cigarette-cessation",
+      "text_vi": "Thuốc lá điện tử có giúp người hút thuốc bỏ được thuốc lá không?",
+      "text_en": "Does electronic tobacco help smokers to quit smoking?",
+      "pool_size": 23,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3139319073",
+          "title": "Session details: Help Me Search",
+          "year": 2008
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4387266791",
+          "title": "Automated invoice processing: Machine learning-based information extraction for long tail suppliers",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3006863666",
+          "title": "Effectiveness of WhatsApp online group discussion for smoking relapse prevention: protocol for a pragmatic randomized controlled trial",
+          "year": 2020
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W2088351047",
+          "title": "The ENews electronic information project",
+          "year": 1994
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4404285128",
+          "title": "Concurrent Mentions of Vaping and Alcohol on Twitter: Latent Dirichlet Analysis (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4413323436",
+          "title": "A machine learning framework for predicting healthcare utilization and risk factors",
+          "year": 2025
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4280550048",
+          "title": "Text mining tweets on e-cigarette risks and benefits using machine learning following a vaping related lung injury outbreak in the USA",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3213398408",
+          "title": "Machine learning to empower electrohydrodynamic processing",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4200373041",
+          "title": "A Machine Learning Approach to Identify Predictors of Frequent Vaping and Vulnerable Californian Youth Subgroups",
+          "year": 2021
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3130558257",
+          "title": "Recognizing lung cancer and stages using a self-developed electronic nose system",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4295681497",
+          "title": "Quickly identifying people at risk of opioid use disorder in emergency departments: trade-offs between a machine learning approach and a simple EHR flag strategy",
+          "year": 2022
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W2133676034",
+          "title": "Web based collection selection using singular value decomposition",
+          "year": 2004
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W1488358594",
+          "title": "Abstracts and Abstracting in Knowledge Discovery.",
+          "year": 1999
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4388219750",
+          "title": "Electronic Nicotine Delivery Systems and E-Liquid Modifications to Vape Cannabis Depicted in Online Videos",
+          "year": 2023
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4386893095",
+          "title": "A multimodal deep learning architecture for smoking detection with a small data approach",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3196576658",
+          "title": "Does sentiment help requirement engineering: exploring sentiments in user comments to discover informative comments",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4388067414",
+          "title": "Enhanced phenotypes for identifying opioid overdose in emergency department visit electronic health record data",
+          "year": 2023
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4309739381",
+          "title": "Access to and use of Tobacco Production Health Hazard Information Sources by Tobacco Farmers in Kuria West Sub – County, Migori County, Kenya",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4405997304",
+          "title": "Gradient Boosting for Heart Stroke Prediction: Investigating Unexpected Risk Factors",
+          "year": 2025
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4205503877",
+          "title": "A machine learning approach to predict e-cigarette use and dependence among Ontario youth",
+          "year": 2022
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W3190090328",
+          "title": "Use of Geographic Information System Technology to Evaluate Health Disparities in Smoking Cessation Class Accessibility for Patients in Louisiana Public Hospitals",
+          "year": 2021
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4235449594",
+          "title": "Evaluating Information",
+          "year": 2005
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:004",
+      "split": "dev",
+      "intent_family": "sleep-memory",
+      "text_vi": "Ngủ đủ giấc có cải thiện trí nhớ làm việc không?",
+      "text_en": "Does taking sufficient sleep improve your work - memory?",
+      "pool_size": 20,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4401251207",
+          "title": "Predicting Workers’ Stress: Application of a High-Performance Algorithm Using Working-Style Characteristics (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4415924971",
+          "title": "TRA: Trajectory retrieval augmented model for automatic sleep staging",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4386028990",
+          "title": "DeepSearch: A deep learning based document retrieval system",
+          "year": 2023
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4401251185",
+          "title": "Predicting Workers’ Stress: Application of a High-Performance Algorithm Using Working-Style Characteristics",
+          "year": 2024
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4232725947",
+          "title": "Get smart?",
+          "year": 1972
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W2026016723",
+          "title": "Memory Search of Words and Nonwords",
+          "year": 1974
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W1980714004",
+          "title": "Relation between intelligence and short-term memory",
+          "year": 1977
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3177118919",
+          "title": "QPR: Quantizing PageRank with Coherent Shared Memory Accelerators",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W7160462182",
+          "title": "Study 1 Pre-registration Worksheet",
+          "year": 2023
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4408153241",
+          "title": "Machine learning classifier solving the problem of sleep stage imbalance between overnight sleep",
+          "year": 2025
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W2734698323",
+          "title": "Retrieval cue effectiveness in cued recall",
+          "year": 1974
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W1995624221",
+          "title": "The role of mental contiguity in memory: registration and retrieval effects",
+          "year": 1974
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W2089007864",
+          "title": "Effects of cuing on recall from categorized word lists.",
+          "year": 1974
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W1480687347",
+          "title": "SOME PRINCIPLES OF MEMORY SCHEMATA",
+          "year": 1975
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4313414369",
+          "title": "Automatic Sleep Staging Based on Single-Channel EEG Signal Using Null Space Pursuit Decomposition Algorithm",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4366957262",
+          "title": "Liberator: A Data Reuse Framework for Out-of-Memory Graph Computing on GPUs",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4405524706",
+          "title": "Annotated interictal discharges in intracranial EEG sleep data and related machine learning detection scheme",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W1964991726",
+          "title": "Cognitive tuning and receptivity to novel information",
+          "year": 1973
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3040314783",
+          "title": "Sleep Identification Enabled by Supervised Training Algorithms (SIESTA): An open-source platform for automatic sleep staging of rodent polysomnographic data",
+          "year": 2020
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:005",
+      "split": "dev",
+      "intent_family": "peer-review-gender-bias",
+      "text_vi": "Bình duyệt kiểu double-blind có giảm thiên vị giới khi đánh giá bài báo không?",
+      "text_en": "Does double-blind reviews have a taste-down when you evaluate the article?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4214933304",
+          "title": "Sentiment Classification untuk Opini Berita SepakBola",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4367146566",
+          "title": "COLTR: Semi-Supervised Learning to Rank With Co-Training and Over-Parameterization for Web Search",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W1807420371",
+          "title": "Blind Men and the Elephant: Detecting Evolving Groups in Social News",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4378233777",
+          "title": "Coverage and similarity of bibliographic databases to find most relevant literature for systematic reviews in education",
+          "year": 2023
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W2090602322",
+          "title": "Clustered Semi-Supervised Relevance Feedback",
+          "year": 2015
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4385573609",
+          "title": "DebiasGAN: Eliminating Position Bias in News Recommendation with Adversarial Learning",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4371785051",
+          "title": "Online Reviews and Information Overload: The Role of Selective, Parsimonious, and Concordant Top Reviews",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4211230355",
+          "title": "A Specific Public Sentiment Clustering Problem Based on Hybrid Bat Algorithm",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W7136376314",
+          "title": "Origin and Evolution of Double Entry Bookkeeping (Book).",
+          "year": 1939
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W2995214047",
+          "title": "Double-Hard Debias: Tailoring Word Embeddings for Gender Bias Mitigation",
+          "year": 2020
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4386729270",
+          "title": "Collaborative filtering algorithms are prone to mainstream-taste bias",
+          "year": 2023
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W2916240996",
+          "title": "LibGuides: Database Searching Tips: Proximity Searches",
+          "year": 2017
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3004085829",
+          "title": "Social media as taste re-mediators: emerging patterns of food taste on TripAdvisor",
+          "year": 2020
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4392902241",
+          "title": "Exploration and Mitigation of Stereotypical Gender Biases in Information Retrieval Systems",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3030133709",
+          "title": "Online Near-Duplicate Detection of News Articles",
+          "year": 2020
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4396608433",
+          "title": "Mutterings: Have You Read Anything Personally Lately?",
+          "year": 1974
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W7162833419",
+          "title": "Vol 23 #5",
+          "year": 1979
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W2161059653",
+          "title": "Evaluation System for Information Retrieval in Biomedical Field",
+          "year": 2003
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4319781029",
+          "title": "Personalized User Recommendation based on Various User Behavior in Local Domain",
+          "year": 2022
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4392902227",
+          "title": "Exploration and Mitigation of Stereotypical Gender Biases in Information Retrieval Systems",
+          "year": 2024
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4402747738",
+          "title": "Boosting efficiency in a clinical literature surveillance system with LightGBM",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:006",
+      "split": "dev",
+      "intent_family": "omega3-cognition",
+      "text_vi": "Bổ sung omega-3 có ngăn chặn suy giảm nhận thức ở người lớn tuổi không?",
+      "text_en": "Does the omega-3 plugin prevent cognitive degenerative decline in older people?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3010398207",
+          "title": "You do not have to be quick to be information literate!",
+          "year": 2019
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W2010840650",
+          "title": "Retrieval failure in the presence of retrieval cues: A comparison of three age groups.",
+          "year": 1977
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4413025875",
+          "title": "Alzheimer’s disease risk prediction using machine learning for survival analysis with a comorbidity-based approach",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4416396107",
+          "title": "Dynamic Changes in Metabolic Syndrome Scores and New‐Onset Stroke Risk in Middle‐Aged and Older Adults: A Nationwide Prospective Cohort Study in China Aligned With Predictive, Preventive, and Personalized Medicine",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4392881890",
+          "title": "Automated knee degenerative arthritis reports generation through visual data analysis",
+          "year": 2024
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4224929142",
+          "title": "Bilingualism as a Contributor to Cognitive Reserve: What it Can do and What it Cannot do",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W1964991726",
+          "title": "Cognitive tuning and receptivity to novel information",
+          "year": 1973
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W7131758091",
+          "title": "Supplementary Materials for: [Web, GenAI, or hybrid? Effects of information-seeking conditions and text types on MTPE process, product, and perception]",
+          "year": 2026
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W7206801929",
+          "title": "General Information Experiment 3",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4414764873",
+          "title": "Dual Machine Learning Framework for Predicting Long-Term Glycemic Change and Prediabetes Risk in Young Taiwanese Men",
+          "year": 2025
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W7129380070",
+          "title": "Integration of HOIRT-Derived Scores and Machine Learning for Accurate Detection of Cognitive Impairment",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3170061265",
+          "title": "Exploring Factors Associated with Subjective Health of Older-Old using ReLU Deep Neural Network and Machine Learning",
+          "year": 2021
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4399665479",
+          "title": "Evidence Based Principles to Accelerate Health Information Flow and Uptake Among Older Adults",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4402220266",
+          "title": "Quantifying the Enhancement of Sarcopenic Skeletal Muscle Preservation Through a Hybrid Exercise Program: Randomized Controlled Trial",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4378516263",
+          "title": "Prediction of Cognitive Decline in Parkinson’s Disease Using Clinical and DAT SPECT Imaging Features, and Hybrid Machine Learning Systems",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4414476246",
+          "title": "Multimodal prognostic modeling of individual cognitive trajectories to enhance trial efficiency in preclinical Alzheimer's disease",
+          "year": 2025
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4406661293",
+          "title": "Uncovering narrative aging: an underlying neural mechanism compensated through spatial constructional ability",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4323031833",
+          "title": "Predictors of the rate of cognitive decline in older adults using machine learning",
+          "year": 2023
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4323662930",
+          "title": "Detecting type 2 diabetes mellitus cognitive impairment using whole-brain functional connectivity",
+          "year": 2023
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4393862227",
+          "title": "Urban transformation and population decline in old New Towns in the Osaka Metropolitan Area",
+          "year": 2024
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W3048469880",
+          "title": "Social Reminiscence in Older Adults’ Everyday Conversations: Automated Detection Using Natural Language Processing and Machine Learning",
+          "year": 2020
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:007",
+      "split": "dev",
+      "intent_family": "social-media-anxiety",
+      "text_vi": "Dùng mạng xã hội nhiều có làm tăng lo âu ở thanh thiếu niên không?",
+      "text_en": "Does social networking use increase anxiety in teenagers?",
+      "pool_size": 24,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4390979806",
+          "title": "Social media insights into spatio-temporal emotional responses to COVID-19 crisis",
+          "year": 2024
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3119357638",
+          "title": "A Metric to Assess Brokerage Positions within Social Networking Sites",
+          "year": 2020
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3035361739",
+          "title": "Using social media during job search: The case of 16–24 year olds in Scotland",
+          "year": 2020
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4402426105",
+          "title": "Analyzing Online Conversations on Reddit: A Study of Stress and Anxiety Through Topic Modeling and Sentiment Analysis",
+          "year": 2024
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4310490426",
+          "title": "High school students' mathematical proficiency based on mathematics anxiety and cognitive independence",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4404285128",
+          "title": "Concurrent Mentions of Vaping and Alcohol on Twitter: Latent Dirichlet Analysis (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W3099972023",
+          "title": "The Use of Facebook by International Students for Information-seeking in Malaysia: A Social Network Analysis",
+          "year": 2020
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4296990080",
+          "title": "Improved Key Node Recognition Method of Social Network Based on PageRank Algorithm",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3048879013",
+          "title": "A Computational Approach to Analyzing the Twitter Debate on Gaming Disorder",
+          "year": 2020
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4297093311",
+          "title": "The extent of and motivation for disaster information seeking behavior via social networking sites",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3214507200",
+          "title": "Suicide Ideation Detection in Social Media Forums",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3113950957",
+          "title": "Perilaku Informasi Mahasiswa dan Hoaks di Media Sosial",
+          "year": 2020
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4231582519",
+          "title": "The Correlation of Online Health Information–Seeking Experience With Health-Related Quality of Life: Cross-Sectional Study Among Non–English-Speaking Female Students in a Religious Community (Preprint)",
+          "year": 2020
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4241707254",
+          "title": "Recommender system on social networking site with domain specific and sparse data",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4414618918",
+          "title": "Effects of ICT use on self-regulated learning: chain intermediary effect of information retrieval and social interaction",
+          "year": 2025
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3126678455",
+          "title": "Predicting Age Groups of Reddit Users Based on Posting Behavior and Metadata: Classification Model Development and Validation",
+          "year": 2021
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3085825554",
+          "title": "Using social media data for assessing children’s exposure to violence during the COVID-19 pandemic",
+          "year": 2020
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W7144099956",
+          "title": "高信頼性言語空間の構築に関する研究",
+          "year": null
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4308727034",
+          "title": "High school students' mathematical proficiency based on mathematics anxiety and cognitive independence",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3198460693",
+          "title": "Understanding the Impact of COVID-19 on Online Mental Health Forums",
+          "year": 2021
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3112800536",
+          "title": "Social Media Insights Into US Mental Health During the COVID-19 Pandemic: Longitudinal Analysis of Twitter Data",
+          "year": 2020
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4309736004",
+          "title": "Investigating the Relationship between Emotional Intelligence, Library Anxiety and Academic Performance of Post Graduate Students",
+          "year": 2022
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W3216984101",
+          "title": "Quantifying Suicidal Ideation on Social Media using Machine Learning: A Critical Review",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:008",
+      "split": "dev",
+      "intent_family": "acupuncture-low-back-pain",
+      "text_vi": "Châm cứu có giảm đau lưng dưới mạn tính không?",
+      "text_en": "Does the rescue bring back pain to the chest?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3216247144",
+          "title": "A Comparison of Natural Language Processing Methods for the Classification of Lumbar Spine Imaging Findings Related to Lower Back Pain",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4281659506",
+          "title": "Classification of painful or painless diabetic peripheral neuropathy and identification of the most powerful predictors using machine learning models in large cross-sectional cohorts",
+          "year": 2022
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3010226827",
+          "title": "Can online support groups address psychological morbidity of cancer patients? An artificial intelligence based investigation of prostate cancer trajectories",
+          "year": 2020
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4253177099",
+          "title": "A machine for information retrieval",
+          "year": 1978
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4220944089",
+          "title": "Machine learning versus logistic regression for prognostic modelling in individuals with non-specific neck pain",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W3215218816",
+          "title": "Analysis of Chronic Pain Experiences Based on Online Reports: the RRCP Dataset for quality-of-life assessment.",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4360859287",
+          "title": "An MRI image automatic diagnosis model for lumbar disc herniation using semi-supervised learning",
+          "year": 2023
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W7125947234",
+          "title": "A Novel Feature Selection Method Base on Enhanced-CDRIME and Multi-Classifiers for Pain Assessment",
+          "year": 2025
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3139319073",
+          "title": "Session details: Help Me Search",
+          "year": 2008
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4353109195",
+          "title": "Environmental disaster and public rescue: A social media perspective",
+          "year": 2023
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4413025072",
+          "title": "Machine learning classification models for predicting chronic pain",
+          "year": 2025
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4254287474",
+          "title": "Top 10 downloads from ACM's digital library",
+          "year": 2007
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4393321320",
+          "title": "Graph modeling of relational structures among functioning variables with low back pain: an exploratory analysis based on International Classification of Functioning, Disability and Health",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W7128623584",
+          "title": "The missing link: sharing information",
+          "year": 2017
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W3210307996",
+          "title": "Natural Language Processing and Machine Learning Methods to Characterize Unstructured Patient-Reported Outcomes: Validation Study",
+          "year": 2021
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3194644054",
+          "title": "Analysis of Chronic Pain Experiences Based on Online Reports: the RRCP Dataset.",
+          "year": 2021
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4389519127",
+          "title": "Back Transcription as a Method for Evaluating Robustness of Natural Language Understanding Models to Speech Recognition Errors",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4404263922",
+          "title": "The Treasure Trove Hidden in Plain Sight: The Utility of GPT-4 in Chest Radiograph Evaluation",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4415156723",
+          "title": "On the Influence of Apologies on the Likelihood of Lawsuits in Cases of Perceived Medical Negligence: Analysis of Archival and Experimental Data",
+          "year": 2025
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4226325130",
+          "title": "Out-of-Domain Semantics to the Rescue! Zero-Shot Hybrid Retrieval Models",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:009",
+      "split": "dev",
+      "intent_family": "intermittent-fasting-weight",
+      "text_vi": "Nhịn ăn gián đoạn có giảm cân hiệu quả như chế độ ăn kiêng liên tục không?",
+      "text_en": "Has interrupted diet been as effective as a continuous diet?",
+      "pool_size": 18,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4415131507",
+          "title": "Applying Machine Learning to Predict Complex Clinical Course in Youth With Eating Disorders",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3138205321",
+          "title": "Associations between habitual diet, metabolic disease, and the gut microbiota using latent Dirichlet allocation",
+          "year": 2021
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4297458461",
+          "title": "Effect of a Personalized Diet to Reduce Postprandial Glycemic Response vs a Low-fat Diet on Weight Loss in Adults With Abnormal Glucose Metabolism and Obesity",
+          "year": 2022
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4281659506",
+          "title": "Classification of painful or painless diabetic peripheral neuropathy and identification of the most powerful predictors using machine learning models in large cross-sectional cohorts",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4223605206",
+          "title": "Could Artificial Intelligence/Machine Learning and Inclusion of Diet-Gut Microbiome Interactions Improve Disease Risk Prediction? Case Study: Coronary Artery Disease",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4392773076",
+          "title": "Hiệu quả các nhóm mô hình học sâu trong bài toán phát hiện phương tiện giao thông",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4318541376",
+          "title": "Academic performance prediction associated with synchronous online interactive learning behaviors based on the machine learning approach",
+          "year": 2023
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3160735230",
+          "title": "Identifying how COVID-19-related misinformation reacts to the announcement of the UK national lockdown: An interrupted time-series study",
+          "year": 2021
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4403990196",
+          "title": "Using interpretable machine learning methods to identify the relative importance of lifestyle factors for overweight and obesity in adults: pooled evidence from CHNS and NHANES",
+          "year": 2024
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3164288247",
+          "title": "Application of Deep Learning Model Convolution Neural Network for Effective Web Information Retrieval",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3208289046",
+          "title": "Sahul's megafauna were vulnerable to plant‐community changes due to their position in the trophic network",
+          "year": 2022
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3007095655",
+          "title": "A Framework for Applying Natural Language Processing in Digital Health Interventions",
+          "year": 2020
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4406795697",
+          "title": "Causal effect estimation for competing risk data in randomized trial: adjusting covariates to gain efficiency",
+          "year": 2025
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W3021619624",
+          "title": "Learning Interpretable and Discrete Representations with Adversarial Training for Unsupervised Text Classification",
+          "year": 2020
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4313492007",
+          "title": "Short Text Clustering in Continuous Time Using Stacked Dirichlet-Hawkes Process with Inverse Cluster Frequency Prior",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3153228281",
+          "title": "A Brief Survey of Word Embedding and Its Recent Development",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:010",
+      "split": "dev",
+      "intent_family": "citation-prediction-features",
+      "text_vi": "Những đặc trưng nào của bài báo dự đoán được số trích dẫn trong tương lai?",
+      "text_en": "What features of the article predict future quotations?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4382996882",
+          "title": "Predicting Social Events Using Analyses of Arabic Dailies",
+          "year": 2023
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4392773076",
+          "title": "Hiệu quả các nhóm mô hình học sâu trong bài toán phát hiện phương tiện giao thông",
+          "year": 2024
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W7127288205",
+          "title": "ViTrend: A Real-Time System for Topic-Based Social Media Trend Analysis on Vietnamese Facebook",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4379645494",
+          "title": "Created, Intended, Articulated and Projected: Four Perceptions of Purpose Around the Archival Document for Expert Users",
+          "year": 2023
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3104207208",
+          "title": "Adjacent and Non‐Adjacent Word Contexts Both Predict Age of Acquisition of English Words: A Distributional Corpus Analysis of Child‐Directed Speech",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W2767325740",
+          "title": "THOMAS MOORE: QUOTATIONS IN LETTERS",
+          "year": 1971
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4283160522",
+          "title": "Towards Proactively Forecasting Sentence-Specific Information Popularity within Online News Documents",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4308976246",
+          "title": "A new algorithmic imaginary",
+          "year": 2022
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4294349118",
+          "title": "Text representation for direction prediction of share market",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3176327488",
+          "title": "Continuity of Topic, Interaction, and Query: Learning to Quote in Online Conversations",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4280548928",
+          "title": "Predicting individual skill learning, a cautionary tale",
+          "year": 2022
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4399777907",
+          "title": "Explaining Neural News Recommendation with Attributions onto Reading Histories",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3016462384",
+          "title": "A novel text-based framework for forecasting agricultural futures using massive online news headlines",
+          "year": 2020
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4411709179",
+          "title": "ỨNG DỤNG MÔ HÌNH HỌC MÁY XGBOOST NHẬN DẠNG LŨ LỚN TRÊN SÔNG ĐÀ",
+          "year": 2025
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W1815347410",
+          "title": "Searching the World Wide Web",
+          "year": 1996
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W2766393917",
+          "title": "QUOTATIONS AND REFERENCES IN HARDY",
+          "year": 1975
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4281743154",
+          "title": "The Use of NLP-Based Text Representation Techniques to Support Requirement Engineering Tasks: A Systematic Mapping Review",
+          "year": 2022
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4302012799",
+          "title": "Predicting the Future of AI with AI: High-quality link prediction in an exponentially growing knowledge network",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4409942617",
+          "title": "Machine Learning in Baseball Analytics: Sabermetrics and Beyond",
+          "year": 2025
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4382468081",
+          "title": "Predicting the Future Popularity of Academic Publications Using Deep Learning by Considering It as Temporal Citation Networks",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:001",
+      "split": "test",
+      "intent_family": "statin-diabetes",
+      "text_vi": "Thuốc statin có làm tăng nguy cơ tiểu đường type 2 không?",
+      "text_en": "Does the statin increase the risk of type 2 diabetes?",
+      "pool_size": 18,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4413181613",
+          "title": "Leveraging Artificial Intelligence for Type 2 Diabetes Management: A Community-Driven Platform Using Reddit Data and AI Tools",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4407585537",
+          "title": "Assessing the predictive power of boosting techniques for diabetes",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3136164205",
+          "title": "Geographically weighted machine learning model for untangling spatial heterogeneity of type 2 diabetes mellitus (T2D) prevalence in the USA",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W3043172995",
+          "title": "Prediction of carotid intima-media thickness and its relation to cardiovascular events in persons with type 2 diabetes",
+          "year": 2020
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3117206776",
+          "title": "Identifying Sequential Complication and Mortality Patterns in Diabetes Mellitus: Comparisons of Machine Learning Methodologies",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4388944527",
+          "title": "Comparison between multiple logistic regression and machine learning methods in prediction of abnormal thallium scans in type 2 diabetes",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4386945278",
+          "title": "A novel prediction model of the risk of pancreatic cancer among diabetes patients using multiple clinical data and machine learning",
+          "year": 2023
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4414764873",
+          "title": "Dual Machine Learning Framework for Predicting Long-Term Glycemic Change and Prediabetes Risk in Young Taiwanese Men",
+          "year": 2025
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3003018218",
+          "title": "Easy-to-use tool for evaluating the elevated acute kidney injury risk against reduced cardiovascular disease risk during intensive blood pressure control",
+          "year": 2020
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4323662930",
+          "title": "Detecting type 2 diabetes mellitus cognitive impairment using whole-brain functional connectivity",
+          "year": 2023
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4401547382",
+          "title": "Assessment of fracture risk in diabetic patients",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4405949718",
+          "title": "In silico design of dehydrophenylalanine containing peptide activators of glucokinase using pharmacophore modelling, molecular dynamics and machine learning: implications in type 2 diabetes",
+          "year": 2024
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4382776092",
+          "title": "Development and economic assessment of machine learning models to predict glycosylated hemoglobin in type 2 diabetes",
+          "year": 2023
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4406205595",
+          "title": "AntiT2DMP-Pred: Leveraging feature fusion and optimization for superior machine learning prediction of type 2 diabetes mellitus",
+          "year": 2025
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4283516814",
+          "title": "Comparing Multiple Linear Regression and Machine Learning in Predicting Diabetic Urine Albumin–Creatinine Ratio in a 4-Year Follow-Up Study",
+          "year": 2022
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W7134847038",
+          "title": "AI-Enabled Personalization of Semaglutide Therapy in Type 2 Diabetes: Systematic Review With an Integration Framework (Preprint)",
+          "year": 2025
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3127164240",
+          "title": "Discovery of predictors of sudden cardiac arrest in diabetes: rationale and outline of the RESCUED (REcognition of Sudden Cardiac arrest vUlnErability in Diabetes) project",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W7127647679",
+          "title": "Optimal Model Evaluation and Explanation Methodology for Disease Prediction",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:002",
+      "split": "test",
+      "intent_family": "mediterranean-diet-cardio",
+      "text_vi": "Chế độ ăn Địa Trung Hải có giảm bệnh tim mạch không?",
+      "text_en": "Does the Mediterranean diet reduce heart disease?",
+      "pool_size": 24,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4404185697",
+          "title": "An interpretable electrocardiogram-based model for predicting arrhythmia and ischemia in cardiovascular disease",
+          "year": 2024
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3138205321",
+          "title": "Associations between habitual diet, metabolic disease, and the gut microbiota using latent Dirichlet allocation",
+          "year": 2021
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4413308493",
+          "title": "The Comparison of Insulin Resistance Between Normal and Early Menopause Women Younger than Fifty Years Old by Machine Learning Methods",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4311255638",
+          "title": "RETRACTED: Predictive modeling the probability of suffering from metabolic syndrome using machine learning: A population-based study",
+          "year": 2022
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4415300147",
+          "title": "Predictive modeling for heart disease using machine learning: techniques, applications, and future directions",
+          "year": 2025
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4410587223",
+          "title": "Discovering Latent Themes in Heart Disease Article Abstracts: A Topic Modeling Approach",
+          "year": 2025
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4393850205",
+          "title": "Predictive Modeling for Cardiovascular Disease Risk Assessment",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4223605206",
+          "title": "Could Artificial Intelligence/Machine Learning and Inclusion of Diet-Gut Microbiome Interactions Improve Disease Risk Prediction? Case Study: Coronary Artery Disease",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3118526518",
+          "title": "Derivation of an electronic frailty index for short-term mortality in heart failure: a machine learning approach",
+          "year": 2021
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4253177099",
+          "title": "A machine for information retrieval",
+          "year": 1978
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4403184708",
+          "title": "Insights into Heart Failure Metabolite Markers through Explainable Machine Learning",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4414764873",
+          "title": "Dual Machine Learning Framework for Predicting Long-Term Glycemic Change and Prediabetes Risk in Young Taiwanese Men",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4411918751",
+          "title": "Enhanced machine learning models for predicting three-year mortality in Non-STEMI patients aged 75 and above",
+          "year": 2025
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4401317952",
+          "title": "Emerging Analytical Approaches for Personalized Medicine Using Machine Learning In Pediatric and Congenital Heart Disease",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4285588130",
+          "title": "Machine learning is an effective method to predict the 90-day prognosis of patients with transient ischemic attack and minor stroke",
+          "year": 2022
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4310184741",
+          "title": "Phenotypic Disease Network-Based Multimorbidity Analysis in Idiopathic Cardiomyopathy Patients with Hospital Discharge Records",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4327811512",
+          "title": "Boosting multivariate structured additive distributional regression models",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4416396107",
+          "title": "Dynamic Changes in Metabolic Syndrome Scores and New‐Onset Stroke Risk in Middle‐Aged and Older Adults: A Nationwide Prospective Cohort Study in China Aligned With Predictive, Preventive, and Personalized Medicine",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W3133519121",
+          "title": "Predicting deseasonalised serum 25 hydroxy vitamin D concentrations in the D-Health Trial: An analysis using boosted regression trees",
+          "year": 2021
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4395007500",
+          "title": "Machine-learning-based models to predict cardiovascular risk using oculomics and clinic variables in KNHANES",
+          "year": 2024
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4406795697",
+          "title": "Causal effect estimation for competing risk data in randomized trial: adjusting covariates to gain efficiency",
+          "year": 2025
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4297458461",
+          "title": "Effect of a Personalized Diet to Reduce Postprandial Glycemic Response vs a Low-fat Diet on Weight Loss in Adults With Abnormal Glucose Metabolism and Obesity",
+          "year": 2022
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4313485199",
+          "title": "Performance analysis of supervised classification models on heart disease prediction",
+          "year": 2023
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4410881560",
+          "title": "Comparative Analysis of Machine Learning Algorithms for Heart Disease Prediction",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:003",
+      "split": "test",
+      "intent_family": "aspirin-colorectal-cancer",
+      "text_vi": "Aspirin liều thấp hằng ngày có phòng ngừa ung thư đại trực tràng không?",
+      "text_en": "Is low doses daily preventental cancer?",
+      "pool_size": 25,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4220654714",
+          "title": "Machine learning using longitudinal prescription and medical claims for the detection of non-alcoholic steatohepatitis (NASH)",
+          "year": 2022
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4394874527",
+          "title": "A protocol for remote collection of skeletal muscle mass via D3-creatine dilution in community-dwelling postmenopausal women from the Women’s Health Initiative",
+          "year": 2024
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3181599436",
+          "title": "Estudo de critérios de distribuição de vacinas com doses limitadas - uma abordagem baseada em redes complexas",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4408880971",
+          "title": "Enhancing Coagulation Prediction in Water Treatment Using a Similarity Score–Based Piecewise Machine Learning Model",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4388673675",
+          "title": "Relation between Latitude-dependent Sunspot Data and Near-Earth Solar Wind Speed",
+          "year": 2023
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4285588130",
+          "title": "Machine learning is an effective method to predict the 90-day prognosis of patients with transient ischemic attack and minor stroke",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4399379316",
+          "title": "Probabilistic graph-based model uncovers previously unseen druggable vulnerabilities in major solid cancers",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3160767347",
+          "title": "Comparative Effectiveness of Machine Learning Approaches for Predicting Gastrointestinal Bleeds in Patients Receiving Antithrombotic Treatment",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4253177099",
+          "title": "A machine for information retrieval",
+          "year": 1978
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3192842223",
+          "title": "Web-Based Information Seeking Behaviors of Low-Literacy Hispanic Survivors of Breast Cancer: Observational Pilot Study",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3010226827",
+          "title": "Can online support groups address psychological morbidity of cancer patients? An artificial intelligence based investigation of prostate cancer trajectories",
+          "year": 2020
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4401198335",
+          "title": "Large-scale analysis to identify risk factors for ovarian cancer",
+          "year": 2024
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4366084601",
+          "title": "Radiomics analysis of baseline computed tomography to predict oncological outcomes in patients treated for resectable colorectal cancer liver metastasis",
+          "year": 2023
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4293530383",
+          "title": "Bayesian Additive Regression Trees for Predicting Colon Cancer: Methodological Study (Validity Study)",
+          "year": 2022
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4212978291",
+          "title": "Explainable Machine Learning for Lung Cancer Screening Models",
+          "year": 2022
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3133519121",
+          "title": "Predicting deseasonalised serum 25 hydroxy vitamin D concentrations in the D-Health Trial: An analysis using boosted regression trees",
+          "year": 2021
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4297495940",
+          "title": "ProfhEX: AI-based platform for small molecules liability profiling",
+          "year": 2022
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4323314079",
+          "title": "A new biomarker panel of ultraconserved long non-coding RNAs for bladder cancer prognosis by a machine learning based methodology",
+          "year": 2023
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4380087918",
+          "title": "ProfhEX: AI-based platform for small molecules liability profiling",
+          "year": 2023
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4405781666",
+          "title": "Predictive Mortality and Gastric Cancer Risk Using Clinical and Socio-Economic Data: A Nationwide Multicenter Cohort Study",
+          "year": 2024
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4284694594",
+          "title": "APASL‐ACLF Research Consortium–Artificial Intelligence ( AARC‐AI ) model precisely predicts outcomes in acute‐on‐chronic liver failure patients",
+          "year": 2022
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4392346236",
+          "title": "GLIMS: A two-stage gradual-learning method for cancer genes prediction using multi-omics data and co-splicing network",
+          "year": 2024
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4414761462",
+          "title": "OncovigIA: Artificial Intelligence for Early Lung Cancer Detection and Referral in a Chilean Public Hospital",
+          "year": 2025
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4409323492",
+          "title": "Web-Based Explainable Machine Learning-Based Drug Surveillance for Predicting Sunitinib- and Sorafenib-Associated Thyroid Dysfunction: Model Development and Validation Study",
+          "year": 2025
+        },
+        {
+          "position": 25,
+          "doc_id": "openalex:W4380264658",
+          "title": "Hypothesis‐free discovery of novel cancer predictors using machine learning",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:004",
+      "split": "test",
+      "intent_family": "exercise-depression",
+      "text_vi": "Tập thể dục aerobic có giảm triệu chứng trầm cảm ở người lớn không?",
+      "text_en": "Does exercise aterics reduce adult depression?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4415432614",
+          "title": "How does depression talk on social media? Modeling depression language with relevance-based statistical language models",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4281659506",
+          "title": "Classification of painful or painless diabetic peripheral neuropathy and identification of the most powerful predictors using machine learning models in large cross-sectional cohorts",
+          "year": 2022
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4410901866",
+          "title": "A Feasibility Study of Domain Adaptation for Exercise Intensity Recognition Based on Wearable Sensors",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W3196118804",
+          "title": "What Happens When People with Depression Gather Online?",
+          "year": 2021
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4391768603",
+          "title": "Associations between physical activity and subcategories of mental health: A propensity score analysis among a global sample of 341,956 adults",
+          "year": 2024
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4386417184",
+          "title": "Autonomic function and motor subtypes in Parkinson’s disease: a multicentre cross-sectional study",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4323031833",
+          "title": "Predictors of the rate of cognitive decline in older adults using machine learning",
+          "year": 2023
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4322706808",
+          "title": "Designing Social Robot for Adults Using Self-Determination Theory and AI Technologies",
+          "year": 2023
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4396506287",
+          "title": "AI-Enabled Deep Depression Detection and Evaluation Informed by DSM-5-TR",
+          "year": 2024
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4289654640",
+          "title": "Enabling Early Health Care Intervention by Detecting Depression in Users of Web-Based Forums using Language Models: Longitudinal Analysis and Evaluation (Preprint)",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4407555395",
+          "title": "What social media analyses can tell us about Ghanaian women's concerns during pregnancy",
+          "year": 2025
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3120977657",
+          "title": "Exploring Online Depression Forums via Text Mining: A Comparison of Reddit and a Curated Online Forum",
+          "year": 2020
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4312304546",
+          "title": "Does Social Media Feed Tell about Your Mental State? A Deep Randomised Neural Network Approach",
+          "year": 2022
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4367550006",
+          "title": "Depression Detection with Dynamic and Static Visual Features",
+          "year": 2023
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4401300796",
+          "title": "Exercise and resting periods: Thermal comfort dynamics in gym environments",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4211190202",
+          "title": "Predictive Machine Learning for Personalised Medicine in Major Depressive Disorder",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4385349689",
+          "title": "A Machine Learning Method for Detecting Depression Among College Students",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4402220266",
+          "title": "Quantifying the Enhancement of Sarcopenic Skeletal Muscle Preservation Through a Hybrid Exercise Program: Randomized Controlled Trial",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4312196572",
+          "title": "Acceptance and Commitment Therapy and Weight-Related Difficulties in Overweight and Obese Adults: A Systematic Review",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4224273198",
+          "title": "Determining the Severity of Depression in Speech Based on Combination of Acoustic-Space and Score-Space Features",
+          "year": 2022
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4377094006",
+          "title": "Machine learning-based predictive models for the occurrence of behavioral and psychological symptoms of dementia: model development and validation",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:005",
+      "split": "test",
+      "intent_family": "vaping-lung-injury",
+      "text_vi": "Hút thuốc lá điện tử có liên quan đến tổn thương phổi cấp không?",
+      "text_en": "Does electronic smoking involve lung damage?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4392008303",
+          "title": "Pneumonia Detection in Lung Ultrasound Images with Texture Analysis and Machine Learning",
+          "year": 2023
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4388219750",
+          "title": "Electronic Nicotine Delivery Systems and E-Liquid Modifications to Vape Cannabis Depicted in Online Videos",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3130558257",
+          "title": "Recognizing lung cancer and stages using a self-developed electronic nose system",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4385259099",
+          "title": "Deep learning-based diagnosis of histopathological patterns for invasive non-mucinous lung adenocarcinoma using semantic segmentation",
+          "year": 2023
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3080791042",
+          "title": "Lung Cancer Classification and Detection Using Convolutional Neural Networks",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W3118526518",
+          "title": "Derivation of an electronic frailty index for short-term mortality in heart failure: a machine learning approach",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4387395221",
+          "title": "Mitochondrial dysfunction drives the pathogenesis of pulmonary arterial hypertension: insights from a multi-omics investigation",
+          "year": 2023
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4401168854",
+          "title": "Research and application of methods to prevent external force damage to underground cables based on the IoT",
+          "year": 2024
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4286494054",
+          "title": "Testing machine learning models for seismic damage prediction at a regional scale using building‐damage dataset compiled after the 2015 Gorkha Nepal earthquake",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4212978291",
+          "title": "Explainable Machine Learning for Lung Cancer Screening Models",
+          "year": 2022
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3006863666",
+          "title": "Effectiveness of WhatsApp online group discussion for smoking relapse prevention: protocol for a pragmatic randomized controlled trial",
+          "year": 2020
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4205503877",
+          "title": "A machine learning approach to predict e-cigarette use and dependence among Ontario youth",
+          "year": 2022
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4411918751",
+          "title": "Enhanced machine learning models for predicting three-year mortality in Non-STEMI patients aged 75 and above",
+          "year": 2025
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4402920617",
+          "title": "EARLY DIAGNOSIS AND CLASSIFICATION OF LUNG CANCER DRIVEN BY MULTI-FEATURE DATA: A COMPARISON AND OPTIMIZATION OF THREE MACHINE LEARNING METHODS",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4404285128",
+          "title": "Concurrent Mentions of Vaping and Alcohol on Twitter: Latent Dirichlet Analysis (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4386893095",
+          "title": "A multimodal deep learning architecture for smoking detection with a small data approach",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W3049321748",
+          "title": "A multicenter mixed-effects model for inference and prediction of 72-h return visits to the emergency department for adult patients with trauma-related diagnoses",
+          "year": 2020
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4280550048",
+          "title": "Text mining tweets on e-cigarette risks and benefits using machine learning following a vaping related lung injury outbreak in the USA",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4200373041",
+          "title": "A Machine Learning Approach to Identify Predictors of Frequent Vaping and Vulnerable Californian Youth Subgroups",
+          "year": 2021
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4295681497",
+          "title": "Quickly identifying people at risk of opioid use disorder in emergency departments: trade-offs between a machine learning approach and a simple EHR flag strategy",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:006",
+      "split": "test",
+      "intent_family": "citation-count-quality",
+      "text_vi": "Số lượng trích dẫn có dự đoán được chất lượng lâu dài của bài báo không?",
+      "text_en": "Can the number of quotations predict the long - term quality of the article?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3135847883",
+          "title": "A Multi-Platform Analysis of Political News Discussion and Sharing on Web Communities",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3198415313",
+          "title": "Why cannot long-term cascade be predicted? Exploring temporal dynamics in information diffusion processes",
+          "year": 2021
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4353081311",
+          "title": "A survey on multi-objective recommender systems",
+          "year": 2023
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4391424494",
+          "title": "Multi-criteria evaluation of health news stories",
+          "year": 2024
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3094144049",
+          "title": "The Prediction of Traffic Flow Based on Long Short-Term Memory Network for All Weather",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W2620887933",
+          "title": "A longitudinal study of topic classification on Twitter",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W7164347219",
+          "title": "ОЦІНКА ВПЛИВУ ПОПЕРЕДНЬОЇ ФІЛЬТРАЦІЇ НА ЯКІСТЬ ВИБІРКИ В RAG-СИСТЕМАХ З ВЕКТОРНИМ ПОШУКОМ",
+          "year": 2026
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4385756462",
+          "title": "Abstractive Financial News Summarization via Transformer-BiLSTM Encoder and Graph Attention-Based Decoder",
+          "year": 2023
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4394922444",
+          "title": "Quality-aware Signal Processing Mechanism for Long-term Heart Rate Monitoring",
+          "year": 2024
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3085747564",
+          "title": "Relating Wikipedia article quality to edit behavior and link structure",
+          "year": 2020
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3094135119",
+          "title": "Individual corpora predict fast memory retrieval during reading",
+          "year": 2020
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3037078219",
+          "title": "Reliability of Perplexity to Find Number of Latent Topics.",
+          "year": 2020
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4391983718",
+          "title": "User Experiments on the Effect of the Diversity of Consumption on News Services",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W970275373",
+          "title": "Popularity Dynamics and Intrinsic Quality in Reddit and Hacker News",
+          "year": 2021
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4312210978",
+          "title": "The long-term impacts of air quality on fine-grained online emotional responses to haze pollution in 160 Chinese cities",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4385574327",
+          "title": "Predicting Long-Term Citations from Short-Term Linguistic Influence",
+          "year": 2022
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W2767325740",
+          "title": "THOMAS MOORE: QUOTATIONS IN LETTERS",
+          "year": 1971
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W2766393917",
+          "title": "QUOTATIONS AND REFERENCES IN HARDY",
+          "year": 1975
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3133952572",
+          "title": "Effects on Time and Quality of Short Text Clustering during Real-Time Presentations",
+          "year": 2021
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4414704255",
+          "title": "Stack Coupling Machine Learning Model Could Enhance the Accuracy in Short-Term Water Quality Prediction",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:007",
+      "split": "test",
+      "intent_family": "open-access-citations",
+      "text_vi": "Xuất bản mở (open access) có làm tăng số trích dẫn của bài báo không?",
+      "text_en": "Has the publicationopen a cappella added the quote number of the article?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3213099165",
+          "title": "BIP4COVID19: Releasing impact measures for articles relevant to COVID-19",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4415046980",
+          "title": "A Review on Scholarly Publication Recommender Systems: Features, Approaches, Evaluation, and Open Research Directions",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W2070264227",
+          "title": "Information retrieval research at the national library of medicine",
+          "year": 1986
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4240718444",
+          "title": "The on-line interface of library management and document retrieval systems",
+          "year": 1973
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4242409237",
+          "title": "Comparative analysis of interactive retrieval systems",
+          "year": 1973
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W2141653139",
+          "title": "The influence of document presentation order and number of documents judged on users' judgments of relevance",
+          "year": 2004
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4205678521",
+          "title": "Implicit Estimation of Paragraph Relevance From Eye Movements",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3176327488",
+          "title": "Continuity of Topic, Interaction, and Query: Learning to Quote in Online Conversations",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4406687051",
+          "title": "Joining PCMR: Aspirations for Editorial Contributions",
+          "year": 2025
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W2336831300",
+          "title": "WHERE Ω",
+          "year": 1973
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4214612112",
+          "title": "Author and subject index",
+          "year": 1977
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4234888786",
+          "title": "Review of \"Inside Information: Computers in Fiction, by Abbe Mowshowitz\", Addison-Wesley Publishing Company, 1977.",
+          "year": 1976
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4235475292",
+          "title": "Information retrieval II",
+          "year": 1973
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W2091002342",
+          "title": "Meta-Path-Based Ranking with Pseudo Relevance Feedback on Heterogeneous Graph for Citation Recommendation",
+          "year": 2014
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W2083858805",
+          "title": "Query expansion method based on word contribution (poster abstract)",
+          "year": 1999
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4313256688",
+          "title": "Matching news articles and wikipedia tables for news augmentation",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4251437589",
+          "title": "The on-line interface of library management and document retrieval systems",
+          "year": 1973
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W2886955910",
+          "title": "Open Access Information JRD",
+          "year": 2014
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3197236654",
+          "title": "Query Expansion for Transliterated Text Retrieval",
+          "year": 2021
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W2061067736",
+          "title": "A Study of Archival Reference Service through Freedom of Information Act: Strauss and Corbin's Grounded Theory",
+          "year": 2014
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4252348984",
+          "title": "Publication only",
+          "year": 1972
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:008",
+      "split": "test",
+      "intent_family": "author-name-disambiguation",
+      "text_vi": "Phân biệt tác giả trùng tên trong cơ sở dữ liệu thư mục lượng (bibliometrics) bằng cách nào?",
+      "text_en": "How can the author be identical to the name in the biblimerics database?",
+      "pool_size": 25,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W2079013705",
+          "title": "Category-Name Meaningfulness ( M ') and Category-Name Mediation in Free Recall",
+          "year": 1976
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4281263087",
+          "title": "Caracterização autoral interdomínio a partir de textos",
+          "year": 2021
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W2005647671",
+          "title": "Methods and Algorithms for Searching Arabic Name Entity",
+          "year": 2013
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W2263624911",
+          "title": "An empirical analysis of information filtering methods",
+          "year": 2011
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3211695117",
+          "title": "Comparison of methods of ranking scientists based on the Hirsch and PageRank indices: contradictory situations",
+          "year": 2021
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4412401937",
+          "title": "Measuring research interest similarity with transition probabilities",
+          "year": 2025
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4405280094",
+          "title": "A novel approach based on journal coupling to determine authors who are most likely to be part of the same invisible college",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W2165902260",
+          "title": "Quantitative Measurement and Dynamic Library Service (Book Review)",
+          "year": 1979
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4280506036",
+          "title": "A Paradox of Information Aggregation",
+          "year": 2022
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3213898752",
+          "title": "The data set knowledge graph: Creating a linked open data source for data sets",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3114582376",
+          "title": "Towards a Stylometric Authorship Recognition Model for the Social Media Texts in Arabic",
+          "year": 2020
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W7207709124",
+          "title": "システム間連結のための著者名典拠ディレクトリシステムの開発",
+          "year": 2008
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4402581259",
+          "title": "Author Correction: Brain clocks capture diversity and disparities in aging and dementia across geographically diverse populations",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4386566438",
+          "title": "Great Bibliographies as a Source of Data for the Humanities – NLP in the Analysis of Gender of Book Authors in German Countries and in Poland (1801-2021)",
+          "year": 2023
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W249509517",
+          "title": "Interface Design Concepts in the Development of ELSA, an Intelligent Electronic Library Search Assistant.",
+          "year": 1994
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W1997432734",
+          "title": "Methodological problems in assessing the overlap between bibliographical files and library holdings",
+          "year": 1975
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W2099739120",
+          "title": "Error Detection in Computerized Information Retrieval Data Bases,",
+          "year": 1977
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4393138722",
+          "title": "Stylometric analysis of French plays of the 17th century",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4396877899",
+          "title": "“Paper, Meet Code”: A Deep Learning Approach to Linking Scholarly Articles With GitHub Repositories",
+          "year": 2024
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W7126336057",
+          "title": "Referenčni servis Vprašaj knjižničarja v sistemu COBISS.SI",
+          "year": 2008
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4391957085",
+          "title": "Connected Components for Scaling Partial-order Blocking to Billion Entities",
+          "year": 2024
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4289276093",
+          "title": "Távolság a tudományos együttműködési hálózatokban",
+          "year": 2020
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4386411968",
+          "title": "PREDICTION OF AUTHORS OF THE TEXTS WRITTEN IN AZERBAIJANI BY THE NEAREST NEIGHBOR-BASED ALGORITHM",
+          "year": 2023
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W593914218",
+          "title": "Biblioteks- och informationsvetenskap som kunskapsområde En bibliometrisk studie.",
+          "year": 2005
+        },
+        {
+          "position": 25,
+          "doc_id": "openalex:W3193673569",
+          "title": "Identifying constitutive articles of cumulative dissertation theses by bilingual text similarity. Evaluation of similarity methods on a new short text task",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:009",
+      "split": "test",
+      "intent_family": "retraction-causes",
+      "text_vi": "Nguyên nhân phổ biến khiến bài báo khoa học bị rút lại (retraction) là gì?",
+      "text_en": "What was the common cause of the scientific withdrawal?",
+      "pool_size": 23,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3135714317",
+          "title": "A multi-perspective analysis of retractions in life sciences",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4391168569",
+          "title": "A Community Detection and Graph-Neural-Network-Based Link Prediction Approach for Scientific Literature",
+          "year": 2024
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W7161297345",
+          "title": "Retraction of Scholarly Articles: Exploring the Knowledge of LIS Researchers in Nigerian Universities",
+          "year": 2026
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4401043597",
+          "title": "Improving Health Question Answering with Reliable and Time-Aware Evidence Retrieval",
+          "year": 2024
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4323833155",
+          "title": "A method for assessing the productivity trends of collective scientific subjects based on the modified PageRank algorithm",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W7161958250",
+          "title": "A review of search theory.",
+          "year": 1972
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4384068096",
+          "title": "Gender-Related Differences in the Citation Impact of Scientific Publications and Improving the Authors’ Productivity",
+          "year": 2023
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W2158835682",
+          "title": "Common elements and requirements of information storage and retrieval systems",
+          "year": 1974
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4293545873",
+          "title": "The influence of disruption on evaluating the scientific significance of papers",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4360617463",
+          "title": "The Paranormal Is Normal",
+          "year": 2023
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4386417211",
+          "title": "Freelance information management agents: why information management is so hard on translational teams",
+          "year": 2023
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3004114204",
+          "title": "WITHDRAWN: An NLP-powered human rights monitoring platform",
+          "year": 2020
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4385573712",
+          "title": "Learning to Revise References for Faithful Summarization",
+          "year": 2022
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W3084923820",
+          "title": "COMPONENTS OF SCIENTIFIC NETWORK ANALYSIS",
+          "year": 2020
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4289861417",
+          "title": "Understanding the Scientific Topics in the Chinese Government’s Communication about COVID-19: An LDA Approach",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3080432310",
+          "title": "Online Hate Speech",
+          "year": 2020
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4401820536",
+          "title": "Research topic displacement and the lack of interdisciplinarity: lessons from the scientific response to COVID-19",
+          "year": 2024
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3037903309",
+          "title": "Source Attribution: Recovering the Press Releases Behind Health Science News",
+          "year": 2020
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3040729127",
+          "title": "Unsupervised Keyphrase Extraction from Scientific Publications",
+          "year": 2023
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4402288687",
+          "title": "Withdrawing is believing? Detecting Inconsistencies between Withdrawal Choices and Third-party Data Collections in Mobile Apps",
+          "year": 2024
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W7135493371",
+          "title": "Why is meta analysis neglected by information scientists?:letter to the editor",
+          "year": 2001
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:010",
+      "split": "test",
+      "intent_family": "manuscript-length-acceptance",
+      "text_vi": "Độ dài bài báo có ảnh hưởng đến xác suất được chấp nhận đăng không?",
+      "text_en": "Does the length of the article affect the probability of being accepted?",
+      "pool_size": 25,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W1554506751",
+          "title": "Personalizing news content: An experimental study",
+          "year": 2014
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3129134261",
+          "title": "How Many Pages?",
+          "year": 2020
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3133952572",
+          "title": "Effects on Time and Quality of Short Text Clustering during Real-Time Presentations",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W2105157020",
+          "title": "Probabilistic models of information retrieval based on measuring the divergence from randomness",
+          "year": 2002
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4401161129",
+          "title": "How does information competition affect new product diffusion? Insights from computational experiments",
+          "year": 2024
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4383959354",
+          "title": "A comparison of two text specificity measures analyzing a heterogenous text corpus",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W3180841593",
+          "title": "Are Lengthy and Boilerplate Risk Factor Disclosures Inadequate? An Examination of Judicial and Regulatory Assessments of Risk Factor Language",
+          "year": 2020
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3120851275",
+          "title": "Persuasiveness of News Editorials depending on Ideology and Personality",
+          "year": 2020
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4392773076",
+          "title": "Hiệu quả các nhóm mô hình học sâu trong bài toán phát hiện phương tiện giao thông",
+          "year": 2024
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3176127324",
+          "title": "Leveraging Twitter data to analyze the virality of Covid-19 tweets: a text mining approach",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4399205872",
+          "title": "Put Your Money Where Your Mouth Is: Dataset and Analysis of Real World Habit Building Attempts",
+          "year": 2024
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W2731385229",
+          "title": "The Effects of Line Length and Paragraph Denotation on the Retrieval of Information from Prose Text.",
+          "year": 1978
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3135847883",
+          "title": "A Multi-Platform Analysis of Political News Discussion and Sharing on Web Communities",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4295453813",
+          "title": "Posts on central websites need less originality to be noticed",
+          "year": 2022
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W1988711048",
+          "title": "Document length normalization",
+          "year": 1996
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3201302602",
+          "title": "The Quest for Acceptance: A Blog-Based Study of Autistic Women's Experiences and Well-Being During Autism Identification and Diagnosis",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4407122152",
+          "title": "Does literature evolve one funeral at a time?",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4403553593",
+          "title": "How does the built environment affect intermodal transit demand across different spatiotemporal contexts?",
+          "year": 2024
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3037078219",
+          "title": "Reliability of Perplexity to Find Number of Latent Topics.",
+          "year": 2020
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W1486033873",
+          "title": "Document Length Normalization Using Effective Level of Term Frequency in Large Collections",
+          "year": 2006
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4389301654",
+          "title": "Motivating Experts to Contribute to Digital Public Goods: A Personalized Field Experiment on Wikipedia",
+          "year": 2023
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W3023534206",
+          "title": "Information gain modulates brain activity evoked by reading",
+          "year": 2020
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4206206083",
+          "title": "Examination of fake news from a viral perspective: an interplay of emotions, resonance, and sentiments",
+          "year": 2022
+        },
+        {
+          "position": 25,
+          "doc_id": "openalex:W3097485556",
+          "title": "How Document Sampling and Vocabulary Pruning Affect the Results of Topic Models",
+          "year": 2020
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:011",
+      "split": "test",
+      "intent_family": "mmr-vaccine-autism",
+      "text_vi": "Vaccine MMR có liên quan đến chứng tự kỷ ở trẻ em không?",
+      "text_en": "Does Vaccine MMR have anything to do with child autism?",
+      "pool_size": 23,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3005901674",
+          "title": "Shared and distinct resting functional connectivity in children and adults with attention-deficit/hyperactivity disorder",
+          "year": 2020
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W2797891952",
+          "title": "Mutterings: Have You Read Anything Personally Lately?",
+          "year": 1974
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3201302602",
+          "title": "The Quest for Acceptance: A Blog-Based Study of Autistic Women's Experiences and Well-Being During Autism Identification and Diagnosis",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W3210307996",
+          "title": "Natural Language Processing and Machine Learning Methods to Characterize Unstructured Patient-Reported Outcomes: Validation Study",
+          "year": 2021
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4396608433",
+          "title": "Mutterings: Have You Read Anything Personally Lately?",
+          "year": 1974
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W3134069009",
+          "title": "Predicting vaccine hesitancy from area-level indicators: A machine learning approach",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4416031714",
+          "title": "Individual differences in effects of stressful life events on childhood ADHD : genetic, neural, and familial contributions",
+          "year": 2025
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4285194641",
+          "title": "How Do People View COVID-19 Vaccines",
+          "year": 2022
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4380687221",
+          "title": "Accurate Measures of Vaccination and Concerns of Vaccine Holdouts from Web Search Logs",
+          "year": 2023
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4393408900",
+          "title": "Seeking information about Covid-19 vaccine on social media: a moderated mediated model of antecedents and behavioral outcomes",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4385226213",
+          "title": "Identifying what anxiety treatments are provided to neurodivergent children and young people and their outcomes in routine care: protocol for a data-driven electronic health records study (ACECAT-CRIS)",
+          "year": 2023
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3179945325",
+          "title": "Asking Clarifying Questions Based on Negative Feedback in Conversational Search",
+          "year": 2021
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3206380387",
+          "title": "Factors Driving the Popularity and Virality of COVID-19 Vaccine Discourse on Twitter: Text Mining and Data Visualization Study",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4213316513",
+          "title": "Analysis of the fecal and oral microbiota in chronic recurrent multifocal osteomyelitis",
+          "year": 2022
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4386030531",
+          "title": "Unveiling Vaccine Hesitancy on Twitter: Analyzing Trends and Reasons during the Emergence of COVID-19 Delta and Omicron Variants",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3201551569",
+          "title": "MMCoVaR: Multimodal COVID-19 Vaccine Focused Data Repository for Fake News Detection and a Baseline Architecture for Classification",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4281762223",
+          "title": "Gross motor function prediction using natural language processing in cerebral palsy",
+          "year": 2022
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4406458928",
+          "title": "Using speech characteristics from children’s story narratives to detect autistic tendencies through deep learning methods",
+          "year": 2024
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3198252989",
+          "title": "Social media study of public opinions on potential COVID-19 vaccines: informing dissent, disparities, and dissemination",
+          "year": 2021
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4391721197",
+          "title": "Auditory event-related potential differentiates girls with Rett syndrome from their typically-developing peers with high accuracy: Machine learning study",
+          "year": 2024
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4310364510",
+          "title": "Effect of presentation rate on auditory processing in Rett Syndrome: ERP study",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:012",
+      "split": "test",
+      "intent_family": "coffee-mortality",
+      "text_vi": "Uống cà phê hằng ngày có liên quan đến tử vong toàn phần không?",
+      "text_en": "Does drinking coffee daily involve total death?",
+      "pool_size": 24,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3036583493",
+          "title": "COVID-19 Outpatient Screening: a Prediction Score for Adverse Events",
+          "year": 2020
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3013536404",
+          "title": "Problems in pregnancy, modeling fetal mortality through the Naïve Bayes classifier",
+          "year": 2020
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3035880085",
+          "title": "Association of hypertension, diabetes, stroke, cancer, kidney disease, and high-cholesterol with COVID-19 disease severity and fatality: a systematic review",
+          "year": 2020
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4321769485",
+          "title": "The journey to overdose: Using spatial social network analysis as a novel framework to study geographic discordance in overdose deaths",
+          "year": 2023
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4205503877",
+          "title": "A machine learning approach to predict e-cigarette use and dependence among Ontario youth",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4404285128",
+          "title": "Concurrent Mentions of Vaping and Alcohol on Twitter: Latent Dirichlet Analysis (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4409438895",
+          "title": "Predicting Phenoconversion in Isolated RBD: Machine Learning and Explainable AI Approach",
+          "year": 2025
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4415001557",
+          "title": "Tuning into flavor: predicting coffee sensory attributes from EEG with boosted-tree regression models",
+          "year": 2025
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4308486813",
+          "title": "Segmentation of African countries based on infection and death rates of COVID-19 before vaccination: A rigid population to source for workforce amidst the pandemic?",
+          "year": 2022
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4393383996",
+          "title": "Machine Learning to Access and Ensure Safe Drinking Water Supply: A Systematic Review",
+          "year": 2024
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3163637628",
+          "title": "Customer Complaints Clusterization of Government Drinking Water Company on Social Media Twitter using Text Mining",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W3014382184",
+          "title": "Using BLE beacons and Machine Learning for Personalized Customer Experience in Smart Cafés",
+          "year": 2020
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4320726752",
+          "title": "Machine learning determination of motivators of terminal extubation during the transition to end-of-life care in intensive care unit",
+          "year": 2023
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3118526518",
+          "title": "Derivation of an electronic frailty index for short-term mortality in heart failure: a machine learning approach",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4403860516",
+          "title": "Predicting Mortality and Hospitalization in Heart Failure With Preserved Ejection Fraction by Using Machine Learning",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4320507225",
+          "title": "Leveraging Mobile Phone Sensors, Machine Learning, and Explainable Artificial Intelligence to Predict Imminent Same-Day Binge-drinking Events to Support Just-in-time Adaptive Interventions: Algorithm Development and Validation Study",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3112925755",
+          "title": "Contrasting factors associated with COVID-19-related ICU admission and death outcomes in hospitalised patients by means of Shapley values",
+          "year": 2020
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4394575897",
+          "title": "Unravelling life cycle impacts of coffee: Why do results differ so much among studies?",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4403990196",
+          "title": "Using interpretable machine learning methods to identify the relative importance of lifestyle factors for overweight and obesity in adults: pooled evidence from CHNS and NHANES",
+          "year": 2024
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4405781666",
+          "title": "Predictive Mortality and Gastric Cancer Risk Using Clinical and Socio-Economic Data: A Nationwide Multicenter Cohort Study",
+          "year": 2024
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4406447276",
+          "title": "Factors Associated With Cocaine Use at 17 and 20 Years Old: A Longitudinal Analysis of a Nationally Representative Cohort",
+          "year": 2025
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W3036659011",
+          "title": "Clinically Relevant Mediation Analysis using Controlled Indirect Effect",
+          "year": 2020
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4223918432",
+          "title": "Two-year death prediction models among patients with Chagas Disease using machine learning-based methods",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:013",
+      "split": "test",
+      "intent_family": "screen-time-children-sleep",
+      "text_vi": "Thời gian dùng màn hình có ảnh hưởng đến giấc ngủ của trẻ em không?",
+      "text_en": "Does the time of the screen affect the sleep of children?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4415983600",
+          "title": "Machine learning on a smartphone-based CPT for ADHD prediction",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4415924971",
+          "title": "TRA: Trajectory retrieval augmented model for automatic sleep staging",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4414638043",
+          "title": "Leveraging Digital Devices for Objective Behavioral Health Assessment: Computational Machine Learning Methods for Sleep and Mental Health Evaluation",
+          "year": 2025
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4313414369",
+          "title": "Automatic Sleep Staging Based on Single-Channel EEG Signal Using Null Space Pursuit Decomposition Algorithm",
+          "year": 2022
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4408153241",
+          "title": "Machine learning classifier solving the problem of sleep stage imbalance between overnight sleep",
+          "year": 2025
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W2399484104",
+          "title": "Children search for information as efficiently as adults, but seek additional confirmatory evidence.",
+          "year": 2015
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W3005901674",
+          "title": "Shared and distinct resting functional connectivity in children and adults with attention-deficit/hyperactivity disorder",
+          "year": 2020
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3040314783",
+          "title": "Sleep Identification Enabled by Supervised Training Algorithms (SIESTA): An open-source platform for automatic sleep staging of rodent polysomnographic data",
+          "year": 2020
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4225536321",
+          "title": "A machine-learning approach to discerning prevalence and causes of myopia among elementary students in Hubei",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4406407313",
+          "title": "Explainable Artificial Intelligence for Predicting Attention Deficit Hyperactivity Disorder in Children and Adults",
+          "year": 2025
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4410078855",
+          "title": "Nonlinear effects of transit on children’s activity range: Mobile phone data insights",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4402693825",
+          "title": "What explains adolescents’ physical activity and sports participation during the COVID-19 pandemic? – an interpretable machine learning approach",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4405524706",
+          "title": "Annotated interictal discharges in intracranial EEG sleep data and related machine learning detection scheme",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4319082940",
+          "title": "Machine Learning Predictive Models for Evaluating Risk Factors Affecting Sperm Count: Predictions Based on Health Screening Indicators",
+          "year": 2023
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4403553593",
+          "title": "How does the built environment affect intermodal transit demand across different spatiotemporal contexts?",
+          "year": 2024
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4406085363",
+          "title": "Exploring Early Learning Challenges in Children Utilizing Statistical and Explainable Machine Learning",
+          "year": 2025
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4392773076",
+          "title": "Hiệu quả các nhóm mô hình học sâu trong bài toán phát hiện phương tiện giao thông",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4416887663",
+          "title": "Sleep Disorder Prediction Using Machine Learning",
+          "year": 2025
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4402743471",
+          "title": "Validation of two novel human activity recognition models for typically developing children and children with Cerebral Palsy",
+          "year": 2024
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W4401161129",
+          "title": "How does information competition affect new product diffusion? Insights from computational experiments",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:014",
+      "split": "test",
+      "intent_family": "glucosamine-knee-osteoarthritis",
+      "text_vi": "Glucosamine có cải thiện đau khớp gối do thoái hóa không?",
+      "text_en": "Does Glucosamine improve joint pain from degeneration?",
+      "pool_size": 24,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4252427250",
+          "title": "Entity Prediction in Knowledge Graphs with Joint Embeddings",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4220944089",
+          "title": "Machine learning versus logistic regression for prognostic modelling in individuals with non-specific neck pain",
+          "year": 2022
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4402220266",
+          "title": "Quantifying the Enhancement of Sarcopenic Skeletal Muscle Preservation Through a Hybrid Exercise Program: Randomized Controlled Trial",
+          "year": 2024
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4392881890",
+          "title": "Automated knee degenerative arthritis reports generation through visual data analysis",
+          "year": 2024
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4206181061",
+          "title": "Predicting subjective failure of ACL reconstruction: a machine learning analysis of the Norwegian Knee Ligament Register and patient reported outcomes",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W3200937053",
+          "title": "Treinamento de Classificadores de Aprendizagem de Máquina para o Diagnóstico do Glaucoma com o Uso de Dados de Perimetria Automatizada Padrão (SAP)",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4393321320",
+          "title": "Graph modeling of relational structures among functioning variables with low back pain: an exploratory analysis based on International Classification of Functioning, Disability and Health",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4288758076",
+          "title": "Design of predictive model to optimize the solubility of Oxaprozin as nonsteroidal anti-inflammatory drug",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3113505813",
+          "title": "A machine learning pipeline for predicting joint space narrowing in knee osteoarthritis patients",
+          "year": 2020
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4288067784",
+          "title": "Predictors of improvement in quality of life at 12-month follow-up in patients undergoing anterior endoscopic skull base surgery",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3215218816",
+          "title": "Analysis of Chronic Pain Experiences Based on Online Reports: the RRCP Dataset for quality-of-life assessment.",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4397049601",
+          "title": "Unlocking the full potential of mesenchymal stromal cell therapy for osteoarthritis through machine learning-based in silico trials",
+          "year": 2024
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3212879407",
+          "title": "Convex Aggregation for Opinion Summarization",
+          "year": 2022
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4413982547",
+          "title": "Does “Made in China (2025)” improve innovation quality in robotics? Evidence from PageRank-based patent network",
+          "year": 2025
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4413025072",
+          "title": "Machine learning classification models for predicting chronic pain",
+          "year": 2025
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4311255638",
+          "title": "RETRACTED: Predictive modeling the probability of suffering from metabolic syndrome using machine learning: A population-based study",
+          "year": 2022
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4416252120",
+          "title": "Teach Structure Features to Cooperate with Node Embeddings in Link Prediction",
+          "year": 2025
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4393098468",
+          "title": "Non‐targeted metabolomics for the identification of plasma metabolites associated with organic anion transporting polypeptide 1B1 function",
+          "year": 2024
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4393241381",
+          "title": "MCD-LightGBM System for Intelligent Analyzing Heterogeneous Clinical Drug Therapeutic Effects",
+          "year": 2024
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4281659506",
+          "title": "Classification of painful or painless diabetic peripheral neuropathy and identification of the most powerful predictors using machine learning models in large cross-sectional cohorts",
+          "year": 2022
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3194644054",
+          "title": "Analysis of Chronic Pain Experiences Based on Online Reports: the RRCP Dataset.",
+          "year": 2021
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W7125947234",
+          "title": "A Novel Feature Selection Method Base on Enhanced-CDRIME and Multi-Classifiers for Pain Assessment",
+          "year": 2025
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4414484564",
+          "title": "Optimizing hip exoskeleton assistance pattern based on machine learning and simulation algorithms: a personalized approach to metabolic cost reduction",
+          "year": 2025
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4408663251",
+          "title": "Enhancing Chronic Pain Nursing Diagnosis Through Machine Learning",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:015",
+      "split": "test",
+      "intent_family": "mindfulness-anxiety",
+      "text_vi": "Thiền chánh niệm có giảm lo âu ở người trưởng thành không?",
+      "text_en": "Does the idea of meditation reduce anxiety in adults?",
+      "pool_size": 24,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4383497679",
+          "title": "Developing and validating a scale for anxiety over land and forest fire",
+          "year": 2023
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4323031833",
+          "title": "Predictors of the rate of cognitive decline in older adults using machine learning",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4399365836",
+          "title": "Crowdsourcing for innovation: Effects of idea content and competition intensity on idea success",
+          "year": 2024
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W2164544342",
+          "title": "Changes in primacy and recency with practice in single-trial free recall",
+          "year": 1976
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W2399484104",
+          "title": "Children search for information as efficiently as adults, but seek additional confirmatory evidence.",
+          "year": 2015
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4200493178",
+          "title": "Combining International Survey Datasets to Identify Indicators of Stress during the COVID-19 Pandemic: A Machine Learning Approach to Improve Generalization",
+          "year": 2021
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W1964991726",
+          "title": "Cognitive tuning and receptivity to novel information",
+          "year": 1973
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4410188574",
+          "title": "A machine learning-driven model predicts patient-reported dysphagia after instrumented cervical fusion",
+          "year": 2025
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4406407313",
+          "title": "Explainable Artificial Intelligence for Predicting Attention Deficit Hyperactivity Disorder in Children and Adults",
+          "year": 2025
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3135028031",
+          "title": "Library Anxiety: An Overview of Re-Emerging Phenomena",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4389455268",
+          "title": "Understanding Challenges and Emotions of Informal Caregivers of General Older Adults and People With Alzheimer Disease and Related Dementia: Comparative Study (Preprint)",
+          "year": 2023
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4308727034",
+          "title": "High school students' mathematical proficiency based on mathematics anxiety and cognitive independence",
+          "year": 2022
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4309736004",
+          "title": "Investigating the Relationship between Emotional Intelligence, Library Anxiety and Academic Performance of Post Graduate Students",
+          "year": 2022
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4385226213",
+          "title": "Identifying what anxiety treatments are provided to neurodivergent children and young people and their outcomes in routine care: protocol for a data-driven electronic health records study (ACECAT-CRIS)",
+          "year": 2023
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3210857026",
+          "title": "Information anxiety in the workplace: Scale development and validation",
+          "year": 2021
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4402426105",
+          "title": "Analyzing Online Conversations on Reddit: A Study of Stress and Anxiety Through Topic Modeling and Sentiment Analysis",
+          "year": 2024
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W3139319073",
+          "title": "Session details: Help Me Search",
+          "year": 2008
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4321789105",
+          "title": "Amygdala's T1-weighted image radiomics outperforms volume for differentiation of anxiety disorder and its subtype",
+          "year": 2023
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W2058302527",
+          "title": "Locus of the modality effect in free recall",
+          "year": 1972
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W4308687068",
+          "title": "Mental Health Chatbot for Young Adults With Depressive Symptoms During the COVID-19 Pandemic: Single-Blind, Three-Arm Randomized Controlled Trial",
+          "year": 2022
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W3038616631",
+          "title": "An Exploratory Analysis Pertaining to Stress Detection in Adolescents",
+          "year": 2020
+        },
+        {
+          "position": 23,
+          "doc_id": "openalex:W4310490426",
+          "title": "High school students' mathematical proficiency based on mathematics anxiety and cognitive independence",
+          "year": 2022
+        },
+        {
+          "position": 24,
+          "doc_id": "openalex:W4405113218",
+          "title": "NLP and Topic Modeling with LDA, LSA, and NMF for Monitoring Psychosocial Well-being in Monthly Surveys",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:016",
+      "split": "test",
+      "intent_family": "protein-supplement-sarcopenia",
+      "text_vi": "Bổ sung protein có duy trì khối cơ ở người cao tuổi không?",
+      "text_en": "Does protein plugins maintain muscle blocks in older people?",
+      "pool_size": 19,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W7117464239",
+          "title": "Integrative Machine Learning and Network Analysis of Skeletal Muscle Transcriptomes Identifies Candidate Pioglitazone-Responsive Biomarkers in Polycystic Ovary Syndrome",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4411918751",
+          "title": "Enhanced machine learning models for predicting three-year mortality in Non-STEMI patients aged 75 and above",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4323921104",
+          "title": "Nonexercise machine learning models for maximal oxygen uptake prediction in national population surveys",
+          "year": 2023
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4415358428",
+          "title": "A machine learning tool for predicting newly diagnosed osteoporosis in primary healthcare in the Stockholm Region",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4376113402",
+          "title": "An analysis of the thematic evolution of ageing and healthcare expenditure using word embedding: A scoping review of policy implications",
+          "year": 2023
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4253177099",
+          "title": "A machine for information retrieval",
+          "year": 1978
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4396694361",
+          "title": "How Technology, Health Information Seeking, and Socioeconomic Factors Are Associated With Coronavirus Disease 2019 Vaccination Readiness in Estonians Over 50 Years?",
+          "year": 2024
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4220958062",
+          "title": "Partners in life and online search: Investigating older couples’ collaborative information seeking",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W3139654928",
+          "title": "Combining evolutionary and assay-labelled data for protein fitness prediction",
+          "year": 2021
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4406503084",
+          "title": "Adoption of Wearable Devices by Older Adults",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4399665479",
+          "title": "Evidence Based Principles to Accelerate Health Information Flow and Uptake Among Older Adults",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4411673697",
+          "title": "Understanding the Impact of Street Environments on Traffic Crash Risk from the Perspective of Aging People: An Interpretable Machine Learning Approach",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4402220266",
+          "title": "Quantifying the Enhancement of Sarcopenic Skeletal Muscle Preservation Through a Hybrid Exercise Program: Randomized Controlled Trial",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4387592320",
+          "title": "Roles of biochemistry data, lifestyle, and inflammation in identifying abnormal renal function in old Chinese",
+          "year": 2023
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4394874527",
+          "title": "A protocol for remote collection of skeletal muscle mass via D3-creatine dilution in community-dwelling postmenopausal women from the Women’s Health Initiative",
+          "year": 2024
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4387614756",
+          "title": "Use and benefit of information, communication, and assistive technology among community-dwelling older adults – a cross-sectional study",
+          "year": 2023
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3170061265",
+          "title": "Exploring Factors Associated with Subjective Health of Older-Old using ReLU Deep Neural Network and Machine Learning",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W3199229491",
+          "title": "Non-Linear Effects of the Built Environment and Social Environment on Bus Use among Older Adults in China: An Application of the XGBoost Model",
+          "year": 2021
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4310184741",
+          "title": "Phenotypic Disease Network-Based Multimorbidity Analysis in Idiopathic Cardiomyopathy Patients with Hospital Discharge Records",
+          "year": 2022
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:017",
+      "split": "test",
+      "intent_family": "citation-community-structure",
+      "text_vi": "Cấu trúc cộng đồng trong đồ thị trích dẫn phản ánh các lĩnh vực nghiên cứu thế nào?",
+      "text_en": "How does the public structure in the graph reflect areas of research?",
+      "pool_size": 21,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4323668127",
+          "title": "Surrogate Explanations for Role Discovery on Graphs",
+          "year": 2023
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3081243492",
+          "title": "Exploring research trends in big data across disciplines: A text mining analysis",
+          "year": 2020
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W7142073398",
+          "title": "Infographic (Tiếng Việt): IA Generativa ở Nghiên cứu Học tập: Cơ sở dữ liệu theo Các Biến của Us",
+          "year": 2026
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W7120511715",
+          "title": "Information architecture at the Geledés website: the black woman in focus",
+          "year": 2018
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3083979605",
+          "title": "Correlation Guided Graph Learning to Estimate Functional Connectivity Patterns From fMRI Data",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4396896562",
+          "title": "Exploring Factors Influencing Recreational Experiences of Urban River Corridors Based on Social Media Data",
+          "year": 2024
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4411472469",
+          "title": "Exploring functional zone-dependent nonlinear associations between objective features and subjective perceptions: A case study in Beijing",
+          "year": 2025
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4319781029",
+          "title": "Personalized User Recommendation based on Various User Behavior in Local Domain",
+          "year": 2022
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4396698482",
+          "title": "Recomendación a grupos de usuarios usando técnicas de aprendizaje profundo",
+          "year": 2024
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3154000428",
+          "title": "Graph Topic Neural Network for Document Representation",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W3128119963",
+          "title": "Finding the Context Indigenous Innovation in Village Enterprise Knowledge Structure: A Topic Modeling",
+          "year": 2021
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4395451248",
+          "title": "Seeing through their eyes: Revealing recreationists’ landscape preferences through viewshed analysis and machine learning",
+          "year": 2024
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W2002547600",
+          "title": "Collaborative querying using the Query Graph Visualizer",
+          "year": 2005
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4206143587",
+          "title": "An Exploration of Community Detection and Recommendation Systems (CDR) in Social Networks",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W3171131018",
+          "title": "NetFense: Adversarial Defenses against Privacy Attacks on Neural Networks for Graph Data",
+          "year": 2021
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3093105030",
+          "title": "Urban Narrative: Computational Linguistic Interpretation of Large Format Public Participation for Urban Infrastructure",
+          "year": 2020
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4327912210",
+          "title": "Direct, Orienting, and Scenic Paths: How Users Navigate Search in a Research Data Archive",
+          "year": 2023
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4413973327",
+          "title": "A Comprehensive Survey and Experimental Study of Learning-Based Community Search",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4411184221",
+          "title": "Graph Embeddings to Empower Entity Retrieval",
+          "year": 2025
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4226331877",
+          "title": "Finding the context indigenous innovation in village enterprise knowledge structure: a topic modeling",
+          "year": 2022
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W3034506286",
+          "title": "Contributions of modern network science to the cognitive sciences: revisiting research spirals of representation and process",
+          "year": 2020
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:018",
+      "split": "test",
+      "intent_family": "preprint-vs-published-quality",
+      "text_vi": "Bài báo preprint có chất lượng ngang bài báo đã bình duyệt không?",
+      "text_en": "Is the preprint peer-quality article the same as the one that the article approved?",
+      "pool_size": 22,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4396232287",
+          "title": "MetaWriter: Exploring the Potential and Perils of AI Writing Support in Scientific Peer Review",
+          "year": 2024
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W3031031194",
+          "title": "Improving Investment Suggestions for Peer-to-Peer Lending via Integrating Credit Scoring into Profit Scoring",
+          "year": 2020
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4367146566",
+          "title": "COLTR: Semi-Supervised Learning to Rank With Co-Training and Over-Parameterization for Web Search",
+          "year": 2023
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4385573466",
+          "title": "Discord Questions: A Computational Approach To Diversity Analysis in News Coverage",
+          "year": 2022
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4385799539",
+          "title": "Development of Reviewer Assignment Method with Latent Dirichlet Allocation and Link Prediction to Avoid Conflict of Interest",
+          "year": 2023
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4284990544",
+          "title": "PM-Search: State-of-the-art Evidence Retriever for Precision Medicine: Algorithm Development and Validation (Preprint)",
+          "year": 2022
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4311487515",
+          "title": "Analysing Environmental Narratives Computationally",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W2328409093",
+          "title": "Information Work with Unpublished Reports (Book Review)",
+          "year": 1978
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4360617282",
+          "title": "Irreproducible Research",
+          "year": 2023
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W3199066980",
+          "title": "MỘT PHƯƠNG PHÁP KẾT HỢP CÁC MÔ HÌNH HỌC SÂU VÀ KỸ THUẬT HỌC TĂNG CƯỜNG HIỆU QUẢ CHO TÓM TẮT VĂN BẢN HƯỚNG TRÍCH RÚT",
+          "year": 2021
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4390141881",
+          "title": "Is text preprocessing still worth the time? A comparative survey on the influence of popular preprocessing methods on Transformers and traditional classifiers",
+          "year": 2023
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W7164347219",
+          "title": "ОЦІНКА ВПЛИВУ ПОПЕРЕДНЬОЇ ФІЛЬТРАЦІЇ НА ЯКІСТЬ ВИБІРКИ В RAG-СИСТЕМАХ З ВЕКТОРНИМ ПОШУКОМ",
+          "year": 2026
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4401009896",
+          "title": "Feature-based Unsupervised Method for Salient Sentence Ranking in Text Summarization Task",
+          "year": 2024
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W3144558234",
+          "title": "Application of Machine Learning Techniques in Injection Molding Quality Prediction: Implications on Sustainable Manufacturing Industry",
+          "year": 2021
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W4387849088",
+          "title": "COPR: Consistency-Oriented Pre-Ranking for Online Advertising",
+          "year": 2023
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3024478371",
+          "title": "COVID-19 research in Wikipedia",
+          "year": 2020
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3166336242",
+          "title": "NewsEmbed: Modeling News through Pre-trained Document Representations",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W970275373",
+          "title": "Popularity Dynamics and Intrinsic Quality in Reddit and Hacker News",
+          "year": 2021
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W3094430118",
+          "title": "Don't judge a journal by its cover?: Appearance of a Journal's website as predictor of blacklisted Open‐Access status",
+          "year": 2020
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W3106809994",
+          "title": "Improving peer-to-peer accommodation service based on text analytics",
+          "year": 2020
+        },
+        {
+          "position": 21,
+          "doc_id": "openalex:W7172422244",
+          "title": "A Pre-Registered Negative Result: Conjunctive Graph Diffusion Does Not Beat Flat Dense Retrieval on Multi-Hop Retrieval",
+          "year": 2026
+        },
+        {
+          "position": 22,
+          "doc_id": "openalex:W2507740821",
+          "title": "ADAPTIVE CONTENT BASED TEXTUAL INFORMATION SOURCE PRIORITIZATION",
+          "year": 2014
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:019",
+      "split": "test",
+      "intent_family": "h-index-limitations",
+      "text_vi": "Chỉ số h có hạn chế gì khi đánh giá nhà nghiên cứu?",
+      "text_en": "What are the restrictions on the h index when the researcher is evaluated?",
+      "pool_size": 19,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W3165528579",
+          "title": "Evaluating Scholars’ Impact and Influence: Cross-sectional Study of the Correlation Between a Novel Social Media–Based Score and an Author-Level Citation Metric",
+          "year": 2021
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4382725419",
+          "title": "Measuring the Hubble constant with cosmic chronometers: a machine learning approach",
+          "year": 2023
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W3193488692",
+          "title": "A Research Collaborator Recommendation Model with Role and Directed Graph",
+          "year": 2021
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W4308728310",
+          "title": "Node importance identification for uncertain networks",
+          "year": 2022
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4385351752",
+          "title": "The Evolution of Multicultural Education Indonesia 2000-2022: Bibliometric Analysis, Google Scholar",
+          "year": 2023
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W3200293699",
+          "title": "Publication outperformance among global South researchers: An analysis of individual-level and publication-level predictors of positive deviance",
+          "year": 2021
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4401132085",
+          "title": "Model of classification of scientists as a measure of the significance of scientific associations, events and publications",
+          "year": 2024
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4367186552",
+          "title": "Ranking academic authors for publication venues based on relevance-based co-authorship network",
+          "year": 2023
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4281392476",
+          "title": "A Study on Paper and Author Ranking",
+          "year": 2022
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4411128906",
+          "title": "Ứng dụng máy học trong giải thích các nhân tố quyết định quản lý tồn kho",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4248173379",
+          "title": "Developing a new collection‐evaluation method: Mapping and the user‐side h‐index",
+          "year": 2009
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W4254349437",
+          "title": "Evaluating Scholars’ Impact and Influence: Cross-sectional Study of the Correlation Between a Novel Social Media–Based Score and an Author-Level Citation Metric (Preprint)",
+          "year": 2021
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4405782650",
+          "title": "Using classification methods in forecasting the level of geomagnetic field disturbance based on the Kp-Index",
+          "year": 2024
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W7113652971",
+          "title": "Indexing of fiction : A study of public libraries that don’t buy indexed records containing subject headings from Bibliotekstjänst",
+          "year": 2007
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W4403336400",
+          "title": "Interferência dos periódicos da área de gestão na determinação das publicações historicamente mais influentes da Ciência da Informação e Biblioteconomia",
+          "year": 2024
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W4282571011",
+          "title": "Higher criticism for discriminating word-frequency tables and authorship attribution",
+          "year": 2022
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4379191927",
+          "title": "The statistical nature of h -index of a network node and its extensions",
+          "year": 2023
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W3211695117",
+          "title": "Comparison of methods of ranking scientists based on the Hirsch and PageRank indices: contradictory situations",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "query_id": "vn:test:020",
+      "split": "test",
+      "intent_family": "air-pollution-asthma-children",
+      "text_vi": "Ô nhiễm không khí có làm tăng triệu chứng hen suyễn ở trẻ em không?",
+      "text_en": "Does air pollution raise childhood asthma?",
+      "pool_size": 20,
+      "candidates": [
+        {
+          "position": 1,
+          "doc_id": "openalex:W4412658264",
+          "title": "Multilevel small-area childhood stunting risk estimation: Insights from spatial ensemble learning, agro-ecological and environmentally remotely sensed indicators",
+          "year": 2025
+        },
+        {
+          "position": 2,
+          "doc_id": "openalex:W4409729137",
+          "title": "Enhancing PM2.5 Air Pollution Prediction Performance by Optimizing the Echo State Network (ESN) Deep Learning Model Using New Metaheuristic Algorithms",
+          "year": 2025
+        },
+        {
+          "position": 3,
+          "doc_id": "openalex:W4312210978",
+          "title": "The long-term impacts of air quality on fine-grained online emotional responses to haze pollution in 160 Chinese cities",
+          "year": 2022
+        },
+        {
+          "position": 4,
+          "doc_id": "openalex:W4403736885",
+          "title": "The effect of air pollution on hospitalizations with Parkinson’s disease among medicare beneficiaries nationwide",
+          "year": 2024
+        },
+        {
+          "position": 5,
+          "doc_id": "openalex:W3035012228",
+          "title": "Uncovering the invisible effect of air pollution on stock returns: A moderation and mediation analysis",
+          "year": 2020
+        },
+        {
+          "position": 6,
+          "doc_id": "openalex:W4406714956",
+          "title": "Nonlinear effects of urban multidimensional characteristics on air pollution heterogeneity in China's urban agglomerations",
+          "year": 2025
+        },
+        {
+          "position": 7,
+          "doc_id": "openalex:W4225312687",
+          "title": "The impact of the COVID-19 pandemic on air pollution: A global assessment using machine learning techniques",
+          "year": 2022
+        },
+        {
+          "position": 8,
+          "doc_id": "openalex:W4231441946",
+          "title": "COVID-19 lockdown only partially alleviates health impacts of air pollution in Northern Italy",
+          "year": 2020
+        },
+        {
+          "position": 9,
+          "doc_id": "openalex:W4385740148",
+          "title": "Socioeconomic and environmental determinants of asthma prevalence: a cross-sectional study at the U.S. County level using geographically weighted random forests",
+          "year": 2023
+        },
+        {
+          "position": 10,
+          "doc_id": "openalex:W4401612481",
+          "title": "Use of machine learning algorithms to determine the relationship between air pollution and cognitive impairment in Taiwan",
+          "year": 2024
+        },
+        {
+          "position": 11,
+          "doc_id": "openalex:W4392436736",
+          "title": "Enhancing risk communication and environmental crisis management through satellite imagery and AI for air quality index estimation",
+          "year": 2024
+        },
+        {
+          "position": 12,
+          "doc_id": "openalex:W4407221202",
+          "title": "Seasonal and Meteorological Drivers of Hand, Foot, and Mouth Disease Outbreaks Using Data-Driven Machine Learning Models",
+          "year": 2025
+        },
+        {
+          "position": 13,
+          "doc_id": "openalex:W3161849626",
+          "title": "Using Social Media Mining and PLS-SEM to Examine the Causal Relationship between Public Environmental Concerns and Adaptation Strategies",
+          "year": 2021
+        },
+        {
+          "position": 14,
+          "doc_id": "openalex:W4416031714",
+          "title": "Individual differences in effects of stressful life events on childhood ADHD : genetic, neural, and familial contributions",
+          "year": 2025
+        },
+        {
+          "position": 15,
+          "doc_id": "openalex:W7126227821",
+          "title": "Xây dựng mô hình nghiên cứu về tác động của Chatbot tuyển sinh HUTECH đến hành vi tìm hiểu thông tin của học sinh THPT",
+          "year": 2025
+        },
+        {
+          "position": 16,
+          "doc_id": "openalex:W3084886934",
+          "title": "Computational tools for understanding air pollution",
+          "year": 2020
+        },
+        {
+          "position": 17,
+          "doc_id": "openalex:W3206895341",
+          "title": "Developing air pollution concentration fields for health studies using multiple methods: Cross-comparison and evaluation",
+          "year": 2021
+        },
+        {
+          "position": 18,
+          "doc_id": "openalex:W4406753543",
+          "title": "Retrospectively understanding the multifaceted interplay of COVID-19 outbreak, air pollution, and sociodemographic factors through explainable AI",
+          "year": 2025
+        },
+        {
+          "position": 19,
+          "doc_id": "openalex:W4387528463",
+          "title": "Quantifying the impacts of the COVID-19 pandemic lockdown and the armed conflict with Russia on Sentinel 5P TROPOMI NO 2 changes in Ukraine",
+          "year": 2023
+        },
+        {
+          "position": 20,
+          "doc_id": "openalex:W4414013542",
+          "title": "Modeling Joint Health Effects of Environmental Exposure Mixtures With Bayesian Additive Regression Trees",
+          "year": 2025
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "artifact_type": "measurement_correction",
+  "task_id": "SG-013",
+  "status": "CORRECTED",
+  "corrected_at": "2026-09-15T22:10:25.6268411+07:00",
+  "snapshot_id": "openalex-api-t10286-seed20260915-3c6a3a485dfc",
+  "query_fingerprint": "3c6a3a485dfc7c694334ad9ea2b492883fbaba1b847ec5e254f02ed76d7c02f0",
+  "supersedes": {
+    "path": "artifacts/reports/openalex_pilot.json",
+    "sha256": "c55dd5ca74e63edb6eece6966edc12c5521c6c17eea979841f95281736b90a27",
+    "scope": "coverage.venue and the addition of coverage.primary_location only",
+    "original_venue_value": {
+      "count": 2000,
+      "fraction": 1.0
+    }
+  },
+  "provenance": {
+    "raw_works": {
+      "path": "data/raw/openalex/works.jsonl",
+      "sha256": "3f301e4fc6c9b0de1fa95f736d0ceff2fa6fac137c086e0716fc3afe761c4980",
+      "record_count": 2000
+    },
+    "snapshot_manifest": {
+      "path": "data/manifests/openalex_pilot.json",
+      "sha256": "830391357c29ce3e197cd0b4b83eff0c4ce835bd5d59119535e59618962f87b8"
+    },
+    "corrected_report_builder": {
+      "path": "src/scholargraph/ingest/openalex.py",
+      "sha256": "573e64947622249c74668da6ce1f8e6550a4014b44ba9ecce56e0eaa3b628919"
+    }
+  },
+  "reason": "The original venue predicate counted any non-empty primary_location object, including locations that had only a landing URL and no venue/source name.",
+  "definitions": {
+    "primary_location": "primary_location is a non-empty JSON object",
+    "venue": "primary_location.source.display_name or primary_location.raw_source_name is a non-empty string"
+  },
+  "corrected_coverage": {
+    "primary_location": {
+      "count": 2000,
+      "total": 2000,
+      "fraction": 1.0
+    },
+    "venue": {
+      "count": 1627,
+      "total": 2000,
+      "fraction": 0.8135
+    }
+  },
+  "other_metrics": {
+    "source": "artifacts/reports/openalex_pilot.json",
+    "recomputed_in_this_correction": false,
+    "policy": "All fields outside this correction scope remain quoted from the immutable original report; this artifact does not claim they were measured again."
+  }
+}

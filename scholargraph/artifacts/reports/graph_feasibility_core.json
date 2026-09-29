@@ -1,0 +1,601 @@
+{
+  "artifact_type": "graph_feasibility_gate",
+  "beir_reference_enrichment": {
+    "scidocs": {
+      "counts": {
+        "docs_with_doi": 0,
+        "docs_with_metadata_references": 24504,
+        "docs_with_metadata_year": 25585,
+        "docs_with_top_level_references": 0,
+        "docs_without_any_reference_list": 1153,
+        "documents": 25657,
+        "duplicate_reference_entry_count": 20,
+        "internal_reference_occurrences_within_corpus": 20825,
+        "out_of_corpus_reference_occurrences": 197491,
+        "reciprocal_edge_pair_count": 21,
+        "reference_entries_total": 218316,
+        "self_loop_count": 0,
+        "unique_internal_directed_edges": 20811
+      },
+      "dataset": "scidocs",
+      "graph_connectivity": {
+        "docs_with_at_least_one_internal_edge": 15253,
+        "isolated_docs_in_reference_graph": 10404
+      },
+      "provenance": "structural audit of corpus reference fields only; qrels and queries are not read by this module (label-leakage audit is SG-016 scope)",
+      "reference_field_location": "metadata.references"
+    },
+    "scifact": {
+      "counts": {
+        "docs_with_doi": 0,
+        "docs_with_metadata_references": 0,
+        "docs_with_metadata_year": 0,
+        "docs_with_top_level_references": 0,
+        "docs_without_any_reference_list": 5183,
+        "documents": 5183,
+        "duplicate_reference_entry_count": 0,
+        "internal_reference_occurrences_within_corpus": 0,
+        "out_of_corpus_reference_occurrences": 0,
+        "reciprocal_edge_pair_count": 0,
+        "reference_entries_total": 0,
+        "self_loop_count": 0,
+        "unique_internal_directed_edges": 0
+      },
+      "dataset": "scifact",
+      "graph_connectivity": {
+        "docs_with_at_least_one_internal_edge": 0,
+        "isolated_docs_in_reference_graph": 5183
+      },
+      "provenance": "structural audit of corpus reference fields only; qrels and queries are not read by this module (label-leakage audit is SG-016 scope)",
+      "reference_field_location": "absent"
+    }
+  },
+  "command": [
+    "--works",
+    "data/processed/openalex/works.jsonl",
+    "--manifest",
+    "data/manifests/openalex_core.json",
+    "--protocol",
+    "configs/protocol_v1.json",
+    "--scifact-corpus",
+    "data/raw/beir/scifact/corpus.jsonl",
+    "--scidocs-corpus",
+    "data/raw/beir/scidocs/corpus.jsonl",
+    "--report",
+    "artifacts/reports/graph_feasibility_core.json"
+  ],
+  "decision": {
+    "binding_no_go_evidence": [],
+    "criteria": [
+      {
+        "criterion_id": "snapshot_provenance_integrity",
+        "decision": "GO",
+        "measured": {
+          "unique_canonical_ids": 18251,
+          "works": 18251
+        },
+        "requirement": "snapshot non-empty; every record maps to one unique canonical ID; manifest sha256 verified",
+        "source": "Protocol v1 §2 (raw snapshot immutability) and ADR-013"
+      },
+      {
+        "criterion_id": "cohort_test_year_floor",
+        "decision": "GO",
+        "measured": {
+          "max_eligible_sources_in_any_year": 663,
+          "reason": "latest completed year before 2026 with at least 50 eligible sources",
+          "test_year": 2025
+        },
+        "requirement": "a test_year before the snapshot year with at least 50 eligible sources exists",
+        "source": "configs/protocol_v1.json tracks.B.graph_gate (test_year_rule)"
+      },
+      {
+        "criterion_id": "cohort_dev_year_floor",
+        "decision": "GO",
+        "measured": {
+          "dev_year": 2024,
+          "reason": "latest year before test_year 2025 with at least 30 eligible sources"
+        },
+        "requirement": "a dev_year before test_year with at least 30 eligible sources exists",
+        "source": "configs/protocol_v1.json tracks.B.graph_gate (dev_year_rule)"
+      },
+      {
+        "criterion_id": "minimum_novel_candidates_per_source",
+        "decision": "GO",
+        "measured": {
+          "max": 18223,
+          "median": 10335,
+          "min": 206,
+          "sources_below_minimum_novel_candidates": 0,
+          "sources_measured": 3797
+        },
+        "requirement": "every eligible source keeps at least 100 novel eligible candidates",
+        "source": "configs/protocol_v1.json tracks.B.graph_gate (minimum_novel_candidates_per_query)"
+      },
+      {
+        "criterion_id": "internal_edge_availability",
+        "decision": "RECORDED",
+        "measured": {
+          "internal_reference_occurrences": 26516,
+          "out_of_snapshot_reference_occurrences": 843870,
+          "unique_internal_directed_edges": 26516
+        },
+        "requirement": "directed internal citation edges exist inside the snapshot",
+        "source": "Protocol v1 §4 B1 (audit fields)"
+      },
+      {
+        "criterion_id": "doi_id_mapping_openalex_beir",
+        "decision": "RECORDED",
+        "measured": {
+          "beir_docs_with_doi": 0,
+          "beir_unique_normalized_dois": 0,
+          "doi_matches": 0,
+          "doi_matches_per_dataset": {
+            "scidocs": 0,
+            "scifact": 0
+          },
+          "openalex_unique_normalized_dois": 16708,
+          "openalex_works_with_doi": 16708,
+          "verdict": "DOI join infeasible: the BEIR corpus snapshots expose no DOI field"
+        },
+        "requirement": "mapping capability between OpenAlex snapshot and BEIR corpora (track B is OpenAlex-only; BEIR enrichment is out of track B scope)",
+        "source": "Protocol v1 §4 B1 (DOI/ID mapping audit field)"
+      },
+      {
+        "criterion_id": "beir_reference_enrichment_feasibility",
+        "decision": "RECORDED",
+        "measured": {
+          "scidocs": {
+            "counts": {
+              "docs_with_doi": 0,
+              "docs_with_metadata_references": 24504,
+              "docs_with_metadata_year": 25585,
+              "docs_with_top_level_references": 0,
+              "docs_without_any_reference_list": 1153,
+              "documents": 25657,
+              "duplicate_reference_entry_count": 20,
+              "internal_reference_occurrences_within_corpus": 20825,
+              "out_of_corpus_reference_occurrences": 197491,
+              "reciprocal_edge_pair_count": 21,
+              "reference_entries_total": 218316,
+              "self_loop_count": 0,
+              "unique_internal_directed_edges": 20811
+            },
+            "dataset": "scidocs",
+            "graph_connectivity": {
+              "docs_with_at_least_one_internal_edge": 15253,
+              "isolated_docs_in_reference_graph": 10404
+            },
+            "provenance": "structural audit of corpus reference fields only; qrels and queries are not read by this module (label-leakage audit is SG-016 scope)",
+            "reference_field_location": "metadata.references"
+          },
+          "scifact": {
+            "counts": {
+              "docs_with_doi": 0,
+              "docs_with_metadata_references": 0,
+              "docs_with_metadata_year": 0,
+              "docs_with_top_level_references": 0,
+              "docs_without_any_reference_list": 5183,
+              "documents": 5183,
+              "duplicate_reference_entry_count": 0,
+              "internal_reference_occurrences_within_corpus": 0,
+              "out_of_corpus_reference_occurrences": 0,
+              "reciprocal_edge_pair_count": 0,
+              "reference_entries_total": 0,
+              "self_loop_count": 0,
+              "unique_internal_directed_edges": 0
+            },
+            "dataset": "scifact",
+            "graph_connectivity": {
+              "docs_with_at_least_one_internal_edge": 0,
+              "isolated_docs_in_reference_graph": 5183
+            },
+            "provenance": "structural audit of corpus reference fields only; qrels and queries are not read by this module (label-leakage audit is SG-016 scope)",
+            "reference_field_location": "absent"
+          }
+        },
+        "requirement": "whether BEIR corpus reference fields could serve as an alternative citation graph (timeboxed evaluation)",
+        "source": "SG-014 task card (timebox BEIR enrichment)"
+      },
+      {
+        "criterion_id": "masking_protocol_readiness",
+        "decision": "GO",
+        "measured": {
+          "design_document": "docs/GRAPH_PROTOCOL.md",
+          "design_document_present": true,
+          "two_way_masking_defined": true
+        },
+        "requirement": "holdout/cutoff/masking design documented before any graph experiment (docs/GRAPH_PROTOCOL.md); verification on real masked graph is SG-016",
+        "source": "Protocol v1 §4 B2 and SG-014 task card"
+      }
+    ],
+    "gating_criteria": [
+      "snapshot_provenance_integrity",
+      "cohort_test_year_floor",
+      "cohort_dev_year_floor",
+      "minimum_novel_candidates_per_source",
+      "masking_protocol_readiness"
+    ],
+    "overall": "GO",
+    "overall_rule": "overall GO iff every gating criterion is GO; RECORDED criteria are context, not gates; a NO-GO is a valid measured outcome, not a run failure",
+    "scope_dependency_adjustments": [],
+    "sg015_requirements_if_no_go": []
+  },
+  "known_limitations": [
+    "The audited snapshot is a 18251-work sample from the pinned manifest sampling plan; its sparsity is measured evidence for this snapshot only and is not an estimate for any other sampling strategy.",
+    "OpenAlex referenced_works contains only references OpenAlex successfully matched to another work.",
+    "The novel-candidate universe is a pre-split conservative lower bound (all valid-year works with year <= source year, minus self, minus all internal references of the source).",
+    "BEIR reference-field findings are structural only; no qrels, queries, or relevance labels were read by this module."
+  ],
+  "leakage_audit": {
+    "reason": "this gate runs pre-label per Protocol v1 §2: it reads no qrels and no heldout edge list; the masked-split leakage audit belongs to the trusted split builder/auditor at SG-016",
+    "status": "deferred_to_SG016"
+  },
+  "mapping": {
+    "doi_mapping": {
+      "beir_docs_with_doi": 0,
+      "beir_unique_normalized_dois": 0,
+      "doi_matches": 0,
+      "doi_matches_per_dataset": {
+        "scidocs": 0,
+        "scifact": 0
+      },
+      "openalex_unique_normalized_dois": 16708,
+      "openalex_works_with_doi": 16708,
+      "verdict": "DOI join infeasible: the BEIR corpus snapshots expose no DOI field"
+    },
+    "provenance": "mapping measured on snapshot fields only; no external data fetched",
+    "provisional_exact_title_probe": {
+      "limitation": "exact casefolded-whitespace-collapsed title equality only; no version, author, or venue disambiguation; a positive/negative mapping decision must not be built on this probe alone",
+      "openalex_normalized_title_collisions": 264,
+      "openalex_works_with_title": 17980,
+      "per_dataset": {
+        "scidocs": {
+          "beir_normalized_title_collisions": 8,
+          "distinct_beir_docs_matched": 24,
+          "distinct_openalex_works_matched": 24,
+          "exact_normalized_title_matches": 24
+        },
+        "scifact": {
+          "beir_normalized_title_collisions": 3,
+          "distinct_beir_docs_matched": 0,
+          "distinct_openalex_works_matched": 0,
+          "exact_normalized_title_matches": 0
+        }
+      }
+    }
+  },
+  "measured_at": "2026-09-17T00:14:25.917823+00:00",
+  "module": {
+    "id": "sg014-graph-feasibility",
+    "version": "1.0.0"
+  },
+  "openalex_snapshot": {
+    "anomalies": {
+      "duplicate_reference_entry_count": 0,
+      "handling": "self-references are excluded from edges per Protocol v1 B2 ('khác u'); duplicate reference entries are deduplicated; reciprocal pairs are kept as directed edges and must be masked both ways at SG-016",
+      "out_of_range_publication_year_count": 3,
+      "out_of_range_publication_year_examples": [
+        {
+          "canonical_id": "openalex:W4233213534",
+          "publication_year": 1895
+        },
+        {
+          "canonical_id": "openalex:W4250344565",
+          "publication_year": 1899
+        },
+        {
+          "canonical_id": "openalex:W4255846454",
+          "publication_year": 1885
+        }
+      ],
+      "reciprocal_edge_pair_count": 23,
+      "self_loop_count_exact": 163,
+      "self_loop_works": [
+        "openalex:W1511283908",
+        "openalex:W1972647649",
+        "openalex:W2041517458",
+        "openalex:W2065524973",
+        "openalex:W2153150702",
+        "openalex:W2741603249",
+        "openalex:W2915731794",
+        "openalex:W2990100693",
+        "openalex:W3005404134",
+        "openalex:W3006863666",
+        "openalex:W3007347649",
+        "openalex:W3008902511",
+        "openalex:W3021727507",
+        "openalex:W3022197377",
+        "openalex:W3024284289",
+        "openalex:W3038979953",
+        "openalex:W3039409383",
+        "openalex:W3039500550",
+        "openalex:W3045509105",
+        "openalex:W3048879013"
+      ]
+    },
+    "counts": {
+      "duplicate_reference_entry_count": 0,
+      "internal_reference_occurrences": 26516,
+      "isolated_nodes": 2324,
+      "largest_weak_component_size": 15848,
+      "max_internal_in_degree": 5398,
+      "max_internal_out_degree": 76,
+      "nodes_with_at_least_one_internal_edge": 15927,
+      "out_of_snapshot_reference_occurrences": 843870,
+      "reciprocal_edge_pair_count": 23,
+      "reference_entries_total": 870549,
+      "self_loop_count": 163,
+      "unique_canonical_ids": 18251,
+      "unique_internal_directed_edges": 26516,
+      "weakly_connected_components": 2357,
+      "works": 18251
+    },
+    "coverage": {
+      "abstract_inverted_index": {
+        "count": 12884,
+        "fraction": 0.705934,
+        "total": 18251
+      },
+      "doi": {
+        "count": 16713,
+        "fraction": 0.915731,
+        "total": 18251
+      },
+      "has_any_reference": {
+        "count": 16302,
+        "fraction": 0.893211,
+        "total": 18251
+      },
+      "title": {
+        "count": 18244,
+        "fraction": 0.999616,
+        "total": 18251
+      },
+      "valid_publication_year_1900_2100": {
+        "count": 18226,
+        "fraction": 0.99863,
+        "total": 18251
+      },
+      "venue_name_corrected_predicate": {
+        "count": 17440,
+        "fraction": 0.955564,
+        "total": 18251
+      }
+    },
+    "derived": {
+      "directed_density": 7.9608323e-05,
+      "isolated_node_fraction": 0.127335,
+      "largest_weak_component_fraction": 0.868336,
+      "mean_internal_out_degree": 1.452852
+    },
+    "doi": {
+      "duplicated_doi_groups": 5,
+      "unique_normalized_dois": 16708,
+      "works_sharing_a_doi": 10,
+      "works_with_doi": 16713
+    },
+    "reference_provenance": "referenced_works field only; qrels never read",
+    "years": {
+      "distribution": {
+        "1902": 4,
+        "1903": 1,
+        "1904": 2,
+        "1906": 3,
+        "1907": 1,
+        "1908": 2,
+        "1909": 2,
+        "1910": 1,
+        "1911": 1,
+        "1912": 1,
+        "1922": 1,
+        "1926": 2,
+        "1939": 2,
+        "1941": 2,
+        "1947": 1,
+        "1948": 1,
+        "1952": 1,
+        "1955": 1,
+        "1960": 1,
+        "1961": 1,
+        "1962": 1,
+        "1963": 2,
+        "1964": 2,
+        "1965": 3,
+        "1966": 2,
+        "1967": 2,
+        "1968": 3,
+        "1969": 8,
+        "1970": 3,
+        "1971": 152,
+        "1972": 99,
+        "1973": 112,
+        "1974": 144,
+        "1975": 126,
+        "1976": 151,
+        "1977": 134,
+        "1978": 146,
+        "1979": 160,
+        "1980": 6,
+        "1981": 4,
+        "1982": 6,
+        "1983": 7,
+        "1984": 4,
+        "1985": 9,
+        "1986": 10,
+        "1987": 6,
+        "1988": 12,
+        "1989": 10,
+        "1990": 12,
+        "1991": 14,
+        "1992": 7,
+        "1993": 16,
+        "1994": 19,
+        "1995": 17,
+        "1996": 11,
+        "1997": 24,
+        "1998": 22,
+        "1999": 17,
+        "2000": 25,
+        "2001": 33,
+        "2002": 33,
+        "2003": 33,
+        "2004": 58,
+        "2005": 51,
+        "2006": 54,
+        "2007": 53,
+        "2008": 66,
+        "2009": 70,
+        "2010": 71,
+        "2011": 84,
+        "2012": 78,
+        "2013": 85,
+        "2014": 73,
+        "2015": 79,
+        "2016": 85,
+        "2017": 79,
+        "2018": 59,
+        "2019": 56,
+        "2020": 2546,
+        "2021": 2527,
+        "2022": 2526,
+        "2023": 2521,
+        "2024": 2527,
+        "2025": 2589,
+        "2026": 251
+      },
+      "max_valid_year": 2026,
+      "min_valid_year": 1902,
+      "missing_publication_year_count": 22,
+      "out_of_range_publication_year_count": 3,
+      "valid_publication_year_count": 18226,
+      "works_in_snapshot_publication_year": 251
+    }
+  },
+  "protocol_b_cohorts": {
+    "dev_year": 2024,
+    "dev_year_reason": "latest year before test_year 2025 with at least 30 eligible sources",
+    "dev_year_rule": "latest_year_before_test_year_with_at_least_30_eligible_sources",
+    "eligible_definition": "valid publication year; non-empty title and abstract; at least 2 distinct internal references with known target year <= source year",
+    "eligible_source_count_by_publication_year": {
+      "1971": 1,
+      "1972": 3,
+      "1973": 4,
+      "1974": 5,
+      "1975": 4,
+      "1976": 7,
+      "1977": 8,
+      "1978": 10,
+      "1979": 11,
+      "1980": 2,
+      "1982": 2,
+      "1984": 1,
+      "1985": 2,
+      "1986": 2,
+      "1987": 1,
+      "1989": 1,
+      "1990": 3,
+      "1991": 1,
+      "1993": 1,
+      "1994": 3,
+      "1995": 1,
+      "1996": 2,
+      "1997": 2,
+      "1998": 4,
+      "1999": 4,
+      "2000": 5,
+      "2001": 7,
+      "2002": 10,
+      "2003": 7,
+      "2004": 12,
+      "2005": 14,
+      "2006": 11,
+      "2007": 10,
+      "2008": 20,
+      "2009": 22,
+      "2010": 20,
+      "2011": 15,
+      "2012": 21,
+      "2013": 18,
+      "2014": 14,
+      "2015": 11,
+      "2016": 12,
+      "2017": 16,
+      "2018": 9,
+      "2019": 10,
+      "2020": 512,
+      "2021": 563,
+      "2022": 565,
+      "2023": 663,
+      "2024": 563,
+      "2025": 579,
+      "2026": 3
+    },
+    "floors_applied": {
+      "minimum_dev_queries": 30,
+      "minimum_eligible_references": 2,
+      "minimum_novel_candidates_per_query": 100,
+      "minimum_test_queries": 50
+    },
+    "max_eligible_sources_in_any_year": 663,
+    "novel_candidate_universe_lower_bound": {
+      "max": 18223,
+      "median": 10335,
+      "min": 206,
+      "sources_below_minimum_novel_candidates": 0,
+      "sources_measured": 3797
+    },
+    "snapshot_year": 2026,
+    "test_year": 2025,
+    "test_year_reason": "latest completed year before 2026 with at least 50 eligible sources",
+    "test_year_rule": "latest_completed_year_before_snapshot_year_with_at_least_50_eligible_sources",
+    "total_eligible_sources": 3797
+  },
+  "provenance": {
+    "exit_code_semantics": {
+      "0": "report measured (gate decision may still be NO_GO — data, not failure)",
+      "1": "fatal missing resource / data integrity failure; no fabricated stats"
+    },
+    "inputs": {
+      "protocol_config": {
+        "bytes": 21481,
+        "path": "configs/protocol_v1.json",
+        "sha256": "8b9be0ea50c79462b6736db5c392ead093a4f7f78732914902e1ee81d9b02306"
+      },
+      "scidocs_corpus": {
+        "bytes": 257334350,
+        "path": "data/raw/beir/scidocs/corpus.jsonl",
+        "sha256": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc"
+      },
+      "scifact_corpus": {
+        "bytes": 8106566,
+        "path": "data/raw/beir/scifact/corpus.jsonl",
+        "sha256": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6"
+      },
+      "snapshot_manifest": {
+        "bytes": 47948,
+        "path": "data/manifests/openalex_core.json",
+        "sha256": "e0df3f9cd9b257a2b874794ec3c0c91f380f0aca317d0d2b66bf8862504261c8"
+      },
+      "works_jsonl": {
+        "bytes": 150651587,
+        "path": "data/processed/openalex/works.jsonl",
+        "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+      }
+    },
+    "snapshot_verification": {
+      "manifest_sha256_of_works": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4",
+      "retrieved_completed_at": "2026-09-16T20:44:01.099407+00:00",
+      "snapshot_id": "openalex-core-03b28664fca6",
+      "snapshot_year": 2026,
+      "verified": true
+    }
+  },
+  "qrels_used": false,
+  "runtime": {
+    "platform": "win32",
+    "python": "3.12.14"
+  },
+  "schema_version": 1,
+  "status": "MEASURED",
+  "task_id": "SG-014"
+}

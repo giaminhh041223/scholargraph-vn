@@ -1,0 +1,5 @@
+# Direct SG-008 verification dependencies; Python 3.12.14 tested.
+# C trec_eval reference bindings, not a Python reimplementation.
+pytrec-eval-terrier==0.5.10
+pydantic==2.13.5
+pytest==8.4.2

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScholarGraph VN — Tìm kiếm</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>ScholarGraph VN</h1>
+  <p class="sub">Tìm kiếm bài báo khoa học (snapshot: {{ snapshot }}, {{ docs }} tài liệu)</p>
+</header>
+<main>
+  <form id="search-form">
+    <input id="q" name="q" type="text" placeholder="Nhập truy vấn tiếng Anh…" required minlength="1">
+    <select id="method" name="method">
+      <option value="bm25">BM25</option>
+      <option value="dense">Dense (bge-base)</option>
+      <option value="hybrid">Hybrid RRF</option>
+    </select>
+    <input id="top_k" name="top_k" type="number" value="10" min="1" max="100">
+    <button type="submit">Tìm kiếm</button>
+  </form>
+  <p id="status" role="status"></p>
+  <section id="results"></section>
+  <section id="detail" hidden>
+    <h2>Chi tiết</h2>
+    <div id="detail-body"></div>
+    <h3>Tài liệu liên quan</h3>
+    <div id="related"></div>
+  </section>
+</main>
+<footer>
+  <p>Giải thích: mỗi kết quả ghi phương pháp truy xuất. Metadata thiếu (năm/DOI) hiển thị “không có”, không bịa.
+  Lọc tiêu đề áp dụng trong pool top-100 (xem API).</p>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

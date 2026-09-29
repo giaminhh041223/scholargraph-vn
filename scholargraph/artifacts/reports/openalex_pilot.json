@@ -1,0 +1,134 @@
+{
+  "acquisition": {
+    "active_request_seconds": 39.612,
+    "api_cost_usd_reported_by_meta": 0.002,
+    "last_rate_limit_headers": {
+      "x-ratelimit-credits-used": "1",
+      "x-ratelimit-limit": "1000",
+      "x-ratelimit-remaining": "968",
+      "x-ratelimit-reset": "33763"
+    },
+    "mean_active_request_seconds_per_page": 1.980618,
+    "mean_api_page_cost_usd": 0.0001,
+    "projections_are_linear_estimates_not_commitments": {
+      "10000": {
+        "estimated_active_request_seconds": 198.062,
+        "estimated_api_cost_usd": 0.01,
+        "estimated_raw_jsonl_bytes": 53569900,
+        "pages_at_same_per_page": 100
+      },
+      "20000": {
+        "estimated_active_request_seconds": 396.124,
+        "estimated_api_cost_usd": 0.02,
+        "estimated_raw_jsonl_bytes": 107139800,
+        "pages_at_same_per_page": 200
+      }
+    }
+  },
+  "counts": {
+    "api_records_returned": 2000,
+    "internal_reference_occurrences": 190,
+    "isolated_nodes_in_induced_snapshot": 1779,
+    "pages": 20,
+    "references_to_openalex_works": 20102,
+    "retries": 0,
+    "unique_internal_directed_edges": 190,
+    "unique_openalex_ids": 2000,
+    "works": 2000
+  },
+  "coverage": {
+    "abstract_inverted_index": {
+      "count": 1208,
+      "fraction": 0.604
+    },
+    "authorship": {
+      "count": 1924,
+      "fraction": 0.962
+    },
+    "doi": {
+      "count": 1202,
+      "fraction": 0.601
+    },
+    "has_any_reference": {
+      "count": 837,
+      "fraction": 0.4185
+    },
+    "internal_reference_occurrence_fraction": 0.009452,
+    "title": {
+      "count": 1996,
+      "fraction": 0.998
+    },
+    "valid_publication_year_1900_2100": {
+      "count": 1975,
+      "fraction": 0.9875
+    },
+    "venue": {
+      "count": 2000,
+      "fraction": 1.0
+    }
+  },
+  "known_limitations": [
+    "This is a frozen local extraction from the continuously updated live API, not an official bulk snapshot release.",
+    "The seeded random sample is reproducible only against an unchanged upstream database; local page hashes define this snapshot.",
+    "topics.id selection uses any assigned OpenAlex topic; topic assignments are model-inferred and can introduce selection bias.",
+    "OpenAlex referenced_works contains only references OpenAlex successfully matched to another work.",
+    "Internal-edge coverage is conditional on this topic sample and does not estimate all out-of-snapshot references as missing metadata.",
+    "Linear 10K/20K cost, time, and size projections exclude rate-limit waits and changes in record size or API pricing."
+  ],
+  "measured_at": "2026-09-15T14:37:19.525416+00:00",
+  "protocol_b_feasibility_inputs": {
+    "cohort_selection_deferred_to": "SG-014",
+    "eligible_definition": "valid year; non-empty title and abstract; at least two distinct internal references with target year <= source year",
+    "eligible_source_count_by_publication_year": {
+      "1990": 1,
+      "1997": 1,
+      "2001": 1,
+      "2004": 1,
+      "2005": 1,
+      "2008": 2,
+      "2010": 2,
+      "2011": 2,
+      "2012": 1,
+      "2013": 1,
+      "2016": 2,
+      "2017": 1,
+      "2018": 1,
+      "2022": 2,
+      "2024": 2
+    }
+  },
+  "query_fingerprint": "3c6a3a485dfc7c694334ad9ea2b492883fbaba1b847ec5e254f02ed76d7c02f0",
+  "schema_version": 1,
+  "selection": {
+    "corpus": "core",
+    "endpoint": "https://api.openalex.org/works",
+    "fields": [
+      "id",
+      "doi",
+      "title",
+      "publication_year",
+      "abstract_inverted_index",
+      "authorships",
+      "primary_location",
+      "cited_by_count",
+      "referenced_works",
+      "primary_topic",
+      "topics",
+      "updated_date",
+      "type",
+      "language",
+      "is_retracted",
+      "is_paratext"
+    ],
+    "filter": "topics.id:T10286",
+    "paging": "basic_page_over_seeded_sample",
+    "per_page": 100,
+    "sample_seed": "20260915",
+    "sample_size": 2100,
+    "target_count": 2000,
+    "topic_id": "T10286",
+    "topic_name": "Information Retrieval and Search Behavior"
+  },
+  "status": "MEASURED",
+  "task_id": "SG-013"
+}

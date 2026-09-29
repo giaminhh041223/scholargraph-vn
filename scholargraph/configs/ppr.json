@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "config_id": "ppr-v1",
+  "task_id": "SG-023",
+  "created_at": "2026-09-17T15:40:00+07:00",
+  "status": "frozen_for_dev",
+  "protocol_reference": {
+    "path": "configs/protocol_v1.json",
+    "section": "5.3",
+    "formula": "p(t+1) = 0.85 P^T p(t) + 0.15 v; p(0) = v",
+    "damping": 0.85,
+    "tol_l1": 1e-8,
+    "max_iter": 200
+  },
+  "seeds": {
+    "source": "top_20_hybrid_rrf_in_C100",
+    "teleport": "v(d) = RRF(d) / sum_seed RRF, else 0",
+    "max_seeds": 20,
+    "empty_seeds": "input_failure_never_qrels_fallback"
+  },
+  "graph": {
+    "matrix": "row-normalized out-degree on G_mask, dangling rows replaced by v",
+    "directed": true,
+    "weighted": false
+  },
+  "output": {
+    "expansion": "off_in_core",
+    "final_set": "C100_unchanged_rerank_only",
+    "cache_identity": ["graph_hash", "seed_hash", "damping", "tol"]
+  }
+}

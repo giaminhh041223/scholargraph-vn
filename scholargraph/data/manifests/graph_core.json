@@ -1,0 +1,413 @@
+{
+  "artifact_type": "graph_masked_split_manifest",
+  "audit": {
+    "path": "artifacts/reports/graph_audit.json",
+    "sha256": "8b7c4cf5b0d775d81a71898f02acde195a9f3c9728c4b53f2857fe570297dd39",
+    "status": "PASS"
+  },
+  "command": [
+    "--works",
+    "data/processed/openalex/works.jsonl",
+    "--manifest",
+    "data/manifests/openalex_core.json",
+    "--protocol",
+    "configs/protocol_v1.json",
+    "--gate-report",
+    "artifacts/reports/graph_feasibility_core.json",
+    "--protocol-doc",
+    "docs/GRAPH_PROTOCOL.md",
+    "--out-dir",
+    "data/processed/graph",
+    "--graph-manifest",
+    "data/manifests/graph_core.json",
+    "--audit",
+    "artifacts/reports/graph_audit.json"
+  ],
+  "counts": {
+    "duplicate_reference_entry_count": 0,
+    "edges_removed_by_mask": 330,
+    "future_target_edges_both_years_known": 188,
+    "internal_directed_edges_postmask": 26186,
+    "internal_directed_edges_premask": 26516,
+    "internal_reference_occurrences_premask": 26516,
+    "isolated_nodes_postmask": 2325,
+    "isolated_nodes_premask": 2324,
+    "missing_abstract_count": 5367,
+    "missing_doi_count": 1538,
+    "missing_publication_year_count": 22,
+    "missing_title_count": 7,
+    "nodes": 18251,
+    "out_of_range_publication_year_count": 3,
+    "out_of_snapshot_distinct_targets": 511439,
+    "out_of_snapshot_reference_occurrences": 843870,
+    "reciprocal_edge_pairs_postmask": 23,
+    "reciprocal_edge_pairs_premask": 23,
+    "reciprocal_pairs_with_heldout_direction": 0,
+    "reference_entries_total": 870549,
+    "self_loop_works": [
+      "openalex:W1511283908",
+      "openalex:W1972647649",
+      "openalex:W2041517458",
+      "openalex:W2065524973",
+      "openalex:W2153150702",
+      "openalex:W2741603249",
+      "openalex:W2915731794",
+      "openalex:W2990100693",
+      "openalex:W3005404134",
+      "openalex:W3006863666",
+      "openalex:W3007347649",
+      "openalex:W3008902511",
+      "openalex:W3021727507",
+      "openalex:W3022197377",
+      "openalex:W3024284289",
+      "openalex:W3038979953",
+      "openalex:W3039409383",
+      "openalex:W3039500550",
+      "openalex:W3045509105",
+      "openalex:W3048879013",
+      "openalex:W3082972076",
+      "openalex:W3084178519",
+      "openalex:W3084923820",
+      "openalex:W3088655161",
+      "openalex:W3092264102",
+      "openalex:W3094012117",
+      "openalex:W3094886522",
+      "openalex:W3094948551",
+      "openalex:W3095994439",
+      "openalex:W3097828721",
+      "openalex:W3099803581",
+      "openalex:W3111168774",
+      "openalex:W3123693258",
+      "openalex:W3123833892",
+      "openalex:W3125696332",
+      "openalex:W3126082159",
+      "openalex:W3130648395",
+      "openalex:W3130814454",
+      "openalex:W3134656253",
+      "openalex:W3157702025",
+      "openalex:W3160028288",
+      "openalex:W3161627551",
+      "openalex:W3162855938",
+      "openalex:W3165043926",
+      "openalex:W3165217171",
+      "openalex:W3166258538",
+      "openalex:W3171520860",
+      "openalex:W3174959259",
+      "openalex:W3188379046",
+      "openalex:W3193305974",
+      "openalex:W3198415313",
+      "openalex:W3199422917",
+      "openalex:W3202363644",
+      "openalex:W4206107469",
+      "openalex:W4206917237",
+      "openalex:W4210889230",
+      "openalex:W4210986992",
+      "openalex:W4220675176",
+      "openalex:W4220882047",
+      "openalex:W4221064245",
+      "openalex:W4224291430",
+      "openalex:W4224919678",
+      "openalex:W4225289781",
+      "openalex:W4226277019",
+      "openalex:W4234529789",
+      "openalex:W4282836463",
+      "openalex:W4283075327",
+      "openalex:W4283208661",
+      "openalex:W4284973137",
+      "openalex:W4285060045",
+      "openalex:W4292731230",
+      "openalex:W4292829068",
+      "openalex:W4293217666",
+      "openalex:W4294335603",
+      "openalex:W4294363373",
+      "openalex:W4294707534",
+      "openalex:W4297007007",
+      "openalex:W4297907100",
+      "openalex:W4298156561",
+      "openalex:W4307575404",
+      "openalex:W4309457940",
+      "openalex:W4310360297",
+      "openalex:W4311575662",
+      "openalex:W4312088629",
+      "openalex:W4312125443",
+      "openalex:W4312747397",
+      "openalex:W4318830507",
+      "openalex:W4319161355",
+      "openalex:W4320031143",
+      "openalex:W4320507225",
+      "openalex:W4321782774",
+      "openalex:W4362521222",
+      "openalex:W4362584299",
+      "openalex:W4363677085",
+      "openalex:W4366133333",
+      "openalex:W4372358883",
+      "openalex:W4375841206",
+      "openalex:W4376881504",
+      "openalex:W4378499404",
+      "openalex:W4378835047",
+      "openalex:W4381948587",
+      "openalex:W4382024961",
+      "openalex:W4383109639",
+      "openalex:W4383741708",
+      "openalex:W4385270587",
+      "openalex:W4386248071",
+      "openalex:W4386554886",
+      "openalex:W4386615065",
+      "openalex:W4386644938",
+      "openalex:W4386945278",
+      "openalex:W4387021286",
+      "openalex:W4387099814",
+      "openalex:W4387345677",
+      "openalex:W4388268017",
+      "openalex:W4388483920",
+      "openalex:W4388955889",
+      "openalex:W4389508877",
+      "openalex:W4389751567",
+      "openalex:W4390010929",
+      "openalex:W4390950271",
+      "openalex:W4391244537",
+      "openalex:W4391380824",
+      "openalex:W4391630942",
+      "openalex:W4391974126",
+      "openalex:W4392003224",
+      "openalex:W4392163593",
+      "openalex:W4392406436",
+      "openalex:W4392593248",
+      "openalex:W4392875079",
+      "openalex:W4393094990",
+      "openalex:W4393098468",
+      "openalex:W4393205164",
+      "openalex:W4393309214",
+      "openalex:W4393383996",
+      "openalex:W4393428123",
+      "openalex:W4395093795",
+      "openalex:W4396869414",
+      "openalex:W4396888675",
+      "openalex:W4396956329",
+      "openalex:W4398878387",
+      "openalex:W4399045547",
+      "openalex:W4399389624",
+      "openalex:W4399786080",
+      "openalex:W4399793895",
+      "openalex:W4400099682",
+      "openalex:W4400118022",
+      "openalex:W4400681986",
+      "openalex:W4400910190",
+      "openalex:W4400935532",
+      "openalex:W4401667316",
+      "openalex:W4402489862",
+      "openalex:W4402875856",
+      "openalex:W4404486407",
+      "openalex:W4405682947",
+      "openalex:W4407611107",
+      "openalex:W4410335274",
+      "openalex:W4410743254",
+      "openalex:W4411271580",
+      "openalex:W4412401937",
+      "openalex:W4412707830",
+      "openalex:W4414030090",
+      "openalex:W4414084682",
+      "openalex:W4414679633"
+    ],
+    "self_loop_works_removed": 163,
+    "valid_year_nodes": 18226,
+    "works": 18251
+  },
+  "graph_hash": "d4ba550c0374d539b22d132c61f68828271e4b502283c5322ef092e66a688501",
+  "hashes": {
+    "adjacency_masked": {
+      "bytes": 1099192,
+      "edge_count": 26186,
+      "path": "data/processed/graph/adjacency_masked.tsv",
+      "sha256": "d4ba550c0374d539b22d132c61f68828271e4b502283c5322ef092e66a688501"
+    },
+    "adjacency_premask": {
+      "bytes": 1113052,
+      "edge_count": 26516,
+      "path": "data/processed/graph/adjacency_premask.tsv",
+      "sha256": "5c2d29f022c331bd9d7ca3fdd65decfe622ef5d5341b240a7435a98a94b165e8"
+    },
+    "features_cutoff_degree": {
+      "bytes": 75204,
+      "line_count": 300,
+      "path": "data/processed/graph/features_cutoff_degree.jsonl",
+      "sha256": "33bb085a8596df8f2b71718f754122583ec8396d2e7c201a5ddda37618e0fae1"
+    },
+    "features_degree_masked": {
+      "bytes": 912235,
+      "path": "data/processed/graph/features_degree_masked.json",
+      "sha256": "942d0241f1744dab15e5727337c7ec1dd390f34e08e893026853d8c9c0d41d99"
+    },
+    "holdout_edges": {
+      "bytes": 13860,
+      "edge_count": 330,
+      "path": "data/processed/graph/holdout_edges.tsv",
+      "sha256": "2a46a69c101069d9145181aed2c94937b0b19b6b3cf595164ae5d5960ad7bbe0"
+    },
+    "mask_edges": {
+      "bytes": 27720,
+      "edge_count": 660,
+      "path": "data/processed/graph/mask_edges.tsv",
+      "sha256": "d9a1549baa9af283fcf01abff3c9c4a90a07bab6bfc465019a1db011810c5222"
+    },
+    "split_queries": {
+      "bytes": 7821,
+      "path": "data/processed/graph/split_queries.json",
+      "sha256": "5b61de56e5008b77999ee6cbd4ec9bc573d24afd82175ceedaed11f115d5b3b7"
+    }
+  },
+  "holdout": {
+    "caps": {
+      "maximum_dev_queries": 100,
+      "maximum_test_queries": 200
+    },
+    "dev_year": 2024,
+    "edge_sort_rule": "sha256(UTF8('20260915|u|v'))_ascending_then_target_id",
+    "eligible_sources_by_cohort": {
+      "dev": 563,
+      "test": 579
+    },
+    "excluded_by_novel_floor": {
+      "dev": 0,
+      "test": 0
+    },
+    "excluded_by_split_minimums": {
+      "dev": 0,
+      "test": 0
+    },
+    "floors": {
+      "minimum_dev_queries": 30,
+      "minimum_eligible_references": 2,
+      "minimum_novel_candidates_per_query": 100,
+      "minimum_test_queries": 50
+    },
+    "heldout_count_rule": "min(R-1,max(1,ceil(0.2*R)))",
+    "heldout_edges_by_cohort": {
+      "dev": 119,
+      "test": 211
+    },
+    "heldout_edges_total": 330,
+    "heldout_fraction": 0.2,
+    "heldout_fraction_exact": "1/5",
+    "heldout_per_query_range": {
+      "dev": {
+        "max": 8,
+        "min": 1
+      },
+      "test": {
+        "max": 4,
+        "min": 1
+      }
+    },
+    "mask_edges_total": 660,
+    "mask_reverse_counterpart_edges": 330,
+    "mask_reverse_only_absent_from_premask": 330,
+    "mask_scope": [
+      "all_dev_heldout_edges",
+      "all_test_heldout_edges",
+      "reverse_counterparts"
+    ],
+    "minimum_heldout": 1,
+    "minimum_observed": 1,
+    "novel_candidates_selected_range": {
+      "dev": {
+        "max": 15384,
+        "min": 15357
+      },
+      "test": {
+        "max": 17973,
+        "min": 17962
+      }
+    },
+    "observed_edges_by_cohort": {
+      "dev": 217,
+      "test": 342
+    },
+    "qualifying_sources_by_cohort": {
+      "dev": 563,
+      "test": 579
+    },
+    "query_selection_rule": "sha256(seed|canonical_source_id)_ascending_then_source_id",
+    "seed": 20260915,
+    "selected_queries": {
+      "dev": 100,
+      "test": 200
+    },
+    "test_year": 2025,
+    "total_eligible_sources_all_years": 3797
+  },
+  "interpretation_notes": [
+    "Heldout sets are computed for the selected dev/test query sources only (GRAPH_PROTOCOL §2.6 query selection with caps/floors); the mask scope is the global union H_dev ∪ H_test ∪ reverse per §4.1, not per-query. Non-query sources keep all internal edges in G_mask because their references are labels for no query; masking the heldout of every eligible source would be a protocol deviation requiring an ADR.",
+    "Reciprocal pairs with no heldout direction remain in G_mask per GRAPH_PROTOCOL §1.3 ('giữ nguyên tính có hướng trong raw'); every pair with a heldout direction is removed in both directions (audited: two_way_heldout_residual = 0).",
+    "Works with missing or out-of-range publication year stay as graph nodes (consistent with the SG-014/SG-015 gate statistics) but can be neither queries nor candidates and never enter a cutoff-induced subgraph.",
+    "heldout_count ceil is computed with exact rational arithmetic (Fraction(str(heldout_fraction))) to avoid binary floating-point boundary drift.",
+    "Edges whose target year exceeds the source year (both years known) remain in E_pre and G_mask as observed data; time legality is enforced only inside cutoff-induced features (GRAPH_PROTOCOL §3.2).",
+    "If post-floor query selection drops below minimum_dev_queries/minimum_test_queries the build fails loudly instead of emitting a below-floor split.",
+    "qrels/BEIR labels are never read (track B independent); cited_by_count is never used as a feature (Protocol v1 forbidden features)."
+  ],
+  "leakage_contract": {
+    "cited_by_count_used_as_feature": false,
+    "edge_source": "referenced_works only (OpenAlex)",
+    "features_derived_from": "adjacency_masked.tsv",
+    "qrels_or_beir_labels_used": false,
+    "ranker_visible_artifacts": [
+      "data/processed/graph/adjacency_premask.tsv",
+      "data/processed/graph/adjacency_masked.tsv",
+      "data/processed/graph/split_queries.json",
+      "data/processed/graph/features_degree_masked.json",
+      "data/processed/graph/features_cutoff_degree.jsonl"
+    ],
+    "trusted_artifacts": [
+      "data/processed/graph/holdout_edges.tsv",
+      "data/processed/graph/mask_edges.tsv"
+    ],
+    "trusted_artifacts_read_only_by": [
+      "evaluator",
+      "auditor"
+    ]
+  },
+  "mask_hash": "d9a1549baa9af283fcf01abff3c9c4a90a07bab6bfc465019a1db011810c5222",
+  "measured_at": "2026-09-17T04:30:04.384513+00:00",
+  "module": {
+    "id": "sg016-graph-build",
+    "version": "1.0.0"
+  },
+  "provenance": {
+    "gate_report": {
+      "decision_overall": "GO",
+      "measured_at": "2026-09-17T00:14:25.917823+00:00",
+      "path": "artifacts/reports/graph_feasibility_core.json",
+      "sha256": "c5b4b11b1d62fc7463697c6df17033d0946033a39c223e5f191ab363a96ec5a9"
+    },
+    "graph_protocol_doc": {
+      "path": "docs/GRAPH_PROTOCOL.md",
+      "sha256": "e5d5eec1c55dc59c2dbd2128f2ea7b593a3575a6dfdc77bede8691703a1b6134"
+    },
+    "protocol_config": {
+      "path": "configs/protocol_v1.json",
+      "sha256": "8b9be0ea50c79462b6736db5c392ead093a4f7f78732914902e1ee81d9b02306"
+    },
+    "snapshot_manifest": {
+      "path": "data/manifests/openalex_core.json",
+      "query_fingerprint": "03b28664fca637eace05c30819571ba33b1529a12c46bd780741cb9189fdb7ed",
+      "retrieved_completed_at": "2026-09-16T20:44:01.099407+00:00",
+      "sha256": "e0df3f9cd9b257a2b874794ec3c0c91f380f0aca317d0d2b66bf8862504261c8",
+      "snapshot_id": "openalex-core-03b28664fca6",
+      "snapshot_year": 2026,
+      "v2_fingerprint": "cb63697d054d667f7bb331db36b5380e3c0dbb901d9f9f28ab241bd372df812e"
+    },
+    "works_jsonl": {
+      "bytes": 150651587,
+      "path": "data/processed/openalex/works.jsonl",
+      "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+    }
+  },
+  "runtime": {
+    "platform": "win32",
+    "python": "3.12.14"
+  },
+  "schema_version": 1,
+  "split_hash": "5b61de56e5008b77999ee6cbd4ec9bc573d24afd82175ceedaed11f115d5b3b7",
+  "status": "COMPLETED",
+  "task_id": "SG-016"
+}

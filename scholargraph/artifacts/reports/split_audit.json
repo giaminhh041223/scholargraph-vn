@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "task": "SG-011",
+  "title": "Dataset Split & Leakage Audit Report",
+  "audit_timestamp": "2026-09-16T07:27:16.868949+07:00",
+  "split_audit_passed": true,
+  "errors": [],
+  "splits": {
+    "scifact_dev": {
+      "dataset": "scifact",
+      "split": "dev",
+      "source": "official_BEIR_train",
+      "role": "development_and_tuning",
+      "query_count": 809,
+      "qrel_count": 919,
+      "corpus_count": 5183,
+      "manifest": "data/splits/scifact_dev.json"
+    },
+    "scifact_test": {
+      "dataset": "scifact",
+      "split": "test",
+      "source": "official_BEIR_test",
+      "role": "final_evaluation_locked",
+      "query_count": 300,
+      "qrel_count": 339,
+      "corpus_count": 5183,
+      "manifest": "data/splits/scifact_test.json"
+    },
+    "scidocs_test": {
+      "dataset": "scidocs",
+      "split": "test",
+      "source": "official_BEIR_test",
+      "role": "final_evaluation_locked",
+      "query_count": 1000,
+      "qrel_count": 29928,
+      "corpus_count": 25657,
+      "manifest": "data/splits/scidocs_test.json"
+    }
+  },
+  "leakage_checks": {
+    "scifact_query_id_disjoint": true,
+    "scifact_query_id_overlap_count": 0,
+    "scifact_query_id_overlap_ids": [],
+    "scifact_query_text_overlap_count": 2,
+    "scifact_query_text_overlap_pairs": [
+      {
+        "test_query_id": "beir:scifact:1292",
+        "dev_query_id": "beir:scifact:1291",
+        "query_text": "there is no association between hnf4a mutations and diabetes risks."
+      },
+      {
+        "test_query_id": "beir:scifact:870",
+        "dev_query_id": "beir:scifact:871",
+        "query_text": "obesity decreases life quality."
+      }
+    ],
+    "scifact_referential_integrity": true,
+    "scidocs_referential_integrity": true,
+    "ranker_qrels_isolation_policy": "Rankers and retrievers must ingest only corpus documents and query texts. Qrel relevance labels are strictly confined to the Evaluator component."
+  },
+  "split_manifests": {
+    "scifact_dev": "data/splits/scifact_dev.json",
+    "scifact_test": "data/splits/scifact_test.json",
+    "scidocs_test": "data/splits/scidocs_test.json"
+  }
+}

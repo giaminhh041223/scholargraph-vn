@@ -50,3 +50,7 @@ page_20.png
 
 # Raw logs
 *.log
+
+# bn workspace extras
+tmp/
+.tmp/

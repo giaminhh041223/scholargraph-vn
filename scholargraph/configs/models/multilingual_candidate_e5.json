@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "multilingual_encoder_config",
+  "task_id": "SG-032",
+  "config_id": "multilingual-candidate-e5",
+  "model_id": "intfloat/multilingual-e5-base",
+  "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+  "pooling": "mean",
+  "normalize": true,
+  "similarity": "cosine",
+  "l2_normalize": true,
+  "embedding_dimension": 768,
+  "max_length": 512,
+  "prefix": "query: ",
+  "prefix_scope": "query_only",
+  "passage_prefix": "passage: ",
+  "license": "MIT",
+  "missing_embedding": "fail_not_drop_document",
+  "snapshot_local": "artifacts/cache/huggingface/hub/models--intfloat--multilingual-e5-base"
+}

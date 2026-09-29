@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "config_id": "dense-encoder-v1",
+  "task_id": "SG-017",
+  "created_at": "2026-09-16T23:04:43+07:00",
+  "status": "encoder_selected_pending_sg019_compute_pilot_and_sg026_dev_config_selection",
+  "track": "A",
+  "language": "en",
+  "scope_note": "SG-017 la task lua chon + tai lieu. Khong chay encoding, khong tai weights, khong do benchmark (thuoc SG-019/SG-026). Moi fact ve model co nguon URL + ngay truy cap; khong tra duoc thi ghi unknown.",
+  "protocol_reference": {
+    "path": "configs/protocol_v1.json",
+    "block": "retrieval.dense",
+    "similarity": "cosine",
+    "l2_normalize": true,
+    "missing_embedding": "fail_not_drop_document",
+    "selection_gate": "SG-017"
+  },
+  "selection": {
+    "config_id": "dense-a-bge-base-en-v1.5",
+    "model_id": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "revision_status": "verified_sha_of_main_at_access_time",
+    "revision_source_url": "https://huggingface.co/api/models/BAAI/bge-base-en-v1.5",
+    "revision_accessed_at": "2026-09-16",
+    "revision_note": "SHA cua nhanh main tai thoi diem truy cap (lastModified repo: 2024-02-21T03:00:19Z). Nhanh main co the di chuyen; SG-019 phai re-verify dung hash nay khi tai weights va ghi revision thuc te vao manifest shard.",
+    "architecture": "BertModel: hidden_size 768, num_hidden_layers 12, num_attention_heads 12, max_position_embeddings 512, position_embedding_type absolute (config.json cua repo)",
+    "parameters": "approx 0.1B params theo Safetensors size tren model card; con so tensor chinh xac khong duoc cong bo trong cac nguon da truy cap",
+    "pooling": "cls",
+    "pooling_source": "1_Pooling/config.json cua repo: pooling_mode_cls_token=true, pooling_mode_mean_tokens=false; vi du tren card: 'Perform pooling. In this case, cls pooling.'",
+    "normalize": true,
+    "normalize_source": "Vi du tren model card thuc hien 'normalize embeddings' truoc khi tinh cosine; protocol v1 retrieval.dense.l2_normalize=true",
+    "max_length": 512,
+    "adapter": null,
+    "prefix": "Represent this sentence for searching relevant passages: ",
+    "prefix_scope": "query_only",
+    "prefix_justification": "FAQ model card bge-*-v1.5: khuyen nghi them instruction cho short query de tim passage dai; 'In all cases, the documents/passages do not need to add the instruction.' Voi v1.5, khong dung instruction chi lam giam nhe chat luong retrieval. Corpus track A la title+abstract (van ban dai), query la claim/query ngan -> theo khuyen nghi query_only.",
+    "embedding_dimension": 768,
+    "license": "MIT",
+    "license_source": "Model card: 'License: mit'; FlagEmbedding README: 'FlagEmbedding is licensed under the MIT License.'; card ghi 'The released models can be used for commercial purposes free of charge.'",
+    "training_data_summary": "Card: 'We pre-train the models using retromae and train them on large-scale pairs data using contrastive learning.' Danh muc dataset cu the cho ban tieng Anh KHONG duoc liet ke trong model card va FlagEmbedding README da truy cap; bai bao lien ket tren card la C-Pack (arXiv:2309.07597, mo ta ho model tieng Trung). Ghi lai unknown theo nguyen tac khong suy dien qua nguon.",
+    "training_data_source": "https://huggingface.co/BAAI/bge-base-en-v1.5; https://github.com/FlagOpen/FlagEmbedding",
+    "sources": [
+      {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "model card: FAQ query instruction, dimension 768, seq length 512, license MIT, retromae + large-scale pairs data"},
+      {"url": "https://huggingface.co/api/models/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "sha=a5beb1e3e68b9ab74eb54cfd186867f64f240e1a, lastModified=2024-02-21T03:00:19Z, license:mit"},
+      {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/config.json", "accessed_at": "2026-09-16", "content": "BertModel, hidden 768, 12 layers, max_position_embeddings 512"},
+      {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/1_Pooling/config.json", "accessed_at": "2026-09-16", "content": "pooling_mode_cls_token=true, word_embedding_dimension 768"},
+      {"url": "https://github.com/FlagOpen/FlagEmbedding", "accessed_at": "2026-09-16", "content": "license MIT; khong liet ke dataset training tieng Anh"}
+    ],
+    "reasons": [
+      "Xay dung rieng cho embedding retrieval (s2p) voi cơ che query instruction duoc tai lieu hoa tren card; v1.5 'more reasonable similarity distribution' theo card.",
+      "max_seq_length 512 (vs 256 cua MiniLM) giam cat xien title+abstract; day la thuoc tinh cau hinh, khong phai claim chat luong da do.",
+      "License MIT cho phep nghien cuu/su dung hoc phan; cong bo miem phi ca muc dich thuong mai theo card.",
+      "0.1B params va dims 768 nam trong ngan sach compute da lap (COMPUTE_PLAN §7 du tru luu tru 20K x 768 x 4B ~ 61.4MB; T4 16GB free). SG-019 bat buoc chay compute pilot rieng voi model nay, khong ngo suy toc do MiniLM.",
+      "Pooling/normalization/prefix xac minh duoc trong repo (1_Pooling/config.json, config.json), phuc vu pin revision va tai lap."
+    ]
+  },
+  "dense_shortlist": [
+    {
+      "config_id": "dense-a-bge-base-en-v1.5",
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "role": "core_encoder_selected",
+      "pooling": "cls",
+      "normalize": true,
+      "max_length": 512,
+      "prefix_scope": "query_only"
+    },
+    {
+      "config_id": "dense-a-bge-small-en-v1.5",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "role": "shortlisted_alternative",
+      "pooling": "cls",
+      "normalize": true,
+      "max_length": 512,
+      "prefix_scope": "query_only"
+    },
+    {
+      "config_id": "dense-a-minilm-l6-v2",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "role": "shortlisted_compute_baseline",
+      "pooling": "mean",
+      "normalize": true,
+      "max_length": 256,
+      "prefix_scope": null
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "dense-a-bge-base-en-v1.5",
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+      "revision_status": "verified_sha_of_main_at_access_time",
+      "revision_source_url": "https://huggingface.co/api/models/BAAI/bge-base-en-v1.5",
+      "revision_accessed_at": "2026-09-16",
+      "architecture": "BertModel: hidden 768, 12 layers, 12 heads, max_position_embeddings 512, absolute position embeddings",
+      "parameters": "approx 0.1B params (Safetensors size tren card); so tensor chinh xac unknown",
+      "pooling": "cls",
+      "normalize": true,
+      "max_length": 512,
+      "adapter": null,
+      "prefix": "Represent this sentence for searching relevant passages: ",
+      "prefix_scope": "query_only",
+      "embedding_dimension": 768,
+      "license": "MIT",
+      "training_data_summary": "retromae pre-training + contrastive learning tren large-scale pairs data; danh muc dataset tieng Anh khong duoc liet ke trong nguon da truy cap (unknown)",
+      "usage_in_project": "selected_core",
+      "overlap_risk": "unknown_cannot_confirm_or_exclude",
+      "overlap_evidence": "Card chi noi 'large-scale pairs data' khong liet ke dataset; khong co bang chung card xac nhan hoac loai tru corpus SciFact/SCIDOCS. Khong suy dien qua nguon.",
+      "sources": [
+        {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "model card: mo ta, FAQ query instruction, dimension 768, seq length 512, license MIT, retromae + large-scale pairs data"},
+        {"url": "https://huggingface.co/api/models/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "sha=a5beb1e3e68b9ab74eb54cfd186867f64f240e1a, lastModified=2024-02-21T03:00:19Z, license:mit"},
+        {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/config.json", "accessed_at": "2026-09-16", "content": "BertModel, hidden_size 768, 12 layers, max_position_embeddings 512"},
+        {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/1_Pooling/config.json", "accessed_at": "2026-09-16", "content": "pooling_mode_cls_token=true, word_embedding_dimension 768"},
+        {"url": "https://github.com/FlagOpen/FlagEmbedding", "accessed_at": "2026-09-16", "content": "README khong liet ke dataset training tieng Anh; 'FlagEmbedding is licensed under the MIT License.'"}
+      ]
+    },
+    {
+      "candidate_id": "dense-a-bge-small-en-v1.5",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "revision_status": "verified_sha_of_main_at_access_time",
+      "revision_source_url": "https://huggingface.co/api/models/BAAI/bge-small-en-v1.5",
+      "revision_accessed_at": "2026-09-16",
+      "architecture": "BertModel (BGE family, cung dong bge-*-en-v1.5); khong tai config.json rieng cua repo small trong phien nay",
+      "parameters": "33.4M params (card: 'Model size 33.4M params')",
+      "pooling": "cls",
+      "normalize": true,
+      "max_length": 512,
+      "adapter": null,
+      "prefix": "Represent this sentence for searching relevant passages: ",
+      "prefix_scope": "query_only",
+      "embedding_dimension": 384,
+      "license": "MIT",
+      "training_data_summary": "retromae pre-training + contrastive learning tren large-scale pairs data; danh muc dataset tieng Anh khong duoc liet ke trong nguon da truy cap (unknown)",
+      "usage_in_project": "shortlisted_alternative",
+      "overlap_risk": "unknown_cannot_confirm_or_exclude",
+      "overlap_evidence": "Card chi noi 'large-scale pairs data' khong liet ke dataset; khong co bang chung card xac nhan hoac loai tru corpus SciFact/SCIDOCS.",
+      "sources": [
+        {"url": "https://huggingface.co/BAAI/bge-small-en-v1.5", "accessed_at": "2026-09-16", "content": "model card: 33.4M params, dimension 384, sequence length 512, FAQ instruction, license MIT"},
+        {"url": "https://huggingface.co/api/models/BAAI/bge-small-en-v1.5", "accessed_at": "2026-09-16", "content": "sha=5c38ec7c405ec4b44b94cc5a9bb96e735b38267a, lastModified=2024-02-22T03:36:23Z, license:mit"},
+        {"url": "https://huggingface.co/BAAI/bge-small-en-v1.5/raw/main/1_Pooling/config.json", "accessed_at": "2026-09-16", "content": "pooling_mode_cls_token=true, word_embedding_dimension 384"}
+      ]
+    },
+    {
+      "candidate_id": "dense-a-minilm-l6-v2",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "revision_status": "verified_sha_of_main_at_access_time",
+      "revision_source_url": "https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2",
+      "revision_accessed_at": "2026-09-16",
+      "architecture": "MiniLM-L6-H384 (BERT-based, base_model nreimers/MiniLM-L6-H384-uncased); maps sentences & paragraphs to a 384 dimensional dense vector space",
+      "parameters": "safetensors total 22,713,728 (F32 22,713,216 + I64 512) theo HF API",
+      "pooling": "mean",
+      "normalize": true,
+      "max_length": 256,
+      "adapter": null,
+      "prefix": null,
+      "prefix_scope": null,
+      "embedding_dimension": 384,
+      "license": "Apache-2.0",
+      "training_data_summary": ">1B sentence pairs (card ghi tong 1,170,060,424 tuples): Reddit, S2ORC citation pairs (abstract 116,288,806; title 52,603,982; title-abstract 41,769,185), WikiAnswers, PAQ, StackExchange, MS MARCO, GOOAQ, Yahoo Answers, SPECTER (embedding-data/SPECTER), Code Search, NLI, NQ, TriviaQA, ... Card ghi training sequence length gioi han 128 tokens.",
+      "usage_in_project": "shortlisted_compute_baseline",
+      "overlap_risk": "documented_scientific_pair_training_moderate_to_high",
+      "overlap_evidence": "Card liet ke ro S2ORC citation pairs va dataset SPECTER trong training mix; day la du lieu van ban khoa hoc quy mo lon, con SciFact/SCIDOCS la corpus abstract khoa hoc cong khai cung loai du lieu, nen mot phan van ban corpus co kha nang da xuat hien trong cap training (muc trung cu the chua duoc audit). Khong co bang chung qrels SciFact/SCIDOCS nam trong training.",
+      "sources": [
+        {"url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2", "accessed_at": "2026-09-16", "content": "model card: kien truc, 1B pairs + bang dataset (S2ORC, SPECTER, Reddit...), truncation 256 word pieces, mean pooling, F.normalize, license apache-2.0"},
+        {"url": "https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2", "accessed_at": "2026-09-16", "content": "sha=1110a243fdf4706b3f48f1d95db1a4f5529b4d41, lastModified=2026-06-01T06:29:13Z, tags dataset:s2orc + dataset:embedding-data/SPECTER, safetensors params"},
+        {"url": "artifacts/reports/compute_pilot.json", "accessed_at": "2026-09-16", "content": "SG-002: resolved_revision=1110a243fdf4706b3f48f1d95db1a4f5529b4d41 tai run 2026-09-15 (khop sha API 2026-09-16); 1065.48 docs/s tren T4"}
+      ]
+    },
+    {
+      "candidate_id": "dense-a-specter2-base",
+      "model_id": "allenai/specter2_base",
+      "revision": "3447645e1def9117997203454fa4495937bfbd83",
+      "revision_status": "verified_sha_of_main_at_access_time",
+      "revision_source_url": "https://huggingface.co/api/models/allenai/specter2_base",
+      "revision_accessed_at": "2026-09-16",
+      "architecture": "bert-base-uncased + adapters; finetuned tu allenai/scibert (scibert_scivocab_uncased)",
+      "parameters": "khong duoc cong bo trong cac nguon da truy cap (unknown)",
+      "pooling": "unknown_not_stated_on_card",
+      "normalize": true,
+      "max_length": 512,
+      "adapter": "allenai/specter2 (proximity) hoac allenai/specter2_adhoc_query (short raw text queries); load qua adapters.AutoAdapterModel + load_adapter(set_active)",
+      "prefix": null,
+      "prefix_scope": null,
+      "embedding_dimension": "not_stated_on_card",
+      "license": "Apache-2.0",
+      "training_data_summary": "Card: 'SPECTER2 has been trained on over 6M triplets of scientific paper citations' (dataset allenai/scirepeval); 'The base model is trained on citation links between papers and the adapters are trained on 8 large scale tasks'.",
+      "usage_in_project": "considered_not_shortlisted",
+      "overlap_risk": "documented_citation_pretraining_high",
+      "overlap_evidence": "Pretraining tren citation links giua cac paper khoa hoc (card: >6M triplets, SciRepEval) -> trung tiep voi huong du lieu citation cua SCIDOCS (homepage BEIR dan ve SciDocs evaluation suite cua SPECTER co tac vu cite/co-cite; RW04/RW06 trong RELATED_WORK.md). Day la nguy co cong bo bat buoc neu dung.",
+      "not_selected_reasons": [
+        "Pretraining citation-based lam dense baseline cua track A mang tin hieu graph co san, lam suy YEU phep so sanh co kiem soat cua RQ1 (RQ2/3 moi do gia tri graph o tuyen rieng co masking).",
+        "Can he thong adapter (thu vien adapters, chon adapter theo task: proximity vs adhoc_query) -> vuot ngan sach 'nho/base' va them bien cau hinh adapter.",
+        "Card khong cong bo embedding dimension va khong tai lieu pooling -> thieu metadata bat buoc de pin cau hinh trung thuc."
+      ],
+      "sources": [
+        {"url": "https://huggingface.co/allenai/specter2_base", "accessed_at": "2026-09-16", "content": "model card: 6M citation triplets, adapters, max length 512, license apache-2.0, base scibert"},
+        {"url": "https://huggingface.co/api/models/allenai/specter2_base", "accessed_at": "2026-09-16", "content": "sha=3447645e1def9117997203454fa4495937bfbd83, lastModified=2024-12-04T07:45:10Z, tags dataset:allenai/scirepeval, license:apache-2.0"}
+      ]
+    }
+  ],
+  "overlap_disclosure": {
+    "statement": "Theo AGENTS.md §6 va RESEARCH_PROTOCOL §5.1: embedding pretrained bang du lieu trich dan/khoa hoc co the da tung thay mot phan corpus/query benchmark; nguy cơ overlap duoc cong bo truoc khi chay benchmark, khong suy dien qua nguon. Overlap khong lam mat hieu luc benchmark neu duoc cong bo va phan tich trung thuc; dense khong phai tin hieu duy nhat vi co BM25 va hybrid RRF.",
+    "benchmark_datasets": [
+      {
+        "dataset": "SciFact (BEIR track A)",
+        "corpus": "5,183 documents (title+abstract khoa hoc; claims + evidence abstracts; Wadden et al. 2020). Derivation S2ORC cua corpus khong duoc xac minh tu nguon cong khai da truy cap nen khong duoc khang dinh.",
+        "queries": "809 dev (official train) / 300 test",
+        "manifest": "data/manifests/beir_scifact.json"
+      },
+      {
+        "dataset": "SCIDOCS (BEIR track A)",
+        "corpus": "25,657 documents (title+abstract); homepage BEIR dan ve SciDocs evaluation suite cua SPECTER (repo allenai/scidocs, co tac vu cite/co-cite)",
+        "queries": "1,000 test",
+        "manifest": "data/manifests/beir_scidocs.json"
+      }
+    ],
+    "per_candidate_risk": {
+      "sentence-transformers/all-MiniLM-L6-v2": {
+        "risk_level": "moderate_to_high",
+        "basis": "Model card liet ke S2ORC citation pairs (116.3M abstract pairs + 52.6M title pairs + 41.8M title-abstract pairs) va dataset SPECTER trong training mix (>1B pairs). S2ORC/SPECTER la du lieu van ban khoa hoc quy mo lon; SciFact/SCIDOCS la corpus abstract khoa hoc cong khai cung loai du lieu, nen mot phan van ban corpus co kha nang nam trong tap cap training du card khong liet ke rieng tung van ban (muc trung cu the chua duoc audit).",
+        "not_claimed": "Khong co bang chung qrels/nhan relevance cua SciFact hoac SCIDOCS duoc dung trong training; khong co bang chung model da thay danh sach query test."
+      },
+      "BAAI/bge-base-en-v1.5": {
+        "risk_level": "unknown_cannot_confirm_or_exclude",
+        "basis": "Card ghi 'large-scale pairs data' khong liet ke dataset; FlagEmbedding README khong liet ke; khong xac minh duoc thanh phan training tu cac nguon da truy cap ngay 2026-09-16.",
+        "not_claimed": "Khong khang dinh overlap bang suy dien; khong khang dinh khong overlap."
+      },
+      "BAAI/bge-small-en-v1.5": {
+        "risk_level": "unknown_cannot_confirm_or_exclude",
+        "basis": "Same as BAAI/bge-base-en-v1.5."
+      },
+      "allenai/specter2_base": {
+        "risk_level": "high_documented",
+        "basis": "Card ghi train tren >6M citation triplets khoa hoc (SciRepEval); 'base model is trained on citation links between papers'. SCIDOCS la benchmark citation-based (homepage BEIR dan ve SciDocs evaluation suite cua SPECTER) nen nguy co trung corpus/citation context cao nhat trong cac ung vien.",
+        "not_claimed": "Khong co bang chung qrels SCIDOCS cu the nam trong tap train."
+      }
+    },
+    "mitigation_and_reporting": [
+      "Cong bo overlap trong MODEL_CARD.md va config nay truoc bat ky run retrieval nao (SG-019/SG-026/SG-027).",
+      "Bao cao overlap trong phan limitation cua bao cao cuoi; khong dung diem dense de tuyen bo chat luong 'tong quat' neu overlap da biet voi benchmark.",
+      "Dong encoder co overlap cao (SPECTER2) khong nam trong shortlist core; neu mo sau phai co ADR va bang ket qua rieng.",
+      "Chua co kha nang audit tung van ban corpus co nam trong tap training (khong cong bo per-document training membership cua cac model); muc do overlap bao cao la cap do 'nguy co theo tai lieu model card', khong phai do dem chinh xac."
+    ]
+  },
+  "track_vn_note": {
+    "task": "SG-032 (khong chot thay task nay)",
+    "status": "requirements_only_not_a_selection",
+    "requirements": [
+      "Encoder phai la multilingual ho tro query tieng Viet -> corpus khoa hoc tieng Anh; encoder tieng Anh cua track A KHONG tu chung minh hieu tieng Viet.",
+      "Pin dung mot config: model_id, revision, prefix/prompt, license, overlap disclosure; selection_gate=SG-032 theo protocol tracks.C.multilingual_dense.",
+      "Mot fixed config truoc relevance pooling; khong relevance grid; technical dev pilot khong can nhan relevance.",
+      "Ung vien da duoc RELATED_WORK RW11 ghi nhan: Multilingual E5 (Wang et al., 2024) la de xuat tham khao, KHONG phai cam ket chon.",
+      "Cross-lingual capability phai duoc chung minh qua danh gia tuyen C bang nhan nguoi, khong dua tren diem multilingual tong hop tren web."
+    ]
+  },
+  "unknowns": [
+    "Danh muc dataset training tieng Anh cua BAAI/bge-base-en-v1.5 va BAAI/bge-small-en-v1.5: khong duoc liet ke trong model card va FlagEmbedding README da truy cap ngay 2026-09-16 -> overlap voi SciFact/SCIDOCS khong xac nhan duoc cung khong loai tru duoc.",
+    "So tham so tensor chinh xac cua BAAI/bge-base-en-v1.5: chi co '0.1B params' (Safetensors size) tren card.",
+    "Pooling va embedding dimension cua allenai/specter2_base: khong duoc ghi tren card (chi ghi nho nhu ung vien bi loai).",
+    "Derivation chinh xac corpus benchmark (SciFact tu S2ORC, SCIDOCS tu SciDocs): khong xac minh duoc tu cac nguon cong khai da truy cap (abstract/README/HF dataset card de trong provenance; than bai bao PDF khong fetch duoc) -> overlap duoc bao o muc do nguy co theo model card, khong dua tren derivation da chung minh.",
+    "Throughput/latency va VRAM thuc te cua bge-base-en-v1.5 tren T4/CPU: CHUA DO; SG-019 bat buoc chay compute pilot voi model duoc chon (COMPUTE_PLAN §5: khong ngo suy toc do MiniLM sang model SG-017).",
+    "Chat luong retrieval thuc te cua tung config: CHUA DO; SG-026 chon tren SciFact dev nDCG@10 theo protocol §8.1. Tai lieu nay khong chua bat ky diem benchmark nao."
+  ],
+  "sources": [
+    {"url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2", "accessed_at": "2026-09-16", "content": "model card all-MiniLM-L6-v2"},
+    {"url": "https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2", "accessed_at": "2026-09-16", "content": "HF API: sha, lastModified, tags, safetensors params"},
+    {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "model card bge-base-en-v1.5"},
+    {"url": "https://huggingface.co/api/models/BAAI/bge-base-en-v1.5", "accessed_at": "2026-09-16", "content": "HF API: sha, lastModified, tags"},
+    {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/config.json", "accessed_at": "2026-09-16", "content": "config.json BertModel hidden 768 12 layers max_position_embeddings 512"},
+    {"url": "https://huggingface.co/BAAI/bge-base-en-v1.5/raw/main/1_Pooling/config.json", "accessed_at": "2026-09-16", "content": "1_Pooling config: CLS pooling, dim 768"},
+    {"url": "https://huggingface.co/BAAI/bge-small-en-v1.5", "accessed_at": "2026-09-16", "content": "model card bge-small-en-v1.5"},
+    {"url": "https://huggingface.co/api/models/BAAI/bge-small-en-v1.5", "accessed_at": "2026-09-16", "content": "HF API: sha, lastModified, tags"},
+    {"url": "https://huggingface.co/BAAI/bge-small-en-v1.5/raw/main/1_Pooling/config.json", "accessed_at": "2026-09-16", "content": "1_Pooling config: CLS pooling, dim 384"},
+    {"url": "https://huggingface.co/allenai/specter2_base", "accessed_at": "2026-09-16", "content": "model card specter2_base"},
+    {"url": "https://huggingface.co/api/models/allenai/specter2_base", "accessed_at": "2026-09-16", "content": "HF API: sha, lastModified, tags"},
+    {"url": "https://github.com/FlagOpen/FlagEmbedding", "accessed_at": "2026-09-16", "content": "README FlagEmbedding: license MIT, khong liet ke dataset training tieng Anh"},
+    {"url": "https://github.com/allenai/scidocs", "accessed_at": "2026-09-16", "content": "homepage BEIR SCIDOCS redirect ve day: SciDocs evaluation suite cua SPECTER; README khong mo ta cach dung corpus"},
+    {"url": "https://github.com/beir-cellar/beir", "accessed_at": "2026-09-16", "content": "bang datasets BEIR: SCIDOCS test-only 1,000 queries / 25K corpus, homepage allenai.org/data/scidocs"},
+    {"url": "https://huggingface.co/datasets/allenai/scifact", "accessed_at": "2026-09-16", "content": "HF dataset card SciFact: claims + evidence abstracts; provenance de trong -> khong khang dinh S2ORC-derived"},
+    {"url": "artifacts/reports/compute_pilot.json", "accessed_at": "2026-09-16", "content": "SG-002 compute pilot: resolved revision MiniLM, T4 1065.48 docs/s"},
+    {"url": "configs/protocol_v1.json", "accessed_at": "2026-09-16", "content": "protocol v1 retrieval.dense: cosine, l2_normalize, selection_gate SG-017"},
+    {"url": "docs/RESEARCH_PROTOCOL.md", "accessed_at": "2026-09-16", "content": "§5.1 dense contract, §8.1 dense shortlist budget"},
+    {"url": "docs/COMPUTE_PLAN.md", "accessed_at": "2026-09-16", "content": "§4 T4 pilot, §5 khong ngo suy toc do, §7 storage budget"},
+    {"url": "docs/RELATED_WORK.md", "accessed_at": "2026-09-16", "content": "RW04 SPECTER, RW06 SciRepEval/SPECTER2, RW11 Multilingual E5"},
+    {"url": "docs/DATA_CARD.md", "accessed_at": "2026-09-16", "content": "counts SciFact 5183/809/300, SCIDOCS 25657/1000, license dataset"}
+  ]
+}

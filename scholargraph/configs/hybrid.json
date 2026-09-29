@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "config_id": "hybrid-rrf-v1",
+  "task_id": "SG-020",
+  "created_at": "2026-09-17T14:10:00+07:00",
+  "status": "frozen_for_dev",
+  "protocol_reference": {
+    "path": "configs/protocol_v1.json",
+    "block": "retrieval.rrf",
+    "k": 60,
+    "rank_origin": 1,
+    "missing_contribution": 0,
+    "equal_weights": true
+  },
+  "rrf": {
+    "k": 60,
+    "rank_origin": 1,
+    "missing_contribution": 0,
+    "equal_weights": true,
+    "formula": "RRF(d) = sum_m 1/(k + rank_m(d))"
+  },
+  "depths": {
+    "per_retriever_depth": 100,
+    "union_maximum": 200,
+    "final_depth": 100
+  },
+  "tie_policy": {
+    "order": ["score_desc", "doc_id_asc_unicode_codepoints"],
+    "note": "Deterministic canonical order; NaN/Inf scores rejected, never ranked."
+  },
+  "inputs": {
+    "lexical": "Top-100 BM25 (SG-012/SG-018) rank order, unique doc_ids",
+    "dense": "Top-100 dense exact cosine (SG-019) rank order, unique doc_ids"
+  },
+  "leakage_contract": {
+    "ranker_forbidden": ["qrels", "labels", "ground_truth", "heldout_edges", "test_labels", "human_labels"],
+    "note": "Fusion reads only component rank orders; qrels never enter ranking path (enforced by BaseRanker)."
+  }
+}

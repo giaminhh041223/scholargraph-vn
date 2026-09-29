@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "multilingual_pilot_search",
+  "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "note": "descriptive top-5 for technical pilot; NO relevance metrics (labels at SG-033)",
+  "results": [
+    {
+      "query_id": "vn:dev:001",
+      "intent_family": "vitamin-d-bone",
+      "top": [
+        {
+          "doc_id": "beir:scifact:30720103",
+          "score": 0.7434
+        },
+        {
+          "doc_id": "beir:scifact:21553394",
+          "score": 0.6829
+        },
+        {
+          "doc_id": "beir:scifact:13312471",
+          "score": 0.6632
+        },
+        {
+          "doc_id": "beir:scifact:16256507",
+          "score": 0.6606
+        },
+        {
+          "doc_id": "beir:scifact:9555784",
+          "score": 0.6591
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:002",
+      "intent_family": "probiotic-ibs",
+      "top": [
+        {
+          "doc_id": "beir:scifact:44672703",
+          "score": 0.6731
+        },
+        {
+          "doc_id": "beir:scifact:25878014",
+          "score": 0.6209
+        },
+        {
+          "doc_id": "beir:scifact:26702468",
+          "score": 0.6136
+        },
+        {
+          "doc_id": "beir:scifact:6372244",
+          "score": 0.612
+        },
+        {
+          "doc_id": "beir:scifact:40096222",
+          "score": 0.6044
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:003",
+      "intent_family": "e-cigarette-cessation",
+      "top": [
+        {
+          "doc_id": "beir:scifact:5114940",
+          "score": 0.6256
+        },
+        {
+          "doc_id": "beir:scifact:16422880",
+          "score": 0.6094
+        },
+        {
+          "doc_id": "beir:scifact:34369306",
+          "score": 0.6048
+        },
+        {
+          "doc_id": "beir:scifact:8570690",
+          "score": 0.6041
+        },
+        {
+          "doc_id": "beir:scifact:11614737",
+          "score": 0.5892
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:004",
+      "intent_family": "sleep-memory",
+      "top": [
+        {
+          "doc_id": "beir:scifact:17973630",
+          "score": 0.5853
+        },
+        {
+          "doc_id": "beir:scifact:8868863",
+          "score": 0.5583
+        },
+        {
+          "doc_id": "beir:scifact:11913139",
+          "score": 0.5535
+        },
+        {
+          "doc_id": "beir:scifact:24346598",
+          "score": 0.5373
+        },
+        {
+          "doc_id": "beir:scifact:20602517",
+          "score": 0.5121
+        }
+      ]
+    },
+    {
+      "query_id": "vn:dev:005",
+      "intent_family": "peer-review-gender-bias",
+      "top": [
+        {
+          "doc_id": "beir:scifact:16979690",
+          "score": 0.5692
+        },
+        {
+          "doc_id": "beir:scifact:7547329",
+          "score": 0.453
+        },
+        {
+          "doc_id": "beir:scifact:63858430",
+          "score": 0.4297
+        },
+        {
+          "doc_id": "beir:scifact:39652608",
+          "score": 0.4109
+        },
+        {
+          "doc_id": "beir:scifact:20008796",
+          "score": 0.3991
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "config_id": "candidate-policy-v1",
+  "task_id": "SG-021",
+  "created_at": "2026-09-17T14:30:00+07:00",
+  "status": "frozen_for_dev",
+  "pool": {
+    "per_retriever_depth": 100,
+    "union_maximum": 200,
+    "rerank_depth": 100,
+    "note": "Ablation và rerank dùng đúng cùng pool C100; reranker không được mở rộng universe ngầm."
+  },
+  "latency_budget": {
+    "retrieval_per_query_ms": 500,
+    "rerank_per_query_ms": 500,
+    "status": "target_not_measured",
+    "note": "Mục tiêu theo SG-021; số đo thật thuộc SG-040. Không điền số giả."
+  },
+  "oracle_definition": {
+    "recall_at_100": "fraction of relevant docs present in pool top-100 (per-method only)",
+    "recall_full_union": "fraction of relevant docs present anywhere in the FULL BM25+TF-IDF union (up to 200 docs); NOT comparable head-to-head with Recall@100",
+    "oracle_ndcg_at_10": "nDCG@10 of the ideal rerank restricted to the pool (relevant-in-pool first, linear gain, log2 discount) divided by full IDCG@10",
+    "answerable_rate": "fraction of queries with >=1 relevant doc in pool"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "module_version": "sg022-1.1.0",
+  "task_id": "SG-022",
+  "generated_at": "2026-09-17T07:10:04.195680+00:00",
+  "inputs": {
+    "adjacency": "data\\processed\\graph\\adjacency_masked.tsv",
+    "sha256": "d4ba550c0374d539b22d132c61f68828271e4b502283c5322ef092e66a688501",
+    "node_degrees": {
+      "path": "data\\processed\\graph\\features_degree_masked.json",
+      "sha256": "942d0241f1744dab15e5727337c7ec1dd390f34e08e893026853d8c9c0d41d99",
+      "edge_count": 26186
+    },
+    "qrels_used": false,
+    "command": [
+      "--adjacency",
+      "data\\processed\\graph\\adjacency_masked.tsv",
+      "--node-degrees",
+      "data\\processed\\graph\\features_degree_masked.json",
+      "--output",
+      "artifacts\\reports\\graph_baselines.json",
+      "--top-k",
+      "100"
+    ]
+  },
+  "graph": {
+    "nodes": 18251,
+    "edges": 26186,
+    "dangling_nodes": 2492,
+    "isolated_nodes": 2325
+  },
+  "pagerank": {
+    "damping": 0.85,
+    "tol_l1": 1e-08,
+    "max_iter": 200,
+    "iterations": 71,
+    "residual": 8.60098346970611e-09,
+    "mass": 1.0
+  },
+  "popularity_audit": {
+    "top_100_mass_share": 0.5003887949737825,
+    "top_100_indeg_overlap": 0.68
+  },
+  "fallback_policy": "Candidates outside the masked graph are reported as errors, never scored 0 silently."
+}

@@ -1,0 +1,158 @@
+{
+  "artifacts": {
+    "coverage_report": {
+      "path": "artifacts/reports/openalex_pilot.json",
+      "sha256": "c55dd5ca74e63edb6eece6966edc12c5521c6c17eea979841f95281736b90a27"
+    },
+    "raw_pages": [
+      {
+        "path": "data/raw/openalex/pages/page-00001.json",
+        "sha256": "7413de91e385d50ce1eba72d8fa6056e338fc7d0f721d9c2a2b59016480b0e9d"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00002.json",
+        "sha256": "c647968aee7976a7f3c6301e2691d33df5003226f094e1f9a11289184079af39"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00003.json",
+        "sha256": "6e4c30ff5576e6862b91b9bac8726e74cf7559e5cd285e80012b84ce57673989"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00004.json",
+        "sha256": "fb89b29ff916bbd5b119e97b396dff87da1e5bd55a14bb8a7248e27fd6f76774"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00005.json",
+        "sha256": "c8e71caec6240baba4c6c42aaba91640d4cb2755fb387418048815c4c009335a"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00006.json",
+        "sha256": "20c755c3eeca70ef5466463543ac0097891ad1e41032f5808af22dd6fee5447f"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00007.json",
+        "sha256": "af13ecf0192de423f2d7eb54d1f415d35911a86df5442a6f64690ad753f3682a"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00008.json",
+        "sha256": "3fc852e4c628d3aaa86dba2456913f7d14b746e63105ceea15833d1cd4e4c023"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00009.json",
+        "sha256": "e4ed03320bffb83dd0e9232d87c5bcb277f5ddeda3773fcb6f8aaf8758042336"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00010.json",
+        "sha256": "324f1a9c830af266b72d3dee4d2816711469d2a576115ed014ba0f8552a9fe09"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00011.json",
+        "sha256": "6ed7175f84cee6b7120425f162a62f31adeda5769b2da40fd20259a878adb54e"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00012.json",
+        "sha256": "e59842c995005374c46f539ef2c50996bba65baeadcfc846b75ca4c07f7ff429"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00013.json",
+        "sha256": "24c72eb1d5d7ff99eb9f4673814c6ac102706a95e38a066775521cdf4fe5dca4"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00014.json",
+        "sha256": "8edda4c899570fb42fe493fefa377082ed8f41fa44d344ec7f7853cefa60de5c"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00015.json",
+        "sha256": "5e6f5391b0a095bfc5d39935569a98e7e7df8130aabec495fe4dbc451a9b5148"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00016.json",
+        "sha256": "401d5fe1078c5fd7efacbbd003884062ec266abd5858865e1cc2778727e5be0b"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00017.json",
+        "sha256": "55544841c1781b78c275f7aa8e00ed3fe6f7953019fa0dea7a012403fb9faf72"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00018.json",
+        "sha256": "19942063627975dca2c164aeeef838e0a9cc00c866ff6e9f5111190bd2e12ca4"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00019.json",
+        "sha256": "88147e85bfef063d36b200cf9d913b7fd20960209b4494e5b3b7426eee9faab2"
+      },
+      {
+        "path": "data/raw/openalex/pages/page-00020.json",
+        "sha256": "ec1a62c3401e12c44a04cccb2ea2b2a9e27ba2a22e8c5a00bbea15a805a7e711"
+      }
+    ],
+    "works_jsonl": {
+      "bytes": 10713980,
+      "path": "data/raw/openalex/works.jsonl",
+      "sha256": "3f301e4fc6c9b0de1fa95f736d0ceff2fa6fac137c086e0716fc3afe761c4980"
+    }
+  },
+  "counts": {
+    "api_records_returned": 2000,
+    "duplicates_dropped_before_selection": 0,
+    "pages": 20,
+    "retries": 0,
+    "selected_unique_works": 2000
+  },
+  "dataset": "OpenAlex",
+  "id_namespace": {
+    "canonical_mapping": "strip URI prefix and prepend openalex:, e.g. openalex:W123",
+    "raw": "OpenAlex URI, e.g. https://openalex.org/W123"
+  },
+  "immutability": {
+    "completed_manifest_prevents_overwrite": true,
+    "resume_source_of_truth": "verified raw page cache"
+  },
+  "query_fingerprint": "3c6a3a485dfc7c694334ad9ea2b492883fbaba1b847ec5e254f02ed76d7c02f0",
+  "retrieved_completed_at": "2026-09-15T14:37:19.525416+00:00",
+  "retrieved_started_at": "2026-09-15T14:36:38.262439+00:00",
+  "schema_version": 1,
+  "selection": {
+    "corpus": "core",
+    "endpoint": "https://api.openalex.org/works",
+    "fields": [
+      "id",
+      "doi",
+      "title",
+      "publication_year",
+      "abstract_inverted_index",
+      "authorships",
+      "primary_location",
+      "cited_by_count",
+      "referenced_works",
+      "primary_topic",
+      "topics",
+      "updated_date",
+      "type",
+      "language",
+      "is_retracted",
+      "is_paratext"
+    ],
+    "filter": "topics.id:T10286",
+    "paging": "basic_page_over_seeded_sample",
+    "per_page": 100,
+    "sample_seed": "20260915",
+    "sample_size": 2100,
+    "target_count": 2000,
+    "topic_id": "T10286",
+    "topic_name": "Information Retrieval and Search Behavior"
+  },
+  "snapshot_id": "openalex-api-t10286-seed20260915-3c6a3a485dfc",
+  "snapshot_kind": "immutable_local_extraction_from_live_api",
+  "source": {
+    "api_documentation": "https://help.openalex.org/api/",
+    "authentication": "anonymous_or_bearer_header; credential_not_persisted",
+    "endpoint": "https://api.openalex.org/works",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "provider": "OpenAlex",
+    "topic_documentation": "https://help.openalex.org/data/topics/"
+  },
+  "status": "COMPLETED",
+  "task_id": "SG-013"
+}

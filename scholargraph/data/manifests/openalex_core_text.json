@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "openalex_text_subset_manifest",
+  "task_id": "SG-026",
+  "adr": "ADR-017 (proposed)",
+  "status": "COMPLETED",
+  "generated_at": "2026-09-18T03:33:43.395645+00:00",
+  "parent_snapshot": {
+    "manifest": "data/manifests/openalex_core.json",
+    "works_jsonl": "data/processed/openalex/works.jsonl",
+    "sha256": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4"
+  },
+  "postprocess": {
+    "processed_works": 18250,
+    "output_order": "canonical ID ascending"
+  },
+  "artifacts": {
+    "works_jsonl": {
+      "path": "data/processed/openalex/works_text.jsonl",
+      "sha256": "4819a46bf45083038ef8bbb14668a48cf94bd37d7469819963c090c59337d413",
+      "bytes": 150667157
+    }
+  },
+  "excluded_textless_works": [
+    {
+      "line": 29,
+      "id": "openalex:W126924136"
+    }
+  ],
+  "counts": {
+    "parent_works": 18251,
+    "text_works": 18250,
+    "excluded": 1
+  }
+}

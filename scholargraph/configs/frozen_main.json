@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "main_freeze",
+  "task_id": "SG-027",
+  "frozen_at": "2026-09-19T22:22:02+07:00",
+  "frozen_by": "bn/orchestrator_C (session SESSION-20260917-053)",
+  "git_head": "e959f682cb40433448c2d21183660389964333bf",
+  "freeze_rule": "Sau freeze: mọi thay đổi data/split/graph/model/config phải tạo freeze version mới (schema_version bump) + ADR ghi lý do; tuning trên test bị cấm vĩnh viễn.",
+  "data": {
+    "scifact": {
+      "data/raw/beir/scifact/corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+      "data/raw/beir/scifact/queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+      "data/raw/beir/scifact/qrels/train.tsv": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+      "data/raw/beir/scifact/qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c"
+    },
+    "scidocs": {
+      "data/raw/beir/scidocs/corpus.jsonl": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+      "data/raw/beir/scidocs/queries.jsonl": "3c85b68419bd579ff52edb58f9e7b32eb3d18bc83435edb71dbb68aaf79531d6",
+      "data/raw/beir/scidocs/qrels/test.tsv": "dcd3d7f77417294bb6f338537f3c28d8a5ea72b30fe6633f407fa85528767e35"
+    },
+    "openalex": {
+      "data/processed/openalex/works.jsonl": "04e7008e6e536d10adbd9acaba3d0e5a2e335035e958b216f09ad3c628fd60a4",
+      "data/processed/openalex/works_text.jsonl": "4819a46bf45083038ef8bbb14668a48cf94bd37d7469819963c090c59337d413"
+    }
+  },
+  "splits": {
+    "data/splits/scifact_dev.json": "65977e95d7eb36d3f929a3e99b27f1e21875c1d6e87d1766f2a3848f57fef1f7",
+    "data/splits/scifact_test.json": "71f2611137df722d7d0d2ba9b403ae696f709e09cf9ee232da4e85b94a4b3cda",
+    "data/splits/scidocs_test.json": "6b97c7b43b6633577ee404e100a4039a0b3adbce23fd4308c77d1c8d5a932372"
+  },
+  "graph": {
+    "data/manifests/graph_core.json": "1addba341a18e703fc56ae68b564e8352b9915b359eb5c07455db9600a3fb73e",
+    "data/processed/graph/adjacency_masked.tsv": "d4ba550c0374d539b22d132c61f68828271e4b502283c5322ef092e66a688501",
+    "data/processed/graph/holdout_edges.tsv": "2a46a69c101069d9145181aed2c94937b0b19b6b3cf595164ae5d5960ad7bbe0",
+    "data/processed/graph/features_degree_masked.json": "942d0241f1744dab15e5727337c7ec1dd390f34e08e893026853d8c9c0d41d99"
+  },
+  "models": {
+    "configs/models/dense_encoder.json": "b54c27e15e0ba23ce4da001af3e2f57ffb8bbffd761a0e5a6e477ea81e195fc0",
+    "configs/models/multilingual_candidate_e5.json": "bc4156762768200669f4342e1d3a4fb4c76b94838316228d5fcefd17d1eb7858",
+    "configs/models/multilingual_candidate_minilm.json": "56b3a65782cd52ba3909085abfe16fe0681dbf683f4dc5b7a079243c3c1013a4"
+  },
+  "configs": {
+    "configs/protocol_v1.json": "8b9be0ea50c79462b6736db5c392ead093a4f7f78732914902e1ee81d9b02306",
+    "configs/split_policy.json": "5fef6952a6761066b53f2db97b543f3a74370483a3cc728e70b865fa8856bf26",
+    "configs/tuning_space.json": "c0bf31a76348b52554643dd4c8013db83d0645d74c9a7e4f1e99cd06f10b31a1",
+    "configs/vn_methods.json": "e6568df819af6662afe7d143bc9912b35383012026abd4a8a3970764e04d2f77",
+    "configs/hybrid.json": "540a72d9d81a0a3100f4b1ab9ae2fd01532a8e296cf48e3fbd5ff8fe818d16f9",
+    "configs/ppr.json": "183c7bddd668374b6a87c975f691a93adab66ef1aeda70add310f750179c771a",
+    "configs/age_adjustment.json": "f3ca7c777f3d4eba323772d9d0c3579c3d3bd42b6ca9fec415f9b1f76cb791e6",
+    "configs/candidate_policy.json": "71321221b874d17a017836abb1850b5137e8e778b815b1e84460a39570e0effe"
+  },
+  "dense_index_pins": {
+    "scifact_bge": "67d2e184e949f5a7a11e0a482e5cee642bc093c74e5ee3300cb7ea9b8df5d9fa",
+    "scidocs_bge": "d002bcabf7a302b93a9c845f473440324ae1b25ae711b455aa734a3ec0c3de57",
+    "openalex_bge": "77d8074a6a4912e05fad1311c63737afc90e45feb5250999b16f1b94c4817ad5",
+    "scifact_e5_multilingual": "061134562ad28127a7625f7397c272dbcf771b8d1f64bf3f0b1f0400369a01e4",
+    "openalex_e5_multilingual": "0f2f39ca9ab88409386688428b97041b9114e99f5c81816848a03670fc404868"
+  },
+  "translation_pin": {
+    "model_id": "Helsinki-NLP/opus-mt-vi-en",
+    "revision": "c8d2853e77f5fae31124d993e0b35176b1c8914e",
+    "cache_sha256": "0ccd119d9ca5b6ea641ec27e5e3a7ded1ecf0aaf565de22816e474469202bf5c"
+  },
+  "tuning_selection": {
+    "track_A": "fixed_defaults_no_grid_search (bm25_positive_idf, tfidf_protocol, dense_bge-base, hybrid_rrf_k60)",
+    "track_B_best": {
+      "gamma": 0.3,
+      "lambda": 0.0,
+      "dev_nDCG@10": 0.13103199755444994,
+      "trial_id": "hybrid_ppr_g0.3_l0.0",
+      "registry": "artifacts/reports/b_dev_trials.json"
+    },
+    "track_C": "three fixed methods (translated_bm25, multilingual_dense=e5 pinned, vn_hybrid_rrf) — chọn default bằng pooled dev sau SG-033"
+  },
+  "evaluator": {
+    "version": "sg008-1.0.0",
+    "reference": "pytrec-eval-terrier 0.5.10"
+  },
+  "primary_comparison": {
+    "track_A_scifact": [
+      "bm25_positive_idf",
+      "tfidf_protocol",
+      "dense_bge-base",
+      "hybrid_rrf_k60"
+    ],
+    "track_A_scidocs": [
+      "bm25_positive_idf",
+      "dense_bge-base",
+      "hybrid_rrf_k60"
+    ],
+    "track_B": [
+      "global_pagerank_control",
+      "ppr_age_best_g0.3_l0.0"
+    ],
+    "track_C_vn": [
+      "translated_bm25",
+      "multilingual_dense_e5",
+      "vn_hybrid_rrf",
+      "(diagnostic) original_vi_bm25"
+    ],
+    "metrics": [
+      "nDCG@10",
+      "Recall@100",
+      "MRR@10",
+      "MAP@100",
+      "P@5"
+    ]
+  },
+  "ablations_planned": [
+    "SG-029: age adjustment on/off (B best có lambda=0 — kiểm tra lambda>0), RRF k, graph feature variants",
+    "per-intent error analysis VN"
+  ]
+}

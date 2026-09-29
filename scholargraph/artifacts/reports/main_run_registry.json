@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "task_id": "SG-028",
+  "generated_at": "2026-09-21T10:51:39.226773+00:00",
+  "frozen_manifest": "configs/frozen_main.json",
+  "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
+  "git_head": "e4c1a7e95612fcb57f1a9d904c2fedf8df76be9c",
+  "track_A_runs": [
+    {
+      "method": "bm25",
+      "dataset": "scidocs",
+      "split": "test",
+      "run_id": "RUN-20260921-103429-bm25-scidocs-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-103429-bm25-scidocs-test",
+      "manifest_sha256": "7ca62e02602da042e7f2c148aa3b79e49be009877512d42b7ce406d481f437a3",
+      "metrics": {
+        "MAP@100": 0.10404207470846118,
+        "MRR@10": 0.27077936507936506,
+        "P@5": 0.1092,
+        "Recall@100": 0.34953333333333336,
+        "nDCG@10": 0.1520510358999793
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "dense",
+      "dataset": "scidocs",
+      "split": "test",
+      "run_id": "RUN-20260921-104021-dense-scidocs-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-104021-dense-scidocs-test",
+      "manifest_sha256": "38eeb69e5e161432384c942ef9376764ec059f0796dbbc7a00f1e91224e2917c",
+      "metrics": {
+        "MAP@100": 0.15491454923696485,
+        "MRR@10": 0.358606746031746,
+        "P@5": 0.15880000000000002,
+        "Recall@100": 0.49568333333333336,
+        "nDCG@10": 0.2172458820187077
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "hybrid",
+      "dataset": "scidocs",
+      "split": "test",
+      "run_id": "RUN-20260921-104036-hybrid-scidocs-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-104036-hybrid-scidocs-test",
+      "manifest_sha256": "c238c445165e30de2f6001f285252323e2b572b1a3c2a4b01aadb4ad84e8a788",
+      "metrics": {
+        "MAP@100": 0.14211964608162145,
+        "MRR@10": 0.3367805555555556,
+        "P@5": 0.1466,
+        "Recall@100": 0.46753333333333336,
+        "nDCG@10": 0.19755991836357797
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "bm25",
+      "dataset": "scifact",
+      "split": "test",
+      "run_id": "RUN-20260921-103103-bm25-scifact-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-103103-bm25-scifact-test",
+      "manifest_sha256": "056f46e66308d9d9e020af45b75cda3e4ecc6bc9ab43afd0ed0d61f91b47516f",
+      "metrics": {
+        "MAP@100": 0.6259926297764248,
+        "MRR@10": 0.6327804232804233,
+        "P@5": 0.15666666666666668,
+        "Recall@100": 0.8892222222222221,
+        "nDCG@10": 0.6646598637127541
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "dense",
+      "dataset": "scifact",
+      "split": "test",
+      "run_id": "RUN-20260921-103405-dense-scifact-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-103405-dense-scifact-test",
+      "manifest_sha256": "f2e17c9f8bd8fd06b70c2846f6f93e6fa10c33d3ca069fe46240c9b7e64394af",
+      "metrics": {
+        "MAP@100": 0.6978264641184614,
+        "MRR@10": 0.7033862433862433,
+        "P@5": 0.182,
+        "Recall@100": 0.9666666666666667,
+        "nDCG@10": 0.740391287918679
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "hybrid",
+      "dataset": "scifact",
+      "split": "test",
+      "run_id": "RUN-20260921-103415-hybrid-scifact-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-103415-hybrid-scifact-test",
+      "manifest_sha256": "b7cba3e0800553736b832210b85cdae08e4ad92f0577d58226e1c569301ff543",
+      "metrics": {
+        "MAP@100": 0.6810008000760693,
+        "MRR@10": 0.6870489417989418,
+        "P@5": 0.1726666666666667,
+        "Recall@100": 0.9693333333333334,
+        "nDCG@10": 0.7204239389590927
+      },
+      "status": "COMPLETED"
+    },
+    {
+      "method": "tfidf",
+      "dataset": "scifact",
+      "split": "test",
+      "run_id": "RUN-20260921-103129-tfidf-scifact-test",
+      "run_dir": "artifacts\\runs\\RUN-20260921-103129-tfidf-scifact-test",
+      "manifest_sha256": "d6895722c36566a63b09b4e75c6a44d123decf372cace2a4887bafb43cef41e0",
+      "metrics": {
+        "MAP@100": 0.5865884013422721,
+        "MRR@10": 0.593744708994709,
+        "P@5": 0.162,
+        "Recall@100": 0.8915555555555554,
+        "nDCG@10": 0.632695291810751
+      },
+      "status": "COMPLETED"
+    }
+  ],
+  "track_B": {
+    "report": "artifacts/reports/b_trials_test.json",
+    "report_sha256": "d159d05e8bef894a94784d71cedeced187dfd2212b4520b36965d6b01ed23e16",
+    "frozen_weights": {
+      "gamma": 0.3,
+      "lambda": 0.0,
+      "source": "SG-026 dev selection via freeze (no test tuning)"
+    },
+    "arms": {
+      "ppr_age_best_g0.3_l0.0": {
+        "nDCG@10": 0.10037326504922445,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.08900396825396825,
+        "MAP@100": 0.08890372218633014,
+        "P@5": 0.025
+      },
+      "global_pagerank_control": {
+        "nDCG@10": 0.1081743314769434,
+        "Recall@100": 0.2325,
+        "MRR@10": 0.09909722222222221,
+        "MAP@100": 0.098743836795165,
+        "P@5": 0.026000000000000002
+      }
+    },
+    "queries": 200,
+    "completed_queries": 200,
+    "status": "COMPLETED"
+  },
+  "track_C_vn": {
+    "status": "chua do",
+    "reason": "Human labels arrive at SG-033; no scores reported."
+  }
+}

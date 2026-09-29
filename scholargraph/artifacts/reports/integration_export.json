@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "reference_export",
+  "generated_by": "scripts/export_references.py (SG-038)",
+  "missing_policy": "missing metadata is null in structured fields and '[không có]' in citation_text; never fabricated",
+  "counts": {
+    "requested": 4,
+    "exported": 4,
+    "with_doi": 2,
+    "missing_doi": 2,
+    "missing_year": 2
+  },
+  "records": [
+    {
+      "doc_id": "beir:scifact:195352",
+      "title": "Insulin action and resistance in obesity and type 2 diabetes",
+      "year": null,
+      "doi": null,
+      "venue": null,
+      "url": null,
+      "source_corpus": "beir-scifact-frozen",
+      "abstract_present": true,
+      "citation_text": "Insulin action and resistance in obesity and type 2 diabetes. [không có]."
+    },
+    {
+      "doc_id": "beir:scifact:32909242",
+      "title": "Contribution of traditional healers to a rural tuberculosis control programme in Hlabisa, South Africa.",
+      "year": null,
+      "doi": null,
+      "venue": null,
+      "url": null,
+      "source_corpus": "beir-scifact-frozen",
+      "abstract_present": true,
+      "citation_text": "Contribution of traditional healers to a rural tuberculosis control programme in Hlabisa, South Africa.. [không có]."
+    },
+    {
+      "doc_id": "openalex:W1678356000",
+      "title": "Greedy function approximation: A gradient boosting machine.",
+      "year": 2001,
+      "doi": "10.1214/aos/1013203451",
+      "venue": null,
+      "url": "https://doi.org/10.1214/aos/1013203451",
+      "source_corpus": "openalex-core-text-subset",
+      "abstract_present": true,
+      "citation_text": "Greedy function approximation: A gradient boosting machine.. 2001. https://doi.org/10.1214/aos/1013203451."
+    },
+    {
+      "doc_id": "openalex:W1003264260",
+      "title": "Preface",
+      "year": 2008,
+      "doi": "10.1017/cbo9780511809071.001",
+      "venue": null,
+      "url": "https://doi.org/10.1017/cbo9780511809071.001",
+      "source_corpus": "openalex-core-text-subset",
+      "abstract_present": true,
+      "citation_text": "Preface. 2008. https://doi.org/10.1017/cbo9780511809071.001."
+    }
+  ]
+}

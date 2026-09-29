@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "original_vi_bm25_diagnostic",
+  "diagnostic_only": true,
+  "never_a_pool_method": true,
+  "counts": {
+    "queries": 30,
+    "zero_token_queries": 0
+  },
+  "coverage_limit": "Vietnamese tokens almost never match English corpus terms; overlap is expected near zero",
+  "results": [
+    {
+      "query_id": "vn:dev:001",
+      "tokens": 15,
+      "top1": "beir:scifact:30720103",
+      "top1_score": 17.345581726945102
+    },
+    {
+      "query_id": "vn:dev:002",
+      "tokens": 13,
+      "top1": "beir:scifact:27731651",
+      "top1_score": 9.451138391407161
+    },
+    {
+      "query_id": "vn:dev:003",
+      "tokens": 14,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:dev:004",
+      "tokens": 11,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:dev:005",
+      "tokens": 16,
+      "top1": "beir:scifact:17897801",
+      "top1_score": 10.477618043997204
+    },
+    {
+      "query_id": "vn:dev:006",
+      "tokens": 16,
+      "top1": "beir:scifact:18375089",
+      "top1_score": 16.420211537453117
+    },
+    {
+      "query_id": "vn:dev:007",
+      "tokens": 15,
+      "top1": "beir:scifact:2605032",
+      "top1_score": 13.053194957298306
+    },
+    {
+      "query_id": "vn:dev:008",
+      "tokens": 10,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:dev:009",
+      "tokens": 17,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:dev:010",
+      "tokens": 16,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:001",
+      "tokens": 12,
+      "top1": "beir:scifact:40156901",
+      "top1_score": 13.647313152805395
+    },
+    {
+      "query_id": "vn:test:002",
+      "tokens": 12,
+      "top1": "beir:scifact:25453683",
+      "top1_score": 18.578889171184333
+    },
+    {
+      "query_id": "vn:test:003",
+      "tokens": 14,
+      "top1": "beir:scifact:7613033",
+      "top1_score": 12.333377179308387
+    },
+    {
+      "query_id": "vn:test:004",
+      "tokens": 14,
+      "top1": "beir:scifact:2424794",
+      "top1_score": 9.7193575022509
+    },
+    {
+      "query_id": "vn:test:005",
+      "tokens": 14,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:006",
+      "tokens": 16,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:007",
+      "tokens": 15,
+      "top1": "beir:scifact:27768226",
+      "top1_score": 15.448381328770514
+    },
+    {
+      "query_id": "vn:test:008",
+      "tokens": 18,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:009",
+      "tokens": 15,
+      "top1": "beir:scifact:16905344",
+      "top1_score": 15.59540011378618
+    },
+    {
+      "query_id": "vn:test:010",
+      "tokens": 15,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:011",
+      "tokens": 13,
+      "top1": "beir:scifact:21502234",
+      "top1_score": 14.719278450520006
+    },
+    {
+      "query_id": "vn:test:012",
+      "tokens": 14,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:013",
+      "tokens": 15,
+      "top1": "beir:scifact:9580772",
+      "top1_score": 10.87676660253775
+    },
+    {
+      "query_id": "vn:test:014",
+      "tokens": 11,
+      "top1": "beir:scifact:14724693",
+      "top1_score": 15.966531806547271
+    },
+    {
+      "query_id": "vn:test:015",
+      "tokens": 12,
+      "top1": "beir:scifact:2605032",
+      "top1_score": 13.053194957298306
+    },
+    {
+      "query_id": "vn:test:016",
+      "tokens": 13,
+      "top1": "beir:scifact:29460384",
+      "top1_score": 3.3666828310610137
+    },
+    {
+      "query_id": "vn:test:017",
+      "tokens": 18,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:018",
+      "tokens": 13,
+      "top1": null,
+      "top1_score": null
+    },
+    {
+      "query_id": "vn:test:019",
+      "tokens": 13,
+      "top1": "beir:scifact:21932297",
+      "top1_score": 7.38347869605598
+    },
+    {
+      "query_id": "vn:test:020",
+      "tokens": 15,
+      "top1": "beir:scifact:9580772",
+      "top1_score": 10.87676660253775
+    }
+  ]
+}

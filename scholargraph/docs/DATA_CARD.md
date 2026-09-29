@@ -103,16 +103,25 @@ Kết quả kiểm tra tự động chạy bởi `src/scholargraph/ingest/beir_a
 - **Nhận định:**
   - Không gian ID truy vấn hoàn toàn phân tách (`query_id_overlap_count = 0`).
   - Sự trùng lặp văn bản này tồn tại sẵn trong dữ liệu gốc của nhóm tác giả SciFact / BEIR.
-  - Vì dự án áp dụng mô hình Zero-shot / Pretrained Retrieval (không fine-tune tham số mạng nơ-ron trên train split), hiện tượng này không gây rò rỉ trọng số mô hình nhưng cần được lưu ý khi phân tích lỗi per-query.
+  - Không fine-tune không loại trừ rò rỉ khi lựa chọn cấu hình trên internal dev. Các query trùng nội dung phải được xử lý bằng split policy trước tuning; SG-010 chỉ phát hiện và báo cáo, không tự sửa split hoặc lọc benchmark.
+  - Trường `query_text_exact_overlap_count` đếm số văn bản riêng biệt sau `strip + casefold`; `query_text_exact_overlap_details` liệt kê mọi cặp query train/test khớp nhau. Với snapshot này có 2 văn bản và 2 cặp.
 
 ---
 
 ## 6. Tuân thủ Giao thức Nghiên cứu (Research Protocol Compliance)
 
-Dưới đây là các yêu cầu bắt buộc của Giao thức nghiên cứu v1 (Protocol v1) được bảo đảm và xác thực qua Auditor:
-1. **Không lọc dữ liệu ngầm (No Silent Filtering):** Toàn bộ 5.183 văn bản SciFact và 25.657 văn bản SCIDOCS bắt buộc phải được đưa vào candidate universe của mọi retriever (TF-IDF, BM25, Dense, RRF).
-2. **Không rò rỉ nhãn (No Label Leakage):** Qrels chỉ được cung cấp cho Evaluator để tính toán metric (nDCG@10, Recall@100, MRR@10, MAP@100, P@5). Bộ tìm kiếm (Indexers / Retrievers) hoàn toàn không được tiếp cận qrels.
-3. **Tính tái lập (Reproducibility):** Mọi mã nguồn xử lý và đánh giá đọc dữ liệu offline từ snapshot đã đóng băng, không tải lại qua mạng.
+SG-010 kiểm tra dữ liệu đầu vào; các yêu cầu downstream dưới đây vẫn phải được kiểm chứng tại module tương ứng:
+1. **Không lọc dữ liệu ngầm:** Auditor đọc toàn bộ corpus, không loại tài liệu thiếu abstract. Retriever phải dùng full corpus và áp dụng self-removal theo Protocol v1; auditor chưa chứng minh index/retriever thực hiện đúng điều này.
+2. **Không rò rỉ nhãn:** Auditor được đọc qrels để phát hiện lỗi. Ranker không được nhận qrels; ranh giới đó cần tests của interface/ranker và split audit, không suy ra từ data audit PASS.
+3. **Tính tái lập:** Lần audit đọc file local; báo cáo giữ hash đầu vào trước/sau và kiểm tra chúng không đổi. Provenance chính thức nằm ở manifests đã đối chiếu hash, không suy từ số lượng corpus hay số tài liệu thiếu abstract.
+
+### 6.1 Contract báo cáo khi có lỗi — auditor `sg010-2.0.0`
+
+- `schema_version=2`: mỗi component có `status`. Nếu file/split thiếu, parse lỗi hoặc dependency chưa audit được: `status=FAIL`, có `error`, số đo và nhóm số đo không khả dụng là JSON `null`. Không dùng 0 thay “chưa đo”. Split bắt buộc bị thiếu vẫn có entry FAIL trong `splits_audit`.
+- Một tập quan sát rỗng có `count=0`, nhưng mean/min/max/percentiles là `null`. Query trong qrels có toàn nhãn 0 là quan sát hợp lệ với số positive bằng 0; vẫn nằm trong mẫu số thống kê `positives_per_query_stats`.
+- Raw IDs phải là string không rỗng/không whitespace; query text phải là string không rỗng. Title-only và text-only được báo đúng missingness, nhưng kiểu dữ liệu sai, JSON trùng key và score ngoài 0/1/2 bị chặn. Positive self-qrel gây FAIL vì mâu thuẫn với self-removal.
+- CLI trả 1 và ghi báo cáo FAIL khi dữ liệu sai/thiếu. Nếu đường dẫn output không ghi được hoặc trỏ vào raw benchmark, CLI báo `AUDIT FAILED` trên stderr, trả 1; không thể ghi report vào đường dẫn bị cấm. Auditor không ghi đè raw để lưu lỗi.
+- Text overlap được báo thành anomaly; query ID collision làm FAIL. Dùng chung relevant document giữa hai split không tự nó là query leakage.
 
 ---
 

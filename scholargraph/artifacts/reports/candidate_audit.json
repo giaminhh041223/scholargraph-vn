@@ -1,0 +1,218 @@
+{
+  "per_method": {
+    "bm25": {
+      "queries": 809,
+      "mean_recall_at_100": 0.9102389781623403,
+      "mean_oracle_ndcg_at_10": 0.9116482311613745,
+      "answerable_rate": 0.9159456118665018,
+      "fully_missed_queries": 68
+    },
+    "tfidf": {
+      "queries": 809,
+      "mean_recall_at_100": 0.9124021425628348,
+      "mean_oracle_ndcg_at_10": 0.9135703329456831,
+      "answerable_rate": 0.9171817058096415,
+      "fully_missed_queries": 67
+    }
+  },
+  "union_oracle": {
+    "queries": 809,
+    "pool_depth": "full_union_up_to_200_not_top100",
+    "mean_recall_full_union": 0.9179645653069634,
+    "mean_oracle_ndcg_at_10": 0.9192726162494723,
+    "answerable_rate": 0.92336217552534,
+    "fully_missed_queries": 62
+  },
+  "dense": null,
+  "union_rescued_examples": [
+    {
+      "query_id": "beir:scifact:1008",
+      "relevant_docs": [
+        "beir:scifact:2547636"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:2547636"
+      ]
+    },
+    {
+      "query_id": "beir:scifact:1068",
+      "relevant_docs": [
+        "beir:scifact:4429668"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:4429668"
+      ]
+    },
+    {
+      "query_id": "beir:scifact:1314",
+      "relevant_docs": [
+        "beir:scifact:13072112",
+        "beir:scifact:16237005"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:16237005"
+      ]
+    },
+    {
+      "query_id": "beir:scifact:1397",
+      "relevant_docs": [
+        "beir:scifact:17717391"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:17717391"
+      ]
+    },
+    {
+      "query_id": "beir:scifact:91",
+      "relevant_docs": [
+        "beir:scifact:1084345"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:1084345"
+      ]
+    },
+    {
+      "query_id": "beir:scifact:92",
+      "relevant_docs": [
+        "beir:scifact:1084345"
+      ],
+      "relevant_in_union": [
+        "beir:scifact:1084345"
+      ]
+    }
+  ],
+  "inputs": {
+    "bm25_rankings": {
+      "path": "artifacts\\runs\\RUN-20260916-163653-bm25-scifact-dev\\rankings.jsonl",
+      "sha256": "9511878406a1a6eec9c9bc60a4c3db544f91ef96c5fba171b2287d802766842a"
+    },
+    "tfidf_rankings": {
+      "path": "artifacts\\runs\\RUN-20260916-191127-tfidf-scifact-dev\\rankings.jsonl",
+      "sha256": "0799dc729ec83a569a43c82075631de9bc837eedddd06a9aa42e184e02ce928e"
+    },
+    "qrels": {
+      "path": "data\\raw\\beir\\scifact\\qrels\\train.tsv",
+      "sha256": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d"
+    },
+    "per_query": {
+      "path": "artifacts\\runs\\RUN-20260916-163653-bm25-scifact-dev\\per_query.json",
+      "sha256": "df16527a6bcd4db2990c6aca8d9e8ed662fe0f46f6526ffb64e578d2d4614586"
+    },
+    "dense_rankings": null
+  },
+  "examples": [
+    {
+      "query_id": "beir:scifact:0",
+      "case": "candidate_miss",
+      "reason": "0/1 relevant docs in pool; reranker cannot recover papers never retrieved.",
+      "relevant_docs": [
+        "beir:scifact:31715818"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1008",
+      "case": "candidate_miss",
+      "reason": "0/1 relevant docs in pool; reranker cannot recover papers never retrieved.",
+      "relevant_docs": [
+        "beir:scifact:2547636"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1032",
+      "case": "candidate_miss",
+      "reason": "0/1 relevant docs in pool; reranker cannot recover papers never retrieved.",
+      "relevant_docs": [
+        "beir:scifact:6836086"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1033",
+      "case": "candidate_miss",
+      "reason": "0/1 relevant docs in pool; reranker cannot recover papers never retrieved.",
+      "relevant_docs": [
+        "beir:scifact:6836086"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1048",
+      "case": "candidate_miss",
+      "reason": "0/1 relevant docs in pool; reranker cannot recover papers never retrieved.",
+      "relevant_docs": [
+        "beir:scifact:12486491"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1002",
+      "case": "rank_error_candidate_present",
+      "reason": "1/1 relevant docs in pool but ranked low; reranking/fusion can help.",
+      "relevant_docs": [
+        "beir:scifact:13639330"
+      ],
+      "relevant_in_pool": [
+        "beir:scifact:13639330"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1067",
+      "case": "rank_error_candidate_present",
+      "reason": "1/1 relevant docs in pool but ranked low; reranking/fusion can help.",
+      "relevant_docs": [
+        "beir:scifact:4429668"
+      ],
+      "relevant_in_pool": [
+        "beir:scifact:4429668"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1096",
+      "case": "rank_error_candidate_present",
+      "reason": "1/1 relevant docs in pool but ranked low; reranking/fusion can help.",
+      "relevant_docs": [
+        "beir:scifact:29638116"
+      ],
+      "relevant_in_pool": [
+        "beir:scifact:29638116"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1109",
+      "case": "rank_error_candidate_present",
+      "reason": "1/2 relevant docs in pool but ranked low; reranking/fusion can help.",
+      "relevant_docs": [
+        "beir:scifact:13770184",
+        "beir:scifact:8582337"
+      ],
+      "relevant_in_pool": [
+        "beir:scifact:8582337"
+      ],
+      "pool_size": 100
+    },
+    {
+      "query_id": "beir:scifact:1161",
+      "case": "rank_error_candidate_present",
+      "reason": "1/1 relevant docs in pool but ranked low; reranking/fusion can help.",
+      "relevant_docs": [
+        "beir:scifact:13048272"
+      ],
+      "relevant_in_pool": [
+        "beir:scifact:13048272"
+      ],
+      "pool_size": 100
+    }
+  ],
+  "meta": {
+    "schema_version": 1,
+    "module_version": "sg021-1.1.0",
+    "task_id": "SG-021",
+    "generated_at": "2026-09-17T06:55:03.844204+00:00",
+    "dense": "chua_do_thieu_dense_run"
+  }
+}

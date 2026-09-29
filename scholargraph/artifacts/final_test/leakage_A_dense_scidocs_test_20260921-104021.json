@@ -1,0 +1,16 @@
+{
+  "artifact_kind": "final_test_leakage_audit",
+  "task_id": "SG-028",
+  "status": "PASS",
+  "generated_at": "2026-09-21T10:40:21.561252+00:00",
+  "track": "A",
+  "dataset": "scidocs",
+  "split": "test",
+  "data_hash": "328bb38854179c83ee40d4f49fae2ef7209ede7163785193cbdcd5906b28eecc",
+  "split_hash": "6b97c7b43b6633577ee404e100a4039a0b3adbce23fd4308c77d1c8d5a932372",
+  "evidence_notes": [
+    "Locked split manifests from SG-011 (dev/test disjoint query namespaces, corpus referential integrity, manifest consistency).",
+    "Ranking path reads corpus text + locked query text only; qrels are consumed solely by the evaluator after rankings are recorded (ranking_reads_qrels=false).",
+    "No graph features, no pretrained-query tuning, no test-driven config change (frozen defaults from SG-027)."
+  ]
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScholarGraph VN — Đồ thị trích dẫn</title>
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/graph-static/graph.css">
+</head>
+<body>
+<header>
+  <h1>ScholarGraph VN — Đồ thị trích dẫn</h1>
+  <p class="sub">Snapshot: {{ snapshot_id }} · Lấy dữ liệu: {{ snapshot_date }} · {{ nodes }} works ·
+    evaluated (G_mask): {{ edges_masked }} cạnh · full snapshot: {{ edges_premask }} cạnh</p>
+</header>
+<main>
+  <form id="graph-form">
+    <input id="doc_id" name="doc_id" type="text" placeholder="openalex:W1678356000" required minlength="1">
+    <select id="mode" name="mode">
+      <option value="evaluated" selected>Evaluated — G_mask (demo truy hồi)</option>
+      <option value="snapshot">Snapshot — full snapshot (tham khảo)</option>
+    </select>
+    <select id="hop" name="hop">
+      <option value="1" selected>Hop 1</option>
+      <option value="2">Hop 2</option>
+      <option value="3">Hop 3</option>
+    </select>
+    <input id="cap" name="cap" type="number" value="30" min="1" max="100" title="Cap số node láng giềng (1–100)">
+    <button type="submit">Vẽ neighborhood</button>
+  </form>
+  <p id="status" role="status"></p>
+  <section id="viz">
+    <div id="graph-wrap">
+      <svg id="graph-svg" role="img" aria-label="Neighborhood trích dẫn"></svg>
+    </div>
+    <aside id="detail"></aside>
+  </section>
+  <section id="panels">
+    <div id="legend">
+      <h2>Chú giải — cách đọc cited-by/cites</h2>
+      <ul>
+        <li><span class="arrow cites"></span><strong>cites</strong>: cạnh đi RA khỏi node đang xem —
+          node đang xem <strong>trích dẫn</strong> bài ở đầu mũi tên (bài đó nằm trong
+          <code>referenced_works</code> của node).</li>
+        <li><span class="arrow cited_by"></span><strong>cited-by</strong>: cạnh đi VÀO node đang xem —
+          bài ở ĐẦU kia mũi tên <strong>trích dẫn</strong> node đang xem (mũi tên luôn trỏ từ bài
+          trích dẫn tới bài được trích dẫn).</li>
+        <li><span class="arrow other"></span>Cạnh giữa hai node láng giềng (không chạm node đang xem) —
+          chiều mũi tên vẫn là chiều trích dẫn.</li>
+        <li><span class="swatch center"></span>Node đang xem &nbsp;
+          <span class="swatch cites"></span>bài nó trích dẫn &nbsp;
+          <span class="swatch cited_by"></span>bài trích dẫn nó &nbsp;
+          <span class="swatch both"></span>cả hai chiều &nbsp;
+          <span class="swatch multi_hop"></span>hop ≥ 2</li>
+        <li><span class="swatch query_ring"></span>Viền nét đứt: node thuộc bộ query dev/test
+          (chỉ chế độ evaluated, từ <code>split_queries.json</code>).</li>
+        <li><strong>Evaluated (mặc định):</strong> chỉ {{ edges_masked }} cạnh G_mask — đã loại
+          330 cạnh held-out và 330 cạnh đảo theo GRAPH_PROTOCOL §4; cạnh held-out
+          <strong>không bao giờ</strong> được đọc/hiển thị làm input của demo truy hồi.</li>
+        <li><strong>Snapshot:</strong> full snapshot {{ edges_premask }} cạnh nội bộ thật —
+          gồm cả cạnh sẽ bị holdout; <strong>chỉ tham khảo cấu trúc</strong>.</li>
+        <li>Metadata thiếu (tiêu đề/năm) hiển thị “không có”, không bịa.</li>
+      </ul>
+    </div>
+    <div id="node-list"></div>
+    <div id="provenance"></div>
+  </section>
+</main>
+<footer>
+  <p>Nguồn: data/processed/graph/adjacency_masked.tsv (evaluated) / adjacency_premask.tsv (snapshot),
+  xác minh SHA-256 theo data/manifests/graph_core.json (masked {{ hash_masked[:16] }}…, premask {{ hash_premask[:16] }}…).
+  Chi tiết cạnh: u→v nghĩa là u trích dẫn v (GRAPH_PROTOCOL §1.3). Không dùng CDN; chạy offline.</p>
+</footer>
+<script src="/graph-static/graph.js"></script>
+</body>
+</html>
