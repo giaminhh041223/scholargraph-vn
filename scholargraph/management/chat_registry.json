@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-29T12:58:00+07:00",
+  "updated_at": "2026-09-29T13:31:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -13,11 +13,6 @@
     {
       "task_id": "SG-033",
       "session_id": "SESSION-20260921-064",
-      "chat_id": "C"
-    },
-    {
-      "task_id": "SG-041",
-      "session_id": "SESSION-20260923-065",
       "chat_id": "C"
     }
   ],
@@ -1185,6 +1180,38 @@
       "actual_model": "gemini-3.1-pro",
       "actual_reasoning": "high",
       "log_path": "management/logs/SESSION-20260929-070-GEMINI.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "fresh_context_reviewer"
+    },
+    {
+      "session_id": "SESSION-20260929-071-CODEX",
+      "chat_id": "D",
+      "app_thread_id": null,
+      "agent_task_name": "cx2_fresh_venv_reproduce",
+      "task_ids": [
+        "SG-051",
+        "SG-041"
+      ],
+      "actual_model": "gpt-5.4-codex",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260929-071-CODEX.md",
+      "status": "completed",
+      "claimed_paths": [],
+      "role": "implementation_worker"
+    },
+    {
+      "session_id": "SESSION-20260929-072-GEMINI",
+      "chat_id": "V",
+      "app_thread_id": null,
+      "agent_task_name": "gm4_release_reviewer",
+      "task_ids": [
+        "SG-041",
+        "SG-051"
+      ],
+      "actual_model": "gemini-3.1-pro",
+      "actual_reasoning": "high",
+      "log_path": "management/logs/SESSION-20260929-072-GEMINI.md",
       "status": "completed",
       "claimed_paths": [],
       "role": "fresh_context_reviewer"

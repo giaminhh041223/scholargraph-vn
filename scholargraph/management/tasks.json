@@ -1402,7 +1402,7 @@
       "title": "Packaging và tái lập",
       "phase": "M7",
       "priority": "CORE",
-      "status": "REVIEW",
+      "status": "DONE",
       "role": "S",
       "owner": "coordinator/worker-single-chat",
       "session_id": "SESSION-20260923-065",
@@ -1418,21 +1418,18 @@
         "scripts/run_demo.ps1",
         "scripts/verify_release.py",
         "tests/unit/test_packaging.py",
-        "management/logs/SESSION-20260923-065.md"
+        "management/logs/SESSION-20260923-065.md",
+        "management/logs/SESSION-20260929-067-CODEX.md",
+        "management/logs/SESSION-20260929-071-CODEX.md",
+        "management/reviews/SG-041-REVIEW-20260929.md"
       ],
       "verification": [
         "2026-09-23T14:30:00+07:00: verify_release.py PASS (33 freeze files, snapshots, CLI imports); RELEASE_MANIFEST sinh tu hash live; requirements.lock 80 pins; run_demo.ps1 CHAY THAT (DEMO OK, offline 13/13).",
         "2026-09-23T14:30:00+07:00: pytest tests/unit/test_packaging.py 7/7 PASS.",
-        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed."
+        "PENDING: fresh_context_required review before DONE (no human gate per routing). Self-check only; no independent reviewer claimed.",
+        "2026-09-29: Fresh venv in main repo (include-system-site-packages=false) installed requirements.lock (exit 0), pip check (exit 0), REPRODUCE.md commands verified (734 passed, offline smoke 13/13 PASS), /health 200 OK in 28.17s, GM-4 review PASS (management/reviews/SG-041-REVIEW-20260929.md)."
       ],
-      "claimed_paths": [
-        "docs/REPRODUCE.md",
-        "docs/RELEASE_MANIFEST.md",
-        "scripts/run_demo.ps1",
-        "scripts/verify_release.py",
-        "tests/unit/test_packaging.py",
-        "management/logs/SESSION-20260923-065.md"
-      ],
+      "claimed_paths": [],
       "note": "Packaging xong + thu that; can fresh review truoc DONE."
     },
     {
@@ -1633,10 +1630,10 @@
       "title": "Hợp nhất bn sang bản chính",
       "phase": "M7",
       "priority": "CORE",
-      "status": "TODO",
+      "status": "DONE",
       "role": "C",
-      "owner": null,
-      "session_id": null,
+      "owner": "coordinator/g3-merge",
+      "session_id": "SESSION-20260929-072-GEMINI",
       "estimate_human_hours": 2,
       "dependencies": [
         "SG-040",
@@ -1645,9 +1642,16 @@
       "blocked_reason": null,
       "evidence": [
         "docs/MERGE_AND_FINISH_PLAN.md",
-        "management/DECISIONS.md"
+        "management/DECISIONS.md",
+        "docs/RELEASE_MANIFEST.md",
+        "management/logs/SESSION-20260929-071-CODEX.md",
+        "management/logs/SESSION-20260929-072-GEMINI.md",
+        "management/reviews/SG-041-REVIEW-20260929.md"
       ],
-      "verification": [],
+      "verification": [
+        "2026-09-29: Merged bn git history into main repo (commit 6e3b70e, e959f68 and dcca385 preserved in git DAG); transferred gitignored data/artifacts; restored AGENTS.md scope to D:/Web_mining_20261.",
+        "2026-09-29: Recreated clean .venv (include-system-site-packages=false), verified verify_release.py PASS (33/33 files), pytest 734 passed, offline_smoke 13/13 PASS, check_project.ps1 PASS."
+      ],
       "claimed_paths": [],
       "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): hợp nhất lịch sử git và dữ liệu từ bn về bản chính."
     },

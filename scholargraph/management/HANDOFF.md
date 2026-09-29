@@ -1,6 +1,13 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-051
+NEXT_TASK: SG-034
+
+## G3 Hoàn tất (Hợp nhất `bn` → `D:\Web_mining_20261`, SG-051 DONE, SG-041 DONE) — 2026-09-29T13:30:00+07:00
+
+- **SG-051 (`G3 Merge` + `CX-2`):** Đã hợp nhất lịch sử `bn` (`c820aef`) vào `D:\Web_mining_20261` (`6e3b70e`), giữ nguyên vẹn toàn bộ commit `e959f68` và `dcca385`, đồng bộ `artifacts/` và `data/` bằng `robocopy`, khôi phục `AGENTS.md` về `D:/Web_mining_20261` (`2d01b70`). Đã dựng `.venv` mới tinh tại `D:\Web_mining_20261\scholargraph\.venv`, chạy `pip install -r requirements.lock` (`exit 0`), `pip check` (`exit 0`), `verify_release.py` (`PASS`), `run_final.py --only registry` (`exit 0`, khớp bit-identical), `run_statistics.py` (`exit 0`, khớp bit-identical), `scripts/run_demo.ps1` (`13/13 PASS, DEMO OK`), và `pytest tests -q` (**734 passed**). Ghi nhận tại [SESSION-20260929-071-CODEX.md](logs/SESSION-20260929-071-CODEX.md).
+- **GM-4 (`SG-041` Review & Closeout):** Review độc lập **PASS** ([SG-041-REVIEW-20260929.md](reviews/SG-041-REVIEW-20260929.md), [log 072](logs/SESSION-20260929-072-GEMINI.md)). Cập nhật `docs/RELEASE_MANIFEST.md` tại bản chính, đo thực tế `/health` startup (`28.17s`), kiểm chứng `run_demo.bat:23` và vắng mặt `scholargraph/1`. **SG-041 DONE**, **SG-051 DONE**.
+- **Board:** `DONE=42`, `REVIEW=1` (`SG-030` chờ human gate), `IN_PROGRESS=1` (`SG-033` chờ nhãn người), `TODO=5` (`SG-034`, `SG-042`, `SG-043`, `SG-044`, `SG-045`), `DEFERRED=4`.
+- **Tiếp theo (G4):** Chuẩn bị toàn bộ công cụ/tài liệu phía agent (`CX-4` & `GM-6`: `evidence_index.json`, `compare_reproduction.py`, `reports/figures/`, bản thảo `reports/final_report.md`, `docs/CLAIMS_CHECKLIST.md`, `reports/defense_slides.md`, `docs/DEFENSE_QA.md`, `docs/SUBMISSION_CHECKLIST.md`, `artifacts/reports/release_audit.md`) trong khi giữ nguyên các human gates (`SG-030`, `SG-033`..`SG-045`).
 
 ## G1 & G2 Hoàn tất (SG-052 DONE, GM-1..GM-3 Reviews PASS, sẵn sàng G3 Merge) — 2026-09-29T12:58:00+07:00
 
