@@ -20,7 +20,7 @@ if errorlevel 1 (
 echo.
 echo == [2/2] Khoi dong API server (cua so rieng) ==
 start "ScholarGraph API - dong cua so nay de tat server" cmd /k "set PYTHONPATH=src && .venv\Scripts\python.exe -m uvicorn scholargraph.api.app:app --host 127.0.0.1 --port 8000"
-echo Cho server nap model (lan dau co the >1 phut, toi da cho 4 phut)...
+echo Cho server nap model (lan dau co the hon 1 phut, toi da cho 4 phut)...
 powershell -NoProfile -Command "$ok=$false; for ($i=0; $i -lt 48; $i++) { try { $h=Invoke-RestMethod -Uri 'http://127.0.0.1:8000/health' -TimeoutSec 5; if ($h.status -eq 'ok') { $ok=$true; break } } catch { Start-Sleep -Seconds 5 } }; if (-not $ok) { Write-Error 'FAIL: server chua san sang sau 4 phut - xem cua so ScholarGraph API'; exit 1 }; Write-Output ('Server OK: ' + $h.docs + ' docs, model ' + $h.model_revision)"
 if errorlevel 1 (
   echo Server chua san sang - kiem tra cua so "ScholarGraph API" roi Enter de thu lai.

@@ -30,18 +30,31 @@ def test_fail_returns_nonzero():
 def test_requirements_lock_clean_and_pinned():
     lock = (ROOT / "requirements.lock").read_text(encoding="utf-8").splitlines()
     assert len(lock) >= 20
+    has_cpu_index = False
     for line in lock:
         line = line.strip()
         if not line or line.startswith("#"):
             continue
+        if line == "--extra-index-url https://download.pytorch.org/whl/cpu":
+            has_cpu_index = True
+            continue
         assert re.fullmatch(r"[A-Za-z0-9_.\-]+==\S+", line), f"unpinned line: {line}"
         assert "file://" not in line and "@" not in line.split("==")[0]
+    assert has_cpu_index, "requirements.lock must include PyTorch CPU extra-index-url for torch==2.14.0+cpu"
 
 
 def test_demo_launcher_wires_required_stages():
     text = (ROOT / "scripts" / "run_demo.ps1").read_text(encoding="utf-8")
     for needle in ("verify_release.py", "offline_smoke.py", "HF_HUB_OFFLINE", "exit 1", "DEMO_SCRIPT.md"):
         assert needle in text, f"launcher lacks {needle}"
+    bat = (ROOT.parent / "run_demo.bat").read_text(encoding="utf-8")
+    assert ">1" not in bat, "run_demo.bat must not contain unescaped >1 redirection"
+    assert not (ROOT / "1").exists(), "stray scholargraph/1 file from batch redirection must not exist"
+    for doc_rel in ("docs/REPRODUCE.md", "docs/DEMO_SCRIPT.md"):
+        doc_text = (ROOT / doc_rel).read_text(encoding="utf-8")
+        assert "bn\\scholargraph" not in doc_text and "bn/scholargraph" not in doc_text, (
+            f"{doc_rel} still contains hardcoded bn path"
+        )
 
 
 def test_release_manifest_matches_live_freeze():
