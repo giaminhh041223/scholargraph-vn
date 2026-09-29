@@ -7,7 +7,7 @@ trừ pilot T4 ở SG-002 (ghi riêng).
 ## 1. Chuẩn bị môi trường sạch
 
 ```powershell
-cd D:\Web_mining_20261\bn\scholargraph
+cd scholargraph
 py -3.12 -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.lock

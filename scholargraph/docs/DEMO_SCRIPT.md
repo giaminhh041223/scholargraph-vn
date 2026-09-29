@@ -1,8 +1,8 @@
 # DEMO_SCRIPT — Kịch bản demo 5 phút chạy offline (SG-038)
 
-**Điều kiện tiên quyết:** đã cài môi trường `bn/scholargraph` (`.venv`), dữ liệu frozen đã có (SciFact corpus, OpenAlex core, graph masked, dense indexes). Toàn bộ demo **không cần mạng** — model bge-base chạy từ cache local, UI không tham chiếu CDN, không có synthetic substitution.
+**Điều kiện tiên quyết:** đã cài môi trường `scholargraph` (`.venv`), dữ liệu frozen đã có (SciFact corpus, OpenAlex core, graph masked, dense indexes). Toàn bộ demo **không cần mạng** — model bge-base chạy từ cache local, UI không tham chiếu CDN, không có synthetic substitution.
 
-Chạy từ thư mục `D:/Web_mining_20261/bn/scholargraph` (Git Bash):
+Chạy từ thư mục `scholargraph` trong repo (Git Bash):
 
 ```bash
 export PYTHONPATH=src
