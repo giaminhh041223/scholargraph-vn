@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-23T14:30:00+07:00",
+  "updated_at": "2026-09-29T12:19:00+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -19,9 +19,53 @@
       "task_id": "SG-041",
       "session_id": "SESSION-20260923-065",
       "chat_id": "C"
+    },
+    {
+      "task_id": "SG-052",
+      "session_id": "SESSION-20260929-067-CODEX",
+      "chat_id": "M"
     }
   ],
   "sessions": [
+    {
+      "session_id": "SESSION-20260929-067-CODEX",
+      "chat_id": "M",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-052",
+        "SG-041"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260929-067-CODEX.md",
+      "status": "active",
+      "role": "implementation_worker",
+      "claimed_paths": [
+        "scripts/build_openalex_text_subset.py",
+        "tests/unit/test_text_subset.py",
+        "tests/integration/test_api.py",
+        "scripts/run_ablation.py",
+        "artifacts/reports/ablation.md",
+        "requirements.lock",
+        "docs/REPRODUCE.md",
+        "docs/DEMO_SCRIPT.md"
+      ]
+    },
+    {
+      "session_id": "SESSION-20260923-066",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [
+        "SG-036",
+        "SG-041"
+      ],
+      "actual_model": null,
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20260923-066.md",
+      "status": "completed",
+      "role": "coordinator_and_implementation_worker",
+      "claimed_paths": []
+    },
     {
       "session_id": "SESSION-20260923-065",
       "chat_id": "C",

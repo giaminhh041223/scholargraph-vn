@@ -1,17 +1,18 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-23T14:30:00+07:00",
+  "updated_at": "2026-09-29T12:20:00+07:00",
   "phase": "M7",
-  "stage": "sg041_review_human_gates_pending",
+  "stage": "g0_complete_g1_sg052_in_progress",
   "active_tasks": [
     "SG-030",
     "SG-033",
-    "SG-041"
+    "SG-041",
+    "SG-052"
   ],
-  "next_task_id": "SG-041",
-  "last_session_id": "SESSION-20260923-065",
-  "last_session_log": "management/logs/SESSION-20260923-065.md",
+  "next_task_id": "SG-052",
+  "last_session_id": "SESSION-20260929-067-CODEX",
+  "last_session_log": "management/logs/SESSION-20260929-067-CODEX.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -57,10 +58,10 @@
     "Human time estimates assume agent assistance; annotation effort must be measured."
   ],
   "last_verification": {
-    "checked_at": "2026-09-21T21:15:00+07:00",
+    "checked_at": "2026-09-29T12:20:00+07:00",
     "command": "./scripts/check_project.ps1",
     "exit_code": 0,
-    "task_count": 51,
-    "scope": "SG-040 REVIEW (profile that, 7/7 tests; fresh review pending). DONE=38, REVIEW=2, TODO=7. Next: SG-033 pool prep (deps DONE)."
+    "task_count": 53,
+    "scope": "G0 complete: .gitattributes renormalized, backup zip verified, SG-051/SG-052 registered, ADR-019 added; starting G1 (CX-1, GM-1..3)."
   }
 }

@@ -171,19 +171,19 @@ Thay thế ADR nào (nếu có):
 
 **Thay thế ADR nào (nếu có):** không thay thế; chuyên mục hóa và bổ sung chi tiết thi hành cho ADR-003/ADR-012 (quyết định graph protocol và go/no-go trước đó giao cho SG-014).
 
-## ADR-017 — 2026-09-17T22:29:57+07:00 — Works không text bị loại khỏi dense universe (đề xuất, chờ human duyệt)
+## ADR-017-DRAFT — 2026-09-17T22:29:57+07:00 — Works không text bị loại khỏi dense universe (đề xuất ban đầu, đã được thay thế bởi ADR-017 chính thức bên dưới)
 
-**Trạng thái:** proposed; người phụ trách duyệt mới có hiệu lực (ảnh hưởng protocol-adjacent policy + chạm phạm vi SG-019 đã DONE).
+**Trạng thái:** superseded by ADR-017 (2026-09-17 accepted).
 **Task liên quan:** SG-026 (B trials), SG-019 (follow-up additive).
 **Bối cảnh:** `dense encode --corpus openalex_core` FAIL đúng thiết kế tại work `openalex:W126924136` (dòng 29): không title lẫn abstract. Rà toàn snapshot: chỉ **1 work** textless (6 works thiếu title còn lại vẫn có abstract_inverted_index). Policy `missing_embedding=fail_not_drop_document` cấm drop ngầm.
-**Các lựa chọn:** (a) giữ FAIL — B-track dense vĩnh viễn không chạy được; (b) encode chuỗi rỗng — vi phạm L2/cosine và policy; (c) loại tường minh 7 works khỏi DENSE universe, giữ guard fail trong encoder (chọn).
+**Các lựa chọn:** (a) giữ FAIL — B-track dense vĩnh nhiễn không chạy được; (b) encode chuỗi rỗng — vi phạm L2/cosine và policy; (c) loại tường minh 7 works khỏi DENSE universe, giữ guard fail trong encoder (chọn).
 **Quyết định (đề xuất):** dense universe OpenAlex = 18.250 works có text; 1 work textless bị loại khỏi dense candidate universe với counts/ID ghi trong manifest + report (không im lặng); lexical vẫn phủ qua empty-string policy; encoder giữ nguyên fail-loud; thay đổi code cộng thêm (spec entry + subset builder + tests), không sửa hành vi hiện có; SG-019 mở lại review delta trước khi encode production.
 **Hệ quả:** B-dev trials chạy được sau khi human duyệt ADR này.
 
 
 ## ADR-017 — 2026-09-17 — Mở lại SG-019 và chính sách loại tường minh cho work thiếu text
 
-**Trạng thái:** accepted; người dùng phê duyệt trực tiếp (chuyển quyền coordinator + duyệt mở lại SG-019).
+**Trạng thái:** accepted; người dùng phê duyệt trực tiếp (chuyển quyền coordinator + duyệt mở lại SG-019). Thay thế bản nháp ADR-017-DRAFT ở trên.
 **Phạm vi:** SG-019 (đóng DONE trước đó chỉ phủ SciFact); encoding corpus OpenAlex; không đổi protocol hay raw data.
 **Bối cảnh:** Acceptance SG-019 yêu cầu encode theo từng corpus manifest, nhưng bản DONE trước chỉ có SciFact 5.183 docs. Encode OpenAlex bị chặn bởi `missing_embedding=fail_not_drop_document` tại work `openalex:W126924136` (thiếu cả title lẫn abstract). Session trước đã tạo text-subset `data/processed/openalex/works_text.jsonl` (18.250 = 18.251 − 1) kèm manifest `openalex_core_text.json` (counts: parent 18.251, text_works 18.250, excluded 1) và đề xuất ADR này; encode dừng ở 2/19 shards. SCIDOCS chưa encode.
 **Quyết định:** (1) Mở lại SG-019 về IN_PROGRESS; hoàn tất encode OpenAlex text-subset (19 shards) và SCIDOCS (26 shards; work thiếu abstract dùng title — combined text không rỗng, không vi phạm fail_not_drop_document), rồi review lại trước khi DONE mới. (2) Chính sách loại tường minh: work không có sự kết hợp title+abstract nào bị LOẠI KHỎI encoding corpus với exclusion list + count trong manifest (hiện 1/18.251); đây là recorded transformation theo ADR-013 — không phải silent drop; mọi consumer phải đọc exclusion từ manifest. (3) Không hạ điều kiện protocol `missing_embedding=fail_not_drop_document`.
@@ -193,9 +193,23 @@ Thay thế ADR nào (nếu có):
 
 ## ADR-018 — 2026-09-19T22:22:02+07:00 — Main Freeze trước final runs
 
-**Trạng thái:** accepted; freeze manifest tạo bởi SG-027, chờ human gate của owner trước SG-028 (routing human_approval_required=true).
+**Trạng thái:** accepted; freeze manifest tạo bởi SG-027, đã được owner human-approve trước SG-028.
 **Phạm vi:** Toàn bộ data, split, graph, model configs, evaluator, selection được khóa trong `configs/frozen_main.json` (32 hash + git HEAD); narrative trong `docs/MAIN_FREEZE.md`.
 **Bối cảnh:** Card SG-027 + chỉ thị người dùng yêu cầu khóa hash trước final runs; SG-026 selection đã human-approve; SG-033 prerequisite (OpenAlex-e5 index 18.250 docs) đã encode xong 19:22 cùng ngày.
 **Quyết định:** (1) Primary comparison chốt: track A (bm25/tfidf/dense/hybrid), track B (control + PPR best gamma=0.3/lambda=0.0), track C VN (translated_bm25/multilingual_dense_e5/vn_hybrid_rrf; original_vi_bm25 diagnostic). (2) Ablations định sẵn cho SG-029. (3) Quy tắc sau freeze: mọi thay đổi phải bump schema_version + ADR; tuning trên test cấm vĩnh viễn; final runs phải dẫn freeze sha256 trong run manifest.
 **Bằng chứng:** `configs/frozen_main.json` (32 hash); `tests/unit/test_main_freeze.py` đối chiếu freeze↔file thật (phát hiện drift); encode OpenAlex-e5 18.250 docs hoàn tất 19:22 (sha256 trong freeze).
 **Hệ quả:** SG-028 final runs chỉ chạy trên freeze này; kết quả test từ đây có giá trị học thuật "chưa từng thấy test".
+
+
+## ADR-019 — 2026-09-29 — Hợp nhất `bn` → bản chính, vệ sinh test (SG-051/SG-052) và review hồi tố độc lập (SG-027/028/029/040)
+
+**Trạng thái:** accepted; triển khai theo `docs/MERGE_AND_FINISH_PLAN.md` được người dùng phê duyệt.
+**Task liên quan:** SG-027, SG-028, SG-029, SG-030, SG-040, SG-041, SG-051, SG-052.
+**Bối cảnh:** Toàn bộ công việc từ SG-012 đến SG-041 đã được thực hiện trong môi trường độc lập `bn/` (ADR-015). Để hoàn tất dự án tại bản chính `D:/Web_mining_20261/scholargraph`, cần giải quyết: (1) nguy cơ lệch byte EOL khi git checkout/merge (`core.autocrlf=true`); (2) nối lịch sử git của `bn` (`e959f68`, `dcca385`) vào repo chính; (3) cô lập `test_text_subset.py` để không ghi đè dữ liệu freeze thật khi chạy pytest, bổ sung test cho 2 nhánh fallback còn thiếu của hybrid API (`dcca385`), và sửa header bảng A2 trong `ablation.md` (SG-052); (4) thực hiện review hồi tố độc lập cho SG-027, SG-028, SG-029, SG-040 (vốn trước đó mới tự kiểm + owner duyệt).
+**Quyết định kỹ thuật:**
+1. Thêm `.gitattributes` (`* -text`) và chạy `git add --renormalize .` trong `bn` trước khi merge; sao lưu dự phòng `.tmp/backups/bn_scholargraph_backup_20260929.zip` (sha256 `eec6e7eca74bb84c2682f491ffdaceea94199ee8cd464cca127f03bd9ebc9ccc`).
+2. Lưu nhánh cũ của bản chính vào `archive/pre-merge`; dùng `git fetch ./bn master:bn-import` và `git merge --allow-unrelated-histories` để giữ nguyên toàn bộ commit SHA của `bn` (`e959f68`, `dcca385`) trong lịch sử bản chính.
+3. Chuyển nguyên trạng các thư mục ngoài git (`artifacts/`, `data/`) sang bản chính mà không qua git text checkout, giữ `bn` làm bản dự phòng.
+4. Thực hiện đầy đủ SG-052, sửa lỗi đóng gói SG-041 (`run_demo.bat`, `requirements.lock`, đường dẫn tương đối trong `REPRODUCE.md`/`DEMO_SCRIPT.md`), và bổ sung báo cáo review độc lập cho SG-027, SG-028, SG-029, SG-030, SG-040, SG-041, SG-052.
+**Hệ quả:** Bản chính `D:/Web_mining_20261/scholargraph` trở thành nguồn sự thật duy nhất có đầy đủ lịch sử git, 33/33 file freeze khớp byte-exact SHA-256, và bộ kiểm thử không chạm vào dữ liệu đã đóng băng.
+

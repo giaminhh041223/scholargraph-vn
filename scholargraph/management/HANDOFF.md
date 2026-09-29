@@ -1,6 +1,11 @@
 # Bàn giao ScholarGraph
 
-NEXT_TASK: SG-041
+NEXT_TASK: SG-052
+
+## G0 Hoàn tất (.gitattributes, backup, SG-051/SG-052, ADR-019) — 2026-09-29T12:19:00+07:00
+
+- Đã hoàn tất G0 theo [MERGE_AND_FINISH_PLAN.md](../docs/MERGE_AND_FINISH_PLAN.md): thêm `.gitattributes` (`* -text`), `git add --renormalize .`, kiểm chứng `verify_release.py` PASS (33 files) và clone thử khớp hash 100%; sao lưu dự phòng `.tmp/backups/bn_scholargraph_backup_20260929.zip` (sha256 `eec6e7eca74bb84c2682f491ffdaceea94199ee8cd464cca127f03bd9ebc9ccc`).
+- Đã đăng ký `SG-051`, `SG-052`, `ADR-019`, log `SESSION-20260923-066.md` (cho `dcca385`) và mở `SESSION-20260929-067-CODEX` cho `CX-1` (`SG-052` + sửa `SG-041`).
 
 ## Fix UI 500 query Việt zero-overlap — 2026-09-23T16:00:00+07:00
 

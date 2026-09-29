@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-23T14:00:00+07:00",
+  "updated_at": "2026-09-29T12:20:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1617,6 +1617,55 @@
       ],
       "claimed_paths": [],
       "note": "Created per ADR-017: finish OpenAlex text-subset (2/19 shards) + SCIDOCS (0/26) encoding, exact indexes, profile; explicit 1-work exclusion per openalex_core_text.json manifest."
+    },
+    {
+      "id": "SG-051",
+      "title": "Hợp nhất bn sang bản chính",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "TODO",
+      "role": "C",
+      "owner": null,
+      "session_id": null,
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-040",
+        "SG-052"
+      ],
+      "blocked_reason": null,
+      "evidence": [
+        "docs/MERGE_AND_FINISH_PLAN.md",
+        "management/DECISIONS.md"
+      ],
+      "verification": [],
+      "claimed_paths": [],
+      "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): hợp nhất lịch sử git và dữ liệu từ bn về bản chính."
+    },
+    {
+      "id": "SG-052",
+      "title": "Vệ sinh test và phủ fallback API",
+      "phase": "M7",
+      "priority": "CORE",
+      "status": "IN_PROGRESS",
+      "role": "S",
+      "owner": "codex/cx-1",
+      "session_id": "SESSION-20260929-067-CODEX",
+      "estimate_human_hours": 2,
+      "dependencies": [
+        "SG-036",
+        "SG-050"
+      ],
+      "blocked_reason": null,
+      "evidence": [],
+      "verification": [],
+      "claimed_paths": [
+        "scripts/build_openalex_text_subset.py",
+        "tests/unit/test_text_subset.py",
+        "tests/integration/test_api.py",
+        "scripts/run_ablation.py",
+        "artifacts/reports/ablation.md"
+      ],
+      "note": "Tạo theo MERGE_AND_FINISH_PLAN.md (ADR-019): cô lập test_text_subset không ghi đè dữ liệu freeze, phủ đủ test 3 nhánh fallback hybrid và sửa header bảng A2."
     }
   ]
 }

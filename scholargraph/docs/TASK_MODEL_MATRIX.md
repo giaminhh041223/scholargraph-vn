@@ -64,3 +64,6 @@ SG-033: Terra chỉ hỗ trợ công cụ, randomize/blind pool và tính agreem
 Các mức phân vai ở trên là quyết định thiết kế cho dự án, chưa có thử nghiệm đối chiếu các coding model trên ScholarGraph. Cơ sở phân loại chung: [OpenAI model catalog](https://developers.openai.com/api/docs/models); danh sách model khả dụng được đối chiếu với tool catalog của host hiện tại. Xem lại khi model/khả năng truy cập thay đổi.
 
 | [SG-050](TASKS.md#sg-050) — Hoàn tất dense encoding OpenAlex text-subset + SCIDOCS | Terra · High | M | Sol · High | Review riêng | Theo checkpoint | Resume sharded encoding theo manifest đã pin; xác nhận checksum/ID alignment. |
+| [SG-051](TASKS.md#sg-051) — Hợp nhất bn sang bản chính | Sol · High | C | Sol · High | Tự kiểm được | Theo checkpoint | Hợp nhất lịch sử git và dữ liệu từ bn về bản chính; bảo toàn byte-exact hash freeze. |
+| [SG-052](TASKS.md#sg-052) — Vệ sinh test và phủ fallback API | Sol · High | M | Astra · High | Review riêng | Theo checkpoint | Vệ sinh test không ghi đè dữ liệu freeze, phủ đủ test 3 nhánh fallback hybrid và sửa bảng A2. |
+

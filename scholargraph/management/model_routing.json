@@ -514,6 +514,24 @@
       "review_mode": "fresh_context_required",
       "human_approval_required": false,
       "rationale": "Resume sharded encoding theo manifest đã pin; xác nhận checksum/ID alignment."
+    },
+    {
+      "task_id": "SG-051",
+      "primary_profile": "S_H",
+      "chat_id": "C",
+      "review_profile": "S_H",
+      "review_mode": "self_check_allowed",
+      "human_approval_required": false,
+      "rationale": "Hợp nhất lịch sử git và dữ liệu từ bn về bản chính; bảo toàn byte-exact hash freeze."
+    },
+    {
+      "task_id": "SG-052",
+      "primary_profile": "S_H",
+      "chat_id": "M",
+      "review_profile": "A_H",
+      "review_mode": "fresh_context_required",
+      "human_approval_required": false,
+      "rationale": "Vệ sinh test không ghi đè dữ liệu freeze, phủ đủ test 3 nhánh fallback hybrid và sửa bảng A2."
     }
   ]
 }
