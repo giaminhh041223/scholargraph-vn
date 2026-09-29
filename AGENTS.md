@@ -1,8 +1,8 @@
 # Workspace instructions — Web Mining 20261
 
 ## Scope
-- Workspace: `D:/Web_mining_20261/bn` (bản sao làm việc độc lập được clone từ `D:/Web_mining_20261` theo yêu cầu của người dùng; mọi quy tắc giữ nguyên, chỉ thay đổi đường dẫn scope).
-- ScholarGraph VN lives in `scholargraph/`. Mọi phiên làm việc trong môi trường này CHỈ hoạt động bên trong `D:/Web_mining_20261/bn`; không đọc/sửa thư mục cha `D:/Web_mining_20261` ngoài `bn/`.
+- Workspace: `D:/Web_mining_20261`.
+- ScholarGraph VN lives in `scholargraph/`.
 - Toàn bộ công việc thực hiện bên trong `scholargraph/`.
 - The user's current request determines scope. A saved plan is context, not permission to execute the entire backlog.
 - Respect system/developer instructions and the user's latest corrections.

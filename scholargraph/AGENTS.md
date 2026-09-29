@@ -1,7 +1,7 @@
 # ScholarGraph — Quy tắc cho mọi phiên làm việc
 
 ## 1. Phạm vi và thứ tự ưu tiên
-- Dự án ở `D:/Web_mining_20261/bn/scholargraph` (bản sao làm việc độc lập; mọi quy tắc giữ nguyên, chỉ thay đổi đường dẫn). Mọi phiên làm việc trong môi trường này chỉ hoạt động bên trong `D:/Web_mining_20261/bn`.
+- Dự án ở `D:/Web_mining_20261/scholargraph`. Không sửa tệp bài giảng ở thư mục gốc trừ khi người dùng yêu cầu rõ.
 - Chỉ dẫn hệ thống/developer và yêu cầu mới nhất của người dùng được ưu tiên. Kế hoạch là danh mục công việc; thực hiện phần đã được giao.
 - Mỗi task có ID cố định `SG-NNN`. Vai trò trong kế hoạch là vai trò nhóm, không phải lệnh tạo agent hoặc task trong ứng dụng.
 - Không tự tạo subagent, task mới, automation, tài khoản, dịch vụ trả phí hay xuất bản chỉ vì backlog có mục liên quan.
