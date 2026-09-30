@@ -1,0 +1,7 @@
+# Gate EXT-04B — chấp nhận artifact đã xác minh
+
+- SOL delivery `791bb8c43faa96c0b2161080ab89fe93e1a6b6e1`, code `2a8add8`; worker đã idle và checkout sạch. Sáu tệp được nhập nguyên byte vào parent, không đổi W0/W1.
+- Coordinator chạy thật focused99tests: **99 pass, 0 fail, exit0, 9.54s**. Log local `data/public_search/control/w2-082/fusion-r1-tests.log`. Author reported430=99fusion+331frozen; không gọi đó là parent430 mới chạy.
+- Muse fresh reviewer session `ses_f0e1950fcffeArWZ1c2Vvj1VW9`, observed model `opencode/muse-spark-1.3-contributor-free/xhigh`, đã tạo report/log đầy đủ. Verdict **PASS cho exact791bb8c**, không còn findings product. Coordinator đối chiếu outputs00..06:45pins/import/scope, RRF tính tay, aliases không bridge DOI, counters/cap/year,23schema negatives+title-onlypositive,17CLIcalls (2exit0/15exit1), pure/leakage instrumentation.
+- Hai controller review/closeout **TIMEOUT/exit1** (`5c60f816`, `a8cb42e4`) giữ nguyên là FAIL. Không claim worker turn hoàn tất hoặc controllerPASS. Sau khi tiến trình đã dừng, coordinator xác minh các artifact review đã được ghi đầy đủ và có verdict cụ thể trước khi accept. Gate dựa trên artifact/test/code evidence; lỗi điều khiển được lưu tách khỏi kết quả module. Không suy PASS từ artifact viết dở hoặc timeout đơn thuần.
+- EXT-04B DONE trong phạm vi pure fusion/boundary CLI. UI còn IN_PROGRESS, W2 combined integration chưa chạy; production service/routes/CLI/live thuộc vòng sau, chưa được mở.

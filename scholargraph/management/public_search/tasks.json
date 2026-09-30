@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T17:47:39.170483+07:00",
+  "updated_at": "2026-09-30T22:25:22.137093+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -405,7 +405,7 @@
     {
       "id": "EXT-04B",
       "title": "Dedup, filter và RRF",
-      "status": "REVIEW",
+      "status": "DONE",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -414,7 +414,15 @@
       ],
       "session_id": "DISPATCH-20260930-W2-SOL-082",
       "evidence": [
-        "management/public_search/dispatch/SOL-W2-082.txt"
+        "management/public_search/dispatch/SOL-W2-082.txt",
+        "src/scholargraph/public_search/fusion.py",
+        "tests/unit/test_public_fusion.py",
+        "tests/fixtures/public_search/sol/fusion/hand_rrf.json",
+        "tests/fixtures/public_search/sol/fusion/hand_rrf.sidecar.json",
+        "management/public_search/logs/SOL/EXT-04B-W2-082.md",
+        "management/public_search/packets/SOL/EXT-04B-W2-082.md",
+        "management/public_search/reviews/MUSE/EXT-04B-W2-082.md",
+        "management/public_search/reviews/COORDINATOR/EXT-04B-W2-GATE-082.md"
       ],
       "owner": "SOL",
       "dispatch_file": "management/public_search/dispatch/SOL-W2-082.txt",
@@ -427,6 +435,37 @@
         "exit_code": 0,
         "worker_checker_exit_code": 1,
         "worker_checker_missing_items": 69
+      },
+      "completed_at": "2026-09-30T22:15:16.146368+07:00",
+      "review_verdict": "PASS_exact_target_artifact",
+      "verification": {
+        "coordinator_focused": {
+          "passed": 99,
+          "failed": 0,
+          "exit_code": 0,
+          "duration_seconds": 9.54,
+          "evidence_local": "data/public_search/control/w2-082/fusion-r1-tests.log"
+        },
+        "import_exact_owned_files": 6,
+        "review_report": "management/public_search/reviews/MUSE/EXT-04B-W2-082.md",
+        "review_controller_status": "TIMEOUT_FAIL_preserved",
+        "review_controller_runs": [
+          "5c60f816-03f0-4ecf-8158-06dcb9dfd7d6",
+          "a8cb42e4-b06d-40d9-b758-e45ee39cf4e8"
+        ],
+        "parent_import_first_run": {
+          "passed": 97,
+          "failed": 2,
+          "exit_code": 1,
+          "duration_seconds": 145.94,
+          "failure_kind": "subprocess_20s_timeout",
+          "failed_cases": [
+            "missing_title",
+            "wrong_root"
+          ],
+          "evidence_local": "data/public_search/control/w2-082/parent-fusion-tests.log",
+          "retry": "pending"
+        }
       }
     },
     {

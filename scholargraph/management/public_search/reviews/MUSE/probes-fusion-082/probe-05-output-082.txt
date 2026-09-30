@@ -1,0 +1,19 @@
+﻿tmp=C:\Users\ADMIN\AppData\Local\Temp\probe05-082-y3_d7pg8
+valid-success exit=0 stdout_len=2433 stderr=''
+valid-empty exit=0
+valid-failed exit=1 stdout='{"hits":[],"counts":{"raw":0,"valid":0,"invalid":0,"excluded_by_year":0,"eligible":0,"groups":0,"duplicate_excess":0,"returned":0}}\n' stderr='FAIL: selected source failed\n'
+partial exit=1 returned=1 stderr='FAIL: selected source failed\n'
+missing_request exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+missing_results exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+syntax exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+duplicate exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+nonfinite exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+missing_title exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+text_only exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+bad_year exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+extra_labels exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+missing_source exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+args exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+wrong_root exit=1 redacted=True notrace=True stderr='FAIL: invalid fusion boundary input\n'
+no-args exit=1 stderr='FAIL: invalid fusion boundary input\n'
+PROBE05 PASS

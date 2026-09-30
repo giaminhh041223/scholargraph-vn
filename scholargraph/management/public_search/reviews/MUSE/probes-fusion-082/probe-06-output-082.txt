@@ -1,0 +1,5 @@
+﻿tmp=C:\Users\ADMIN\AppData\Local\Temp\probe06-082-ig8gvrmp
+fuse returned=1 file_calls=0 socket_calls=0
+no-blocked-token PASS (graph-docstring false positive excluded)
+labels-extra rejected (FusionError) PASS; failed-attempt preserved
+PROBE06 PASS

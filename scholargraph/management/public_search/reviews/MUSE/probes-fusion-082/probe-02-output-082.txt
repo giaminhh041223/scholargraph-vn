@@ -1,0 +1,18 @@
+﻿normalize_doi PASS
+uppercase V rejected (FusionError) PASS - regex requires lowercase v, category casefold only
+arxiv_base PASS
+same-title groups=3 ids=['doi:10.7777/t1', 'doi:10.7777/t2', 'openalex:T3']
+same-title non-merge PASS
+multiDOI groups=3 dup=0 ids=['doi:10.7777/m1', 'doi:10.7777/m2', 'arxiv:2501.00001']
+multiDOI no-bridge + conflict evidence PASS
+chain groups=3 dup=1
+  doi:10.7777/c1 nrec=1 doi_conf=2
+  arxiv:2501.00002 nrec=2 doi_conf=2
+  doi:10.7777/c2 nrec=1 doi_conf=2
+alias-chain no-transitive-merge PASS
+solo groups=1 ids=['doi:10.7777/s1']
+single-DOI join PASS
+display source=openalex sid=D1 abstract=None
+display determinism PASS
+duplicate permutation PASS
+PROBE02 PASS

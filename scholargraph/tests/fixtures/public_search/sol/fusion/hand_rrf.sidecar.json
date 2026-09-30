@@ -1,0 +1,6 @@
+{
+  "synthetic": true,
+  "not_live_evidence": true,
+  "not_for_production_fallback": true,
+  "description": "Four synthetic records, two DOI groups. Both scores hand-calculated as 1/61 + 1/62; canonical tie a before b."
+}

@@ -1,0 +1,322 @@
+{
+  "request": {
+    "query": "synthetic graph",
+    "sources": [
+      "arxiv",
+      "openalex"
+    ],
+    "top_k": 50,
+    "cap_per_source": 50,
+    "year_from": null,
+    "year_to": null,
+    "refresh": false
+  },
+  "source_results": [
+    {
+      "source": "openalex",
+      "status": "success",
+      "records": [
+        {
+          "source": "openalex",
+          "source_id": "W1",
+          "title": "Synthetic title",
+          "landing_url": "https://example.org/paper",
+          "retrieved_at": "2026-09-30T00:00:00Z",
+          "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "parser_version": "synthetic-1",
+          "abstract": null,
+          "publication_year": null,
+          "doi": "10.1234/a",
+          "arxiv_id": null,
+          "venue": null,
+          "pdf_url": null,
+          "license": null,
+          "open_access_status": null,
+          "citation_count": null,
+          "authors": null,
+          "authors_availability": "missing",
+          "missing_fields": [
+            "abstract",
+            "publication_year",
+            "arxiv_id",
+            "venue",
+            "pdf_url",
+            "license",
+            "open_access_status",
+            "citation_count",
+            "authors"
+          ],
+          "field_provenance": {
+            "source_id": [
+              {
+                "source": "openalex",
+                "source_id": "W1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "source_id"
+              }
+            ],
+            "title": [
+              {
+                "source": "openalex",
+                "source_id": "W1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "title"
+              }
+            ],
+            "landing_url": [
+              {
+                "source": "openalex",
+                "source_id": "W1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "landing_url"
+              }
+            ],
+            "doi": [
+              {
+                "source": "openalex",
+                "source_id": "W1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "doi"
+              }
+            ]
+          }
+        },
+        {
+          "source": "openalex",
+          "source_id": "W2",
+          "title": "Synthetic title",
+          "landing_url": "https://example.org/paper",
+          "retrieved_at": "2026-09-30T00:00:00Z",
+          "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "parser_version": "synthetic-1",
+          "abstract": null,
+          "publication_year": null,
+          "doi": "10.1234/b",
+          "arxiv_id": null,
+          "venue": null,
+          "pdf_url": null,
+          "license": null,
+          "open_access_status": null,
+          "citation_count": null,
+          "authors": null,
+          "authors_availability": "missing",
+          "missing_fields": [
+            "abstract",
+            "publication_year",
+            "arxiv_id",
+            "venue",
+            "pdf_url",
+            "license",
+            "open_access_status",
+            "citation_count",
+            "authors"
+          ],
+          "field_provenance": {
+            "source_id": [
+              {
+                "source": "openalex",
+                "source_id": "W2",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "source_id"
+              }
+            ],
+            "title": [
+              {
+                "source": "openalex",
+                "source_id": "W2",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "title"
+              }
+            ],
+            "landing_url": [
+              {
+                "source": "openalex",
+                "source_id": "W2",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "landing_url"
+              }
+            ],
+            "doi": [
+              {
+                "source": "openalex",
+                "source_id": "W2",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "doi"
+              }
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "source_total": 2,
+      "elapsed_seconds": 0.1,
+      "filter_coverage": "none",
+      "truncated": false,
+      "raw_references": [
+        {
+          "raw_id": "openalex-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_count": 1
+        }
+      ]
+    },
+    {
+      "source": "arxiv",
+      "status": "success",
+      "records": [
+        {
+          "source": "arxiv",
+          "source_id": "2401.00001v1",
+          "title": "Synthetic title",
+          "landing_url": "https://example.org/paper",
+          "retrieved_at": "2026-09-30T00:00:00Z",
+          "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "parser_version": "synthetic-1",
+          "abstract": null,
+          "publication_year": null,
+          "doi": "10.1234/b",
+          "arxiv_id": null,
+          "venue": null,
+          "pdf_url": null,
+          "license": null,
+          "open_access_status": null,
+          "citation_count": null,
+          "authors": null,
+          "authors_availability": "missing",
+          "missing_fields": [
+            "abstract",
+            "publication_year",
+            "arxiv_id",
+            "venue",
+            "pdf_url",
+            "license",
+            "open_access_status",
+            "citation_count",
+            "authors"
+          ],
+          "field_provenance": {
+            "source_id": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00001v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "source_id"
+              }
+            ],
+            "title": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00001v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "title"
+              }
+            ],
+            "landing_url": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00001v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "landing_url"
+              }
+            ],
+            "doi": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00001v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "doi"
+              }
+            ]
+          }
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2401.00002v1",
+          "title": "Synthetic title",
+          "landing_url": "https://example.org/paper",
+          "retrieved_at": "2026-09-30T00:00:00Z",
+          "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "parser_version": "synthetic-1",
+          "abstract": null,
+          "publication_year": null,
+          "doi": "10.1234/a",
+          "arxiv_id": null,
+          "venue": null,
+          "pdf_url": null,
+          "license": null,
+          "open_access_status": null,
+          "citation_count": null,
+          "authors": null,
+          "authors_availability": "missing",
+          "missing_fields": [
+            "abstract",
+            "publication_year",
+            "arxiv_id",
+            "venue",
+            "pdf_url",
+            "license",
+            "open_access_status",
+            "citation_count",
+            "authors"
+          ],
+          "field_provenance": {
+            "source_id": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00002v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "source_id"
+              }
+            ],
+            "title": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00002v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "title"
+              }
+            ],
+            "landing_url": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00002v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "landing_url"
+              }
+            ],
+            "doi": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00002v1",
+                "raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "raw_field": "doi"
+              }
+            ]
+          }
+        }
+      ],
+      "error": null,
+      "source_total": 2,
+      "elapsed_seconds": 0.1,
+      "filter_coverage": "none",
+      "truncated": false,
+      "raw_references": [
+        {
+          "raw_id": "arxiv-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_count": 1
+        }
+      ]
+    }
+  ],
+  "expected_counts": {
+    "raw": 4,
+    "valid": 4,
+    "invalid": 0,
+    "excluded_by_year": 0,
+    "eligible": 4,
+    "groups": 2,
+    "duplicate_excess": 2,
+    "returned": 2
+  }
+}

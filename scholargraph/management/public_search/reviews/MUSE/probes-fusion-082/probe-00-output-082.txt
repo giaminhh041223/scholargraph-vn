@@ -1,0 +1,63 @@
+﻿W0 pins=14 W1 pins=31
+OVERLAP=[]
+UNION=45 (expect 45)
+OK  artifacts/reports/public_search/muse/source_audit.json
+OK  configs/public_search.json
+OK  docs/PUBLIC_PAPER_SEARCH_TASKS.md
+OK  docs/public_search/CONTRACT.md
+OK  docs/public_search/SOURCE_AUDIT.md
+OK  docs/public_search/UX_SPEC.md
+OK  scripts/run_public_worker.py
+OK  src/scholargraph/public_search/__init__.py
+OK  src/scholargraph/public_search/arxiv.py
+OK  src/scholargraph/public_search/contracts.py
+OK  src/scholargraph/public_search/export.py
+OK  src/scholargraph/public_search/openalex.py
+OK  src/scholargraph/public_search/store.py
+OK  src/scholargraph/public_search/transport.py
+OK  tests/fixtures/public_search/gemini/arxiv/duplicate_id_feed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/empty_feed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/error_entry_feed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/error_feed_no_counters.xml
+OK  tests/fixtures/public_search/gemini/arxiv/invalid_counter.xml
+OK  tests/fixtures/public_search/gemini/arxiv/invalid_date.xml
+OK  tests/fixtures/public_search/gemini/arxiv/malformed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/missing_id.xml
+OK  tests/fixtures/public_search/gemini/arxiv/missing_link.xml
+OK  tests/fixtures/public_search/gemini/arxiv/missing_opensearch.xml
+OK  tests/fixtures/public_search/gemini/arxiv/missing_title.xml
+OK  tests/fixtures/public_search/gemini/arxiv/title_only_feed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/valid_feed.xml
+OK  tests/fixtures/public_search/gemini/arxiv/valid_with_doi.xml
+OK  tests/fixtures/public_search/gemini/arxiv/xxe_doctype.xml
+OK  tests/fixtures/public_search/gemini/ux_examples.json
+OK  tests/fixtures/public_search/gemini/ux_examples.sidecar.json
+OK  tests/fixtures/public_search/gemini/validate_fixtures.py
+OK  tests/fixtures/public_search/muse/store/manifest.json
+OK  tests/fixtures/public_search/muse/store/manifest.sidecar.json
+OK  tests/fixtures/public_search/muse/store/special_chars.json
+OK  tests/fixtures/public_search/muse/store/special_chars.sidecar.json
+OK  tests/fixtures/public_search/sol/openalex_page.json
+OK  tests/fixtures/public_search/sol/openalex_page.sidecar.json
+OK  tests/unit/test_public_arxiv.py
+OK  tests/unit/test_public_contracts.py
+OK  tests/unit/test_public_export.py
+OK  tests/unit/test_public_openalex.py
+OK  tests/unit/test_public_store.py
+OK  tests/unit/test_public_transport.py
+OK  tests/unit/test_public_worker_control.py
+frozen_match=45/45
+target_HEAD=791bb8c43faa96c0b2161080ab89fe93e1a6b6e1 exit=0
+target_status='' exit=0
+diff_check_exit=0 out='' err=''
+changed_paths:
+scholargraph/management/public_search/logs/SOL/EXT-04B-W2-082.md
+scholargraph/management/public_search/packets/SOL/EXT-04B-W2-082.md
+scholargraph/src/scholargraph/public_search/fusion.py
+scholargraph/tests/fixtures/public_search/sol/fusion/hand_rrf.json
+scholargraph/tests/fixtures/public_search/sol/fusion/hand_rrf.sidecar.json
+scholargraph/tests/unit/test_public_fusion.py
+
+fusion_file=D:\Web_mining_20261\scholargraph\.worktrees\public-sol\scholargraph\src\scholargraph\public_search\fusion.py
+FUSION_VERSION=fusion-1.0.0 RRF_K=60
+PROBE00 PASS

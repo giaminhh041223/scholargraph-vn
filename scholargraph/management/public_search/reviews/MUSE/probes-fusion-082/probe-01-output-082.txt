@@ -1,0 +1,9 @@
+﻿groups=2 eligible=4 raw=4
+hit doi:10.5555/aaa score=0.03252247488101534 ranks={'arxiv': 2, 'openalex': 1}
+hit doi:10.5555/bbb score=0.03252247488101534 ranks={'arxiv': 1, 'openalex': 2}
+permutation invariance PASS
+after swap: [('doi:10.5555/aaa', {'arxiv': 1, 'openalex': 1}), ('doi:10.5555/bbb', {'arxiv': 2, 'openalex': 2})]
+upstream order sensitivity PASS
+filter scores=[0.016129032258064516, 0.015873015873015872] excluded=1
+original-rank-before-filter PASS
+PROBE01 PASS

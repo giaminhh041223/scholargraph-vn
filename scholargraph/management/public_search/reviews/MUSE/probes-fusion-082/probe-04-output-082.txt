@@ -1,0 +1,25 @@
+﻿title-only VALID PASS
+text-only FusionError PASS
+title-None FusionError PASS
+title-empty FusionError PASS
+title-blank FusionError PASS
+year-bool FusionError PASS
+year-str FusionError PASS
+year-low FusionError PASS
+cite-neg FusionError PASS
+cite-nan FusionError PASS
+url-js FusionError PASS
+arxiv-bad FusionError PASS
+arxiv-v0 FusionError PASS
+doi-raw FusionError PASS
+extra-qrels FusionError PASS
+extra-labels FusionError PASS
+extra-held_out FusionError PASS
+extra-rank FusionError PASS
+extra-score FusionError PASS
+req-topk-nan FusionError PASS
+elapsed-Inf FusionError PASS
+missing-attr-construct FusionError PASS
+nested-provenance-mutation FusionError PASS
+noncanonical-text FusionError PASS
+PROBE04 PASS

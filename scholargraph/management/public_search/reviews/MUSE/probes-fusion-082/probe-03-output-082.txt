@@ -1,0 +1,16 @@
+﻿exact-dup: raw=2 valid=2 invalid=0 excl=0 elig=2 groups=1 dup=1 ret=1 PASS
+exact-dup no-double-count PASS
+fullpool: raw=100 valid=100 invalid=0 excl=0 elig=100 groups=50 dup=50 ret=7 PASS
+fullpool top_k PASS
+nullyear: raw=2 valid=2 invalid=0 excl=1 elig=1 groups=1 dup=0 ret=1 PASS
+null-year-excluded PASS
+cap 0 rejected PASS
+cap 51 rejected PASS
+pool-over-cap FAIL PASS
+source-total FAIL PASS
+partial-pool: raw=1 valid=1 invalid=0 excl=0 elig=1 groups=1 dup=0 ret=1 PASS
+failed-source-not-counted PASS
+no-source structured-FAIL PASS
+duplicate-source structured-FAIL PASS
+missing-selected structured-FAIL PASS
+PROBE03 PASS
