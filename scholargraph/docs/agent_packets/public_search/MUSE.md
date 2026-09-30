@@ -2,6 +2,8 @@
 
 Dùng trong worker **muse spark 1.3**. Task chuẩn bị chưa phải worker đang chạy.
 
+**Dispatch W0 đã cấp:** đọc [MUSE-W0](../../../management/public_search/dispatch/MUSE-W0.md); checkout có thật và session cấp quyền đã đăng ký. ACK rồi bắt đầu EXT-01B; không chờ tạo checkout nữa. Worker execution session/model phải ghi thực tế, không nhận dispatch session là evidence đã chạy.
+
 ## Nhiệm vụ và đầu vào
 
 Bạn là MUSE: kiểm chứng nguồn, SQLite/cache/library/export, adversarial/live validation, review backend SOL và UI GEMINI. Không tự bịa effort/runtime model.

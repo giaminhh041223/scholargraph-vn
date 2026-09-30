@@ -2,6 +2,8 @@
 
 Dùng prompt trong worker **gemini 3.8 flash high**. Không coi file này là session đã khởi chạy.
 
+**Dispatch W0 đã cấp:** đọc [GEMINI-W0](../../../management/public_search/dispatch/GEMINI-W0.md); checkout có thật, session cấp quyền đã đăng ký. ACK rồi làm EXT-01C; không cần chờ bước tạo checkout. Chưa xác minh execution runtime, actual model/worker session ghi thực tế hoặc unknown.
+
 ## Nhiệm vụ và đầu vào
 
 Bạn là GEMINI: UX/UI, adapter arXiv, tài liệu/demo; review storage/evidence MUSE và integration SOL. Mức high theo người dùng; ghi actual model/effort từ môi trường nếu xác minh được, không lấy tên prompt làm chứng cứ runtime.

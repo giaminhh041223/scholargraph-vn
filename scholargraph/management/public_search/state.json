@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-30T08:09:18.4113236+07:00",
+  "stage": "w0_checkouts_ready_authorized_awaiting_ack",
+  "active_tasks": [],
+  "authorized_tasks": [
+    "EXT-01A",
+    "EXT-01B",
+    "EXT-01C"
+  ],
+  "next_steps": {
+    "GEMINI": "Read dispatch/GEMINI-W0.md, ACK then EXT-01C",
+    "MUSE": "Read dispatch/MUSE-W0.md, ACK then EXT-01B",
+    "SOL": "Read dispatch/SOL-W0.md, ACK then EXT-01A"
+  },
+  "last_session_log": "management/logs/SESSION-20260930-077-CODEX.md",
+  "worker_execution_observed": false
+}

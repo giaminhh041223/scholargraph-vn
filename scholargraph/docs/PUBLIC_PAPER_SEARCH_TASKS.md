@@ -2,7 +2,7 @@
 
 - Ngày: 2026-09-30. Nhánh điều phối: `codex/public-paper-search`.
 - [Kế hoạch chức năng](PUBLIC_PAPER_SEARCH_PLAN.md), [board extension](../management/public_search/tasks.json), [handoff](../management/public_search/HANDOFF.md).
-- Phạm vi phiên này: thiết kế và phân công; chưa chạy implementation hoặc ghi nhận model thực tế.
+- Thiết kế ở phiên 076; phiên 077 đã tạo ba checkout và cấp quyền W0 theo dispatch bên dưới. Chưa xác nhận implementation/model runtime của workers.
 
 ## 1. Vai trò và nguyên tắc giao việc
 
@@ -57,11 +57,13 @@ flowchart LR
 
 Không chạy ba worker cùng switch branch/commit trên checkout gốc. Dùng ba worktree/clone riêng; coordinator nhập commit đã review vào `codex/public-paper-search`.
 
-Checkout dự kiến, **chưa tạo**:
+Checkout **đã tạo và xác minh Git** ngày 2026-09-30 từ commit 46328b2; thông tin khởi động hiện hành:
 
 - SOL: `D:/Web_mining_20261/scholargraph/.worktrees/public-sol/`, project con `scholargraph/`, branch `codex/public-search-sol`.
 - GEMINI: `D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/`, project con `scholargraph/`, branch `codex/public-search-gemini`.
 - MUSE: `D:/Web_mining_20261/scholargraph/.worktrees/public-muse/`, project con `scholargraph/`, branch `codex/public-search-muse`.
+
+Dispatch cấp quyền W0: [SOL — EXT-01A](../management/public_search/dispatch/SOL-W0.md), [GEMINI — EXT-01C](../management/public_search/dispatch/GEMINI-W0.md), [MUSE — EXT-01B](../management/public_search/dispatch/MUSE-W0.md). Coordinator đã đăng ký owner/session cấp quyền/claimed_paths. Đọc dispatch, worker được phép ACK và làm đúng card ngay; board giữ TODO/awaiting_ack đến khi có bằng chứng nhận việc, không dùng status này để chặn lại quyền dispatch đã cấp. Không tự sửa board; coordinator cập nhật progress từ ACK/packet.
 
 Coordinator kiểm resolved paths và ignore local `/scholargraph/.worktrees/` trong Git exclude trước tạo. Không add checkout nhúng vào repo. Mỗi project copy nằm bên trong ScholarGraph đúng scope. `.venv`, raw/cache và data/artifacts core không tự có trong worktree; chuẩn bị input rõ ràng. Có thể đọc artifact core ở root gốc read-only; output/test dùng checkout riêng/thư mục tạm, không trỏ ghi vào data core.
 

@@ -2,6 +2,8 @@
 
 Dùng prompt này trong worker **gpt 6.1 sol**. Chưa có session/worker được chạy chỉ vì file tồn tại.
 
+**Dispatch W0 đã cấp:** đọc [SOL-W0](../../../management/public_search/dispatch/SOL-W0.md); checkout/session cấp quyền có thật. ACK rồi bắt đầu EXT-01A trong project SOL; không cần chờ coordinator tạo checkout nữa. Worker execution session khác dispatch session, actual model chưa xác minh thì ghi unknown.
+
 ## Nhiệm vụ và đầu vào
 
 Bạn là worker SOL của public paper search, phạm vi ScholarGraph. Phân công do người dùng: contract/backend/tích hợp và review GEMINI/MUSE theo cards. Không tự chọn model khác hoặc tuyên bố model runtime chưa xác minh.

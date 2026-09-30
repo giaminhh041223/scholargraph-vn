@@ -1,35 +1,393 @@
 {
   "schema_version": 1,
-  "scope": "public_search_extension_planning",
-  "updated_at": "2026-09-30T07:37:30+07:00",
+  "scope": "public_search_extension",
+  "updated_at": "2026-09-30T08:09:18.4113236+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "assignments_prepared_not_dispatched",
+  "mode": "w0_authorized_awaiting_worker_ack",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
   "main_board": "management/tasks.json",
   "workers": {
-    "SOL": {"requested_model": "gpt 6.1 sol", "prompt": "docs/agent_packets/public_search/SOL.md", "actual_model": null, "session_id": null, "thread_id": null},
-    "GEMINI": {"requested_model": "gemini 3.8 flash high", "prompt": "docs/agent_packets/public_search/GEMINI.md", "actual_model": null, "session_id": null, "thread_id": null},
-    "MUSE": {"requested_model": "muse spark 1.3", "prompt": "docs/agent_packets/public_search/MUSE.md", "actual_model": null, "session_id": null, "thread_id": null}
+    "SOL": {
+      "requested_model": "gpt 6.1 sol",
+      "prompt": "docs/agent_packets/public_search/SOL.md",
+      "actual_model": null,
+      "session_id": "DISPATCH-20260930-W0-SOL",
+      "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "branch": "codex/public-search-sol",
+      "worktree_repo": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol",
+      "dispatch_id": "DISPATCH-20260930-W0-SOL",
+      "dispatch_state": "authorized_awaiting_ack",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph",
+      "base_commit": "46328b2be70d17c644fe3351724a5c9f8702eb35",
+      "dispatch_file": "management/public_search/dispatch/SOL-W0.md",
+      "start_authorized": true,
+      "worker_execution_session_id": null,
+      "session_kind": "coordinator_issued_dispatch"
+    },
+    "GEMINI": {
+      "requested_model": "gemini 3.8 flash high",
+      "prompt": "docs/agent_packets/public_search/GEMINI.md",
+      "actual_model": null,
+      "session_id": "DISPATCH-20260930-W0-GEMINI",
+      "thread_id": null,
+      "branch": "codex/public-search-gemini",
+      "worktree_repo": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini",
+      "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
+      "dispatch_state": "authorized_awaiting_ack",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph",
+      "base_commit": "46328b2be70d17c644fe3351724a5c9f8702eb35",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W0.md",
+      "start_authorized": true,
+      "worker_execution_session_id": null,
+      "session_kind": "coordinator_issued_dispatch"
+    },
+    "MUSE": {
+      "requested_model": "muse spark 1.3",
+      "prompt": "docs/agent_packets/public_search/MUSE.md",
+      "actual_model": null,
+      "session_id": "DISPATCH-20260930-W0-MUSE",
+      "thread_id": null,
+      "branch": "codex/public-search-muse",
+      "worktree_repo": "D:/Web_mining_20261/scholargraph/.worktrees/public-muse",
+      "dispatch_id": "DISPATCH-20260930-W0-MUSE",
+      "dispatch_state": "authorized_awaiting_ack",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph",
+      "base_commit": "46328b2be70d17c644fe3351724a5c9f8702eb35",
+      "dispatch_file": "management/public_search/dispatch/MUSE-W0.md",
+      "start_authorized": true,
+      "worker_execution_session_id": null,
+      "session_kind": "coordinator_issued_dispatch"
+    }
   },
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "EXT-01A",
+      "worker": "SOL",
+      "dispatch_id": "DISPATCH-20260930-W0-SOL",
+      "state": "authorized_awaiting_ack",
+      "start_authorized": true,
+      "session_id": "DISPATCH-20260930-W0-SOL",
+      "coordinator_session_id": "DISPATCH-20260930-W0-SOL",
+      "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph",
+      "claimed_paths": [
+        "docs/public_search/CONTRACT.md",
+        "src/scholargraph/public_search/__init__.py",
+        "src/scholargraph/public_search/contracts.py",
+        "src/scholargraph/public_search/transport.py",
+        "configs/public_search.json",
+        "tests/unit/test_public_contracts.py",
+        "tests/unit/test_public_transport.py",
+        "management/public_search/logs/SOL/",
+        "management/public_search/packets/SOL/"
+      ],
+      "dispatch_file": "management/public_search/dispatch/SOL-W0.md"
+    },
+    {
+      "task_id": "EXT-01C",
+      "worker": "GEMINI",
+      "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
+      "state": "authorized_awaiting_ack",
+      "start_authorized": true,
+      "session_id": "DISPATCH-20260930-W0-GEMINI",
+      "coordinator_session_id": "DISPATCH-20260930-W0-GEMINI",
+      "thread_id": null,
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph",
+      "claimed_paths": [
+        "docs/public_search/UX_SPEC.md",
+        "tests/fixtures/public_search/gemini/",
+        "management/public_search/logs/GEMINI/",
+        "management/public_search/packets/GEMINI/"
+      ],
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W0.md"
+    },
+    {
+      "task_id": "EXT-01B",
+      "worker": "MUSE",
+      "dispatch_id": "DISPATCH-20260930-W0-MUSE",
+      "state": "authorized_awaiting_ack",
+      "start_authorized": true,
+      "session_id": "DISPATCH-20260930-W0-MUSE",
+      "coordinator_session_id": "DISPATCH-20260930-W0-MUSE",
+      "thread_id": null,
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph",
+      "claimed_paths": [
+        "docs/public_search/SOURCE_AUDIT.md",
+        "artifacts/reports/public_search/muse/source_audit.json",
+        "data/public_search/muse/source_pilot/",
+        "management/public_search/logs/MUSE/",
+        "management/public_search/packets/MUSE/"
+      ],
+      "dispatch_file": "management/public_search/dispatch/MUSE-W0.md"
+    }
+  ],
   "tasks": [
-    {"id":"EXT-01A","title":"Contract, schema và transport dùng chung","status":"TODO","proposed_owner":"SOL","proposed_reviewer":"MUSE","dependencies":[],"session_id":null,"evidence":[]},
-    {"id":"EXT-01B","title":"Kiểm chứng nguồn và giới hạn truy cập","status":"TODO","proposed_owner":"MUSE","proposed_reviewer":"SOL","dependencies":[],"session_id":null,"evidence":[]},
-    {"id":"EXT-01C","title":"Luồng UI và request/response examples","status":"TODO","proposed_owner":"GEMINI","proposed_reviewer":"MUSE","dependencies":[],"session_id":null,"evidence":[]},
-    {"id":"EXT-02","title":"Adapter OpenAlex","status":"TODO","proposed_owner":"SOL","proposed_reviewer":"MUSE","dependencies":["EXT-01A","EXT-01B"],"session_id":null,"evidence":[]},
-    {"id":"EXT-03","title":"Adapter arXiv","status":"TODO","proposed_owner":"GEMINI","proposed_reviewer":"SOL","dependencies":["EXT-01A","EXT-01B"],"session_id":null,"evidence":[]},
-    {"id":"EXT-04A","title":"SQLite cache, snapshot, library và export","status":"TODO","proposed_owner":"MUSE","proposed_reviewer":"GEMINI","dependencies":["EXT-01A"],"session_id":null,"evidence":[]},
-    {"id":"EXT-04B","title":"Dedup, filter và RRF","status":"TODO","proposed_owner":"SOL","proposed_reviewer":"MUSE","dependencies":["EXT-02","EXT-03"],"session_id":null,"evidence":[]},
-    {"id":"EXT-05A","title":"UI public search và library","status":"TODO","proposed_owner":"GEMINI","proposed_reviewer":"MUSE","dependencies":["EXT-01A","EXT-01C"],"session_id":null,"evidence":[]},
-    {"id":"EXT-05B","title":"Service, routes, CLI và tích hợp ứng dụng","status":"TODO","proposed_owner":"SOL","proposed_reviewer":"GEMINI","dependencies":["EXT-04A","EXT-04B"],"session_id":null,"evidence":[]},
-    {"id":"EXT-06","title":"Kiểm thử tích hợp phá hủy và pilot thực","status":"TODO","proposed_owner":"MUSE","proposed_reviewer":"SOL","dependencies":["EXT-05A","EXT-05B"],"session_id":null,"evidence":[]},
-    {"id":"EXT-07S","title":"Audit tích hợp backend của SOL","status":"TODO","proposed_owner":"MUSE","proposed_reviewer":"GEMINI","dependencies":["EXT-06"],"session_id":null,"evidence":[]},
-    {"id":"EXT-07G","title":"Audit tích hợp UI và arXiv của GEMINI","status":"TODO","proposed_owner":"SOL","proposed_reviewer":"MUSE","dependencies":["EXT-06"],"session_id":null,"evidence":[]},
-    {"id":"EXT-07M","title":"Audit tích hợp storage và test evidence của MUSE","status":"TODO","proposed_owner":"GEMINI","proposed_reviewer":"SOL","dependencies":["EXT-06"],"session_id":null,"evidence":[]},
-    {"id":"EXT-08","title":"Tài liệu demo, review packet và bàn giao","status":"TODO","proposed_owner":"GEMINI","proposed_reviewer":"MUSE","dependencies":["EXT-07S","EXT-07G","EXT-07M"],"session_id":null,"evidence":[]},
-    {"id":"EXT-09","title":"Crossref enrichment (giai đoạn B)","status":"DEFERRED","proposed_owner":"MUSE","proposed_reviewer":"SOL","dependencies":["EXT-08"],"session_id":null,"evidence":[]},
-    {"id":"EXT-10","title":"Crawler HTML một site (giai đoạn B)","status":"DEFERRED","proposed_owner":"GEMINI","proposed_reviewer":"SOL","dependencies":["EXT-08"],"session_id":null,"evidence":[]}
+    {
+      "id": "EXT-01A",
+      "title": "Contract, schema và transport dùng chung",
+      "status": "TODO",
+      "proposed_owner": "SOL",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [],
+      "session_id": "DISPATCH-20260930-W0-SOL",
+      "evidence": [],
+      "dispatch_id": "DISPATCH-20260930-W0-SOL",
+      "owner": "SOL",
+      "claimed_paths": [
+        "docs/public_search/CONTRACT.md",
+        "src/scholargraph/public_search/__init__.py",
+        "src/scholargraph/public_search/contracts.py",
+        "src/scholargraph/public_search/transport.py",
+        "configs/public_search.json",
+        "tests/unit/test_public_contracts.py",
+        "tests/unit/test_public_transport.py",
+        "management/public_search/logs/SOL/",
+        "management/public_search/packets/SOL/"
+      ],
+      "dispatch_state": "authorized_awaiting_ack",
+      "session_kind": "coordinator_issued_dispatch"
+    },
+    {
+      "id": "EXT-01B",
+      "title": "Kiểm chứng nguồn và giới hạn truy cập",
+      "status": "TODO",
+      "proposed_owner": "MUSE",
+      "proposed_reviewer": "SOL",
+      "dependencies": [],
+      "session_id": "DISPATCH-20260930-W0-MUSE",
+      "evidence": [],
+      "dispatch_id": "DISPATCH-20260930-W0-MUSE",
+      "owner": "MUSE",
+      "claimed_paths": [
+        "docs/public_search/SOURCE_AUDIT.md",
+        "artifacts/reports/public_search/muse/source_audit.json",
+        "data/public_search/muse/source_pilot/",
+        "management/public_search/logs/MUSE/",
+        "management/public_search/packets/MUSE/"
+      ],
+      "dispatch_state": "authorized_awaiting_ack",
+      "session_kind": "coordinator_issued_dispatch"
+    },
+    {
+      "id": "EXT-01C",
+      "title": "Luồng UI và request/response examples",
+      "status": "TODO",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [],
+      "session_id": "DISPATCH-20260930-W0-GEMINI",
+      "evidence": [],
+      "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
+      "owner": "GEMINI",
+      "claimed_paths": [
+        "docs/public_search/UX_SPEC.md",
+        "tests/fixtures/public_search/gemini/",
+        "management/public_search/logs/GEMINI/",
+        "management/public_search/packets/GEMINI/"
+      ],
+      "dispatch_state": "authorized_awaiting_ack",
+      "session_kind": "coordinator_issued_dispatch"
+    },
+    {
+      "id": "EXT-02",
+      "title": "Adapter OpenAlex",
+      "status": "TODO",
+      "proposed_owner": "SOL",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [
+        "EXT-01A",
+        "EXT-01B"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-03",
+      "title": "Adapter arXiv",
+      "status": "TODO",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "SOL",
+      "dependencies": [
+        "EXT-01A",
+        "EXT-01B"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-04A",
+      "title": "SQLite cache, snapshot, library và export",
+      "status": "TODO",
+      "proposed_owner": "MUSE",
+      "proposed_reviewer": "GEMINI",
+      "dependencies": [
+        "EXT-01A"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-04B",
+      "title": "Dedup, filter và RRF",
+      "status": "TODO",
+      "proposed_owner": "SOL",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [
+        "EXT-02",
+        "EXT-03"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-05A",
+      "title": "UI public search và library",
+      "status": "TODO",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [
+        "EXT-01A",
+        "EXT-01C"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-05B",
+      "title": "Service, routes, CLI và tích hợp ứng dụng",
+      "status": "TODO",
+      "proposed_owner": "SOL",
+      "proposed_reviewer": "GEMINI",
+      "dependencies": [
+        "EXT-04A",
+        "EXT-04B"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-06",
+      "title": "Kiểm thử tích hợp phá hủy và pilot thực",
+      "status": "TODO",
+      "proposed_owner": "MUSE",
+      "proposed_reviewer": "SOL",
+      "dependencies": [
+        "EXT-05A",
+        "EXT-05B"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-07S",
+      "title": "Audit tích hợp backend của SOL",
+      "status": "TODO",
+      "proposed_owner": "MUSE",
+      "proposed_reviewer": "GEMINI",
+      "dependencies": [
+        "EXT-06"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-07G",
+      "title": "Audit tích hợp UI và arXiv của GEMINI",
+      "status": "TODO",
+      "proposed_owner": "SOL",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [
+        "EXT-06"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-07M",
+      "title": "Audit tích hợp storage và test evidence của MUSE",
+      "status": "TODO",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "SOL",
+      "dependencies": [
+        "EXT-06"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-08",
+      "title": "Tài liệu demo, review packet và bàn giao",
+      "status": "TODO",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "MUSE",
+      "dependencies": [
+        "EXT-07S",
+        "EXT-07G",
+        "EXT-07M"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-09",
+      "title": "Crossref enrichment (giai đoạn B)",
+      "status": "DEFERRED",
+      "proposed_owner": "MUSE",
+      "proposed_reviewer": "SOL",
+      "dependencies": [
+        "EXT-08"
+      ],
+      "session_id": null,
+      "evidence": []
+    },
+    {
+      "id": "EXT-10",
+      "title": "Crawler HTML một site (giai đoạn B)",
+      "status": "DEFERRED",
+      "proposed_owner": "GEMINI",
+      "proposed_reviewer": "SOL",
+      "dependencies": [
+        "EXT-08"
+      ],
+      "session_id": null,
+      "evidence": []
+    }
+  ],
+  "dispatch_sessions": [
+    {
+      "session_id": "DISPATCH-20260930-W0-SOL",
+      "kind": "coordinator_dispatch_not_worker_execution",
+      "issued_at": "2026-09-30T08:09:18.4113236+07:00",
+      "worker": "SOL",
+      "task_id": "EXT-01A",
+      "status": "authorized_awaiting_ack",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-20260930-W0-SOL.md",
+      "actual_model": null,
+      "worker_execution_session_id": null
+    },
+    {
+      "session_id": "DISPATCH-20260930-W0-GEMINI",
+      "kind": "coordinator_dispatch_not_worker_execution",
+      "issued_at": "2026-09-30T08:09:18.4113236+07:00",
+      "worker": "GEMINI",
+      "task_id": "EXT-01C",
+      "status": "authorized_awaiting_ack",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-20260930-W0-GEMINI.md",
+      "actual_model": null,
+      "worker_execution_session_id": null
+    },
+    {
+      "session_id": "DISPATCH-20260930-W0-MUSE",
+      "kind": "coordinator_dispatch_not_worker_execution",
+      "issued_at": "2026-09-30T08:09:18.4113236+07:00",
+      "worker": "MUSE",
+      "task_id": "EXT-01B",
+      "status": "authorized_awaiting_ack",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-20260930-W0-MUSE.md",
+      "actual_model": null,
+      "worker_execution_session_id": null
+    }
   ]
 }
