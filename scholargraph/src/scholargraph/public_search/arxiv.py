@@ -136,7 +136,7 @@ def fail_adapter(
 
 def build_arxiv_query(raw_query: str) -> str:
     """Build and validate an arXiv search_query string from user query text.
-    
+
     Rules:
     - Validates balanced quotes and parentheses; rejects malformed unbalanced syntax with request error.
     - Preserves standard boolean operators (AND, OR, ANDNOT) and field prefixes (ti:, au:, abs:, all:).
@@ -242,7 +242,7 @@ def verify_xml_with_expat(raw_bytes: bytes, encoding: str) -> None:
 
 def check_xml_security(raw_bytes: bytes) -> str:
     """Verify XML payload is safe, well-encoded, and free of DOCTYPE/ENTITY declarations.
-    
+
     Rejects DOCTYPE and ENTITY declarations across supported encodings (UTF-8, UTF-16).
     Unsupported encodings like UTF-32 fail schema cleanly.
     """
@@ -269,7 +269,7 @@ def check_xml_security(raw_bytes: bytes) -> str:
 
 def detect_upstream_error_entry(entry: ET.Element, idx: int) -> None:
     """Detect if an Atom entry represents an arXiv error response (HTTP 200 error feed).
-    
+
     arXiv API error responses return standard Atom entries with an id containing:
     http://arxiv.org/api/errors#...
     Does NOT rely on title or abstract text so valid research papers (e.g. with title 'Error'
@@ -648,7 +648,7 @@ def parse_feed_payload(
     max_requested_items: int | None = None,
 ) -> tuple[int, int, int, list[PaperRecord]]:
     """Parse, securely validate, and extract PaperRecords from an arXiv Atom feed payload.
-    
+
     Unified validation logic used by both search() and CLI boundary runner:
     - Verifies XML security (DOCTYPE/ENTITY rejection, UTF-8/UTF-16 support, UTF-32 rejection).
     - Validates root element is Atom feed (<feed xmlns="http://www.w3.org/2005/Atom">).
@@ -740,7 +740,7 @@ def parse_feed_payload(
 
 def search(request: SearchRequest, transport: Transport) -> SourceResult:
     """Execute public paper search on arXiv using the unified transport.
-    
+
     Adheres strictly to the public search contract:
     - If 'arxiv' is not in request.sources, immediately returns not_requested without network.
     - Uses unified transport.deadline() across all pagination calls.

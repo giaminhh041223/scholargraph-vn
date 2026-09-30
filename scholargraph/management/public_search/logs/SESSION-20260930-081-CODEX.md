@@ -88,3 +88,14 @@
 - IndependentSOLR5PASS,14cases and7focusedreviewer tests; parent actual287testsPASS after exactbyteimportarxiv. EXT-03DONE.
 - MuseR2author retryPASS/40testsPASS; originalreviewerprobe rerunfirst failedcleanup because intendedStoreError bypassedclose. Immutableoriginalprobe retained, tempcopyfinallycloseonly -> collector0, exportinvertedfalse/cacheexplicitStoreError. Not productionfailure or claimedoriginalcollectorPASS.
 - Gemini R2 storage re-review active24299/originalsession0cb3bca2. No targetwrites or W2 dispatch.
+
+## Storage Anti-Silent-Bypass gate 2026-09-30T15:29:20.810671+07:00
+
+- Gemini R2 re-review PASS forF1-F3, runner4a08acfc CLI0, originalreviewcontext0cb3bca2 reused (fresh was initial review, not newR2context). Independentstatic/probe-design review; tests actualcoordinator notmodel.
+- Coordinator tempfault injection found requiredresource errors swallowed: connectionclose returnsNone/_closedTrue; CLI subprocess closefault returnsVALID/0; evidence enumeratefault returnsFalse. [R2 close gate](../reviews/COORDINATOR/EXT-04A-R2-CLOSE-GATE-081.md) overrides overallacceptancependingR3, noDONE. Muse originalsuccessfulretrycontextassignedR3 runner63883.
+- Parentarxiv5blanktrailingwhitespace lines removed only; bytehash differs from delivered pin while executablelogic identical. Finalcombinedsuite will test exactparentbytes; earlierexactcopyclaim refers precleanupstage.
+
+## Storage R3 verification 2026-09-30T15:35:06.380870+07:00
+
+- MUSE R3 CLI0/actual43testsPASS (40prior+3new), pinned6b33c8fe1f5817d38960ac6db29ac62af899da3b. Faultcollector confirms structuredcloseFAIL/closedfalse/CLI1/emptyVALIDoutput andevidenceFAIL. No DBrebuild; temp sentinelbytesasserted.
+- GEMINI originalreviewcontext assignedR3 runner55718; noauthorwriting target. OldR2probe checks2functionalbugs+RawIDonly, notclosefailure. Earlier timeout/blockedwrite and originalprobeWindowscleanupfailure preserved.

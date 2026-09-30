@@ -1,3 +1,9 @@
+# W1 081 — storage R3 theo gate chống nuốt lỗi
+
+- EXT-02/03 DONE; parentadapters287testsPASS. EXT-04A IN_PROGRESS: Gemini R2PASS choF1-F3, nhưng coordinatorfaultinjection thấy closefailureCLI0 và evidenceenumerationfallbackFalse.
+- MuseR3 đang sửa trong originalsuccessfulretry session ses_f0ea2fb52ffeXlJNnX5Xk3iiHT, runner63883/runbe38c554-50cd-4190-82cc-9609dcf37f50. Không dispatchreview khi author còn viết target.
+- Bước executable: thu authorR3, chạy focused/faultsubprocess, pinHEAD; Gemini originalindependentreviewcontextreviewdeltaR3. SauPASS importstorage và combinedsuite, freezeW1. W2 chưadispatch.
+
 # W1 081 — chỉ còn review storage R2
 
 - EXT-02 DONE (MUSE reviewPASS, parent217tests). EXT-03 DONE (SOL R5reviewPASS, parentadapters287tests). Arxiv head049a2b8/source7524a8f đã nhập exactbytes.

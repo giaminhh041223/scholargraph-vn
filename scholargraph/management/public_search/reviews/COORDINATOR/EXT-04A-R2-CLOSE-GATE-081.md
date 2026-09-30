@@ -1,0 +1,7 @@
+# Gate bổ sung EXT-04A R2 — CHANGES_REQUIRED
+
+- Target MUSE `e6ba94f4bf268faf7179da863501f418c4f07e95`; Gemini re-review F1–F3 PASS, 40 focused tests PASS. Gate coordinator kiểm nhánh lỗi tài nguyên theo Anti-Silent-Bypass của AGENTS, không phủ nhận các bản sửa trước đã đạt.
+- Fault injection temp-only thực chạy: `SQLiteStore.close()` khi connection.close raises OSError vẫn trả thành công và `_closed=True`; subprocess CLI với injected close fault vẫn exit0 và `VALID storage`. Đây là P1: nuốt lỗi và báo thành công sai. Yêu cầu close giữ lock, lỗi -> StoreError storage, không đánh dấu đã đóng thành công; CLI close error -> FAIL/exit1.
+- `_has_evidence(existing_dir)` với injected enumeration OSError trả `False`. Đây là P2: lỗi đọc tài nguyên bị đổi thành “không có evidence”, không đủ căn cứ cho initialize. Yêu cầu StoreError storage, không tạo/rebuild DB khi chưa đọc được evidence.
+- Bằng chứng chạy: `data/public_search/control/w1-081/storage-close-fault-081.py`, collector exit0 chỉ ghi kết quả; output `{close: returned success, closed_flag: true, cli_exit: 0, cli_stdout: VALID storage, evidence: false}`. Không live API, không sửa DB/projectdata; subprocess và directory đều system temp.
+- Muse R3 sửa đúng nhánh này và thêm fault-injection regression/subprocess CLI1. Cleanup đang truyền primary failure phải tiếp tục FAIL; không thay đó bằng thành công. Gemini review tiếp target mới; EXT-04A vẫn chưa DONE.
