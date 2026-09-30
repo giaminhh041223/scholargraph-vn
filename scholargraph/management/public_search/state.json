@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T08:09:18.4113236+07:00",
-  "stage": "w0_checkouts_ready_authorized_awaiting_ack",
+  "updated_at": "2026-09-30T08:55:20.713446+07:00",
+  "stage": "w0_delivered_direct_channels_ready",
   "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
@@ -9,10 +9,28 @@
     "EXT-01C"
   ],
   "next_steps": {
-    "GEMINI": "Read dispatch/GEMINI-W0.md, ACK then EXT-01C",
-    "MUSE": "Read dispatch/MUSE-W0.md, ACK then EXT-01B",
-    "SOL": "Read dispatch/SOL-W0.md, ACK then EXT-01A"
+    "SOL": "Independent review EXT-01B from MUSE pinned head; coordinator dispatches separately",
+    "MUSE": "Independent review EXT-01A and EXT-01C pinned heads; coordinator dispatches separately",
+    "GEMINI": "Reconcile UX fixture with reviewed contract after findings; do not start W1"
   },
-  "last_session_log": "management/logs/SESSION-20260930-077-CODEX.md",
-  "worker_execution_observed": false
+  "last_session_log": "management/logs/SESSION-20260930-078-CODEX.md",
+  "worker_execution_observed": true,
+  "last_verification": {
+    "checked_at": "2026-09-30T09:00:31.902759+07:00",
+    "controller_tests": {
+      "passed": 21,
+      "exit_code": 0
+    },
+    "core_checker": {
+      "exit_code": 0,
+      "task_count": 53,
+      "markdown_links": 448
+    },
+    "channel_probes": {
+      "SOL": "PASS",
+      "GEMINI": "PASS",
+      "MUSE": "PASS"
+    },
+    "scope": "Channel probes and coordinator runner; W0 worker deliverables await independent review"
+  }
 }

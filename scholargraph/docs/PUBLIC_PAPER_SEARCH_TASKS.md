@@ -2,7 +2,7 @@
 
 - Ngày: 2026-09-30. Nhánh điều phối: `codex/public-paper-search`.
 - [Kế hoạch chức năng](PUBLIC_PAPER_SEARCH_PLAN.md), [board extension](../management/public_search/tasks.json), [handoff](../management/public_search/HANDOFF.md).
-- Thiết kế ở phiên 076; phiên 077 đã tạo ba checkout và cấp quyền W0 theo dispatch bên dưới. Chưa xác nhận implementation/model runtime của workers.
+- Thiết kế ở phiên 076; phiên 077 tạo checkout/cấp quyền W0. Phiên 078 xác minh ba packet và commit W0, chuyển REVIEW; thiết lập [kênh trực tiếp](../management/public_search/CONTROL.md). Model runtime của implementation W0 còn unknown theo packet; chưa review/DONE.
 
 ## 1. Vai trò và nguyên tắc giao việc
 

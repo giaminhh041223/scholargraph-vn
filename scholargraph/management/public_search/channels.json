@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "scope": "public_search_extension",
+  "scheduler_enabled": false,
+  "channels": {
+    "SOL": {
+      "transport": "codex_app_thread",
+      "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "host_id": "local",
+      "model_id": "gpt-6.1-sol",
+      "probe_status": "PASS",
+      "probe_turn_id": "01a0effa-2c39-7ec2-a111-5fc8574d0376",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph"
+    },
+    "GEMINI": {
+      "transport": "antigravity_cli",
+      "executable": "C:/Users/ADMIN/AppData/Local/agy/bin/agy.exe",
+      "model_id": "gemini-3.8-flash-high",
+      "probe_status": "PASS",
+      "probe_session_id": "ed8034e8-92b5-4900-86e8-2aa4f01734d1",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph",
+      "probe_evidence": "data/public_search/control/runs/5e906cef-f0fb-4497-97ac-622da72a53cc/summary.json"
+    },
+    "MUSE": {
+      "transport": "opencode_cli",
+      "executable": "D:/Web_mining_20261/scholargraph/data/public_search/control/opencode-cli/node_modules/opencode-ai/bin/opencode.exe",
+      "cli_version": "1.18.0",
+      "model_id": "opencode/muse-spark-1.3-contributor-free",
+      "user_selected_model": "muse-spark-1.3-free",
+      "probe_status": "PASS",
+      "probe_session_id": "ses_f0ffc150fffeVVIMDYcrEGTvO3",
+      "previous_probe_error": "meta/muse-spark-1.3: HTTP 401 invalid_api_key after isolating CLI SQLite database",
+      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph",
+      "probe_evidence": "data/public_search/control/runs/445eb7c9-b147-439a-92eb-4d170ff060f4/summary.json"
+    }
+  },
+  "updated_at": "2026-09-30T08:55:20.713446+07:00"
+}
