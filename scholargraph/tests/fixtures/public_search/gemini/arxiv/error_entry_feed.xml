@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- synthetic=true; not_live; fixture for upstream arXiv HTTP 200 error feed -->
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://arxiv.org/api/errors#syntax</id>
+  <title>arXiv Query: error</title>
+  <updated>2026-09-30T00:00:00Z</updated>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/api/errors#unrecognized_field</id>
+    <title>Error</title>
+    <summary>Error: unrecognized field prefix invalid_field</summary>
+    <updated>2026-09-30T00:00:00Z</updated>
+  </entry>
+</feed>

@@ -82,3 +82,9 @@
 
 - OpenAlex integrated parent checkpoint adadb1e. Gemini R5 CLI0/session66093fce; initial69pass1fail emptyport. Coordinator2line emptyport guard pinned049a2b8, actualfinal70PASS/exit0; independentSOL R5 re-review running. Author tasklabel/sessionpacket not runtimeID, actualmodel request exactFlashHigh/high from controller; packet abbreviatedname not observedmetadata.
 - Muse supplementalcloseout and R2 original attempt have requiredwriteFAIL despite oldcontrollerPASS. Fixrootrelativepermissions and denial detection;31testsPASS including temp subprocessCLIexit1. [Controller gate](../reviews/COORDINATOR/MUSE-PERMISSIONS-081.md). Retry active sessionses_f0ea2fb52ffeXlJNnX5Xk3iiHT exactfree/xhigh observed, no DONE.
+
+## Adapter integration 2026-09-30T15:23:59.960394+07:00
+
+- IndependentSOLR5PASS,14cases and7focusedreviewer tests; parent actual287testsPASS after exactbyteimportarxiv. EXT-03DONE.
+- MuseR2author retryPASS/40testsPASS; originalreviewerprobe rerunfirst failedcleanup because intendedStoreError bypassedclose. Immutableoriginalprobe retained, tempcopyfinallycloseonly -> collector0, exportinvertedfalse/cacheexplicitStoreError. Not productionfailure or claimedoriginalcollectorPASS.
+- Gemini R2 storage re-review active24299/originalsession0cb3bca2. No targetwrites or W2 dispatch.

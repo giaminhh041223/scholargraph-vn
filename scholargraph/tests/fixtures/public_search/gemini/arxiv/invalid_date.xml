@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- synthetic=true; not_live; entry with invalid published timestamp -->
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/invalid_date</id>
+  <title>Query</title>
+  <updated>2026-09-30T00:00:00Z</updated>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2101.00003v1</id>
+    <title>Valid Title</title>
+    <link href="https://arxiv.org/abs/2101.00003v1" rel="alternate" type="text/html"/>
+    <published>not-a-valid-iso-date</published>
+    <updated>2026-09-30T00:00:00Z</updated>
+  </entry>
+</feed>

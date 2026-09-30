@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- synthetic=true; not_live; entry missing landing_url link with valid arxiv id -->
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/missing_link</id>
+  <title>Query</title>
+  <updated>2026-09-30T00:00:00Z</updated>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>https://arxiv.org/abs/2101.00001v1</id>
+    <title>Valid Title</title>
+    <updated>2026-09-30T00:00:00Z</updated>
+  </entry>
+</feed>

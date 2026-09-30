@@ -1,9 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T15:17:56.865996+07:00",
-  "stage": "w1_corrective_review",
+  "updated_at": "2026-09-30T15:23:59.960394+07:00",
+  "stage": "w1_final_storage_review",
   "active_tasks": [
-    "EXT-03",
     "EXT-04A"
   ],
   "authorized_tasks": [
@@ -15,9 +14,9 @@
     "EXT-04A"
   ],
   "next_steps": {
-    "GEMINI": "EXT-03 R5 fixes2P2 then coordinator tests and SOL re-review",
-    "MUSE": "EXT-04A R2 fixes cache/timezone/close locking then coordinator tests and GEMINI re-review",
-    "COORDINATOR": "Record exact runtimes; verify fixes; no W2 dispatch"
+    "COORDINATOR": "Collect Gemini storage R2 review; if PASS import exact bytes, run combined integration suite then close W1",
+    "GEMINI": "Independent storage R2 re-review in original review context",
+    "MUSE": "Author R2 ended; readonly pinned target e6ba94f; no new task"
   },
   "last_session_log": "management/public_search/logs/SESSION-20260930-081-CODEX.md",
   "worker_execution_observed": true,
@@ -60,37 +59,21 @@
   "pause_scope": "Prior pause revoked by user continue",
   "active_review_assignments": [
     {
-      "task_id": "EXT-03",
-      "reviewer": "SOL",
-      "agent_task": "/root/review_w1_arxiv_081",
-      "target_head": "049a2b86aa309dcdd5b4885b1ac25a8150b93200",
-      "claimed_paths": [
-        "management/public_search/reviews/SOL/EXT-03-W1-R5-081.md",
-        "management/public_search/logs/SOL/REVIEW-EXT-03-W1-R5-081.md"
-      ]
+      "task_id": "EXT-04A",
+      "reviewer": "GEMINI",
+      "session_id": "0cb3bca2-2268-432e-a0c6-67ec6664d024",
+      "runner_exec_session": 24299,
+      "target_head": "e6ba94f4bf268faf7179da863501f418c4f07e95",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-REVIEW-EXT04A-R2-081.txt"
     }
   ],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/W0-R2-GATE.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-03",
+  "next_task_id": "EXT-04A",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-04A",
-      "owner": "MUSE",
-      "runner_exec_session": 53234,
-      "session_id": "ses_f0ea2fb52ffeXlJNnX5Xk3iiHT",
-      "runtime_evidence": "data/public_search/control/runs/fe105b60-415b-49c1-b7bd-827f45f66a54/summary.json",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
-      "runtime_variant_observed": "xhigh",
-      "dispatch_file": "management/public_search/dispatch/MUSE-W1-EXT04A-R2-RETRY-081.txt",
-      "status": "RUNNING"
-    }
-  ]
+  "active_assignments": []
 }

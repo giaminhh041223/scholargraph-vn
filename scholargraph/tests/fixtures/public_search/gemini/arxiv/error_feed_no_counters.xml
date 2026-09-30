@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- synthetic=true; not_live; upstream error feed without opensearch counters -->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://arxiv.org/api/errors#nocounters</id>
+  <title>Error</title>
+  <updated>2026-09-30T00:00:00Z</updated>
+  <entry>
+    <id>http://arxiv.org/api/errors#bad_query</id>
+    <title>Error</title>
+    <summary>Error: invalid query syntax</summary>
+    <updated>2026-09-30T00:00:00Z</updated>
+  </entry>
+</feed>

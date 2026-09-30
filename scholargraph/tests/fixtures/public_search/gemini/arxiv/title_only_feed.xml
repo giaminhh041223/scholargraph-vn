@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- synthetic=true; not_live; fixture for title-only valid entry without abstract -->
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/title_only</id>
+  <title>arXiv Query: title only</title>
+  <updated>2026-09-30T00:00:00Z</updated>
+  <opensearch:itemsPerPage>1</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2102.99999v1</id>
+    <title>Title Only Record Without Abstract</title>
+    <updated>2021-02-01T00:00:00Z</updated>
+    <published>2021-02-01T00:00:00Z</published>
+    <link href="https://arxiv.org/abs/2102.99999v1" rel="alternate" type="text/html"/>
+    <author>
+      <name>Solo Author</name>
+    </author>
+  </entry>
+</feed>

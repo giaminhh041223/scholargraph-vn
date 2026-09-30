@@ -1,3 +1,10 @@
+# W1 081 — chỉ còn review storage R2
+
+- EXT-02 DONE (MUSE reviewPASS, parent217tests). EXT-03 DONE (SOL R5reviewPASS, parentadapters287tests). Arxiv head049a2b8/source7524a8f đã nhập exactbytes.
+- EXT-04A REVIEW: MUSE R2 head e6ba94f/40testsPASS; Gemini independent originalreviewcontext đang re-review runner24299/session0cb3bca2. TargetMUSEcode/tests immutable.
+- OpenCode scoped relativepermissions corrected;31controller testsPASS incl denialCLIexit1. Earlier timeout/blockedwrite records retained as failures.
+- Next executable: thu review rồi import storage, combinedW1suite và checkpoint. W2 chưa dispatch, main human gates giữ nguyên.
+
 # W1 081 — corrections after independent review
 
 - EXT-02 DONE: OpenAlex exact bytes imported; fresh MUSE review PASS; parent217tests PASS.
