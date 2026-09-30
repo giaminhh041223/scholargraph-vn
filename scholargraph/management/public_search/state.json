@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T17:15:31.617384+07:00",
+  "updated_at": "2026-09-30T17:24:35.842550+07:00",
   "stage": "w2_authoring",
   "active_tasks": [
     "EXT-04B",
@@ -75,7 +75,21 @@
   "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
-  "active_review_assignments": [],
+  "active_review_assignments": [
+    {
+      "task_id": "EXT-05A",
+      "worker": "MUSE",
+      "runtime_session_id": null,
+      "controller_run": "569bbe8f-d340-44e0-910a-7ff4e0e632bc",
+      "target_head": "68b2416",
+      "status": "running",
+      "claimed_paths": [
+        "management/public_search/reviews/MUSE/EXT-05A-W2-082.md",
+        "management/public_search/reviews/MUSE/probes-ui-082/",
+        "management/public_search/logs/MUSE/REVIEW-EXT-05A-W2-082.md"
+      ]
+    }
+  ],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/W1-FINISH-081.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
@@ -101,28 +115,6 @@
         "tests/fixtures/public_search/sol/fusion/",
         "management/public_search/logs/SOL/EXT-04B-W2-082.md",
         "management/public_search/packets/SOL/EXT-04B-W2-082.md"
-      ]
-    },
-    {
-      "task_id": "EXT-05A",
-      "worker": "GEMINI",
-      "dispatch_id": "DISPATCH-20260930-W2-GEMINI-082",
-      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-NATIVE-082.txt",
-      "runtime_session_id": null,
-      "input_head": "51cdef56b797cad42ea71a36e90536f780207c4d",
-      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph",
-      "status": "running",
-      "controller_run": "3568323a-d5b6-47e7-9fc8-8cae7836407f",
-      "evidence": "data/public_search/control/runs/3568323a-d5b6-47e7-9fc8-8cae7836407f/summary.json",
-      "claimed_paths": [
-        "ui/templates/public_search.html",
-        "ui/static/public_search.js",
-        "ui/static/public_search.css",
-        "ui/templates/search.html",
-        "tests/unit/test_public_ui.py",
-        "tests/fixtures/public_search/gemini/ui/",
-        "management/public_search/logs/GEMINI/EXT-05A-W2-082.md",
-        "management/public_search/packets/GEMINI/EXT-05A-W2-082.md"
       ]
     }
   ],

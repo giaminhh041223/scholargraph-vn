@@ -1,3 +1,9 @@
+# W2 082 — UI R1 cần sửa, fusion regression qua
+
+- EXT-05A REVIEW tại head68b24163: authorGemini native PASS nhưng actualpytest11pass1fail/exit1; Nodeharnesslocator sai. Coordinator8probes JSON dị dạng đều UIaccept/Pydanticreject; paginationcontrols chưa có và quota partial không incompletebanner/old snapshot action. Report coordinator management/public_search/reviews/COORDINATOR/EXT-05A-W2-R1-082.md.
+- Fresh Muse UIreview đang chạy controller569bbe8f, chỉ report/probes owned; chưa sửa immutabletarget. SOLfusion428regressionPASS reported, đang closeout packet; đợi finish trước freshMUSEfusionreview.
+- Next executable: nhận2delivery/review, gomfindingsUIR2 choGemini nativefix, chạyactualJS/browser; fusion handcalc/adversarialreview. KhôngW3dispatch.
+
 # W2 082 — đăng ký author fusion và UI
 
 - User yêu cầu tiếp bước. EXT-04B SOL và EXT-05A Gemini IN_PROGRESS; chưa dispatch W3.

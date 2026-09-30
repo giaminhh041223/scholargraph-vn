@@ -12,3 +12,10 @@
 - SOL active turn01a0f1cd-0313-7560-831c-6c042c336b99 trong existingthread; requestedgpt6.1/high, actualmetadataunknown.
 - Gemini firstwork run063dc611 FAIL/exit1: RunCommand denied; không có response/artifacts. Giữ evidence lịch sử; không bỏ guard hay mở skippermissions. Fresh native-only retry run3568323a-d5b6-47e7-9fc8-8cae7836407f, hiện RUNNING; không claim runtimecomplete.
 - Check_project actualexit0:53tasks/497links/53routes/7lanes/79sessions; WARNhuman SG034waitsSG033.
+
+## UI R1 immutable review
+
+- Gemini native author CLI0/PASS session43f2f3f6; coordinator commit68b2416 (10ownedfiles), authorshell NOTRUN truthful. Focusedpytest11PASS1FAIL/exit1 (node locatortests/ui/static incorrect); preserveui-r1-tests.log. Draftbrowserfixture search/save work; snapshotpaginationcontrols absent. NoUIacceptancePASS.
+- FreshMUSE UIreview running, controller569bbe8f-d340-44e0-910a-7ff4e0e632bc; reportONLY immutablehead68b2416. SOLfusion authorcontinues.
+
+- Coordinator actual8mutationprobes: JSaccept8/8; frozenPydanticreject8/8. Browserpartial503 hit1 visible nhưng khôngincompletebanner; refreshtrue503 khôngoldaction. ReportR1saved, không UIgatePASS. MUSEactualDBassistantmetadataobserved opencode/muse-spark-1.3-contributor-free/xhigh session ses_f0e28930dffekd6gj67Eyfsrjr; mappingcontrollerawaitsummaryverification.

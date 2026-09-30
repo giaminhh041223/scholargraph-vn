@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T17:15:31.617384+07:00",
+  "updated_at": "2026-09-30T17:24:35.842550+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -422,7 +422,7 @@
     {
       "id": "EXT-05A",
       "title": "UI public search và library",
-      "status": "IN_PROGRESS",
+      "status": "REVIEW",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -434,7 +434,17 @@
         "management/public_search/dispatch/GEMINI-W2-082.txt"
       ],
       "owner": "GEMINI",
-      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt"
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt",
+      "delivered_head": "68b2416",
+      "author_execution_session_id": "43f2f3f6-6ea6-4698-86f6-ee7060c448a8",
+      "verification": {
+        "ui_r1": {
+          "passed": 11,
+          "failed": 1,
+          "exit_code": 1,
+          "evidence_local": "data/public_search/control/w2-082/ui-r1-tests.log"
+        }
+      }
     },
     {
       "id": "EXT-05B",
