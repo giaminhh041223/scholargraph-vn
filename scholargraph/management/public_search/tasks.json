@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T17:24:35.842550+07:00",
+  "updated_at": "2026-09-30T17:47:39.170483+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -405,7 +405,7 @@
     {
       "id": "EXT-04B",
       "title": "Dedup, filter và RRF",
-      "status": "IN_PROGRESS",
+      "status": "REVIEW",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -417,12 +417,22 @@
         "management/public_search/dispatch/SOL-W2-082.txt"
       ],
       "owner": "SOL",
-      "dispatch_file": "management/public_search/dispatch/SOL-W2-082.txt"
+      "dispatch_file": "management/public_search/dispatch/SOL-W2-082.txt",
+      "delivered_head": "791bb8c43faa96c0b2161080ab89fe93e1a6b6e1",
+      "author_execution_session_id": "01a0f1cd-0313-7560-831c-6c042c336b99",
+      "author_verification": {
+        "combined_passed": 430,
+        "fusion_passed": 99,
+        "frozen_passed": 331,
+        "exit_code": 0,
+        "worker_checker_exit_code": 1,
+        "worker_checker_missing_items": 69
+      }
     },
     {
       "id": "EXT-05A",
       "title": "UI public search và library",
-      "status": "REVIEW",
+      "status": "IN_PROGRESS",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -431,11 +441,13 @@
       ],
       "session_id": "DISPATCH-20260930-W2-GEMINI-082",
       "evidence": [
-        "management/public_search/dispatch/GEMINI-W2-082.txt"
+        "management/public_search/dispatch/GEMINI-W2-082.txt",
+        "management/public_search/reviews/MUSE/EXT-05A-W2-082.md",
+        "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R1-082.md"
       ],
       "owner": "GEMINI",
       "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt",
-      "delivered_head": "68b2416",
+      "delivered_head": "68b24163e9affbbd7e7d25735c0d4c2ac1076500",
       "author_execution_session_id": "43f2f3f6-6ea6-4698-86f6-ee7060c448a8",
       "verification": {
         "ui_r1": {
@@ -444,7 +456,9 @@
           "exit_code": 1,
           "evidence_local": "data/public_search/control/w2-082/ui-r1-tests.log"
         }
-      }
+      },
+      "review_verdict": "FAIL_CHANGES_REQUIRED",
+      "fix_dispatch": "management/public_search/dispatch/GEMINI-W2-R2-082.txt"
     },
     {
       "id": "EXT-05B",

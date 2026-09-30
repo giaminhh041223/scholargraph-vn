@@ -1,0 +1,68 @@
+﻿=== REVIEWER PROBE EXT-05A-W2-082 DOM BEHAVIOR ===
+UI_JS: D:\Web_mining_20261\scholargraph\.worktrees\public-muse\scholargraph\management\public_search\reviews\MUSE\probes-ui-082\tmp-diag\public_search.js
+UX examples: example_01_success_dedup_rrf_and_missing_fields,example_02_tt01_all_empty,example_03_tt02_success_plus_empty_with_hit,example_04_tt03_success_sources_filtered_to_zero,example_05_tt04_empty_plus_failed_no_hit,example_06_tt05_success_plus_failed_partial_failure_with_hits,example_07_tt06_all_failed_mixed_precedence,example_08_tt07_invalid_request_422,example_09_cache_fresh_stale_and_refresh_failure,example_10_library_save_idempotent_and_export,example_11_storage_error_500_and_xss_url_sanitization
+[PASS] P-PAGINATION-visible :: nav.hidden=false info="Hiß╗ân thß╗ï 1 b├ái tr├¬n Snapshot #snap_syn_20260930_003 (chß╗æt l├║c 2026-09-30T08:12:00+07:00)"
+[PASS] P-PAGINATION-no-fetch :: fetch urls seen=[] (expected NO /public/results fetch because render never calls it)
+[PASS] P-PAGINATION-no-xy :: info lacks 'Trang X / Y' (actual="Hiß╗ân thß╗ï 1 b├ái tr├¬n Snapshot #snap_syn_20260930_003 (chß╗æt l├║c 2026-09-30T08:12:00+07:00)") ΓÇö MISSING required pagination wording
+[PASS] P-PAGINATION-no-controls :: nav.children=1 (only info span, no prev/next/offset/limit buttons)
+[PASS] P-LIBPAG-mock-gap :: mock DOM omits #library-pagination (got null) while template has it ΓÇö harness cannot test library paging
+[PASS] P-REFRESH-false :: search URL has refresh=false: /public/search?q=graph+mining&sources=openalex&sources=arxiv&top_k=20&cap_per_source=50&refresh=false
+[PASS] P-SEARCH-params :: q/sources/top_k/cap present: /public/search?q=graph+mining&sources=openalex&sources=arxiv&top_k=20&cap_per_source=50&refresh=false
+[PASS] P-YEAR-absent :: year omitted when empty (correct): /public/search?q=graph+mining&sources=openalex&sources=arxiv&top_k=20&cap_per_source=50&refresh=false
+[PASS] P-REFRESH-true :: refresh URL has refresh=true: /public/search?q=graph+mining&sources=openalex&sources=arxiv&year_from=2020&year_to=2024&top_k=20&cap_per_source=50&refresh=true
+[PASS] P-YEAR-present :: years forwarded: /public/search?q=graph+mining&sources=openalex&sources=arxiv&year_from=2020&year_to=2024&top_k=20&cap_per_source=50&refresh=true
+[PASS] P-QUERY-case :: query preserved verbatim (no lowercase): /public/search?q=graph+mining&sources=openalex&sources=arxiv&year_from=2020&year_to=2024&top_k=20&cap_per_source=50&refresh=true
+[PASS] P-STALE-offered :: stale-review offered after failed refresh (hidden=false)
+[PASS] P-STALE-btn :: previous-snapshot button present in stale subtree (author mock getElementById would return null ΓÇö mock gap)
+[PASS] P-STALE-mock-gap :: author mock getElementById('btn-view-previous-snapshot')=null even when button exists ΓÇö Suite6 assertion would fail
+[PASS] P-STALE-false-claim :: clicking fresh-history snapshot claims stale/TTL-expired (banner="Bß║ín ─æang xem bß║ún l╞░u Snapshot c┼⌐ ─æ├ú qu├í hß║ín TTL (cached_stale ΓÇö thu thß║¡p l├║c 2026-09-30T08:00:00+07:00). ─É├óy l├á dß╗» liß╗çu lß╗ïch sß╗¡ do bß║ín chß╗ìn mß╗ƒ, kh├┤ng phß║úi kß║┐t quß║ú l├ám mß╗¢i trß╗▒c tiß║┐p.") ΓÇö FALSE when expires=2099
+[PASS] P-PARTIAL-posted :: save POST sent (posted={"snapshot_id":"snap_syn_20260930_003","canonical_id":"doi:10.1000/syn.kg.2025.001"})
+[PASS] P-PARTIAL-wrong-snap :: save used last SUCCESS snapshot 'snap_syn_20260930_003' not partial 'snap_syn_20260930_006' ΓÇö partial hits CANNOT be saved with correct provenance (expected partial id, actual snap_syn_20260930_003)
+[PASS] P-XSS-title :: card.innerHTML has no <script> (innerHTML="")
+[PASS] P-XSS-text :: payload preserved as TEXT (textContent contains <script> literally)
+[PASS] P-XSS-error :: error.message inert as text, no SCRIPT element (hasScript=false)
+[PASS] P-URL-safe :: accept https://arxiv.org/abs/2401.00001
+[PASS] P-URL-safe :: accept https://doi.org/10.1145/3394486.3403204
+[PASS] P-URL-safe :: accept http://api.openalex.org/works/W1234567890
+[PASS] P-URL-safe :: accept https://example.org/valid_path?q=test&page=1#section
+[PASS] P-URL-unsafe :: reject "javascript:alert('xss-link')"
+[PASS] P-URL-unsafe :: reject "data:text/html,<script>alert(1)</script>"
+[PASS] P-URL-unsafe :: reject "vbscript:msgbox(1)"
+[PASS] P-URL-unsafe :: reject "http://user:password@example.com/paper"
+[PASS] P-URL-unsafe :: reject "http://example.com\\escaped\\path"
+[PASS] P-URL-unsafe :: reject "http://example.com/path\u0000nullbyte"
+[PASS] P-URL-unsafe :: reject "ftp://example.com/paper.pdf"
+[PASS] P-URL-unsafe :: reject "file:///etc/passwd"
+[PASS] P-URL-unsafe :: reject ""
+[PASS] P-URL-no-anchor :: javascript: landing_url renders no <a> (hasA=false, text="#1 (RRF 0.0100)TT├íc giß║ú: Nguß╗ôn x├íc nhß║¡n danh s├ích t├íc giß║ú rß╗ùng[arXiv]N─âm xuß║Ñt bß║ún: kh├┤ng c├│ dß╗» liß╗çuN╞íi c├┤ng bß╗æ / Chuy├¬n ")
+[PASS] P-URL-anchor :: https landing_url renders <a> (hasA=true)
+[PASS] P-OA-unknown :: oa unknown hides PDF
+[PASS] P-OA-closed :: oa closed hides PDF
+[PASS] P-OA-null :: oa open but pdf null hides PDF
+[PASS] P-OA-badurl :: oa open but unsafe pdf hides PDF
+[PASS] P-OA-open :: oa open+https shows PDF
+[PASS] P-WIRE-accept-extra-labels :: JS ACCEPTS extra-labels (threw=false) ΓÇö contract would REJECT (missing provenance/score/rank/counts/extra-field checks)
+[PASS] P-WIRE-accept-invalid-counts-nonzero :: JS ACCEPTS invalid-counts-nonzero (threw=false) ΓÇö contract would REJECT (missing provenance/score/rank/counts/extra-field checks)
+[PASS] P-WIRE-accept-bad-score-zero :: JS ACCEPTS bad-score-zero (threw=false) ΓÇö contract would REJECT (missing provenance/score/rank/counts/extra-field checks)
+[PASS] P-WIRE-accept-bad-rank-zero :: JS ACCEPTS bad-rank-zero (threw=false) ΓÇö contract would REJECT (missing provenance/score/rank/counts/extra-field checks)
+[PASS] P-WIRE-failed-null :: failed+snapshot null accepted (threw=false) ΓÇö correct per contract
+[PASS] P-WIRE-accept-success-zero-hits :: JS ACCEPTS success-zero-hits (threw=false) ΓÇö contract would REJECT (missing provenance/score/rank/counts/extra-field checks)
+[PASS] P-DETAIL-id :: detail shows canonical_id
+[PASS] P-DETAIL-prov :: detail shows provenance header
+[PASS] P-DETAIL-hash :: provenance hash shown (truncated)
+[PASS] P-DETAIL-conf-info :: hit.conflicts keys=1 (example has 1); UI shows generic conflict lines only, no per-evidence rows
+[PASS] P-LANG-notice :: language limitation notice present
+[PASS] P-A11Y-status :: status-region role=status aria-live=polite
+[PASS] P-A11Y-alert :: banner-region role=alert assertive
+[PASS] P-A11Y-busy :: JS sets aria-busy during loading
+[PASS] P-A11Y-stale-norole :: stale-review-region has NO role/live (gap)
+[PASS] P-KEY-buttons :: search/refresh are <button> (keyboard Tab/Enter/Space)
+[PASS] P-RACE-library :: loadLibrary has NO abort/seq (rapid tab switches can race)
+[PASS] P-RACE-save :: savePaperToLibrary has NO abort/seq (double-click double POST)
+[PASS] P-RACE-export :: exportLibrary has NO abort
+[PASS] P-TT03-gap :: TT-03 fixture excluded_by_year=0 with empty+empty (identical to TT-01); harness expects filter wording but fixture cannot produce it ΓÇö author harness TT-03 assertion FAILs (see tmp-diag run)
+[PASS] P-HARNESS-query :: harness uses card.querySelector (absent in MockElement) ΓåÆ falls back to detached button, NOT the real card button
+[PASS] P-HARNESS-tt07 :: harness never executes TT-07 payload example_08 (only mentions TT-07 in comments)
+[PASS] P-HARNESS-export :: harness never calls exportLibrary nor tests export non-2xx; no LibraryEntry schema/incompleteSources payload checks
+
+=== PROBE SUMMARY PASS=63 FAIL=0 ===

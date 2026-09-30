@@ -1,0 +1,39 @@
+﻿contracts file: D:\Web_mining_20261\scholargraph\.worktrees\public-gemini\scholargraph\src\scholargraph\public_search\contracts.py
+contract 1.0.0 schema 1
+[PASS] W-TRUTH-example_02_tt01_all_empty :: contracts ACCEPT overall=empty (expected, via validate_json)
+[PASS] W-TRUTH-example_03_tt02_success_plus_empty_with_hit :: contracts ACCEPT overall=success (expected, via validate_json)
+[PASS] W-TRUTH-example_04_tt03_success_sources_filtered_to_zero :: contracts ACCEPT overall=empty (expected, via validate_json)
+[PASS] W-TRUTH-example_05_tt04_empty_plus_failed_no_hit :: contracts ACCEPT overall=partial_failure (expected, via validate_json)
+[PASS] W-TRUTH-example_06_tt05_success_plus_failed_partial_failure_with_hits :: contracts ACCEPT overall=partial_failure (expected, via validate_json)
+[PASS] W-TRUTH-example_07_tt06_all_failed_mixed_precedence :: contracts ACCEPT overall=failed (expected, via validate_json)
+[PASS] W-TRUTH-example_11_storage_error_500_and_xss_url_sanitization :: contracts ACCEPT overall=failed (expected, via validate_json)
+[PASS] W-FAIL-NULL :: failed+snapshot null accepted per contract
+[PASS] W-PARTIAL-NOSNAP :: contracts REJECT partial without snapshot (correct)
+[PASS] W-EXTRA-labels :: contracts REJECT extra labels (correct) ù JS validateEnvelope ACCEPTS (see JS probe)
+[PASS] W-EXTRA-splits :: REJECT splits (correct)
+[PASS] W-SOURCE-success-empty :: REJECT success without records (correct)
+[PASS] W-RANK-score-zero :: REJECT score-zero (correct) ù JS ACCEPTS (see JS probe)
+[PASS] W-RANK-rank-zero :: REJECT rank-zero (correct) ù JS ACCEPTS (see JS probe)
+[PASS] W-RANK-score-nan :: REJECT NaN (correct) ù JS ACCEPTS
+[PASS] W-DISPLAY-present :: display has missing_fields/field_provenance
+[PASS] W-DISPLAY-valid :: display record validates via wire JSON
+[PASS] W-LIB-incomplete :: incomplete_sources=True (partial snapshot badge)
+[PASS] W-URL-safe :: https://arxiv.org/abs/2401.00001
+[PASS] W-URL-unsafe :: REJECT 'javascript:alert(1)'
+[PASS] W-URL-unsafe :: REJECT 'http://user:pass@example.com/x'
+[PASS] W-URL-unsafe :: REJECT 'http://example.com\\a'
+[PASS] W-URL-unsafe :: REJECT 'http://example.com/a\x00b'
+[PASS] W-URL-unsafe :: REJECT 'ftp://example.com/x'
+[PASS] W-URL-unsafe :: REJECT ''
+[PASS] W-NOSKIP-gap :: test_public_ui.py contains pytest.skip for missing Node (5 occurrences) ù required JS gate would be silently SKIPPED, must FAIL
+[PASS] W-CLI-check :: exit=0 out='VALIDATED: public UI templates, static files, and node harness exist and are wel'
+[PASS] W-CLI-unknown :: unknown args exit=1 (expected 1)
+[PASS] W-CLI-missing :: node missing fixtures exit=1 (expected 1)
+[PASS] W-CLI-good :: valid req exit=0
+[PASS] W-CLI-malformed :: malformed exit=1
+[PASS] W-CLI-duplicate :: duplicate exit=1
+[PASS] W-CLI-nonfinite :: nonfinite exit=1
+[PASS] W-CLI-extra :: extra labels exit=1
+[PASS] W-CLI-missing2 :: missing exit=1
+
+=== WIRE PROBE SUMMARY PASS=35 FAIL=0 ===

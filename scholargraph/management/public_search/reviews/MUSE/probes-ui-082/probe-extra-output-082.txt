@@ -1,0 +1,24 @@
+﻿=== EXTRA PROBE ===
+[PASS] E-FORM-empty :: empty query rejected: ["Tß╗½ kh├│a t├¼m kiß║┐m kh├┤ng ─æ╞░ß╗úc ─æß╗â trß╗æng (bß║»t buß╗Öc 1..500 k├╜ tß╗▒)."]
+[PASS] E-FORM-long :: >500 rejected
+[PASS] E-FORM-nosource :: no source rejected
+[PASS] E-FORM-year-rev :: year reversed rejected with wording
+[PASS] E-FORM-year-range :: year 1700 out of 1800..2100 rejected
+[PASS] E-FORM-topk :: top_k 75 rejected
+[PASS] E-FORM-topk0 :: top_k 0 rejected
+[PASS] E-FORM-trim-ok :: trimmed valid passes
+[PASS] E-CACHED-fresh :: fresh badge shown: Snapshot #snap_syn_20260930_001 ┬╖ Thu thß║¡p: 2026-09-30T08:10:00+07:00 ┬╖ Hß║┐t hß║ín: 2026-10-01T08:10:00+07:00cached_fresh
+[PASS] E-CACHED-nocache :: non-cached shows no badge (actual="Snapshot #snap_syn_20260930_003 ┬╖ Thu thß║¡p: 2026-09-30T08:12:00+07:00 ┬╖ Hß║┐t hß║ín: 2026-10-01T08:12:00")
+[PASS] E-EXPORT-err :: export 500 shows error banner: "Xuß║Ñt th╞░ viß╗çn thß║Ñt bß║íi: Lß╗ùi m├íy chß╗º khi xuß║Ñt dß╗» liß╗çu (HTTP 500)"
+[PASS] E-EXPORT-dl :: export success calls downloadTextFile (Blob+URL.createObjectURL ΓÇö mock lacks Blob, browser-only)
+[PASS] E-RACE-search :: stale slow request ignored, fast newer preserved (children=1)
+[PASS] E-RACE-double-post :: double save sends 2 POSTs (no client idempotent guard; server must dedup)
+[PASS] E-SAVE-badge :: button shows save_idempotent: "─É├ú c├│ trong th╞░ viß╗çn (save_idempotent) l├║c 2026-09-30T15:00:00+07:00"
+[PASS] E-DETAIL-crash :: showDetailPanel with field_provenance=null throws (threw=true) ΓÇö no graceful FAIL banner
+[PASS] E-LIB-placeholder :: library card uses "(Kh├┤ng c├│ ti├¬u ─æß╗ü)" fallback ΓÇö hides required-title schema violation instead of explicit FAIL
+[PASS] E-EMPTY-accept :: JS accepts success+0hits (threw=false) ΓÇö contract snapshot overall would be empty, mismatch hidden
+[PASS] E-EMPTY-render :: rendered as empty message, masking overall=success mismatch
+[PASS] E-NO-OFFLINE :: no /paper/ or /recommend/ calls
+[PASS] E-NO-FIXTURE :: production JS has no ux_examples fixture import (only harness uses it)
+
+=== EXTRA SUMMARY PASS=21 FAIL=0 ===

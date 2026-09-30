@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T17:24:35.842550+07:00",
+  "updated_at": "2026-09-30T20:51:40.904058+07:00",
   "stage": "w2_authoring",
   "active_tasks": [
     "EXT-04B",
@@ -17,7 +17,7 @@
     "EXT-05A"
   ],
   "next_steps": {
-    "COORDINATOR": "DispatchW2 authors, pin finished targets, freshMUSEreviews, fix/test/integrate/checkpoint before nextW3",
+    "COORDINATOR": "WaitfreshMUSEreviews on immutable UI/fusion, nativeGemini UI R2fixes thenactualtest/review/integration",
     "SOL": "EXT-04B fusion only",
     "GEMINI": "EXT-05A UI only; freshsmokePASS c7d8486e",
     "MUSE": "Freshreview after each immutable author delivery"
@@ -77,17 +77,17 @@
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [
     {
-      "task_id": "EXT-05A",
+      "task_id": "EXT-04B",
       "worker": "MUSE",
+      "controller_run": "5c60f816-03f0-4ecf-8158-06dcb9dfd7d6",
       "runtime_session_id": null,
-      "controller_run": "569bbe8f-d340-44e0-910a-7ff4e0e632bc",
-      "target_head": "68b2416",
-      "status": "running",
+      "target_head": "791bb8c43faa96c0b2161080ab89fe93e1a6b6e1",
       "claimed_paths": [
-        "management/public_search/reviews/MUSE/EXT-05A-W2-082.md",
-        "management/public_search/reviews/MUSE/probes-ui-082/",
-        "management/public_search/logs/MUSE/REVIEW-EXT-05A-W2-082.md"
-      ]
+        "management/public_search/reviews/MUSE/EXT-04B-W2-082.md",
+        "management/public_search/reviews/MUSE/probes-fusion-082/",
+        "management/public_search/logs/MUSE/REVIEW-EXT-04B-W2-082.md"
+      ],
+      "status": "running"
     }
   ],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
@@ -100,22 +100,23 @@
   },
   "active_assignments": [
     {
-      "task_id": "EXT-04B",
-      "worker": "SOL",
-      "dispatch_id": "DISPATCH-20260930-W2-SOL-082",
-      "dispatch_file": "management/public_search/dispatch/SOL-W2-082.txt",
-      "runtime_session_id": "01a0f1cd-0313-7560-831c-6c042c336b99",
-      "input_head": "5c41e37da38577a16dbedec18afd94b149647575",
-      "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph",
-      "status": "running",
-      "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "task_id": "EXT-05A",
+      "worker": "GEMINI",
+      "status": "timeout_failed",
+      "runtime_session_id": "43f2f3f6-6ea6-4698-86f6-ee7060c448a8",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-R2-082.txt",
+      "input_head": "68b24163e9affbbd7e7d25735c0d4c2ac1076500",
       "claimed_paths": [
-        "src/scholargraph/public_search/fusion.py",
-        "tests/unit/test_public_fusion.py",
-        "tests/fixtures/public_search/sol/fusion/",
-        "management/public_search/logs/SOL/EXT-04B-W2-082.md",
-        "management/public_search/packets/SOL/EXT-04B-W2-082.md"
-      ]
+        "ui/templates/public_search.html",
+        "ui/static/public_search.js",
+        "ui/static/public_search.css",
+        "ui/templates/search.html",
+        "tests/unit/test_public_ui.py",
+        "tests/fixtures/public_search/gemini/ui/",
+        "management/public_search/logs/GEMINI/EXT-05A-W2-082.md",
+        "management/public_search/packets/GEMINI/EXT-05A-W2-082.md"
+      ],
+      "controller_run": "9312ebc7-fd98-43b3-9999-584863b8b47a"
     }
   ],
   "w1_freeze": {

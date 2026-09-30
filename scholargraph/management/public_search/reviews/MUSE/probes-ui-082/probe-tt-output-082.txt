@@ -1,0 +1,24 @@
+﻿=== TT PROBE ===
+[PASS] TT-01-overall :: overall=empty
+[PASS] TT-01-validate :: JS validate accept
+[PASS] TT-01-render :: empty message shown
+[PASS] TT-02-overall :: overall=success
+[PASS] TT-02-validate :: JS validate accept
+[PASS] TT-02-render :: 1 hit (got 1)
+[PASS] TT-04-overall :: overall=partial_failure
+[PASS] TT-04-validate :: JS validate accept
+[PASS] TT-04-banner :: partial banner shown
+[PASS] TT-04-hits :: no hits but banner (results="Kh├┤ng t├¼m thß║Ñy b├ái b├ío n├áo khß╗¢p vß╗¢i tß╗½ kh├│a tr├¬n c├íc nguß╗ôn ─æ├ú chß╗ìn.")
+[PASS] TT-05-overall :: overall=partial_failure
+[PASS] TT-05-validate :: JS validate accept
+[PASS] TT-05-banner :: partial/quota banner
+[PASS] TT-05-hits :: hits preserved (1)
+[PASS] TT-06-overall :: overall=failed
+[PASS] TT-06-validate :: JS validate accept
+[PASS] TT-06-banner-quota :: quota warning shown (mixed)
+[PASS] TT-06-banner-suppress :: schema error SUPPRESSED when quota present (banner="Nguß╗ôn openalex ─æ├ú chß║ím giß╗¢i hß║ín l╞░ß╗út truy cß║¡p (Quota / Rate Limit). Thß╗¥i gian chß╗¥ khuyß║┐n nghß╗ï (retry_after_seconds): 120 gi├óy.") ΓÇö BUG: mixed errors hidden
+[PASS] TT-QUOTA-retry :: quota banner shows retry_after: "Nguß╗ôn arxiv ─æ├ú chß║ím giß╗¢i hß║ín l╞░ß╗út truy cß║¡p (Quota / Rate Limit). Thß╗¥i gian chß╗¥ khuyß║┐n nghß╗ï (retry_after_seconds): 45 gi├óy."
+[PASS] TT-NON2XX-banner :: 502 body parsed, partial/quota banner shown (actual="Nguß╗ôn arxiv ─æ├ú chß║ím giß╗¢i hß║ín l╞░ß╗út truy cß║¡p (Quota / Rate Limit). Thß╗¥i gian chß╗¥ khuyß║┐n nghß╗ï (retry_after_seconds): 45 gi├óy.")
+[PASS] TT-NON2XX-hits :: 502 body hits rendered (1) ΓÇö correct non-2xx body read
+
+=== TT SUMMARY PASS=21 FAIL=0 ===
