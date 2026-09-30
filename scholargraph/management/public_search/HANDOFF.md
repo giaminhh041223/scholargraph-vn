@@ -1,3 +1,10 @@
+# W1 checkpoint 081 — review và storage author
+
+- EXT-02 REVIEW: SOL author ended HEADfea4992, coordinator106 tests PASS; fresh MUSE review running99663/session ses_f0ed8e478ffePAh4Pr2C06KuSh xhigh.
+- EXT-03 REVIEW: GEMINI R1 23fail/15pass -> R2 3fail/40pass -> R3 53pass; head74df8db pinned. Fresh SOL6.1/high reviewer /root/review_w1_arxiv_081 đang xác nhận thêm findings (không tự DONE từ tests). Gemini idle, nhận sửa sau report cuối.
+- EXT-04A IN_PROGRESS: MUSE original author56754/session ses_f0ef27bcfffekQkB6r6eCHL40x xhigh đang viết storage/export/tests. Permissions captured at dispatch remain distinct from fresh review scopes.
+- W0 freeze57b6598, W1 chưa tích hợp; main SG human gates nguyên trạng. Next: thu review reports, trả author fixes, kiểm storage và giao Gemini fresh review.
+
 # W1 081 — ba author được giao song song
 
 W0 freeze commit 57b6598; 14 hash input khớp cả ba checkout. EXT-02 SOL, EXT-03 GEMINI, EXT-04A MUSE IN_PROGRESS, phạm vi riêng đăng ký trong tasks.json. Gemini chỉ native file tools; coordinator chạy tests/commit. Muse xhigh, Gemini high (max runtime), Sol high. Bước tiếp: thu packet và kiểm tests; reviewer khác author trước DONE.

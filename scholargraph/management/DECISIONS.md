@@ -213,3 +213,17 @@ Thay thế ADR nào (nếu có):
 4. Thực hiện đầy đủ SG-052, sửa lỗi đóng gói SG-041 (`run_demo.bat`, `requirements.lock`, đường dẫn tương đối trong `REPRODUCE.md`/`DEMO_SCRIPT.md`), và bổ sung báo cáo review độc lập cho SG-027, SG-028, SG-029, SG-030, SG-040, SG-041, SG-052.
 **Hệ quả:** Bản chính `D:/Web_mining_20261/scholargraph` trở thành nguồn sự thật duy nhất có đầy đủ lịch sử git, 33/33 file freeze khớp byte-exact SHA-256, và bộ kiểm thử không chạm vào dữ liệu đã đóng băng.
 
+
+## ADR-020 — 2026-09-30 — Phạm vi boundary và XML của public arXiv (EXT-03)
+
+**Trạng thái:** accepted trong public search extension; không đổi human gates SG.
+
+**Căn cứ:** fresh SOL review EXT-03-W1-081 trên head74df8db: 53 tests pass nhưng 3P1/4P2 được chứng minh bằng temp reproducers.
+
+**Quyết định:**
+
+- CLI module arxiv là validator payload/optional SearchRequest schema, chưa phải production search; không xem CLI0 là live search pass. Duplicate JSON keys và lỗi arguments phải FAIL/exit1, error messages không stringify raw request/ValidationError. Query grammar mismatch giữa validator và adapter phải nêu scope rõ; không sửa schema frozen để che lệch semantics.
+- Chỉ claim hỗ trợ encoding có positive evidence: UTF8/UTF16 có/không BOM. UTF32 được nhận diện để từ chối rõ unsupported, bao gồm payload hợp lệ và DTD; không claim positive support từ negative-only tests. Không thêm dependency.
+- Source IDs/version, Atom root/singleton và raw-field link provenance phải validate đúng. Không nhận arbitrary related link là license, không dùng keyword đầu title/abstract như Error correction để kết luận upstream error.
+
+**Bước thực thi:** Gemini R4 author fixes + regression, coordinator chạy thật, independent SOL re-review trước EXT-03 DONE. W0 contract/config/schema giữ nguyên; W1 chưa tích hợp khi quyết định này được ghi.
