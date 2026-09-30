@@ -1,13 +1,13 @@
 # Contract public paper search — 1.0.0
 
-EXT-01A, SOL; bản đề nghị REVIEW, chưa freeze W0. Python schema tại
+EXT-01A, SOL; W0 được coordinator chấp nhận sau review độc lập ngày 2026-09-30. Python schema tại
 `src/scholargraph/public_search/contracts.py`; transport tại `transport.py`.
-Source policy chưa audit: cả hai source giữ false, live FAIL trước mạng.
+Source policy đã audit cho anonymous MVP; OpenAlex CONDITIONAL, sustained quota/runtime chưa đo. Config unverified vẫn FAIL trước mạng.
 Không có adapter/store/service production được triển khai trong card này.
 
 ## Version và serialization
 
-- `schema_version=1`, `contract_version=1.0.0`; config version `1.0.0-unverified`.
+- `schema_version=1`, `contract_version=1.0.0`; config version `1.0.0-audited`.
 - `digest(model)` là SHA-256 JSON UTF-8 canonical: sorted keys, compact separators,
   ensure_ascii=false, NaN forbidden. Packet ghi thêm SHA-256 bytes của contract/config/code.
 - Model strict, extra fields forbidden. Required nullable phải hiện diện với null;
@@ -181,5 +181,5 @@ Boundary executable: `python -m scholargraph.public_search.contracts --config <f
 Chỉ validate inputs, không search production. Required-file/schema lỗi exit1;
 valid request exit0 không đồng nghĩa nguồn live hoạt động. Production CLI recheck EXT-05B/06.
 Unit tests mock/synthetic; không source live, không core dataset/model API, không metric relevance.
-Parent config đã nhập audit hash và bật source policy verified cho anonymous MVP; delta chưa được MUSE review, chưa freeze store signatures,
-chưa claim reviewer PASS hoặc EXT-01A DONE. Card tiếp theo chỉ sau deps và dispatch coordinator.
+Parent config đã nhập audit hash cho anonymous MVP và được MUSE review PASS (report EXT-01A-PARENT-POLICY-081).
+W0 schema/store signatures đã khóa; card tiếp theo chỉ sau deps và dispatch coordinator. Policy anchor không phải bảo đảm quota/live pilot.

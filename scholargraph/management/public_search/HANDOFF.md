@@ -1,3 +1,7 @@
+# W0 freeze 081 — chuẩn bị W1
+
+EXT-01A/B/C DONE sau review độc lập; config policy delta MUSE PASS. Input khóa tại [manifest](W0-FREEZE-081.json), [gate](reviews/COORDINATOR/W0-FREEZE-081.md). Bước tiếp: đồng bộ input/commit checkout rồi dispatch EXT-02 SOL, EXT-03 GEMINI, EXT-04A MUSE song song. User đã tiếp tục, pause cũ không còn hiệu lực.
+
 # Resume 081 — W0 parent policy review
 
 User requested continue. Prior pause revoked. EXT-01A remains REVIEW; MUSE fresh CLI review registered for parent policy/config/test delta. Inputs pinned by policy-review-input-081.json; targets remain immutable during review. W1 depends on this PASS and W0 freeze.

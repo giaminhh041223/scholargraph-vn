@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T13:26:34.697333+07:00",
+  "updated_at": "2026-09-30T13:40:28.824876+07:00",
   "branch": "codex/public-paper-search",
   "mode": "paused_after_w0_r2_by_user",
   "coordinator": "current_chat_extension_only",
@@ -75,14 +75,15 @@
     {
       "id": "EXT-01A",
       "title": "Contract, schema và transport dùng chung",
-      "status": "REVIEW",
+      "status": "DONE",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [],
       "session_id": "DISPATCH-20260930-W0-SOL",
       "evidence": [
         "management/public_search/packets/SOL/EXT-01A-R2-774aeef.md",
-        "management/public_search/reviews/MUSE/EXT-01A-R2.md"
+        "management/public_search/reviews/MUSE/EXT-01A-R2.md",
+        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md"
       ],
       "dispatch_id": "DISPATCH-20260930-W0-SOL",
       "owner": "SOL",
@@ -101,14 +102,13 @@
       "session_kind": "coordinator_issued_dispatch",
       "worker_execution_session_id": "SESSION-20260930-SOL-01",
       "delivered_head": "cb64c59",
-      "review_verdict": "AUTHOR_FIX_PASS_PARENT_POLICY_DELTA_PENDING",
+      "review_verdict": "PASS",
       "review_evidence": [
-        "management/public_search/reviews/MUSE/EXT-01A-R2.md"
+        "management/public_search/reviews/MUSE/EXT-01A-R2.md",
+        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md"
       ],
-      "unresolved_findings": [
-        "Parent config policy delta and test adaptations require independent MUSE review"
-      ],
-      "next_action": "After user resumes: MUSE reviews parent config policy and two test adaptations; freeze W0 only after PASS"
+      "unresolved_findings": [],
+      "next_action": "W0 freeze accepted; W1 can dispatch on pinned inputs"
     },
     {
       "id": "EXT-01B",
@@ -407,43 +407,13 @@
       "worker_execution_session_id": null
     }
   ],
-  "current_round_assignments": [
-    {
-      "task_id": "EXT-01A",
-      "reviewer": "MUSE",
-      "scope": "parent_policy_config_and_two_test_adaptations",
-      "session_id": null,
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "prompt": "management/public_search/dispatch/review-muse-parent-policy-081.txt",
-      "started_at": "2026-09-30T13:26:34.697333+07:00",
-      "claimed_paths": [
-        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md",
-        "management/public_search/logs/MUSE/REVIEW-PARENT-POLICY-081.md"
-      ]
-    }
-  ],
+  "current_round_assignments": [],
   "pause_after_current_round": false,
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
   "resumed_from": "paused_after_w0_r1_by_user",
   "pause_reason": "Prior pause revoked by user continue",
-  "active_review_assignments": [
-    {
-      "task_id": "EXT-01A",
-      "reviewer": "MUSE",
-      "scope": "parent_policy_config_and_two_test_adaptations",
-      "session_id": null,
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "prompt": "management/public_search/dispatch/review-muse-parent-policy-081.txt",
-      "started_at": "2026-09-30T13:26:34.697333+07:00",
-      "claimed_paths": [
-        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md",
-        "management/public_search/logs/MUSE/REVIEW-PARENT-POLICY-081.md"
-      ]
-    }
-  ],
+  "active_review_assignments": [],
   "round_closeout": {
     "round": "W0-R2",
     "closed_at": "2026-09-30T11:32:14.507259+07:00",
@@ -470,5 +440,13 @@
     ],
     "contract_frozen": false,
     "pause_authorization": "Latest user explicitly requested finishing current tasks and saving checkpoint before stopping"
+  },
+  "w0_freeze": {
+    "accepted_at": "2026-09-30T13:40:28.824876+07:00",
+    "manifest": "management/public_search/W0-FREEZE-081.json",
+    "gate": "management/public_search/reviews/COORDINATOR/W0-FREEZE-081.md",
+    "contract_frozen": true,
+    "schema_version": 1,
+    "contract_version": "1.0.0"
   }
 }
