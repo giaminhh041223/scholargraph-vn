@@ -32,8 +32,14 @@
       "reasoning_effort": "xhigh",
       "effort_basis": "opencode models opencode --verbose: highest listed variant xhigh",
       "allowed_write_paths": [
-        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md",
-        "management/public_search/logs/MUSE/REVIEW-PARENT-POLICY-081.md"
+        "src/scholargraph/public_search/store.py",
+        "src/scholargraph/public_search/export.py",
+        "tests/unit/test_public_store.py",
+        "tests/unit/test_public_export.py",
+        "tests/fixtures/public_search/muse/store/",
+        "management/public_search/logs/MUSE/EXT-04A-W1-081.md",
+        "management/public_search/packets/MUSE/EXT-04A-W1-081.md",
+        "data/public_search/muse/store_w1/"
       ],
       "user_selected_model": "muse-spark-1.3-free",
       "probe_status": "PASS",
@@ -43,5 +49,5 @@
       "probe_evidence": "data/public_search/control/runs/445eb7c9-b147-439a-92eb-4d170ff060f4/summary.json"
     }
   },
-  "updated_at": "2026-09-30T13:26:34.697333+07:00"
+  "updated_at": "2026-09-30T13:42:50.233697+07:00"
 }

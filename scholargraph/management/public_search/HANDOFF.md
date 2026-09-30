@@ -1,3 +1,7 @@
+# W1 081 — ba author được giao song song
+
+W0 freeze commit 57b6598; 14 hash input khớp cả ba checkout. EXT-02 SOL, EXT-03 GEMINI, EXT-04A MUSE IN_PROGRESS, phạm vi riêng đăng ký trong tasks.json. Gemini chỉ native file tools; coordinator chạy tests/commit. Muse xhigh, Gemini high (max runtime), Sol high. Bước tiếp: thu packet và kiểm tests; reviewer khác author trước DONE.
+
 # W0 freeze 081 — chuẩn bị W1
 
 EXT-01A/B/C DONE sau review độc lập; config policy delta MUSE PASS. Input khóa tại [manifest](W0-FREEZE-081.json), [gate](reviews/COORDINATOR/W0-FREEZE-081.md). Bước tiếp: đồng bộ input/commit checkout rồi dispatch EXT-02 SOL, EXT-03 GEMINI, EXT-04A MUSE song song. User đã tiếp tục, pause cũ không còn hiệu lực.

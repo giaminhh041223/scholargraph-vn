@@ -1,15 +1,25 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T13:40:28.824876+07:00",
-  "stage": "w0_frozen_prepare_w1",
-  "active_tasks": [],
+  "updated_at": "2026-09-30T13:42:50.233697+07:00",
+  "stage": "w1_parallel_author",
+  "active_tasks": [
+    "EXT-02",
+    "EXT-03",
+    "EXT-04A"
+  ],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
-    "EXT-01C"
+    "EXT-01C",
+    "EXT-02",
+    "EXT-03",
+    "EXT-04A"
   ],
   "next_steps": {
-    "COORDINATOR": "Sync W0 pinned inputs to three clean worker checkouts, register and dispatch W1 EXT-02/03/04A"
+    "SOL": "EXT-02 OpenAlex",
+    "GEMINI": "EXT-03 arXiv",
+    "MUSE": "EXT-04A SQLite/cache/library/export",
+    "COORDINATOR": "Collect focused test evidence, dispatch independent cross-review before integration"
   },
   "last_session_log": "management/public_search/logs/SESSION-20260930-081-CODEX.md",
   "worker_execution_observed": true,
