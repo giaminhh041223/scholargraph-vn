@@ -1,0 +1,81 @@
+{
+  "artifact_kind": "ext01b_source_audit",
+  "schema_version": 2,
+  "task_id": "EXT-01B",
+  "session_id": "ses_f0fc34300ffehYtM193B3KNg56",
+  "generated_at": "2026-09-30T10:16:26+07:00",
+  "branch": "codex/public-search-muse",
+  "head_sha": "9f70669",
+  "request_budget_used": 3,
+  "sources": {
+    "arxiv": {
+      "status": "READY",
+      "manual_url": "https://info.arxiv.org/help/api/user-manual.html",
+      "terms_url": "https://info.arxiv.org/help/api/tou.html",
+      "terms_status": "REACHABLE (was unreachable in planning)",
+      "politeness": "single request, 4s gap author-reported/unverified; Terms: <=1 req/3s single connection",
+      "atom_valid": true,
+      "entries_returned": 2,
+      "doi_present": 0,
+      "doi_total": 2,
+      "doi_note": "0/2 records have arxiv:doi (both missing; both have journal_ref); not verified",
+      "live_probe": {
+        "status": 200,
+        "bytes": 4457,
+        "sha256": "e38e577822f80ed9e8555322c5865e34ecc60b604a2af1bd767effa08535254c",
+        "elapsed_s": 0.451,
+        "totalResults": 186833
+      }
+    },
+    "openalex": {
+      "status": "CONDITIONAL",
+      "docs_url": "https://help.openalex.org/api/",
+      "auth_note": "anonymous and keyed access described per official docs (docs-only); keyed behavior not probed; no account created",
+      "anonymous_throttle_observed": true,
+      "live_probe_429": {
+        "status": 429,
+        "bytes": 253,
+        "sha256": "e2853e1081387fb57084d3fbaa427c9e4dc1562c2af5ff09044420a58189aca6",
+        "retry_after_s": 33
+      },
+      "live_probe_retry": {
+        "status": 200,
+        "bytes": 101458,
+        "sha256": "8050e77aba06e90709c0ef2006647049ef8306e55f48e2e034bc538764468a0d",
+        "works_returned": 3,
+        "wait_s_provenance": "author-reported/unverified",
+        "remaining_quota": "990",
+        "remaining_provenance": "author-reported/unverified",
+        "headers_provenance": "author-reported/unverified (sparse meta: no url, no headers, no date; not reconstructed)",
+        "timing_provenance": "author-reported/unverified"
+      },
+      "observed_first_page": {
+        "page": 1,
+        "per_page": 3,
+        "filter": "fulltext.search:graph neural networks",
+        "count": 976071,
+        "cost_usd": 0.001,
+        "note": "observed first-page only; from response body"
+      },
+      "docs_only": [
+        "sustained quota",
+        "other pages",
+        "other filters",
+        "section-8 pilot runtime"
+      ],
+      "sustained_note": "sustained quota/runtime not measured; single remaining value is author-reported/unverified, not a sustained measurement"
+    }
+  },
+  "unverified": [
+    "sustained anonymous quota/runtime for section-8 pilot: not measured; sustained quota/runtime not measured",
+    "retry wait interval, retry headers and retry timestamps: author-reported/unverified",
+    "observed first-page/filter coverage only; beyond first page is docs-only",
+    "EXT-01A contract and EXT-01C UX (not yet written)",
+    "phase-B sources",
+    "OpenAlex keyed behavior docs-only per official docs; not probed"
+  ],
+  "proposals": [
+    "P1: pilot scope decision (coordinator): anonymous-only within observed first-page limits vs reduced scope; no account or quota gate",
+    "P2: 10 pilot queries need user/two-member confirmation"
+  ]
+}

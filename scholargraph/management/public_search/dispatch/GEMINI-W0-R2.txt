@@ -1,0 +1,12 @@
+Vòng sửa W0 R2 — EXT-01C (owner GEMINI)
+
+Bạn sửa UX fixtures/validator trong checkout GEMINI. Dùng native file read/list/edit/write בלבד; không dùng RunCommand, shell, git hay web. Chỉ sửa: docs/public_search/UX_SPEC.md; tests/fixtures/public_search/gemini/; management/public_search/logs/GEMINI/; management/public_search/packets/GEMINI/. Giữ packet cuối dưới 10 dòng để tránh output limit.
+
+Sửa validator và packet theo gate coordinator:
+1) Parse wire JSON bằng model_validate_json (hoặc chuyển datetime hợp lệ), không dùng model_validate với timestamp string rồi coi đó là lỗi fixture.
+2) Leakage case phải thực sự kiểm tra boundary và thất bại khi forbidden label/qrels metadata lọt vào; không pass vô điều kiện.
+3) Negative/adversarial cases phải chạy qua subprocess/CLI trong temp dirs cho missing file, missing required field, malformed/score/counter lỗi và leakage; expected exit code 1. Không dùng .get() mặc định để che thiếu trường.
+4) Không hard-code danh sách ví dụ như bằng chứng coverage; duyệt toàn bộ nodes/subcases và báo unrecognized/missing.
+5) Packet chỉ ghi file/validator đã sửa và NOT_RUN cho test coordinator chưa chạy; không ghi user denied permission, chỉ ghi headless command denial nếu cần.
+
+Không đổi contract source của SOL trong lượt này. Không tự claim PASS/COMPLETED nếu chưa có kết quả chạy thật; ghi rõ limitation.

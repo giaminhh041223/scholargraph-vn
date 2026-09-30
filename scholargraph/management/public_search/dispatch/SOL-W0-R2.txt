@@ -1,0 +1,9 @@
+Vòng sửa W0 R2 — EXT-01A (owner SOL)
+
+Bạn là tác giả sửa contract trong checkout SOL. Chỉ sửa các path đã cấp của EXT-01A và ghi packet/log riêng của SOL. Giữ wire version 1.0.0 nếu không thật sự bắt buộc; không tạo factory/stub trong contracts.py và không đổi chính sách auth OpenAlex sang keyed-only. Không đọc/ghi qrels, labels, env hoặc checkout khác.
+
+Sửa đúng hai finding đã được coordinator chấp nhận:
+1) Invariant: SourceResult có status=not_requested phải có filter_coverage="none"; chặn server/bounded_pool và thêm regression/adversarial test.
+2) CONTRACT.md phải nói rõ chính sách politeness arXiv 3 giây hiện chỉ được điều phối trong một process/owner; RateState là process-local, chưa có distributed lock/cross-machine guarantee, và phải nêu gap vận hành.
+
+Chạy test liên quan, gồm negative case; lỗi bắt buộc phải fail rõ và CLI/test exit nonzero, không dùng fallback. Ghi log các lệnh và exit code thật. Packet cuối ngắn, nêu files, commit, tests, findings còn lại; nếu không chạy được phải ghi NOT_RUN, không claim PASS. Không xử lý các finding đã bác (Bearer OpenAlex hoặc factory sai module).

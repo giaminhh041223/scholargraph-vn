@@ -1,0 +1,11 @@
+{
+  "artifact": "adv_no_totalresults",
+  "files": {
+    "arxiv_search.body": "ae705d53d2bf6df768c0da5be238be82f6bfbfa72caee41ea99a933d9626775d",
+    "arxiv_search.meta.json": "dad80cab3e2942ac34d9bd13926e7429fa7d2b952ab1e949d8238e74d6c66efb",
+    "openalex_search.body": "90796ff1727dc347258d2451b9c151825899bc0c69d704500c34ff17ce84d8db",
+    "openalex_search.meta.json": "f04c3c92af1cec037f4c210f0a0abee107b8bf7927c94263eddab2ceb6d52d51",
+    "openalex_retry.body": "8b331941c9661cb001f4fe47e99f22d3f270480818b72373bf0efd03629fbd3b",
+    "openalex_retry.meta.json": "57098e495dd717b08608fdf2f051bfa9699764836f92e2aa3aa75e17ce13ded0"
+  }
+}

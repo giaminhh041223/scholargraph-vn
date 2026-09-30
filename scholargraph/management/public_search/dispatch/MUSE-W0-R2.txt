@@ -1,0 +1,11 @@
+Vòng sửa W0 R2 — EXT-01B (owner MUSE)
+
+Bạn là tác giả sửa source audit trong checkout MUSE. Chỉ sửa các path được cấp: docs/public_search/SOURCE_AUDIT.md; artifacts/reports/public_search/muse/; tests/fixtures/public_search/muse/; management/public_search/logs/MUSE/; management/public_search/packets/MUSE/. Raw pilot dưới data/public_search/muse/source_pilot là bất biến, không chỉnh. Không đọc/ghi qrels, labels, env hoặc checkout khác.
+
+Sửa bốn finding đã được SOL review và coordinator chấp nhận:
+F1. Sửa SHA-256 arXiv trong audit JSON từ bytes thực tế và tạo validator nhỏ kiểm tra audit hash ↔ meta ↔ MANIFEST ↔ bytes; thiếu file/hash sai phải FAIL rõ.
+F2. Bỏ mọi claim/gate yêu cầu Bearer không hợp lệ, keyed probe, tài khoản hoặc quota đo được. Ghi đúng rằng OpenAlex anonymous/keyed auth theo tài liệu chính thức, quota/runtime sustained chưa đo; không bịa headers/timestamps.
+F3. Với retry 429→200, ghi metadata/timing không có là author-reported/unverified; phân biệt observed first-page/filter coverage với docs-only, không dựng lại request cũ.
+F4. DOI phải phản ánh toàn bộ payload: hiện 0/2 record có DOI nếu đó là số thực; không gọi verified. Validator phải bắt mismatch narrative/counters.
+
+Giữ raw immutable; validator và adversarial fixtures có thể dùng thư mục được cấp. Bắt buộc có negative cases cho missing resource, malformed/hash mismatch, và narrative-counter mismatch; khi chạy trực tiếp CLI/subprocess lỗi phải exit 1. Chạy kiểm tra thật nếu có thể, ghi exit code và evidence. Packet/log ngắn; nếu không chạy được ghi NOT_RUN, không claim PASS.

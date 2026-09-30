@@ -1,43 +1,75 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T09:36:09.827209+07:00",
-  "stage": "paused_after_w0_r1_by_user",
-  "active_tasks": [],
+  "updated_at": "2026-09-30T13:26:34.697333+07:00",
+  "stage": "w0_parent_policy_review",
+  "active_tasks": [
+    "EXT-01A"
+  ],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
     "EXT-01C"
   ],
   "next_steps": {
-    "SOL": "Await user resume; fix accepted contract P2, re-review MUSE source audit after fixes",
-    "MUSE": "Await user resume; fix source audit F1-F4, re-review contract and later UX",
-    "GEMINI": "Await user resume; fix validator and packet, then independent UX review"
+    "COORDINATOR": "Review parent policy delta; freeze W0 after PASS; dispatch W1 with pinned inputs"
   },
-  "last_session_log": "management/logs/SESSION-20260930-079-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20260930-081-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
-    "checked_at": "2026-09-30T09:39:43.360391+07:00",
+    "checked_at": "2026-09-30T11:32:14.507259+07:00",
     "controller_tests": {
       "passed": 24,
       "exit_code": 0
     },
+    "w0_contract_tests": {
+      "passed": 111,
+      "exit_code": 0
+    },
+    "source_audit": {
+      "positive_exit_code": 0,
+      "negative_cases": 7,
+      "negative_exit_code": 1,
+      "f5_f6_temp_probes_exit_code": 1
+    },
+    "ux_validator": {
+      "exit_code": 0,
+      "typed_total": 13,
+      "negative_cases": 16,
+      "negative_exit_code": 1
+    },
+    "worker_heads": {
+      "SOL": "cb64c59",
+      "MUSE": "9f70669-working-tree",
+      "GEMINI": "cc51ef8-working-tree"
+    },
+    "process_check": "No author/reviewer worker process after closeout",
     "core_checker": {
       "exit_code": 0,
       "task_count": 53,
-      "markdown_links": 452
-    },
-    "round_outcome": "Two independent review reports CHANGES_REQUIRED; GEMINI native files checkpointed, CLI validator FAIL; no W0 DONE/freeze/W1",
-    "worker_heads": {
-      "SOL": "f6582d985e0be2555d8368716d82a0766d16ffc9",
-      "MUSE": "9f7066960b068b519b0799210035761a21b23fae",
-      "GEMINI": "cc51ef8b714ae975d731e082cdbff239d9717508"
-    },
-    "process_check": "No coordinator agy/opencode CLI process matched after round completion"
+      "markdown_links": 458
+    }
   },
-  "pause_after_current_round": true,
+  "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
-  "pause_scope": "After SOL source review, MUSE contract review, GEMINI UX reconciliation currently dispatched; no fixes/re-review/W1 dispatch",
-  "active_review_assignments": [],
-  "paused_at": "2026-09-30T09:36:09.827209+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/W0-R1-GATE.md"
+  "pause_scope": "Latest user pause: no additional agent dispatch; save current checkpoint",
+  "active_review_assignments": [
+    {
+      "task_id": "EXT-01A",
+      "reviewer": "MUSE",
+      "scope": "parent_policy_config_and_two_test_adaptations",
+      "session_id": null,
+      "model_requested": "opencode/muse-spark-1.3-contributor-free",
+      "reasoning_effort_requested": "xhigh",
+      "prompt": "management/public_search/dispatch/review-muse-parent-policy-081.txt",
+      "started_at": "2026-09-30T13:26:34.697333+07:00",
+      "claimed_paths": [
+        "management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md",
+        "management/public_search/logs/MUSE/REVIEW-PARENT-POLICY-081.md"
+      ]
+    }
+  ],
+  "paused_at": "2026-09-30T11:32:14.507259+07:00",
+  "gate_report": "management/public_search/reviews/COORDINATOR/W0-R2-GATE.md",
+  "resumed_at": "2026-09-30T13:26:34.697333+07:00",
+  "next_task_id": "EXT-01A"
 }

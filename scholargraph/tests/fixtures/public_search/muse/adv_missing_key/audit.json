@@ -1,0 +1,74 @@
+{
+  "artifact_kind": "ext01b_source_audit",
+  "schema_version": 2,
+  "task_id": "EXT-01B",
+  "session_id": "MINI",
+  "generated_at": "2026-09-30T00:00:00+07:00",
+  "branch": "test",
+  "head_sha": "0000000",
+  "request_budget_used": 3,
+  "sources": {
+    "arxiv": {
+      "status": "READY",
+      "manual_url": "https://info.arxiv.org/help/api/user-manual.html",
+      "terms_url": "https://info.arxiv.org/help/api/tou.html",
+      "terms_status": "REACHABLE",
+      "politeness": "single request author-reported/unverified",
+      "atom_valid": true,
+      "entries_returned": 1,
+      "doi_present": 0,
+      "doi_total": 1,
+      "doi_note": "0/1 records have arxiv:doi; not verified",
+      "live_probe": {
+        "status": 200,
+        "bytes": 1094,
+        "sha256": "dc2c7dfb5662db03c1981e6587f1a07e9ebf1b0f4e88e92bc06ffe4632c07a70",
+        "elapsed_s": 0.5
+      }
+    },
+    "openalex": {
+      "status": "CONDITIONAL",
+      "docs_url": "https://help.openalex.org/api/",
+      "auth_note": "anonymous and keyed access described per official docs (docs-only); no account created",
+      "anonymous_throttle_observed": true,
+      "live_probe_429": {
+        "status": 429,
+        "bytes": 74,
+        "sha256": "90796ff1727dc347258d2451b9c151825899bc0c69d704500c34ff17ce84d8db",
+        "retry_after_s": 33
+      },
+      "live_probe_retry": {
+        "status": 200,
+        "bytes": 380,
+        "sha256": "8b331941c9661cb001f4fe47e99f22d3f270480818b72373bf0efd03629fbd3b",
+        "works_returned": 1,
+        "wait_s_provenance": "author-reported/unverified",
+        "remaining_quota": "7",
+        "remaining_provenance": "author-reported/unverified",
+        "headers_provenance": "author-reported/unverified (sparse meta: no url, no headers, no date; not reconstructed)",
+        "timing_provenance": "author-reported/unverified"
+      },
+      "observed_first_page": {
+        "page": 1,
+        "per_page": 1,
+        "filter": "mini",
+        "count": 123,
+        "cost_usd": 0.001,
+        "note": "observed first-page only; from response body"
+      },
+      "docs_only": [
+        "sustained quota",
+        "other pages"
+      ],
+      "sustained_note": "sustained quota/runtime not measured; single remaining value is author-reported/unverified"
+    }
+  },
+  "unverified": [
+    "sustained anonymous quota/runtime: not measured; sustained quota/runtime not measured",
+    "retry wait interval, retry headers and retry timestamps: author-reported/unverified",
+    "observed first-page/filter coverage only; beyond first page is docs-only"
+  ],
+  "proposals": [
+    "P1: pilot scope decision (coordinator); no account or quota gate"
+  ]
+}

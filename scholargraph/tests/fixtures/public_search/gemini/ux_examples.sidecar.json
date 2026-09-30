@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "fixture_path": "tests/fixtures/public_search/gemini/ux_examples.json",
+  "ux_spec_path": "docs/public_search/UX_SPEC.md",
+  "validator_path": "tests/fixtures/public_search/gemini/validate_fixtures.py",
+  "task_id": "EXT-01C",
+  "wave": "W0",
+  "iteration": "R2",
+  "owner": "GEMINI",
+  "reviewer": "MUSE",
+  "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
+  "worker_session_id": "SESSION-20260930-W0-GEMINI-EXT-01C-R2",
+  "updated_at": "2026-09-30T10:05:00+07:00",
+  "synthetic": true,
+  "not_live_evidence": true,
+  "not_for_production_fallback": true,
+  "reconciled_with_contract": "src/scholargraph/public_search/contracts.py",
+  "reconciled_contract_version": "1.0.0",
+  "contract_code_commit": "774aeef0bfc42c636779f739c3fb4fbb8e9e37c4",
+  "proposed_sol_head": "cb64c59a714085f1c453284fdfba76de3efb086e",
+  "contract_status": "PROPOSED_SOL_R2_RECONCILED"
+}

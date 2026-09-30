@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-09-30T13:26:34.697333+07:00",
+  "scope": "EXT-01A parent policy delta review",
+  "sha256": {
+    "configs/public_search.json": "1e188af340572a8fc51124fd8bd5b31f615d607a85967a3ee88871374853c4ed",
+    "src/scholargraph/public_search/contracts.py": "5d752064888f0558f121407bfa3bbc2d2c1a921f7991a39d5716ced79a553908",
+    "src/scholargraph/public_search/transport.py": "a775b1e99c2dc64d4b6f523567a6543d1b536deed35c255a1b66c894e3607baf",
+    "tests/unit/test_public_contracts.py": "28a4b884bce6a47bda452c8aec6e19e144e21b1e555762b454b6119ea5d407f5",
+    "tests/unit/test_public_transport.py": "7c7578bbf706930449cf8a1aaf87a3fed78d61a00db3729d038de666be688a74",
+    "docs/public_search/CONTRACT.md": "2c4acf74c68fa9701908b5fa82a7ed66f77dd8e684da9f6b2a448a98bf566812",
+    "docs/public_search/SOURCE_AUDIT.md": "d213f075ae2256bfc21b3bf847699346b09c66c108962ccbd814444da254e312",
+    "artifacts/reports/public_search/muse/source_audit.json": "a37778605f63821b820edc27b20ad5c859b05761d450980650336a4b8b727923"
+  }
+}

@@ -1,0 +1,3240 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "task_id": "EXT-01C",
+  "wave": "W0",
+  "owner": "GEMINI",
+  "reviewer": "MUSE",
+  "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
+  "synthetic": true,
+  "not_live_evidence": true,
+  "not_for_production_fallback": true,
+  "contract_status": "PROPOSED_SOL_R2_RECONCILED",
+  "contract_alignment_note": "Reconciled 1:1 with SOL proposed typed contract (head cb64c59a, commit 774aeef0, contracts.py v1.0.0). Contract remains under review (unfrozen).",
+  "truth_table_cases_covered": [
+    "TT-01_all_empty",
+    "TT-02_success_plus_empty_with_hit",
+    "TT-03_success_filtered_to_zero",
+    "TT-04_empty_plus_failed_no_hit",
+    "TT-05_success_plus_failed_with_hit",
+    "TT-06_all_failed",
+    "TT-07_no_source_selected_422"
+  ],
+  "ui_states_covered": [
+    "loading",
+    "empty",
+    "missing_fields",
+    "partial_failure",
+    "quota_exceeded",
+    "cached_fresh",
+    "cached_stale",
+    "oa_unknown",
+    "save_idempotent"
+  ],
+  "examples": {
+    "example_01_success_dedup_rrf_and_missing_fields": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": null,
+      "description": "Overall success across OpenAlex and arXiv with RRF ranking, field provenance, missing_fields null tracking, title-only valid arXiv record, and OA status.",
+      "ui_states_demonstrated": [
+        "loading",
+        "missing_fields",
+        "oa_unknown"
+      ],
+      "http_status": 200,
+      "cli_exit_code": 0,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_001",
+          "request": {
+            "query": "Graph Neural Networks Citation",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 10,
+            "cap_per_source": 50,
+            "year_from": 2023,
+            "year_to": 2026,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "success",
+          "fetched_at": "2026-09-30T08:10:00+07:00",
+          "expires_at": "2026-10-01T08:10:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "success",
+              "error": null,
+              "source_total": 340,
+              "elapsed_seconds": 0.685,
+              "filter_coverage": "bounded_pool",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_arxiv_001",
+                  "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "byte_count": 4096
+                }
+              ],
+              "records": [
+                {
+                  "source": "arxiv",
+                  "source_id": "2401.00001",
+                  "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                  "landing_url": "https://arxiv.org/abs/2401.00001",
+                  "retrieved_at": "2026-09-30T08:10:00+07:00",
+                  "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "parser_version": "arxiv-adapter-1.0.0",
+                  "abstract": "Synthetic arXiv record demonstrating clean graph neural network citation retrieval.",
+                  "publication_year": 2024,
+                  "doi": "10.48550/arxiv.2401.00001",
+                  "arxiv_id": "2401.00001",
+                  "venue": null,
+                  "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+                  "license": "http://creativecommons.org/licenses/by/4.0/",
+                  "open_access_status": "open",
+                  "citation_count": null,
+                  "authors": [
+                    "Alice Nguyen",
+                    "Bob Tran"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "venue",
+                    "citation_count"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "title"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "summary"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "published"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "arxiv:doi"
+                      }
+                    ],
+                    "arxiv_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "pdf_url": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "link[@title='pdf']"
+                      }
+                    ],
+                    "license": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "link[@title='doi']"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "arxiv:license"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2401.00001",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "author"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "source": "arxiv",
+                  "source_id": "2405.99999",
+                  "title": "Title Only Benchmark Record on Graph Mining",
+                  "landing_url": "https://arxiv.org/abs/2405.99999",
+                  "retrieved_at": "2026-09-30T08:10:00+07:00",
+                  "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "parser_version": "arxiv-adapter-1.0.0",
+                  "abstract": null,
+                  "publication_year": 2024,
+                  "doi": null,
+                  "arxiv_id": "2405.99999",
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "unknown",
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": [
+                    "abstract",
+                    "doi",
+                    "venue",
+                    "pdf_url",
+                    "license",
+                    "citation_count",
+                    "authors"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "title"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "published"
+                      }
+                    ],
+                    "arxiv_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "arxiv:comment"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "source": "openalex",
+              "status": "success",
+              "error": null,
+              "source_total": 1280,
+              "elapsed_seconds": 0.412,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_openalex_001",
+                  "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "byte_count": 8192
+                }
+              ],
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000001",
+                  "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                  "landing_url": "https://openalex.org/W4390000001",
+                  "retrieved_at": "2026-09-30T08:10:00+07:00",
+                  "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic OpenAlex record demonstrating citation network analytics.",
+                  "publication_year": 2025,
+                  "doi": "10.48550/arxiv.2401.00001",
+                  "arxiv_id": null,
+                  "venue": "Journal of Web Mining Research",
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "open",
+                  "citation_count": 14,
+                  "authors": [
+                    "Alice Nguyen",
+                    "Bob Tran"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "pdf_url",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 3,
+              "valid": 3,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 3,
+              "groups": 2,
+              "duplicate_excess": 1,
+              "returned": 2
+            },
+            "hits": [
+              {
+                "canonical_id": "doi:10.48550/arxiv.2401.00001",
+                "rank": 1,
+                "score": 0.03252247,
+                "display": {
+                  "source": "openalex",
+                  "source_id": "W4390000001",
+                  "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                  "landing_url": "https://openalex.org/W4390000001",
+                  "retrieved_at": "2026-09-30T08:10:00+07:00",
+                  "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic OpenAlex record demonstrating citation network analytics.",
+                  "publication_year": 2025,
+                  "doi": "10.48550/arxiv.2401.00001",
+                  "arxiv_id": null,
+                  "venue": "Journal of Web Mining Research",
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "open",
+                  "citation_count": 14,
+                  "authors": [
+                    "Alice Nguyen",
+                    "Bob Tran"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "pdf_url",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000001",
+                    "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                    "landing_url": "https://openalex.org/W4390000001",
+                    "retrieved_at": "2026-09-30T08:10:00+07:00",
+                    "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                    "parser_version": "openalex-adapter-1.0.0",
+                    "abstract": "Synthetic OpenAlex record demonstrating citation network analytics.",
+                    "publication_year": 2025,
+                    "doi": "10.48550/arxiv.2401.00001",
+                    "arxiv_id": null,
+                    "venue": "Journal of Web Mining Research",
+                    "pdf_url": null,
+                    "license": null,
+                    "open_access_status": "open",
+                    "citation_count": 14,
+                    "authors": [
+                      "Alice Nguyen",
+                      "Bob Tran"
+                    ],
+                    "authors_availability": "known",
+                    "missing_fields": [
+                      "arxiv_id",
+                      "pdf_url",
+                      "license"
+                    ],
+                    "field_provenance": {
+                      "source_id": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "title": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "display_name"
+                        }
+                      ],
+                      "landing_url": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "abstract": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "abstract_inverted_index"
+                        }
+                      ],
+                      "publication_year": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "publication_year"
+                        }
+                      ],
+                      "doi": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "venue": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "primary_location.source.display_name"
+                        }
+                      ],
+                      "open_access_status": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "open_access.oa_status"
+                        }
+                      ],
+                      "citation_count": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "cited_by_count"
+                        }
+                      ],
+                      "authors": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000001",
+                          "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                          "raw_field": "authorships"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "source": "arxiv",
+                    "source_id": "2401.00001",
+                    "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                    "landing_url": "https://arxiv.org/abs/2401.00001",
+                    "retrieved_at": "2026-09-30T08:10:00+07:00",
+                    "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "parser_version": "arxiv-adapter-1.0.0",
+                    "abstract": "Synthetic arXiv record demonstrating clean graph neural network citation retrieval.",
+                    "publication_year": 2024,
+                    "doi": "10.48550/arxiv.2401.00001",
+                    "arxiv_id": "2401.00001",
+                    "venue": null,
+                    "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+                    "license": "http://creativecommons.org/licenses/by/4.0/",
+                    "open_access_status": "open",
+                    "citation_count": null,
+                    "authors": [
+                      "Alice Nguyen",
+                      "Bob Tran"
+                    ],
+                    "authors_availability": "known",
+                    "missing_fields": [
+                      "venue",
+                      "citation_count"
+                    ],
+                    "field_provenance": {
+                      "source_id": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "title": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "title"
+                        }
+                      ],
+                      "landing_url": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "abstract": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "summary"
+                        }
+                      ],
+                      "publication_year": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "published"
+                        }
+                      ],
+                      "doi": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "arxiv:doi"
+                        }
+                      ],
+                      "arxiv_id": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "pdf_url": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "link[@title='pdf']"
+                        }
+                      ],
+                      "license": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "link[@title='doi']"
+                        }
+                      ],
+                      "open_access_status": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "arxiv:license"
+                        }
+                      ],
+                      "authors": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2401.00001",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "author"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "source_ranks": {
+                  "openalex": 1,
+                  "arxiv": 1
+                },
+                "conflicts": {
+                  "publication_year": [
+                    {
+                      "source": "openalex",
+                      "source_id": "W4390000001",
+                      "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "raw_field": "publication_year"
+                    },
+                    {
+                      "source": "arxiv",
+                      "source_id": "2401.00001",
+                      "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                      "raw_field": "published"
+                    }
+                  ]
+                }
+              },
+              {
+                "canonical_id": "arxiv:2405.99999",
+                "rank": 2,
+                "score": 0.01612903,
+                "display": {
+                  "source": "arxiv",
+                  "source_id": "2405.99999",
+                  "title": "Title Only Benchmark Record on Graph Mining",
+                  "landing_url": "https://arxiv.org/abs/2405.99999",
+                  "retrieved_at": "2026-09-30T08:10:00+07:00",
+                  "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "parser_version": "arxiv-adapter-1.0.0",
+                  "abstract": null,
+                  "publication_year": 2024,
+                  "doi": null,
+                  "arxiv_id": "2405.99999",
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "unknown",
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": [
+                    "abstract",
+                    "doi",
+                    "venue",
+                    "pdf_url",
+                    "license",
+                    "citation_count",
+                    "authors"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "title"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "published"
+                      }
+                    ],
+                    "arxiv_id": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "arxiv",
+                        "source_id": "2405.99999",
+                        "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "raw_field": "arxiv:comment"
+                      }
+                    ]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "arxiv",
+                    "source_id": "2405.99999",
+                    "title": "Title Only Benchmark Record on Graph Mining",
+                    "landing_url": "https://arxiv.org/abs/2405.99999",
+                    "retrieved_at": "2026-09-30T08:10:00+07:00",
+                    "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "parser_version": "arxiv-adapter-1.0.0",
+                    "abstract": null,
+                    "publication_year": 2024,
+                    "doi": null,
+                    "arxiv_id": "2405.99999",
+                    "venue": null,
+                    "pdf_url": null,
+                    "license": null,
+                    "open_access_status": "unknown",
+                    "citation_count": null,
+                    "authors": null,
+                    "authors_availability": "missing",
+                    "missing_fields": [
+                      "abstract",
+                      "doi",
+                      "venue",
+                      "pdf_url",
+                      "license",
+                      "citation_count",
+                      "authors"
+                    ],
+                    "field_provenance": {
+                      "source_id": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "title": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "title"
+                        }
+                      ],
+                      "landing_url": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "publication_year": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "published"
+                        }
+                      ],
+                      "arxiv_id": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "open_access_status": [
+                        {
+                          "source": "arxiv",
+                          "source_id": "2405.99999",
+                          "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                          "raw_field": "arxiv:comment"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "source_ranks": {
+                  "arxiv": 2
+                },
+                "conflicts": {}
+              }
+            ]
+          }
+        }
+      }
+    },
+    "example_02_tt01_all_empty": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-01",
+      "description": "Both selected sources complete normally with 0 records. Overall status is empty (HTTP 200, CLI exit 0).",
+      "ui_states_demonstrated": [
+        "empty"
+      ],
+      "http_status": 200,
+      "cli_exit_code": 0,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_002",
+          "request": {
+            "query": "quantum bioluminescent xylophone 2099",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 20,
+            "cap_per_source": 50,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T08:11:00+07:00",
+          "expires_at": "2026-10-01T08:11:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.21,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            },
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.18,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            },
+            "hits": []
+          }
+        }
+      }
+    },
+    "example_03_tt02_success_plus_empty_with_hit": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-02",
+      "description": "OpenAlex returns 1 valid eligible hit while arXiv completes normally with 0 records (empty). Overall status is success (HTTP 200, CLI exit 0).",
+      "ui_states_demonstrated": [
+        "oa_unknown"
+      ],
+      "http_status": 200,
+      "cli_exit_code": 0,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_003",
+          "request": {
+            "query": "Vietnamese scientific citation analysis",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 10,
+            "cap_per_source": 50,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "success",
+          "fetched_at": "2026-09-30T08:12:00+07:00",
+          "expires_at": "2026-10-01T08:12:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.25,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            },
+            {
+              "source": "openalex",
+              "status": "success",
+              "error": null,
+              "source_total": 1,
+              "elapsed_seconds": 0.35,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_openalex_vn_01",
+                  "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "byte_count": 2048
+                }
+              ],
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000010",
+                  "title": "Bibliometric Patterns in Vietnamese Computer Science Publications",
+                  "landing_url": "https://openalex.org/W4390000010",
+                  "retrieved_at": "2026-09-30T08:12:00+07:00",
+                  "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic OpenAlex hit when arXiv returns empty.",
+                  "publication_year": 2024,
+                  "doi": "10.1000/syn.2024.010",
+                  "arxiv_id": null,
+                  "venue": "Asian Digital Libraries",
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "closed",
+                  "citation_count": 3,
+                  "authors": [
+                    "Lan Pham"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "pdf_url",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 1,
+              "groups": 1,
+              "duplicate_excess": 0,
+              "returned": 1
+            },
+            "hits": [
+              {
+                "canonical_id": "openalex:W4390000010",
+                "rank": 1,
+                "score": 0.01639344,
+                "display": {
+                  "source": "openalex",
+                  "source_id": "W4390000010",
+                  "title": "Bibliometric Patterns in Vietnamese Computer Science Publications",
+                  "landing_url": "https://openalex.org/W4390000010",
+                  "retrieved_at": "2026-09-30T08:12:00+07:00",
+                  "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic OpenAlex hit when arXiv returns empty.",
+                  "publication_year": 2024,
+                  "doi": "10.1000/syn.2024.010",
+                  "arxiv_id": null,
+                  "venue": "Asian Digital Libraries",
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": "closed",
+                  "citation_count": 3,
+                  "authors": [
+                    "Lan Pham"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "pdf_url",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000010",
+                        "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000010",
+                    "title": "Bibliometric Patterns in Vietnamese Computer Science Publications",
+                    "landing_url": "https://openalex.org/W4390000010",
+                    "retrieved_at": "2026-09-30T08:12:00+07:00",
+                    "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                    "parser_version": "openalex-adapter-1.0.0",
+                    "abstract": "Synthetic OpenAlex hit when arXiv returns empty.",
+                    "publication_year": 2024,
+                    "doi": "10.1000/syn.2024.010",
+                    "arxiv_id": null,
+                    "venue": "Asian Digital Libraries",
+                    "pdf_url": null,
+                    "license": null,
+                    "open_access_status": "closed",
+                    "citation_count": 3,
+                    "authors": [
+                    "Lan Pham"
+                  ],
+                    "authors_availability": "known",
+                    "missing_fields": [
+                      "arxiv_id",
+                      "pdf_url",
+                      "license"
+                    ],
+                    "field_provenance": {
+                      "source_id": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "title": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "display_name"
+                        }
+                      ],
+                      "landing_url": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "abstract": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "abstract_inverted_index"
+                        }
+                      ],
+                      "publication_year": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "publication_year"
+                        }
+                      ],
+                      "doi": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "venue": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "primary_location.source.display_name"
+                        }
+                      ],
+                      "open_access_status": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "open_access.oa_status"
+                        }
+                      ],
+                      "citation_count": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "cited_by_count"
+                        }
+                      ],
+                      "authors": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000010",
+                          "raw_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                          "raw_field": "authorships"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "source_ranks": {
+                  "openalex": 1
+                },
+                "conflicts": {}
+              }
+            ]
+          }
+        }
+      }
+    },
+    "example_04_tt03_success_sources_filtered_to_zero": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-03",
+      "description": "Both sources return 0 records in year range. Overall status is empty (HTTP 200, CLI exit 0). Note: in SOL snapshot, invalid=0 and valid equals records in snapshot.",
+      "ui_states_demonstrated": [
+        "empty"
+      ],
+      "http_status": 200,
+      "cli_exit_code": 0,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_004",
+          "request": {
+            "query": "classic pagerank web graph",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 10,
+            "cap_per_source": 50,
+            "year_from": 2026,
+            "year_to": 2026,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T08:13:00+07:00",
+          "expires_at": "2026-10-01T08:13:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.3,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            },
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.28,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            },
+            "hits": []
+          }
+        }
+      }
+    },
+    "example_05_tt04_empty_plus_failed_no_hit": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-04",
+      "description": "OpenAlex completes empty (0 hits) while arXiv fails with timeout. Overall status is partial_failure (HTTP 504, CLI exit 1).",
+      "ui_states_demonstrated": [
+        "partial_failure"
+      ],
+      "http_status": 504,
+      "cli_exit_code": 1,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "partial_failure",
+        "stale": false,
+        "cached": false,
+        "errors": [
+          {
+            "kind": "timeout",
+            "message": "arXiv Atom endpoint exceeded request deadline (30.0s).",
+            "source": "arxiv",
+            "retry_after_seconds": null,
+            "record_index": null
+          }
+        ],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_005",
+          "request": {
+            "query": "rare algebraic hypergraph conjecture",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 10,
+            "cap_per_source": 50,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "partial_failure",
+          "fetched_at": "2026-09-30T08:14:00+07:00",
+          "expires_at": "2026-10-01T08:14:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "failed",
+              "records": [],
+              "error": {
+                "kind": "timeout",
+                "message": "arXiv Atom endpoint exceeded request deadline (30.0s).",
+                "source": "arxiv",
+                "retry_after_seconds": null,
+                "record_index": null
+              },
+              "source_total": null,
+              "elapsed_seconds": 30.0,
+              "filter_coverage": "none",
+              "truncated": null,
+              "raw_references": []
+            },
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.42,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            },
+            "hits": []
+          }
+        }
+      }
+    },
+    "example_06_tt05_success_plus_failed_partial_failure_with_hits": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-05",
+      "description": "OpenAlex succeeds with 1 valid hit while arXiv fails with quota rate limit. HTTP status 503, CLI exit 1, overall is partial_failure with valid hits in envelope snapshot.",
+      "ui_states_demonstrated": [
+        "partial_failure",
+        "quota_exceeded"
+      ],
+      "http_status": 503,
+      "cli_exit_code": 1,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "partial_failure",
+        "stale": false,
+        "cached": false,
+        "errors": [
+          {
+            "kind": "quota",
+            "message": "arXiv API returned HTTP 429 Too Many Requests; Retry-After (45.0s) exceeds remaining deadline.",
+            "source": "arxiv",
+            "retry_after_seconds": 45.0,
+            "record_index": null
+          }
+        ],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_syn_20260930_006",
+          "request": {
+            "query": "knowledge graph link prediction",
+            "sources": [
+              "arxiv",
+              "openalex"
+            ],
+            "top_k": 10,
+            "cap_per_source": 50,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+          "adapter_sha256": {
+            "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "overall": "partial_failure",
+          "fetched_at": "2026-09-30T08:15:00+07:00",
+          "expires_at": "2026-10-01T08:15:00+07:00",
+          "source_results": [
+            {
+              "source": "arxiv",
+              "status": "failed",
+              "records": [],
+              "error": {
+                "kind": "quota",
+                "message": "arXiv API returned HTTP 429 Too Many Requests; Retry-After (45.0s) exceeds remaining deadline.",
+                "source": "arxiv",
+                "retry_after_seconds": 45.0,
+                "record_index": null
+              },
+              "source_total": null,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "none",
+              "truncated": null,
+              "raw_references": []
+            },
+            {
+              "source": "openalex",
+              "status": "success",
+              "error": null,
+              "source_total": 45,
+              "elapsed_seconds": 0.38,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_openalex_kg_01",
+                  "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "byte_count": 4096
+                }
+              ],
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "title": "Inductive Link Prediction on Temporal Knowledge Graphs",
+                  "landing_url": "https://openalex.org/W4390000020",
+                  "retrieved_at": "2026-09-30T08:15:00+07:00",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic partial-hit record from OpenAlex while arXiv is rate-limited.",
+                  "publication_year": 2025,
+                  "doi": "10.1000/syn.kg.2025.001",
+                  "arxiv_id": null,
+                  "venue": "Web Conference",
+                  "pdf_url": "https://example.org/open-access/kg2025.pdf",
+                  "license": null,
+                  "open_access_status": "open",
+                  "citation_count": 7,
+                  "authors": [
+                    "Huy Hoang",
+                    "Trang Dao"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "pdf_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "open_access.oa_url"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 1,
+              "groups": 1,
+              "duplicate_excess": 0,
+              "returned": 1
+            },
+            "hits": [
+              {
+                "canonical_id": "doi:10.1000/syn.kg.2025.001",
+                "rank": 1,
+                "score": 0.01639344,
+                "display": {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "title": "Inductive Link Prediction on Temporal Knowledge Graphs",
+                  "landing_url": "https://openalex.org/W4390000020",
+                  "retrieved_at": "2026-09-30T08:15:00+07:00",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "parser_version": "openalex-adapter-1.0.0",
+                  "abstract": "Synthetic partial-hit record from OpenAlex while arXiv is rate-limited.",
+                  "publication_year": 2025,
+                  "doi": "10.1000/syn.kg.2025.001",
+                  "arxiv_id": null,
+                  "venue": "Web Conference",
+                  "pdf_url": "https://example.org/open-access/kg2025.pdf",
+                  "license": null,
+                  "open_access_status": "open",
+                  "citation_count": 7,
+                  "authors": [
+                    "Huy Hoang",
+                    "Trang Dao"
+                  ],
+                  "authors_availability": "known",
+                  "missing_fields": [
+                    "arxiv_id",
+                    "license"
+                  ],
+                  "field_provenance": {
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "display_name"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "abstract": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "abstract_inverted_index"
+                      }
+                    ],
+                    "publication_year": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "publication_year"
+                      }
+                    ],
+                    "doi": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "doi"
+                      }
+                    ],
+                    "venue": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "primary_location.source.display_name"
+                      }
+                    ],
+                    "pdf_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "open_access.oa_url"
+                      }
+                    ],
+                    "open_access_status": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "open_access.oa_status"
+                      }
+                    ],
+                    "citation_count": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "cited_by_count"
+                      }
+                    ],
+                    "authors": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000020",
+                        "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                        "raw_field": "authorships"
+                      }
+                    ]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "title": "Inductive Link Prediction on Temporal Knowledge Graphs",
+                    "landing_url": "https://openalex.org/W4390000020",
+                    "retrieved_at": "2026-09-30T08:15:00+07:00",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "parser_version": "openalex-adapter-1.0.0",
+                    "abstract": "Synthetic partial-hit record from OpenAlex while arXiv is rate-limited.",
+                    "publication_year": 2025,
+                    "doi": "10.1000/syn.kg.2025.001",
+                    "arxiv_id": null,
+                    "venue": "Web Conference",
+                    "pdf_url": "https://example.org/open-access/kg2025.pdf",
+                    "license": null,
+                    "open_access_status": "open",
+                    "citation_count": 7,
+                    "authors": [
+                      "Huy Hoang",
+                      "Trang Dao"
+                    ],
+                    "authors_availability": "known",
+                    "missing_fields": [
+                      "arxiv_id",
+                      "license"
+                    ],
+                    "field_provenance": {
+                      "source_id": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "id"
+                        }
+                      ],
+                      "title": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "display_name"
+                        }
+                      ],
+                      "landing_url": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "abstract": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "abstract_inverted_index"
+                        }
+                      ],
+                      "publication_year": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "publication_year"
+                        }
+                      ],
+                      "doi": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "doi"
+                        }
+                      ],
+                      "venue": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "primary_location.source.display_name"
+                        }
+                      ],
+                      "pdf_url": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "open_access.oa_url"
+                        }
+                      ],
+                      "open_access_status": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "open_access.oa_status"
+                        }
+                      ],
+                      "citation_count": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "cited_by_count"
+                        }
+                      ],
+                      "authors": [
+                        {
+                          "source": "openalex",
+                          "source_id": "W4390000020",
+                          "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                          "raw_field": "authorships"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "source_ranks": {
+                  "openalex": 1
+                },
+                "conflicts": {}
+              }
+            ]
+          }
+        }
+      }
+    },
+    "example_07_tt06_all_failed_mixed_precedence": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope",
+      "truth_table_id": "TT-06",
+      "description": "All selected sources fail: OpenAlex hits quota (503) and arXiv fails schema (502). In SearchEnvelope, snapshot can be None or present. Here all failed before snapshot creation (snapshot=None). Priority priority quota(503) > schema(502) gives HTTP 503, CLI exit 1.",
+      "ui_states_demonstrated": [
+        "quota_exceeded"
+      ],
+      "http_status": 503,
+      "cli_exit_code": 1,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "snapshot": null,
+        "errors": [
+          {
+            "kind": "quota",
+            "message": "OpenAlex daily polite/authenticated budget exhausted.",
+            "source": "openalex",
+            "retry_after_seconds": 120.0,
+            "record_index": null
+          },
+          {
+            "kind": "schema",
+            "message": "Record at index 1 is missing required non-empty 'title'. Source rejected.",
+            "source": "arxiv",
+            "retry_after_seconds": null,
+            "record_index": 1
+          }
+        ],
+        "stale": false,
+        "cached": false
+      }
+    },
+    "example_08_tt07_invalid_request_422": {
+      "synthetic": true,
+      "contract_type": "SearchRequest_ValidationError",
+      "truth_table_id": "TT-07",
+      "description": "Invalid search parameters rejected by SearchRequest validation (HTTP 422, CLI exit 1) before network or cache.",
+      "http_status": 422,
+      "cli_exit_code": 1,
+      "invalid_request_payload": {
+        "query": "   ",
+        "sources": [],
+        "top_k": 75,
+        "cap_per_source": 50,
+        "year_from": 2026,
+        "year_to": 2022,
+        "refresh": false
+      },
+      "expected_validation_errors": [
+        {
+          "loc": [
+            "query"
+          ],
+          "msg": "String should have at least 1 character",
+          "type": "string_too_short"
+        },
+        {
+          "loc": [
+            "sources"
+          ],
+          "msg": "Value error, sources must be nonempty and unique",
+          "type": "value_error"
+        },
+        {
+          "loc": [
+            "top_k"
+          ],
+          "msg": "Input should be less than or equal to 50",
+          "type": "less_than_equal"
+        },
+        {
+          "loc": [],
+          "msg": "Value error, year bounds reversed",
+          "type": "value_error"
+        }
+      ]
+    },
+    "example_09_cache_fresh_stale_and_refresh_failure": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope_CacheScenarios",
+      "truth_table_id": null,
+      "description": "Demonstrates (A) cached_fresh hit with cached=True and stale=False, (B) refresh=True failure returning failed envelope without falsely returning stale cache as success, and (C) explicit opening of stale snapshot with stale=True and cached=True.",
+      "ui_states_demonstrated": [
+        "cached_fresh",
+        "cached_stale"
+      ],
+      "subcases": {
+        "A_cached_fresh": {
+          "http_status": 200,
+          "cli_exit_code": 0,
+          "envelope": {
+            "schema_version": 1,
+            "contract_version": "1.0.0",
+            "overall": "success",
+            "stale": false,
+            "cached": true,
+            "errors": [],
+            "snapshot": {
+              "schema_version": 1,
+              "contract_version": "1.0.0",
+              "snapshot_id": "snap_syn_20260930_001",
+              "request": {
+                "query": "Graph Neural Networks Citation",
+                "sources": [
+                  "arxiv",
+                  "openalex"
+                ],
+                "top_k": 10,
+                "cap_per_source": 50,
+                "year_from": null,
+                "year_to": null,
+                "refresh": false
+              },
+              "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+              "adapter_sha256": {
+                "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+              },
+              "overall": "success",
+              "fetched_at": "2026-09-30T08:10:00+07:00",
+              "expires_at": "2026-10-01T08:10:00+07:00",
+              "source_results": [
+                {
+                  "source": "arxiv",
+                  "status": "empty",
+                  "records": [],
+                  "error": null,
+                  "source_total": 0,
+                  "elapsed_seconds": 0.25,
+                  "filter_coverage": "server",
+                  "truncated": false,
+                  "raw_references": []
+                },
+                {
+                  "source": "openalex",
+                  "status": "success",
+                  "error": null,
+                  "source_total": 1,
+                  "elapsed_seconds": 0.35,
+                  "filter_coverage": "server",
+                  "truncated": false,
+                  "raw_references": [
+                    {
+                      "raw_id": "raw_openalex_001",
+                      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "byte_count": 8192
+                    }
+                  ],
+                  "records": [
+                    {
+                      "source": "openalex",
+                      "source_id": "W4390000001",
+                      "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                      "landing_url": "https://openalex.org/W4390000001",
+                      "retrieved_at": "2026-09-30T08:10:00+07:00",
+                      "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "parser_version": "openalex-adapter-1.0.0",
+                      "abstract": null,
+                      "publication_year": 2025,
+                      "doi": "10.48550/arxiv.2401.00001",
+                      "arxiv_id": null,
+                      "venue": null,
+                      "pdf_url": null,
+                      "license": null,
+                      "open_access_status": "open",
+                      "citation_count": 14,
+                      "authors": null,
+                      "authors_availability": "missing",
+                      "missing_fields": [
+                        "abstract",
+                        "arxiv_id",
+                        "venue",
+                        "pdf_url",
+                        "license",
+                        "authors"
+                      ],
+                      "field_provenance": {
+                        "source_id": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "id"
+                          }
+                        ],
+                        "title": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "display_name"
+                          }
+                        ],
+                        "landing_url": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "publication_year": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "publication_year"
+                          }
+                        ],
+                        "doi": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "open_access_status": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "open_access.oa_status"
+                          }
+                        ],
+                        "citation_count": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "cited_by_count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "fusion": {
+                "counts": {
+                  "raw": 1,
+                  "valid": 1,
+                  "invalid": 0,
+                  "excluded_by_year": 0,
+                  "eligible": 1,
+                  "groups": 1,
+                  "duplicate_excess": 0,
+                  "returned": 1
+                },
+                "hits": [
+                  {
+                    "canonical_id": "doi:10.48550/arxiv.2401.00001",
+                    "rank": 1,
+                    "score": 0.01639344,
+                    "display": {
+                      "source": "openalex",
+                      "source_id": "W4390000001",
+                      "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                      "landing_url": "https://openalex.org/W4390000001",
+                      "retrieved_at": "2026-09-30T08:10:00+07:00",
+                      "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "parser_version": "openalex-adapter-1.0.0",
+                      "abstract": null,
+                      "publication_year": 2025,
+                      "doi": "10.48550/arxiv.2401.00001",
+                      "arxiv_id": null,
+                      "venue": null,
+                      "pdf_url": null,
+                      "license": null,
+                      "open_access_status": "open",
+                      "citation_count": 14,
+                      "authors": null,
+                      "authors_availability": "missing",
+                      "missing_fields": [
+                        "abstract",
+                        "arxiv_id",
+                        "venue",
+                        "pdf_url",
+                        "license",
+                        "authors"
+                      ],
+                      "field_provenance": {
+                        "source_id": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "id"
+                          }
+                        ],
+                        "title": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "display_name"
+                          }
+                        ],
+                        "landing_url": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "publication_year": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "publication_year"
+                          }
+                        ],
+                        "doi": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "open_access_status": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "open_access.oa_status"
+                          }
+                        ],
+                        "citation_count": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000001",
+                            "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "raw_field": "cited_by_count"
+                          }
+                        ]
+                      }
+                    },
+                    "source_records": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000001",
+                        "title": "Scalable Citation Graph Neural Networks for Scientific Retrieval",
+                        "landing_url": "https://openalex.org/W4390000001",
+                        "retrieved_at": "2026-09-30T08:10:00+07:00",
+                        "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "parser_version": "openalex-adapter-1.0.0",
+                        "abstract": null,
+                        "publication_year": 2025,
+                        "doi": "10.48550/arxiv.2401.00001",
+                        "arxiv_id": null,
+                        "venue": null,
+                        "pdf_url": null,
+                        "license": null,
+                        "open_access_status": "open",
+                        "citation_count": 14,
+                        "authors": null,
+                        "authors_availability": "missing",
+                        "missing_fields": [
+                          "abstract",
+                          "arxiv_id",
+                          "venue",
+                          "pdf_url",
+                          "license",
+                          "authors"
+                        ],
+                        "field_provenance": {
+                          "source_id": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "id"
+                            }
+                          ],
+                          "title": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "display_name"
+                            }
+                          ],
+                          "landing_url": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "doi"
+                            }
+                          ],
+                          "publication_year": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "publication_year"
+                            }
+                          ],
+                          "doi": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "doi"
+                            }
+                          ],
+                          "open_access_status": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "open_access.oa_status"
+                            }
+                          ],
+                          "citation_count": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000001",
+                              "raw_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "raw_field": "cited_by_count"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "source_ranks": {
+                      "openalex": 1
+                    },
+                    "conflicts": {}
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "B_refresh_failure_does_not_mask_with_old_cache": {
+          "http_status": 504,
+          "cli_exit_code": 1,
+          "envelope": {
+            "schema_version": 1,
+            "contract_version": "1.0.0",
+            "overall": "failed",
+            "stale": false,
+            "cached": false,
+            "snapshot": null,
+            "errors": [
+              {
+                "kind": "timeout",
+                "message": "Live refresh failed due to upstream timeout. Existing cache pointer was preserved.",
+                "source": "arxiv",
+                "retry_after_seconds": null,
+                "record_index": null
+              }
+            ]
+          }
+        },
+        "C_explicit_open_stale_snapshot": {
+          "http_status": 200,
+          "cli_exit_code": 0,
+          "envelope": {
+            "schema_version": 1,
+            "contract_version": "1.0.0",
+            "overall": "success",
+            "stale": true,
+            "cached": true,
+            "errors": [],
+            "snapshot": {
+              "schema_version": 1,
+              "contract_version": "1.0.0",
+              "snapshot_id": "snap_syn_20260928_old",
+              "request": {
+                "query": "Graph Neural Networks Citation",
+                "sources": [
+                  "arxiv",
+                  "openalex"
+                ],
+                "top_k": 10,
+                "cap_per_source": 50,
+                "year_from": null,
+                "year_to": null,
+                "refresh": false
+              },
+              "config_sha256": "65cc0ce4d28a1947d9af74353f49f301d7fb9adf074d67620896d844218b33d8",
+              "adapter_sha256": {
+                "arxiv": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "openalex": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+              },
+              "overall": "success",
+              "fetched_at": "2026-09-28T07:00:00+07:00",
+              "expires_at": "2026-09-29T07:00:00+07:00",
+              "source_results": [
+                {
+                  "source": "arxiv",
+                  "status": "empty",
+                  "records": [],
+                  "error": null,
+                  "source_total": 0,
+                  "elapsed_seconds": 0.2,
+                  "filter_coverage": "server",
+                  "truncated": false,
+                  "raw_references": []
+                },
+                {
+                  "source": "openalex",
+                  "status": "success",
+                  "error": null,
+                  "source_total": 1,
+                  "elapsed_seconds": 0.3,
+                  "filter_coverage": "server",
+                  "truncated": false,
+                  "raw_references": [
+                    {
+                      "raw_id": "raw_openalex_old_01",
+                      "sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                      "byte_count": 2048
+                    }
+                  ],
+                  "records": [
+                    {
+                      "source": "openalex",
+                      "source_id": "W4390000099",
+                      "title": "Historical Citation Network Survey",
+                      "landing_url": "https://openalex.org/W4390000099",
+                      "retrieved_at": "2026-09-28T07:00:00+07:00",
+                      "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                      "parser_version": "openalex-adapter-1.0.0",
+                      "abstract": null,
+                      "publication_year": 2023,
+                      "doi": "10.1000/syn.hist.099",
+                      "arxiv_id": null,
+                      "venue": null,
+                      "pdf_url": null,
+                      "license": null,
+                      "open_access_status": "open",
+                      "citation_count": 50,
+                      "authors": null,
+                      "authors_availability": "missing",
+                      "missing_fields": [
+                        "abstract",
+                        "arxiv_id",
+                        "venue",
+                        "pdf_url",
+                        "license",
+                        "authors"
+                      ],
+                      "field_provenance": {
+                        "source_id": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "id"
+                          }
+                        ],
+                        "title": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "display_name"
+                          }
+                        ],
+                        "landing_url": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "publication_year": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "publication_year"
+                          }
+                        ],
+                        "doi": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "open_access_status": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "open_access.oa_status"
+                          }
+                        ],
+                        "citation_count": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "cited_by_count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "fusion": {
+                "counts": {
+                  "raw": 1,
+                  "valid": 1,
+                  "invalid": 0,
+                  "excluded_by_year": 0,
+                  "eligible": 1,
+                  "groups": 1,
+                  "duplicate_excess": 0,
+                  "returned": 1
+                },
+                "hits": [
+                  {
+                    "canonical_id": "openalex:W4390000099",
+                    "rank": 1,
+                    "score": 0.01639344,
+                    "display": {
+                      "source": "openalex",
+                      "source_id": "W4390000099",
+                      "title": "Historical Citation Network Survey",
+                      "landing_url": "https://openalex.org/W4390000099",
+                      "retrieved_at": "2026-09-28T07:00:00+07:00",
+                      "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                      "parser_version": "openalex-adapter-1.0.0",
+                      "abstract": null,
+                      "publication_year": 2023,
+                      "doi": "10.1000/syn.hist.099",
+                      "arxiv_id": null,
+                      "venue": null,
+                      "pdf_url": null,
+                      "license": null,
+                      "open_access_status": "open",
+                      "citation_count": 50,
+                      "authors": null,
+                      "authors_availability": "missing",
+                      "missing_fields": [
+                        "abstract",
+                        "arxiv_id",
+                        "venue",
+                        "pdf_url",
+                        "license",
+                        "authors"
+                      ],
+                      "field_provenance": {
+                        "source_id": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "id"
+                          }
+                        ],
+                        "title": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "display_name"
+                          }
+                        ],
+                        "landing_url": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "publication_year": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "publication_year"
+                          }
+                        ],
+                        "doi": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "doi"
+                          }
+                        ],
+                        "open_access_status": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "open_access.oa_status"
+                          }
+                        ],
+                        "citation_count": [
+                          {
+                            "source": "openalex",
+                            "source_id": "W4390000099",
+                            "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                            "raw_field": "cited_by_count"
+                          }
+                        ]
+                      }
+                    },
+                    "source_records": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W4390000099",
+                        "title": "Historical Citation Network Survey",
+                        "landing_url": "https://openalex.org/W4390000099",
+                        "retrieved_at": "2026-09-28T07:00:00+07:00",
+                        "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                        "parser_version": "openalex-adapter-1.0.0",
+                        "abstract": null,
+                        "publication_year": 2023,
+                        "doi": "10.1000/syn.hist.099",
+                        "arxiv_id": null,
+                        "venue": null,
+                        "pdf_url": null,
+                        "license": null,
+                        "open_access_status": "open",
+                        "citation_count": 50,
+                        "authors": null,
+                        "authors_availability": "missing",
+                        "missing_fields": [
+                          "abstract",
+                          "arxiv_id",
+                          "venue",
+                          "pdf_url",
+                          "license",
+                          "authors"
+                        ],
+                        "field_provenance": {
+                          "source_id": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "id"
+                            }
+                          ],
+                          "title": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "display_name"
+                            }
+                          ],
+                          "landing_url": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "doi"
+                            }
+                          ],
+                          "publication_year": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "publication_year"
+                            }
+                          ],
+                          "doi": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "doi"
+                            }
+                          ],
+                          "open_access_status": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "open_access.oa_status"
+                            }
+                          ],
+                          "citation_count": [
+                            {
+                              "source": "openalex",
+                              "source_id": "W4390000099",
+                              "raw_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+                              "raw_field": "cited_by_count"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "source_ranks": {
+                      "openalex": 1
+                    },
+                    "conflicts": {}
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "example_10_library_save_idempotent_and_export": {
+      "synthetic": true,
+      "contract_type": "LibraryEntry",
+      "truth_table_id": null,
+      "description": "Saving a validated paper from snapshot into SQLite library as LibraryEntry typed model, repeating save idempotently.",
+      "ui_states_demonstrated": [
+        "save_idempotent"
+      ],
+      "library_entry": {
+        "canonical_id": "doi:10.1000/syn.kg.2025.001",
+        "snapshot_id": "snap_syn_20260930_006",
+        "saved_at": "2026-09-30T08:16:00+07:00",
+        "incomplete_sources": true,
+        "hit": {
+          "canonical_id": "doi:10.1000/syn.kg.2025.001",
+          "rank": 1,
+          "score": 0.01639344,
+          "display": {
+            "source": "openalex",
+            "source_id": "W4390000020",
+            "title": "Inductive Link Prediction on Temporal Knowledge Graphs",
+            "landing_url": "https://openalex.org/W4390000020",
+            "retrieved_at": "2026-09-30T08:15:00+07:00",
+            "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+            "parser_version": "openalex-adapter-1.0.0",
+            "abstract": "Synthetic partial-hit record from OpenAlex while arXiv is rate-limited.",
+            "publication_year": 2025,
+            "doi": "10.1000/syn.kg.2025.001",
+            "arxiv_id": null,
+            "venue": "Web Conference",
+            "pdf_url": "https://example.org/open-access/kg2025.pdf",
+            "license": null,
+            "open_access_status": "open",
+            "citation_count": 7,
+            "authors": [
+              "Huy Hoang",
+              "Trang Dao"
+            ],
+            "authors_availability": "known",
+            "missing_fields": [
+              "arxiv_id",
+              "license"
+            ],
+            "field_provenance": {
+              "source_id": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "id"
+                }
+              ],
+              "title": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "display_name"
+                }
+              ],
+              "landing_url": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "doi"
+                }
+              ],
+              "abstract": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "abstract_inverted_index"
+                }
+              ],
+              "publication_year": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "publication_year"
+                }
+              ],
+              "doi": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "doi"
+                }
+              ],
+              "venue": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "primary_location.source.display_name"
+                }
+              ],
+              "pdf_url": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "open_access.oa_url"
+                }
+              ],
+              "open_access_status": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "open_access.oa_status"
+                }
+              ],
+              "citation_count": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "cited_by_count"
+                }
+              ],
+              "authors": [
+                {
+                  "source": "openalex",
+                  "source_id": "W4390000020",
+                  "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                  "raw_field": "authorships"
+                }
+              ]
+            }
+          },
+          "source_records": [
+            {
+              "source": "openalex",
+              "source_id": "W4390000020",
+              "title": "Inductive Link Prediction on Temporal Knowledge Graphs",
+              "landing_url": "https://openalex.org/W4390000020",
+              "retrieved_at": "2026-09-30T08:15:00+07:00",
+              "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+              "parser_version": "openalex-adapter-1.0.0",
+              "abstract": "Synthetic partial-hit record from OpenAlex while arXiv is rate-limited.",
+              "publication_year": 2025,
+              "doi": "10.1000/syn.kg.2025.001",
+              "arxiv_id": null,
+              "venue": "Web Conference",
+              "pdf_url": "https://example.org/open-access/kg2025.pdf",
+              "license": null,
+              "open_access_status": "open",
+              "citation_count": 7,
+              "authors": [
+                "Huy Hoang",
+                "Trang Dao"
+              ],
+              "authors_availability": "known",
+              "missing_fields": [
+                "arxiv_id",
+                "license"
+              ],
+              "field_provenance": {
+                "source_id": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "id"
+                  }
+                ],
+                "title": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "display_name"
+                  }
+                ],
+                "landing_url": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "doi"
+                  }
+                ],
+                "abstract": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "abstract_inverted_index"
+                  }
+                ],
+                "publication_year": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "publication_year"
+                  }
+                ],
+                "doi": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "doi"
+                  }
+                ],
+                "venue": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "primary_location.source.display_name"
+                  }
+                ],
+                "pdf_url": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "open_access.oa_url"
+                  }
+                ],
+                "open_access_status": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "open_access.oa_status"
+                  }
+                ],
+                "citation_count": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "cited_by_count"
+                  }
+                ],
+                "authors": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W4390000020",
+                    "raw_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+                    "raw_field": "authorships"
+                  }
+                ]
+              }
+            }
+          ],
+          "source_ranks": {
+            "openalex": 1
+          },
+          "conflicts": {}
+        }
+      }
+    },
+    "example_11_storage_error_500_and_xss_url_sanitization": {
+      "synthetic": true,
+      "contract_type": "SearchEnvelope_StorageError",
+      "truth_table_id": null,
+      "description": "Demonstrates HTTP 500 when SQLite store is uninitialized (overall=failed, error kind=storage, snapshot=None), and client-side XSS and URL sanitization vectors.",
+      "http_status": 500,
+      "cli_exit_code": 1,
+      "envelope": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "snapshot": null,
+        "errors": [
+          {
+            "kind": "storage",
+            "message": "Public search SQLite store is not initialized at configured data root. Run explicit init-storage command.",
+            "source": null,
+            "retry_after_seconds": null,
+            "record_index": null
+          }
+        ],
+        "stale": false,
+        "cached": false
+      },
+      "ui_sanitization_vectors": [
+        {
+          "input_title": "<img src=x onerror=alert('xss')>Graph & Citation Mining",
+          "expected_dom_text_content": "<img src=x onerror=alert('xss')>Graph & Citation Mining",
+          "inner_html_allowed": false
+        },
+        {
+          "input_landing_url": "javascript:alert(document.cookie)",
+          "expected_href": null,
+          "expected_ui_badge": "Liên kết không an toàn đã bị chặn"
+        },
+        {
+          "input_pdf_url": "https://user:password@arxiv.org/pdf/2401.00001v2.pdf",
+          "expected_href": null,
+          "expected_ui_badge": "Liên kết chứa thông tin xác thực không hợp lệ đã bị chặn"
+        }
+      ]
+    }
+  }
+}

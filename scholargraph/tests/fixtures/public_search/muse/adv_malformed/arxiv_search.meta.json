@@ -1,0 +1,13 @@
+{
+  "name": "arxiv_search",
+  "url": "https://export.arxiv.org/api/query?mini=1",
+  "status": 200,
+  "elapsed_s": 0.5,
+  "bytes": 21,
+  "sha256": "3b5181674e9ff7c7bfd81e552f2aa831060f1ecabd779381c52532b95a37e2af",
+  "headers": {
+    "date": "Tue, 30 Sep 2026 00:00:00 GMT",
+    "content-type": "application/json",
+    "content-length": "21"
+  }
+}

@@ -1,0 +1,7 @@
+EXT-01B R2 follow-up, same worker/session and write scope. Fix evidence hygiene before review; no new live requests and raw source_pilot remains immutable.
+
+1) Correct source_audit.json provenance: generated_at must not be future or invented; set exactly 2026-09-30T10:16:26+07:00 (coordinator checkpoint time). session_id must be the real runner session ses_f0fc34300ffehYtM193B3KNg56; head_sha must be the actual checkout HEAD 9f70669 unless you commit, then use the real commit. Do not claim a commit that did not happen. Packet/log must match.
+2) Validator must initialize actual_tr=None before conditional use, avoid any silent `.get()` for required fields (use explicit key checks), and add a subprocess negative for missing totalResults/required meta key. Keep current hash/DOI/narrative tests.
+3) Verify the four named adversarial fixtures really exit 1 with the validator; include the commands/results in the R2 packet. Do not alter old R1 reports or raw files.
+
+Keep final response <=8 lines and state exact files, real tests/exit codes, commit or uncommitted status, and any remaining limitation. No reviewer dispatch from this turn.

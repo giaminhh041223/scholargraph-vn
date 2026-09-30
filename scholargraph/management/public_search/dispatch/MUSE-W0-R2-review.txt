@@ -1,0 +1,5 @@
+Đây là re-review độc lập W0 R2, không phải author fix. Dùng OpenCode native tools/đọc file trong ba checkout; không live request, không đọc qrels/labels/env. Chỉ ghi report/log vào management/public_search/reviews/MUSE/ và management/public_search/logs/MUSE/; không sửa implementation, fixtures, board hay raw.
+
+Review EXT-01A tại checkout SOL commit 774aeef0bfc42c636779f739c3fb4fbb8e9e37c4c: invariant SourceResult not_requested→filter_coverage=none, arXiv politeness process-local/cross-process gap, tests and diff evidence. Xác nhận hai finding đã sửa, tìm regression/silent fallback và ghi PASS hoặc CHANGES_REQUIRED.
+
+Review EXT-01C tại checkout GEMINI hiện tại: UX_SPEC, ux_examples.json, sidecar, validate_fixtures.py. Coordinator đã chạy validator exit0: 13 typed objects, 16 negative subprocess checks exit1, title-only + benign query pass. Kiểm tra độc lập logic contract_type/payload, coverage, leakage metadata/text boundary, sidecar provenance, no .get default. Nếu cần chạy lại validator read-only. Ghi report riêng EXT-01A-R2.md và EXT-01C-R2.md cùng log, nêu evidence thật và verdict từng task. Packet cuối <=8 dòng, không claim nếu không kiểm được.

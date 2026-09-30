@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "config_version": "1.0.0-audited",
+  "data_root": "data/public_search/sol",
+  "cache_ttl_seconds": 86400,
+  "deadline_seconds": 30.0,
+  "sources": {
+    "openalex": {
+      "endpoint": "https://api.openalex.org/works",
+      "source_policy_verified": true,
+      "policy_evidence_sha256": "a37778605f63821b820edc27b20ad5c859b05761d450980650336a4b8b727923",
+      "auth_mode": "anonymous",
+      "key_env": null,
+      "interval_seconds": 1.0,
+      "timeout_seconds": 30.0,
+      "max_retries": 2,
+      "backoff_seconds": 1.0,
+      "max_body_bytes": 10000000,
+      "content_types": [
+        "application/json"
+      ]
+    },
+    "arxiv": {
+      "endpoint": "https://export.arxiv.org/api/query",
+      "source_policy_verified": true,
+      "policy_evidence_sha256": "a37778605f63821b820edc27b20ad5c859b05761d450980650336a4b8b727923",
+      "auth_mode": "anonymous",
+      "key_env": null,
+      "interval_seconds": 3.0,
+      "timeout_seconds": 30.0,
+      "max_retries": 2,
+      "backoff_seconds": 1.0,
+      "max_body_bytes": 10000000,
+      "content_types": [
+        "application/atom+xml",
+        "application/xml",
+        "text/xml"
+      ]
+    }
+  }
+}

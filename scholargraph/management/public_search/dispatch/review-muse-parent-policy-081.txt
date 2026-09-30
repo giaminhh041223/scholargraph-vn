@@ -1,0 +1,25 @@
+Bạn là reviewer độc lập MUSE cho delta cuối EXT-01A. Đây là phiên mới, không phải author. Dùng mức xhigh đã cấu hình. Đọc AGENTS.md của workspace/project và instructions liên quan; không tự giao backlog.
+
+Checkout của bạn: D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph.
+Target READ ONLY là parent D:/Web_mining_20261/scholargraph, không phải config cũ trong checkout:
+- configs/public_search.json
+- src/scholargraph/public_search/contracts.py và transport.py
+- tests/unit/test_public_contracts.py và test_public_transport.py
+- docs/public_search/CONTRACT.md, SOURCE_AUDIT.md
+- artifacts/reports/public_search/muse/source_audit.json
+- management/public_search/reviews/COORDINATOR/W0-R2-GATE.md
+- management/public_search/reviews/MUSE/EXT-01A-R2.md (history, không thay review mới)
+- management/public_search/policy-review-input-081.json (hashes để kiểm target bất biến).
+
+Scope review: config parent đổi version 1.0.0-audited, source_policy_verified=true với audit hash thật cho hai nguồn; auth anonymous/key_env=null; arXiv interval 3s. Test config negative false_verified vẫn giữ evidence hash để bắt mismatch, transport negative tạo verified=false/evidence=null và chứng minh không network. Những bản sửa code trước đã review PASS; chỉ mở lại nếu phát hiện risk thật của delta.
+
+Điều kiện: policy_verified chỉ là terms/access policy đã audit, không phải sustained quota hay pilot toàn luồng đã pass. OpenAlex vẫn CONDITIONAL, 429/retry thật và phần header/time không được chứng minh giữ unverified. Không nhận fake quota/counter. Hash trong config phải khớp byte audit actual, report audit và docs không mâu thuẫn điều kiện anonymous. Unverified config hợp lệ phải chặn network. Test adaptations không được che mất coverage.
+
+Gate đã bác hai finding lịch sử: không yêu cầu API key bắt buộc khi anonymous được phép; không yêu cầu factory store ở contracts.py (đúng module store.py của EXT-04A). Không lặp finding thiếu căn cứ. Nếu cần docs hiện tại, ghi link và căn cứ cụ thể; không gọi live API hoặc đọc key/qrels/labels/offline corpus.
+
+Bạn được chạy kiểm tra chỉ đọc và temporary adversarial fixtures ở thư mục TEMP hệ thống. Python dùng D:/Web_mining_20261/scholargraph/.venv/Scripts/python.exe; set PYTHONPATH=parent/src và kiểm import thực tế. Không cài dependency. Không sửa implementation/board/config của bất kỳ checkout. Nếu không chạy được thì ghi NOT_RUN, không giả PASS. Thu hash trước/sau.
+
+Output chỉ được ghi trong checkout của bạn:
+management/public_search/reviews/MUSE/EXT-01A-PARENT-POLICY-081.md
+management/public_search/logs/MUSE/REVIEW-PARENT-POLICY-081.md
+Report tiếng Việt: PASS hoặc FINDINGS, target hashes, test commands/results/exit, findings có path+line+reproducer hoặc none; limitation/provenance thực tế, không suy model từ prompt. Báo ngắn cuối: verdict, hai paths, session ID nếu có bằng chứng. Kết thúc lượt sau report, không mở task mới.

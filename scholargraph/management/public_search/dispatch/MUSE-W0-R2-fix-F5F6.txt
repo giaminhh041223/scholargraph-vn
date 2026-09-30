@@ -1,0 +1,5 @@
+EXT-01B R2 correction from independent SOL review. Same scope; no live requests, raw pilot immutable.
+
+F5 P1: validator currently allows a temp copy whose Atom body has no opensearch:totalResults because actual_tr stays None. The body must FAIL exit 1 when the required totalResults element is missing or empty, and audit totalResults must equal that parsed integer. Add an adversarial fixture/subprocess case that removes the element and proves exit 1.
+
+F6 P2: malformed numeric counters such as entries_returned='oops' currently raise uncaught ValueError traceback. Convert required numeric parsing/comparisons to fail(msg) with contextual FAIL output and exit1; add a fixture/subprocess case for nonnumeric counter. Do not catch all errors silently. Re-run real + all negative fixtures and update packet/log with exact results. Do not modify raw or old reports; final response <=8 lines.

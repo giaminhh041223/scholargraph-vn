@@ -1,0 +1,14 @@
+{
+  "name": "openalex_search",
+  "url": "https://api.openalex.org/works?search=mini&per-page=1",
+  "status": 429,
+  "elapsed_s": 0.5,
+  "bytes": 74,
+  "sha256": "90796ff1727dc347258d2451b9c151825899bc0c69d704500c34ff17ce84d8db",
+  "headers": {
+    "date": "Tue, 30 Sep 2026 00:00:00 GMT",
+    "content-type": "application/json",
+    "content-length": "74",
+    "retry-after": "33"
+  }
+}

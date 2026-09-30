@@ -1,8 +1,47 @@
+# Resume 081 — W0 parent policy review
+
+User requested continue. Prior pause revoked. EXT-01A remains REVIEW; MUSE fresh CLI review registered for parent policy/config/test delta. Inputs pinned by policy-review-input-081.json; targets remain immutable during review. W1 depends on this PASS and W0 freeze.
+
+# Checkpoint 080 — tạm dừng theo yêu cầu mới (2026-09-30T12:50:33.836835+07:00)
+
+- Tất cả worker author/reviewer đã kết thúc. Không dispatch thêm.
+- EXT-01B và EXT-01C DONE sau sửa và review độc lập PASS.
+- EXT-01A REVIEW: author fixes PASS; parent policy config/test delta chưa được MUSE review. W0 chưa freeze.
+- Parent code/tests/audit/UX và packets đã nhập; kiểm tra 111 contract/transport, 24 controller, source audit và UX validator PASS. Project checker exit0, 458 links.
+- Raw pilot local-only ở data/public_search/muse/source_pilot; không sửa bytes, không live request mới.
+- Bước executable sau khi user tiếp tục: review độc lập config policy và hai test adaptations trong parent, rồi freeze W0. Chưa mở W1.
+- [Gate checkpoint](reviews/COORDINATOR/W0-R2-GATE.md) · [Log 080](logs/SESSION-20260930-080-CODEX.md)
+
+## Lịch sử checkpoint (được thay thế bởi trạng thái ở trên)
+
 # Bàn giao điều phối phần mở rộng public search
 
 Ngày chuẩn bị: 2026-09-30. Nhánh điều phối: `codex/public-paper-search`.
 
+## Phiên 080 — đóng W0 R2 và tạm dừng theo user (2026-09-30T11:32:14.507259+07:00)
+
+- Ba author fixes R2 đã được nhập parent: SOL contract, MUSE source audit/validator/raw snapshot, GEMINI UX/validator.
+- Re-review độc lập PASS: MUSE cho EXT-01A và EXT-01C; SOL fresh-context cho EXT-01B sau F5/F6.
+- Coordinator checks: SOL 111 tests exit0; Muse positive exit0 + 7 negatives exit1 và hai temp reproducers F5/F6 exit1; Gemini 13 typed + 16 negative exit1 + title-only/benign positive.
+- Policy delta đã nhập config với evidence hash `a37778605f63821b820edc27b20ad5c859b05761d450980650336a4b8b727923`. OpenAlex vẫn CONDITIONAL; quota/runtime sustained chưa đo.
+- EXT-01A/B/C chuyển DONE với review PASS. W1 chưa dispatch. User yêu cầu tạm dừng sau đợt song song này; `pause_after_current_round=true`.
+- Gate: [W0-R2-GATE](reviews/COORDINATOR/W0-R2-GATE.md). Log: [SESSION-080](logs/SESSION-20260930-080-CODEX.md).
+
 ## Trạng thái thật
+
+### Phiên 080 — đang tiếp tục W0 R2 (2026-09-30T10:09:24.368313+07:00)
+
+- User “Hãy tiếp tục nhé” đã bỏ pause trước; ba worker được dispatch author fixes R2.
+- SOL chat turn01a0f03c-af42-7bc2-94fa-ec586bf28782 hoàn tất: code774aeef,
+  packet/logcb64c59, báo111 tests exit0. Task01A REVIEW; chưa re-review/freeze.
+- GEMINI sessione3622839-d0fe-425d-87f7-dbf06e7771ac runnerPASS; coordinator chạy
+  validator13 typed objects +6 negative CLIexit1. Ba mutation coverage/type vẫn
+  exit0 sai, đã dispatch followup file-only; chưa commit/finalacceptance.
+- MUSE author audit runner đang chạy, có file đang sửa; không dispatch reviewer
+  vào cùng checkout khi author chưa kết thúc.
+- Bước executable: thu Muse/Gemini completion, xác minh validators và files;
+  pin commits rồi reviewer độc lập. Không mở W1 trước W0 gate.
+- Root log: [080](logs/SESSION-20260930-080-CODEX.md); quyền ghi/dispatch tại board.
 
 ### Phiên 079 — ĐÃ TẠM DỪNG sau đợt song song theo người dùng
 
