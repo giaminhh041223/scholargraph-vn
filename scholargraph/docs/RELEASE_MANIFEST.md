@@ -1,7 +1,7 @@
 # RELEASE MANIFEST (SG-041) — generated, do not hand-edit
 
-Generated: 2026-09-29T09:31:05.089221+00:00 by verify_release.py (sg041-1.0.0). Re-run to regenerate.
-Git HEAD: `43193c763ef98b0ee576f3b014eeee410ffaf27d`. Python: `3.12.14`.
+Generated: 2026-09-30T00:08:48.830708+00:00 by verify_release.py (sg041-1.0.0). Re-run to regenerate.
+Git HEAD: `c2ba2c876cc75da15b28c72ece5ae7a13378afcb`. Python: `3.12.14`.
 Freeze: `configs/frozen_main.json` sha256 `34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557` (33 files re-hashed live).
 
 ## Environment lock
