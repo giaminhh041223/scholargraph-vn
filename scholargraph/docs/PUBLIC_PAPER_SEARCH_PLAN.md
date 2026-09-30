@@ -6,6 +6,7 @@
 - Phạm vi được giao trong phiên này: tạo nhánh và kế hoạch chi tiết.
 - Trạng thái: kế hoạch đã soạn; các chức năng dưới đây chưa triển khai, chưa đo.
 - Mã `EXT-01`..`EXT-10` là work package trong kế hoạch này, chưa phải task được đăng ký trên board `SG-NNN`.
+- Phân rã và giao ba worker ngày 2026-09-30: [task cards chi tiết](PUBLIC_PAPER_SEARCH_TASKS.md), [board extension](../management/public_search/tasks.json), [handoff extension](../management/public_search/HANDOFF.md). EXT IDs quản lý riêng trên nhánh, không đổi trạng thái SG core.
 
 ## 1. Mục tiêu và hiện trạng đã kiểm tra
 
@@ -141,7 +142,7 @@ API dự kiến:
 | Route | Chức năng |
 |---|---|
 | `GET /public` | Trang tìm trực tuyến, không khởi tạo index offline |
-| `GET /public/search` | Query, nguồn, khoảng năm, top_k; trả snapshot ID, hits và source statuses |
+| `GET /public/search` | Query, nguồn, khoảng năm, top_k, refresh; trả snapshot ID, hits và source statuses |
 | `GET /public/results/{snapshot_id}` | Đọc trang kết quả đã chốt |
 | `POST /public/library` | Lưu một bài có ID thuộc snapshot đã kiểm tra |
 | `GET /public/library` | Danh sách đã lưu |
@@ -151,11 +152,15 @@ Không nhận URL tùy ý để backend tải thay người dùng. Crawler B nh�
 
 Cache key gồm query, filters, nguồn, adapter/config version. TTL đề xuất 24 giờ; có fetched_at/expires_at. Cache quá hạn chỉ mở qua lựa chọn xem bản đã lưu và ghi `stale=true`; lỗi mạng không tự thay bằng cache cũ rồi báo thành công.
 
+Nút Làm mới gửi refresh=true, bỏ qua cache dù còn TTL và tạo snapshot mới; chỉ cập nhật cache pointer sau request thành công. Refresh lỗi báo failure và giữ bản cũ để người dùng chủ động mở, không trả bản cũ như search thành công. Refresh không thay logical cache key.
+
 Cache ghi transaction; raw payload/manifest ghi atomically. Hash sai hoặc schema version không đọc được phải báo FAIL. Thư viện lưu metadata để xem offline; không hứa đọc PDF offline khi chưa tải file.
+
+Store phải được khởi tạo bằng init-storage tường minh. Service mở store hiện có; mất DB hoặc raw đã được snapshot/library tham chiếu phải FAIL, không tự tạo thư viện rỗng. Init root mới tạo schema/marker hợp lệ; init lại chỉ idempotent khi store hợp lệ, không ghi đè store hỏng/còn evidence mất DB.
 
 ### Chính sách FAIL rõ ràng
 
-- Source status phân biệt: `success`, `empty`, `failed`, `not_requested`. Response overall: `success` chỉ khi tất cả nguồn được chọn thành công; `partial_failure`/`failed` kèm error cụ thể khi có nguồn lỗi.
+- Source status: `success`, `empty`, `failed`, `not_requested`. Overall: tất cả nguồn selected hoàn tất và có hit sau filter → `success`; tất cả hoàn tất không hit → `empty`; một phần nguồn lỗi và còn nguồn hoàn tất kể cả empty → `partial_failure`; tất cả selected lỗi → `failed`. Không có source selected là request invalid. Truth table/examples/tests chốt trong contract; success/empty HTTP200 CLI0, partial_failure/failed non-2xx CLI1.
 - HTTP upstream timeout trả 504; lỗi upstream/schema trả 502; quota trả 503 kèm retry info; request nội bộ sai trả 422; lỗi storage trả 500. Khi nhiều lỗi, ưu tiên theo quy tắc ghi trong contract.
 - Nếu một nguồn thành công và một nguồn lỗi, payload có thể chứa kết quả đã lấy để người dùng xem, nhưng HTTP vẫn non-2xx và UI hiển thị rõ chưa tìm đủ nguồn. CLI tương ứng bắt buộc exit **1**.
 - Response hợp lệ với 0 kết quả là `empty`, không phải giả lập lỗi mạng thành rỗng.
@@ -167,7 +172,7 @@ Giới hạn vận hành **đề xuất để pilot**, không phải giới hạ
 
 ## 7. Các work package và nghiệm thu
 
-Ước lượng giờ triển khai/kiểm thử với agent hỗ trợ dưới đây là dự trù, không phải cam kết thời gian chạy hay số giờ đã làm. Thực hiện tuần tự với một worker mặc định.
+Ước lượng sơ bộ bên dưới là bản trước phân công, không phải giờ đã làm. Lịch và ownership hiện hành theo [bộ task ba worker](PUBLIC_PAPER_SEARCH_TASKS.md); người dùng đã cung cấp SOL/GEMINI/MUSE để làm song song theo dependencies và review chéo.
 
 | Mã | Phụ thuộc | Việc và đầu ra | Tiêu chí nghiệm thu | Giờ dự trù |
 |---|---|---|---|---|
@@ -182,7 +187,7 @@ Giới hạn vận hành **đề xuất để pilot**, không phải giới hạ
 | EXT-09 (B) | EXT-08 | Crossref enrichment | DOI lookup, provenance/xung đột/rate limit/CLI FAIL được kiểm tra | 4–6 |
 | EXT-10 (B) | EXT-08 + site audit | Một crawler HTML có allowlist/config/parser | Crawl có budget/resume, raw HTML/hash; robots/redirect/parser change FAIL; end-to-end site thật | 6–10 |
 
-Tổng MVP A: **32–47 giờ công dự trù**. Giai đoạn B: thêm **10–16 giờ**. Dự kiến chia MVP thành 4–6 phiên triển khai/kiểm thử tùy độ dài phiên và khả dụng API; không suy ra ngày hoàn thành từ số phiên.
+Tổng sơ bộ MVP A: 32–47 giờ. Sau phân rã contract freeze, review chéo và sửa, dự trù hiện hành là **39–62 giờ công** theo bộ task ba worker, chia W0–W6. B thêm **10–16 giờ**. Không suy ra ngày hoàn thành từ số đợt hoặc tổng giờ công.
 
 Mốc review:
 
@@ -224,7 +229,7 @@ Chất lượng relevance nếu chấm thủ công thì lưu judgments/protocol 
 - Các commit triển khai nhỏ theo EXT-01..08; chỉ sửa bên trong `scholargraph/`.
 - Raw/cache/SQLite/key không commit; cập nhật ignore đúng scope khi triển khai. Fixture sạch và source audit có thể commit với nhãn provenance rõ.
 - Trước mỗi phiên kiểm tra Git, file đang thay đổi và tiến trình thực tế. Không coi timestamp cũ là quyền chiếm task SG-030/033.
-- Khi bắt đầu implementation, coordinator đăng ký SG IDs/task cards/routing phù hợp và chuyển các work package được giao sang board; chưa claim cả backlog trong phiên lập kế hoạch.
+- Khi bắt đầu implementation, coordinator extension đăng ký owner/session thật trên board EXT riêng và chỉ claim card đủ dependency. Khi nhập vào lịch core, coordinator main ánh xạ SG IDs/routing phù hợp bằng decision thật; không ép model ngoại vào catalog main để vượt checker.
 - Do registry vẫn có coordinator C và assignments SG-030/033, phiên này ghi kế hoạch/log riêng, không sửa trạng thái các task hiện có. Không tạo chat/agent/automation từ bảng phân việc.
 - Review độc lập cần phiên/context có thật nếu task được đặt gate đó; self-check phải ghi đúng là self-check. Không bịa reviewer hoặc human approval.
 - Trước tích hợp: M4 đạt, kiểm tra regression và freeze hash, người dùng xem demo mới, ghi quyết định phạm vi tích hợp. Merge vào `master` là bước sau kế hoạch này.
