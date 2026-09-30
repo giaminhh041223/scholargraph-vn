@@ -78,6 +78,20 @@ delta trước W1. Lời gọi kiểm tra kênh chỉ yêu cầu trả nonce.
 Công cụ này dùng khi coordinator đang chạy. `scheduler_enabled=false`; chưa có
 vòng chạy nền khi chat/app đã dừng.
 
+## Mức suy luận và quyền ở phiên 079
+
+- Sol `high` theo user; Gemini Flash High `high` là mức cao nhất của model này
+  (thử `max` bị runtime reject/conflict); Muse free `xhigh` là variant cao nhất
+  trong catalog đã đọc. Runner truyền explicit effort/variant, không dùng prompt
+  “suy nghĩ kỹ” thay setting runtime.
+- OpenCode work mode cấp quyền đọc input ScholarGraph và edit chỉ allowed_write_paths
+  của assignment hiện tại trong channels.json qua process config; không đổi global.
+- Antigravity headless soft-deny command theo settings mặc định. Với lượt UX hiện tại,
+  agent dùng file tools; coordinator đọc/thực thi validator và commit, packet ghi
+  NOT_RUN khi agent chưa chạy. Không claim status SUCCESS/CLI0 là task đã hoàn tất
+  khi có denied_actions hoặc response rỗng.
+- User yêu cầu tạm dừng sau đợt này; không tự dispatch khi pause flag đang bật.
+
 Nguồn hướng dẫn CLI: [Antigravity headless](https://antigravity.google/docs/cli/headless/),
 [OpenCode CLI](https://opencode.ai/docs/cli/),
 [OpenCode providers](https://opencode.ai/docs/providers/).

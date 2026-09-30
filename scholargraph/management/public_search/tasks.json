@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T08:55:20.713446+07:00",
+  "updated_at": "2026-09-30T09:36:09.827209+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "w0_delivered_direct_channels_ready",
+  "mode": "paused_after_w0_r1_by_user",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -46,7 +46,7 @@
       "worker_execution_session_id": "SESSION-20260930-W0-GEMINI-EXT-01C",
       "session_kind": "coordinator_issued_dispatch",
       "worker_execution_session_kind": "worker_reported_log_id",
-      "delivered_head": "78177a8dce76322e43692dbe0ad90b4b70ba78b7",
+      "delivered_head": "cc51ef8b714ae975d731e082cdbff239d9717508",
       "channel_config": "management/public_search/channels.json"
     },
     "MUSE": {
@@ -75,7 +75,7 @@
       "task_id": "EXT-01A",
       "worker": "SOL",
       "dispatch_id": "DISPATCH-20260930-W0-SOL",
-      "state": "delivered_awaiting_review",
+      "state": "stopped_awaiting_user_resume",
       "start_authorized": true,
       "session_id": "DISPATCH-20260930-W0-SOL",
       "coordinator_session_id": "DISPATCH-20260930-W0-SOL",
@@ -100,7 +100,7 @@
       "task_id": "EXT-01C",
       "worker": "GEMINI",
       "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
-      "state": "delivered_awaiting_review",
+      "state": "stopped_awaiting_user_resume",
       "start_authorized": true,
       "session_id": "DISPATCH-20260930-W0-GEMINI",
       "coordinator_session_id": "DISPATCH-20260930-W0-GEMINI",
@@ -120,7 +120,7 @@
       "task_id": "EXT-01B",
       "worker": "MUSE",
       "dispatch_id": "DISPATCH-20260930-W0-MUSE",
-      "state": "delivered_awaiting_review",
+      "state": "stopped_awaiting_user_resume",
       "start_authorized": true,
       "session_id": "DISPATCH-20260930-W0-MUSE",
       "coordinator_session_id": "DISPATCH-20260930-W0-MUSE",
@@ -166,7 +166,17 @@
       "dispatch_state": "delivered_awaiting_review",
       "session_kind": "coordinator_issued_dispatch",
       "worker_execution_session_id": "SESSION-20260930-SOL-01",
-      "delivered_head": "93f8c75e7599a96598f36421254608f3ccb081fc"
+      "delivered_head": "93f8c75e7599a96598f36421254608f3ccb081fc",
+      "review_verdict": "CHANGES_REQUIRED_AFTER_COORDINATOR_TRIAGE",
+      "review_evidence": [
+        "D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph/management/public_search/reviews/MUSE/EXT-01A-R1.md",
+        "management/public_search/reviews/COORDINATOR/W0-R1-GATE.md"
+      ],
+      "unresolved_findings": [
+        "P2-1 not_requested filter_coverage invariant",
+        "P2-2 document cross-process/machine arxiv coordination"
+      ],
+      "next_action": "After user resumes: SOL fixes two accepted P2 and re-review; two reviewer P1 findings rejected with evidence"
     },
     {
       "id": "EXT-01B",
@@ -191,7 +201,18 @@
       "dispatch_state": "delivered_awaiting_review",
       "session_kind": "coordinator_issued_dispatch",
       "worker_execution_session_id": "DISPATCH-20260930-W0-MUSE",
-      "delivered_head": "8cee172edd2b295b95ec06323efbb6b900a11371"
+      "delivered_head": "8cee172edd2b295b95ec06323efbb6b900a11371",
+      "review_verdict": "CHANGES_REQUIRED",
+      "review_evidence": [
+        "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph/management/public_search/reviews/SOL/EXT-01B-R1.md"
+      ],
+      "unresolved_findings": [
+        "F1 arxiv audit sha256 mismatch",
+        "F2 auth scheme ungrounded keyed-probe gate",
+        "F3 retry request metadata/timing missing",
+        "F4 DOI claim vs actual 0/2 coverage"
+      ],
+      "next_action": "After user resumes: MUSE fix F1-F4 then SOL re-review; no dispatch while paused"
     },
     {
       "id": "EXT-01C",
@@ -202,7 +223,7 @@
       "dependencies": [],
       "session_id": "DISPATCH-20260930-W0-GEMINI",
       "evidence": [
-        "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph/management/public_search/packets/GEMINI/EXT-01C-SESSION-20260930-W0-GEMINI.md"
+        "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph/management/public_search/packets/GEMINI/EXT-01C-R1.md"
       ],
       "dispatch_id": "DISPATCH-20260930-W0-GEMINI",
       "owner": "GEMINI",
@@ -215,7 +236,13 @@
       "dispatch_state": "delivered_awaiting_review",
       "session_kind": "coordinator_issued_dispatch",
       "worker_execution_session_id": "SESSION-20260930-W0-GEMINI-EXT-01C",
-      "delivered_head": "78177a8dce76322e43692dbe0ad90b4b70ba78b7"
+      "delivered_head": "cc51ef8b714ae975d731e082cdbff239d9717508",
+      "review_invalidated_reason": "Reconcile provisional examples with proposed SOL typed contract before independent UX review",
+      "review_verdict": "COORDINATOR_VALIDATION_CHANGES_REQUIRED",
+      "review_evidence": [
+        "management/public_search/reviews/COORDINATOR/EXT-01C-R1-VALIDATION.md"
+      ],
+      "next_action": "After user resumes: fix runnable validator/negative CLI/packet then independent MUSE UX review"
     },
     {
       "id": "EXT-02",
@@ -416,5 +443,79 @@
       "actual_model": null,
       "worker_execution_session_id": "DISPATCH-20260930-W0-MUSE"
     }
-  ]
+  ],
+  "current_round_assignments": [
+    {
+      "id": "REV-W0-01B-R1-SOL",
+      "worker": "SOL",
+      "role": "reviewer",
+      "task_id": "EXT-01B",
+      "state": "completed",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "target_head": "8cee172",
+      "report_path": "management/public_search/reviews/SOL/EXT-01B-R1.md",
+      "execution_session_id": "/root/review_source_audit_r1",
+      "session_kind": "collaboration_fresh_agent",
+      "verdict": "CHANGES_REQUIRED",
+      "report_commit": "f6582d985e0be2555d8368716d82a0766d16ffc9",
+      "report_absolute_path": "D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph/management/public_search/reviews/SOL/EXT-01B-R1.md",
+      "findings": {
+        "P1": 1,
+        "P2": 3
+      }
+    },
+    {
+      "id": "REV-W0-01A-R1-MUSE",
+      "worker": "MUSE",
+      "role": "reviewer",
+      "task_id": "EXT-01A",
+      "state": "completed",
+      "requested_model": "opencode/muse-spark-1.3-contributor-free",
+      "requested_effort": "xhigh",
+      "target_head": "93f8c75",
+      "report_path": "management/public_search/reviews/MUSE/EXT-01A-R1.md",
+      "execution_session_id": "ses_f0feb3bd7ffe8nVzTrg1uiQWy0",
+      "failed_run_evidence": "data/public_search/control/runs/c03402b8-8f84-4ba1-8dd7-33f57e21daf2/summary.json",
+      "runtime_model_evidence": "Local CLI SQLite session.model and message variant=xhigh",
+      "run_id": "3b2793a1-6d2b-435a-a5c5-7eeaa9c58ccc",
+      "verdict": "CHANGES_REQUIRED",
+      "report_commit": "9f7066960b068b519b0799210035761a21b23fae",
+      "report_absolute_path": "D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph/management/public_search/reviews/MUSE/EXT-01A-R1.md",
+      "accepted_findings": [
+        "P2-1 not_requested filter_coverage",
+        "P2-2 arxiv cross-process policy limitation"
+      ],
+      "rejected_findings": [
+        "P1-1 Bearer unsupported premise false",
+        "P1-2 factories imported from wrong module"
+      ]
+    },
+    {
+      "id": "FIX-W0-01C-R1-GEMINI",
+      "worker": "GEMINI",
+      "role": "author",
+      "task_id": "EXT-01C",
+      "state": "delivered_with_validation_failures",
+      "requested_model": "gemini-3.8-flash-high",
+      "requested_effort": "high",
+      "target_head": "78177a8",
+      "packet_path": "management/public_search/packets/GEMINI/EXT-01C-R1.md",
+      "execution_session_id": "c9a347d3-74ca-449a-aeb9-6736122be32a",
+      "failed_run_evidence": "data/public_search/control/runs/6d700de1-a256-4b46-bec3-2ca0b64cb965/summary.json",
+      "effort_reconciliation": "max conflicts with exact Flash High model; runtime high is highest supported",
+      "denied_turn_evidence": "data/public_search/control/runs/3e0861e7-1316-4ebe-92fd-08ee6ddf1cc4/summary.json",
+      "coordinator_runs_validator_and_commits": true,
+      "verdict": "CHANGES_REQUIRED",
+      "delivered_head": "cc51ef8b714ae975d731e082cdbff239d9717508",
+      "agent_run_id": "fe80edf0-d827-41b9-9279-640d8a40dcea",
+      "agent_run_status": "ERROR output token limit",
+      "validator_exit_code": 1,
+      "typed_json_positive_pass": 12,
+      "typed_json_expected_invalid": 1,
+      "coordinator_validation_report": "management/public_search/reviews/COORDINATOR/EXT-01C-R1-VALIDATION.md"
+    }
+  ],
+  "pause_after_current_round": true,
+  "paused_at": "2026-09-30T09:36:09.827209+07:00"
 }

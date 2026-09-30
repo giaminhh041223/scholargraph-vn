@@ -4,6 +4,27 @@ Ngày chuẩn bị: 2026-09-30. Nhánh điều phối: `codex/public-paper-searc
 
 ## Trạng thái thật
 
+### Phiên 079 — ĐÃ TẠM DỪNG sau đợt song song theo người dùng
+
+- User yêu cầu làm bước tiếp theo với ba agents, Sol high, Gemini/Muse mức cao nhất.
+  Gemini Flash High từ chối max, đã dùng high (cao nhất của đúng model); MUSE free xhigh.
+- SOL fresh agent đã review EXT-01B: CHANGES_REQUIRED, report/log commit f6582d9
+  trong checkout SOL; 1P1 hash arXiv và 3P2 auth/timing/DOI narrative. Chưa sửa audit.
+- MUSE đã giao report/log review01A tại commit 9f70669; còn hai P2 được gate giữ.
+  Hai P1 của reviewer bị bác: OpenAlex hỗ trợ Bearer; store factories được spec
+  đặt trong store.py chưa triển khai, không phải contracts.py.
+- GEMINI ghi sáu UX/fixture outputs, coordinator checkpoint commit cc51ef8. Agent
+  terminal ERROR/output token limit; validator CLI1. Typed JSON checks 12PASS +1
+  expected invalid không thay validator/negative acceptance.
+- **pause_after_current_round=true**: chỉ thu ba outputs đã giao rồi checkpoint/dừng.
+  Cả ba agents đã kết thúc lượt, không process điều phối dài còn chạy. Không dispatch
+  fixes, UX review/re-review hoặc W1 trước khi người dùng tiếp tục.
+- Kết luận [gate W0 R1](reviews/COORDINATOR/W0-R1-GATE.md) và
+  [UX validation](reviews/COORDINATOR/EXT-01C-R1-VALIDATION.md). Cả ba task REVIEW,
+  chưa DONE/freeze. Implementation chưa nhập parent branch.
+- Runtime IDs/owned paths/verdicts tại current_round_assignments trong board;
+  [log 079](../logs/SESSION-20260930-079-CODEX.md). Main human gates giữ nguyên.
+
 ### Checkpoint mới nhất — thiết lập kênh trực tiếp, phiên 078
 
 - SOL/GEMINI/MUSE đã có packet và commit W0 trong ba checkout sạch; board ghi
@@ -37,7 +58,7 @@ Ngày chuẩn bị: 2026-09-30. Nhánh điều phối: `codex/public-paper-searc
 
 Các EXT là task extension trong board riêng, không phải SG đã đăng ký ở board main. Khi tích hợp vào lịch core, coordinator main ánh xạ sang SG IDs và routing được hỗ trợ bằng quyết định có thật. Không tạo SG IDs giả hoặc ép tên model ngoại vào schema main để vượt checker.
 
-## Bước khởi động
+## Bước khởi động W0 trước phiên 079 (lịch sử; không chạy lại khi đang pause)
 
 **Setup đã hoàn tất:** worker đọc [dispatch SOL](dispatch/SOL-W0.md), [GEMINI](dispatch/GEMINI-W0.md), [MUSE](dispatch/MUSE-W0.md), ACK/log rồi bắt đầu card W0 được cấp. Không chờ bước tạo worktree nữa. Python W0 dùng runtime root read-only với PYTHONPATH source riêng, đã kiểm cả ba.
 

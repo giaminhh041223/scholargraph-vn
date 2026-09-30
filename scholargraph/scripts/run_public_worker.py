@@ -16,6 +16,8 @@ def parse_response(worker, output):
         result = json.loads(output)
         if result["status"] != "SUCCESS":
             raise ValueError("Antigravity turn failed")
+        if "denied_actions" in result and result["denied_actions"]:
+            raise ValueError("Antigravity required action was denied")
         session, response = result["conversation_id"], result["response"]
     else:
         events = []
@@ -73,6 +75,11 @@ def main():
         model = channel["model_id"]
         if not isinstance(model, str) or not model.strip():
             raise ValueError("Model ID missing")
+        effort = channel["reasoning_effort"]
+        supported = {"GEMINI": {"low", "medium", "high", "max"},
+                     "MUSE": {"minimal", "low", "medium", "high", "xhigh"}}
+        if effort not in supported[args.worker]:
+            raise ValueError("Unsupported reasoning effort for configured channel")
         nonce = "SCHOLARGRAPH_" + args.worker + "_CHANNEL_OK"
         prompt = ("Do not use tools, read files, run commands, or modify anything. Reply exactly " + nonce + "."
                   if args.smoke else args.prompt_file.read_text(encoding="utf-8-sig"))
@@ -80,7 +87,8 @@ def main():
             raise ValueError("Prompt must be nonempty and at most 16000 characters")
         env = os.environ.copy()
         if args.worker == "GEMINI":
-            command = [str(executable), "--model", model, "--mode",
+            command = [str(executable), "--model", model, "--effort", effort,
+                       "--add-dir", str(ROOT), "--mode",
                        "plan" if args.mode == "plan" else "accept-edits",
                        "--output-format", "json", "--print-timeout", str(args.timeout) + "s"]
             if args.session:
@@ -99,14 +107,33 @@ def main():
                 if "OPENCODE_CONFIG_CONTENT" in env:
                     raise ValueError("Resolve existing process config override before dispatch")
                 # Reuse saved auth in memory; do not copy keys into the project runtime.
-                env["OPENCODE_CONFIG_CONTENT"] = json.dumps({"provider": {"opencode": {"options": {"apiKey": credential["key"]}}}})
-            command = [str(executable), "run", "--pure", "--model", model,
+                overrides = {"provider": {"opencode": {"options": {"apiKey": credential["key"]}}}}
+                if args.mode == "work":
+                    write_paths = channel["allowed_write_paths"]
+                    if not isinstance(write_paths, list) or not write_paths:
+                        raise ValueError("Authorized write paths missing")
+                    edits = {"*": "deny"}
+                    for relative in write_paths:
+                        resolved = (cwd / relative).resolve()
+                        if not resolved.is_relative_to(cwd):
+                            raise ValueError("Authorized write path escapes worker checkout")
+                        edits[str(resolved) + ("\\*" if relative.endswith("/") else "")] = "allow"
+                        edits[resolved.as_posix() + ("/*" if relative.endswith("/") else "")] = "allow"
+                    overrides["permission"] = {
+                        "external_directory": {"*": "deny", str(ROOT) + "\\*": "allow", ROOT.as_posix() + "/*": "allow"},
+                        "edit": edits,
+                        "read": {"*": "allow", "*.env": "deny", "*.env.*": "deny", "*qrels*": "deny", "*labels*": "deny"},
+                        "bash": {"*": "allow", "git push*": "deny", "git reset --hard*": "deny", "rm -rf*": "deny"},
+                        "task": "deny", "question": "deny", "webfetch": "deny", "websearch": "deny"}
+                env["OPENCODE_CONFIG_CONTENT"] = json.dumps(overrides)
+            command = [str(executable), "run", "--pure", "--model", model, "--variant", effort,
                        "--agent", "plan" if args.mode == "plan" else "build", "--format", "json"]
             if args.session:
                 command += ["--session", args.session]
             command += [prompt]
         run_dir = ROOT / "data/public_search/control/runs" / str(uuid.uuid4())
         summary = {"worker": args.worker, "requested_model_id": model, "mode": args.mode,
+                   "requested_reasoning_effort": effort,
                    "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(), "status": "RUNNING"}
         run_dir.mkdir(parents=True, exist_ok=False)
         (run_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

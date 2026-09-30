@@ -28,6 +28,7 @@ def test_valid_responses():
     ("GEMINI", '{"status":"SUCCESS","conversation_id":"a","response":""}'),
     ("GEMINI", '{"status":"SUCCESS","conversation_id":null,"response":"ACK"}'),
     ("GEMINI", "{malformed}"),
+    ("GEMINI", '{"status":"SUCCESS","conversation_id":"a","response":"DONE","denied_actions":[{"action":"command"}]}'),
     ("MUSE", "banner only"),
     ("MUSE", '{"type":"error","sessionID":"a"}'),
     ("MUSE", '{"type":"text","sessionID":"a","part":{"text":"ACK"}}'),
@@ -53,7 +54,7 @@ def test_cli_bad_input_exits_one(tmp_path, options):
     assert json.loads(result.stderr)["status"] == "FAIL"
 
 
-@pytest.mark.parametrize("case", ["no_config", "missing_model", "missing_executable", "wrong_checkout", "zero_exit_error"])
+@pytest.mark.parametrize("case", ["no_config", "missing_model", "missing_effort", "invalid_effort", "missing_executable", "wrong_checkout", "zero_exit_error"])
 def test_required_resources_and_zero_exit_error(tmp_path, monkeypatch, capsys, case):
     monkeypatch.setattr(control, "ROOT", tmp_path)
     monkeypatch.setattr(sys, "argv", [str(SCRIPT), "--worker", "GEMINI", "--smoke"])
@@ -61,9 +62,13 @@ def test_required_resources_and_zero_exit_error(tmp_path, monkeypatch, capsys, c
     project.mkdir(parents=True)
     executable = tmp_path / "fake.exe"
     executable.touch()
-    channel = {"model_id": "fixture-model", "executable": str(executable), "project_root": str(project)}
+    channel = {"model_id": "fixture-model", "reasoning_effort": "max", "executable": str(executable), "project_root": str(project)}
     if case == "missing_model":
         del channel["model_id"]
+    elif case == "missing_effort":
+        del channel["reasoning_effort"]
+    elif case == "invalid_effort":
+        channel["reasoning_effort"] = "unsupported"
     elif case == "missing_executable":
         executable.unlink()
     elif case == "wrong_checkout":
@@ -81,6 +86,8 @@ def test_required_resources_and_zero_exit_error(tmp_path, monkeypatch, capsys, c
 
     def launch(*args, **kwargs):
         assert case == "zero_exit_error", "Must fail before starting a process"
+        command = args[0]
+        assert command[command.index("--effort") + 1] == "max"
         return FailedTurn()
 
     monkeypatch.setattr(control.subprocess, "Popen", launch)
