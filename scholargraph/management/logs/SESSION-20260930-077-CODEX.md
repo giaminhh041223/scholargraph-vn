@@ -19,7 +19,7 @@
 - Continuity checker root exit0: 53 tasks core, 442 local Markdown links PASS; cảnh báo SG-034 chờ SG-033 giữ nguyên.
 - Kiểm dispatch: PASS ba checkout/branch thật, ba quyền W0, owner/session/log/claimed_paths khớp, không overlap, runtime execution chưa bịa.
 - `git diff --check` phát hiện CRLF do JSON writer; đã chuẩn hóa LF hai JSON của extension và chạy lại exit0. Không sửa EOL/hash core.
-- Fast-forward các checkout tới commit dispatch sẽ được kiểm sau commit.
+- Đã commit setup/dispatch `14c731c`, fast-forward cả ba worker checkout từ 46328b2 tới 14c731c. Kiểm từng copy board/start_authorized/session/path dispatch PASS; Git worktree list xác nhận bốn checkout và branch đúng. Không xác nhận worker đã ACK/chạy code.
 
 ## Tiếp tục
 
