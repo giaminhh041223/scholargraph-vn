@@ -1,3 +1,15 @@
+# W1 081 — sửa race SQLite phát hiện lúc tích hợp
+
+- EXT-02/03 DONE. EXT-04A IN_PROGRESS R4: parent combinedsuite crash accessviolation -1073741819 khi close và metadata verification cùng connection; chưa tổng kết361tests, khôngPASS.
+- Bằng chứng parent-w1-final.log (control/w1-081) và gate COORDINATOR/EXT-04A-R3-CONCURRENCY-GATE-081.md. MuseR4 runner36193/session ses_f0ea2fb52ffeXlJNnX5Xk3iiHT đang sửa; khôngreviewtargetđangviết.
+- Next: thuR4, focusedtests+deterministicconcurrencycase, pin; SOL originalstoragefreshreviewcontext re-reviewdelta; sauPASS mớiretrycombinedsuite/freeze. NoW2dispatch.
+
+# W1 081 — SOL review storage cuối
+
+- EXT-02/03 DONE; EXT-04A REVIEW: MuseR3 6b33c8f/43testsPASS + faultCLI1. Không writer nào đang sửa target.
+- Gemini R3 hai attemptsFAIL do eligibilitycheck cần Google profilehost nhưng TCPtimeout; không có R3output, không tựPASS. FreshSOL6.1/high child /root/review_storage_r3_081 được giao finalstorage review, ghi report/log riêng.
+- Bước tiếp: SOLPASS -> importexactstorage, combinedsuite và freezeW1; nếu findings trảMusefix. NoW2dispatch.
+
 # W1 081 — storage R3 theo gate chống nuốt lỗi
 
 - EXT-02/03 DONE; parentadapters287testsPASS. EXT-04A IN_PROGRESS: Gemini R2PASS choF1-F3, nhưng coordinatorfaultinjection thấy closefailureCLI0 và evidenceenumerationfallbackFalse.

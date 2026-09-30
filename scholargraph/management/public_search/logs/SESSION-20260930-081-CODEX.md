@@ -99,3 +99,15 @@
 
 - MUSE R3 CLI0/actual43testsPASS (40prior+3new), pinned6b33c8fe1f5817d38960ac6db29ac62af899da3b. Faultcollector confirms structuredcloseFAIL/closedfalse/CLI1/emptyVALIDoutput andevidenceFAIL. No DBrebuild; temp sentinelbytesasserted.
 - GEMINI originalreviewcontext assignedR3 runner55718; noauthorwriting target. OldR2probe checks2functionalbugs+RawIDonly, notclosefailure. Earlier timeout/blockedwrite and originalprobeWindowscleanupfailure preserved.
+
+- Gemini resumeR3 attempt34851234 returnedERROR/process1, noR3reviewfiles. No500/INTERNAL markers in diagnostics; specificreason unverified. PreserveFAIL, freshsameGeminiHigh/high reviewerretry23619; no model fallback, pinnedMUSE6b33c8f unchanged.
+
+## Reviewer reassignment 2026-09-30T15:52:49.952389+07:00
+
+- BothGemR3resume34851234/fresh309bcfd9 actualERROR/process1. Diagnostics reason verified: eligibilitycheck cannot fetch Googleprofilehost dueTCPconnect timeout; noR3reviewoutputs. Notmodelquota or500. No provider/account settings changed.
+- Coordinator explicitly reassigns finalR3review freshSOL6.1/high /root/review_storage_r3_081, useralreadyallowed workercoordination/models. Gemini priorR1/R2reviewoutputs retained; no claimGemR3PASS/no silentmodel substitution inGemchannel. Actualread-onlyMusemetadata R2/R3session exactfree/xhigh; noactiveauthor.
+
+## Integration concurrency failure 2026-09-30T16:05:11.956229+07:00
+
+- FreshSOLstorageR3PASS report/loghashverified; imported8storagefilesexact. Parentcombinedsuite attemptCRASH/-1073741819 Windowsaccessviolation; no finalpassed/failedcounts, not361PASS. Stackconnclose621 versusmetadata213/_verify_store241/list_library569 outside lock. No persistentdata modified, tests temp/synthetic.
+- R4author sameMuseverifiedcontext runner36193 assignedfullsharedconnectionlocking anddeterministicregression, R3PASS histories kept. FreshSOLreviewer notified actualfatal finding; no newtargetreview beforepin. Parentstoragecodecurrently importedR3 and acceptanceincomplete; nofreezeW1/noW2.

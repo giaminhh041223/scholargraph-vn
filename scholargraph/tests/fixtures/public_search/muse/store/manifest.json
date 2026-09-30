@@ -1,0 +1,1 @@
+{"contract_version": "1.0.0", "description": "Synthetic store fixtures for EXT-04A, no live data", "files": ["special_chars.json"], "schema_version": 1, "synthetic": true}

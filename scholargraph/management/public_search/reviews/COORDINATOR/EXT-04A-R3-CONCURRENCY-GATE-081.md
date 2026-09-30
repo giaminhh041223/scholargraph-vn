@@ -1,0 +1,7 @@
+# Gate tích hợp R3 — P1 concurrency crash
+
+- Parent combined W1 suite chưa PASS: process bị Windows access violation, exit `-1073741819`; không có tổng kết test hoàn tất. Log nguyên: `data/public_search/control/w1-081/parent-w1-final.log`.
+- Stack trace thực: thread closer đang `store.py:621 connection.close()`, thread reader đang `store.py:213 _verify_metadata()` qua `_verify_store` và `list_library:569`. `_verify_store` nằm trước `with self._lock`, nên lock trong close chưa bảo vệ toàn bộ sử dụng connection.
+- Target MUSE `6b33c8f` vẫn bất biến; parent nhập exact bytes. Review SOL R3 đã PASS các ca được chạy và ghi giới hạn concurrency bounded; crash mới là evidence cụ thể để mở lại acceptance, không xóa lịch sử PASS trước.
+- Yêu cầu R4: serialize mọi sử dụng shared SQLite connection và close bằng cùng lock, kiểm trạng thái mở bên trong lock. Bao gồm `_verify_store`, execute/fetch/transaction và các public methods gọi lồng nhau. Có thể dùng RLock để tránh deadlock cho save_paper/read_snapshot/export/list calls. Không chỉ chuyển một dòng lỗi đã thấy trong list_library rồi bỏ các nhánh cùng dạng.
+- Giữ API/schema/idempotence và lỗi tài nguyên R3; không nuốt exception, không bỏ test concurrency. Thêm regression điều khiển interleaving kiểm metadata so với close (temp/subprocess, không làm crash coordinator). Chạy lại suite focused và gate tích hợp trên bản sửa, reviewer SOL kiểm delta.
