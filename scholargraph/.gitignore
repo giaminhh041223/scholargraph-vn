@@ -29,6 +29,8 @@ artifacts/reports/*
 # Downloaded model/tokenizer cache is reproducible and too large for Git
 artifacts/cache/
 
-# Temporary pilot downloads
+# Temporary pilot downloads & generated labeling kit bundle
 tmp/
 *.tmp
+artifacts/vn_labeling_kit_SG033/
+artifacts/vn_labeling_kit_SG033.zip
