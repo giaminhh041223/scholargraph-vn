@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T16:55:10.814044+07:00",
+  "updated_at": "2026-09-30T16:57:19.905563+07:00",
   "stage": "w1_completed_reviewed",
   "active_tasks": [],
   "authorized_tasks": [
@@ -42,15 +42,15 @@
       "negative_exit_code": 1
     },
     "worker_heads": {
-      "SOL": "cb64c59",
-      "MUSE": "9f70669-working-tree",
-      "GEMINI": "cc51ef8-working-tree"
+      "SOL": "5c41e37da38577a16dbedec18afd94b149647575",
+      "GEMINI": "51cdef56b797cad42ea71a36e90536f780207c4d",
+      "MUSE": "4fdff57bea0096873929d36e2f975a235e1088e2"
     },
     "process_check": "No author/reviewer CLI controller process after workers closed; SOL appchat idle",
     "core_checker": {
       "exit_code": 0,
       "task_count": 53,
-      "markdown_links": 481
+      "markdown_links": 497
     },
     "w1_combined_tests": {
       "passed": 362,
@@ -72,7 +72,7 @@
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/W0-R2-GATE.md",
+  "gate_report": "management/public_search/reviews/COORDINATOR/W1-FINISH-081.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
   "next_task_id": "EXT-04B",
   "w0_freeze": {
@@ -83,5 +83,15 @@
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"
+  },
+  "w1_synchronized_checkouts": {
+    "anchor": "c8686c8a4b8c4758bf63f0a1adefa189ecfa4635",
+    "heads": {
+      "SOL": "5c41e37da38577a16dbedec18afd94b149647575",
+      "GEMINI": "51cdef56b797cad42ea71a36e90536f780207c4d",
+      "MUSE": "4fdff57bea0096873929d36e2f975a235e1088e2"
+    },
+    "verified_w0_files": 14,
+    "verified_w1_files": 31
   }
 }
