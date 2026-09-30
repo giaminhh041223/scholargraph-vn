@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "round": "W1",
+  "accepted_at": "2026-09-30T16:55:10.814044+07:00",
+  "anchor_commit_before_freeze": "417ab73012b5e7464e17a79cc60c91c22e96aef0",
+  "tasks_done": [
+    "EXT-02",
+    "EXT-03",
+    "EXT-04A"
+  ],
+  "w0_manifest": "management/public_search/W0-FREEZE-081.json",
+  "delivered_worker_heads": {
+    "SOL": "fea49923f9187aee8de356fb0b02e4b73f90487f",
+    "GEMINI_arxiv": "049a2b86aa309dcdd5b4885b1ac25a8150b93200",
+    "MUSE_storage": "5b1bd1db235a4c4f7865f36bc5c9e621c07d31dc"
+  },
+  "reviews": [
+    "management/public_search/reviews/MUSE/EXT-02-W1-081.md",
+    "management/public_search/reviews/SOL/EXT-03-W1-R5-081.md",
+    "management/public_search/reviews/GEMINI/EXT-04A-W1-R2-081.md",
+    "management/public_search/reviews/SOL/EXT-04A-W1-R4-081.md"
+  ],
+  "verification": {
+    "passed": 362,
+    "failed": 0,
+    "exit_code": 0,
+    "duration_seconds": 36.52,
+    "modules": {
+      "contracts_transport": 111,
+      "openalex": 106,
+      "arxiv": 70,
+      "store_export": 44,
+      "controller": 31
+    },
+    "evidence_local": "data/public_search/control/w1-081/parent-w1-final-r4.log"
+  },
+  "sha256": {
+    "scripts/run_public_worker.py": "d635c9221dc1367c9ae4027335b0fffe9d06ae11aab84a0f4acebd626fd1a0e3",
+    "src/scholargraph/public_search/arxiv.py": "3fa86fc7bc776709aeb779c282f82be770e21ad96f3c71327b0ab694b43b6b34",
+    "src/scholargraph/public_search/export.py": "c6d2575002ae1ca24d7791d5e0b7430035c375d60f8e013f590959ca48c63f60",
+    "src/scholargraph/public_search/openalex.py": "a0d650d714958eef420b5a514843fdcd35d0d7cb0b6863757c94b2a13112e170",
+    "src/scholargraph/public_search/store.py": "37130333b4839f24279d7bea0f074ba7149c7a012beed7d6fc8eceed4ea330c1",
+    "tests/fixtures/public_search/gemini/arxiv/duplicate_id_feed.xml": "349bec1385848fa87b14886cfbb1fac04deb761b0fc93d3ee1ffdce14b8d3e78",
+    "tests/fixtures/public_search/gemini/arxiv/empty_feed.xml": "20a6ec519a4c6ab4dcddc53a2b0461fad35c9aa3f88e5f38350f4fdf2fefe94a",
+    "tests/fixtures/public_search/gemini/arxiv/error_entry_feed.xml": "8d7885b9a0ccfdaca6899c098ec0371eaea259eea6d33b14c4d23e61838ce348",
+    "tests/fixtures/public_search/gemini/arxiv/error_feed_no_counters.xml": "fb2c7bc377825b2cfaa0958aea3c9ca685f51de97e96336d3b6ff134923e6ed0",
+    "tests/fixtures/public_search/gemini/arxiv/invalid_counter.xml": "fea386d14796556e7cb4300e73f3ca5f0dd0946f00ea77b869f69849d10d72a7",
+    "tests/fixtures/public_search/gemini/arxiv/invalid_date.xml": "d5162102531be6f15636d1d680c75f1005e399fa3ff856c08397592522e9f032",
+    "tests/fixtures/public_search/gemini/arxiv/malformed.xml": "1bc6abf79739a019eb6463aea73f06401d9fa6538e0df03438e890f443a894d2",
+    "tests/fixtures/public_search/gemini/arxiv/missing_id.xml": "84dcc9f042dd4291067b673d87da8d0fe6bcf02fcbd27caabe04e39d7ab70b64",
+    "tests/fixtures/public_search/gemini/arxiv/missing_link.xml": "203d9cbf6cb3067737e1a84ad5217de8a9e978deb09c1070f319254962023b56",
+    "tests/fixtures/public_search/gemini/arxiv/missing_opensearch.xml": "9503ed87a839912a5f561317933e002e200f0f9f58ff2845ab709dbe62045d93",
+    "tests/fixtures/public_search/gemini/arxiv/missing_title.xml": "27cb894eb5ec478e3947812a4e312ad00ddd229262b65f089e8c4b57b861284f",
+    "tests/fixtures/public_search/gemini/arxiv/title_only_feed.xml": "c817e88488b5ba2d33008dec40c9895507a10f0da26ef1fa7522657163719909",
+    "tests/fixtures/public_search/gemini/arxiv/valid_feed.xml": "a5c563a988240778d6ebd284c37e5c5d25fdb7988a8d7e207fdac3b5e5c0c074",
+    "tests/fixtures/public_search/gemini/arxiv/valid_with_doi.xml": "a78abffe309c6ae03751bbb5d8efdab845b6c6e42dab9f4447f44846fd2d2b82",
+    "tests/fixtures/public_search/gemini/arxiv/xxe_doctype.xml": "0c5e21c7c25efa695daddc638847a4e0a2a6febff2fc30e6e334be78c4845a7e",
+    "tests/fixtures/public_search/muse/store/manifest.json": "09bddb3d392428c186aae5605d24caee2a733099abb423f45b02121e4be36a08",
+    "tests/fixtures/public_search/muse/store/manifest.sidecar.json": "a7dde656f32e8dc39453501edc92c95767ee5b637f78b95cd49c54438e64fd2f",
+    "tests/fixtures/public_search/muse/store/special_chars.json": "0af7e15901056bb1afa593bfe78b21e80eb5fd4f2eaabe1f06e6775020dc2260",
+    "tests/fixtures/public_search/muse/store/special_chars.sidecar.json": "77e2efd51e18b85cd6b75df396950b3c8f46d561c08a368d1055fa080caec480",
+    "tests/fixtures/public_search/sol/openalex_page.json": "ff878559464b88a7edce4b86887708791a4e4c2a3eb68cee703bafe9210140ef",
+    "tests/fixtures/public_search/sol/openalex_page.sidecar.json": "7bcca7e8a7a7bd0611f73bdd46adda06d217e57b44ee486ac5a77938e9adaf71",
+    "tests/unit/test_public_arxiv.py": "bdce6badbf2c21ea39822e341abaf0f732ae2be6a4c110b2491efd121e5d163b",
+    "tests/unit/test_public_export.py": "d79883c2b556e9b4b92ccfe1b17b5bb1e1b0404c3b6b1ca0d4dc7b0e64f85cc1",
+    "tests/unit/test_public_openalex.py": "3b74a0e69cc7c4b9479afdf668dc0c79ee9ee787c2f53da8d0c5e71803b5bd74",
+    "tests/unit/test_public_store.py": "5da200c7263bc884ab93ebb7042513c37a89ea5773277aec1b44491d9fd90551",
+    "tests/unit/test_public_worker_control.py": "68826e70f2ea36d3e99611c7d968652c6dd12694b086088a112fe36cf747ba59"
+  },
+  "integration_delta": "arxiv parent differs from approved worker only in removing trailing spaces on5blanklines; final362tests run exactparent bytes",
+  "prior_failure_evidence_local": "data/public_search/control/w1-081/parent-w1-final.log",
+  "limitations": [
+    "No production fusion/service/UI integrated yet; W2 tasksTODO",
+    "No new liveAPI or sustainedquota/runtime measurements",
+    "Gemini R3review failed eligibility hostconnection; finalstorage review assignedfreshSOL",
+    "RateState process-local; UTF32 explicitly unsupported"
+  ]
+}

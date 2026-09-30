@@ -1,10 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T16:05:11.956229+07:00",
-  "stage": "w1_storage_r4_connection_race_fix",
-  "active_tasks": [
-    "EXT-04A"
-  ],
+  "updated_at": "2026-09-30T16:55:10.814044+07:00",
+  "stage": "w1_completed_reviewed",
+  "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -14,9 +12,10 @@
     "EXT-04A"
   ],
   "next_steps": {
-    "MUSE": "Serialize sharedconnectionverification/read/write/close; add deterministic regression",
-    "COORDINATOR": "Preservefatal log; verifyR4focused/pin/SOLreview thencombinedsuite",
-    "SOL": "R3review ended; await pinnedR4delta forre-review"
+    "COORDINATOR": "W1closeout accepted; nextround W2cards EXT-04Bfusion +EXT-05AUI require next dispatch within user scope",
+    "SOL": "Idle; EXT-02 complete",
+    "GEMINI": "Idle; EXT-03complete; verifyAntigravityconnection before nextdispatch",
+    "MUSE": "Idle; EXT-04Acomplete"
   },
   "last_session_log": "management/public_search/logs/SESSION-20260930-081-CODEX.md",
   "worker_execution_observed": true,
@@ -47,35 +46,42 @@
       "MUSE": "9f70669-working-tree",
       "GEMINI": "cc51ef8-working-tree"
     },
-    "process_check": "No author/reviewer worker process after closeout",
+    "process_check": "No author/reviewer CLI controller process after workers closed; SOL appchat idle",
     "core_checker": {
       "exit_code": 0,
       "task_count": 53,
       "markdown_links": 481
+    },
+    "w1_combined_tests": {
+      "passed": 362,
+      "failed": 0,
+      "exit_code": 0,
+      "duration_seconds": 36.52,
+      "modules": {
+        "contracts_transport": 111,
+        "openalex": 106,
+        "arxiv": 70,
+        "store_export": 44,
+        "controller": 31
+      },
+      "evidence_local": "data/public_search/control/w1-081/parent-w1-final-r4.log"
     }
   },
   "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
-  "pause_scope": "Prior pause revoked by user continue",
+  "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/W0-R2-GATE.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-04A",
+  "next_task_id": "EXT-04B",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-04A",
-      "owner": "MUSE",
-      "runner_exec_session": 36193,
-      "session_id": "ses_f0ea2fb52ffeXlJNnX5Xk3iiHT",
-      "status": "RUNNING",
-      "dispatch_file": "management/public_search/dispatch/MUSE-W1-EXT04A-R4-081.txt",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh"
-    }
-  ]
+  "active_assignments": [],
+  "w1_freeze": {
+    "manifest": "management/public_search/W1-FREEZE-081.json",
+    "accepted_at": "2026-09-30T16:55:10.814044+07:00"
+  }
 }

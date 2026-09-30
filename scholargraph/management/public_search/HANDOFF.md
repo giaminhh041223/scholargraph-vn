@@ -1,3 +1,17 @@
+# W1 081 — hoàn tất sau review và tích hợp
+
+- EXT-02 OpenAlex, EXT-03 arXiv, EXT-04A storage/cache/library/export DONE. W0 đãfreeze14pins. GateW1 mới [manifest](W1-FREEZE-081.json), [gate](reviews/COORDINATOR/W1-FINISH-081.md).
+- Parent actual362testsPASS/exit0/36.52s:111contract+transport,106OpenAlex,70arxiv,44store+export,31controller. Loglocal data/public_search/control/w1-081/parent-w1-final-r4.log. FirstcombinedR3fatal -1073741819 giữnguyên riêng, đãsửa metadata/close race và SOL event/proxyreviewPASS.
+- Review độc lập: MuseOpenAlexPASS; SOLarxivR5PASS; Gemini storageR2PASS, finalstorageR4SOLPASS sauGemR3eligibilityhostTCPtimeout. Model requests SOL6.1/high, GeminiHigh/high, Musefree/xhigh; Museactualmetadataobserved, SOLactualmetadataunknown.
+- Khôngauthor/reviewerCLIactive; SOLappchatidle. Worktreeshash cuối đồng bộ saufreeze, không xóa targetreview/history. MainSGhumangatesunchanged. Usertiếp tục, không đặtpause mới.
+- Chưa cóluồng tìmkiếm sảnphẩm hoànchỉnh: nextcards EXT-04B dedup/filter/RRF (SOL) và EXT-05A UI (Gemini) làW2; EXT-05Bservice/routes/CLI saufusion. W2 chưa đượcdispatch trongW1turn. Next executable: đọccard/board, kiểmGemconnection, đăngkýownedpaths/dispatchW2 khi tiếp tụcvòngtiếp.
+
+# W1 081 — storage R4 review đã pin
+
+- Muse R4 nativeauthorCLI0/44focusedtestsPASS, immutableHEAD5b1bd1d. RLock bao quanh toàn bộpublicoperations để metadata/query/close không overlap.
+- SOL reviewercontext /root/review_storage_r3_081 re-reviewdelta; chỉ ghi report/log R4 mới. Repo test mới là barrier/subprocess bounded, không gọi đó là deterministic metadata pause; reviewer thiết kế probe event/proxy cho race cụ thể.
+- Parent vẫn R3failingcopy ởcheckpoint417ab73; sauSOLPASS importexactR4 rồicombinedretrylogmới, khôngghiđè firstfatal. Bước tiếp này chưahoànthành. NoW2dispatch.
+
 # W1 081 — sửa race SQLite phát hiện lúc tích hợp
 
 - EXT-02/03 DONE. EXT-04A IN_PROGRESS R4: parent combinedsuite crash accessviolation -1073741819 khi close và metadata verification cùng connection; chưa tổng kết361tests, khôngPASS.

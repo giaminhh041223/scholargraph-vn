@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T16:05:11.956229+07:00",
+  "updated_at": "2026-09-30T16:55:10.814044+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "w1_final_review",
+  "mode": "w1_completed_reviewed",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -70,18 +70,7 @@
       "channel_config": "management/public_search/channels.json"
     }
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-04A",
-      "owner": "MUSE",
-      "runner_exec_session": 36193,
-      "session_id": "ses_f0ea2fb52ffeXlJNnX5Xk3iiHT",
-      "status": "RUNNING",
-      "dispatch_file": "management/public_search/dispatch/MUSE-W1-EXT04A-R4-081.txt",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh"
-    }
-  ],
+  "active_assignments": [],
   "tasks": [
     {
       "id": "EXT-01A",
@@ -317,7 +306,7 @@
     {
       "id": "EXT-04A",
       "title": "SQLite cache, snapshot, library và export",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "GEMINI",
       "dependencies": [
@@ -339,7 +328,7 @@
         "management/public_search/logs/MUSE/EXT-04A-W1-081.md",
         "management/public_search/packets/MUSE/EXT-04A-W1-081.md"
       ],
-      "dispatch_state": "r4_author_fix_connection_race",
+      "dispatch_state": "completed_reviewed_integrated",
       "input_head": "1ab9e7c5d754b85ebb33e5bbcd9ec7f5feef72b2",
       "runtime": {
         "runner_exec_session": 56754,
@@ -351,26 +340,25 @@
         "runtime_variant_observed": "xhigh",
         "runtime_observation_basis": "read-only OpenCode assistant metadata"
       },
-      "delivered_head": "6b33c8fe1f5817d38960ac6db29ac62af899da3b",
+      "delivered_head": "5b1bd1db235a4c4f7865f36bc5c9e621c07d31dc",
       "coordinator_verification_latest": {
-        "passed": 43,
+        "passed": 44,
         "failed": 0,
         "exit_code": 0,
-        "evidence_local": "data/public_search/control/w1-081/muse-tests-r3.log"
+        "evidence_local": "data/public_search/control/w1-081/muse-tests-r4.log"
       },
       "author_turn_status": "TIMEOUT_EXIT1",
       "author_turn_evidence_local": "data/public_search/control/runs/da62fd79-048c-4cb1-8f75-817848ef458e/summary.json",
-      "next_action": "Muse R4 lockscope fix; focused suite andSOLre-review before combinedretry",
-      "review_verdict": "COORDINATOR_INTEGRATION_CHANGES_REQUIRED",
-      "unresolved_findings": [
-        "sqlite-verification-close-concurrency-crash"
-      ],
+      "next_action": "StorageW1accepted; productionservice integrationTODO",
+      "review_verdict": "PASS",
+      "unresolved_findings": [],
       "review_evidence": [
         "management/public_search/reviews/GEMINI/EXT-04A-W1-081.md",
         "management/public_search/reviews/GEMINI/EXT-04A-W1-R2-081.md",
         "management/public_search/reviews/COORDINATOR/EXT-04A-R2-CLOSE-GATE-081.md",
         "management/public_search/reviews/SOL/EXT-04A-W1-R3-081.md",
-        "management/public_search/reviews/COORDINATOR/EXT-04A-R3-CONCURRENCY-GATE-081.md"
+        "management/public_search/reviews/COORDINATOR/EXT-04A-R3-CONCURRENCY-GATE-081.md",
+        "management/public_search/reviews/SOL/EXT-04A-W1-R4-081.md"
       ],
       "runtime_latest": {
         "task_id": "EXT-04A",
@@ -394,11 +382,18 @@
       ],
       "integrated_into_parent": true,
       "parent_integration_verification": {
-        "status": "CRASH",
-        "exit_code": -1073741819,
-        "passed": null,
-        "failed": null,
-        "evidence_local": "data/public_search/control/w1-081/parent-w1-final.log"
+        "passed": 362,
+        "failed": 0,
+        "exit_code": 0,
+        "duration_seconds": 36.52,
+        "modules": {
+          "contracts_transport": 111,
+          "openalex": 106,
+          "arxiv": 70,
+          "store_export": 44,
+          "controller": 31
+        },
+        "evidence_local": "data/public_search/control/w1-081/parent-w1-final-r4.log"
       }
     },
     {
@@ -612,12 +607,13 @@
       ],
       "input_head": "430842b793b6b9560ce383e88f1f00a2ad96fd96",
       "freeze_commit": "57b6598",
-      "dispatch_state": "initial_author_turn_ended",
+      "dispatch_state": "round_completed_reviewed",
       "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
       "turn_id": "01a0f10d-4a57-7b71-ad8a-707815cf2d84",
       "model_requested": "gpt-6.1-sol",
       "reasoning_effort_requested": "high",
-      "runtime_model_observed": null
+      "runtime_model_observed": null,
+      "status": "ENDED"
     },
     {
       "task_id": "EXT-03",
@@ -634,11 +630,12 @@
       ],
       "input_head": "a56bffa20ec25423048b82188055419e982b2871",
       "freeze_commit": "57b6598",
-      "dispatch_state": "initial_author_turn_ended",
+      "dispatch_state": "round_completed_reviewed",
       "runner_exec_session": 92818,
       "runtime_evidence": "data/public_search/control/runs/4a033af4-25aa-4722-8a82-c529c3bbd11a/summary.json",
       "model_requested": "gemini-3.8-flash-high",
-      "reasoning_effort_requested": "high"
+      "reasoning_effort_requested": "high",
+      "status": "ENDED"
     },
     {
       "task_id": "EXT-04A",
@@ -657,14 +654,15 @@
       ],
       "input_head": "1ab9e7c5d754b85ebb33e5bbcd9ec7f5feef72b2",
       "freeze_commit": "57b6598",
-      "dispatch_state": "initial_author_turn_ended",
+      "dispatch_state": "round_completed_reviewed",
       "runner_exec_session": 56754,
       "runtime_evidence": "data/public_search/control/runs/da62fd79-048c-4cb1-8f75-817848ef458e/summary.json",
       "model_requested": "opencode/muse-spark-1.3-contributor-free",
       "reasoning_effort_requested": "xhigh",
       "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
       "runtime_variant_observed": "xhigh",
-      "runtime_observation_basis": "read-only OpenCode assistant metadata"
+      "runtime_observation_basis": "read-only OpenCode assistant metadata",
+      "status": "ENDED"
     }
   ],
   "pause_after_current_round": false,
@@ -674,31 +672,29 @@
   "pause_reason": "Prior pause revoked by user continue",
   "active_review_assignments": [],
   "round_closeout": {
-    "round": "W0-R2",
-    "closed_at": "2026-09-30T11:32:14.507259+07:00",
-    "verdict": "AUTHOR_FIXES_REVIEWED; PARENT_POLICY_DELTA_REVIEW_PENDING",
-    "tasks": [
-      "EXT-01A",
-      "EXT-01B",
-      "EXT-01C"
-    ],
-    "coordinator_checks": {
-      "sol_contract_tests": "111 passed exit0",
-      "muse_source_audit": "PASS exit0; 7 negative fixtures exit1; F5/F6 temp reproducers exit1",
-      "gemini_ux_validator": "13 typed objects; 16 negative subprocess cases exit1; title-only and benign query pass"
-    },
-    "policy_evidence_sha256": "a37778605f63821b820edc27b20ad5c859b05761d450980650336a4b8b727923",
-    "integrated_into_parent_worktree": true,
-    "parent_commit_before_closeout": "f2914a6",
+    "round": "W1",
+    "closed_at": "2026-09-30T16:55:10.814044+07:00",
+    "verdict": "PASS",
     "tasks_done": [
-      "EXT-01B",
-      "EXT-01C"
+      "EXT-02",
+      "EXT-03",
+      "EXT-04A"
     ],
-    "task_review": [
-      "EXT-01A"
-    ],
-    "contract_frozen": false,
-    "pause_authorization": "Latest user explicitly requested finishing current tasks and saving checkpoint before stopping"
+    "integration_tests": {
+      "passed": 362,
+      "failed": 0,
+      "exit_code": 0,
+      "duration_seconds": 36.52,
+      "modules": {
+        "contracts_transport": 111,
+        "openalex": 106,
+        "arxiv": 70,
+        "store_export": 44,
+        "controller": 31
+      },
+      "evidence_local": "data/public_search/control/w1-081/parent-w1-final-r4.log"
+    },
+    "pause_authorization": null
   },
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
@@ -707,5 +703,9 @@
     "contract_frozen": true,
     "schema_version": 1,
     "contract_version": "1.0.0"
+  },
+  "w1_freeze": {
+    "manifest": "management/public_search/W1-FREEZE-081.json",
+    "accepted_at": "2026-09-30T16:55:10.814044+07:00"
   }
 }

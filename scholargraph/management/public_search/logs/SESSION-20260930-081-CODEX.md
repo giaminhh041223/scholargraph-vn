@@ -111,3 +111,14 @@
 
 - FreshSOLstorageR3PASS report/loghashverified; imported8storagefilesexact. Parentcombinedsuite attemptCRASH/-1073741819 Windowsaccessviolation; no finalpassed/failedcounts, not361PASS. Stackconnclose621 versusmetadata213/_verify_store241/list_library569 outside lock. No persistentdata modified, tests temp/synthetic.
 - R4author sameMuseverifiedcontext runner36193 assignedfullsharedconnectionlocking anddeterministicregression, R3PASS histories kept. FreshSOLreviewer notified actualfatal finding; no newtargetreview beforepin. Parentstoragecodecurrently importedR3 and acceptanceincomplete; nofreezeW1/noW2.
+
+## Storage R4 pin 2026-09-30T16:13:59.341658+07:00
+
+- MUSE R4 run e45a2bc3 nativeCLI0/PASS; coordinator44focusedPASS/exit0. HEAD5b1bd1db235a4c4f7865f36bc5c9e621c07d31dc, all6publicops holdRLock andensureopenbeforemetadata/sharedSQLite calls.
+- Newrepo regression barrier3thread/subprocess bounded; itdoesnot pausemetadata deterministically. SOL originalindependentstoragecontext re-review delta +event/proxy concreteinterleavingprobe, no targetwrites. ParentR3fatal historypreserved, finalintegrationretry stillpending.
+
+## Final integration PASS 2026-09-30T16:55:10.814044+07:00
+
+- SOL R4scopePASS verified report8dea3c5b/log2129fe15, controlledR3vsR4closeordering and7targetedtests. ParentexactR4store/test imported; finalcombined actual362PASS/exit0/36.52s (111+106+70+44+31). Parentall14W0pinsunchanged, manifestW1hasheswritten. EXT-04ADONE/roundW1PASS; noactiveworkerCLI/SOLappidle.
+- FirstcombinedR3fatal retainedunchanged andruntimeERROR/blockedwrite histories notretroactivelysuccess. Rootarxiv5blankwhitespacecleanup recorded/finalbytes tested. NoW2dispatch orproductionUI/serviceclaims.
+- SOLappchat had separate readonlystatus turn01a0f155-d68a-75d3-8b88-e6fbce4dc124 completed; returnedhistorical4DONE2fix statusesasofitsread, nowboard6DONEconfirmed; no activeownership/writes fromthatturn.

@@ -355,19 +355,19 @@ class SQLiteStore:
         self._conn = conn
         self._digest = config_digest
         self._closed = False
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
 
     def _ensure_open(self) -> None:
         if self._closed:
             _fail("storage", "store closed")
 
     def load_cache(self, cache_key: str, *, now: datetime) -> SearchSnapshot | None:
-        self._ensure_open()
-        if type(cache_key) is not str or CACHE_KEY_PATTERN.fullmatch(cache_key) is None:
-            _fail("request", "invalid cache key")
-        _require_aware(now, "now")
-        _verify_store(self._data_root, self._conn, self._digest)
         with self._lock:
+            self._ensure_open()
+            if type(cache_key) is not str or CACHE_KEY_PATTERN.fullmatch(cache_key) is None:
+                _fail("request", "invalid cache key")
+            _require_aware(now, "now")
+            _verify_store(self._data_root, self._conn, self._digest)
             try:
                 row = self._conn.execute("SELECT snapshot_id FROM cache WHERE cache_key = ?", (cache_key,)).fetchone()
             except Exception:
@@ -382,59 +382,59 @@ class SQLiteStore:
             if srow is None:
                 _fail("storage", "referenced snapshot missing")
             snapshot_json = srow[0]
-        try:
-            if isinstance(snapshot_json, str):
-                snapshot = SearchSnapshot.model_validate_json(snapshot_json.encode("utf-8"))
-            else:
-                snapshot = SearchSnapshot.model_validate_json(snapshot_json)
-        except Exception:
-            _fail("storage", "cached snapshot corrupt")
-        if snapshot.config_sha256 != self._digest:
-            _fail("storage", "cached snapshot config mismatch")
-        if snapshot.overall not in ("success", "empty"):
-            _fail("storage", "cached snapshot invalid overall")
-        refs = _collect_raw_refs(snapshot)
-        raw_dir = _raw_dir(self._data_root)
-        for raw_id in refs:
-            sha, count = refs[raw_id]
-            _read_raw_checked(raw_dir, raw_id, sha, count)
-        if now >= snapshot.expires_at:
-            return None
-        return snapshot
+            try:
+                if isinstance(snapshot_json, str):
+                    snapshot = SearchSnapshot.model_validate_json(snapshot_json.encode("utf-8"))
+                else:
+                    snapshot = SearchSnapshot.model_validate_json(snapshot_json)
+            except Exception:
+                _fail("storage", "cached snapshot corrupt")
+            if snapshot.config_sha256 != self._digest:
+                _fail("storage", "cached snapshot config mismatch")
+            if snapshot.overall not in ("success", "empty"):
+                _fail("storage", "cached snapshot invalid overall")
+            refs = _collect_raw_refs(snapshot)
+            raw_dir = _raw_dir(self._data_root)
+            for raw_id in refs:
+                sha, count = refs[raw_id]
+                _read_raw_checked(raw_dir, raw_id, sha, count)
+            if now >= snapshot.expires_at:
+                return None
+            return snapshot
 
     def save_snapshot(self, snapshot: SearchSnapshot, raw_payloads: dict[str, bytes], *, cache_key: str) -> None:
-        self._ensure_open()
-        if type(cache_key) is not str or CACHE_KEY_PATTERN.fullmatch(cache_key) is None:
-            _fail("request", "invalid cache key")
-        if type(raw_payloads) is not dict:
-            _fail("storage", "raw payloads must be dict")
-        snap = _revalidate_snapshot(snapshot)
-        if snap.config_sha256 != self._digest:
-            _fail("config", "snapshot config mismatch")
-        refs = _collect_raw_refs(snap)
-        if set(raw_payloads.keys()) != set(refs.keys()):
-            _fail("storage", "raw keyset mismatch")
-        for raw_id in refs:
-            if raw_id not in raw_payloads:
-                _fail("storage", "raw keyset mismatch")
-            payload = raw_payloads[raw_id]
-            if type(payload) is not bytes:
-                _fail("storage", "raw payload must be bytes")
-            sha, count = refs[raw_id]
-            if len(payload) != count:
-                _fail("storage", "raw byte count mismatch")
-            if hashlib.sha256(payload).hexdigest() != sha:
-                _fail("storage", "raw hash mismatch")
-        _verify_store(self._data_root, self._conn, self._digest)
-        raw_dir = _raw_dir(self._data_root)
-        for raw_id in refs:
-            payload = raw_payloads[raw_id]
-            _write_raw_atomic(raw_dir, raw_id, payload)
-        snapshot_json = snap.model_dump_json()
-        overall = snap.overall
-        fetched = snap.fetched_at.isoformat()
-        expires = snap.expires_at.isoformat()
         with self._lock:
+            self._ensure_open()
+            if type(cache_key) is not str or CACHE_KEY_PATTERN.fullmatch(cache_key) is None:
+                _fail("request", "invalid cache key")
+            if type(raw_payloads) is not dict:
+                _fail("storage", "raw payloads must be dict")
+            snap = _revalidate_snapshot(snapshot)
+            if snap.config_sha256 != self._digest:
+                _fail("config", "snapshot config mismatch")
+            refs = _collect_raw_refs(snap)
+            if set(raw_payloads.keys()) != set(refs.keys()):
+                _fail("storage", "raw keyset mismatch")
+            for raw_id in refs:
+                if raw_id not in raw_payloads:
+                    _fail("storage", "raw keyset mismatch")
+                payload = raw_payloads[raw_id]
+                if type(payload) is not bytes:
+                    _fail("storage", "raw payload must be bytes")
+                sha, count = refs[raw_id]
+                if len(payload) != count:
+                    _fail("storage", "raw byte count mismatch")
+                if hashlib.sha256(payload).hexdigest() != sha:
+                    _fail("storage", "raw hash mismatch")
+            _verify_store(self._data_root, self._conn, self._digest)
+            raw_dir = _raw_dir(self._data_root)
+            for raw_id in refs:
+                payload = raw_payloads[raw_id]
+                _write_raw_atomic(raw_dir, raw_id, payload)
+            snapshot_json = snap.model_dump_json()
+            overall = snap.overall
+            fetched = snap.fetched_at.isoformat()
+            expires = snap.expires_at.isoformat()
             try:
                 self._conn.execute("BEGIN IMMEDIATE")
                 existing = self._conn.execute("SELECT snapshot_json FROM snapshots WHERE snapshot_id = ?", (snap.snapshot_id,)).fetchone()
@@ -459,14 +459,14 @@ class SQLiteStore:
                 except Exception:
                     pass
                 _fail("storage", "snapshot persist failed")
-        return None
+            return None
 
     def read_snapshot(self, snapshot_id: str) -> SearchSnapshot:
-        self._ensure_open()
-        if type(snapshot_id) is not str or not snapshot_id.strip():
-            _fail("request", "invalid snapshot id")
-        _verify_store(self._data_root, self._conn, self._digest)
         with self._lock:
+            self._ensure_open()
+            if type(snapshot_id) is not str or not snapshot_id.strip():
+                _fail("request", "invalid snapshot id")
+            _verify_store(self._data_root, self._conn, self._digest)
             try:
                 row = self._conn.execute("SELECT snapshot_json FROM snapshots WHERE snapshot_id = ?", (snapshot_id,)).fetchone()
             except Exception:
@@ -474,42 +474,42 @@ class SQLiteStore:
             if row is None:
                 _fail("request", "unknown snapshot id")
             snapshot_json = row[0]
-        try:
-            if isinstance(snapshot_json, str):
-                snapshot = SearchSnapshot.model_validate_json(snapshot_json.encode("utf-8"))
-            else:
-                snapshot = SearchSnapshot.model_validate_json(snapshot_json)
-        except Exception:
-            _fail("storage", "snapshot corrupt")
-        if snapshot.config_sha256 != self._digest:
-            _fail("storage", "snapshot config mismatch")
-        refs = _collect_raw_refs(snapshot)
-        raw_dir = _raw_dir(self._data_root)
-        for raw_id in refs:
-            sha, count = refs[raw_id]
-            _read_raw_checked(raw_dir, raw_id, sha, count)
-        return snapshot
+            try:
+                if isinstance(snapshot_json, str):
+                    snapshot = SearchSnapshot.model_validate_json(snapshot_json.encode("utf-8"))
+                else:
+                    snapshot = SearchSnapshot.model_validate_json(snapshot_json)
+            except Exception:
+                _fail("storage", "snapshot corrupt")
+            if snapshot.config_sha256 != self._digest:
+                _fail("storage", "snapshot config mismatch")
+            refs = _collect_raw_refs(snapshot)
+            raw_dir = _raw_dir(self._data_root)
+            for raw_id in refs:
+                sha, count = refs[raw_id]
+                _read_raw_checked(raw_dir, raw_id, sha, count)
+            return snapshot
 
     def save_paper(self, snapshot_id: str, canonical_id: str, *, now: datetime) -> LibraryEntry:
-        self._ensure_open()
-        if type(snapshot_id) is not str or not snapshot_id.strip():
-            _fail("request", "invalid snapshot id")
-        if type(canonical_id) is not str or not canonical_id.strip():
-            _fail("request", "invalid canonical id")
-        _require_aware(now, "now")
-        snapshot = self.read_snapshot(snapshot_id)
-        hit = None
-        for candidate in snapshot.fusion.hits:
-            if candidate.canonical_id == canonical_id:
-                hit = candidate
-                break
-        if hit is None:
-            _fail("request", "unknown hit")
-        if snapshot.overall == "partial_failure":
-            incomplete = True
-        else:
-            incomplete = False
         with self._lock:
+            self._ensure_open()
+            if type(snapshot_id) is not str or not snapshot_id.strip():
+                _fail("request", "invalid snapshot id")
+            if type(canonical_id) is not str or not canonical_id.strip():
+                _fail("request", "invalid canonical id")
+            _require_aware(now, "now")
+            snapshot = self.read_snapshot(snapshot_id)
+            hit = None
+            for candidate in snapshot.fusion.hits:
+                if candidate.canonical_id == canonical_id:
+                    hit = candidate
+                    break
+            if hit is None:
+                _fail("request", "unknown hit")
+            if snapshot.overall == "partial_failure":
+                incomplete = True
+            else:
+                incomplete = False
             try:
                 existing = self._conn.execute("SELECT entry_json FROM library WHERE canonical_id = ?", (canonical_id,)).fetchone()
             except Exception:
@@ -559,59 +559,60 @@ class SQLiteStore:
             return fresh_valid
 
     def list_library(self, *, offset: int, limit: int) -> list[LibraryEntry]:
-        self._ensure_open()
-        if type(offset) is not int or isinstance(offset, bool):
-            _fail("request", "invalid paging")
-        if type(limit) is not int or isinstance(limit, bool):
-            _fail("request", "invalid paging")
-        if offset < 0 or limit < 1 or limit > 100:
-            _fail("request", "invalid paging")
-        _verify_store(self._data_root, self._conn, self._digest)
         with self._lock:
+            self._ensure_open()
+            if type(offset) is not int or isinstance(offset, bool):
+                _fail("request", "invalid paging")
+            if type(limit) is not int or isinstance(limit, bool):
+                _fail("request", "invalid paging")
+            if offset < 0 or limit < 1 or limit > 100:
+                _fail("request", "invalid paging")
+            _verify_store(self._data_root, self._conn, self._digest)
             try:
                 rows = list(self._conn.execute("SELECT entry_json FROM library ORDER BY saved_at ASC, canonical_id ASC LIMIT ? OFFSET ?", (limit, offset)).fetchall())
             except Exception:
                 _fail("storage", "library list failed")
-        out: list[LibraryEntry] = []
-        for row in rows:
-            try:
-                if isinstance(row[0], str):
-                    entry = LibraryEntry.model_validate_json(row[0].encode("utf-8"))
-                else:
-                    entry = LibraryEntry.model_validate_json(row[0])
-            except Exception:
-                _fail("storage", "library entry corrupt")
-            snap = self.read_snapshot(entry.snapshot_id)
-            found = False
-            for candidate in snap.fusion.hits:
-                if candidate.canonical_id == entry.canonical_id:
-                    found = True
-                    break
-            if not found:
-                _fail("storage", "library hit missing")
-            out.append(entry)
-        return out
+            out: list[LibraryEntry] = []
+            for row in rows:
+                try:
+                    if isinstance(row[0], str):
+                        entry = LibraryEntry.model_validate_json(row[0].encode("utf-8"))
+                    else:
+                        entry = LibraryEntry.model_validate_json(row[0])
+                except Exception:
+                    _fail("storage", "library entry corrupt")
+                snap = self.read_snapshot(entry.snapshot_id)
+                found = False
+                for candidate in snap.fusion.hits:
+                    if candidate.canonical_id == entry.canonical_id:
+                        found = True
+                        break
+                if not found:
+                    _fail("storage", "library hit missing")
+                out.append(entry)
+            return out
 
     def export_library(self, format: Literal["json", "bibtex"]) -> bytes:
-        self._ensure_open()
-        if format != "json" and format != "bibtex":
-            _fail("request", "unknown export format")
-        full: list[LibraryEntry] = []
-        offset = 0
-        while True:
-            page = self.list_library(offset=offset, limit=100)
-            if len(page) == 0:
-                break
-            for item in page:
-                full.append(item)
-            if len(page) < 100:
-                break
-            offset += 100
-            if offset > 100000:
-                _fail("storage", "library too large")
-        if format == "json":
-            return export_json(full)
-        return export_bibtex(full)
+        with self._lock:
+            self._ensure_open()
+            if format != "json" and format != "bibtex":
+                _fail("request", "unknown export format")
+            full: list[LibraryEntry] = []
+            offset = 0
+            while True:
+                page = self.list_library(offset=offset, limit=100)
+                if len(page) == 0:
+                    break
+                for item in page:
+                    full.append(item)
+                if len(page) < 100:
+                    break
+                offset += 100
+                if offset > 100000:
+                    _fail("storage", "library too large")
+            if format == "json":
+                return export_json(full)
+            return export_bibtex(full)
 
     def close(self) -> None:
         with self._lock:

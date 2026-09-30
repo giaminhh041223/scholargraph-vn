@@ -848,3 +848,26 @@ def test_has_evidence_enumeration_fault_fails_loud(tmp_path):
     assert sentinel.read_bytes() == before
     assert not (data_dir / "store.json").exists()
     assert not (data_dir / "library.sqlite3").exists()
+
+
+def test_metadata_close_interleaving_controlled(tmp_path):
+    cfg = muse_config(tmp_path)
+    proj = tmp_path / "projR4race"
+    proj.mkdir()
+    seed = initialize_store(proj, cfg)
+    snap, raws, key = build_snapshot(cfg, "snap-r4-race", "success")
+    seed.save_snapshot(snap, raws, cache_key=key)
+    seed.close()
+    cfg_file = tmp_path / "used_r4.json"
+    cfg_file.write_text(cfg.model_dump_json(), encoding="utf-8")
+    child = tmp_path / "race_r4_child.py"
+    child.write_text("import sys, json, threading\nfrom pathlib import Path\nfrom datetime import datetime, timezone\nfrom scholargraph.public_search.store import open_existing, StoreError\nfrom scholargraph.public_search.contracts import load_config\ncfg_file = Path(sys.argv[1])\nproj = Path(sys.argv[2])\ncfg = load_config(cfg_file)\nstore = open_existing(proj, cfg)\nbarrier = threading.Barrier(3)\nouts = []\nguard = threading.Lock()\n\ndef reader():\n try:\n  barrier.wait(timeout=5)\n except Exception:\n  with guard:\n   outs.append('barrier-fail')\n  return\n try:\n  store.list_library(offset=0, limit=1)\n  with guard:\n   outs.append('ok')\n except StoreError as e:\n  assert e.error.kind == 'storage'\n  with guard:\n   outs.append('closed')\n except Exception:\n  with guard:\n   outs.append('unexpected')\n\ndef closer():\n try:\n  barrier.wait(timeout=5)\n except Exception:\n  with guard:\n   outs.append('barrier-fail')\n  return\n try:\n  store.close()\n  with guard:\n   outs.append('close-ok')\n except StoreError:\n  with guard:\n   outs.append('close-structured')\n except Exception:\n  with guard:\n   outs.append('close-unexpected')\nthreads = [threading.Thread(target=reader) for _ in range(2)]\nthreads.append(threading.Thread(target=closer))\nfor t in threads:\n t.start()\nfor t in threads:\n t.join(timeout=5)\nhung = [t.is_alive() for t in threads]\nprint(json.dumps({'outs': outs, 'hung': hung, 'closed': store._closed}))\nraise SystemExit(0 if (not any(hung) and ('close-ok' in outs or 'close-structured' in outs) and all(o in ('ok', 'closed', 'close-ok', 'close-structured') for o in outs)) else 1)\n", encoding="utf-8")
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(ROOT / "src")
+    proc = subprocess.run([sys.executable, str(child), str(cfg_file), str(proj)], cwd=str(tmp_path), env=env, capture_output=True, text=True)
+    assert proc.returncode == 0
+    assert proc.returncode != -1073741819
+    payload = json.loads(proc.stdout.strip().splitlines()[-1])
+    assert payload["hung"] == [False, False, False]
+    assert "close-ok" in payload["outs"] or "close-structured" in payload["outs"]
+    assert all(o in ("ok", "closed", "close-ok", "close-structured") for o in payload["outs"])
