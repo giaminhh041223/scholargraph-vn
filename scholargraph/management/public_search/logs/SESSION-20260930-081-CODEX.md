@@ -77,3 +77,8 @@
 - Coordinator inspected probe before execution; temp only. Actual diagnostic2functionalbugs reproduced; rawID convention confirmednotfinding. Exit0 collector not gatePASS.
 - Muse fresh supplementalcloseout runf9390d0d PASS/sessionses_f0eb50c79ffe3qG6rshNrnou37 but responsewrite-blocked/no files. Original TIMEOUT preserved; scopedR2 author fix next.
 - Corrected inheritedGemini log taskcard link only in parent, original author history otherwise retained.
+
+## Corrective checkpoint 2026-09-30T15:17:56.865996+07:00
+
+- OpenAlex integrated parent checkpoint adadb1e. Gemini R5 CLI0/session66093fce; initial69pass1fail emptyport. Coordinator2line emptyport guard pinned049a2b8, actualfinal70PASS/exit0; independentSOL R5 re-review running. Author tasklabel/sessionpacket not runtimeID, actualmodel request exactFlashHigh/high from controller; packet abbreviatedname not observedmetadata.
+- Muse supplementalcloseout and R2 original attempt have requiredwriteFAIL despite oldcontrollerPASS. Fixrootrelativepermissions and denial detection;31testsPASS including temp subprocessCLIexit1. [Controller gate](../reviews/COORDINATOR/MUSE-PERMISSIONS-081.md). Retry active sessionses_f0ea2fb52ffeXlJNnX5Xk3iiHT exactfree/xhigh observed, no DONE.

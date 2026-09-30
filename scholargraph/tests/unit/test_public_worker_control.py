@@ -22,6 +22,85 @@ def test_valid_responses():
     assert control.parse_response("MUSE", stream) == ("muse-session", "ACK")
 
 
+def test_denied_write_is_failure_even_with_text_and_normal_stop():
+    events = [
+        {"type": "tool_use", "sessionID": "s", "part": {"state": {
+            "status": "error", "error": "The user has specified a rule which prevents you from using this specific tool call."}}},
+        {"type": "text", "sessionID": "s", "part": {"text": "write blocked, STOP"}},
+        {"type": "step_finish", "sessionID": "s", "part": {"reason": "stop"}},
+    ]
+    with pytest.raises(ValueError, match="action was denied"):
+        control.parse_response("MUSE", "\n".join(json.dumps(e) for e in events))
+
+
+def test_worktree_relative_edit_permissions_preserve_scope(tmp_path):
+    import fnmatch
+    cwd = tmp_path / "public-muse/scholargraph"
+    cwd.mkdir(parents=True)
+    rules = control.edit_permissions(cwd, ["src/store.py", "logs/MUSE/"])
+
+    def action(path):
+        hits = [value for pattern, value in rules.items() if fnmatch.fnmatchcase(path, pattern)]
+        return hits[-1]
+
+    for path in ["scholargraph/src/store.py", "scholargraph\\src\\store.py",
+                 "scholargraph/logs/MUSE/packet.md", "scholargraph\\logs\\MUSE\\packet.md"]:
+        assert action(path) == "allow"
+    for path in ["scholargraph/src/arxiv.py", "scholargraph/logs/GEMINI/packet.md",
+                 "../other/scholargraph/src/store.py", "scholargraph/management/tasks.json"]:
+        assert action(path) == "deny"
+
+
+@pytest.mark.parametrize("paths", [[], ["../../parent.py"], [None], [""]])
+def test_invalid_edit_scope_fails(tmp_path, paths):
+    with pytest.raises(ValueError):
+        control.edit_permissions(tmp_path.resolve(), paths)
+
+
+def test_cli_denied_tool_exits_one(tmp_path):
+    project = tmp_path / ".worktrees/public-muse/scholargraph"
+    project.mkdir(parents=True)
+    config = tmp_path / "management/public_search/channels.json"
+    config.parent.mkdir(parents=True)
+    config.write_text(json.dumps({"channels": {"MUSE": {
+        "model_id": "opencode/fixture", "reasoning_effort": "xhigh",
+        "executable": sys.executable, "project_root": str(project),
+        "allowed_write_paths": ["src/store.py"]}}}), encoding="utf-8")
+    auth = tmp_path / ".local/share/opencode/auth.json"
+    auth.parent.mkdir(parents=True)
+    auth.write_text(json.dumps({"opencode": {"type": "api", "key": "SYNTHETIC_NOT_A_KEY"}}), encoding="utf-8")
+    prompt = tmp_path / "prompt.txt"
+    prompt.write_text("Synthetic denied-write turn; never contacts a model.", encoding="utf-8")
+    bootstrap = tmp_path / "denied_cli.py"
+    bootstrap.write_text(f'''
+import importlib.util, json, os, sys
+from pathlib import Path
+spec = importlib.util.spec_from_file_location("control", {str(SCRIPT)!r})
+c = importlib.util.module_from_spec(spec); spec.loader.exec_module(c)
+c.ROOT = Path({str(tmp_path)!r})
+c.Path.home = classmethod(lambda cls: Path({str(tmp_path)!r}))
+os.environ.pop("OPENCODE_CONFIG_CONTENT", None)
+class Turn:
+    returncode = 0
+    def communicate(self, timeout):
+        events = [
+            {{"type":"tool_use","sessionID":"s","part":{{"state":{{"status":"error","error":"The user has specified a rule which prevents you from using this specific tool call."}}}}}},
+            {{"type":"text","sessionID":"s","part":{{"text":"STOP"}}}},
+            {{"type":"step_finish","sessionID":"s","part":{{"reason":"stop"}}}}]
+        return "\\n".join(json.dumps(e) for e in events).encode(), b""
+c.subprocess.Popen = lambda *args, **kwargs: Turn()
+sys.argv = [str(c.ROOT / "runner.py"), "--worker", "MUSE", "--mode", "work", "--prompt-file", {str(prompt)!r}]
+sys.exit(c.main())
+''', encoding="utf-8")
+    result = subprocess.run([sys.executable, str(bootstrap)], cwd=tmp_path,
+                            capture_output=True, text=True, timeout=10)
+    assert result.returncode == 1
+    failure = json.loads(result.stderr)
+    assert failure["status"] == "FAIL"
+    assert "action was denied" in failure["reason"]
+    assert "SYNTHETIC_NOT_A_KEY" not in result.stdout + result.stderr
+
+
 @pytest.mark.parametrize("worker,output", [
     ("GEMINI", "{}"),
     ("GEMINI", '{"status":"FAIL"}'),

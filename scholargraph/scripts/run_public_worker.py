@@ -11,6 +11,25 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def edit_permissions(cwd, write_paths):
+    """OpenCode edit asks with paths relative to the Git worktree root."""
+    if not isinstance(write_paths, list) or not write_paths:
+        raise ValueError("Authorized write paths missing")
+    edits = {"*": "deny"}
+    for relative in write_paths:
+        if not isinstance(relative, str) or not relative or Path(relative).is_absolute():
+            raise ValueError("Authorized write path must be relative")
+        resolved = (cwd / relative).resolve()
+        if not resolved.is_relative_to(cwd):
+            raise ValueError("Authorized write path escapes worker checkout")
+        repo_relative = resolved.relative_to(cwd.parent).as_posix()
+        for pattern in (str(resolved), resolved.as_posix(), repo_relative,
+                        repo_relative.replace("/", "\\")):
+            suffix = ("\\*" if "\\" in pattern else "/*") if relative.endswith("/") else ""
+            edits[pattern + suffix] = "allow"
+    return edits
+
+
 def parse_response(worker, output):
     if worker == "GEMINI":
         result = json.loads(output)
@@ -27,6 +46,11 @@ def parse_response(worker, output):
                 events.append(json.loads(line))
         if not events or any(event["type"] == "error" for event in events):
             raise ValueError("OpenCode missing events or returned an error")
+        for event in events:
+            if event["type"] == "tool_use":
+                state = event["part"]["state"]
+                if state["status"] == "error" and "rule which prevents" in state["error"]:
+                    raise ValueError("OpenCode required tool action was denied")
         sessions = {event["sessionID"] for event in events}
         if len(sessions) != 1:
             raise ValueError("OpenCode session mismatch")
@@ -109,16 +133,7 @@ def main():
                 # Reuse saved auth in memory; do not copy keys into the project runtime.
                 overrides = {"provider": {"opencode": {"options": {"apiKey": credential["key"]}}}}
                 if args.mode == "work":
-                    write_paths = channel["allowed_write_paths"]
-                    if not isinstance(write_paths, list) or not write_paths:
-                        raise ValueError("Authorized write paths missing")
-                    edits = {"*": "deny"}
-                    for relative in write_paths:
-                        resolved = (cwd / relative).resolve()
-                        if not resolved.is_relative_to(cwd):
-                            raise ValueError("Authorized write path escapes worker checkout")
-                        edits[str(resolved) + ("\\*" if relative.endswith("/") else "")] = "allow"
-                        edits[resolved.as_posix() + ("/*" if relative.endswith("/") else "")] = "allow"
+                    edits = edit_permissions(cwd, channel["allowed_write_paths"])
                     overrides["permission"] = {
                         "external_directory": {"*": "deny", str(ROOT) + "\\*": "allow", ROOT.as_posix() + "/*": "allow"},
                         "edit": edits,
