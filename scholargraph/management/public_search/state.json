@@ -1,9 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T14:17:50.192785+07:00",
-  "stage": "w1_author_and_independent_reviews",
+  "updated_at": "2026-09-30T15:00:26.585344+07:00",
+  "stage": "w1_author_corrections",
   "active_tasks": [
-    "EXT-02",
     "EXT-03",
     "EXT-04A"
   ],
@@ -16,10 +15,9 @@
     "EXT-04A"
   ],
   "next_steps": {
-    "COORDINATOR": "Collect MUSE storage; cross-review EXT-02 MUSE and EXT-03 fresh SOL6.1; no DONE before reviews",
-    "MUSE": "Storage author continues in original captured permission scope; separate fresh review OpenAlex only",
-    "GEMINI": "Await storage artifact for independent review",
-    "SOL": "Author completed; arXiv review handled by fresh subagent"
+    "GEMINI": "EXT-03 R5 fixes2P2 then coordinator tests and SOL re-review",
+    "MUSE": "EXT-04A R2 fixes cache/timezone/close locking then coordinator tests and GEMINI re-review",
+    "COORDINATOR": "Record exact runtimes; verify fixes; no W2 dispatch"
   },
   "last_session_log": "management/public_search/logs/SESSION-20260930-081-CODEX.md",
   "worker_execution_observed": true,
@@ -54,51 +52,43 @@
     "core_checker": {
       "exit_code": 0,
       "task_count": 53,
-      "markdown_links": 474
+      "markdown_links": 481
     }
   },
   "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
-  "pause_scope": "Latest user pause: no additional agent dispatch; save current checkpoint",
-  "active_review_assignments": [
-    {
-      "task_id": "EXT-03",
-      "reviewer": "SOL",
-      "model_requested": "gpt-6.1-sol",
-      "reasoning_effort_requested": "high",
-      "session_id": null,
-      "target_head": "74df8db71371306d2db71a2f529308063e763e9d",
-      "started_at": "2026-09-30T14:05:21.080616+07:00",
-      "claimed_paths": [
-        "management/public_search/reviews/SOL/EXT-03-W1-081.md",
-        "management/public_search/logs/SOL/REVIEW-EXT-03-W1-081.md"
-      ],
-      "agent_task": "/root/review_w1_arxiv_081"
-    },
-    {
-      "task_id": "EXT-02",
-      "reviewer": "MUSE",
-      "session_id": "ses_f0ed8e478ffePAh4Pr2C06KuSh",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "target_head": "fea49923f9187aee8de356fb0b02e4b73f90487f",
-      "claimed_paths": [
-        "management/public_search/reviews/MUSE/EXT-02-W1-081.md",
-        "management/public_search/logs/MUSE/REVIEW-EXT-02-W1-081.md"
-      ],
-      "started_at": "2026-09-30T14:11:04.605154+07:00",
-      "runner_exec_session": 99663,
-      "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
-      "runtime_variant_observed": "xhigh",
-      "runtime_observation_basis": "read-only OpenCode DB assistant metadata"
-    }
-  ],
+  "pause_scope": "Prior pause revoked by user continue",
+  "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/W0-R2-GATE.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-02",
+  "next_task_id": "EXT-03",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
-  }
+  },
+  "active_assignments": [
+    {
+      "task_id": "EXT-03",
+      "owner": "GEMINI",
+      "runner_exec_session": 25577,
+      "runtime_evidence": "data/public_search/control/runs/dd140961-35b6-493a-9ab3-94037d909c37/summary.json",
+      "session_id": null,
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W1-EXT03-R5-081.txt",
+      "status": "RUNNING",
+      "model_requested": "gemini-3.8-flash-high",
+      "reasoning_effort_requested": "high"
+    },
+    {
+      "task_id": "EXT-04A",
+      "owner": "MUSE",
+      "runner_exec_session": 76587,
+      "runtime_evidence": "data/public_search/control/runs/14db2baa-36ec-4845-bb1b-483ddcc17797/summary.json",
+      "session_id": null,
+      "dispatch_file": "management/public_search/dispatch/MUSE-W1-EXT04A-R2-081.txt",
+      "status": "RUNNING",
+      "model_requested": "opencode/muse-spark-1.3-contributor-free",
+      "reasoning_effort_requested": "xhigh"
+    }
+  ]
 }

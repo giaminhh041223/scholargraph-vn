@@ -59,3 +59,21 @@
 - Fresh reviewer6.1/high completed CHANGES_REQUIRED 3P1+4P2 despite53testsPASS, immutable37hashes/14pins. Report/log verified SHA exact.
 - Coordinator accepts F1–F7; F5 query mismatch clarified schema/payload-only boundary (not productionsearch); duplicate keys and argument exit1 required. F6 minimal scope decision UTF32 explicitly unsupported, UTF8/16 supported; no fake positive encoding claim. No frozencontract/schema change.
 - GEMINI same verified conversation assignedR4. Checker transient fail while reviewer log pending resolved by reviewer exit0/477links; no fake placeholder fix.
+
+## EXT-02 integrated 2026-09-30T14:34:17.901687+07:00
+
+- Fresh MUSE OpenAlex review PASS, no findings; runner565cec57-43f8-4d1e-9338-226f00ba6e61 CLI0/session ses_f0ed8e478ffePAh4Pr2C06KuSh, model/xhigh observed. Exact SOL bytes imported parent, modulehash a0d650d714958eef420b5a514843fdcd35d0d7cb0b6863757c94b2a13112e170. EXT-02 DONE. Parent integration focused tests next.
+- GEMINI R4 runner7e00d470-1f25-41dd-8aac-7f0fa59c0c13 ERROR HTTP500 INTERNAL. Partial actual66pass/1fail (fixture has invalid ID before missinglink). Closeout retry20478 same conversation, no model fallback. Prompt named ID inaccurately as arxiv:missinglink; actual fixture was urn:arxiv:non_http_id, rule remains isolate validID/missinglink. No R4 completion/PASS claim.
+
+## Final review dispatch 2026-09-30T14:46:33.975390+07:00
+
+- Parent OpenAlex integration217 pass/exit0. EXT-02 DONE.
+- GEMINI R4 actual67 pass/exit0; prior2INTERNAL500 errors preserved, freshcloseout b30fd17d PASS/session11c38d90-0129-46e0-80fb-c0777cd0cdcc. Pinnedhead095150c48b5fbf4cb46ff2f3af9aa4b3436dea16 (one whitespace-only code line cleanup aftertest).
+- MUSE author runtime3600s TIMEOUTexit1, code9b459bb plus savedpacket/log committedhead7785bd5d4fde8eb094785b57547d493606e7dcdd. Coordinator focused34 pass/exit0, not claiming author runtimeSUCCESS. Slot available; scoped supplementalcloseout and independentreviewnext.
+
+## Independent findings 2026-09-30T15:00:26.585344+07:00
+
+- SOL R4 re-review CHANGES_REQUIRED2P2, old findings resolved,67testsPASS. Gemini storage review runner8ea07a87 PASS/session0cb3bca2-2268-432e-a0c6-67ec6664d024 but verdictCHANGES_REQUIRED F1/F2/P3F3.
+- Coordinator inspected probe before execution; temp only. Actual diagnostic2functionalbugs reproduced; rawID convention confirmednotfinding. Exit0 collector not gatePASS.
+- Muse fresh supplementalcloseout runf9390d0d PASS/sessionses_f0eb50c79ffe3qG6rshNrnou37 but responsewrite-blocked/no files. Original TIMEOUT preserved; scopedR2 author fix next.
+- Corrected inheritedGemini log taskcard link only in parent, original author history otherwise retained.

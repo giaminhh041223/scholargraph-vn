@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T14:22:26.547081+07:00",
+  "updated_at": "2026-09-30T15:00:26.585344+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "paused_after_w0_r2_by_user",
+  "mode": "w1_author_corrections",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -72,45 +72,26 @@
   },
   "active_assignments": [
     {
-      "task_id": "EXT-04A",
-      "owner": "MUSE",
-      "dispatch_id": "DISPATCH-W1-081-MUSE",
-      "session_id": "ses_f0ef27bcfffekQkB6r6eCHL40x",
-      "started_at": "2026-09-30T13:42:50.233697+07:00",
-      "claimed_paths": [
-        "src/scholargraph/public_search/store.py",
-        "src/scholargraph/public_search/export.py",
-        "tests/unit/test_public_store.py",
-        "tests/unit/test_public_export.py",
-        "tests/fixtures/public_search/muse/store/",
-        "management/public_search/logs/MUSE/EXT-04A-W1-081.md",
-        "management/public_search/packets/MUSE/EXT-04A-W1-081.md"
-      ],
-      "input_head": "1ab9e7c5d754b85ebb33e5bbcd9ec7f5feef72b2",
-      "freeze_commit": "57b6598",
-      "dispatch_state": "running",
-      "runner_exec_session": 56754,
-      "runtime_evidence": "data/public_search/control/runs/da62fd79-048c-4cb1-8f75-817848ef458e/summary.json",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
-      "runtime_variant_observed": "xhigh",
-      "runtime_observation_basis": "read-only OpenCode assistant metadata"
-    },
-    {
       "task_id": "EXT-03",
       "owner": "GEMINI",
-      "session_id": "a9abb7f8-1a49-4768-a8ef-06d4889ce262",
-      "started_at": "2026-09-30T14:22:26.547081+07:00",
-      "dispatch_state": "author_fix_r4",
-      "prompt": "management/public_search/dispatch/GEMINI-W1-EXT03-R4-081.txt",
-      "claimed_paths": [
-        "src/scholargraph/public_search/arxiv.py",
-        "tests/unit/test_public_arxiv.py",
-        "tests/fixtures/public_search/gemini/arxiv/",
-        "management/public_search/logs/GEMINI/EXT-03-W1-081.md",
-        "management/public_search/packets/GEMINI/EXT-03-W1-081.md"
-      ]
+      "runner_exec_session": 25577,
+      "runtime_evidence": "data/public_search/control/runs/dd140961-35b6-493a-9ab3-94037d909c37/summary.json",
+      "session_id": null,
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W1-EXT03-R5-081.txt",
+      "status": "RUNNING",
+      "model_requested": "gemini-3.8-flash-high",
+      "reasoning_effort_requested": "high"
+    },
+    {
+      "task_id": "EXT-04A",
+      "owner": "MUSE",
+      "runner_exec_session": 76587,
+      "runtime_evidence": "data/public_search/control/runs/14db2baa-36ec-4845-bb1b-483ddcc17797/summary.json",
+      "session_id": null,
+      "dispatch_file": "management/public_search/dispatch/MUSE-W1-EXT04A-R2-081.txt",
+      "status": "RUNNING",
+      "model_requested": "opencode/muse-spark-1.3-contributor-free",
+      "reasoning_effort_requested": "xhigh"
     }
   ],
   "tasks": [
@@ -183,7 +164,7 @@
         "management/public_search/reviews/SOL/EXT-01B-R2.md"
       ],
       "unresolved_findings": [],
-      "next_action": "W1 EXT-02/03 remains paused by user"
+      "next_action": "W0 accepted; W1 in progress"
     },
     {
       "id": "EXT-01C",
@@ -213,13 +194,13 @@
       "review_evidence": [
         "management/public_search/reviews/MUSE/EXT-01C-R2.md"
       ],
-      "next_action": "W1 EXT-03/05A remains paused by user",
+      "next_action": "W0 accepted; W1 in progress",
       "unresolved_findings": []
     },
     {
       "id": "EXT-02",
       "title": "Adapter OpenAlex",
-      "status": "REVIEW",
+      "status": "DONE",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -228,7 +209,8 @@
       ],
       "session_id": "01a0f10d-4a57-7b71-ad8a-707815cf2d84",
       "evidence": [
-        "management/public_search/packets/SOL/EXT-02-W1-081.md"
+        "management/public_search/packets/SOL/EXT-02-W1-081.md",
+        "management/public_search/reviews/MUSE/EXT-02-W1-081.md"
       ],
       "owner": "SOL",
       "dispatch_id": "DISPATCH-W1-081-SOL",
@@ -239,7 +221,7 @@
         "management/public_search/logs/SOL/EXT-02-W1-081.md",
         "management/public_search/packets/SOL/EXT-02-W1-081.md"
       ],
-      "dispatch_state": "author_complete_await_review",
+      "dispatch_state": "completed_reviewed_integrated",
       "input_head": "430842b793b6b9560ce383e88f1f00a2ad96fd96",
       "runtime": {
         "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
@@ -254,7 +236,13 @@
         "failed": 0,
         "exit_code": 0,
         "evidence_local": "data/public_search/control/w1-081/sol-tests-r1.log"
-      }
+      },
+      "review_verdict": "PASS",
+      "review_evidence": [
+        "management/public_search/reviews/MUSE/EXT-02-W1-081.md"
+      ],
+      "unresolved_findings": [],
+      "integrated_into_parent": true
     },
     {
       "id": "EXT-03",
@@ -277,7 +265,7 @@
         "management/public_search/logs/GEMINI/EXT-03-W1-081.md",
         "management/public_search/packets/GEMINI/EXT-03-W1-081.md"
       ],
-      "dispatch_state": "author_fix_r4",
+      "dispatch_state": "author_fix_dispatched",
       "input_head": "a56bffa20ec25423048b82188055419e982b2871",
       "runtime": {
         "runner_exec_session": 92818,
@@ -288,13 +276,8 @@
         "author_fix_prompt": "management/public_search/dispatch/GEMINI-W1-EXT03-R3-081.txt"
       },
       "unresolved_findings": [
-        "F1 secret CLI stderr",
-        "F2 arbitrary/offhost/v0 IDs",
-        "F3 legitimate Error title/abstract misclassified",
-        "F4 Atom root/singleton ambiguity",
-        "F5 duplicate JSON and args exit1",
-        "F6 UTF32 support narrative mismatch",
-        "F7 raw link provenance/license semantics"
+        "R4-F1",
+        "R4-F2"
       ],
       "coordinator_verification": {
         "command": "pytest tests/unit/test_public_arxiv.py -q --tb=short -p no:cacheprovider",
@@ -311,7 +294,7 @@
         "evidence_local": "data/public_search/control/w1-081/gemini-tests-r2.log",
         "tested_head": "e5d4105 (same files as tested before commit)"
       },
-      "delivered_head": "74df8db71371306d2db71a2f529308063e763e9d",
+      "delivered_head": "095150c48b5fbf4cb46ff2f3af9aa4b3436dea16",
       "coordinator_verification_r3": {
         "passed": 53,
         "failed": 0,
@@ -322,8 +305,16 @@
       },
       "review_verdict": "CHANGES_REQUIRED",
       "review_evidence": [
-        "management/public_search/reviews/SOL/EXT-03-W1-081.md"
-      ]
+        "management/public_search/reviews/SOL/EXT-03-W1-081.md",
+        "management/public_search/reviews/SOL/EXT-03-W1-R4-081.md"
+      ],
+      "coordinator_verification_latest": {
+        "passed": 67,
+        "exit_code": 0,
+        "evidence_local": "data/public_search/control/w1-081/gemini-tests-r4.log"
+      },
+      "author_closeout_session": "11c38d90-0129-46e0-80fb-c0777cd0cdcc",
+      "author_closeout_evidence_local": "data/public_search/control/runs/b30fd17d-6893-451f-a820-452fc615f1e7/summary.json"
     },
     {
       "id": "EXT-04A",
@@ -347,7 +338,7 @@
         "management/public_search/logs/MUSE/EXT-04A-W1-081.md",
         "management/public_search/packets/MUSE/EXT-04A-W1-081.md"
       ],
-      "dispatch_state": "running",
+      "dispatch_state": "author_fix_dispatched",
       "input_head": "1ab9e7c5d754b85ebb33e5bbcd9ec7f5feef72b2",
       "runtime": {
         "runner_exec_session": 56754,
@@ -358,7 +349,25 @@
         "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
         "runtime_variant_observed": "xhigh",
         "runtime_observation_basis": "read-only OpenCode assistant metadata"
-      }
+      },
+      "delivered_head": "7785bd5d4fde8eb094785b57547d493606e7dcdd",
+      "coordinator_verification_latest": {
+        "passed": 34,
+        "exit_code": 0,
+        "evidence_local": "data/public_search/control/w1-081/muse-tests-r1.log"
+      },
+      "author_turn_status": "TIMEOUT_EXIT1",
+      "author_turn_evidence_local": "data/public_search/control/runs/da62fd79-048c-4cb1-8f75-817848ef458e/summary.json",
+      "next_action": "Independent GEMINI review pinned code; supplemental scoped author closeout preserves timeout evidence",
+      "review_verdict": "CHANGES_REQUIRED",
+      "unresolved_findings": [
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "review_evidence": [
+        "management/public_search/reviews/GEMINI/EXT-04A-W1-081.md"
+      ]
     },
     {
       "id": "EXT-04B",
@@ -571,7 +580,7 @@
       ],
       "input_head": "430842b793b6b9560ce383e88f1f00a2ad96fd96",
       "freeze_commit": "57b6598",
-      "dispatch_state": "running",
+      "dispatch_state": "initial_author_turn_ended",
       "thread_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
       "turn_id": "01a0f10d-4a57-7b71-ad8a-707815cf2d84",
       "model_requested": "gpt-6.1-sol",
@@ -593,7 +602,7 @@
       ],
       "input_head": "a56bffa20ec25423048b82188055419e982b2871",
       "freeze_commit": "57b6598",
-      "dispatch_state": "author_fix_r3",
+      "dispatch_state": "initial_author_turn_ended",
       "runner_exec_session": 92818,
       "runtime_evidence": "data/public_search/control/runs/4a033af4-25aa-4722-8a82-c529c3bbd11a/summary.json",
       "model_requested": "gemini-3.8-flash-high",
@@ -616,7 +625,7 @@
       ],
       "input_head": "1ab9e7c5d754b85ebb33e5bbcd9ec7f5feef72b2",
       "freeze_commit": "57b6598",
-      "dispatch_state": "running",
+      "dispatch_state": "initial_author_turn_ended",
       "runner_exec_session": 56754,
       "runtime_evidence": "data/public_search/control/runs/da62fd79-048c-4cb1-8f75-817848ef458e/summary.json",
       "model_requested": "opencode/muse-spark-1.3-contributor-free",
@@ -631,25 +640,7 @@
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
   "resumed_from": "paused_after_w0_r1_by_user",
   "pause_reason": "Prior pause revoked by user continue",
-  "active_review_assignments": [
-    {
-      "task_id": "EXT-02",
-      "reviewer": "MUSE",
-      "session_id": "ses_f0ed8e478ffePAh4Pr2C06KuSh",
-      "model_requested": "opencode/muse-spark-1.3-contributor-free",
-      "reasoning_effort_requested": "xhigh",
-      "target_head": "fea49923f9187aee8de356fb0b02e4b73f90487f",
-      "claimed_paths": [
-        "management/public_search/reviews/MUSE/EXT-02-W1-081.md",
-        "management/public_search/logs/MUSE/REVIEW-EXT-02-W1-081.md"
-      ],
-      "started_at": "2026-09-30T14:11:04.605154+07:00",
-      "runner_exec_session": 99663,
-      "runtime_model_observed": "opencode/muse-spark-1.3-contributor-free",
-      "runtime_variant_observed": "xhigh",
-      "runtime_observation_basis": "read-only OpenCode DB assistant metadata"
-    }
-  ],
+  "active_review_assignments": [],
   "round_closeout": {
     "round": "W0-R2",
     "closed_at": "2026-09-30T11:32:14.507259+07:00",

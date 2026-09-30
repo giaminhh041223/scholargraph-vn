@@ -1,0 +1,7 @@
+{
+  "synthetic": true,
+  "not_live": true,
+  "purpose": "EXT-02 deterministic OpenAlex payload mapping; not source availability or research evidence",
+  "payload": "openalex_page.json",
+  "records": 2
+}

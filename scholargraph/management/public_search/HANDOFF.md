@@ -1,3 +1,11 @@
+# W1 081 — corrections after independent review
+
+- EXT-02 DONE: OpenAlex exact bytes imported; fresh MUSE review PASS; parent217tests PASS.
+- EXT-03 IN_PROGRESS: R4 oldF1-F7 resolved/67testsPASS; SOL re-review finds2P2 wrong request diagnosis and malformed URL ports. Gemini R5 author fix next.
+- EXT-04A IN_PROGRESS: author TIMEOUT preserved,34testsPASS; freshGemini review finds cache integrity/timezone/close lock. Coordinator executed temp reviewer probe: both functional defects reproduced. Muse R2 author fix next.
+- SupplementalMusecloseout runnerPASS but file writes blocked, no closure artifacts; not completed author acceptance.
+- W0 freeze57b6598 unchanged; no W2 dispatch. Next executable: run author corrections, focused suites, pin heads and re-review.
+
 # W1 checkpoint 081 — review và storage author
 
 - EXT-02 REVIEW: SOL author ended HEADfea4992, coordinator106 tests PASS; fresh MUSE review running99663/session ses_f0ed8e478ffePAh4Pr2C06KuSh xhigh.

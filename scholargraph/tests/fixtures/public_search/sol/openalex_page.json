@@ -1,0 +1,23 @@
+{
+  "synthetic": true,
+  "meta": {"count": 2, "per_page": 2, "page": 1, "next_cursor": null},
+  "results": [
+    {
+      "id": "https://openalex.org/W100",
+      "title": "Synthetic graph paper",
+      "publication_year": 2024,
+      "doi": "https://doi.org/10.1234/SYNTHETIC.A",
+      "abstract_inverted_index": {"Graph": [0, 2], "mining": [1]},
+      "authorships": [{"author": {"display_name": "Synthetic Author"}}],
+      "cited_by_count": 0,
+      "primary_location": {
+        "landing_page_url": "https://example.org/synthetic/a",
+        "pdf_url": "https://example.org/synthetic/a.pdf",
+        "license": "cc-by",
+        "source": {"display_name": "Synthetic Venue"}
+      },
+      "open_access": {"is_oa": true, "oa_status": "gold"}
+    },
+    {"id": "https://openalex.org/W101", "title": "Synthetic title-only paper"}
+  ]
+}
