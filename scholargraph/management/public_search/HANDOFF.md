@@ -1,3 +1,10 @@
+# W2 082 — đăng ký author fusion và UI
+
+- User yêu cầu tiếp bước. EXT-04B SOL và EXT-05A Gemini IN_PROGRESS; chưa dispatch W3.
+- Input45pins W0/W1 identical parent+3checkout, worker clean; Gemini freshsmokePASS. Dispatch chi tiết trong dispatch/SOL-W2-082.txt và dispatch/GEMINI-W2-082.txt.
+- Coordinator giữ board; worker riêng module; Muse review context mới sau mỗi immutable delivery.
+- Next executable: gửi SOL existingthread + freshGemini workCLI, ghi runtimeevidence, chạy actualtests, review/fix/integrate và checkpoint W2.
+
 # W1 081 — hoàn tất sau review và tích hợp
 
 - EXT-02 OpenAlex, EXT-03 arXiv, EXT-04A storage/cache/library/export DONE. W0 đãfreeze14pins. GateW1 mới [manifest](W1-FREEZE-081.json), [gate](reviews/COORDINATOR/W1-FINISH-081.md).

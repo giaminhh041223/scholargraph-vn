@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T16:57:19.905563+07:00",
+  "updated_at": "2026-09-30T17:15:31.617384+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "w1_completed_reviewed",
+  "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -29,7 +29,7 @@
       "delivered_head": "93f8c75e7599a96598f36421254608f3ccb081fc",
       "channel_config": "management/public_search/channels.json",
       "latest_synchronized_head": "5c41e37da38577a16dbedec18afd94b149647575",
-      "current_dispatch_state": "idle_w1_complete"
+      "current_dispatch_state": "running_w2_author"
     },
     "GEMINI": {
       "requested_model": "gemini 3.8 flash high",
@@ -51,7 +51,7 @@
       "delivered_head": "cc51ef8b714ae975d731e082cdbff239d9717508",
       "channel_config": "management/public_search/channels.json",
       "latest_synchronized_head": "51cdef56b797cad42ea71a36e90536f780207c4d",
-      "current_dispatch_state": "idle_w1_complete"
+      "current_dispatch_state": "running_w2_author"
     },
     "MUSE": {
       "requested_model": "muse spark 1.3",
@@ -405,28 +405,36 @@
     {
       "id": "EXT-04B",
       "title": "Dedup, filter và RRF",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [
         "EXT-02",
         "EXT-03"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "DISPATCH-20260930-W2-SOL-082",
+      "evidence": [
+        "management/public_search/dispatch/SOL-W2-082.txt"
+      ],
+      "owner": "SOL",
+      "dispatch_file": "management/public_search/dispatch/SOL-W2-082.txt"
     },
     {
       "id": "EXT-05A",
       "title": "UI public search và library",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "MUSE",
       "dependencies": [
         "EXT-01A",
         "EXT-01C"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "DISPATCH-20260930-W2-GEMINI-082",
+      "evidence": [
+        "management/public_search/dispatch/GEMINI-W2-082.txt"
+      ],
+      "owner": "GEMINI",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt"
     },
     {
       "id": "EXT-05B",

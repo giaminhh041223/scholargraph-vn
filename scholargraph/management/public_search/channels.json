@@ -20,9 +20,9 @@
       "reasoning_effort": "high",
       "effort_basis": "Exact Flash High model rejects --effort=max as conflicting; high is its highest supported tier",
       "probe_status": "PASS",
-      "probe_session_id": "ed8034e8-92b5-4900-86e8-2aa4f01734d1",
+      "probe_session_id": "71e0e9f9-6cce-430d-b475-81d1ef1a17d2",
       "project_root": "D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph",
-      "probe_evidence": "data/public_search/control/runs/5e906cef-f0fb-4497-97ac-622da72a53cc/summary.json"
+      "probe_evidence": "data/public_search/control/runs/c7d8486e-afd6-4f5e-aa5f-0b752958d8d0/summary.json"
     },
     "MUSE": {
       "transport": "opencode_cli",
@@ -48,5 +48,5 @@
       "probe_evidence": "data/public_search/control/runs/445eb7c9-b147-439a-92eb-4d170ff060f4/summary.json"
     }
   },
-  "updated_at": "2026-09-30T15:00:26.585344+07:00"
+  "updated_at": "2026-09-30T17:11:55.791860+07:00"
 }
