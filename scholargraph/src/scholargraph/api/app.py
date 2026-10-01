@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
@@ -53,6 +53,11 @@ def index(request: Request) -> Any:
     svc = get_service()
     return templates.TemplateResponse(request, "search.html", {
         "snapshot": "beir-scifact-frozen", "docs": svc.doc_count})
+
+
+@app.get("/public/ui", response_class=HTMLResponse, include_in_schema=False)
+def public_page(request: Request) -> Any:
+    return templates.TemplateResponse(request, "public_search.html", {})
 
 
 @app.get("/search")

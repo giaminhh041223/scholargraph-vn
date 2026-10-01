@@ -2,7 +2,7 @@
 
 Strict Anti-Silent-Bypass Protocol:
 - Positive tests:
-  * Template inspection: ui/templates/search.html contains explicit navigation link to /public.
+  * Template inspection: ui/templates/search.html contains explicit navigation link to /public/ui.
   * Template inspection: ui/templates/public_search.html contains required forms, inputs, language notice,
     sources checkboxes, year range bounds, action buttons, tabs, detail panel, library section.
   * CSS stylesheet verification: ui/static/public_search.css contains required banners, badges, and accessible states.
@@ -65,12 +65,12 @@ NODE_RUNNER_PATH = FIXTURES_DIR / "node_test_runner.js"
 
 
 def test_search_html_contains_public_link():
-    """Verify that search.html has the explicit navigation link to /public."""
+    """Verify that search.html has the explicit navigation link to /public/ui."""
     search_html = TEMPLATES_DIR / "search.html"
     assert search_html.is_file(), "ui/templates/search.html must exist"
     content = search_html.read_text(encoding="utf-8")
-    assert "/public" in content, "search.html must link to /public"
-    assert 'href="/public"' in content or "href='/public'" in content, "search.html must have href='/public'"
+    assert "/public/ui" in content, "search.html must link to /public/ui"
+    assert 'href="/public/ui"' in content or "href='/public/ui'" in content, "search.html must have href='/public/ui'"
     assert "Tìm kiếm công khai" in content or "public" in content.lower(), "search.html must have descriptive text"
 
 
