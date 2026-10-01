@@ -1,3 +1,9 @@
+# W3 084 — EXT-05B gate INSUFFICIENT_EVIDENCE (2026-10-01T10:04:30+07:00)
+
+- Implementation SOL đã nhập parent `b304bf4`; 451 regression tests và 21 focused tests pass.
+- Không có independent review artifact: Gemini bị Antigravity từ chối, MUSE worker exit 1, fallback SOL không ghi report. Gate coordinator: [EXT-05B-W3-GATE-084](reviews/COORDINATOR/EXT-05B-W3-GATE-084.md).
+- EXT-05B giữ REVIEW/INSUFFICIENT_EVIDENCE; EXT-06 chưa mở. Bước tiếp theo duy nhất là chạy fresh reviewer khi kênh worker hoạt động, rồi mới quyết định DONE hoặc sửa findings.
+
 # W3 084 — short fresh review fallback đang chạy (2026-10-01T09:57:30+07:00)
 
 - Lượt Gemini Antigravity bị từ chối; fallback trước không tạo artifact nên đã dừng.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T09:57:30+07:00",
-  "stage": "w3_ext05b_review",
+  "updated_at": "2026-10-01T10:04:30+07:00",
+  "stage": "w3_ext05b_review_insufficient",
   "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
@@ -15,12 +15,12 @@
     "EXT-05B"
   ],
   "next_steps": {
-    "COORDINATOR": "Fresh short reviewer SOL high đang kiểm target b304bf4; chờ report trước gate",
-    "SOL": "Delivery 66aad9b đã nhập parent; author thread dừng vì usage limit, không còn quyền sửa target",
-    "GEMINI": "Đang fresh review EXT-05B, chỉ ghi report/log/probes",
-    "MUSE": "Idle sau EXT-05A R5 PASS; EXT-06 chưa mở"
+    "COORDINATOR": "EXT-05B đã có implementation và test nhưng gate INSUFFICIENT_EVIDENCE; chờ worker review channel hoạt động để fresh review",
+    "SOL": "Delivery 66aad9b đã nhập parent; không sửa target khi thiếu review",
+    "GEMINI": "Runner bị required-action denied, chưa có report; chưa gán lại tự động",
+    "MUSE": "Runner exit 1, chưa có report; chưa mở EXT-06"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-088-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-089-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -104,20 +104,9 @@
   "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
-  "active_review_assignments": [
-    {
-      "task_id": "EXT-05B",
-      "reviewer": "SOL_FRESH_FALLBACK_SHORT",
-      "dispatch_id": "DISPATCH-W3-084-FRESH-SHORT",
-      "agent": "/root/review_ext05b_short",
-      "target_head": "b304bf4",
-      "status": "RUNNING",
-      "model_requested": "gpt-6.1-sol",
-      "reasoning_effort_requested": "high"
-    }
-  ],
+  "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/W2-FINISH-083.md",
+  "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-GATE-084.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
   "next_task_id": "EXT-05B",
   "w0_freeze": {
