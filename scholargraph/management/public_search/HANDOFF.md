@@ -1,3 +1,9 @@
+# W4 090 — EXT-06 coordinator takeover (2026-10-01T10:17:30+07:00)
+
+- MUSE runner `EXT06-W4-MUSE-090` failed exit 1 before producing artifacts; failure evidence `data/public_search/control/runs/437d74cb-7ecf-4f1e-9d26-c7f526737bdd/summary.json`.
+- Coordinator owns only adversarial test/verification/report namespace for continuity; production code remains frozen at `b304bf4`.
+- EXT-06 is IN_PROGRESS; live pilot will be marked PASS/FAIL/NOT_RUN from actual run, never inferred.
+
 # W3 084 — EXT-05B DONE sau fallback review (2026-10-01T10:09:30+07:00)
 
 - Parent `b304bf4` đã tích hợp delivery SOL `66aad9b`; 485 regression tests pass sau tích hợp.

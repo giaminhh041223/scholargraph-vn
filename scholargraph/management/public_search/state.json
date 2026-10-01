@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T10:09:30+07:00",
-  "stage": "w3_completed_reviewed",
-  "active_tasks": [],
+  "updated_at": "2026-10-01T10:17:30+07:00",
+  "stage": "w4_ext06_in_progress",
+  "active_tasks": [
+    "EXT-06"
+  ],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -15,12 +17,12 @@
     "EXT-05B"
   ],
   "next_steps": {
-    "COORDINATOR": "EXT-05B DONE; EXT-06 là bước kế tiếp (MUSE author, SOL review), chưa claim pilot/live",
-    "SOL": "EXT-05B delivery hoàn tất; review fallback PASS; sẵn sàng review EXT-06 khi dispatch",
-    "GEMINI": "EXT-05B fallback report PASS; kênh Gemini Antigravity vẫn chưa khả dụng",
-    "MUSE": "EXT-05B runner lỗi; EXT-06 chưa dispatch trong checkpoint này"
+    "COORDINATOR": "MUSE worker exit1; coordinator đang tạo adversarial tests/verification và pilot evidence, không claim PASS khi thiếu live",
+    "SOL": "Chờ immutable EXT-06 evidence để fresh review",
+    "GEMINI": "Idle; EXT-07M sau EXT-06",
+    "MUSE": "Runner EXT-06 exit1, failure preserved"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-090-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-091-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -113,7 +115,22 @@
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "EXT-06",
+      "owner": "COORDINATOR_TAKEOVER",
+      "source_owner": "MUSE",
+      "dispatch_id": "DISPATCH-W4-090-MUSE",
+      "status": "IN_PROGRESS",
+      "claimed_paths": [
+        "tests/integration/test_public_adversarial.py",
+        "scripts/verify_public_search.py",
+        "artifacts/reports/public_search/muse/validation.json",
+        "artifacts/reports/public_search/muse/validation.md",
+        "data/public_search/muse/pilot_ext06/"
+      ]
+    }
+  ],
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"

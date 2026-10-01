@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T10:09:30+07:00",
+  "updated_at": "2026-10-01T10:17:30+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -647,15 +647,37 @@
     {
       "id": "EXT-06",
       "title": "Kiểm thử tích hợp phá hủy và pilot thực",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "SOL",
       "dependencies": [
         "EXT-05A",
         "EXT-05B"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "DISPATCH-W4-090-MUSE",
+      "evidence": [],
+      "owner": "MUSE",
+      "dispatch_id": "DISPATCH-W4-090-MUSE",
+      "dispatch_file": "management/public_search/dispatch/MUSE-W4-EXT06-090.txt",
+      "dispatch_state": "worker_failed_coordinator_takeover",
+      "author_execution_status": "FAILED_WORKER_EXIT1",
+      "runtime": {
+        "runner_session": "EXT06-W4-MUSE-090",
+        "model_requested": "opencode/muse-spark-1.3-contributor-free",
+        "reasoning_effort_requested": "xhigh",
+        "runtime_observed": null,
+        "failure_evidence": "data/public_search/control/runs/437d74cb-7ecf-4f1e-9d26-c7f526737bdd/summary.json"
+      },
+      "claimed_paths": [
+        "tests/integration/test_public_adversarial.py",
+        "scripts/verify_public_search.py",
+        "artifacts/reports/public_search/muse/validation.json",
+        "artifacts/reports/public_search/muse/validation.md",
+        "data/public_search/muse/pilot_ext06/",
+        "management/public_search/logs/MUSE/EXT-06-W4-090.md",
+        "management/public_search/packets/MUSE/EXT-06-W4-090.md"
+      ],
+      "next_action": "Coordinator takeover adversarial evidence; reviewer SOL fresh fallback sau khi artifacts immutable"
     },
     {
       "id": "EXT-07S",
@@ -869,6 +891,19 @@
       "actual_model": "gpt-6.1-sol",
       "reasoning_effort_requested": "high",
       "target_head": "b304bf4"
+    },
+    {
+      "session_id": "DISPATCH-W4-090-MUSE",
+      "kind": "coordinator_dispatch_author",
+      "issued_at": "2026-10-01T10:17:30+07:00",
+      "worker": "MUSE",
+      "task_id": "EXT-06",
+      "status": "FAILED_WORKER_EXIT1_COORDINATOR_TAKEOVER",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-W4-090-MUSE.md",
+      "actual_model": null,
+      "worker_execution_session_id": null,
+      "model_requested": "opencode/muse-spark-1.3-contributor-free",
+      "reasoning_effort_requested": "xhigh"
     }
   ],
   "current_round_assignments": [

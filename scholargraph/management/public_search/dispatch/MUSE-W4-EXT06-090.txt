@@ -1,0 +1,16 @@
+EXT-06 / W4 author dispatch — MUSE
+Issued: 2026-10-01T10:15:00+07:00
+Target parent: b304bf4 (EXT-05B integrated)
+Requested runtime: opencode/muse-spark-1.3-contributor-free, reasoning xhigh
+Reviewer: SOL fresh context after immutable delivery
+
+Owned paths:
+tests/integration/test_public_adversarial.py
+scripts/verify_public_search.py
+artifacts/reports/public_search/muse/validation.json
+artifacts/reports/public_search/muse/validation.md
+data/public_search/muse/pilot_ext06/ (raw/manifests only)
+management/public_search/logs/MUSE/EXT-06-W4-090.md
+management/public_search/packets/MUSE/EXT-06-W4-090.md
+
+Acceptance: run plan matrix on temp data; mocked HTTP auth/429/schema/security; CLI subprocess exit checks; explicit missing/corrupt store and source/policy failures; leakage sentinel read-only audit for labels/qrels/held-out; cache miss/hit latency and counts with config/hash/commit; small pilot only if network/policy/source access is genuinely available. Preserve failed/NOT_RUN cases. No production source edits and no board/state/HANDOFF edits. Missing required evidence means INSUFFICIENT_EVIDENCE, never PASS.
