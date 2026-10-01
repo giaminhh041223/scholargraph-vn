@@ -1,3 +1,10 @@
+# W3 084 — EXT-05B DONE sau fallback review (2026-10-01T10:09:30+07:00)
+
+- Parent `b304bf4` đã tích hợp delivery SOL `66aad9b`; 485 regression tests pass sau tích hợp.
+- Fresh fallback review report PASS không findings tại `reviews/GEMINI/EXT-05B-W3-R1-084.md`; deviation: reviewer là Codex fallback vì Gemini/MUSE channel fail, runtime metadata unavailable.
+- Gate: [EXT-05B-W3-FINAL-GATE-084](reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md). EXT-05B DONE.
+- EXT-06 là bước kế tiếp nhưng chưa dispatch trong checkpoint này; chưa có live/pilot claim.
+
 # W3 084 — EXT-05B gate INSUFFICIENT_EVIDENCE (2026-10-01T10:04:30+07:00)
 
 - Implementation SOL đã nhập parent `b304bf4`; 451 regression tests và 21 focused tests pass.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T10:04:30+07:00",
+  "updated_at": "2026-10-01T10:09:30+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -538,7 +538,7 @@
     {
       "id": "EXT-05B",
       "title": "Service, routes, CLI và tích hợp ứng dụng",
-      "status": "REVIEW",
+      "status": "DONE",
       "proposed_owner": "SOL",
       "proposed_reviewer": "GEMINI",
       "dependencies": [
@@ -581,31 +581,35 @@
         "reasoning_effort_requested": "high",
         "runtime_model_observed": null
       },
-      "dispatch_state": "review_evidence_insufficient",
-      "review_verdict": "INSUFFICIENT_EVIDENCE",
-      "unresolved_findings": [
-        "Independent fresh review artifact unavailable: Gemini required action denied, MUSE runner exit 1, fallback reviewers produced no report"
-      ],
-      "next_action": "Giữ REVIEW; cần fresh reviewer report PASS/CHANGES_REQUIRED trước DONE",
+      "dispatch_state": "completed_reviewed_integrated",
+      "review_verdict": "PASS_fallback_independent",
+      "unresolved_findings": [],
+      "next_action": "EXT-06 ready; no live/pilot claim",
       "delivered_head": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
       "author_execution_status": "FAILED_USAGE_LIMIT_AFTER_IMPLEMENTATION_BEFORE_COMMIT_CLOSEOUT",
       "coordinator_takeover": true,
       "verification": {
-        "public_search_tests": {
+        "public_search_parent_regression": {
+          "passed": 485,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "parent command 2026-10-01"
+        },
+        "focused_independent_review": {
+          "passed": 21,
+          "failed": 0,
+          "exit_code": 0,
+          "report": "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md"
+        },
+        "coordinator_public_regression": {
           "passed": 451,
           "failed": 0,
           "exit_code": 0,
-          "evidence_local": "checkout .worktrees/public-sol/scholargraph; imported exact to parent"
+          "evidence_local": "SOL checkout"
         },
-        "focused_new_tests": {
-          "passed": 21,
-          "failed": 0,
-          "exit_code": 0
-        },
-        "base_head": {
-          "base": "791bb8c43faa96c0b2161080ab89fe93e1a6b6e1",
-          "delivery": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
-          "parent": "b304bf4"
+        "checker": {
+          "exit_code": 0,
+          "markdown_links": 503
         }
       },
       "review_dispatch_id": "DISPATCH-W3-084-FRESH-SHORT",
@@ -633,7 +637,12 @@
           "reason": "Previous fallback produced no artifact; short fresh review restarted"
         }
       ],
-      "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-GATE-084.md"
+      "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md",
+      "review_evidence": [
+        "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md"
+      ]
     },
     {
       "id": "EXT-06",

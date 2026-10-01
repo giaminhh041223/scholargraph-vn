@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T10:04:30+07:00",
-  "stage": "w3_ext05b_review_insufficient",
+  "updated_at": "2026-10-01T10:09:30+07:00",
+  "stage": "w3_completed_reviewed",
   "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
@@ -15,12 +15,12 @@
     "EXT-05B"
   ],
   "next_steps": {
-    "COORDINATOR": "EXT-05B đã có implementation và test nhưng gate INSUFFICIENT_EVIDENCE; chờ worker review channel hoạt động để fresh review",
-    "SOL": "Delivery 66aad9b đã nhập parent; không sửa target khi thiếu review",
-    "GEMINI": "Runner bị required-action denied, chưa có report; chưa gán lại tự động",
-    "MUSE": "Runner exit 1, chưa có report; chưa mở EXT-06"
+    "COORDINATOR": "EXT-05B DONE; EXT-06 là bước kế tiếp (MUSE author, SOL review), chưa claim pilot/live",
+    "SOL": "EXT-05B delivery hoàn tất; review fallback PASS; sẵn sàng review EXT-06 khi dispatch",
+    "GEMINI": "EXT-05B fallback report PASS; kênh Gemini Antigravity vẫn chưa khả dụng",
+    "MUSE": "EXT-05B runner lỗi; EXT-06 chưa dispatch trong checkpoint này"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-089-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-090-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -106,9 +106,9 @@
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-GATE-084.md",
+  "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-05B",
+  "next_task_id": "EXT-06",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"

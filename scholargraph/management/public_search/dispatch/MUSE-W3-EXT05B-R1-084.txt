@@ -1,0 +1,9 @@
+Bạn là MUSE reviewer fresh-context thay thế cho EXT-05B/W3 của ScholarGraph. Gemini Antigravity đã bị từ chối trước report; hai fallback SOL chưa tạo artifact. Review này phải độc lập, không sửa source.
+
+Target: D:/Web_mining_20261/scholargraph, immutable HEAD b304bf4. Requested model opencode/muse-spark-1.3-contributor-free, reasoning xhigh; ghi actual metadata nếu có.
+
+Đọc AGENTS.md, docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-05B, docs/public_search/CONTRACT.md, management/public_search/packets/SOL/EXT-05B-W3-084.md và implementation mới: src/scholargraph/public_search/service.py, src/scholargraph/api/public_routes.py, src/scholargraph/api/app.py, scripts/search_public.py, tests/unit/test_public_service.py, tests/integration/test_public_routes.py, tests/integration/test_public_cli.py.
+
+Acceptance: no silent fallback/swallowed exceptions; explicit missing config/policy/auth/resource/schema and corrupt/missing store; shared transport/deadline and bounded source fanout; cache TTL/refresh/error truth table and non-2xx partial failure; init-storage explicit/open_existing normal lifecycle; CLI common service/envelope and exit1 for invalid/missing/partial, no traceback/secret; library/export offline; no offline labels/qrels. Check adversarial evidence and run focused tests with actual command/exit/count.
+
+Write only management/public_search/reviews/MUSE/EXT-05B-W3-R1-084.md and management/public_search/logs/MUSE/EXT-05B-W3-R1-084.md, optional probes under management/public_search/reviews/MUSE/probes-ext05b-r1-084/. Verdict exactly PASS, CHANGES_REQUIRED, or INSUFFICIENT_EVIDENCE. Findings severity/path/line/evidence/expected/actual. No implementation/board/state/HANDOFF edits. Explicitly mark reviewer substitution for proposed GEMINI.
