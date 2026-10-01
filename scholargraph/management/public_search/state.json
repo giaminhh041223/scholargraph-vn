@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T13:32:49+07:00",
-  "stage": "ui_backend_library_envelope_fix_before_w5",
+  "updated_at": "2026-10-01T13:52:04.795523+07:00",
+  "stage": "w5_snapshot_prepared",
   "active_tasks": [
-    "EXT-05A-LIBRARY-DELTA"
+    "EXT-07S",
+    "EXT-07G",
+    "EXT-07M"
   ],
   "authorized_tasks": [
     "EXT-01A",
@@ -22,12 +24,12 @@
     "EXT-08"
   ],
   "next_steps": {
-    "COORDINATOR": "ThuGeminiUI101; actualNodepytestbrowser; pinW5audit",
-    "SOL": "UIroute100done64c7a1b",
-    "GEMINI": "Sửa strict save/list library envelope theo actual backend",
-    "MUSE": "Smoke kênh đang chạy, chưa audit"
+    "COORDINATOR": "Pin immutable snapshot, dispatch native MUSE/GEMINI + fresh SOL audit; browser exports unresolved",
+    "SOL": "EXT-07G arxiv/UI fresh audit high",
+    "GEMINI": "EXT-07M storage/evidence native high; terminal NOT_RUN if denied",
+    "MUSE": "EXT-07S backend audit native xhigh"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-096-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-101-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",

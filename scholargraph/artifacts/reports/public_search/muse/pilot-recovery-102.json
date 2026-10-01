@@ -1,0 +1,1579 @@
+{
+  "schema_version": 2,
+  "task_id": "EXT-06",
+  "evidence_status": "PASS",
+  "two_source_operational": "PASS",
+  "reason": "Recovery cohort: 5 actual two-source refresh + 5 cached replays succeeded; prior 6 partial failures are retained and reported separately, not rewritten.",
+  "code_commit": "ca0344ded94701de267f5545169a00ffd22197c0",
+  "config_path": "data/public_search/muse/pilot_ext06/config.json",
+  "config_sha256": "deb31c5fd6a67aac0da9883500d58707ec5ebe3a4ce9ebfeaa35ebc0ef8f65d2",
+  "requirements_sha256": "b68fcdc47fdbc67460e8384087e0fde8d62fc8fe820a6cf9b220283e0298d57d",
+  "approved_queries": [
+    "knowledge graph",
+    "graph neural network",
+    "information retrieval",
+    "scientific document search",
+    "Vietnamese natural language processing"
+  ],
+  "approval_basis": "User confirmed the five proposed queries in this conversation",
+  "core_query_independence": {
+    "method": "casefold + whitespace normalization, exact equality against all frozen SciFact/SCIDOCS query texts",
+    "core_unique_query_texts": 2105,
+    "overlap_count": 0
+  },
+  "runs": [
+    {
+      "query": "knowledge graph",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "knowledge graph",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.302857299997413,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-90f9c840e6b1445bb0d90be9f44e7e91",
+      "hits": 3,
+      "stdout_sha256": "69f0cf2c4c7866236045a9d59ba3723f8f0a5845fc11b6903a125091910a1210",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q1-refresh.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.8600000000005821,
+          "raw_references": [
+            {
+              "raw_id": "openalex-407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+              "sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+              "byte_count": 23474
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "knowledge graph",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "knowledge graph",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.4629641999999876,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-90f9c840e6b1445bb0d90be9f44e7e91",
+      "hits": 3,
+      "stdout_sha256": "543c7ebe54a6e72ded38e37443886ea6e84213d1677aa9476a19e9ff2d592c44",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q1-cache.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.8600000000005821,
+          "raw_references": [
+            {
+              "raw_id": "openalex-407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+              "sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+              "byte_count": 23474
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "graph neural network",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "graph neural network",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.4022522999948706,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-7518e5ccd831485ea5b7b4eaccfe6722",
+      "hits": 3,
+      "stdout_sha256": "63f9aabed4bca3dcbe99d74e232eaa9f5635d944727cc7bc68650b38474d6bad",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q2-refresh.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.9219999999986612,
+          "raw_references": [
+            {
+              "raw_id": "openalex-31b21dca430541ef57813dd8d52065d41702dff9b52e85219762cac0786fda69",
+              "sha256": "31b21dca430541ef57813dd8d52065d41702dff9b52e85219762cac0786fda69",
+              "byte_count": 28818
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "graph neural network",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "graph neural network",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.41122509999695467,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-7518e5ccd831485ea5b7b4eaccfe6722",
+      "hits": 3,
+      "stdout_sha256": "5a89f7d72ed81368b5f9d22003fc503e0b8deb73df3a5384e200795be64b5121",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q2-cache.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.9219999999986612,
+          "raw_references": [
+            {
+              "raw_id": "openalex-31b21dca430541ef57813dd8d52065d41702dff9b52e85219762cac0786fda69",
+              "sha256": "31b21dca430541ef57813dd8d52065d41702dff9b52e85219762cac0786fda69",
+              "byte_count": 28818
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "information retrieval",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "information retrieval",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.4196451000025263,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-5a9851d6487a4c058f8e78214d0d22aa",
+      "hits": 3,
+      "stdout_sha256": "b698aa453b5142a44f1362acbe230f5c0943a0d8e6b3f3d272c8f0a05e52c1b9",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q3-refresh.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.875,
+          "raw_references": [
+            {
+              "raw_id": "openalex-829064f149ca4649c336419df147073786befad0d02a0916b58017069ef70108",
+              "sha256": "829064f149ca4649c336419df147073786befad0d02a0916b58017069ef70108",
+              "byte_count": 14752
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "information retrieval",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "information retrieval",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.4787390999990748,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-5a9851d6487a4c058f8e78214d0d22aa",
+      "hits": 3,
+      "stdout_sha256": "2789fa33131ab2b16a0dae34c0055fb5e102003fed0e4e8d87747866695b0655",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q3-cache.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.875,
+          "raw_references": [
+            {
+              "raw_id": "openalex-829064f149ca4649c336419df147073786befad0d02a0916b58017069ef70108",
+              "sha256": "829064f149ca4649c336419df147073786befad0d02a0916b58017069ef70108",
+              "byte_count": 14752
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "scientific document search",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "scientific document search",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.113660800001526,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-be19a5d44c314020afcbf19f80c721e1",
+      "hits": 3,
+      "stdout_sha256": "e7a1c7530f6aa4e5f4c33829cfb32774359c1e72d8d1a426e969ee8ceb10084f",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q4-refresh.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 1.625,
+          "raw_references": [
+            {
+              "raw_id": "openalex-9b37c4a26ac2d113bdaaa5db025b7d2a7e2ee11ff2ca88ae333bce2222d09ed9",
+              "sha256": "9b37c4a26ac2d113bdaaa5db025b7d2a7e2ee11ff2ca88ae333bce2222d09ed9",
+              "byte_count": 227977
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "scientific document search",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "scientific document search",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.4200191999989329,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-be19a5d44c314020afcbf19f80c721e1",
+      "hits": 3,
+      "stdout_sha256": "04f8186fec33d1af6a9ac4d86465e7ed53a26df4cfacd35ae9e5d4a3105d58f0",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q4-cache.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 1.625,
+          "raw_references": [
+            {
+              "raw_id": "openalex-9b37c4a26ac2d113bdaaa5db025b7d2a7e2ee11ff2ca88ae333bce2222d09ed9",
+              "sha256": "9b37c4a26ac2d113bdaaa5db025b7d2a7e2ee11ff2ca88ae333bce2222d09ed9",
+              "byte_count": 227977
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "Vietnamese natural language processing",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "Vietnamese natural language processing",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.245914699997229,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-2df52b79cd5544feb07f0365cb5d8ba6",
+      "hits": 3,
+      "stdout_sha256": "d377fd47f7423b05e4087f83e70d39e447539e2cada595eccf94086b409932bd",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q5-refresh.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.7809999999954016,
+          "raw_references": [
+            {
+              "raw_id": "openalex-9f64a3cd9678df64c5fd97504b732cba1cbcac15ac00870c031274a9bdf2bd49",
+              "sha256": "9f64a3cd9678df64c5fd97504b732cba1cbcac15ac00870c031274a9bdf2bd49",
+              "byte_count": 17278
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "Vietnamese natural language processing",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "Vietnamese natural language processing",
+        "--sources",
+        "openalex",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3608634999982314,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-2df52b79cd5544feb07f0365cb5d8ba6",
+      "hits": 3,
+      "stdout_sha256": "53fe95e3a698446a224321ef8d0da76952e819976b561a755aac9e3ff88683ec",
+      "errors": [],
+      "cohort": "explicit_openalex",
+      "stdout_path": "data/public_search/muse/pilot_ext06/openalex_097/q5-cache.stdout.bin",
+      "encoding": "utf-8",
+      "source_outcomes": [
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "elapsed_seconds": 0.7809999999954016,
+          "raw_references": [
+            {
+              "raw_id": "openalex-9f64a3cd9678df64c5fd97504b732cba1cbcac15ac00870c031274a9bdf2bd49",
+              "sha256": "9f64a3cd9678df64c5fd97504b732cba1cbcac15ac00870c031274a9bdf2bd49",
+              "byte_count": 17278
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 3,
+        "valid": 3,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 3,
+        "groups": 3,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "knowledge graph",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "knowledge graph",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9916150999997626,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-1039af03e9134d119997804398d8bade",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q1-refresh.stdout.bin",
+      "stdout_sha256": "bb2e4c921913e0e44c93c249f135af746d0a34be6215a6a7aa9297a5118ff205",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-3fb2302bb9b3d2c6d8b7f2f095fffd45798172b40102c6a4040c64ee548f9986",
+              "sha256": "3fb2302bb9b3d2c6d8b7f2f095fffd45798172b40102c6a4040c64ee548f9986",
+              "byte_count": 7169
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-340450629d8d9aac1d57d6ea82328eb346a263c22c094efd3424655889352c65",
+              "sha256": "340450629d8d9aac1d57d6ea82328eb346a263c22c094efd3424655889352c65",
+              "byte_count": 23474
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 5,
+        "duplicate_excess": 1,
+        "returned": 3
+      }
+    },
+    {
+      "query": "knowledge graph",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "knowledge graph",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5674155999950017,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-1039af03e9134d119997804398d8bade",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q1-cache.stdout.bin",
+      "stdout_sha256": "dfcc139cf27073eec3a8990ad41964f831b72b0ed5de4ad830bf7250418c76a3",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-3fb2302bb9b3d2c6d8b7f2f095fffd45798172b40102c6a4040c64ee548f9986",
+              "sha256": "3fb2302bb9b3d2c6d8b7f2f095fffd45798172b40102c6a4040c64ee548f9986",
+              "byte_count": 7169
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-340450629d8d9aac1d57d6ea82328eb346a263c22c094efd3424655889352c65",
+              "sha256": "340450629d8d9aac1d57d6ea82328eb346a263c22c094efd3424655889352c65",
+              "byte_count": 23474
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 5,
+        "duplicate_excess": 1,
+        "returned": 3
+      }
+    },
+    {
+      "query": "graph neural network",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "graph neural network",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.924910000001546,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-fcb42fee9f1c46a9806fd1b38c9e64d2",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q2-refresh.stdout.bin",
+      "stdout_sha256": "1d59f59c6c19c890532ace562bd1b02ee720b234ebdcdffc75ad49ba205ccd3d",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-0f7ebc7620858b5b857355a892d086b840906bfd793856a54f4ba762505cf7f5",
+              "sha256": "0f7ebc7620858b5b857355a892d086b840906bfd793856a54f4ba762505cf7f5",
+              "byte_count": 8221
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-0879b75ffea0b449762248102d39f7dff88be4f38a039af134f984d1e1f2fc8f",
+              "sha256": "0879b75ffea0b449762248102d39f7dff88be4f38a039af134f984d1e1f2fc8f",
+              "byte_count": 28818
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "graph neural network",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "graph neural network",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.42345539999951143,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-fcb42fee9f1c46a9806fd1b38c9e64d2",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q2-cache.stdout.bin",
+      "stdout_sha256": "066f4c84019b587514c20161a122b139ec278c94d999d8c7fd89fdde3147321b",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-0f7ebc7620858b5b857355a892d086b840906bfd793856a54f4ba762505cf7f5",
+              "sha256": "0f7ebc7620858b5b857355a892d086b840906bfd793856a54f4ba762505cf7f5",
+              "byte_count": 8221
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-0879b75ffea0b449762248102d39f7dff88be4f38a039af134f984d1e1f2fc8f",
+              "sha256": "0879b75ffea0b449762248102d39f7dff88be4f38a039af134f984d1e1f2fc8f",
+              "byte_count": 28818
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "information retrieval",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "information retrieval",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.840500999998767,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-f12ee2a270f14828ad14f6322b5400b2",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q3-refresh.stdout.bin",
+      "stdout_sha256": "0bc8f7328335445546a217d5cabdc0e1b129fbf8a7ea064f6d30a5aef651068d",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-82da49fdd58f2017aa1480f4a91d27391c7c0706c4eac6521c451984dd20ade0",
+              "sha256": "82da49fdd58f2017aa1480f4a91d27391c7c0706c4eac6521c451984dd20ade0",
+              "byte_count": 8817
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-ff1d57fb2398315ba5c65a3552177198b156b9c96ed6be2c9a5f4fb2d8433ae0",
+              "sha256": "ff1d57fb2398315ba5c65a3552177198b156b9c96ed6be2c9a5f4fb2d8433ae0",
+              "byte_count": 14752
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "information retrieval",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "information retrieval",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5203475000016624,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-f12ee2a270f14828ad14f6322b5400b2",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q3-cache.stdout.bin",
+      "stdout_sha256": "f93830dd02e92ab559edc78fdea832eff8520af550e7087b7a432f99bd4c4103",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-82da49fdd58f2017aa1480f4a91d27391c7c0706c4eac6521c451984dd20ade0",
+              "sha256": "82da49fdd58f2017aa1480f4a91d27391c7c0706c4eac6521c451984dd20ade0",
+              "byte_count": 8817
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-ff1d57fb2398315ba5c65a3552177198b156b9c96ed6be2c9a5f4fb2d8433ae0",
+              "sha256": "ff1d57fb2398315ba5c65a3552177198b156b9c96ed6be2c9a5f4fb2d8433ae0",
+              "byte_count": 14752
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "scientific document search",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "scientific document search",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.20646829999896,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-07263e1fecd3416ea1bf4fedccbe55fe",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q4-refresh.stdout.bin",
+      "stdout_sha256": "21d1ec0648590fecb8e35105b6bf0702fb7943a57fbb10a5e39ea54903e24453",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-537099e6e510dae9c8f5d50766568f6c05a9c16c235a6c477d6a222e86593bf5",
+              "sha256": "537099e6e510dae9c8f5d50766568f6c05a9c16c235a6c477d6a222e86593bf5",
+              "byte_count": 6806
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-81c97adb0a88db7d7f1de8bbb948896c7ee8fa37ad59c5bd0bcceb2f77923289",
+              "sha256": "81c97adb0a88db7d7f1de8bbb948896c7ee8fa37ad59c5bd0bcceb2f77923289",
+              "byte_count": 227977
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "scientific document search",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "scientific document search",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5123442000040086,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-07263e1fecd3416ea1bf4fedccbe55fe",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q4-cache.stdout.bin",
+      "stdout_sha256": "1c998f7df8c74c3beb45610d2a48546b0b8a9e15f116777f63964d69e9d36809",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-537099e6e510dae9c8f5d50766568f6c05a9c16c235a6c477d6a222e86593bf5",
+              "sha256": "537099e6e510dae9c8f5d50766568f6c05a9c16c235a6c477d6a222e86593bf5",
+              "byte_count": 6806
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-81c97adb0a88db7d7f1de8bbb948896c7ee8fa37ad59c5bd0bcceb2f77923289",
+              "sha256": "81c97adb0a88db7d7f1de8bbb948896c7ee8fa37ad59c5bd0bcceb2f77923289",
+              "byte_count": 227977
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "Vietnamese natural language processing",
+      "mode": "refresh",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "Vietnamese natural language processing",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3",
+        "--refresh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.185946999998123,
+      "overall": "success",
+      "cached": false,
+      "snapshot_id": "ps-b76211560ff645a08472407c0d4bda15",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q5-refresh.stdout.bin",
+      "stdout_sha256": "373b39889f5f7ba6f564bfb6a8bb1ade00c542a4fe1949244ad970c5dbc0adf3",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-29b072b43f0711ed338a16b6ab456be5992806e4ce57dc3799a360ce7599f5d3",
+              "sha256": "29b072b43f0711ed338a16b6ab456be5992806e4ce57dc3799a360ce7599f5d3",
+              "byte_count": 11823
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-0fd5773c65ce87622fc47f1bcdda0e39bd720654a9f9c28239c52d41b5296372",
+              "sha256": "0fd5773c65ce87622fc47f1bcdda0e39bd720654a9f9c28239c52d41b5296372",
+              "byte_count": 17279
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    },
+    {
+      "query": "Vietnamese natural language processing",
+      "mode": "cache",
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\muse\\pilot_ext06\\config.json",
+        "search",
+        "--query",
+        "Vietnamese natural language processing",
+        "--sources",
+        "openalex,arxiv",
+        "--top-k",
+        "3",
+        "--cap-per-source",
+        "3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5140842000037082,
+      "overall": "success",
+      "cached": true,
+      "snapshot_id": "ps-b76211560ff645a08472407c0d4bda15",
+      "hits": 3,
+      "stdout_path": "data/public_search/muse/two_source_recovery_102/q5-cache.stdout.bin",
+      "stdout_sha256": "a217c1fa8d94a23d0c32f4efda6814e7ec6eae36d2c46e084f5a2093eef01cc6",
+      "encoding": "utf-8",
+      "errors": [],
+      "sources": [
+        [
+          "arxiv",
+          "success",
+          3
+        ],
+        [
+          "openalex",
+          "success",
+          3
+        ]
+      ],
+      "cohort": "two_source_recovery",
+      "source_outcomes": [
+        {
+          "source": "arxiv",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "arxiv-29b072b43f0711ed338a16b6ab456be5992806e4ce57dc3799a360ce7599f5d3",
+              "sha256": "29b072b43f0711ed338a16b6ab456be5992806e4ce57dc3799a360ce7599f5d3",
+              "byte_count": 11823
+            }
+          ]
+        },
+        {
+          "source": "openalex",
+          "status": "success",
+          "record_count": 3,
+          "error": null,
+          "raw_references": [
+            {
+              "raw_id": "openalex-0fd5773c65ce87622fc47f1bcdda0e39bd720654a9f9c28239c52d41b5296372",
+              "sha256": "0fd5773c65ce87622fc47f1bcdda0e39bd720654a9f9c28239c52d41b5296372",
+              "byte_count": 17279
+            }
+          ]
+        }
+      ],
+      "fusion_counts": {
+        "raw": 6,
+        "valid": 6,
+        "invalid": 0,
+        "excluded_by_year": 0,
+        "eligible": 6,
+        "groups": 6,
+        "duplicate_excess": 0,
+        "returned": 3
+      }
+    }
+  ],
+  "latency": {
+    "openalex_refresh": {
+      "n": 5,
+      "method": "end-to-end CLI subprocess wall time; nearest-rank P95 ceil(0.95*n), includes interpreter startup",
+      "median_seconds": 1.4022522999948706,
+      "p95_seconds": 2.113660800001526
+    },
+    "openalex_cache": {
+      "n": 5,
+      "method": "end-to-end CLI subprocess wall time; nearest-rank P95 ceil(0.95*n), includes interpreter startup",
+      "median_seconds": 0.4200191999989329,
+      "p95_seconds": 0.4787390999990748
+    }
+  },
+  "library_demo": {
+    "status": "PASS",
+    "runtime": "FastAPI TestClient; real persisted live OpenAlex snapshots; no browser/human demo",
+    "saves": [
+      {
+        "snapshot_id": "ps-90f9c840e6b1445bb0d90be9f44e7e91",
+        "canonical_id": "doi:10.1609/aaai.v28i1.8870",
+        "query": "knowledge graph",
+        "results_status": 200,
+        "save_status": 200,
+        "save_attempts": 2
+      },
+      {
+        "snapshot_id": "ps-7518e5ccd831485ea5b7b4eaccfe6722",
+        "canonical_id": "doi:10.1109/tnn.2008.2005605",
+        "query": "graph neural network",
+        "results_status": 200,
+        "save_status": 200,
+        "save_attempts": 2
+      },
+      {
+        "snapshot_id": "ps-5a9851d6487a4c058f8e78214d0d22aa",
+        "canonical_id": "doi:10.5860/choice.46-2715",
+        "query": "information retrieval",
+        "results_status": 200,
+        "save_status": 200,
+        "save_attempts": 2
+      },
+      {
+        "snapshot_id": "ps-be19a5d44c314020afcbf19f80c721e1",
+        "canonical_id": "doi:10.1038/s41592-019-0686-2",
+        "query": "scientific document search",
+        "results_status": 200,
+        "save_status": 200,
+        "save_attempts": 2
+      },
+      {
+        "snapshot_id": "ps-2df52b79cd5544feb07f0365cb5d8ba6",
+        "canonical_id": "doi:10.26187/deakin.33412309",
+        "query": "Vietnamese natural language processing",
+        "results_status": 200,
+        "save_status": 200,
+        "save_attempts": 2
+      }
+    ],
+    "entries": 5,
+    "exports": {
+      "json": {
+        "status_code": 200,
+        "sha256": "513aa1fd1261da2b98fd0f43f39ee7657f118c5df25b4ddcf508ba7bf3b6de9a",
+        "bytes": 39220
+      },
+      "bibtex": {
+        "status_code": 200,
+        "sha256": "21b9bf62c439c06cdf0e8197c79ec0f55160bdaa206d3e998c305d286fb83898",
+        "bytes": 4073
+      }
+    }
+  },
+  "core_freeze_audit": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "limitations": [
+    "Human browser demo PENDING; agent browser/API checks are separate.",
+    "Earlier canonical cohort remains operational FAIL; recovery sample only supports current successful run, not sustained availability.",
+    "n=5 per timing mode, includes CLI startup; two-source cache P95 exceeds proposed500ms target.",
+    "No relevance judgments/nDCG/MRR; exact query equality is not semantic independence."
+  ],
+  "counts": {
+    "canonical_runs": 20,
+    "cli_exit0": 20,
+    "cli_exit1": 0,
+    "partial_failure": 0,
+    "success": 20,
+    "two_source_success": 10,
+    "arxiv_timeout": 0,
+    "arxiv_quota": 0
+  },
+  "two_source_latency": {
+    "refresh": {
+      "n": 5,
+      "method": "CLI subprocess wall time including interpreter startup; nearest-rank P95 ceil(0.95*n)",
+      "median_seconds": 1.9916150999997626,
+      "p95_seconds": 2.20646829999896
+    },
+    "cache": {
+      "n": 5,
+      "method": "CLI subprocess wall time including interpreter startup; nearest-rank P95 ceil(0.95*n)",
+      "median_seconds": 0.5140842000037082,
+      "p95_seconds": 0.5674155999950017
+    }
+  },
+  "recovery_only_counts": {
+    "runs": 10,
+    "refresh": 5,
+    "cache": 5,
+    "success": 10,
+    "failed": 0
+  },
+  "prior_failure_history": {
+    "report_path": "artifacts/reports/public_search/muse/pilot-ext06-096.json",
+    "sha256": "152fd0630dff149cfcdb658fb5aaa4d3cbee35d4898a4934c9cfd8d14a54383d",
+    "counts": {
+      "canonical_runs": 16,
+      "cli_exit0": 10,
+      "cli_exit1": 6,
+      "partial_failure": 6,
+      "success": 10,
+      "two_source_success": 0,
+      "arxiv_timeout": 4,
+      "arxiv_quota": 2
+    }
+  },
+  "all_unique_cohorts_counts": {
+    "canonical_runs": 26,
+    "cli_exit0": 20,
+    "cli_exit1": 6,
+    "success": 20,
+    "partial_failure": 6,
+    "two_source_success": 10,
+    "arxiv_timeout": 4,
+    "arxiv_quota": 2
+  },
+  "budget": "5 query refresh calls, at least3seconds between refresh starts; cap3/source, normal shared transport retry/deadline; no forced429",
+  "targets": {
+    "two_source_refresh_p95_under15s": true,
+    "cache_p95_under500ms": false
+  }
+}

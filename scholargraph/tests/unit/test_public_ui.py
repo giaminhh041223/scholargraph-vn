@@ -206,7 +206,7 @@ def test_node_dom_test_runner_all_tests():
         str(UX_EXAMPLES_PATH),
     ]
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     print("STDOUT:\n", result.stdout)
     if result.returncode != 0:
         print("STDERR:\n", result.stderr)
@@ -229,7 +229,7 @@ def test_negative_node_runner_missing_fixtures():
         "--ux-examples",
         str(UX_EXAMPLES_PATH),
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     assert result.returncode == 1, "Expected exit code 1 for missing fixtures"
     assert "FAIL:" in result.stderr or "FAIL:" in result.stdout
 
@@ -248,7 +248,7 @@ def test_negative_node_runner_missing_ux_examples():
         "--ux-examples",
         str(FIXTURES_DIR / "does_not_exist_ux.json"),
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     assert result.returncode == 1, "Expected exit code 1 for missing UX examples"
     assert "FAIL:" in result.stderr or "FAIL:" in result.stdout
 
@@ -270,7 +270,7 @@ def test_negative_node_runner_malformed_json(tmp_path: Path):
         "--ux-examples",
         str(UX_EXAMPLES_PATH),
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     assert result.returncode == 1, "Expected exit code 1 for malformed JSON"
 
 

@@ -1498,6 +1498,326 @@
         "source_ranks": {"arxiv": 1},
         "conflicts": {}
       }
+    },
+    "library_save_envelope": {
+      "synthetic": true,
+      "contract_version": "1.0.0",
+      "entry": {
+        "canonical_id": "paper_syn_12345",
+        "snapshot_id": "snap_syn_w2_001",
+        "saved_at": "2026-09-30T14:30:00+07:00",
+        "incomplete_sources": false,
+        "hit": {
+          "canonical_id": "paper_syn_12345",
+          "rank": 1,
+          "score": 0.01639344,
+          "display": {
+            "source": "arxiv",
+            "source_id": "2401.00001",
+            "title": "Idempotent Test Paper",
+            "landing_url": "https://arxiv.org/abs/2401.00001",
+            "retrieved_at": "2026-09-30T14:00:00+07:00",
+            "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+            "parser_version": "arxiv_atom_1.0.0",
+            "abstract": "An abstract for testing idempotent saving.",
+            "publication_year": 2024,
+            "doi": null,
+            "arxiv_id": "2401.00001",
+            "venue": null,
+            "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+            "license": "http://creativecommons.org/licenses/by/4.0/",
+            "open_access_status": "open",
+            "citation_count": null,
+            "authors": ["Alice Nguyen"],
+            "authors_availability": "known",
+            "missing_fields": ["citation_count", "doi", "venue"],
+            "field_provenance": {
+              "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+              "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+              "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+              "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+              "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+              "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+              "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+              "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+              "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+              "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+            }
+          },
+          "source_records": [
+            {
+              "source": "arxiv",
+              "source_id": "2401.00001",
+              "title": "Idempotent Test Paper",
+              "landing_url": "https://arxiv.org/abs/2401.00001",
+              "retrieved_at": "2026-09-30T14:00:00+07:00",
+              "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+              "parser_version": "arxiv_atom_1.0.0",
+              "abstract": "An abstract for testing idempotent saving.",
+              "publication_year": 2024,
+              "doi": null,
+              "arxiv_id": "2401.00001",
+              "venue": null,
+              "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+              "license": "http://creativecommons.org/licenses/by/4.0/",
+              "open_access_status": "open",
+              "citation_count": null,
+              "authors": ["Alice Nguyen"],
+              "authors_availability": "known",
+              "missing_fields": ["citation_count", "doi", "venue"],
+              "field_provenance": {
+                "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+                "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+                "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+                "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+              }
+            }
+          ],
+          "source_ranks": {"arxiv": 1},
+          "conflicts": {}
+        }
+      },
+      "errors": []
+    },
+    "library_list_envelope": {
+      "synthetic": true,
+      "contract_version": "1.0.0",
+      "entries": [
+        {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false,
+          "hit": {
+            "canonical_id": "paper_syn_12345",
+            "rank": 1,
+            "score": 0.01639344,
+            "display": {
+              "source": "arxiv",
+              "source_id": "2401.00001",
+              "title": "Idempotent Test Paper",
+              "landing_url": "https://arxiv.org/abs/2401.00001",
+              "retrieved_at": "2026-09-30T14:00:00+07:00",
+              "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+              "parser_version": "arxiv_atom_1.0.0",
+              "abstract": "An abstract for testing idempotent saving.",
+              "publication_year": 2024,
+              "doi": null,
+              "arxiv_id": "2401.00001",
+              "venue": null,
+              "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+              "license": "http://creativecommons.org/licenses/by/4.0/",
+              "open_access_status": "open",
+              "citation_count": null,
+              "authors": ["Alice Nguyen"],
+              "authors_availability": "known",
+              "missing_fields": ["citation_count", "doi", "venue"],
+              "field_provenance": {
+                "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+                "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+                "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+                "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+              }
+            },
+            "source_records": [
+              {
+                "source": "arxiv",
+                "source_id": "2401.00001",
+                "title": "Idempotent Test Paper",
+                "landing_url": "https://arxiv.org/abs/2401.00001",
+                "retrieved_at": "2026-09-30T14:00:00+07:00",
+                "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                "parser_version": "arxiv_atom_1.0.0",
+                "abstract": "An abstract for testing idempotent saving.",
+                "publication_year": 2024,
+                "doi": null,
+                "arxiv_id": "2401.00001",
+                "venue": null,
+                "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+                "license": "http://creativecommons.org/licenses/by/4.0/",
+                "open_access_status": "open",
+                "citation_count": null,
+                "authors": ["Alice Nguyen"],
+                "authors_availability": "known",
+                "missing_fields": ["citation_count", "doi", "venue"],
+                "field_provenance": {
+                  "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+                  "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                  "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                  "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+                  "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+                  "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+                  "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+                  "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                  "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+                  "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+                }
+              }
+            ],
+            "source_ranks": {"arxiv": 1},
+            "conflicts": {}
+          }
+        }
+      ],
+      "errors": []
+    },
+    "malformed_library_envelopes": {
+      "save_missing_contract_version": {
+        "synthetic": true,
+        "entry": {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        },
+        "errors": []
+      },
+      "save_wrong_contract_version": {
+        "synthetic": true,
+        "contract_version": "2.0.0",
+        "entry": {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        },
+        "errors": []
+      },
+      "save_missing_entry": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "errors": []
+      },
+      "save_missing_errors": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entry": {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        }
+      },
+      "save_non_empty_errors": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entry": {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        },
+        "errors": [
+          {
+            "kind": "request",
+            "message": "Error present on 200",
+            "source": null,
+            "retry_after_seconds": null,
+            "record_index": null
+          }
+        ]
+      },
+      "save_extra_keys": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "extra_key": "forbidden",
+        "entry": {
+          "canonical_id": "paper_syn_12345",
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        },
+        "errors": []
+      },
+      "save_legacy_bare_entry": {
+        "synthetic": true,
+        "canonical_id": "paper_syn_12345",
+        "snapshot_id": "snap_syn_w2_001",
+        "saved_at": "2026-09-30T14:30:00+07:00",
+        "incomplete_sources": false
+      },
+      "save_invalid_nested_entry": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entry": {
+          "snapshot_id": "snap_syn_w2_001",
+          "saved_at": "2026-09-30T14:30:00+07:00",
+          "incomplete_sources": false
+        },
+        "errors": []
+      },
+      "list_missing_contract_version": {
+        "synthetic": true,
+        "entries": [],
+        "errors": []
+      },
+      "list_wrong_contract_version": {
+        "synthetic": true,
+        "contract_version": "2.0.0",
+        "entries": [],
+        "errors": []
+      },
+      "list_missing_entries": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "errors": []
+      },
+      "list_missing_errors": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entries": []
+      },
+      "list_non_empty_errors": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entries": [],
+        "errors": [
+          {
+            "kind": "storage",
+            "message": "Error present on 200 list",
+            "source": null,
+            "retry_after_seconds": null,
+            "record_index": null
+          }
+        ]
+      },
+      "list_extra_keys": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "extra_key": "forbidden",
+        "entries": [],
+        "errors": []
+      },
+      "list_legacy_bare_array": [
+        {
+          "synthetic": true,
+          "canonical_id": "paper_syn_12345"
+        }
+      ],
+      "list_invalid_nested_entry": {
+        "synthetic": true,
+        "contract_version": "1.0.0",
+        "entries": [
+          {
+            "snapshot_id": "snap_syn_w2_001",
+            "saved_at": "2026-09-30T14:30:00+07:00",
+            "incomplete_sources": false
+          }
+        ],
+        "errors": []
+      }
     }
   }
 }

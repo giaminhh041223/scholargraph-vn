@@ -1,0 +1,13 @@
+Tiếp tục task sửa library envelope101. Runtime vừa từ chối RunCommand; đây action permission của Antigravity, không được lặp/bypass. Từ đây TUYỆT ĐỐI KHÔNG gọi command/terminal/shell/Git. Chỉ dùng native read/edit file tools. Coordinator sẽ thực thi Node/pytest/hashes/commit, bạn ghi tests NOT_RUN.
+
+Exact files trong checkout hiện tại:
+ui/static/public_search.js
+tests/fixtures/public_search/gemini/ui/node_test_runner.js
+tests/fixtures/public_search/gemini/ui/ui_fixtures.json
+tests/fixtures/public_search/gemini/ui/ui_fixtures.sidecar.json (nếu tên/path thực tế khác, native listdirectory thôi)
+
+Đọc actual parentwire từ D:/Web_mining_20261/scholargraph/src/scholargraph/api/public_routes.py, hoặc contract tường minh: POST/public/library response {contract_version:'1.0.0',entry:LibraryEntry,errors:[]}; GET/public/library response {contract_version:'1.0.0',entries:[LibraryEntry],errors:[]}. LibraryEntry schema KHÔNG có contract_version, chỉ canonical_id/snapshot_id/saved_at/hit/incomplete_sources. Backend giữ nguyên.
+
+Fix save/list strict wire envelope required/allowed fields, exactversion, errors list empty on success, nested entryvalidated. Không accept legacybareentry/barearrayfallback, không ignoremissing/unknownfields. UIreadnon2xx vẫn cảnh báoerror. Cập nhật synthetic nodefetchfixtures đúngwire và negative cases cho missingversion/entry/entries/errors, wrongversion và invalidnestedrecord. Export contract vẫn raw JSON list/BibTeXtext.
+
+Ghi packet/log management/public_search/packets/GEMINI/EXT-05A-LIBRARY-101.md và logs/GEMINI/EXT-05A-LIBRARY-101.md bằng native file tools. Fixture sidecar chưa tự bịa hash; nếu không tínhđược không dùng command, ghi coordinator cần recomputehash vàpath. Rootowned board/backend khôngghi. Khôngnetwork, khôngđổi settings/permissions. Kết thúc ngay sau fileoutputs, trảpaths/changelogvàNOT_RUN. Đây quyền làm fileedit đã được usergiao, không phảibypassdeniedcommand.

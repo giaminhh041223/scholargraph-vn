@@ -737,12 +737,17 @@ async function runAllTests(uiFixturesPath, uxExamplesPath) {
     PublicSearchUI.renderSearchResults(successEx.envelope, false);
 
     // Refresh fails
-    const failFetch = async () => {
+    let requestedSearchUrl;
+    const failFetch = async (url) => {
+      requestedSearchUrl = url;
       throw new Error("Upstream 504 Gateway Timeout");
     };
     PublicSearchUI.init({ document: doc, fetchFn: failFetch });
     doc.getElementById("q").value = "graph mining";
     await PublicSearchUI.handleSearchSubmit(true);
+    const queryParams = new URL(requestedSearchUrl, "http://localhost").searchParams;
+    assert(queryParams.getAll("sources").length === 1 && queryParams.get("sources") === "openalex,arxiv",
+      "Both selected sources reach the backend as one comma-separated parameter");
 
     const staleBox = doc.getElementById("stale-review-region");
     assert(!staleBox.hidden, "Refresh failure displays stale snapshot review box");
@@ -783,10 +788,22 @@ async function runAllTests(uiFixturesPath, uxExamplesPath) {
         return {
           ok: true,
           status: 200,
-          json: async () => savedEntry
+          json: async () => ({
+            contract_version: "1.0.0",
+            entry: savedEntry,
+            errors: []
+          })
         };
       }
-      return { ok: true, status: 200, json: async () => (savedEntry ? [savedEntry] : [libData]) };
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({
+          contract_version: "1.0.0",
+          entries: savedEntry ? [savedEntry] : [libData],
+          errors: []
+        })
+      };
     };
 
     PublicSearchUI.init({ document: doc, fetchFn: libraryFetch });
@@ -841,10 +858,22 @@ async function runAllTests(uiFixturesPath, uxExamplesPath) {
             return {
               ok: true,
               status: 200,
-              json: async () => origEntry
+              json: async () => ({
+                contract_version: "1.0.0",
+                entry: origEntry,
+                errors: []
+              })
             };
           }
-          return { ok: true, status: 200, json: async () => [origEntry] };
+          return {
+            ok: true,
+            status: 200,
+            json: async () => ({
+              contract_version: "1.0.0",
+              entries: [origEntry],
+              errors: []
+            })
+          };
         }
       });
       PublicSearchUI.renderSearchResults(partialEx.envelope, false);
@@ -867,9 +896,13 @@ async function runAllTests(uiFixturesPath, uxExamplesPath) {
           ok: true,
           status: 200,
           json: async () => ({
-            ...origEntry,
-            canonical_id: "mismatched_canonical_id_xyz",
-            hit: { ...hitToSave, canonical_id: "mismatched_canonical_id_xyz" }
+            contract_version: "1.0.0",
+            entry: {
+              ...origEntry,
+              canonical_id: "mismatched_canonical_id_xyz",
+              hit: { ...hitToSave, canonical_id: "mismatched_canonical_id_xyz" }
+            },
+            errors: []
           })
         })
       });
@@ -882,6 +915,152 @@ async function runAllTests(uiFixturesPath, uxExamplesPath) {
       const badBanner = docBad.getElementById("banner-region");
       assert(badBanner.textContent.includes("Lưu bài báo thất bại"), "Adversarial Finding 3: mismatched canonical_id response fails loud with error banner");
       assert(!btnBad.textContent.includes("save_idempotent"), "Adversarial Finding 3: mismatched canonical_id does not update button to save_idempotent");
+    }
+  }
+
+  // -------------------------------------------------------------
+  // SUITE 7B: Strict Library Wire Envelope Validation & Negative Testing
+  // -------------------------------------------------------------
+  console.log("\n--- Test Suite 7B: Strict Library Wire Envelope Validation & Negative Testing ---");
+  {
+    // 1. Positive tests on valid wire envelopes
+    const validSaveEnv = JSON.parse(JSON.stringify(uiFixtures.fixtures.library_save_envelope));
+    delete validSaveEnv.synthetic; // Fixture metadata is not part of the wire payload.
+    assert(PublicSearchUI.validateLibrarySaveEnvelope(validSaveEnv) === true, "Valid LibrarySaveEnvelope passes validation");
+
+    const validListEnv = JSON.parse(JSON.stringify(uiFixtures.fixtures.library_list_envelope));
+    delete validListEnv.synthetic;
+    assert(PublicSearchUI.validateLibraryListEnvelope(validListEnv) === true, "Valid LibraryListEnvelope passes validation");
+
+    // 2. Negative tests on all malformed_library_envelopes from ui_fixtures.json
+    const malformedLib = uiFixtures.fixtures.malformed_library_envelopes;
+    for (const key of Object.keys(malformedLib)) {
+      const caseData = JSON.parse(JSON.stringify(malformedLib[key]));
+      delete caseData.synthetic; // Exercise the named defect, not fixture metadata.
+      let threw = false;
+      try {
+        if (key.startsWith("save_")) {
+          PublicSearchUI.validateLibrarySaveEnvelope(caseData);
+        } else if (key.startsWith("list_")) {
+          PublicSearchUI.validateLibraryListEnvelope(caseData);
+        } else {
+          throw new Error("Unknown fixture prefix in key: " + key);
+        }
+      } catch (err) {
+        threw = true;
+      }
+      assert(threw, "Malformed library wire fixture rejected: " + key);
+    }
+
+    // 3. Explicit Anti-Silent-Bypass negative probes: legacy bare payloads MUST be rejected
+    {
+      let bareSaveRejected = false;
+      try {
+        PublicSearchUI.validateLibrarySaveEnvelope(uiFixtures.fixtures.idempotent_library_save);
+      } catch (e) {
+        bareSaveRejected = true;
+      }
+      assert(bareSaveRejected, "Anti-Silent-Bypass: legacy bare LibraryEntry rejected by validateLibrarySaveEnvelope (no wrapper envelope)");
+
+      let bareListRejected = false;
+      try {
+        PublicSearchUI.validateLibraryListEnvelope([uiFixtures.fixtures.idempotent_library_save]);
+      } catch (e) {
+        bareListRejected = true;
+      }
+      assert(bareListRejected, "Anti-Silent-Bypass: legacy bare array rejected by validateLibraryListEnvelope (must be envelope object)");
+    }
+
+    // 4. Non-2xx HTTP Error Handling in savePaperToLibrary
+    {
+      const docErr = createMockDOM();
+      const testHit = JSON.parse(JSON.stringify(uiFixtures.fixtures.idempotent_library_save.hit));
+      testHit.canonical_id = "paper_err_probe_422";
+      PublicSearchUI.init({
+        document: docErr,
+        fetchFn: async () => ({
+          ok: false,
+          status: 422,
+          json: async () => ({
+            schema_version: 1,
+            contract_version: "1.0.0",
+            overall: "failed",
+            snapshot: null,
+            errors: [
+              {
+                kind: "request",
+                message: "invalid library request",
+                source: null,
+                retry_after_seconds: null,
+                record_index: null
+              }
+            ],
+            stale: false,
+            cached: false
+          })
+        })
+      });
+      // Set displayedSnapshot so save doesn't fail pre-check
+      PublicSearchUI.renderSearchResults(examples.example_03_tt02_success_plus_empty_with_hit.envelope, false);
+      const btnErr = docErr.createElement("button");
+      btnErr.className = "btn btn-primary";
+      docErr.body.appendChild(btnErr);
+
+      await PublicSearchUI.savePaperToLibrary(testHit, btnErr);
+      const bannerRegion = docErr.getElementById("banner-region");
+      assert(bannerRegion.textContent.includes("invalid library request"), "Non-2xx HTTP 422 on save shows structured error message in banner");
+      assert(btnErr.disabled === false, "Failed save re-enables button for retry");
+    }
+
+    // 5. Non-2xx HTTP Error Handling in loadLibrary
+    {
+      const docListErr = createMockDOM();
+      PublicSearchUI.init({
+        document: docListErr,
+        fetchFn: async () => ({
+          ok: false,
+          status: 500,
+          json: async () => ({
+            schema_version: 1,
+            contract_version: "1.0.0",
+            overall: "failed",
+            snapshot: null,
+            stale: false,
+            cached: false,
+            errors: [
+              {
+                kind: "storage",
+                message: "storage check failed",
+                source: null,
+                retry_after_seconds: null,
+                record_index: null
+              }
+            ]
+          })
+        })
+      });
+      await PublicSearchUI.loadLibrary(0, 10);
+      const listContainer = docListErr.getElementById("library-list");
+      assert(listContainer.textContent.includes("storage check failed"), "Non-2xx HTTP 500 on loadLibrary shows structured error message in list container");
+    }
+    for (const defect of ["invalid_json", "missing_errors", "empty_errors", "missing_message"]) {
+      const doc = createMockDOM();
+      PublicSearchUI.init({document: doc, fetchFn: async () => ({
+        ok: false, status: 500, json: async () => {
+          if (defect === "invalid_json") throw new SyntaxError("malformed JSON");
+          const envelope = {schema_version: 1, contract_version: "1.0.0", overall: "failed",
+            snapshot: null, stale: false, cached: false,
+            errors: [{kind: "storage", message: "storage failure", source: null,
+              retry_after_seconds: null, record_index: null}]};
+          if (defect === "missing_errors") delete envelope.errors;
+          if (defect === "empty_errors") envelope.errors = [];
+          if (defect === "missing_message") delete envelope.errors[0].message;
+          return envelope;
+        }
+      })});
+      await PublicSearchUI.loadLibrary(0, 10);
+      assert(doc.getElementById("library-list").textContent.includes("phản hồi lỗi không hợp lệ"),
+        "Malformed HTTP library error reported explicitly: " + defect);
     }
   }
 

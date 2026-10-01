@@ -840,12 +840,18 @@
   }
 
   function validateLibraryEntry(entry) {
-    if (!entry || typeof entry !== "object") {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
       throw new Error("LibraryEntry phải là đối tượng JSON");
     }
-    const extra = hasExtraKeys(entry, ["canonical_id", "snapshot_id", "saved_at", "hit", "incomplete_sources"]);
+    const allowed = ["canonical_id", "snapshot_id", "saved_at", "hit", "incomplete_sources"];
+    const extra = hasExtraKeys(entry, allowed);
     if (extra) {
       throw new Error("LibraryEntry chứa trường không được phép: " + extra);
+    }
+    for (const key of allowed) {
+      if (!Object.prototype.hasOwnProperty.call(entry, key)) {
+        throw new Error("LibraryEntry thiếu trường bắt buộc: " + key);
+      }
     }
     if (!isNonEmptyString(entry.canonical_id)) {
       throw new Error("LibraryEntry.canonical_id phải là chuỗi không rỗng");
@@ -862,6 +868,74 @@
     validateRankedHit(entry.hit);
     if (entry.canonical_id !== entry.hit.canonical_id) {
       throw new Error("LibraryEntry: library identity mismatch (canonical_id !== hit.canonical_id)");
+    }
+    return true;
+  }
+
+  function validateLibrarySaveEnvelope(env) {
+    if (!env || typeof env !== "object" || Array.isArray(env)) {
+      throw new Error("LibrarySaveEnvelope phải là một đối tượng JSON");
+    }
+    const allowed = ["contract_version", "entry", "errors"];
+    const extra = hasExtraKeys(env, allowed);
+    if (extra) {
+      throw new Error("LibrarySaveEnvelope chứa trường không được phép: " + extra);
+    }
+    for (const key of allowed) {
+      if (!Object.prototype.hasOwnProperty.call(env, key)) {
+        throw new Error("LibrarySaveEnvelope thiếu trường bắt buộc: " + key);
+      }
+    }
+    if (env.contract_version !== CONTRACT_VERSION) {
+      throw new Error("Sai contract_version trong LibrarySaveEnvelope: mong đợi " + CONTRACT_VERSION + ", nhận được " + env.contract_version);
+    }
+    if (!Array.isArray(env.errors)) {
+      throw new Error("LibrarySaveEnvelope.errors phải là mảng");
+    }
+    if (env.errors.length > 0) {
+      for (const err of env.errors) {
+        validateSearchError(err);
+      }
+      throw new Error("LibrarySaveEnvelope: errors phải rỗng trong phản hồi lưu thành công");
+    }
+    if (!env.entry || typeof env.entry !== "object" || Array.isArray(env.entry)) {
+      throw new Error("LibrarySaveEnvelope.entry phải là đối tượng LibraryEntry");
+    }
+    validateLibraryEntry(env.entry);
+    return true;
+  }
+
+  function validateLibraryListEnvelope(env) {
+    if (!env || typeof env !== "object" || Array.isArray(env)) {
+      throw new Error("LibraryListEnvelope phải là đối tượng JSON (không chấp nhận bare array)");
+    }
+    const allowed = ["contract_version", "entries", "errors"];
+    const extra = hasExtraKeys(env, allowed);
+    if (extra) {
+      throw new Error("LibraryListEnvelope chứa trường không được phép: " + extra);
+    }
+    for (const key of allowed) {
+      if (!Object.prototype.hasOwnProperty.call(env, key)) {
+        throw new Error("LibraryListEnvelope thiếu trường bắt buộc: " + key);
+      }
+    }
+    if (env.contract_version !== CONTRACT_VERSION) {
+      throw new Error("Sai contract_version trong LibraryListEnvelope: mong đợi " + CONTRACT_VERSION + ", nhận được " + env.contract_version);
+    }
+    if (!Array.isArray(env.errors)) {
+      throw new Error("LibraryListEnvelope.errors phải là mảng");
+    }
+    if (env.errors.length > 0) {
+      for (const err of env.errors) {
+        validateSearchError(err);
+      }
+      throw new Error("LibraryListEnvelope: errors phải rỗng trong phản hồi danh sách thành công");
+    }
+    if (!Array.isArray(env.entries)) {
+      throw new Error("LibraryListEnvelope.entries phải là một mảng");
+    }
+    for (const entry of env.entries) {
+      validateLibraryEntry(entry);
     }
     return true;
   }
@@ -1109,9 +1183,7 @@
 
     const params = new URLSearchParams();
     params.set("q", inputs.query);
-    for (const src of inputs.sources) {
-      params.append("sources", src);
-    }
+    params.set("sources", inputs.sources.join(","));
     if (inputs.year_from !== null) {
       params.set("year_from", String(inputs.year_from));
     }
@@ -1978,13 +2050,11 @@
         body: JSON.stringify(payload)
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(function () { return {}; });
-        throw new Error(errData.detail || ("HTTP " + res.status));
-      }
+      if (!res.ok) await throwLibraryHttpError(res);
 
-      const entry = await res.json();
-      validateLibraryEntry(entry);
+      const envelope = await res.json();
+      validateLibrarySaveEnvelope(envelope);
+      const entry = envelope.entry;
 
       // Identity validation: canonical_id must match requested paper and hit identity
       if (entry.canonical_id !== canonicalId) {
@@ -2024,6 +2094,22 @@
    * Tải danh sách thư viện (GET /public/library) có phân trang
    * và sequence guard chống race condition
    */
+  async function throwLibraryHttpError(res) {
+    let envelope;
+    try {
+      envelope = await res.json();
+      validateEnvelope(envelope);
+      if (envelope.overall !== "failed" || envelope.errors.length === 0) {
+        throw new Error("Phản hồi lỗi phải có overall=failed và errors không rỗng");
+      }
+    } catch (err) {
+      throw new Error("HTTP " + res.status + ": phản hồi lỗi không hợp lệ: " + err.message);
+    }
+    throw new Error("HTTP " + res.status + ": " + envelope.errors.map(function (e) {
+      return "[" + e.kind + "] " + e.message;
+    }).join("; "));
+  }
+
   async function loadLibrary(offset, limit) {
     if (!envDocument) return;
     offset = typeof offset === "number" ? offset : 0;
@@ -2052,19 +2138,13 @@
       }
 
       const res = await envFetch("/public/library?offset=" + offset + "&limit=" + limit, fetchOpts);
-      if (!res.ok) {
-        throw new Error("Không thể tải thư viện (HTTP " + res.status + ")");
-      }
+      if (!res.ok) await throwLibraryHttpError(res);
 
-      const entries = await res.json();
+      const envelope = await res.json();
       if (seq !== currentLibrarySeq) return;
 
-      if (!Array.isArray(entries)) {
-        throw new Error("Phản hồi thư viện phải là danh sách (list[LibraryEntry])");
-      }
-      for (const entry of entries) {
-        validateLibraryEntry(entry);
-      }
+      validateLibraryListEnvelope(envelope);
+      const entries = envelope.entries;
 
       updateLibraryCountBadge(entries.length);
 
@@ -2291,6 +2371,8 @@
     validateSearchSnapshot: validateSearchSnapshot,
     validateEnvelope: validateEnvelope,
     validateLibraryEntry: validateLibraryEntry,
+    validateLibrarySaveEnvelope: validateLibrarySaveEnvelope,
+    validateLibraryListEnvelope: validateLibraryListEnvelope,
     collectFormInputs: collectFormInputs,
     validateFormInputs: validateFormInputs,
     handleSearchSubmit: handleSearchSubmit,

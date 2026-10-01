@@ -1,3 +1,7 @@
+# Checkpoint W5 — UI fix + recovery102
+
+Targeted routes/UI24PASS. Gemini file-only delivery nhập và coordinator sửa serializer sources/error/harness/UTF8. Recovery102 verifierPASS,10successful two-source runs; cacheP950.567s chưa đạt500ms. History6FAIL giữ nguyên. Bước kế tiếp: pin commit và giao 3 audit EXT07 trên cùng snapshot; browser export download timeout cần kiểm. Human demoPENDING. Server127.0.0.1:8011 PID11128, pilotstore riêng.
+
 # W4 100 — Evidence DONE; sửa UI entry trước audit W5
 
 - Fresh SOL R3 PASS_EVIDENCE trên5f16994; gate EXT-06-W4-GATE-100. Operational two-source FAIL, release/human demo PENDING.
