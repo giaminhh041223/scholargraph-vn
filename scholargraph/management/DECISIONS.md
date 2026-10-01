@@ -227,3 +227,7 @@ Thay thế ADR nào (nếu có):
 - Source IDs/version, Atom root/singleton và raw-field link provenance phải validate đúng. Không nhận arbitrary related link là license, không dùng keyword đầu title/abstract như Error correction để kết luận upstream error.
 
 **Bước thực thi:** Gemini R4 author fixes + regression, coordinator chạy thật, independent SOL re-review trước EXT-03 DONE. W0 contract/config/schema giữ nguyên; W1 chưa tích hợp khi quyết định này được ghi.
+
+## ADR-021 — 2026-10-01T23:10:58.246939+07:00 — Tích hợp Public Paper Search MVP vào master local
+
+Người dùng đã xác nhận demo/save/mở JSON-BibTeX và đồng ý tích hợp. Coordinator fast-forward nhánh đã review sau hash/continuity gates, không push/publication.14tasks phaseA DONE; EXT09/10DEFERRED; main research human gates giữ nguyên. CacheP95.5674156s n5 chưa đạt đề xuất500ms là giới hạn công bố; pilot không đo relevance/availability dài hạn. Download xác nhận bởi người dùng, không là proof công cụ agent.
