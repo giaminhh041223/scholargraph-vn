@@ -123,6 +123,12 @@
       "fresh_install": "NOT_RUN",
       "native_muse_r2": "TIMEOUT_NO_COMPLETE_REPORT",
       "native_muse_r2_evidence": "data/public_search/control/runs/ab44efcd-f735-47c4-b64e-047ec9bdd4de/summary.json"
+    },
+    "final_project_checker": {
+      "exit_code": 0,
+      "main_task_count": 53,
+      "markdown_links": 563,
+      "main_gates_unchanged": true
     }
   },
   "pause_after_current_round": false,
