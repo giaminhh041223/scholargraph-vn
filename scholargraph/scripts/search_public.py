@@ -112,4 +112,7 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
+    # JSON bytes must be UTF-8 even when Windows redirects a legacy code page.
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     sys.exit(main())

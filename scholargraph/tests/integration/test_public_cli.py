@@ -62,3 +62,24 @@ def test_cli_valid_empty_request_schema_reaches_source_exit1_without_live_succes
     assert result.returncode in {0, 1}
     if result.returncode == 1:
         assert "Traceback" not in result.stderr
+
+
+def test_cli_json_is_utf8_under_legacy_windows_encoding(tmp_path):
+    """Run the real script entry point with a local Unicode envelope, no HTTP."""
+    harness = tmp_path / "unicode_cli.py"
+    harness.write_text(
+        "import runpy,sys,json\n"
+        "from scholargraph.public_search import service\n"
+        "class Envelope:\n"
+        "    errors=[]\n"
+        "    def model_dump_json(self): return json.dumps({'title':'Tiếng Việt ü'},ensure_ascii=False)\n"
+        "class Service:\n"
+        "    def __init__(self,*args): pass\n"
+        "    def search(self,request): return Envelope()\n"
+        "service.PublicSearchService=Service\n"
+        f"sys.argv=[{str(SCRIPT)!r},'search','--query','synthetic']\n"
+        f"runpy.run_path({str(SCRIPT)!r},run_name='__main__')\n", encoding="utf-8")
+    env = {**os.environ, "PYTHONPATH": str(SCRIPT.parents[1] / "src"), "PYTHONIOENCODING": "cp1252"}
+    result = subprocess.run([sys.executable, str(harness)], capture_output=True, timeout=30, env=env)
+    assert result.returncode == 0
+    assert json.loads(result.stdout.decode("utf-8"))["title"] == "Tiếng Việt ü"
