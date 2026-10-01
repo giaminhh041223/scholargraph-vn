@@ -44,6 +44,8 @@ Audit/cross-check:
 - Storage/evidence: [Gemini R3](../../management/public_search/reviews/GEMINI/EXT-07M-W5-R3-103.md), [SOL consistency](../../management/public_search/reviews/SOL/EXT-07M-CONSISTENCY-103.md).
 - Coordinator: [gate104](../../management/public_search/reviews/COORDINATOR/EXT-07-W5-GATE-104.md). Verdict chỉ bao phủ inputs/scenarios đã kiểm, không bảo đảm mọi deployment.
 
+Tài liệu EXT-08: bản Gemini draft `1023cb9` được Muse chỉ ra các điểm cần sửa trong [R1](../../management/public_search/reviews/MUSE/EXT-08-W6-R1-105.md). Coordinator sửa tại `e3a2730`; [SOL review cuối](../../management/public_search/reviews/SOL/EXT-08-FINAL-105.md) PASS trong scope tài liệu, kiểm 39 liên kết cục bộ. Hai controller Muse hết thời gian 600s; R1 đã lưu report CHANGES_REQUIRED, R2 chưa có report hoàn chỉnh. SOL là reviewer thay thế được ghi nhận, không gọi hai lượt native đó là PASS. [Log sửa](../../management/public_search/logs/COORDINATOR/EXT-08-DOC-FIX-105.md) giữ lịch sử và bằng chứng lệnh. Phần bổ sung này chỉ cập nhật attribution và liên kết review sau target tài liệu đã được kiểm.
+
 Yêu cầu SOL/high, Gemini Flash High/high, Muse free/xhigh theo yêu cầu. Gemini terminal bị từ chối ở storage audit, coordinator thực thi probes và ghi attribution; native actual model/effort không có telemetry thì unknown. Không lấy nhãn prompt làm proof runtime.
 
 ## 4. Pilot thật và độ trễ

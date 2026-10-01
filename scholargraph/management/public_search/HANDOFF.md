@@ -1,3 +1,20 @@
+# Bàn giao cuối phần agent — 2026-10-01T15:10:53.260921+07:00
+
+**14 task EXT01..08 DONE; EXT09/10 DEFERRED. Không còn worker đang chạy. Human demo, tải tệp thật và merge master PENDING.**
+
+- [Gói bàn giao](../../docs/public_search/RELEASE_PACKET.md), [hướng dẫn](../../docs/public_search/USER_GUIDE.md), [demo/checklist](../../docs/public_search/DEMO.md), [gate cuối](reviews/COORDINATOR/EXT-08-FINAL-GATE-105.md).
+- Regression 630 PASS, verifier 7 PASS/CLI0, core freeze33 giữ nguyên. Code được kiểm66264a7; UI fix6a5d4e1, tài liệu sửae3a2730. W5checkpoint62f4b4f gồm manifest/evidence.
+- Gemini author; Muse R1 chỉ ra lỗi tài liệu nhưng controller timeout, R2 timeout không report hoàn chỉnh. Coordinator sửa; SOL review thay thế PASS. Giữ lịch sử/attribution đầy đủ.
+- Recovery102=10success (5refresh+5cache hai nguồn), old6partialFAIL giữ nguyên, history26=20success6partial. Live provenanceca0344d; không gọi pilot chạy trên bảncode cuối. CacheP95.5674156s vượt đề xuất500ms, n5; không đo relevance/availability dài hạn.
+- Preview [localhost8011](http://127.0.0.1:8011/public/ui) còn chạy, exec15061, parent14492/child15220. Store pilot riêng6entries; không phải store mặc định. Tệp browserdownload NOT_VERIFIED, API bytes và Node mock đã kiểm.
+- **Bước tiếp duy nhất:** người dùng thử 5 query, lưu bài, mở JSON/BibTeX đã tải thực tế theo DEMO, báo lỗi hoặc xác nhận tích hợp. Sau xác nhận thật, coordinator cập nhật human gate rồi mới xử lý merge. Không chạy lại pilot/test dài nếu code/evidence chưa thay đổi. Không tự mở phaseB hoặc đổi main SG030/033.
+
+## Lịch sử checkpoint
+
+# Checkpoint105 — tài liệu đã sửa, chờ Muse R2
+
+EXT08 REVIEW, target e3a2730. Gemini draft1023cb9; fresh MuseR1 report CHANGES_REQUIRED đã ghi nhưng controller timeout600s (7906d4bd), giữ limitation. Coordinator sửa3docs,6commands khớp exit kỳ vọng gồm thiếu config/overwrite refusal; checker555linksPASS. MuseR2 exec17160 đang chạy file-only concise. Bước tiếp: thu report/log→gateEXT08→checkpoint cuối→human demo/download thật. Preview8011 còn mở. Không merge master/phaseB.
+
 # Checkpoint104 — W5 DONE, EXT08 đang làm
 
 630 regression PASS; verifier7PASS,33 core hashes giữ nguyên. Ba audit và third-check đóng; xem [gate104](reviews/COORDINATOR/EXT-07-W5-GATE-104.md). EXT08 Gemini file-only author→Muse narrative review→coordinator đóng packet. Preview localhost8011 đã restart code66264a7. Human demo/download file PENDING; cacheP95 0.567s vượt proposal;6 historical failures giữ nguyên. Không merge master, không mở EXT09/10.

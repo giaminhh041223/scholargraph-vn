@@ -1,10 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T14:33:03.915243+07:00",
-  "stage": "w6_documentation",
-  "active_tasks": [
-    "EXT-08"
-  ],
+  "updated_at": "2026-10-01T15:10:53.260921+07:00",
+  "stage": "agent_scope_complete_awaiting_human_demo",
+  "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -22,11 +20,10 @@
     "EXT-08"
   ],
   "next_steps": {
-    "GEMINI": "Write EXT08 three docs file-only; no production changes",
-    "MUSE": "Review docs after immutable delivery",
-    "COORDINATOR": "Check docs/commands and final human checklist"
+    "HUMAN": "Use localhost8011 demo, save paper and open actual JSON/BibTeX downloads; report issues or confirm integration",
+    "COORDINATOR": "Record actual human confirmation before merge; do not start deferred phaseB"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-104-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-105-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -116,6 +113,16 @@
       "verifier_exit_code": 0,
       "adversarial": 7,
       "code_commit": "66264a7"
+    },
+    "ext08": {
+      "review": "management/public_search/reviews/SOL/EXT-08-FINAL-105.md",
+      "doc_command_executions": 6,
+      "success_exit0": 4,
+      "expected_failure_exit1": 2,
+      "source_helper_hash_basis": "UTF-8 documented code block with LF, no final newline; not raw CRLF file hash",
+      "fresh_install": "NOT_RUN",
+      "native_muse_r2": "TIMEOUT_NO_COMPLETE_REPORT",
+      "native_muse_r2_evidence": "data/public_search/control/runs/ab44efcd-f735-47c4-b64e-047ec9bdd4de/summary.json"
     }
   },
   "pause_after_current_round": false,
@@ -125,21 +132,12 @@
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-08",
+  "next_task_id": null,
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-08",
-      "owner": "GEMINI_NATIVE",
-      "status": "DISPATCH_READY",
-      "model_requested": "gemini-3.8-flash-high",
-      "effort_requested": "high",
-      "session_id": "72a98e4d-a715-430f-914f-de71cd20481f"
-    }
-  ],
+  "active_assignments": [],
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"
@@ -168,6 +166,13 @@
     "status": "PENDING",
     "two_source_operational": "PASS_RECOVERY_COHORT",
     "human_demo": "PENDING",
-    "scope_change_to_one_source": false
+    "scope_change_to_one_source": false,
+    "agent_technical": "PASS_IN_TESTED_SCOPE",
+    "live_cohort_code_commit": "ca0344d",
+    "regression_code_commit": "66264a7",
+    "browser_saved_download": "NOT_VERIFIED",
+    "master_merge": "PENDING",
+    "documentation_review": "PASS_SOL_FALLBACK",
+    "cache_p95_proposal_met": false
   }
 }
