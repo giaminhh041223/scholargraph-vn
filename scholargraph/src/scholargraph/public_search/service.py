@@ -8,7 +8,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import threading
+import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
@@ -177,7 +179,12 @@ class PublicSearchService:
             raise ServiceError(_error("schema", "invalid public search envelope")) from None
 
     def _source_result(self, source: str, request: SearchRequest, transport) -> SourceResult:
-        started = transport.clock()
+        # Measure the service boundary independently of the adapter's clock:
+        # a broken transport clock must still produce an observed source failure.
+        try:
+            started = time.perf_counter()
+        except Exception:
+            raise ServiceError(_error("config", "source elapsed time measurement failed", source)) from None
         try:
             result = self._adapters[source](request, transport)
             raw = result.model_dump_json().encode("utf-8") if isinstance(result, SourceResult) else result
@@ -186,14 +193,23 @@ class PublicSearchService:
                 raise ValueError("source mismatch")
             return result
         except TransportError as exc:
-            return SourceResult(source=source, status="failed", records=[], error=exc.error,
-                                source_total=None, elapsed_seconds=max(0.0, transport.clock() - started), filter_coverage="none",
-                                truncated=None, raw_references=[])
+            error = exc.error
         except (ValueError, TypeError, AttributeError):
-            return SourceResult(source=source, status="failed", records=[],
-                                error=_error("schema", "invalid source result", source),
-                                source_total=None, elapsed_seconds=max(0.0, transport.clock() - started), filter_coverage="none",
-                                truncated=None, raw_references=[])
+            error = _error("schema", "invalid source result", source)
+        except Exception:
+            error = _error("schema", "source execution failed", source)
+        try:
+            elapsed = time.perf_counter() - started
+            if not math.isfinite(elapsed) or elapsed < 0:
+                raise ValueError("invalid elapsed time")
+        except Exception:
+            raise ServiceError(_error("config", "source elapsed time measurement failed", source)) from None
+        coverage = "none"
+        if request.year_from is not None or request.year_to is not None:
+            coverage = "server" if source == "openalex" else "bounded_pool"
+        return SourceResult(source=source, status="failed", records=[], error=error,
+                            source_total=None, elapsed_seconds=elapsed, filter_coverage=coverage,
+                            truncated=None, raw_references=[])
 
     def _snapshot(self, request: SearchRequest, results: list[SourceResult], fusion: FusionResult,
                   fetched_at: datetime) -> SearchSnapshot:
@@ -242,14 +258,7 @@ class PublicSearchService:
                 futures = {pool.submit(self._source_result, source, request, transport): source for source in selected}
                 for future in as_completed(futures):
                     source = futures[future]
-                    try:
-                        results_by_source[source] = future.result()
-                    except Exception:
-                        results_by_source[source] = SourceResult(
-                            source=source, status="failed", records=[],
-                            error=_error("schema", "source execution failed", source),
-                            source_total=None, elapsed_seconds=None, filter_coverage="none",
-                            truncated=None, raw_references=[])
+                    results_by_source[source] = future.result()
             results = [results_by_source[s] for s in selected]
             fusion = fuse(results, request)
             fetched = self._clock()

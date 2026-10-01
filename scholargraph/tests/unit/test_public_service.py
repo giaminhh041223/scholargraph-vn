@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import json
 import os
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -15,7 +16,7 @@ from scholargraph.public_search.contracts import (
     SearchError, SearchRequest, SearchSnapshot, SourceResult, digest, load_config,
 )
 from scholargraph.public_search.service import PublicSearchService, ServiceError
-from scholargraph.public_search.transport import Transport
+from scholargraph.public_search.transport import Transport, TransportError
 
 ROOT = Path(__file__).resolve().parents[2]
 NOW = datetime(2026, 10, 1, tzinfo=timezone.utc)
@@ -230,6 +231,103 @@ def test_malformed_adapter_result_fails_source_not_empty(tmp_path):
     service = make_service(tmp_path, store=MemoryStore(), adapters={"openalex": bad, "arxiv": lambda r, t: source("arxiv", "empty")})
     result = service.search(request())
     assert result.overall == "partial_failure" and result.errors[0].kind == "schema"
+
+
+@pytest.mark.parametrize("failed_source", ["openalex", "arxiv"])
+@pytest.mark.parametrize("year_from", [None, 2024])
+@pytest.mark.parametrize("exception", [RuntimeError, OSError, TransportError])
+def test_exception_preserves_healthy_source_and_measured_failure(tmp_path, failed_source, year_from, exception):
+    secret = "secret-token-must-not-appear"
+    healthy_source = "arxiv" if failed_source == "openalex" else "openalex"
+
+    def bad(req, transport):
+        time.sleep(0.01)
+        if exception is TransportError:
+            raise TransportError(SearchError(kind="timeout", message="synthetic timeout", source=failed_source,
+                                             retry_after_seconds=None, record_index=None))
+        raise exception(secret)
+
+    def healthy(req, transport):
+        result = source_result_success(healthy_source)
+        row = result.records[0].model_dump()
+        row["publication_year"] = 2024
+        row["missing_fields"].remove("publication_year")
+        row["field_provenance"]["publication_year"] = [dict(source=healthy_source,
+            source_id=row["source_id"], raw_sha256=SHA, raw_field="year")]
+        return result.model_copy(update={"records": [PaperRecord.model_validate(row)]})
+
+    store = MemoryStore()
+    service = make_service(tmp_path, store=store, adapters={failed_source: bad, healthy_source: healthy})
+    started = time.perf_counter()
+    envelope = service.search(request(year_from=year_from))
+    duration = time.perf_counter() - started
+    assert envelope.overall == "partial_failure"
+    assert len(envelope.snapshot.fusion.hits) == 1
+    assert envelope.snapshot.fusion.hits[0].display.source == healthy_source
+    results = {r.source: r for r in envelope.snapshot.source_results}
+    failed = results[failed_source]
+    assert failed.status == "failed" and failed.records == []
+    assert 0.01 <= failed.elapsed_seconds <= duration
+    assert failed.filter_coverage == ("none" if year_from is None else
+                                     "server" if failed_source == "openalex" else "bounded_pool")
+    assert failed.error.kind == ("timeout" if exception is TransportError else "schema")
+    assert results[healthy_source].status == "success"
+    assert secret not in envelope.model_dump_json()
+    assert store.snapshots[envelope.snapshot.snapshot_id] == envelope.snapshot
+    assert store.cache == {}
+
+
+def test_broken_transport_clock_is_measured_and_isolates_source(tmp_path):
+    class BrokenClockTransport:
+        def clock(self):
+            time.sleep(0.01)
+            raise RuntimeError("secret-clock-error")
+
+        def close(self):
+            self.closed = True
+
+    transport = BrokenClockTransport()
+    service = make_service(tmp_path, adapters={
+        "openalex": lambda req, t: t.clock(),
+        "arxiv": lambda req, t: source_result_success("arxiv"),
+    })
+    service._transport_factory = lambda config: transport
+    result = service.search(request())
+    assert result.overall == "partial_failure"
+    assert len(result.snapshot.fusion.hits) == 1
+    failed = next(row for row in result.snapshot.source_results if row.source == "openalex")
+    assert failed.source == "openalex" and failed.status == "failed"
+    assert failed.elapsed_seconds >= 0.01
+    assert "secret-clock-error" not in result.model_dump_json()
+    assert transport.closed
+
+
+@pytest.mark.parametrize("readings", [
+    [OSError("secret-start-error")], [1.0, OSError("secret-end-error")],
+    [1.0, float("nan")], [2.0, 1.0],
+])
+def test_unmeasurable_failure_raises_explicit_service_error(tmp_path, monkeypatch, readings):
+    import scholargraph.public_search.service as service_module
+
+    values = iter(readings)
+    def counter():
+        value = next(values)
+        if isinstance(value, Exception):
+            raise value
+        return value
+
+    def bad(req, transport):
+        raise RuntimeError("secret-adapter-error")
+
+    store = MemoryStore()
+    service = make_service(tmp_path, store=store, adapters={"openalex": bad, "arxiv": bad})
+    monkeypatch.setattr(service_module.time, "perf_counter", counter)
+    with pytest.raises(ServiceError) as failure:
+        service.search(request(sources=["openalex"]))
+    assert failure.value.error.kind == "config"
+    assert failure.value.error.source == "openalex"
+    assert failure.value.error.message == "source elapsed time measurement failed"
+    assert store.snapshots == {} and store.cache == {}
 
 
 def test_init_storage_uses_initialize_not_open_existing(tmp_path):

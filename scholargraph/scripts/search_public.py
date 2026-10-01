@@ -19,6 +19,12 @@ def _failure(error: SearchError) -> int:
     return 1
 
 
+class _ArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        # argparse messages can include raw input; use the structured CLI failure.
+        raise ValueError("invalid CLI arguments")
+
+
 def _service(args):
     root = Path(args.project_root).resolve()
     config = Path(args.config) if args.config else root / "configs" / "public_search.json"
@@ -46,7 +52,7 @@ def _request(args) -> SearchRequest:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="ScholarGraph public paper search")
+    parser = _ArgumentParser(description="ScholarGraph public paper search")
     parser.add_argument("--project-root", default=".")
     parser.add_argument("--config", default=None)
     sub = parser.add_subparsers(dest="command", required=True)
