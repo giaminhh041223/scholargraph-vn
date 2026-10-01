@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "site_id": "joss",
+  "origin": "https://joss.theoj.org",
+  "start_url": "https://joss.theoj.org/papers/published.html",
+  "robots_url": "https://joss.theoj.org/robots.txt",
+  "conditions_url": "https://joss.theoj.org/about",
+  "policy_manifest": "data/public_search/phase_b/policy-107/manifest.json",
+  "user_agent": "ScholarGraphPublicCrawler/1.0",
+  "min_interval_seconds": 3.0,
+  "max_pages": 5,
+  "max_papers": 3,
+  "max_depth": 1,
+  "max_body_bytes": 1048576,
+  "timeout_seconds": 30.0,
+  "parser_version": "joss-citation-1.0.0",
+  "data_root": "data/public_search/joss"
+}

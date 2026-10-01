@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T23:13:32.489133+07:00",
-  "branch": "master",
-  "mode": "integrated_local_master_complete",
+  "updated_at": "2026-10-01T23:30:30.299120+07:00",
+  "branch": "codex/public-search-phase-b",
+  "mode": "phase_b_authorized",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -76,7 +76,41 @@
       "current_dispatch_state": "idle_agent_scope_complete"
     }
   },
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "EXT-09",
+      "owner": "SOL",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "paths": [
+        "src/scholargraph/public_search/crossref.py",
+        "scripts/enrich_public.py",
+        "configs/public_crossref.json",
+        "tests/unit/test_public_crossref.py"
+      ]
+    },
+    {
+      "task_id": "EXT-10",
+      "owner": "GEMINI",
+      "requested_model": "gemini-3.8-flash-high",
+      "requested_effort": "high",
+      "paths": [
+        "src/scholargraph/public_search/site_crawler.py",
+        "scripts/crawl_public.py",
+        "tests/unit/test_public_site_crawler.py"
+      ]
+    },
+    {
+      "task_id": "PHASE-B-POLICY",
+      "owner": "COORDINATOR",
+      "paths": [
+        "configs/public_site_joss.json",
+        "docs/public_search/PHASE_B.md",
+        "management/public_search/",
+        "artifacts/reports/public_search/phase_b/"
+      ]
+    }
+  ],
   "tasks": [
     {
       "id": "EXT-01A",
@@ -819,26 +853,54 @@
     {
       "id": "EXT-09",
       "title": "Crossref enrichment (giai đoạn B)",
-      "status": "DEFERRED",
+      "status": "IN_PROGRESS",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "SOL",
       "dependencies": [
         "EXT-08"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "PHASE-B-107",
+      "evidence": [],
+      "owner": "SOL",
+      "dispatch_state": "running",
+      "claimed_paths": [
+        "src/scholargraph/public_search/crossref.py",
+        "scripts/enrich_public.py",
+        "configs/public_crossref.json",
+        "tests/unit/test_public_crossref.py"
+      ],
+      "runtime": {
+        "agent_id": "/root/crossref_phase_b_107",
+        "model_requested": "gpt-6.1-sol",
+        "effort_requested": "high",
+        "runtime_model_observed": null
+      }
     },
     {
       "id": "EXT-10",
       "title": "Crawler HTML một site (giai đoạn B)",
-      "status": "DEFERRED",
+      "status": "IN_PROGRESS",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "SOL",
       "dependencies": [
         "EXT-08"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "PHASE-B-107",
+      "evidence": [],
+      "owner": "GEMINI",
+      "dispatch_state": "running_file_only",
+      "claimed_paths": [
+        "src/scholargraph/public_search/site_crawler.py",
+        "scripts/crawl_public.py",
+        "tests/unit/test_public_site_crawler.py"
+      ],
+      "runtime": {
+        "controller_exec_session": 11766,
+        "model_requested": "gemini-3.8-flash-high",
+        "effort_requested": "high",
+        "runtime_model_observed": null,
+        "dispatch_file": "management/public_search/dispatch/GEMINI-EXT10-107.txt"
+      }
     }
   ],
   "dispatch_sessions": [

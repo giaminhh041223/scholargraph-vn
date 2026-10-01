@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "resources": [
+    {
+      "url": "https://joss.theoj.org/robots.txt",
+      "status": 200,
+      "raw_path": "data/public_search/phase_b/policy-107/joss-robots.txt",
+      "sha256": "2f15987e4606501202b9d337085439339e53a374e3d194847192c12f85ba78f8",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00"
+    },
+    {
+      "url": "https://joss.theoj.org/about",
+      "status": 200,
+      "raw_path": "data/public_search/phase_b/policy-107/joss-about.txt",
+      "sha256": "a9adc5ca8b3305acdb7b975c6bd5db27965d8e9d78957ceff235e5b9cc8ff686",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00"
+    },
+    {
+      "url": "https://joss.theoj.org/papers/published.html",
+      "status": 200,
+      "raw_path": "data/public_search/phase_b/policy-107/joss-list.txt",
+      "sha256": "23fa91053668df0795d0225b4b9c793255ca013b9ba0a9963baed398788c78a7",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00"
+    },
+    {
+      "url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "status": 200,
+      "raw_path": "data/public_search/phase_b/policy-107/joss-paper.txt",
+      "sha256": "28916e6c412defacc851a24f8fa06fbd299ec0643e139132967d71ca6174b0c1",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00"
+    },
+    {
+      "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/",
+      "status": 200,
+      "raw_path": "data/public_search/phase_b/policy-107/crossref-policy.txt",
+      "sha256": "5e8782fa8d451dd400751dbd97bd22ea10650d62c57a668a9c96809241406ebb",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00"
+    }
+  ]
+}

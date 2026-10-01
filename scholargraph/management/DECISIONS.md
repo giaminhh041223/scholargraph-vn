@@ -231,3 +231,12 @@ Thay thế ADR nào (nếu có):
 ## ADR-021 — 2026-10-01T23:10:58.246939+07:00 — Tích hợp Public Paper Search MVP vào master local
 
 Người dùng đã xác nhận demo/save/mở JSON-BibTeX và đồng ý tích hợp. Coordinator fast-forward nhánh đã review sau hash/continuity gates, không push/publication.14tasks phaseA DONE; EXT09/10DEFERRED; main research human gates giữ nguyên. CacheP95.5674156s n5 chưa đạt đề xuất500ms là giới hạn công bố; pilot không đo relevance/availability dài hạn. Download xác nhận bởi người dùng, không là proof công cụ agent.
+
+
+## ADR-022 — Mở giai đoạn B public search
+
+- 2026-10-01T23:30:30.299120+07:00; user yêu cầu làm đến hết và cho tự chọn site. Mở EXT09/10 trên nhánh riêng từ master.
+- Crossref là sidecar enrichment DOI chính xác, không thêm Source vào v1 search; giữ metadata gốc và ghi conflict/provenance. Public anonymous, không bịa email.
+- Chọn JOSS published HTML, robots và policy raw được lưu. Giới hạn một host HTTPS, listing + paper citation, 1 request/3s, concurrency1, không PDF/JS/ngoài host; caps và resume integrity bắt buộc.
+- SOL nhận EXT09 do Muse write allowlist chỉ review/log; Gemini file-only nhận EXT10, coordinator chạy tests do terminal native bị denied. Muse xhigh review snapshot thật.
+- Scope không thay human research gates SG030/033, không tự mở stretch hoặc push.

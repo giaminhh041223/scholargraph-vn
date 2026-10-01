@@ -1,0 +1,13 @@
+# SESSION-107 — Giai đoạn B
+
+- 2026-10-01T23:30:30.299120+07:00; user yêu cầu tiếp tục đến hết và cho coordinator tự đề xuất site.
+- Branch codex/public-search-phase-b từ master01fd799; mở EXT09/10, không mở SG046..049.
+- SOL high viết Crossref sidecar; Gemini high file-only viết crawler; Muse xhigh review độc lập khi snapshot có thật. SOL thay owner MUSE vì kênh Muse chỉ có quyền ghi report/log.
+- JOSS được chọn: robots200 chỉ comment, metadata HTML citation, public content CC BY4.0; policy raw tại data/public_search/phase_b/policy-107/manifest.json. Crawl metadata, không fetch PDF/JS/GitHub.
+- Main human gates SG030/033 vẫn chờ đầu vào thật.
+
+## Bước tiếp
+Dispatch hai implementation không trùng file; chạy tests phá hủy/CLI và pilot, review snapshot, sửa findings rồi đóng gate.
+
+## Baseline
+- Initial coordinator helper assumed manifest resources key: KeyError, exit1; corrected to required_files/sha256. All 155 W5 resources match, no product changes. check_project PASS53tasks/581links; SG034 awaitsSG033.

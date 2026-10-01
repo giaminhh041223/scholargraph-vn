@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T23:13:32.489133+07:00",
-  "stage": "integrated_local_master_complete",
-  "active_tasks": [],
+  "updated_at": "2026-10-01T23:30:30.299120+07:00",
+  "stage": "phase_b_implementation",
+  "active_tasks": [
+    "EXT-09",
+    "EXT-10"
+  ],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -17,13 +20,16 @@
     "EXT-07S",
     "EXT-07G",
     "EXT-07M",
-    "EXT-08"
+    "EXT-08",
+    "EXT-09",
+    "EXT-10"
   ],
   "next_steps": {
-    "COORDINATOR": "Scope complete; no further authorized phaseA work",
-    "PHASE_B": "EXT09/10 deferred until a new assignment"
+    "SOL": "Implement strict Crossref DOI enrichment sidecar and CLI",
+    "GEMINI": "Implement bounded JOSS HTML crawler and CLI",
+    "COORDINATOR": "Policy/config; execute native file-only tests; live pilots; immutable review"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-106-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261002-107-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -180,12 +186,46 @@
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": null,
+  "next_task_id": "EXT-09",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "EXT-09",
+      "owner": "SOL",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "paths": [
+        "src/scholargraph/public_search/crossref.py",
+        "scripts/enrich_public.py",
+        "configs/public_crossref.json",
+        "tests/unit/test_public_crossref.py"
+      ]
+    },
+    {
+      "task_id": "EXT-10",
+      "owner": "GEMINI",
+      "requested_model": "gemini-3.8-flash-high",
+      "requested_effort": "high",
+      "paths": [
+        "src/scholargraph/public_search/site_crawler.py",
+        "scripts/crawl_public.py",
+        "tests/unit/test_public_site_crawler.py"
+      ]
+    },
+    {
+      "task_id": "PHASE-B-POLICY",
+      "owner": "COORDINATOR",
+      "paths": [
+        "configs/public_site_joss.json",
+        "docs/public_search/PHASE_B.md",
+        "management/public_search/",
+        "artifacts/reports/public_search/phase_b/"
+      ]
+    }
+  ],
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"

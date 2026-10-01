@@ -1,3 +1,9 @@
+# Giai đoạn B đã được giao — 2026-10-01T23:30:30.299120+07:00
+
+EXT09/10 IN_PROGRESS trên codex/public-search-phase-b. SOL Crossref; Gemini crawler HTML JOSS; coordinator config/policy/tests/live; Muse review sau snapshot. [Log107](logs/SESSION-20261002-107-CODEX.md). Chưa có code/test phaseB, không suy DONE từ phaseA. Next: nhận implementation → kiểm adversarial/CLI → live → review. Main SG030/033 human gates còn chờ.
+
+## Lịch sử phaseA
+
 # Tích hợp hoàn tất — 2026-10-01T23:13:32.489133+07:00
 
 **Master local đã nhận public search; human gate PASS_USER_CONFIRMED;14task phaseA DONE.**
