@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T10:17:30+07:00",
-  "stage": "w4_ext06_in_progress",
+  "updated_at": "2026-10-01T13:32:49+07:00",
+  "stage": "ui_backend_library_envelope_fix_before_w5",
   "active_tasks": [
-    "EXT-06"
+    "EXT-05A-LIBRARY-DELTA"
   ],
   "authorized_tasks": [
     "EXT-01A",
@@ -14,15 +14,20 @@
     "EXT-04A",
     "EXT-04B",
     "EXT-05A",
-    "EXT-05B"
+    "EXT-05B",
+    "EXT-06",
+    "EXT-07S",
+    "EXT-07G",
+    "EXT-07M",
+    "EXT-08"
   ],
   "next_steps": {
-    "COORDINATOR": "MUSE worker exit1; coordinator đang tạo adversarial tests/verification và pilot evidence, không claim PASS khi thiếu live",
-    "SOL": "Chờ immutable EXT-06 evidence để fresh review",
-    "GEMINI": "Idle; EXT-07M sau EXT-06",
-    "MUSE": "Runner EXT-06 exit1, failure preserved"
+    "COORDINATOR": "ThuGeminiUI101; actualNodepytestbrowser; pinW5audit",
+    "SOL": "UIroute100done64c7a1b",
+    "GEMINI": "Sửa strict save/list library envelope theo actual backend",
+    "MUSE": "Smoke kênh đang chạy, chưa audit"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-091-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-096-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -108,26 +113,25 @@
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md",
+  "gate_report": "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-06",
+  "next_task_id": "EXT-07S",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
   "active_assignments": [
     {
-      "task_id": "EXT-06",
-      "owner": "COORDINATOR_TAKEOVER",
-      "source_owner": "MUSE",
-      "dispatch_id": "DISPATCH-W4-090-MUSE",
-      "status": "IN_PROGRESS",
+      "task_id": "EXT-05A-LIBRARY-DELTA",
+      "owner": "GEMINI_NATIVE",
+      "status": "RUNNING",
+      "runner_exec_session": 68532,
+      "model_requested": "gemini-3.8-flash-high",
+      "effort_requested": "high",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-UI-LIBRARY-FIX-101.txt",
       "claimed_paths": [
-        "tests/integration/test_public_adversarial.py",
-        "scripts/verify_public_search.py",
-        "artifacts/reports/public_search/muse/validation.json",
-        "artifacts/reports/public_search/muse/validation.md",
-        "data/public_search/muse/pilot_ext06/"
+        ".worktrees/public-gemini/scholargraph/ui/static/public_search.js",
+        ".worktrees/public-gemini/scholargraph/tests/fixtures/public_search/gemini/ui/"
       ]
     }
   ],
@@ -154,5 +158,11 @@
       "EXT-05A"
     ]
   },
-  "GEMINI": "Antigravity runner bị từ chối trước report; không có verdict"
+  "GEMINI": "Antigravity runner bị từ chối trước report; không có verdict",
+  "final_release_gate": {
+    "status": "PENDING",
+    "two_source_operational": "FAIL",
+    "human_demo": "PENDING",
+    "scope_change_to_one_source": false
+  }
 }

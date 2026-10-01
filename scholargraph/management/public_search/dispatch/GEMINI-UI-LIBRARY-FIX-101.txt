@@ -1,0 +1,13 @@
+Bạn là GEMINI author sửa integration UI library, model gemini-3.8-flash-high/high. User đã giao tiếp tục đến hết và worker models; coordinator chỉ cấp vùng UI. Không sửa board/backend/schema/config/source policy hoặc ghi parent.
+
+Project của bạn: D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph. Target code UI R4 hiện có trong checkout giống parentui. Read parent backend frozen contract/routes tại D:/Web_mining_20261/scholargraph/src/scholargraph/api/public_routes.py và public_search/contracts.py, store.py. Mọi ghi chỉ checkout riêng.
+
+Actualbrowser tại parent /public/ui đã chứng minh: search cached real OpenAlex3 hits hoạt động; bấm Lưu vào thư viện POST/public/library HTTP200 nhưng UI hiển thị 'LibraryEntry chứa trường không được phép: contract_version'. UI save validateLibraryEntry toàn response, trong khi backend trả {contract_version:'1.0.0',entry:LibraryEntry,errors:[]}; GET/public/library trả {contract_version:'1.0.0',entries:[LibraryEntry],errors:[]}, UI loadLibrary lại đòi array. Đây P1 integrationkhôngđượcnóiPASStừfixtureold.
+
+Fix tối thiểu: đúng wire envelope save/list với strict allowed/required contract_version, errors và entry/entries; validate nestedLibraryEntry bằng existingvalidator, giữ fail rõ non2xx/schema/unknownversion/error. Không chấp nhận cả oldbareentry/barelist ngầm. Không ignoreextra/nullablemarker/fallback. Export backend bodyjson list vàBibTeXtext giữ đúng existingflow; xem có bugsliênquan.
+
+Own ui/static/public_search.js; tests/fixtures/public_search/gemini/ui/node_test_runner.js và ui_fixtures.json/sidecar nếu cần schemawireupdate. Đọc cácfixtures thật, cập nhật μόνο librarymock trả envelopebackendactual. Thêm negative envelope missingfields/version/error/entrybad + save/list success thực, malformed fail. Test fixtures synthetic=true vẫn giữ rõ, recompute fixtureSHA trongsidecarvìpinnedreview. Không sửa arxiv/route/offline template.
+
+Native filetools được dùng; nếu command bị deny thì ghi NOT_RUN và đề nghị coordinator chạy tests; không lặp deniedaction và không giả runtimePASS. Đừng tựinstalldependency hoặccopycoredata. Khôngcommit/push/merge.
+
+Outputpacket/log trong management/public_search/packets/GEMINI/EXT-05A-LIBRARY-101.md và logs/GEMINI/EXT-05A-LIBRARY-101.md: exactpaths, commandsactual/NOT_RUN, mockvsbrowser, remainingfindings, requestedmodel/effort nhưngactualunknownnếuchưaxácminh. Kết thúc sau artifacts, trảpaths. Coordinator chạypytestNode/browser, nhậpfilesexactvàfreshaudit.

@@ -1,3 +1,19 @@
+# W4 100 — Evidence DONE; sửa UI entry trước audit W5
+
+- Fresh SOL R3 PASS_EVIDENCE trên5f16994; gate EXT-06-W4-GATE-100. Operational two-source FAIL, release/human demo PENDING.
+- Helper /root/public_ui_route_fix đang sửa additive page/link/tests riêng; chưa audit mutable snapshot.
+- Gemini/MUSE smoke channels đang chạy; kết quả phải kiểm thực.
+- Next executable: thu UI delta/test và pin; dispatch3audit trên cùng snapshot; sửa/re-review findings; EXT-08 docs/checklist. Không merge master trước operational+human demo gate.
+
+# W4 098 — EXT-06 REVIEW; operational hai nguồn FAIL
+
+- User đã xác nhận bộ 5 query và giao tiếp tục đến hết.
+- Target immutable `9a20cdf`; packet MUSE/EXT-06-W4-096, manifest W4-REVIEW-098, verifier validation-098.
+- 523 regression PASS; 77 focused PASS; 33 primary freeze hashes khớp. 16 canonical runs: 10 explicit OpenAlex success/cache, 6 two-source partial_failure/CLI1, arXiv 4 timeout+2 quota.
+- Fresh reviewer `/root/review_ext06_gate` đang re-review. Không author nào sửa implementation.
+- Evidence completeness có thể PASS độc lập operational FAIL theo decision096; final release/merge PENDING và human demo PENDING. Không giảm scope một nguồn.
+- Next executable: nhận report SOL, sửa findings nếu có; gate evidence rồi dispatch 3 audit W5. EXT-08 sau audit; không merge master trước demo/two-source operational gate.
+
 # W4 090 — EXT-06 coordinator takeover (2026-10-01T10:17:30+07:00)
 
 - MUSE runner `EXT06-W4-MUSE-090` failed exit 1 before producing artifacts; failure evidence `data/public_search/control/runs/437d74cb-7ecf-4f1e-9d26-c7f526737bdd/summary.json`.

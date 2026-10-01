@@ -1,0 +1,16 @@
+Bạn là GEMINI auditor EXT-07M, requested gemini-3.8-flash-high/high (mức cao nhất hỗ trợ đúng model). Chỉ report/log, không implementation hoặc board.
+
+Target immutable parent D:/Web_mining_20261/scholargraph, code commit 9a20cdf. Đọc code parent, không dùng source cũ của checkout. Đọc AGENTS.md root/con, docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-07M, packet MUSE/EXT-06-W4-096.md, W4-REVIEW-098.json, artifacts/reports/public_search/muse/pilot-ext06-096.json/validation-098.json, decision EXT-06-EVIDENCE-DECISION-096.md.
+
+Audit storage/export, tests và verifier MUSE: transaction/idempotency, cache TTL/stale/refresh/schema/raw hash/provenance, BibTeX escaping; 16 canonical runs/10exit0/6exit1, arXiv4timeout2quota, OpenAlex5refresh5cache,10saves=5entries. Raw pilot local trong parent data/public_search/muse/pilot_ext06, không network, không sửa/overwrite bytes. P95/median/n phải rederive; không gọi failures thành success.
+
+Kiểm scripts/verify_public_search.py: required freeze nonempty data/splits/graph/models/configs, thiếu file/hash/split/ids malformed/overlap phải CLI1; no acceptance fakePASS; output collision không ghi lên protected freeze/core; strict JSON datetime, duplicate keys/NaN/CLI arguments; leakage hooks calibrate builtins.open/io.open chỉ scope service orchestration, không gọi OS-wide monitor. Real core freeze33 vẫn khớp.
+
+Re-run corrupt cache/DB và missing core audit input trên temp nếu native commands được phép. Nếu command action denied, dùng file tools đọc code và ghi NOT_RUN/proposed repro để coordinator chạy; đừng lặp terminal action đã denied. Báo findings cụ thể owner MUSE. Không tự cải thiện implementation.
+
+Output chỉ trong checkout của bạn:
+management/public_search/reviews/GEMINI/EXT-07M-W5-099.md
+management/public_search/logs/GEMINI/EXT-07M-W5-099.md
+Probes .tmp/ext07m-099/ nếu được cấp write.
+
+Report tiếng Việt verdict PASS/CHANGES_REQUIRED/INSUFFICIENT_EVIDENCE, tested target hashes, actual model+effort unknown nếu không xác minh, executed cmds/exitcounts versus NOT_RUN. Core human gates không thay đổi; final release PENDING arXiv+human demo. Không commit/push/merge. Kết thúc sau report/log.

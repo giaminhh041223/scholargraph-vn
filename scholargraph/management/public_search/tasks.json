@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T10:17:30+07:00",
+  "updated_at": "2026-10-01T13:03:56+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -76,7 +76,21 @@
       "current_dispatch_state": "idle_w1_complete"
     }
   },
-  "active_assignments": [],
+  "active_assignments": [
+    {
+      "task_id": "EXT-05A-LIBRARY-DELTA",
+      "owner": "GEMINI_NATIVE",
+      "status": "RUNNING",
+      "runner_exec_session": 68532,
+      "model_requested": "gemini-3.8-flash-high",
+      "effort_requested": "high",
+      "dispatch_file": "management/public_search/dispatch/GEMINI-UI-LIBRARY-FIX-101.txt",
+      "claimed_paths": [
+        ".worktrees/public-gemini/scholargraph/ui/static/public_search.js",
+        ".worktrees/public-gemini/scholargraph/tests/fixtures/public_search/gemini/ui/"
+      ]
+    }
+  ],
   "tasks": [
     {
       "id": "EXT-01A",
@@ -647,7 +661,7 @@
     {
       "id": "EXT-06",
       "title": "Kiểm thử tích hợp phá hủy và pilot thực",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "SOL",
       "dependencies": [
@@ -655,11 +669,22 @@
         "EXT-05B"
       ],
       "session_id": "DISPATCH-W4-090-MUSE",
-      "evidence": [],
-      "owner": "MUSE",
+      "evidence": [
+        "management/public_search/packets/MUSE/EXT-06-W4-096.md",
+        "management/public_search/W4-REVIEW-098.json",
+        "artifacts/reports/public_search/muse/pilot-ext06-096.json",
+        "artifacts/reports/public_search/muse/validation-098.json",
+        "management/public_search/reviews/COORDINATOR/EXT-06-EVIDENCE-DECISION-096.md",
+        "management/public_search/W4-REVIEW-099.json",
+        "artifacts/reports/public_search/muse/validation-099.json",
+        "management/public_search/reviews/SOL/EXT-06-W4-R2-098.md",
+        "management/public_search/reviews/SOL/EXT-06-W4-R3-099.md",
+        "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md"
+      ],
+      "owner": "COORDINATOR_TAKEOVER",
       "dispatch_id": "DISPATCH-W4-090-MUSE",
       "dispatch_file": "management/public_search/dispatch/MUSE-W4-EXT06-090.txt",
-      "dispatch_state": "worker_failed_coordinator_takeover",
+      "dispatch_state": "closed_after_independent_r3_pass",
       "author_execution_status": "FAILED_WORKER_EXIT1",
       "runtime": {
         "runner_session": "EXT06-W4-MUSE-090",
@@ -668,16 +693,12 @@
         "runtime_observed": null,
         "failure_evidence": "data/public_search/control/runs/437d74cb-7ecf-4f1e-9d26-c7f526737bdd/summary.json"
       },
-      "claimed_paths": [
-        "tests/integration/test_public_adversarial.py",
-        "scripts/verify_public_search.py",
-        "artifacts/reports/public_search/muse/validation.json",
-        "artifacts/reports/public_search/muse/validation.md",
-        "data/public_search/muse/pilot_ext06/",
-        "management/public_search/logs/MUSE/EXT-06-W4-090.md",
-        "management/public_search/packets/MUSE/EXT-06-W4-090.md"
-      ],
-      "next_action": "Coordinator takeover adversarial evidence; reviewer SOL fresh fallback sau khi artifacts immutable"
+      "claimed_paths": [],
+      "next_action": "Fresh SOL R2 review completeness; operational two-source FAIL, final release PENDING",
+      "source_owner": "MUSE",
+      "input_head": "5f16994",
+      "completion_scope": "evidence only; two-source operational FAIL; final release PENDING",
+      "review_verdict": "PASS_EVIDENCE"
     },
     {
       "id": "EXT-07S",
@@ -1001,8 +1022,9 @@
       "model_requested": "gpt-6.1-sol",
       "reasoning_effort_requested": "high",
       "runtime_model_observed": null,
-      "status": "RUNNING",
-      "dispatch_state": "author_active"
+      "status": "ENDED",
+      "dispatch_state": "completed_after_coordinator_takeover",
+      "closure_basis": "EXT-05B DONE, immutable b304bf4 integration and final gate084"
     }
   ],
   "pause_after_current_round": false,

@@ -1,0 +1,16 @@
+Bạn là MUSE auditor EXT-07S, model requested opencode/muse-spark-1.3-contributor-free, reasoning xhigh. Đây là audit backend SOL độc lập, chỉ được viết report/log của bạn.
+
+Target immutable parent: D:/Web_mining_20261/scholargraph, code commit 9a20cdf. Dùng parent files để đọc, không dùng source cũ trong checkout hiện tại. Parent source không được sửa. Không network, không push/merge/board edits.
+
+Đọc AGENTS.md root/con, docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-07S, docs/public_search/CONTRACT.md, packet MUSE/EXT-06-W4-096.md, W4-REVIEW-098.json và decision EXT-06-EVIDENCE-DECISION-096.md trong parent. EXT-06 đã được coordinator gate evidence trước dispatch; operational hai nguồn FAIL là limitation giữ nguyên, không phải evidence PASS của network.
+
+Review contract/transport/openalex/fusion/service trong src/scholargraph/public_search; public_routes.py, additive app router, scripts/search_public.py và configs/public_search.json. Kiểm malformed required inputs, retry/quota/deadline/auth/redaction, abstract dictionary words labels phải hợp lệ nhưng label metadata ngoài abstract bị từ chối, ID/conflict/RRF/counters; source failures phải non-2xx/CLI1; offline core thiếu không được chặn public; cache keys/refresh failure/close/resource failure rõ.
+
+Chạy ít nhất CLI missing-resource và partial failure bằng temp synthetic inputs, không gọi nguồn live, không sửa core data. Có thể dùng .venv/Scripts/python.exe parent với PYTHONPATH parent/src, chứng minh import path. Nếu command bị runtime từ chối, ghi NOT_RUN; không gọi report PASS chỉ vì tests có sẵn.
+
+Output chỉ trong checkout của bạn:
+management/public_search/reviews/MUSE/EXT-07S-W5-099.md
+management/public_search/logs/MUSE/EXT-07S-W5-099.md
+Probes chỉ .tmp/ext07s-099/ (nếu được cấp write); có thể thiết kế repro trong report để coordinator thực thi.
+
+Report tiếng Việt: verdict PASS/CHANGES_REQUIRED/INSUFFICIENT_EVIDENCE; target hash; actual model/effort unknown nếu không quan sát được; commands actual và exit counts; findings severity/path/line/expected/actual/reproducer owner SOL; mock/live phân biệt. Final release PENDING do arXiv/human demo, không tuyên bố MVP hoàn tất. Không commit hay sửa implementation. Kết thúc sau report/log; trả paths và tóm tắt.
