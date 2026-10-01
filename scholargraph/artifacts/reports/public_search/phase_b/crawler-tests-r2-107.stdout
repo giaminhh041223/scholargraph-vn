@@ -1,0 +1,10 @@
+........................................................F...             [100%]
+================================== FAILURES ===================================
+____________________ test_malformed_paper_at_budget_resume ____________________
+tests\unit\test_public_site_crawler.py:735: in test_malformed_paper_at_budget_resume
+    with pytest.raises(ParseError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ParseError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_public_site_crawler.py::test_malformed_paper_at_budget_resume
+1 failed, 59 passed in 4.67s

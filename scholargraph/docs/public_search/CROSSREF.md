@@ -5,7 +5,7 @@ Crossref cung cấp sidecar metadata cho một DOI chính xác. `Source` của h
 Chạy từ `D:/Web_mining_20261/scholargraph`:
 
 ```powershell
-.venv/Scripts/python.exe scripts/enrich_public.py --project-root . --doi 10.21105/joss.09260 --output-dir data/public_search/phase_b/crossref-joss-09260
+.venv/Scripts/python.exe scripts/enrich_public.py --project-root . --doi 10.21105/joss.03021 --output-dir data/public_search/phase_b/crossref-joss-03021
 ```
 
 Mỗi lần chạy cần thư mục output mới. Thư mục đã tồn tại bị từ chối, kể cả run lỗi; không ghi đè hoặc coi raw cũ là lần đo mới. Output phải nằm trong `data/public_search/` của project. JSON trên stdout có `status=success|failed`; lỗi trả exit **1**, trợ giúp exit **0**. Script tự thêm `src` vào import path và xuất UTF-8 trên Windows.
@@ -45,4 +45,6 @@ $env:PYTHONPATH = 'src'
 .venv/Scripts/python.exe -m pytest tests/unit/test_public_crossref.py -q
 ```
 
-Author đã chạy **98 tests PASS**. Pilot mạng thật và independent review do coordinator thực hiện sau khi pin snapshot; tài liệu này không tự nhận live pilot hoàn thành hay relevance đã được đo.
+Author: 98 tests PASS (10.27s). Coordinator trên snapshot `faf97a5`: **98 tests PASS (11.28s)**; [bằng chứng test](../../artifacts/reports/public_search/phase_b/crossref-tests-107.json). [Muse review độc lập](../../management/public_search/reviews/MUSE/EXT09-R1-107.md) PASS, file-only; reviewer không tự chạy tests.
+
+[Pilot thực tế](../../artifacts/reports/public_search/phase_b/crossref-live-history-107.json) có **5 calls = 3 success + 2 HTTP 404**. Hai DOI JOSS thành công là `10.21105/joss.09644` và `10.21105/joss.03021`; record OpenAlex `10.1609/aaai.v28i1.8870` giữ nguyên metadata gốc, mâu thuẫn abstract/citation count được ghi riêng. `10.21105/joss.09260` trả 404 ngoài kỳ vọng và DOI unknown trả 404 đúng kỳ vọng. Batch ban đầu FAIL được giữ, không suy nguyên nhân 404 hoặc đổi nó thành success. Chưa đo relevance/độ phủ/tính sẵn sàng dài hạn.

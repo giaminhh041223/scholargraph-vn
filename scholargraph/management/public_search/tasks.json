@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T23:30:30.299120+07:00",
+  "updated_at": "2026-10-02T00:06:36.062427+07:00",
   "branch": "codex/public-search-phase-b",
   "mode": "phase_b_authorized",
   "coordinator": "current_chat_extension_only",
@@ -78,37 +78,19 @@
   },
   "active_assignments": [
     {
-      "task_id": "EXT-09",
-      "owner": "SOL",
-      "requested_model": "gpt-6.1-sol",
-      "requested_effort": "high",
-      "paths": [
-        "src/scholargraph/public_search/crossref.py",
-        "scripts/enrich_public.py",
-        "configs/public_crossref.json",
-        "tests/unit/test_public_crossref.py"
-      ]
-    },
-    {
       "task_id": "EXT-10",
-      "owner": "GEMINI",
-      "requested_model": "gemini-3.8-flash-high",
-      "requested_effort": "high",
+      "owner": "SOL",
+      "agent_id": "/root/crossref_phase_b_107",
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
       "paths": [
         "src/scholargraph/public_search/site_crawler.py",
         "scripts/crawl_public.py",
-        "tests/unit/test_public_site_crawler.py"
-      ]
-    },
-    {
-      "task_id": "PHASE-B-POLICY",
-      "owner": "COORDINATOR",
-      "paths": [
-        "configs/public_site_joss.json",
-        "docs/public_search/PHASE_B.md",
-        "management/public_search/",
-        "artifacts/reports/public_search/phase_b/"
-      ]
+        "tests/unit/test_public_site_crawler.py",
+        "docs/public_search/JOSS_CRAWLER.md",
+        "management/public_search/packets/SOL/EXT10-R3-107.md"
+      ],
+      "reason": "Gemini file-only R2 delivered; meaningful regression still fails and P1 junction/provenance/resume remain; SOL can execute adversarial tests while fixing"
     }
   ],
   "tasks": [
@@ -853,7 +835,7 @@
     {
       "id": "EXT-09",
       "title": "Crossref enrichment (giai đoạn B)",
-      "status": "REVIEW",
+      "status": "DONE",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "SOL",
       "dependencies": [
@@ -866,7 +848,7 @@
         "artifacts/reports/public_search/phase_b/crossref-live-history-107.json"
       ],
       "owner": "SOL",
-      "dispatch_state": "stopped_snapshot_pinned",
+      "dispatch_state": "completed_reviewed",
       "claimed_paths": [
         "src/scholargraph/public_search/crossref.py",
         "scripts/enrich_public.py",
@@ -881,7 +863,14 @@
       },
       "delivered_head": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
       "reviewer": "MUSE",
-      "review_state": "RUNNING_FILE_ONLY"
+      "review_state": "RUNNING_FILE_ONLY",
+      "review_verdict": "PASS",
+      "review_evidence": [
+        "management/public_search/reviews/MUSE/EXT09-R1-107.md",
+        "management/public_search/reviews/SOL/EXT10-107-R2.md"
+      ],
+      "unresolved_findings": [],
+      "next_action": "No further EXT09 work; preserve 5call history3success2HTTP404"
     },
     {
       "id": "EXT-10",
@@ -892,36 +881,36 @@
       "dependencies": [
         "EXT-08"
       ],
-      "session_id": "PHASE-B-107",
+      "session_id": "/root/crossref_phase_b_107",
       "evidence": [],
-      "owner": "GEMINI",
-      "dispatch_state": "running_file_only",
+      "owner": "SOL",
+      "dispatch_state": "running_r3_fix",
       "claimed_paths": [
         "src/scholargraph/public_search/site_crawler.py",
         "scripts/crawl_public.py",
-        "tests/unit/test_public_site_crawler.py"
+        "tests/unit/test_public_site_crawler.py",
+        "docs/public_search/JOSS_CRAWLER.md",
+        "management/public_search/packets/SOL/EXT10-R3-107.md"
       ],
       "runtime": {
-        "controller_exec_session": 11766,
-        "model_requested": "gemini-3.8-flash-high",
+        "agent_id": "/root/crossref_phase_b_107",
+        "model_requested": "gpt-6.1-sol",
         "effort_requested": "high",
-        "runtime_model_observed": null,
-        "dispatch_file": "management/public_search/dispatch/GEMINI-EXT10-107.txt"
+        "runtime_model_observed": null
       },
       "review_verdict": "CHANGES_REQUIRED",
       "review_evidence": [
-        "management/public_search/reviews/SOL/EXT10-107-R1.md"
+        "management/public_search/reviews/SOL/EXT10-107-R1.md",
+        "management/public_search/reviews/SOL/EXT10-107-R2.md"
       ],
       "author_fix_exec_session": 85582,
       "unresolved_findings": [
-        "R1-01",
-        "R1-02",
-        "R1-03",
-        "R1-04",
-        "R1-05",
-        "R1-06",
-        "R1-07",
-        "R1-08"
+        "R2-01",
+        "R2-02",
+        "R2-03",
+        "R2-04",
+        "R2-05",
+        "R2-06"
       ]
     }
   ],

@@ -240,3 +240,7 @@ Người dùng đã xác nhận demo/save/mở JSON-BibTeX và đồng ý tích 
 - Chọn JOSS published HTML, robots và policy raw được lưu. Giới hạn một host HTTPS, listing + paper citation, 1 request/3s, concurrency1, không PDF/JS/ngoài host; caps và resume integrity bắt buộc.
 - SOL nhận EXT09 do Muse write allowlist chỉ review/log; Gemini file-only nhận EXT10, coordinator chạy tests do terminal native bị denied. Muse xhigh review snapshot thật.
 - Scope không thay human research gates SG030/033, không tự mở stretch hoặc push.
+
+### ADR-022 — Làm rõ ranh giới contract B
+
+Pilot B bàn giao CLI sidecar/collection riêng, trường thư mục tương ứng title/authors/DOI/venue/landing URL và provenance/raw. Thay dòng normalize cùng API trong bản plan sơ bộ: frozen v1 chỉ OpenAlex/arXiv, chưa nhập JOSS/Crossref vào search/library UI. Mở rộng enum/API/UI là task contract upgrade mới khi được giao, không tự coi CLI là UIintegration. Crawler→Crossref nối DOI, không truyền JossPaperRecord vào --record-json yêu cầu PaperRecordv1. Đây là quyết định triển khai hẹp để giữ releaseA đang được dùng; ghi rõ trong packet.

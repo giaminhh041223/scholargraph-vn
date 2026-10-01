@@ -18,3 +18,8 @@ Dispatch hai implementation không trùng file; chạy tests phá hủy/CLI và 
 ## Crossref snapshot và live
 - faf97a5: root98PASS11.28s/exit0, CLI env không PYTHONPATH. Live5calls=3success2HTTP404; originalOA giữ nguyên. Initial4callreportFAIL (JOSS09260 unexpectedly404); recovery03021success; giữ cả2report/raw, không relabel lịch sử.
 - CrawlerR1 độc lậpCHANGES_REQUIRED8findings: poisonCLIexit0, parsefailure-resume bypass, protectedroot, malformedrobots, counters/narrative/standaloneCLI/metadataHTTP. R2Gemini exec85582; CrossrefMUSE freshreview exec9791.
+
+## Checkpoint R3 — 2026-10-02T00:06:36.062427+07:00
+- EXT09DONE: MusefreshR1PASS/fileonly + SOLnarrativeCROSSREFpostpilotPASS; codefaf97a5,98testsPASS/root11.28s,5live=3success2HTTP404, originalunchanged.
+- GeminiR2a75e389: root59PASS1FAIL4.67s; independentSOL59PASS1FAIL6.16s. Sixfindings/threeP1 remain; .tmp/jr2107 repros copied into artifacts.
+- SOLauthor /root/crossref_phase_b_107 đã nhậnR3 (issued then immediately recorded); narrowfivepaths, Gemini stopped. Reviewer /root/review_joss_phase_b_107 stopped. No phaseBmastermerge.

@@ -1,9 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T23:30:30.299120+07:00",
-  "stage": "phase_b_crawler_fix_crossref_review",
+  "updated_at": "2026-10-02T00:06:36.062427+07:00",
+  "stage": "phase_b_crossref_done_crawler_r3",
   "active_tasks": [
-    "EXT-09",
     "EXT-10"
   ],
   "authorized_tasks": [
@@ -25,10 +24,8 @@
     "EXT-10"
   ],
   "next_steps": {
-    "SOL": "Crossref delivered98PASS, stopped; independent crawler R1 CHANGES_REQUIRED",
-    "GEMINI": "Fix eight findings R2 fileonly exec85582",
-    "MUSE": "Independent Crossref snapshotfaf97a5 review fileonly exec9791",
-    "COORDINATOR": "Collect native reports; execute crawler R2 tests and live after fixes"
+    "SOL": "AuthorR3 fix sixR2 blockers + execute tests; reviewer separateSOL idle untilsnapshot",
+    "COORDINATOR": "Pin testedR3→JOSSlive→independentreview→packet; preserve corehuman gates"
   },
   "last_session_log": "management/public_search/logs/SESSION-20261002-107-CODEX.md",
   "worker_execution_observed": true,
@@ -187,44 +184,26 @@
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-09",
+  "next_task_id": "EXT-10",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
   "active_assignments": [
     {
-      "task_id": "EXT-09",
-      "owner": "SOL",
-      "requested_model": "gpt-6.1-sol",
-      "requested_effort": "high",
-      "paths": [
-        "src/scholargraph/public_search/crossref.py",
-        "scripts/enrich_public.py",
-        "configs/public_crossref.json",
-        "tests/unit/test_public_crossref.py"
-      ]
-    },
-    {
       "task_id": "EXT-10",
-      "owner": "GEMINI",
-      "requested_model": "gemini-3.8-flash-high",
-      "requested_effort": "high",
+      "owner": "SOL",
+      "agent_id": "/root/crossref_phase_b_107",
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
       "paths": [
         "src/scholargraph/public_search/site_crawler.py",
         "scripts/crawl_public.py",
-        "tests/unit/test_public_site_crawler.py"
-      ]
-    },
-    {
-      "task_id": "PHASE-B-POLICY",
-      "owner": "COORDINATOR",
-      "paths": [
-        "configs/public_site_joss.json",
-        "docs/public_search/PHASE_B.md",
-        "management/public_search/",
-        "artifacts/reports/public_search/phase_b/"
-      ]
+        "tests/unit/test_public_site_crawler.py",
+        "docs/public_search/JOSS_CRAWLER.md",
+        "management/public_search/packets/SOL/EXT10-R3-107.md"
+      ],
+      "reason": "Gemini file-only R2 delivered; meaningful regression still fails and P1 junction/provenance/resume remain; SOL can execute adversarial tests while fixing"
     }
   ],
   "w1_freeze": {

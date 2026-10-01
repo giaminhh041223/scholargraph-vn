@@ -42,7 +42,7 @@ Truy vấn MVP giữ nguyên văn bản người dùng nhập. UI nói rõ nhi�
 - `EXT-09`: Crossref lookup theo DOI, tùy chọn tìm metadata sau pilot; giữ metadata ban đầu và ghi provenance cho phần bổ sung.
 - `EXT-10`: crawler HTML cho **một website thí điểm được chọn cụ thể**: tạp chí, kho trường đại học hoặc repository công khai. Sau pilot mới thêm website thứ hai.
 - Crawler đi từ trang danh sách/kết quả tới trang chi tiết, ưu tiên `citation_*`, JSON-LD hoặc metadata Dublin Core. Selector theo từng site, có version.
-- Lưu raw HTML, URL, thời gian lấy, hash, parser version; normalize về cùng schema với API.
+- Lưu raw HTML, URL, thời gian lấy, hash, parser version. Theo ADR-022, pilot B dùng schema sidecar/collection riêng với các trường thư mục tương ứng (title/authors/DOI/venue/landing URL); không mở rộng enum `Source` của API v1. CLI nối crawler → Crossref bằng DOI. Nhập crawler vào search/library UI cần nâng contract và kiểm tích hợp riêng; không nằm trong EXT-09/10 đang nghiệm thu.
 - Trước pilot phải xác minh điều kiện truy cập, robots.txt và phạm vi URL của chính site đó. Đọc được một trang bằng trình duyệt chưa đủ để quyết định quét hàng loạt.
 
 Full-text indexing, tải PDF hàng loạt, OCR, graph trực tuyến, dense reranking và lịch quét tự động được đưa ra sau khi MVP có số đo và nhu cầu cụ thể. MVP chạy theo request/CLI chủ động.

@@ -1,3 +1,9 @@
+# Checkpoint R3 — 2026-10-02T00:06:36.062427+07:00
+
+EXT09DONE (MusecodePASS, SOLnarrativePASS;98roottests;5livecalls3success2HTTP404). EXT10IN_PROGRESS, ownerSOLauthorR3 /root/crossref_phase_b_107; GeminiR2 đã dừng. Snapshot a75e389 có59PASS1FAIL, [sixfindingR2](reviews/SOL/EXT10-107-R2.md), bao gồm Windowsjunction thật và poisonCLIexit0. ReviewerSOL riêngđãdừng. Next: thuR3/pytest→pin→JOSSlive→review/fix→docs/gate. [Log107](logs/SESSION-20261002-107-CODEX.md). MainSG030/033 cầnngười, phaseBchưa merge.
+
+## Lịch sử checkpoint
+
 # Checkpoint107 — Crossref REVIEW, crawler sửa R2
 
 Crossref faf97a5, root98PASS/11.28s; pilot5attempts=3success2HTTP404, OAoriginal unchanged. Initial4callFAIL giữ nguyên, recovery03021success; [history](../../artifacts/reports/public_search/phase_b/crossref-live-history-107.json). MUSE fresh file-onlyreview exec9791. Crawler d6a849c R1SOL CHANGES_REQUIRED8findings (resume poison/selector drift/protectedroot/robots/counters/standaloneCLI/HTTP/doc); Gemini file-onlyR2 exec85582. [Report](reviews/SOL/EXT10-107-R1.md). Next executable: collectR2→pytest/probes→pin→JOSSlive→freshreview/fixes→gate/docs. Không merge phaseB hoặc relabel corehuman gates.

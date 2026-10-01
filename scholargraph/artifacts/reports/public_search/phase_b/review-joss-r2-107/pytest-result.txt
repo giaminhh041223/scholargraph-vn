@@ -1,0 +1,53 @@
+........................................................F...             [100%]
+================================== FAILURES ===================================
+____________________ test_malformed_paper_at_budget_resume ____________________
+
+tmp_path = WindowsPath('D:/Web_mining_20261/scholargraph/.tmp/jr2107/pytest/test_malformed_paper_at_budget0')
+
+    def test_malformed_paper_at_budget_resume(tmp_path: Path) -> None:
+        project_root, _, config = create_valid_test_env(tmp_path)
+        run_dir = project_root / "data" / "public_search" / "joss" / "budget-fail-resume"
+    
+        # Set max_pages to 2 (1 listing + 1 paper)
+        config = config.model_copy(update={"max_pages": 2})
+    
+        malformed_paper = "<html><head><title>No Citation Tags</title></head><body>Title Only</body></html>"
+    
+        def fail_paper_handler(request: httpx.Request) -> httpx.Response:
+            url_str = str(request.url)
+            if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
+                return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
+            if url_str == f"{CANONICAL_ORIGIN}{START_PATH}":
+                return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html"})
+            return httpx.Response(200, content=malformed_paper.encode("utf-8"), headers={"Content-Type": "text/html"})
+    
+        crawler1 = JossCrawler(
+            project_root=project_root,
+            config=config,
+            run_dir=run_dir,
+            resume=False,
+            client=httpx.Client(transport=httpx.MockTransport(fail_paper_handler)),
+            sleeper=lambda _: None,
+            dns_resolver=fake_global_dns_resolver,
+        )
+        with pytest.raises(ParseError):
+            crawler1.crawl()
+    
+        # Resume must re-evaluate and fail, not silently mark complete with 0 records
+        crawler2 = JossCrawler(
+            project_root=project_root,
+            config=config,
+            run_dir=run_dir,
+            resume=True,
+            client=httpx.Client(transport=httpx.MockTransport(fail_paper_handler)),
+            sleeper=lambda _: None,
+            dns_resolver=fake_global_dns_resolver,
+        )
+>       with pytest.raises(ParseError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ParseError
+
+tests\unit\test_public_site_crawler.py:735: Failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_public_site_crawler.py::test_malformed_paper_at_budget_resume
+1 failed, 59 passed in 6.16s

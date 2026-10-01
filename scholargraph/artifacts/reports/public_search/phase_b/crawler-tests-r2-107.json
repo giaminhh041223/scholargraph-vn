@@ -1,0 +1,19 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/unit/test_public_site_crawler.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    ".tmp/jossr2107"
+  ],
+  "elapsed_wall_seconds": 5.492336300012539,
+  "exit_code": 1,
+  "code_head": "94bbd9be7c4be05329ad3fa9bc951156623f0271",
+  "candidate_code_sha256": "a221902fb2fecaaae477f87cc3f4a927cb0b8823c529b05794d74dd42a46dadf",
+  "stdout_sha256": "0e04233add4110198712b30b95cafca1aaa0a7b70a5fb8e8fcb7caa74ddc0b97"
+}

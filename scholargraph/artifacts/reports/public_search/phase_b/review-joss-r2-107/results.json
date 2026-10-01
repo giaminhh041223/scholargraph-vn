@@ -1,0 +1,291 @@
+[
+  {
+    "probe": "missing_counters",
+    "error": "CheckpointIntegrityError",
+    "calls": []
+  },
+  {
+    "probe": "altered_title",
+    "error": "CheckpointIntegrityError",
+    "calls": []
+  },
+  {
+    "probe": "leakage",
+    "error": "CheckpointIntegrityError",
+    "calls": []
+  },
+  {
+    "probe": "wrong_schema",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "provenance_poison",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "visited_poison",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "frontier_poison",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "links_count_poison",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 0,
+      "duplicate_links": 100,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "duplicate_records",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 5,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 4,
+      "unique_papers": 4,
+      "failed_attempted_calls": 0
+    },
+    "record_ids": [
+      "joss:10.21105/joss.09260",
+      "joss:10.21105/joss.09644",
+      "joss:10.21105/joss.10451",
+      "joss:10.21105/joss.09260"
+    ]
+  },
+  {
+    "probe": "malformed_first_2",
+    "error": "ParseError",
+    "checkpoint": {
+      "schema_version": 1,
+      "site_id": "joss",
+      "config_hash": "3c1911bfd71ed30e8427401afae7df8a9d0130894a975f87065b90c1aacbee11",
+      "status": "failed",
+      "created_at": "2026-10-01T17:00:14.351730+00:00",
+      "updated_at": "2026-10-01T17:00:14.374694+00:00",
+      "frontier": [
+        "https://joss.theoj.org/papers/10.21105/joss.09644",
+        "https://joss.theoj.org/papers/10.21105/joss.10451"
+      ],
+      "visited": [
+        {
+          "url": "https://joss.theoj.org/papers/published.html",
+          "raw_sha256": "4b0571a89bae34030d5b625f7543671b02812757995a023943d893015d725369",
+          "type": "listing",
+          "retrieved_at": "2026-10-01T17:00:14.365642+00:00",
+          "parser_version": "joss-citation-1.0.0",
+          "config_hash": "3c1911bfd71ed30e8427401afae7df8a9d0130894a975f87065b90c1aacbee11"
+        },
+        {
+          "url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+          "raw_sha256": "461d213e2181bef48b0766177c69bdf07ddf844272b11f71465e576408376ecf",
+          "type": "paper",
+          "retrieved_at": "2026-10-01T17:00:14.372641+00:00",
+          "parser_version": "joss-citation-1.0.0",
+          "config_hash": "3c1911bfd71ed30e8427401afae7df8a9d0130894a975f87065b90c1aacbee11"
+        }
+      ],
+      "records": [],
+      "counters": {
+        "pages_fetched": 2,
+        "links_found": 4,
+        "duplicate_links": 1,
+        "papers_parsed": 0,
+        "unique_papers": 0,
+        "failed_attempted_calls": 0
+      },
+      "error": {
+        "kind": "ParseError",
+        "message": "Missing required citation meta tag: 'citation_title'"
+      }
+    }
+  },
+  {
+    "probe": "malformed_resume_2",
+    "status": "success",
+    "records_count": 0,
+    "counters": {
+      "pages_fetched": 2,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 0,
+      "unique_papers": 0,
+      "failed_attempted_calls": 0
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "malformed_first_5",
+    "error": "ParseError",
+    "checkpoint": {
+      "schema_version": 1,
+      "site_id": "joss",
+      "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422",
+      "status": "failed",
+      "created_at": "2026-10-01T17:00:14.474348+00:00",
+      "updated_at": "2026-10-01T17:00:14.497951+00:00",
+      "frontier": [
+        "https://joss.theoj.org/papers/10.21105/joss.09644",
+        "https://joss.theoj.org/papers/10.21105/joss.10451"
+      ],
+      "visited": [
+        {
+          "url": "https://joss.theoj.org/papers/published.html",
+          "raw_sha256": "4b0571a89bae34030d5b625f7543671b02812757995a023943d893015d725369",
+          "type": "listing",
+          "retrieved_at": "2026-10-01T17:00:14.489546+00:00",
+          "parser_version": "joss-citation-1.0.0",
+          "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422"
+        },
+        {
+          "url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+          "raw_sha256": "461d213e2181bef48b0766177c69bdf07ddf844272b11f71465e576408376ecf",
+          "type": "paper",
+          "retrieved_at": "2026-10-01T17:00:14.495943+00:00",
+          "parser_version": "joss-citation-1.0.0",
+          "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422"
+        }
+      ],
+      "records": [],
+      "counters": {
+        "pages_fetched": 2,
+        "links_found": 4,
+        "duplicate_links": 1,
+        "papers_parsed": 0,
+        "unique_papers": 0,
+        "failed_attempted_calls": 0
+      },
+      "error": {
+        "kind": "ParseError",
+        "message": "Missing required citation meta tag: 'citation_title'"
+      }
+    }
+  },
+  {
+    "probe": "malformed_resume_5",
+    "error": "ParseError",
+    "calls": [
+      "https://joss.theoj.org/robots.txt",
+      "https://joss.theoj.org/papers/10.21105/joss.09644"
+    ]
+  },
+  {
+    "probe": "malformed_robots",
+    "error": "RobotsDeniedError",
+    "checkpoint_exists": false
+  },
+  {
+    "probe": "private_dns",
+    "error": "SecurityError",
+    "actual_http_calls": 0,
+    "checkpoint": {
+      "schema_version": 1,
+      "site_id": "joss",
+      "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422",
+      "status": "failed",
+      "created_at": "2026-10-01T17:00:14.600329+00:00",
+      "updated_at": "2026-10-01T17:00:14.605875+00:00",
+      "frontier": [],
+      "visited": [],
+      "records": [],
+      "counters": {
+        "pages_fetched": 0,
+        "links_found": 0,
+        "duplicate_links": 0,
+        "papers_parsed": 0,
+        "unique_papers": 0,
+        "failed_attempted_calls": 1
+      },
+      "error": {
+        "kind": "SecurityError",
+        "message": "SSRF protection: Disallowed non-global IP resolved (127.0.0.1) for joss.theoj.org"
+      }
+    }
+  },
+  {
+    "probe": "junction",
+    "accepted": true,
+    "base_is_symlink": false,
+    "base_is_junction": true,
+    "resolved_run": "D:\\Web_mining_20261\\scholargraph\\.tmp\\jr2107\\probe-8eev7rse\\junction_target\\run",
+    "outside_project": true
+  },
+  {
+    "probe": "cli_missing_counters",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "{\n  \"status\": \"failed\",\n  \"site_id\": \"joss\",\n  \"run_dir\": \"D:\\\\Web_mining_20261\\\\scholargraph\\\\.tmp\\\\jr2107\\\\probe-8eev7rse\\\\cli_missing_counters\\\\project\\\\data\\\\public_search\\\\joss\\\\run\",\n  \"error\": {\n    \"kind\": \"checkpoint_integrity\",\n    \"message\": \"Checkpoint schema validation failed: 1 validation error for CheckpointModel\\ncounters\\n  Field required [type=missing, input_value={'schema_version': 1, 'si...ume']}}], 'error': None}, input_type=dict]\\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\"\n  },\n  \"counters\": {\n    \"pages_fetched\": 0,\n    \"links_found\": 0,\n    \"duplicate_links\": 0,\n    \"papers_parsed\": 0,\n    \"unique_papers\": 0,\n    \"failed_attempted_calls\": 0\n  }\n}\n"
+  },
+  {
+    "probe": "cli_malformed_at_budget",
+    "exit_code": 0,
+    "stdout": "{\n  \"status\": \"success\",\n  \"site_id\": \"joss\",\n  \"run_dir\": \"D:\\\\Web_mining_20261\\\\scholargraph\\\\.tmp\\\\jr2107\\\\probe-8eev7rse\\\\cli_malformed_at_budget\\\\project\\\\data\\\\public_search\\\\joss\\\\run\",\n  \"counters\": {\n    \"pages_fetched\": 2,\n    \"links_found\": 4,\n    \"duplicate_links\": 1,\n    \"papers_parsed\": 0,\n    \"unique_papers\": 0,\n    \"failed_attempted_calls\": 0\n  },\n  \"records_count\": 0,\n  \"records\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "probe": "cli_clean_--help",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  {
+    "probe": "cli_clean_--config",
+    "exit_code": 1,
+    "stderr": "{\n  \"status\": \"failed\",\n  \"site_id\": \"joss\",\n  \"run_dir\": \"D:\\\\Web_mining_20261\\\\scholargraph\\\\.tmp\\\\jr2107\\\\probe-8eev7rse\\\\unused\",\n  \"error\": {\n    \"kind\": \"policy_violation\",\n    \"message\": \"Config file not found: D:\\\\Web_mining_20261\\\\scholargraph\\\\MISSING\"\n  },\n  \"counters\": null\n}\n"
+  }
+]
