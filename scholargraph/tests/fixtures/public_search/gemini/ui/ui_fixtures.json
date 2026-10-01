@@ -1,0 +1,1503 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "task_id": "EXT-05A",
+  "wave": "W2",
+  "owner": "GEMINI",
+  "reviewer": "MUSE",
+  "synthetic": true,
+  "not_live_evidence": true,
+  "not_for_production_fallback": true,
+  "description": "Synthetic UI test fixtures for EXT-05A testing strict schema boundary, XSS sanitization, unsafe URLs, race condition sequences, malformed envelopes, refresh failure, pagination, and idempotent library saving.",
+  "fixtures": {
+    "xss_payloads": {
+      "synthetic": true,
+      "title_with_script": "<script>alert('xss-title')</script>Benign Title",
+      "abstract_with_img_onerror": "Abstract with <img src=x onerror=alert('xss-abstract')> payload",
+      "author_with_svg_onload": "Dr. <svg onload=alert('xss-author')> Vulnerable",
+      "error_with_tag": "Upstream error <script>alert('xss-error')</script>"
+    },
+    "unsafe_urls": [
+      "javascript:alert('xss-link')",
+      "data:text/html,<script>alert(1)</script>",
+      "vbscript:msgbox(1)",
+      "http://user:password@example.com/paper",
+      "http://example.com\\escaped\\path",
+      "http://example.com/path\u0000nullbyte",
+      "ftp://example.com/paper.pdf",
+      "file:///etc/passwd",
+      "",
+      "http://example.com:99999/badport",
+      "https://example.com:abc/badport",
+      "https:example.com/paper",
+      "http:/example.com/paper",
+      "http:////example.com/paper"
+    ],
+    "safe_urls": [
+      "https://arxiv.org/abs/2401.00001",
+      "https://doi.org/10.1145/3394486.3403204",
+      "http://api.openalex.org/works/W1234567890",
+      "https://example.org/valid_path?q=test&page=1#section",
+      "https://example.org:8443/secure_paper",
+      "https://example.com:0/badport"
+    ],
+    "malformed_envelopes": {
+      "missing_schema_version": {
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": []
+      },
+      "missing_overall": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "stale": false,
+        "cached": false,
+        "errors": []
+      },
+      "invalid_overall_enum": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "completely_broken",
+        "stale": false,
+        "cached": false,
+        "errors": []
+      },
+      "success_missing_snapshot": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "snapshot": null,
+        "stale": false,
+        "cached": false,
+        "errors": []
+      },
+      "failed_missing_errors": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "snapshot": null,
+        "stale": false,
+        "cached": false,
+        "errors": []
+      },
+      "cached_on_failure_forbidden": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "snapshot": null,
+        "stale": false,
+        "cached": true,
+        "errors": [
+          {
+            "kind": "upstream",
+            "message": "Gateway timeout",
+            "source": "openalex",
+            "retry_after_seconds": null,
+            "record_index": null
+          }
+        ]
+      },
+      "counter_identity_violation": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_bad_counter",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00",
+          "source_results": [],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 10,
+              "valid": 5,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 5,
+              "groups": 5,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          }
+        }
+      },
+      "probe_1_request_extra_labels": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_1",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false,
+            "labels": ["forbidden_research_label"]
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_2_provenance_hash_missing": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_2",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "success",
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 2 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "abstract": null,
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W123",
+                        "raw_field": "title"
+                      }
+                    ],
+                    "source_id": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W123",
+                        "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                        "raw_field": "id"
+                      }
+                    ],
+                    "landing_url": [
+                      {
+                        "source": "openalex",
+                        "source_id": "W123",
+                        "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                        "raw_field": "id"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "error": null,
+              "source_total": 1,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_1",
+                  "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "byte_count": 100
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 1,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_3_score_negative_one": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_3",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "success",
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 3 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "abstract": null,
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                    "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                    "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                  }
+                }
+              ],
+              "error": null,
+              "source_total": 1,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_1",
+                  "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "byte_count": 100
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "hits": [
+              {
+                "canonical_id": "W123",
+                "rank": 1,
+                "score": -1.0,
+                "display": {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 3 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "abstract": null,
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                    "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                    "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W123",
+                    "title": "Probe 3 Title",
+                    "landing_url": "https://openalex.org/W123",
+                    "retrieved_at": "2026-09-30T10:00:00+07:00",
+                    "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                    "parser_version": "openalex_1.0.0",
+                    "abstract": null,
+                    "publication_year": null,
+                    "doi": null,
+                    "arxiv_id": null,
+                    "venue": null,
+                    "pdf_url": null,
+                    "license": null,
+                    "open_access_status": null,
+                    "citation_count": null,
+                    "authors": null,
+                    "authors_availability": "missing",
+                    "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                    "field_provenance": {
+                      "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                      "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                      "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                    }
+                  }
+                ],
+                "source_ranks": {"openalex": 1},
+                "conflicts": {}
+              }
+            ],
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 1,
+              "groups": 1,
+              "duplicate_excess": 0,
+              "returned": 1
+            }
+          },
+          "overall": "success",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_4_source_rank_zero": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_4",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "success",
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 4 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "abstract": null,
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                    "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                    "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                  }
+                }
+              ],
+              "error": null,
+              "source_total": 1,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_1",
+                  "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "byte_count": 100
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "hits": [
+              {
+                "canonical_id": "W123",
+                "rank": 1,
+                "score": 0.016,
+                "display": {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 4 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "abstract": null,
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                    "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                    "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                  }
+                },
+                "source_records": [
+                  {
+                    "source": "openalex",
+                    "source_id": "W123",
+                    "title": "Probe 4 Title",
+                    "landing_url": "https://openalex.org/W123",
+                    "retrieved_at": "2026-09-30T10:00:00+07:00",
+                    "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                    "parser_version": "openalex_1.0.0",
+                    "abstract": null,
+                    "publication_year": null,
+                    "doi": null,
+                    "arxiv_id": null,
+                    "venue": null,
+                    "pdf_url": null,
+                    "license": null,
+                    "open_access_status": null,
+                    "citation_count": null,
+                    "authors": null,
+                    "authors_availability": "missing",
+                    "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                    "field_provenance": {
+                      "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                      "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                      "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                    }
+                  }
+                ],
+                "source_ranks": {"openalex": 0},
+                "conflicts": {}
+              }
+            ],
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 1,
+              "groups": 1,
+              "duplicate_excess": 0,
+              "returned": 1
+            }
+          },
+          "overall": "success",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_5_wrong_overall_success_with_zero_hits": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "success",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_5",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "success",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_6_counts_fractional": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_6",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 3.5,
+              "valid": 3.5,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 3.5,
+              "groups": 3.5,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_7_missing_nullable_abstract": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_probe_7",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "success",
+              "records": [
+                {
+                  "source": "openalex",
+                  "source_id": "W123",
+                  "title": "Probe 7 Title",
+                  "landing_url": "https://openalex.org/W123",
+                  "retrieved_at": "2026-09-30T10:00:00+07:00",
+                  "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "parser_version": "openalex_1.0.0",
+                  "publication_year": null,
+                  "doi": null,
+                  "arxiv_id": null,
+                  "venue": null,
+                  "pdf_url": null,
+                  "license": null,
+                  "open_access_status": null,
+                  "citation_count": null,
+                  "authors": null,
+                  "authors_availability": "missing",
+                  "missing_fields": ["abstract", "publication_year", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                  "field_provenance": {
+                    "title": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                    "source_id": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                    "landing_url": [{"source": "openalex", "source_id": "W123", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}]
+                  }
+                }
+              ],
+              "error": null,
+              "source_total": 1,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": [
+                {
+                  "raw_id": "raw_1",
+                  "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                  "byte_count": 100
+                }
+              ]
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 1,
+              "valid": 1,
+              "invalid": 0,
+              "excluded_by_year": 1,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "probe_8_leakage_extra_splits": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "splits": ["test_leak"],
+        "snapshot": null
+      },
+      "failed_missing_required_snapshot": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "errors": [
+          {
+            "kind": "quota",
+            "message": "OpenAlex daily polite/authenticated budget exhausted.",
+            "source": "openalex",
+            "retry_after_seconds": 120.0,
+            "record_index": null
+          }
+        ],
+        "stale": false,
+        "cached": false
+      },
+      "failed_wrong_null_snapshot_false": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "snapshot": false,
+        "errors": [
+          {
+            "kind": "quota",
+            "message": "OpenAlex daily polite/authenticated budget exhausted.",
+            "source": "openalex",
+            "retry_after_seconds": 120.0,
+            "record_index": null
+          }
+        ],
+        "stale": false,
+        "cached": false
+      },
+      "impossible_calendar_date": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_impossible_calendar_date",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-02-31T01:00:00Z",
+          "expires_at": "2026-10-01T08:10:00+07:00"
+        }
+      },
+      "errors_not_same_evidence": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "failed",
+        "stale": false,
+        "cached": false,
+        "errors": [
+          {
+            "kind": "quota",
+            "message": "DIFFERENT evidence",
+            "source": "openalex",
+            "retry_after_seconds": 120.0,
+            "record_index": null
+          }
+        ],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_errors_mismatch",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "failed",
+              "records": [],
+              "error": {
+                "kind": "quota",
+                "message": "Original evidence",
+                "source": "openalex",
+                "retry_after_seconds": 120.0,
+                "record_index": null
+              },
+              "source_total": null,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "none",
+              "truncated": null,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "failed",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "missing_source_total": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_missing_source_total",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "missing_truncated": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_missing_truncated",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "source_total_string": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_source_total_string",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": "wrong",
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "truncated_string": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_truncated_string",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": "wrong",
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-09-30T10:00:00+07:00",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "calendar_year0000": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_year0000",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "0000-01-01T00:00:00Z",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      },
+      "calendar_offset_large": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "overall": "empty",
+        "stale": false,
+        "cached": false,
+        "errors": [],
+        "snapshot": {
+          "schema_version": 1,
+          "contract_version": "1.0.0",
+          "snapshot_id": "snap_offset_large",
+          "request": {
+            "query": "graph retrieval",
+            "sources": ["openalex"],
+            "top_k": 10,
+            "cap_per_source": 10,
+            "year_from": null,
+            "year_to": null,
+            "refresh": false
+          },
+          "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "adapter_sha256": {
+            "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+          },
+          "source_results": [
+            {
+              "source": "openalex",
+              "status": "empty",
+              "records": [],
+              "error": null,
+              "source_total": 0,
+              "elapsed_seconds": 0.5,
+              "filter_coverage": "server",
+              "truncated": false,
+              "raw_references": []
+            }
+          ],
+          "fusion": {
+            "hits": [],
+            "counts": {
+              "raw": 0,
+              "valid": 0,
+              "invalid": 0,
+              "excluded_by_year": 0,
+              "eligible": 0,
+              "groups": 0,
+              "duplicate_excess": 0,
+              "returned": 0
+            }
+          },
+          "overall": "empty",
+          "fetched_at": "2026-01-01T00:00:00+23:59",
+          "expires_at": "2026-09-30T11:00:00+07:00"
+        }
+      }
+    },
+    "synthetic_tt03_filtered_zero": {
+      "schema_version": 1,
+      "contract_version": "1.0.0",
+      "overall": "empty",
+      "snapshot": {
+        "schema_version": 1,
+        "contract_version": "1.0.0",
+        "snapshot_id": "snap_syn_tt03_filtered",
+        "request": {
+          "query": "quantum gravity",
+          "sources": ["arxiv", "openalex"],
+          "top_k": 20,
+          "cap_per_source": 50,
+          "year_from": 2024,
+          "year_to": 2026,
+          "refresh": false
+        },
+        "config_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "adapter_sha256": {
+          "arxiv": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "openalex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        },
+        "source_results": [
+          {
+            "source": "arxiv",
+            "status": "empty",
+            "records": [],
+            "error": null,
+            "source_total": 0,
+            "elapsed_seconds": 0.45,
+            "filter_coverage": "server",
+            "truncated": false,
+            "raw_references": []
+          },
+          {
+            "source": "openalex",
+            "status": "success",
+            "records": [
+              {
+                "source": "openalex",
+                "source_id": "W99901",
+                "title": "Historical Quantum Mechanics 1995",
+                "landing_url": "https://openalex.org/W99901",
+                "retrieved_at": "2026-09-30T14:00:00+07:00",
+                "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                "parser_version": "openalex_1.0.0",
+                "abstract": "An early paper on quantum gravity from 1995 outside the 2024-2026 range.",
+                "publication_year": 1995,
+                "doi": null,
+                "arxiv_id": null,
+                "venue": "Phys. Rev. D",
+                "pdf_url": null,
+                "license": null,
+                "open_access_status": "closed",
+                "citation_count": 42,
+                "authors": ["P. Dirac"],
+                "authors_availability": "known",
+                "missing_fields": ["doi", "arxiv_id", "pdf_url", "license"],
+                "field_provenance": {
+                  "title": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                  "source_id": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                  "landing_url": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                  "abstract": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "abstract"}],
+                  "publication_year": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "publication_year"}],
+                  "venue": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "host_venue"}],
+                  "open_access_status": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "open_access"}],
+                  "citation_count": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "cited_by_count"}],
+                  "authors": [{"source": "openalex", "source_id": "W99901", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "authorships"}]
+                }
+              },
+              {
+                "source": "openalex",
+                "source_id": "W99902",
+                "title": "Quantum Foundations 2005",
+                "landing_url": "https://openalex.org/W99902",
+                "retrieved_at": "2026-09-30T14:00:00+07:00",
+                "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                "parser_version": "openalex_1.0.0",
+                "abstract": null,
+                "publication_year": 2005,
+                "doi": null,
+                "arxiv_id": null,
+                "venue": null,
+                "pdf_url": null,
+                "license": null,
+                "open_access_status": null,
+                "citation_count": null,
+                "authors": null,
+                "authors_availability": "missing",
+                "missing_fields": ["abstract", "doi", "arxiv_id", "venue", "pdf_url", "license", "open_access_status", "citation_count", "authors"],
+                "field_provenance": {
+                  "title": [{"source": "openalex", "source_id": "W99902", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "title"}],
+                  "source_id": [{"source": "openalex", "source_id": "W99902", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                  "landing_url": [{"source": "openalex", "source_id": "W99902", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "id"}],
+                  "publication_year": [{"source": "openalex", "source_id": "W99902", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "publication_year"}]
+                }
+              }
+            ],
+            "error": null,
+            "source_total": 2,
+            "elapsed_seconds": 0.62,
+            "filter_coverage": "server",
+            "truncated": false,
+            "raw_references": [
+              {
+                "raw_id": "raw_ref_openalex_1",
+                "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                "byte_count": 2048
+              }
+            ]
+          }
+        ],
+        "fusion": {
+          "hits": [],
+          "counts": {
+            "raw": 2,
+            "valid": 2,
+            "invalid": 0,
+            "excluded_by_year": 2,
+            "eligible": 0,
+            "groups": 0,
+            "duplicate_excess": 0,
+            "returned": 0
+          }
+        },
+        "overall": "empty",
+        "fetched_at": "2026-09-30T14:00:00+07:00",
+        "expires_at": "2026-09-30T15:00:00+07:00"
+      },
+      "errors": [],
+      "stale": false,
+      "cached": false
+    },
+    "idempotent_library_save": {
+      "canonical_id": "paper_syn_12345",
+      "snapshot_id": "snap_syn_w2_001",
+      "saved_at": "2026-09-30T14:30:00+07:00",
+      "incomplete_sources": false,
+      "hit": {
+        "canonical_id": "paper_syn_12345",
+        "rank": 1,
+        "score": 0.01639344,
+        "display": {
+          "source": "arxiv",
+          "source_id": "2401.00001",
+          "title": "Idempotent Test Paper",
+          "landing_url": "https://arxiv.org/abs/2401.00001",
+          "retrieved_at": "2026-09-30T14:00:00+07:00",
+          "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "parser_version": "arxiv_atom_1.0.0",
+          "abstract": "An abstract for testing idempotent saving.",
+          "publication_year": 2024,
+          "doi": null,
+          "arxiv_id": "2401.00001",
+          "venue": null,
+          "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+          "license": "http://creativecommons.org/licenses/by/4.0/",
+          "open_access_status": "open",
+          "citation_count": null,
+          "authors": ["Alice Nguyen"],
+          "authors_availability": "known",
+          "missing_fields": ["citation_count", "doi", "venue"],
+          "field_provenance": {
+            "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+            "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+            "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+            "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+            "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+            "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+            "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+            "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+            "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+            "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+          }
+        },
+        "source_records": [
+          {
+            "source": "arxiv",
+            "source_id": "2401.00001",
+            "title": "Idempotent Test Paper",
+            "landing_url": "https://arxiv.org/abs/2401.00001",
+            "retrieved_at": "2026-09-30T14:00:00+07:00",
+            "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+            "parser_version": "arxiv_atom_1.0.0",
+            "abstract": "An abstract for testing idempotent saving.",
+            "publication_year": 2024,
+            "doi": null,
+            "arxiv_id": "2401.00001",
+            "venue": null,
+            "pdf_url": "https://arxiv.org/pdf/2401.00001.pdf",
+            "license": "http://creativecommons.org/licenses/by/4.0/",
+            "open_access_status": "open",
+            "citation_count": null,
+            "authors": ["Alice Nguyen"],
+            "authors_availability": "known",
+            "missing_fields": ["citation_count", "doi", "venue"],
+            "field_provenance": {
+              "title": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:title"}],
+              "source_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+              "landing_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+              "abstract": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:summary"}],
+              "publication_year": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:published"}],
+              "arxiv_id": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:id"}],
+              "pdf_url": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:link"}],
+              "license": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+              "open_access_status": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:rights"}],
+              "authors": [{"source": "arxiv", "source_id": "2401.00001", "raw_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "raw_field": "atom:author"}]
+            }
+          }
+        ],
+        "source_ranks": {"arxiv": 1},
+        "conflicts": {}
+      }
+    }
+  }
+}

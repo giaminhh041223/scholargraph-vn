@@ -1,0 +1,3 @@
+[PASS] export_missing_blob :: visible failure, no success: Xuất thư viện thất bại: Không thể tải tệp: môi trường thiếu Blob API
+[PASS] export_create_url_throw :: visible failure, no fake success: Xuất thư viện thất bại: Không thể tải tệp: môi trường thiếu Blob APIXuất thư viện thất bại: createURL boom
+SUMMARY { pass: 2, fail: 0 }

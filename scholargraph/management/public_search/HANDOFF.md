@@ -1,3 +1,11 @@
+# W2 083 — freeze hoàn tất EXT-04B + EXT-05A
+
+- W2 đã freeze tại [manifest](W2-FREEZE-083.json) sau khi nhập exact UI Gemini R4 `93f0c2d254da3182f51a7ee58cbba028686aa433` và fusion SOL `791bb8c43faa96c0b2161080ab89fe93e1a6b6e1`.
+- EXT-05A Gate PASS: [gate](reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md). MUSE fresh R5 PASS trên đúng target; 16 pytest + 111 Node + 130 probe độc lập; parent combined 446 PASS. SOL R3 findings đã có adversarial evidence đóng.
+- Fixture UI đã pin SHA `21838284af5c7ae7fc3e0bb9443f21108a34bdd6e9aef5408cd50c8eb5cdbd8e`; không còn `NOTMEASURED` trong sidecar.
+- Controller MUSE trả exit 1 vì denied final bookkeeping action; report/log/probes đã ghi đủ và được coordinator kiểm tra. Giữ failure điều khiển trong lịch sử, không suy diễn thành product failure.
+- Không mở EXT-05B/W3 tự động. Bước tiếp theo chờ user giao rõ.
+
 # W2 082 — fusion đã nhập; UI còn sửa R3
 
 - EXT-04B source/review artifact accepted tại791bb8c,6tệp nhập exact. Childindependent99PASS; parentfirst97PASS2CLI20sTIMEOUT, loggiữriêng và retryđúng2cases; chưaW2combinedgatePASS. Musecontroller TIMEOUTs giữFAIL dùreportartifact đầyđủ verdictPASS; gate giải thích tại reviews/COORDINATOR/EXT-04B-W2-GATE-082.md.

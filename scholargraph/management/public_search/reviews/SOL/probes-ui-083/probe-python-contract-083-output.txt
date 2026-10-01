@@ -1,0 +1,6 @@
+[PASS] missing_source_total reject 6 validation errors for SearchEnvelope
+[PASS] missing_truncated reject 6 validation errors for SearchEnvelope
+[PASS] source_total_string reject 6 validation errors for SearchEnvelope
+[PASS] truncated_string reject 6 validation errors for SearchEnvelope
+[PASS] calendar_year0000 reject 5 validation errors for SearchEnvelope
+[PASS] calendar_offset+23:59 reject 5 validation errors for SearchEnvelope

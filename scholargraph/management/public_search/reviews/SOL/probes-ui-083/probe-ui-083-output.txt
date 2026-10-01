@@ -1,0 +1,8 @@
+[FAIL] missing_source_total :: ACCEPT malformed payload
+[FAIL] missing_truncated :: ACCEPT malformed payload
+[FAIL] source_total_string :: ACCEPT malformed payload
+[FAIL] truncated_string :: ACCEPT malformed payload
+[FAIL] calendar_year0000 :: ACCEPT malformed payload
+[FAIL] calendar_offset+23:59 :: ACCEPT malformed payload
+[FAIL] idempotent_existing_snapshot :: server original snapshot should be accepted; actual banner=Lưu bài báo thất bại: Phản hồi LibraryEntry không khớp canonical_id hoặc snapshot_id đã gửi
+SUMMARY { pass: 0, fail: 7 }

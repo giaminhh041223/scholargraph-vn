@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScholarGraph VN — Tìm kiếm bài báo từ nguồn công khai (OpenAlex &amp; arXiv)</title>
+  <link rel="stylesheet" href="/static/public_search.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <h1>ScholarGraph VN</h1>
+      <p class="sub">Tìm kiếm bài báo từ nguồn công khai (OpenAlex &amp; arXiv)</p>
+      <nav class="nav-offline" aria-label="Điều hướng chính">
+        <a href="/" id="link-offline-search">&larr; Quay lại Tìm kiếm nội bộ (SciFact)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- FORM TÌM KIẾM CÔNG KHAI -->
+    <section class="search-form-section" aria-labelledby="heading-search-form">
+      <h2 id="heading-search-form" class="sr-only">Biểu mẫu tìm kiếm bài báo công khai</h2>
+      <form id="public-search-form" novalidate>
+        <!-- Dòng truy vấn -->
+        <div class="form-row form-query">
+          <label for="q" class="form-label">Từ khóa tìm kiếm:</label>
+          <div class="input-wrap">
+            <input id="q" name="q" type="text" placeholder="Nhập từ khóa tiếng Anh hoặc thuật ngữ khoa học (1..500 ký tự)…" required minlength="1" maxlength="500" autocomplete="off">
+          </div>
+          <p class="notice language-notice" id="language-notice">
+            <strong>Lưu ý ngôn ngữ:</strong> OpenAlex và arXiv chủ yếu lập chỉ mục tiêu đề/tóm tắt bằng tiếng Anh. Trong phạm vi MVP, truy vấn được gửi nguyên văn theo từ khóa bạn nhập (chưa tự động dịch Việt–Anh).
+          </p>
+        </div>
+
+        <!-- Dòng cấu hình & bộ lọc -->
+        <div class="form-grid">
+          <!-- Chọn nguồn -->
+          <fieldset class="form-group form-sources" id="sources-fieldset">
+            <legend class="form-label">Nguồn dữ liệu:</legend>
+            <div class="checkbox-group">
+              <label class="checkbox-label" for="src-openalex">
+                <input type="checkbox" id="src-openalex" name="sources" value="openalex" checked> OpenAlex
+              </label>
+              <label class="checkbox-label" for="src-arxiv">
+                <input type="checkbox" id="src-arxiv" name="sources" value="arxiv" checked> arXiv
+              </label>
+            </div>
+            <p class="field-error" id="sources-error" role="alert" hidden>Vui lòng chọn ít nhất một nguồn tìm kiếm (OpenAlex hoặc arXiv).</p>
+          </fieldset>
+
+          <!-- Bộ lọc năm -->
+          <div class="form-group form-years">
+            <span class="form-label">Khoảng năm xuất bản (tùy chọn):</span>
+            <div class="range-inputs">
+              <label for="year_from" class="sr-only">Năm bắt đầu</label>
+              <input type="number" id="year_from" name="year_from" min="1800" max="2100" placeholder="Từ năm (1800..2100)">
+              <span class="range-sep">&ndash;</span>
+              <label for="year_to" class="sr-only">Năm kết thúc</label>
+              <input type="number" id="year_to" name="year_to" min="1800" max="2100" placeholder="Đến năm (1800..2100)">
+            </div>
+            <p class="notice year-notice">
+              Bài báo không có năm xuất bản (<code>publication_year = null</code>) sẽ không khớp khi bạn bật bộ lọc năm và được thống kê riêng tại bộ đếm <code>excluded_by_year</code>.
+            </p>
+            <p class="field-error" id="years-error" role="alert" hidden>Khoảng năm không hợp lệ: Năm bắt đầu phải nhỏ hơn hoặc bằng năm kết thúc.</p>
+          </div>
+
+          <!-- Ngân sách và top-k -->
+          <div class="form-group form-budget">
+            <span class="form-label">Giới hạn số lượng (1..50):</span>
+            <div class="number-inputs">
+              <div class="input-inline">
+                <label for="top_k">Hiển thị (top_k):</label>
+                <input type="number" id="top_k" name="top_k" min="1" max="50" value="20">
+              </div>
+              <div class="input-inline">
+                <label for="cap_per_source">Ngân sách/nguồn (cap):</label>
+                <input type="number" id="cap_per_source" name="cap_per_source" min="1" max="50" value="50">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút hành động -->
+        <div class="form-actions">
+          <button type="submit" id="btn-search" class="btn btn-primary">Tìm kiếm</button>
+          <button type="button" id="btn-refresh" class="btn btn-secondary">Làm mới từ nguồn</button>
+        </div>
+
+        <!-- Banner lỗi client-side validation -->
+        <div id="client-validation-error" class="banner banner-error" role="alert" hidden></div>
+      </form>
+    </section>
+
+    <!-- THANH CHUYỂN TAB (TÌM KIẾM VS THƯ VIỆN) -->
+    <nav class="tabs-nav" aria-label="Chuyển chế độ xem">
+      <button type="button" id="tab-search" class="tab-btn active" aria-selected="true" role="tab" aria-controls="search-section">Kết quả tìm kiếm</button>
+      <button type="button" id="tab-library" class="tab-btn" aria-selected="false" role="tab" aria-controls="library-section">Thư viện cá nhân (<span id="library-count-badge">chưa tải</span>)</button>
+    </nav>
+
+    <!-- VÙNG THÔNG BÁO VÀ TRẠNG THÁI TOÀN CỤC -->
+    <div id="status-region" role="status" aria-live="polite" class="status-box" hidden></div>
+    <div id="banner-region" role="alert" aria-live="assertive"></div>
+    <div id="stale-review-region" role="status" aria-live="polite" class="stale-review-box" hidden></div>
+
+    <!-- PHẦN 1: KẾT QUẢ TÌM KIẾM -->
+    <section id="search-section" class="tab-panel" role="tabpanel" aria-labelledby="tab-search">
+      <!-- Banner tóm tắt Snapshot & Cache -->
+      <div id="snapshot-meta-banner" class="snapshot-banner" hidden></div>
+
+      <!-- Thẻ trạng thái từng nguồn -->
+      <div id="sources-summary" class="sources-grid" hidden></div>
+
+      <!-- Bộ đếm Fusion & Giải thích RRF -->
+      <div id="fusion-summary" class="fusion-box" hidden></div>
+
+      <!-- Danh sách bài báo tìm thấy -->
+      <div id="results" class="results-list" aria-label="Danh sách kết quả bài báo"></div>
+
+      <!-- Phân trang trên snapshot -->
+      <nav id="snapshot-pagination" class="pagination-nav" aria-label="Phân trang kết quả snapshot" hidden></nav>
+
+      <!-- Khung chi tiết bài báo (Detail Panel) -->
+      <aside id="detail-panel" class="detail-panel" hidden aria-labelledby="detail-heading">
+        <div class="detail-header">
+          <h3 id="detail-heading">Chi tiết bản ghi &amp; Dấu vết nguồn (Provenance)</h3>
+          <button type="button" id="btn-close-detail" class="btn-close" aria-label="Đóng chi tiết">&times;</button>
+        </div>
+        <div id="detail-body" class="detail-content"></div>
+      </aside>
+    </section>
+
+    <!-- PHẦN 2: THƯ VIỆN CÁ NHÂN & XUẤT DỮ LIỆU -->
+    <section id="library-section" class="tab-panel" role="tabpanel" aria-labelledby="tab-library" hidden>
+      <div class="library-header">
+        <div>
+          <h2>Thư viện bài báo đã lưu</h2>
+          <p class="notice storage-notice">
+            Lưu vào thư viện chỉ lưu siêu dữ liệu (metadata) và dấu vết nguồn (provenance) trong SQLite cục bộ để tra cứu/trích dẫn offline; không tải hoặc lưu trữ tệp PDF toàn văn.
+          </p>
+        </div>
+        <div class="export-actions">
+          <button type="button" id="btn-export-json" class="btn btn-outline">Xuất JSON</button>
+          <button type="button" id="btn-export-bibtex" class="btn btn-outline">Xuất BibTeX</button>
+        </div>
+      </div>
+
+      <!-- Danh sách bài báo trong thư viện -->
+      <div id="library-list" class="results-list" aria-label="Danh sách bài báo trong thư viện"></div>
+
+      <!-- Phân trang thư viện -->
+      <nav id="library-pagination" class="pagination-nav" aria-label="Phân trang thư viện" hidden></nav>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>
+        <strong>ScholarGraph VN — Module Tìm kiếm Công khai:</strong>
+        Mọi kết quả hiển thị được ghi nhận minh bạch theo thứ bậc Reciprocal Rank Fusion (RRF k=60).
+        Các trường metadata không có từ nguồn được báo rõ <em>“không có dữ liệu”</em>, tuyệt đối không bịa đặt hoặc gán giá trị mặc định che giấu lỗi.
+        Thư viện hoạt động ngoại tuyến trên SQLite cục bộ.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/static/public_search.js"></script>
+</body>
+</html>

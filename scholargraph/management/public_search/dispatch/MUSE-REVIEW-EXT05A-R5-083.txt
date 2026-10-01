@@ -1,0 +1,14 @@
+Fresh independent review EXT-05A UI W2 R5 after corrective delivery. Model opencode/muse-spark-1.3-contributor-free/xhigh. Review immutable target only; do not modify target.
+
+Target: D:/Web_mining_20261/scholargraph/.worktrees/public-gemini/scholargraph
+Target HEAD: 93f0c2d254da3182f51a7ee58cbba028686aa433 (verify full HEAD)
+Reviewer checkout: D:/Web_mining_20261/scholargraph/.worktrees/public-muse/scholargraph
+Read project/workspace AGENTS, docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-05A, CONTRACT.md, UX_SPEC.md, actual target implementation and previous SOL audit. Treat all claims untrusted.
+
+Verify R4 fixes and all UI acceptance: strict required/type SourceResult fields (including nullable not_requested), Python-compatible calendar year/offset, idempotent library response preserving original snapshot/provenance, safe URL, strict envelope/evidence, TT01-TT07, pagination/stale/refresh, race guards, XSS, detail conflicts, export no-silent-success, fixture and CLI exit-1 negative boundaries. Run target Node harness and pytest tests/unit/test_public_ui.py plus reviewer-owned destructive probes in temporary paths. No pytest.skip or string-only checks. Compare exact data and narrative.
+
+Allowed writes only:
+- management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md
+- management/public_search/reviews/MUSE/probes-ui-r5-083/
+- management/public_search/logs/MUSE/REVIEW-EXT-05A-W2-R5-083.md
+No target, board/state/tasks/HANDOFF, implementation, fixtures, raw data, network, keys, push. Report PASS only with observed evidence; otherwise FAIL exact P0/P1.

@@ -471,7 +471,7 @@
     {
       "id": "EXT-05A",
       "title": "UI public search và library",
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -481,23 +481,34 @@
       "session_id": "DISPATCH-20260930-W2-GEMINI-082",
       "evidence": [
         "management/public_search/dispatch/GEMINI-W2-082.txt",
-        "management/public_search/reviews/MUSE/EXT-05A-W2-082.md",
-        "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R1-082.md"
+        "management/public_search/dispatch/GEMINI-W2-R4-FIX-083.txt",
+        "management/public_search/dispatch/MUSE-REVIEW-EXT05A-R5-083.txt",
+        "ui/static/public_search.js",
+        "ui/static/public_search.css",
+        "ui/templates/public_search.html",
+        "ui/templates/search.html",
+        "tests/unit/test_public_ui.py",
+        "tests/fixtures/public_search/gemini/ui/",
+        "management/public_search/worker_packets/gemini-ui-w2-r4-packet.md",
+        "management/public_search/reviews/SOL/UI-W2-AUDIT-083.md",
+        "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md",
+        "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md"
       ],
       "owner": "GEMINI",
       "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt",
-      "delivered_head": "68b24163e9affbbd7e7d25735c0d4c2ac1076500",
-      "author_execution_session_id": "43f2f3f6-6ea6-4698-86f6-ee7060c448a8",
+      "delivered_head": "93f0c2d254da3182f51a7ee58cbba028686aa433",
+      "author_execution_session_id": "6136d286-b5c2-4975-98fa-5bb1411f4841",
       "verification": {
-        "ui_r1": {
-          "passed": 11,
-          "failed": 1,
-          "exit_code": 1,
-          "evidence_local": "data/public_search/control/w2-082/ui-r1-tests.log"
-        }
+        "r4_pytest": {"passed": 16, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-ui-tests.log"},
+        "r4_node": {"passed": 111, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"},
+        "sol_adversarial": {"passed": 7, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"},
+        "muse_review": {"passed": 130, "failed": 0, "exit_code": 0, "report": "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md"},
+        "w2_combined": {"passed": 446, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"}
       },
-      "review_verdict": "FAIL_CHANGES_REQUIRED",
-      "fix_dispatch": "management/public_search/dispatch/GEMINI-W2-R2-082.txt"
+      "review_verdict": "PASS_fresh_MUSE_R5",
+      "completed_at": "2026-10-01T09:15:00+07:00",
+      "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md",
+      "fix_dispatch": "management/public_search/dispatch/GEMINI-W2-R4-FIX-083.txt"
     },
     {
       "id": "EXT-05B",

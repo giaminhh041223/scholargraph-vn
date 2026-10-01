@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "task_id": "EXT-05A",
+  "wave": "W2",
+  "owner": "GEMINI",
+  "reviewer": "MUSE",
+  "synthetic": true,
+  "not_live_evidence": true,
+  "not_for_production_fallback": true,
+  "created_at": "2026-09-30T17:15:00+07:00",
+  "target_fixture": "tests/fixtures/public_search/gemini/ui/ui_fixtures.json",
+  "target_fixture_sha256": "21838284af5c7ae7fc3e0bb9443f21108a34bdd6e9aef5408cd50c8eb5cdbd8e",
+  "provenance": {
+    "author_model": "gemini-3.8-flash-high",
+    "reasoning_effort": "high",
+    "worktree": "codex/public-search-gemini",
+    "input_head": "51cdef56b797cad42ea71a36e90536f780207c4d"
+  },
+  "assertions": {
+    "strictly_synthetic": true,
+    "no_live_network": true,
+    "no_production_fallback": true,
+    "anti_silent_bypass_verified": true
+  }
+}

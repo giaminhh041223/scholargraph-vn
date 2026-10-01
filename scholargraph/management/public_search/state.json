@@ -1,10 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30T22:25:22.137093+07:00",
-  "stage": "w2_authoring",
-  "active_tasks": [
-    "EXT-05A"
-  ],
+  "updated_at": "2026-10-01T09:15:00+07:00",
+  "stage": "w2_completed_reviewed",
+  "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -16,15 +14,15 @@
     "EXT-05A"
   ],
   "next_steps": {
-    "COORDINATOR": "FinishUIR3/tests/freshMUSEreview; parent2CLItimeoutcases retry then W2combinedgate; noW3",
+    "COORDINATOR": "W2 frozen after EXT-04B and EXT-05A; await explicit user instruction before EXT-05B; no W3 dispatch",
     "SOL": "EXT-04B fusion only",
-    "GEMINI": "EXT-05A UI only; freshsmokePASS c7d8486e",
-    "MUSE": "Freshreview after each immutable author delivery"
+    "GEMINI": "idle after EXT-05A R4 delivery 93f0c2d",
+    "MUSE": "idle after fresh EXT-05A R5 PASS"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20260930-082-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-084-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
-    "checked_at": "2026-09-30T13:35:15.918507+07:00",
+    "checked_at": "2026-10-01T09:15:00+07:00",
     "controller_tests": {
       "passed": 31,
       "exit_code": 0
@@ -69,6 +67,37 @@
         "controller": 31
       },
       "evidence_local": "data/public_search/control/w1-081/parent-w1-final-r4.log"
+    },
+    "w2_combined": {
+      "passed": 446,
+      "failed": 0,
+      "exit_code": 0,
+      "duration_seconds": 68.43,
+      "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"
+    },
+    "w2_ui_pytest": {
+      "passed": 16,
+      "failed": 0,
+      "exit_code": 0,
+      "evidence_local": "data/public_search/control/w2-083/parent-ui-tests.log"
+    },
+    "w2_sol_probe": {
+      "passed": 7,
+      "failed": 0,
+      "exit_code": 0,
+      "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"
+    },
+    "w2_muse_probe": {
+      "passed": 130,
+      "failed": 0,
+      "exit_code": 0,
+      "report": "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md"
+    },
+    "w2_ui_node": {
+      "passed": 111,
+      "failed": 0,
+      "exit_code": 0,
+      "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"
     }
   },
   "pause_after_current_round": false,
@@ -76,34 +105,14 @@
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
   "active_review_assignments": [],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
-  "gate_report": "management/public_search/reviews/COORDINATOR/W1-FINISH-081.md",
+  "gate_report": "management/public_search/reviews/COORDINATOR/W2-FINISH-083.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-05A",
+  "next_task_id": null,
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-05A",
-      "worker": "GEMINI",
-      "status": "running_r3_fix",
-      "runtime_session_id": "52364e24-c3bc-49c4-aa95-39266ee17dce",
-      "dispatch_file": "management/public_search/dispatch/GEMINI-W2-R3-082.txt",
-      "input_head": "68b24163e9affbbd7e7d25735c0d4c2ac1076500",
-      "claimed_paths": [
-        "ui/templates/public_search.html",
-        "ui/static/public_search.js",
-        "ui/static/public_search.css",
-        "ui/templates/search.html",
-        "tests/unit/test_public_ui.py",
-        "tests/fixtures/public_search/gemini/ui/",
-        "management/public_search/logs/GEMINI/EXT-05A-W2-082.md",
-        "management/public_search/packets/GEMINI/EXT-05A-W2-082.md"
-      ],
-      "controller_run": "273c6385-51df-431b-87ac-9131894cc210"
-    }
-  ],
+  "active_assignments": [],
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"
@@ -117,5 +126,14 @@
     },
     "verified_w0_files": 14,
     "verified_w1_files": 31
+  },
+  "w2_freeze": {
+    "manifest": "management/public_search/W2-FREEZE-083.json",
+    "accepted_at": "2026-10-01T09:15:00+07:00",
+    "status": "FROZEN",
+    "tasks": [
+      "EXT-04B",
+      "EXT-05A"
+    ]
   }
 }

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "round": "W2",
+  "accepted_at": "2026-10-01T09:15:00+07:00",
+  "anchor_commit_before_freeze": "4b15acc",
+  "tasks_done": ["EXT-04B", "EXT-05A"],
+  "w1_manifest": "management/public_search/W1-FREEZE-081.json",
+  "delivered_worker_heads": {
+    "SOL_fusion": "791bb8c43faa96c0b2161080ab89fe93e1a6b6e1",
+    "GEMINI_ui": "93f0c2d254da3182f51a7ee58cbba028686aa433",
+    "MUSE_ui_review_target": "93f0c2d254da3182f51a7ee58cbba028686aa433"
+  },
+  "reviews": [
+    "management/public_search/reviews/MUSE/EXT-04B-W2-082.md",
+    "management/public_search/reviews/COORDINATOR/EXT-04B-W2-GATE-082.md",
+    "management/public_search/reviews/SOL/UI-W2-AUDIT-083.md",
+    "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md",
+    "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md"
+  ],
+  "verification": {
+    "ui_pytest": {"passed": 16, "failed": 0, "exit_code": 0, "duration_seconds": 8.94, "evidence_local": "data/public_search/control/w2-083/parent-ui-tests.log"},
+    "ui_node_harness": {"passed": 111, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"},
+    "sol_adversarial_probe": {"passed": 7, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"},
+    "muse_independent_probes": {"passed": 130, "failed": 0, "exit_code": 0, "evidence": "management/public_search/reviews/MUSE/probes-ui-r5-083/"},
+    "w2_combined_suite": {"passed": 446, "failed": 0, "exit_code": 0, "duration_seconds": 68.43, "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"},
+    "core_checker": {"passed": true, "exit_code": 0, "task_count": 53, "markdown_links": 497}
+  },
+  "sha256": {
+    "ui/static/public_search.js": "bfa2649da7bbf22507d389a8bc341a8eabf3e2778f4ed23860c6d6d7f4f2b0e5",
+    "ui/static/public_search.css": "a5ed350d419ee5dc5a14d6ccda2711fd8b5b65bd53d38ce878714501ea01e21f",
+    "ui/templates/public_search.html": "9251c788d7ae63e9bf47009eac2c53a88ec728836bfdff961ff69c5e7e6cdbd3",
+    "ui/templates/search.html": "c2719996d7a50311e086de721f12d50311aac9fcd40083e1041b78aa75d72ba2",
+    "tests/unit/test_public_ui.py": "a208752e40a643d7a6c593951bda113f27d9f154b55f23a00da293191675b4ec",
+    "tests/fixtures/public_search/gemini/ui/node_test_runner.js": "fef7dc2bd93d91d73d9e710170b9f6ded5a910581ae83489b1dcd3a7fe5b59fb",
+    "tests/fixtures/public_search/gemini/ui/ui_fixtures.json": "21838284af5c7ae7fc3e0bb9443f21108a34bdd6e9aef5408cd50c8eb5cdbd8e",
+    "tests/fixtures/public_search/gemini/ui/ui_fixtures.sidecar.json": "1c6ae1f138fb0adadf6ef2cde98d60e2622e8a23356868db7fbfc15ed20a52ba"
+  },
+  "limitations": [
+    "UI uses synthetic fixtures and injected fetchFn; no live W3 service/routes/CLI opened.",
+    "MUSE notes non-blocking P2/P3: JS geographic timezone subset stricter than Pydantic exotic offsets, test-method wording, page-vs-page race, and paged non-2xx handling.",
+    "Browser visual automation was not required by the card; Node mock DOM and independent probes executed real JS behavior."
+  ],
+  "next_scope": "Await explicit user instruction before EXT-05B; do not dispatch W3 automatically."
+}

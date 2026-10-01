@@ -1,0 +1,4 @@
+[FAIL] source_total="wrong" ACCEPTED malformed type
+[FAIL] truncated="wrong" ACCEPTED malformed type
+[FAIL] source_total=-1 ACCEPTED malformed type
+[FAIL] truncated=1 ACCEPTED malformed type
