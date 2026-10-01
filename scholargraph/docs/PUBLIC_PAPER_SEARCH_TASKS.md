@@ -223,14 +223,14 @@ Trước nhận card, dependencies DONE và artifact/commit có thật. Implemen
 
 ### EXT-09 — Crossref enrichment, giai đoạn B
 
-- DEFERRED; owner dự kiến MUSE, reviewer SOL; deps 08 và được giao B; 4–6 giờ.
+- IN_PROGRESS (user giao giai đoạn B ngày 2026-10-01); owner SOL high, reviewer MUSE xhigh; deps 08 DONE; dự trù 4–6 giờ. Owner đổi từ MUSE do native write allowlist chỉ report/log; ADR-022.
 - Paths dự kiến public_search/crossref.py + tests/audit riêng; shared config do SOL/coordinator.
 - Làm: DOI lookup chính xác, polite/auth/rate/concurrency policy tường minh, field provenance/conflicts; không overwrite metadata bất đồng.
 - Nghiệm thu: missing/invalid DOI/404/schema/quota failures, enrichment status rõ, live small pilot và negative CLI exit1; contract upgrade nếu thêm source set. Không tự mở task B vì MVP xong.
 
 ### EXT-10 — Crawler HTML một site, giai đoạn B
 
-- DEFERRED; owner dự kiến GEMINI, reviewer SOL; deps 08 và site/policy đã chốt; 6–10 giờ.
+- IN_PROGRESS (user giao giai đoạn B ngày 2026-10-01); owner GEMINI high file-only, reviewer SOL high; deps 08 DONE, site JOSS/policy đã chốt ADR-022; dự trù 6–10 giờ.
 - Paths dự kiến public_search/site_crawler.py + site config đề xuất/tests/raw HTML/manifest riêng; shared transport/config do SOL/coordinator.
 - Làm: allowlist/robots/conditions/rate/depth/page/body cap, citation metadata/JSON-LD extraction/parser version, URL normalization, atomic checkpoint/resume hash.
 - Nghiệm thu: selector drift/missing required FAIL; robots/redirect/private IP/oversized body FAIL; correct counters/duplicates/resume/provenance; live một site xác minh và negative subprocess exit1. Không bypass hoặc gọi là quét toàn web.

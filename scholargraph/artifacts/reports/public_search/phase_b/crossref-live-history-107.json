@@ -1,0 +1,81 @@
+{
+  "status": "PASS_TESTED_BEHAVIOR_WITH_LIVE_404_LIMITATION",
+  "code_commit": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
+  "actual_attempts": 5,
+  "success": 3,
+  "failed": 2,
+  "http404": 2,
+  "original_unchanged": true,
+  "initial_batch_verdict": "FAIL",
+  "initial_unexpected404": "10.21105/joss.09260",
+  "recovery_verified_doi": "10.21105/joss.03021",
+  "availability_relevance": "NOT_MEASURED",
+  "cases": [
+    {
+      "output_dir": "data/public_search/phase_b/crossref-live-107-joss-a",
+      "status": "failed",
+      "exit_code": 1,
+      "http_status": 404,
+      "doi": null,
+      "error": {
+        "kind": "not_found",
+        "message": "Crossref HTTP 404; no automatic retry"
+      },
+      "result_sha256": "79ffcf7c1a789d274bbde3b269c5ff5c227a02077d90cf58d863cb927d94ca91",
+      "config_sha256": "8e384a54d34b5e429bde43443d5f620830e9927c6a92802d4a2b01a599aba7e4",
+      "parser_sha256": "a6514eb82578bbcac85ab788528c07c17c2eaa26c556bee7cf77e4fe825c61bc",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92"
+    },
+    {
+      "output_dir": "data/public_search/phase_b/crossref-live-107-joss-b",
+      "status": "success",
+      "exit_code": 0,
+      "http_status": 200,
+      "doi": "10.21105/joss.09644",
+      "error": null,
+      "result_sha256": "846fc557ca442411ed992a27c54d15453e2c5ebae0f8b10b82c2c02595d88dc8",
+      "config_sha256": "8e384a54d34b5e429bde43443d5f620830e9927c6a92802d4a2b01a599aba7e4",
+      "parser_sha256": "a6514eb82578bbcac85ab788528c07c17c2eaa26c556bee7cf77e4fe825c61bc",
+      "raw_sha256": "1b8b9f44ea2286d1c4697cfcd9f9296ec94eb45a10b7bf07881c0a39664ff436"
+    },
+    {
+      "output_dir": "data/public_search/phase_b/crossref-live-107-original",
+      "status": "success",
+      "exit_code": 0,
+      "http_status": 200,
+      "doi": "10.1609/aaai.v28i1.8870",
+      "error": null,
+      "result_sha256": "9a7ba33625aec952e9d969eaec4bdac77f7e5e7e524c791a87bea57a127b6ab3",
+      "config_sha256": "8e384a54d34b5e429bde43443d5f620830e9927c6a92802d4a2b01a599aba7e4",
+      "parser_sha256": "a6514eb82578bbcac85ab788528c07c17c2eaa26c556bee7cf77e4fe825c61bc",
+      "raw_sha256": "c9e951d2e7338e15d759e7e0af7ee4a2890c53cc942e2f9c4b20f9d34b589178"
+    },
+    {
+      "output_dir": "data/public_search/phase_b/crossref-live-107-notfound",
+      "status": "failed",
+      "exit_code": 1,
+      "http_status": 404,
+      "doi": null,
+      "error": {
+        "kind": "not_found",
+        "message": "Crossref HTTP 404; no automatic retry"
+      },
+      "result_sha256": "b60cad3d7367e9ba09f39b55867e1a6a1abfbfb05ef1451a2d5d2666f9393b78",
+      "config_sha256": "8e384a54d34b5e429bde43443d5f620830e9927c6a92802d4a2b01a599aba7e4",
+      "parser_sha256": "a6514eb82578bbcac85ab788528c07c17c2eaa26c556bee7cf77e4fe825c61bc",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92"
+    },
+    {
+      "output_dir": "data/public_search/phase_b/crossref-live-107-joss-c",
+      "status": "success",
+      "exit_code": 0,
+      "http_status": 200,
+      "doi": "10.21105/joss.03021",
+      "error": null,
+      "result_sha256": "b17687d1d05744a029f68c102f841a903ec4ea6e94b1ba88bd7338a19cdf25a7",
+      "config_sha256": "8e384a54d34b5e429bde43443d5f620830e9927c6a92802d4a2b01a599aba7e4",
+      "parser_sha256": "a6514eb82578bbcac85ab788528c07c17c2eaa26c556bee7cf77e4fe825c61bc",
+      "raw_sha256": "28a4f330a738982e45c589e6ad4fe95fceb5861b36cef3312519e6acd6adba75"
+    }
+  ]
+}

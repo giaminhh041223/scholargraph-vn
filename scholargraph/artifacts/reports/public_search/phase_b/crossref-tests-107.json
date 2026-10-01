@@ -1,0 +1,18 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/unit/test_public_crossref.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    ".tmp/cr107"
+  ],
+  "exit_code": 0,
+  "elapsed_wall_seconds": 11.78675139999541,
+  "code_commit": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
+  "stdout_sha256": "7e070d09dd8af5585cd627f54819b4e24db59e728a39971bf871e721aa730bf6"
+}

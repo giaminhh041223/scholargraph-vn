@@ -1,0 +1,46 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/enrich_public.py",
+    "--project-root",
+    ".",
+    "--doi",
+    "10.21105/joss.03021",
+    "--output-dir",
+    "data/public_search/phase_b/crossref-live-107-joss-c"
+  ],
+  "exit_code": 0,
+  "expected_exit_code": 0,
+  "elapsed_wall_seconds": 1.272744200003217,
+  "status": "success",
+  "code_commit": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
+  "error": null,
+  "request": {
+    "attempted": true,
+    "status_code": 200,
+    "headers": {
+      "x-rate-limit-limit": [
+        "5"
+      ],
+      "x-rate-limit-interval": [
+        "1s"
+      ],
+      "x-concurrency-limit": [
+        "1"
+      ],
+      "content-type": [
+        "application/json"
+      ]
+    },
+    "complete_body": true,
+    "url": "https://api.crossref.org/works/10.21105%2Fjoss.03021"
+  },
+  "raw": {
+    "path": "raw.json",
+    "sha256": "28a4f330a738982e45c589e6ad4fe95fceb5861b36cef3312519e6acd6adba75",
+    "byte_count": 3484
+  },
+  "output_dir": "data/public_search/phase_b/crossref-live-107-joss-c",
+  "doi": "10.21105/joss.03021",
+  "title": "seaborn: statistical data visualization"
+}

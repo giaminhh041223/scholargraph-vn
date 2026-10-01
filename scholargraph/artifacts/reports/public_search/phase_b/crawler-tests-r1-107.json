@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "executor": "COORDINATOR",
+  "tested_commit": "d6a849c",
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_public_site_crawler.py -q --tb=short -p no:cacheprovider --basetemp .tmp/joss107",
+  "passed": 69,
+  "failed": 3,
+  "duration_seconds": 3.64,
+  "exit_code": 1,
+  "failures": [
+    "test_crawler_full_bounded_run",
+    "test_crawler_resume_complete_run",
+    "test_crawler_resume_corrupted_raw_sha_fails"
+  ],
+  "cause": "Synthetic MockTransport fixture uses last slash segment joss.09260 instead of DOI 10.21105/joss.09260; product exact DOI rejection correct",
+  "timestamp": "2026-10-01T16:41:25.450150+00:00"
+}

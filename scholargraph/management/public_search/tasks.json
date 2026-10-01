@@ -853,16 +853,20 @@
     {
       "id": "EXT-09",
       "title": "Crossref enrichment (giai đoạn B)",
-      "status": "IN_PROGRESS",
+      "status": "REVIEW",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "SOL",
       "dependencies": [
         "EXT-08"
       ],
       "session_id": "PHASE-B-107",
-      "evidence": [],
+      "evidence": [
+        "management/public_search/packets/SOL/EXT09-107.md",
+        "artifacts/reports/public_search/phase_b/crossref-tests-107.json",
+        "artifacts/reports/public_search/phase_b/crossref-live-history-107.json"
+      ],
       "owner": "SOL",
-      "dispatch_state": "running",
+      "dispatch_state": "stopped_snapshot_pinned",
       "claimed_paths": [
         "src/scholargraph/public_search/crossref.py",
         "scripts/enrich_public.py",
@@ -874,7 +878,10 @@
         "model_requested": "gpt-6.1-sol",
         "effort_requested": "high",
         "runtime_model_observed": null
-      }
+      },
+      "delivered_head": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
+      "reviewer": "MUSE",
+      "review_state": "RUNNING_FILE_ONLY"
     },
     {
       "id": "EXT-10",
@@ -900,7 +907,22 @@
         "effort_requested": "high",
         "runtime_model_observed": null,
         "dispatch_file": "management/public_search/dispatch/GEMINI-EXT10-107.txt"
-      }
+      },
+      "review_verdict": "CHANGES_REQUIRED",
+      "review_evidence": [
+        "management/public_search/reviews/SOL/EXT10-107-R1.md"
+      ],
+      "author_fix_exec_session": 85582,
+      "unresolved_findings": [
+        "R1-01",
+        "R1-02",
+        "R1-03",
+        "R1-04",
+        "R1-05",
+        "R1-06",
+        "R1-07",
+        "R1-08"
+      ]
     }
   ],
   "dispatch_sessions": [

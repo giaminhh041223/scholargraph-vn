@@ -1,0 +1,31 @@
+[
+  {
+    "probe": "foreign_abstract_url",
+    "accepted": true,
+    "retrieved_at": "INVALID_TIME",
+    "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf"
+  },
+  {
+    "probe": "pdf_credentials_port",
+    "accepted": true,
+    "retrieved_at": "INVALID_TIME",
+    "pdf_url": "https://user:pass@joss.theoj.org:8080/papers/10.21105/joss.09260.pdf"
+  },
+  {
+    "probe": "crawl_delay_and_malformed_media_type",
+    "status": "success",
+    "times": [
+      1000.0,
+      1003.0,
+      1006.0,
+      1009.0,
+      1012.0
+    ],
+    "intervals": [
+      3.0,
+      3.0,
+      3.0,
+      3.0
+    ]
+  }
+]

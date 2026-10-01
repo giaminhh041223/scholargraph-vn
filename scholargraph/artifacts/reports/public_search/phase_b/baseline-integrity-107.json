@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "phase": "before live phaseB",
+  "core_freeze": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "phase_a_required_files": 155,
+  "phase_a_mismatches": []
+}

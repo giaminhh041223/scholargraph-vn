@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-10-01T23:30:30.299120+07:00",
-  "stage": "phase_b_implementation",
+  "stage": "phase_b_crawler_fix_crossref_review",
   "active_tasks": [
     "EXT-09",
     "EXT-10"
@@ -25,9 +25,10 @@
     "EXT-10"
   ],
   "next_steps": {
-    "SOL": "Implement strict Crossref DOI enrichment sidecar and CLI",
-    "GEMINI": "Implement bounded JOSS HTML crawler and CLI",
-    "COORDINATOR": "Policy/config; execute native file-only tests; live pilots; immutable review"
+    "SOL": "Crossref delivered98PASS, stopped; independent crawler R1 CHANGES_REQUIRED",
+    "GEMINI": "Fix eight findings R2 fileonly exec85582",
+    "MUSE": "Independent Crossref snapshotfaf97a5 review fileonly exec9791",
+    "COORDINATOR": "Collect native reports; execute crawler R2 tests and live after fixes"
   },
   "last_session_log": "management/public_search/logs/SESSION-20261002-107-CODEX.md",
   "worker_execution_observed": true,

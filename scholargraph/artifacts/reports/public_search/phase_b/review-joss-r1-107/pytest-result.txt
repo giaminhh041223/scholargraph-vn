@@ -1,0 +1,259 @@
+...........................................................F..FF........ [100%]
+================================== FAILURES ===================================
+________________________ test_crawler_full_bounded_run ________________________
+
+tmp_path = WindowsPath('D:/Web_mining_20261/scholargraph/.tmp/jr107/pytest/test_crawler_full_bounded_run0')
+
+    def test_crawler_full_bounded_run(tmp_path: Path) -> None:
+        project_root, _, config = create_valid_test_env(tmp_path)
+        run_dir = project_root / "data" / "public_search" / "joss" / "test-run-1"
+    
+        sleep_calls: list[float] = []
+    
+        def mock_sleeper(secs: float) -> None:
+            sleep_calls.append(secs)
+    
+        current_time = [1000.0]
+    
+        def mock_clock() -> float:
+            current_time[0] += 0.1
+            return current_time[0]
+    
+        transport = make_mock_transport()
+        client = httpx.Client(transport=transport)
+    
+        with JossCrawler(
+            project_root=project_root,
+            config=config,
+            run_dir=run_dir,
+            resume=False,
+            client=client,
+            clock=mock_clock,
+            sleeper=mock_sleeper,
+            dns_resolver=fake_global_dns_resolver,
+        ) as crawler:
+>           result = crawler.crawl()
+                     ^^^^^^^^^^^^^^^
+
+tests\unit\test_public_site_crawler.py:529: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\scholargraph\public_search\site_crawler.py:1047: in crawl
+    parsed_record = parser.parse_record(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <scholargraph.public_search.site_crawler.JossPaperParser object at 0x00000229C2EE8890>
+html_bytes = b'<!DOCTYPE html>\n<html>\n<head>\n  <title>JOSS: eratosthenes</title>\n  <meta name="citation_title" content="eratost... content="https://joss.theoj.org/papers/joss.09260.pdf">\n</head>\n<body>\n  <h1>eratosthenes</h1>\n</body>\n</html>\n'
+landing_url = 'https://joss.theoj.org/papers/10.21105/joss.09260'
+parser_version = 'joss-citation-1.0.0'
+retrieved_at = '2026-10-01T16:42:40.612236+00:00'
+
+    def parse_record(
+        self,
+        html_bytes: bytes,
+        landing_url: str,
+        parser_version: str,
+        retrieved_at: str,
+    ) -> JossPaperRecord:
+        """Parse raw HTML bytes and construct a validated JossPaperRecord."""
+        try:
+            html_text = html_bytes.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ParseError(f"Paper HTML is not valid UTF-8: {exc}") from exc
+    
+        self.feed(html_text)
+        self.close()
+    
+        raw_sha256 = hashlib.sha256(html_bytes).hexdigest()
+    
+        # Extract landing DOI
+        m = PAPER_URL_REGEX.match(landing_url)
+        if not m:
+            raise ParseError(f"Landing URL does not match canonical JOSS paper pattern: {landing_url}")
+        expected_doi = f"10.21105/joss.{m.group(1)}"
+    
+        # Mandatory citation singletons
+        title = self._get_singleton("citation_title", required=True)
+        doi = self._get_singleton("citation_doi", required=True)
+        pub_date = self._get_singleton("citation_publication_date", required=True)
+        venue = self._get_singleton("citation_journal_title", required=True)
+    
+        if not title:
+            raise ParseError("Empty citation_title")
+        if not doi:
+            raise ParseError("Empty citation_doi")
+        if not pub_date:
+            raise ParseError("Empty citation_publication_date")
+        if not venue:
+            raise ParseError("Empty citation_journal_title")
+    
+        # Landing DOI must match citation DOI strictly
+        if doi.lower() != expected_doi.lower():
+>           raise ParseError(f"Landing DOI mismatch: landing expects '{expected_doi}', citation has '{doi}'")
+E           scholargraph.public_search.site_crawler.ParseError: Landing DOI mismatch: landing expects '10.21105/joss.09260', citation has 'joss.09260'
+
+src\scholargraph\public_search\site_crawler.py:551: ParseError
+______________________ test_crawler_resume_complete_run _______________________
+
+tmp_path = WindowsPath('D:/Web_mining_20261/scholargraph/.tmp/jr107/pytest/test_crawler_resume_complete_r0')
+
+    def test_crawler_resume_complete_run(tmp_path: Path) -> None:
+        project_root, _, config = create_valid_test_env(tmp_path)
+        run_dir = project_root / "data" / "public_search" / "joss" / "complete-run"
+    
+        transport = make_mock_transport()
+        client = httpx.Client(transport=transport)
+    
+        # Initial crawl to completion
+        crawler1 = JossCrawler(
+            project_root=project_root,
+            config=config,
+            run_dir=run_dir,
+            resume=False,
+            client=client,
+            sleeper=lambda _: None,
+            dns_resolver=fake_global_dns_resolver,
+        )
+>       res1 = crawler1.crawl()
+               ^^^^^^^^^^^^^^^^
+
+tests\unit\test_public_site_crawler.py:599: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\scholargraph\public_search\site_crawler.py:1047: in crawl
+    parsed_record = parser.parse_record(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <scholargraph.public_search.site_crawler.JossPaperParser object at 0x00000229C2F94D40>
+html_bytes = b'<!DOCTYPE html>\n<html>\n<head>\n  <title>JOSS: eratosthenes</title>\n  <meta name="citation_title" content="eratost... content="https://joss.theoj.org/papers/joss.09260.pdf">\n</head>\n<body>\n  <h1>eratosthenes</h1>\n</body>\n</html>\n'
+landing_url = 'https://joss.theoj.org/papers/10.21105/joss.09260'
+parser_version = 'joss-citation-1.0.0'
+retrieved_at = '2026-10-01T16:42:40.781573+00:00'
+
+    def parse_record(
+        self,
+        html_bytes: bytes,
+        landing_url: str,
+        parser_version: str,
+        retrieved_at: str,
+    ) -> JossPaperRecord:
+        """Parse raw HTML bytes and construct a validated JossPaperRecord."""
+        try:
+            html_text = html_bytes.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ParseError(f"Paper HTML is not valid UTF-8: {exc}") from exc
+    
+        self.feed(html_text)
+        self.close()
+    
+        raw_sha256 = hashlib.sha256(html_bytes).hexdigest()
+    
+        # Extract landing DOI
+        m = PAPER_URL_REGEX.match(landing_url)
+        if not m:
+            raise ParseError(f"Landing URL does not match canonical JOSS paper pattern: {landing_url}")
+        expected_doi = f"10.21105/joss.{m.group(1)}"
+    
+        # Mandatory citation singletons
+        title = self._get_singleton("citation_title", required=True)
+        doi = self._get_singleton("citation_doi", required=True)
+        pub_date = self._get_singleton("citation_publication_date", required=True)
+        venue = self._get_singleton("citation_journal_title", required=True)
+    
+        if not title:
+            raise ParseError("Empty citation_title")
+        if not doi:
+            raise ParseError("Empty citation_doi")
+        if not pub_date:
+            raise ParseError("Empty citation_publication_date")
+        if not venue:
+            raise ParseError("Empty citation_journal_title")
+    
+        # Landing DOI must match citation DOI strictly
+        if doi.lower() != expected_doi.lower():
+>           raise ParseError(f"Landing DOI mismatch: landing expects '{expected_doi}', citation has '{doi}'")
+E           scholargraph.public_search.site_crawler.ParseError: Landing DOI mismatch: landing expects '10.21105/joss.09260', citation has 'joss.09260'
+
+src\scholargraph\public_search\site_crawler.py:551: ParseError
+_________________ test_crawler_resume_corrupted_raw_sha_fails _________________
+
+tmp_path = WindowsPath('D:/Web_mining_20261/scholargraph/.tmp/jr107/pytest/test_crawler_resume_corrupted_0')
+
+    def test_crawler_resume_corrupted_raw_sha_fails(tmp_path: Path) -> None:
+        project_root, _, config = create_valid_test_env(tmp_path)
+        run_dir = project_root / "data" / "public_search" / "joss" / "corrupted-run"
+    
+        transport = make_mock_transport()
+        client = httpx.Client(transport=transport)
+    
+        crawler1 = JossCrawler(
+            project_root=project_root,
+            config=config,
+            run_dir=run_dir,
+            resume=False,
+            client=client,
+            sleeper=lambda _: None,
+            dns_resolver=fake_global_dns_resolver,
+        )
+>       crawler1.crawl()
+
+tests\unit\test_public_site_crawler.py:634: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\scholargraph\public_search\site_crawler.py:1047: in crawl
+    parsed_record = parser.parse_record(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <scholargraph.public_search.site_crawler.JossPaperParser object at 0x00000229C2F96F00>
+html_bytes = b'<!DOCTYPE html>\n<html>\n<head>\n  <title>JOSS: eratosthenes</title>\n  <meta name="citation_title" content="eratost... content="https://joss.theoj.org/papers/joss.09260.pdf">\n</head>\n<body>\n  <h1>eratosthenes</h1>\n</body>\n</html>\n'
+landing_url = 'https://joss.theoj.org/papers/10.21105/joss.09260'
+parser_version = 'joss-citation-1.0.0'
+retrieved_at = '2026-10-01T16:42:40.828137+00:00'
+
+    def parse_record(
+        self,
+        html_bytes: bytes,
+        landing_url: str,
+        parser_version: str,
+        retrieved_at: str,
+    ) -> JossPaperRecord:
+        """Parse raw HTML bytes and construct a validated JossPaperRecord."""
+        try:
+            html_text = html_bytes.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ParseError(f"Paper HTML is not valid UTF-8: {exc}") from exc
+    
+        self.feed(html_text)
+        self.close()
+    
+        raw_sha256 = hashlib.sha256(html_bytes).hexdigest()
+    
+        # Extract landing DOI
+        m = PAPER_URL_REGEX.match(landing_url)
+        if not m:
+            raise ParseError(f"Landing URL does not match canonical JOSS paper pattern: {landing_url}")
+        expected_doi = f"10.21105/joss.{m.group(1)}"
+    
+        # Mandatory citation singletons
+        title = self._get_singleton("citation_title", required=True)
+        doi = self._get_singleton("citation_doi", required=True)
+        pub_date = self._get_singleton("citation_publication_date", required=True)
+        venue = self._get_singleton("citation_journal_title", required=True)
+    
+        if not title:
+            raise ParseError("Empty citation_title")
+        if not doi:
+            raise ParseError("Empty citation_doi")
+        if not pub_date:
+            raise ParseError("Empty citation_publication_date")
+        if not venue:
+            raise ParseError("Empty citation_journal_title")
+    
+        # Landing DOI must match citation DOI strictly
+        if doi.lower() != expected_doi.lower():
+>           raise ParseError(f"Landing DOI mismatch: landing expects '{expected_doi}', citation has '{doi}'")
+E           scholargraph.public_search.site_crawler.ParseError: Landing DOI mismatch: landing expects '10.21105/joss.09260', citation has 'joss.09260'
+
+src\scholargraph\public_search\site_crawler.py:551: ParseError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_public_site_crawler.py::test_crawler_full_bounded_run
+FAILED tests/unit/test_public_site_crawler.py::test_crawler_resume_complete_run
+FAILED tests/unit/test_public_site_crawler.py::test_crawler_resume_corrupted_raw_sha_fails
+3 failed, 69 passed in 2.67s

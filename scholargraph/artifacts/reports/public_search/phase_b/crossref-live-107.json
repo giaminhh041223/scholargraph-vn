@@ -1,0 +1,209 @@
+{
+  "status": "FAIL",
+  "code_commit": "faf97a5016296da7f3d1b3348fd5ae5d67685519",
+  "cases": [
+    {
+      "case": "joss-a",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/enrich_public.py",
+        "--project-root",
+        ".",
+        "--doi",
+        "10.21105/joss.09260",
+        "--output-dir",
+        "data/public_search/phase_b/crossref-live-107-joss-a"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "elapsed_wall_seconds": 1.6351770000037504,
+      "output_dir": "data/public_search/phase_b/crossref-live-107-joss-a",
+      "stdout_sha256": "1febb17abdb256197c01d7576d991d525748af22c42e9efca6e485478b56a50e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "failed",
+      "error": {
+        "kind": "not_found",
+        "message": "Crossref HTTP 404; no automatic retry"
+      },
+      "request": {
+        "attempted": true,
+        "status_code": 404,
+        "headers": {
+          "x-rate-limit-limit": [
+            "5"
+          ],
+          "x-rate-limit-interval": [
+            "1s"
+          ],
+          "x-concurrency-limit": [
+            "1"
+          ],
+          "content-type": [
+            "text/plain"
+          ]
+        },
+        "complete_body": true,
+        "url": "https://api.crossref.org/works/10.21105%2Fjoss.09260"
+      },
+      "raw": {
+        "path": "raw.json",
+        "sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+        "byte_count": 19
+      }
+    },
+    {
+      "case": "joss-b",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/enrich_public.py",
+        "--project-root",
+        ".",
+        "--doi",
+        "10.21105/joss.09644",
+        "--output-dir",
+        "data/public_search/phase_b/crossref-live-107-joss-b"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_wall_seconds": 1.418245200009551,
+      "output_dir": "data/public_search/phase_b/crossref-live-107-joss-b",
+      "stdout_sha256": "e1aedd577fac8cd372f57c9801a9f3ba8cf99c4d56e100b883191ee14c93b68d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "success",
+      "error": null,
+      "request": {
+        "attempted": true,
+        "status_code": 200,
+        "headers": {
+          "x-rate-limit-limit": [
+            "5"
+          ],
+          "x-rate-limit-interval": [
+            "1s"
+          ],
+          "x-concurrency-limit": [
+            "1"
+          ],
+          "content-type": [
+            "application/json"
+          ]
+        },
+        "complete_body": true,
+        "url": "https://api.crossref.org/works/10.21105%2Fjoss.09644"
+      },
+      "raw": {
+        "path": "raw.json",
+        "sha256": "1b8b9f44ea2286d1c4697cfcd9f9296ec94eb45a10b7bf07881c0a39664ff436",
+        "byte_count": 11959
+      },
+      "doi": "10.21105/joss.09644",
+      "conflict_fields": [],
+      "unavailable_fields": [
+        "abstract"
+      ]
+    },
+    {
+      "case": "original",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/enrich_public.py",
+        "--project-root",
+        ".",
+        "--record-json",
+        "data/public_search/phase_b/inputs-107/original-record.json",
+        "--output-dir",
+        "data/public_search/phase_b/crossref-live-107-original"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_wall_seconds": 1.2475654000008944,
+      "output_dir": "data/public_search/phase_b/crossref-live-107-original",
+      "stdout_sha256": "fe57d788816c43bd19333762d42e85bf01bc0cb867cb17539c7470cff2cbf4a4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "success",
+      "error": null,
+      "request": {
+        "attempted": true,
+        "status_code": 200,
+        "headers": {
+          "x-rate-limit-limit": [
+            "5"
+          ],
+          "x-rate-limit-interval": [
+            "1s"
+          ],
+          "x-concurrency-limit": [
+            "1"
+          ],
+          "content-type": [
+            "application/json"
+          ]
+        },
+        "complete_body": true,
+        "url": "https://api.crossref.org/works/10.1609%2Faaai.v28i1.8870"
+      },
+      "raw": {
+        "path": "raw.json",
+        "sha256": "c9e951d2e7338e15d759e7e0af7ee4a2890c53cc942e2f9c4b20f9d34b589178",
+        "byte_count": 3895
+      },
+      "doi": "10.1609/aaai.v28i1.8870",
+      "conflict_fields": [
+        "abstract",
+        "citation_count"
+      ],
+      "unavailable_fields": [],
+      "original_unchanged": true
+    },
+    {
+      "case": "notfound",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/enrich_public.py",
+        "--project-root",
+        ".",
+        "--doi",
+        "10.21105/joss.999999999",
+        "--output-dir",
+        "data/public_search/phase_b/crossref-live-107-notfound"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "elapsed_wall_seconds": 1.5158464999985881,
+      "output_dir": "data/public_search/phase_b/crossref-live-107-notfound",
+      "stdout_sha256": "098512a5a15e78e3f5f402e088b16fefe141506c64998490eaa4da6a51e81c84",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "failed",
+      "error": {
+        "kind": "not_found",
+        "message": "Crossref HTTP 404; no automatic retry"
+      },
+      "request": {
+        "attempted": true,
+        "status_code": 404,
+        "headers": {
+          "x-rate-limit-limit": [
+            "5"
+          ],
+          "x-rate-limit-interval": [
+            "1s"
+          ],
+          "x-concurrency-limit": [
+            "1"
+          ],
+          "content-type": [
+            "text/plain"
+          ]
+        },
+        "complete_body": true,
+        "url": "https://api.crossref.org/works/10.21105%2Fjoss.999999999"
+      },
+      "raw": {
+        "path": "raw.json",
+        "sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+        "byte_count": 19
+      }
+    }
+  ],
+  "network_attempts": 4
+}

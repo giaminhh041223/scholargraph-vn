@@ -1,0 +1,583 @@
+[
+  {
+    "probe": "missing_counters",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 0,
+      "links_found": 0,
+      "duplicate_links": 0,
+      "papers_parsed": 0,
+      "unique_papers": 0,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.368784+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.368784+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "negative_counter",
+    "status": "success",
+    "counters": {
+      "pages_fetched": -99,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.481725+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.481725+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "missing_schema",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.581758+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.581758+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "malformed_frontier",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.699127+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.699127+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "missing_title",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.794455+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.794455+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "mutated_title",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "INJECTED WITHOUT RAW CHANGE",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:51.899036+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:51.899036+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "leakage_record",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:52.027229+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:52.027229+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      },
+      "test_labels": [
+        "SECRET"
+      ],
+      "score": 100
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "missing_visited",
+    "status": "success",
+    "counters": {
+      "pages_fetched": 4,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 3,
+      "unique_papers": 3,
+      "failed_attempted_calls": 0
+    },
+    "first_record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+      "retrieved_at": "2026-10-01T16:44:52.133316+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T16:44:52.133316+00:00",
+        "meta_fields": [
+          "citation_author",
+          "citation_doi",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume"
+        ]
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "records_json_missing",
+    "status": "success"
+  },
+  {
+    "probe": "records_json_corrupt",
+    "status": "success"
+  },
+  {
+    "probe": "parse_failure_first",
+    "error": "ParseError",
+    "checkpoint": {
+      "schema_version": 1,
+      "site_id": "joss",
+      "config_hash": "3c1911bfd71ed30e8427401afae7df8a9d0130894a975f87065b90c1aacbee11",
+      "status": "failed",
+      "created_at": "2026-10-01T16:44:52.399070+00:00",
+      "updated_at": "2026-10-01T16:44:52.399070+00:00",
+      "frontier": [
+        "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "https://joss.theoj.org/papers/10.21105/joss.09644",
+        "https://joss.theoj.org/papers/10.21105/joss.10451"
+      ],
+      "visited": [
+        {
+          "url": "https://joss.theoj.org/papers/published.html",
+          "raw_sha256": "4b0571a89bae34030d5b625f7543671b02812757995a023943d893015d725369",
+          "type": "listing"
+        }
+      ],
+      "records": [],
+      "counters": {
+        "pages_fetched": 2,
+        "links_found": 4,
+        "duplicate_links": 1,
+        "papers_parsed": 0,
+        "unique_papers": 0,
+        "failed_attempted_calls": 1
+      },
+      "error": {
+        "kind": "ParseError",
+        "message": "Missing required citation meta tag: 'citation_title'"
+      }
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt",
+      "https://joss.theoj.org/papers/published.html",
+      "https://joss.theoj.org/papers/10.21105/joss.09260"
+    ]
+  },
+  {
+    "probe": "parse_failure_resume",
+    "status": "success",
+    "records_count": 0,
+    "counters": {
+      "pages_fetched": 2,
+      "links_found": 4,
+      "duplicate_links": 1,
+      "papers_parsed": 0,
+      "unique_papers": 0,
+      "failed_attempted_calls": 1
+    },
+    "calls": [
+      "https://joss.theoj.org/robots.txt"
+    ]
+  },
+  {
+    "probe": "listing_drift_first",
+    "error": "ParseError"
+  },
+  {
+    "probe": "listing_drift_resume",
+    "status": "success",
+    "records_count": 0,
+    "counters": {
+      "pages_fetched": 1,
+      "links_found": 0,
+      "duplicate_links": 0,
+      "papers_parsed": 0,
+      "unique_papers": 0,
+      "failed_attempted_calls": 0
+    }
+  },
+  {
+    "probe": "malformed_robots",
+    "status": "success",
+    "calls": [
+      "https://joss.theoj.org/robots.txt",
+      "https://joss.theoj.org/papers/published.html",
+      "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "https://joss.theoj.org/papers/10.21105/joss.09644",
+      "https://joss.theoj.org/papers/10.21105/joss.10451"
+    ]
+  },
+  {
+    "probe": "crawl_delay",
+    "status": "success",
+    "calls": [
+      "https://joss.theoj.org/robots.txt",
+      "https://joss.theoj.org/papers/published.html",
+      "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "https://joss.theoj.org/papers/10.21105/joss.09644",
+      "https://joss.theoj.org/papers/10.21105/joss.10451"
+    ]
+  },
+  {
+    "probe": "protected_root",
+    "created": true,
+    "run_dir": "D:\\Web_mining_20261\\scholargraph\\.tmp\\jr107\\round2\\protected_root\\project\\data\\benchmarks\\run"
+  },
+  {
+    "probe": "absolute_drive_root",
+    "created": true,
+    "run_dir": "D:\\Web_mining_20261\\scholargraph\\.tmp\\jr107\\external2\\run"
+  },
+  {
+    "probe": "empty_dns",
+    "accepted": true
+  },
+  {
+    "probe": "cli_missing_config",
+    "exit_code": 1,
+    "stderr": "{\n  \"status\": \"failed\",\n  \"site_id\": \"joss\",\n  \"run_dir\": \"D:\\\\Web_mining_20261\\\\scholargraph\\\\.tmp\\\\jr107\\\\unused\",\n  \"error\": {\n    \"kind\": \"policy_violation\",\n    \"message\": \"Config file not found: D:\\\\Web_mining_20261\\\\scholargraph\\\\MISSING\"\n  },\n  \"counters\": {\n    \"pages_fetched\": 0,\n    \"links_found\": 0,\n    \"duplicate_links\": 0,\n    \"papers_parsed\": 0,\n    \"unique_papers\": 0,\n    \"failed_attempted_calls\": 1\n  }\n}\n"
+  },
+  {
+    "probe": "cli_clean_env_help",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"D:\\Web_mining_20261\\scholargraph\\scripts\\crawl_public.py\", line 14, in <module>\n    from scholargraph.public_search.site_crawler import (\nModuleNotFoundError: No module named 'scholargraph'\n",
+    "stdout": ""
+  },
+  {
+    "probe": "cli_poison_checkpoint",
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "{\n  \"status\": \"success\",\n  \"site_id\": \"joss\",\n  \"run_dir\": \"D:\\\\Web_mining_20261\\\\scholargraph\\\\.tmp\\\\jr107\\\\round2\\\\cli_checkpoint_poison\\\\project\\\\data\\\\public_search\\\\joss\\\\run\",\n  \"counters\": {\n    \"pages_fetched\": 0,\n    \"links_found\": 0,\n    \"duplicate_links\": 0,\n    \"papers_parsed\": 0,\n    \"unique_papers\": 0,\n    \"failed_attempted_calls\": 0\n  },\n  \"records_count\": 3,\n  \"records\": [\n    {\n      \"id\": \"joss:10.21105/joss.09260\",\n      \"doi\": \"10.21105/joss.09260\",\n      \"title\": \"eratosthenes: Synchronizing archaeological chronologies\",\n      \"authors\": [\n        \"Stephen A. Collins-Elliott\"\n      ],\n      \"publication_date\": \"2026/10/01\",\n      \"venue\": \"Journal of Open Source Software\",\n      \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.09260\",\n      \"pdf_url\": \"https://joss.theoj.org/papers/10.21105/joss.09260.pdf\",\n      \"raw_sha256\": \"ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c\",\n      \"retrieved_at\": \"2026-10-01T16:44:53.021823+00:00\",\n      \"parser_version\": \"joss-citation-1.0.0\",\n      \"provenance\": {\n        \"site_id\": \"joss\",\n        \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.09260\",\n        \"raw_sha256\": \"ccfd934828905c6db06709cc98aab2a05e6b4865c5a7d95020a379c7eb94177c\",\n        \"parser_version\": \"joss-citation-1.0.0\",\n        \"retrieved_at\": \"2026-10-01T16:44:53.021823+00:00\",\n        \"meta_fields\": [\n          \"citation_author\",\n          \"citation_doi\",\n          \"citation_issn\",\n          \"citation_issue\",\n          \"citation_journal_title\",\n          \"citation_pdf_url\",\n          \"citation_publication_date\",\n          \"citation_title\",\n          \"citation_volume\"\n        ]\n      },\n      \"test_labels\": [\n        \"SECRET\"\n      ]\n    },\n    {\n      \"id\": \"joss:10.21105/joss.09644\",\n      \"doi\": \"10.21105/joss.09644\",\n      \"title\": \"eratosthenes: Synchronizing archaeological chronologies\",\n      \"authors\": [\n        \"Stephen A. Collins-Elliott\"\n      ],\n      \"publication_date\": \"2026/10/01\",\n      \"venue\": \"Journal of Open Source Software\",\n      \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.09644\",\n      \"pdf_url\": \"https://joss.theoj.org/papers/10.21105/joss.09644.pdf\",\n      \"raw_sha256\": \"02bc35e14e1c49d87c9f662c19171fe160e9b6101308c1c2dc9dce86639404a0\",\n      \"retrieved_at\": \"2026-10-01T16:44:53.024776+00:00\",\n      \"parser_version\": \"joss-citation-1.0.0\",\n      \"provenance\": {\n        \"site_id\": \"joss\",\n        \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.09644\",\n        \"raw_sha256\": \"02bc35e14e1c49d87c9f662c19171fe160e9b6101308c1c2dc9dce86639404a0\",\n        \"parser_version\": \"joss-citation-1.0.0\",\n        \"retrieved_at\": \"2026-10-01T16:44:53.024776+00:00\",\n        \"meta_fields\": [\n          \"citation_author\",\n          \"citation_doi\",\n          \"citation_issn\",\n          \"citation_issue\",\n          \"citation_journal_title\",\n          \"citation_pdf_url\",\n          \"citation_publication_date\",\n          \"citation_title\",\n          \"citation_volume\"\n        ]\n      }\n    },\n    {\n      \"id\": \"joss:10.21105/joss.10451\",\n      \"doi\": \"10.21105/joss.10451\",\n      \"title\": \"eratosthenes: Synchronizing archaeological chronologies\",\n      \"authors\": [\n        \"Stephen A. Collins-Elliott\"\n      ],\n      \"publication_date\": \"2026/10/01\",\n      \"venue\": \"Journal of Open Source Software\",\n      \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.10451\",\n      \"pdf_url\": \"https://joss.theoj.org/papers/10.21105/joss.10451.pdf\",\n      \"raw_sha256\": \"495157b1dc0a5cc6ca7b0f8418e3f6f79ba3e2b82d3435ec9debf07eeba1475a\",\n      \"retrieved_at\": \"2026-10-01T16:44:53.026826+00:00\",\n      \"parser_version\": \"joss-citation-1.0.0\",\n      \"provenance\": {\n        \"site_id\": \"joss\",\n        \"landing_url\": \"https://joss.theoj.org/papers/10.21105/joss.10451\",\n        \"raw_sha256\": \"495157b1dc0a5cc6ca7b0f8418e3f6f79ba3e2b82d3435ec9debf07eeba1475a\",\n        \"parser_version\": \"joss-citation-1.0.0\",\n        \"retrieved_at\": \"2026-10-01T16:44:53.026826+00:00\",\n        \"meta_fields\": [\n          \"citation_author\",\n          \"citation_doi\",\n          \"citation_issn\",\n          \"citation_issue\",\n          \"citation_journal_title\",\n          \"citation_pdf_url\",\n          \"citation_publication_date\",\n          \"citation_title\",\n          \"citation_volume\"\n        ]\n      }\n    }\n  ]\n}\n"
+  },
+  {
+    "probe": "policy_example",
+    "record": {
+      "id": "joss:10.21105/joss.09260",
+      "doi": "10.21105/joss.09260",
+      "title": "eratosthenes: Synchronizing archaeological chronologies with a focus on artifact types",
+      "authors": [
+        "Stephen A. Collins-Elliott"
+      ],
+      "publication_date": "2026/10/01",
+      "venue": "Journal of Open Source Software",
+      "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+      "pdf_url": "https://joss.theoj.org/papers/10.21105/joss.09260.pdf",
+      "raw_sha256": "28916e6c412defacc851a24f8fa06fbd299ec0643e139132967d71ca6174b0c1",
+      "retrieved_at": "2026-10-01T23:30:30.299120+07:00",
+      "parser_version": "joss-citation-1.0.0",
+      "provenance": {
+        "site_id": "joss",
+        "landing_url": "https://joss.theoj.org/papers/10.21105/joss.09260",
+        "raw_sha256": "28916e6c412defacc851a24f8fa06fbd299ec0643e139132967d71ca6174b0c1",
+        "parser_version": "joss-citation-1.0.0",
+        "retrieved_at": "2026-10-01T23:30:30.299120+07:00",
+        "meta_fields": [
+          "citation_abstract_html_url",
+          "citation_author",
+          "citation_doi",
+          "citation_firstpage",
+          "citation_issn",
+          "citation_issue",
+          "citation_journal_title",
+          "citation_pdf_url",
+          "citation_publication_date",
+          "citation_title",
+          "citation_volume",
+          "csrf-param",
+          "csrf-token",
+          "msapplication-tilecolor",
+          "msapplication-tileimage",
+          "og:description",
+          "og:image",
+          "og:site_name",
+          "og:title",
+          "og:type",
+          "og:url",
+          "theme-color",
+          "twitter:card",
+          "twitter:data1",
+          "twitter:description",
+          "twitter:image",
+          "twitter:label1",
+          "twitter:site",
+          "twitter:title",
+          "twitter:url",
+          "viewport"
+        ]
+      }
+    }
+  }
+]

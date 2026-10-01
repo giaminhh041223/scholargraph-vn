@@ -1,0 +1,112 @@
+{
+  "abstract": "We deal with embedding a large scale knowledge graph composed of entities and relations into a continuous vector space. TransE is a promising method proposed recently, which is very efficient while achieving state-of-the-art predictive performance. We discuss some mapping properties of relations which should be considered in embedding, such as reflexive, one-to-many, many-to-one, and many-to-many. We note that TransE does not do well in dealing with these properties. Some complex models are capable of preserving these mapping properties but sacrifice efficiency in the process. To make a good trade-off between model capacity and efficiency, in this paper we propose TransH which models a relation as a hyperplane together with a translation operation on it. In this way, we can well preserve the above mapping properties of relations with almost the same model complexity of TransE. Additionally, as a practical knowledge graph is often far from completed, how to construct negative examples to reduce false negative labels in training is very important. Utilizing the one-to-many/many-to-one mapping property of a relation, we propose a simple trick to reduce the possibility of false negative labeling. We conduct extensive experiments on link prediction, triplet classification and fact extraction on benchmark datasets like WordNet and Freebase. Experiments show TransH delivers significant improvements over TransE on predictive accuracy with comparable capability to scale up.",
+  "arxiv_id": null,
+  "authors": [
+    "Zhen Wang",
+    "Jianwen Zhang",
+    "Jianlin Feng",
+    "Zheng Chen"
+  ],
+  "authors_availability": "known",
+  "citation_count": 3849,
+  "doi": "10.1609/aaai.v28i1.8870",
+  "field_provenance": {
+    "abstract": [
+      {
+        "raw_field": "abstract_inverted_index",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "authors": [
+      {
+        "raw_field": "authorships[].author.display_name",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "citation_count": [
+      {
+        "raw_field": "cited_by_count",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "doi": [
+      {
+        "raw_field": "doi",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "landing_url": [
+      {
+        "raw_field": "primary_location.landing_page_url",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "open_access_status": [
+      {
+        "raw_field": "open_access.is_oa",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "publication_year": [
+      {
+        "raw_field": "publication_year",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "source_id": [
+      {
+        "raw_field": "id",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "title": [
+      {
+        "raw_field": "title",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ],
+    "venue": [
+      {
+        "raw_field": "primary_location.source.display_name",
+        "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+        "source": "openalex",
+        "source_id": "W2283196293"
+      }
+    ]
+  },
+  "landing_url": "https://doi.org/10.1609/aaai.v28i1.8870",
+  "license": null,
+  "missing_fields": [
+    "arxiv_id",
+    "pdf_url",
+    "license"
+  ],
+  "open_access_status": "open",
+  "parser_version": "openalex-1.0.0",
+  "pdf_url": null,
+  "publication_year": 2014,
+  "raw_sha256": "407013ef5e071081ba5ea40c07eb50af8f9bb059a3b298bc1575cee7f7f09b37",
+  "retrieved_at": "2026-10-01T03:53:06.783735Z",
+  "source": "openalex",
+  "source_id": "W2283196293",
+  "title": "Knowledge Graph Embedding by Translating on Hyperplanes",
+  "venue": "Proceedings of the AAAI Conference on Artificial Intelligence"
+}

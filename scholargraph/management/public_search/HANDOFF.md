@@ -1,3 +1,9 @@
+# Checkpoint107 — Crossref REVIEW, crawler sửa R2
+
+Crossref faf97a5, root98PASS/11.28s; pilot5attempts=3success2HTTP404, OAoriginal unchanged. Initial4callFAIL giữ nguyên, recovery03021success; [history](../../artifacts/reports/public_search/phase_b/crossref-live-history-107.json). MUSE fresh file-onlyreview exec9791. Crawler d6a849c R1SOL CHANGES_REQUIRED8findings (resume poison/selector drift/protectedroot/robots/counters/standaloneCLI/HTTP/doc); Gemini file-onlyR2 exec85582. [Report](reviews/SOL/EXT10-107-R1.md). Next executable: collectR2→pytest/probes→pin→JOSSlive→freshreview/fixes→gate/docs. Không merge phaseB hoặc relabel corehuman gates.
+
+## Lịch sử107
+
 # Giai đoạn B đã được giao — 2026-10-01T23:30:30.299120+07:00
 
 EXT09/10 IN_PROGRESS trên codex/public-search-phase-b. SOL Crossref; Gemini crawler HTML JOSS; coordinator config/policy/tests/live; Muse review sau snapshot. [Log107](logs/SESSION-20261002-107-CODEX.md). Chưa có code/test phaseB, không suy DONE từ phaseA. Next: nhận implementation → kiểm adversarial/CLI → live → review. Main SG030/033 human gates còn chờ.
