@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-09-30T22:25:22.137093+07:00",
+  "updated_at": "2026-10-01T09:14:20+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -499,11 +499,36 @@
       "delivered_head": "93f0c2d254da3182f51a7ee58cbba028686aa433",
       "author_execution_session_id": "6136d286-b5c2-4975-98fa-5bb1411f4841",
       "verification": {
-        "r4_pytest": {"passed": 16, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-ui-tests.log"},
-        "r4_node": {"passed": 111, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"},
-        "sol_adversarial": {"passed": 7, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"},
-        "muse_review": {"passed": 130, "failed": 0, "exit_code": 0, "report": "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md"},
-        "w2_combined": {"passed": 446, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"}
+        "r4_pytest": {
+          "passed": 16,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "data/public_search/control/w2-083/parent-ui-tests.log"
+        },
+        "r4_node": {
+          "passed": 111,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"
+        },
+        "sol_adversarial": {
+          "passed": 7,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"
+        },
+        "muse_review": {
+          "passed": 130,
+          "failed": 0,
+          "exit_code": 0,
+          "report": "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md"
+        },
+        "w2_combined": {
+          "passed": 446,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"
+        }
       },
       "review_verdict": "PASS_fresh_MUSE_R5",
       "completed_at": "2026-10-01T09:15:00+07:00",
@@ -513,15 +538,42 @@
     {
       "id": "EXT-05B",
       "title": "Service, routes, CLI và tích hợp ứng dụng",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "proposed_owner": "SOL",
       "proposed_reviewer": "GEMINI",
       "dependencies": [
         "EXT-04A",
         "EXT-04B"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "DISPATCH-W3-084-SOL",
+      "evidence": [],
+      "owner": "SOL",
+      "dispatch_id": "DISPATCH-W3-084-SOL",
+      "dispatch_file": "management/public_search/dispatch/SOL-W3-EXT05B-084.txt",
+      "claimed_paths": [
+        "src/scholargraph/public_search/service.py",
+        "src/scholargraph/api/public_routes.py",
+        "src/scholargraph/api/app.py",
+        "scripts/search_public.py",
+        "configs/public_search.json",
+        "tests/unit/test_public_service.py",
+        "tests/integration/test_public_routes.py",
+        "tests/integration/test_public_cli.py",
+        "management/public_search/logs/SOL/EXT-05B-W3-084.md",
+        "management/public_search/packets/SOL/EXT-05B-W3-084.md"
+      ],
+      "input_head": "749baf104b33058aa1128a985aa40c2f7584b88d",
+      "author_execution_session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "runtime": {
+        "session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+        "model_requested": "gpt-6.1-sol",
+        "reasoning_effort_requested": "high",
+        "runtime_model_observed": null
+      },
+      "dispatch_state": "author_active",
+      "review_verdict": null,
+      "unresolved_findings": [],
+      "next_action": "SOL triển khai và bàn giao immutable; sau đó Gemini fresh review"
     },
     {
       "id": "EXT-06",
@@ -677,6 +729,29 @@
       "log_path": "management/public_search/logs/COORDINATOR/FIX-W0-01C-R2-GEMINI.md",
       "actual_model": null,
       "worker_execution_session_id": null
+    },
+    {
+      "session_id": "DISPATCH-W3-084-SOL",
+      "kind": "coordinator_dispatch_author",
+      "issued_at": "2026-10-01T09:14:20+07:00",
+      "worker": "SOL",
+      "task_id": "EXT-05B",
+      "status": "RUNNING",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-W3-084-SOL.md",
+      "actual_model": null,
+      "worker_execution_session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "model_requested": "gpt-6.1-sol",
+      "reasoning_effort_requested": "high",
+      "claimed_paths": [
+        "src/scholargraph/public_search/service.py",
+        "src/scholargraph/api/public_routes.py",
+        "src/scholargraph/api/app.py",
+        "scripts/search_public.py",
+        "configs/public_search.json",
+        "tests/unit/test_public_service.py",
+        "tests/integration/test_public_routes.py",
+        "tests/integration/test_public_cli.py"
+      ]
     }
   ],
   "current_round_assignments": [
@@ -751,6 +826,31 @@
       "runtime_variant_observed": "xhigh",
       "runtime_observation_basis": "read-only OpenCode assistant metadata",
       "status": "ENDED"
+    },
+    {
+      "task_id": "EXT-05B",
+      "owner": "SOL",
+      "dispatch_id": "DISPATCH-W3-084-SOL",
+      "session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "started_at": "2026-10-01T09:14:20+07:00",
+      "claimed_paths": [
+        "src/scholargraph/public_search/service.py",
+        "src/scholargraph/api/public_routes.py",
+        "src/scholargraph/api/app.py",
+        "scripts/search_public.py",
+        "configs/public_search.json",
+        "tests/unit/test_public_service.py",
+        "tests/integration/test_public_routes.py",
+        "tests/integration/test_public_cli.py",
+        "management/public_search/logs/SOL/EXT-05B-W3-084.md",
+        "management/public_search/packets/SOL/EXT-05B-W3-084.md"
+      ],
+      "input_head": "749baf104b33058aa1128a985aa40c2f7584b88d",
+      "model_requested": "gpt-6.1-sol",
+      "reasoning_effort_requested": "high",
+      "runtime_model_observed": null,
+      "status": "RUNNING",
+      "dispatch_state": "author_active"
     }
   ],
   "pause_after_current_round": false,

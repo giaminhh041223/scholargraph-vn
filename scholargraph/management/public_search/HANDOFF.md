@@ -1,3 +1,12 @@
+# W3 084 — EXT-05B đang được SOL triển khai (2026-10-01T09:14:20+07:00)
+
+- User đã giao tiếp tục sau W2 freeze; coordinator mở EXT-05B, chưa mở EXT-06.
+- SOL thread `01a0efcc-2062-7d01-b687-10d249b56cbe` đang chạy với requested `gpt-6.1-sol/high` trong checkout `.worktrees/public-sol/scholargraph`; actual model runtime chưa quan sát.
+- Dispatch: [SOL-W3-EXT05B-084](dispatch/SOL-W3-EXT05B-084.txt); coordinator log: [DISPATCH-W3-084-SOL](logs/COORDINATOR/DISPATCH-W3-084-SOL.md).
+- Owned implementation: service, public routes, additive app router, CLI, config và tests/packet/log đã liệt kê trong dispatch. Worker không sửa board/state/HANDOFF.
+- Input checkpoint: parent `749baf1`; EXT-04A/EXT-04B/EXT-05A đã DONE và freeze W2.
+- Bước kế tiếp: nhận commit+packet immutable của SOL, chạy kiểm chứng coordinator; chỉ khi đủ evidence mới chuyển REVIEW và giao GEMINI fresh review.
+
 # W2 083 — freeze hoàn tất EXT-04B + EXT-05A
 
 - W2 đã freeze tại [manifest](W2-FREEZE-083.json) sau khi nhập exact UI Gemini R4 `93f0c2d254da3182f51a7ee58cbba028686aa433` và fusion SOL `791bb8c43faa96c0b2161080ab89fe93e1a6b6e1`.

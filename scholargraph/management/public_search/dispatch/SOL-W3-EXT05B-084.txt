@@ -1,0 +1,24 @@
+EXT-05B / W3 dispatch — SOL author
+Issued: 2026-10-01T09:14:20+07:00
+Coordinator branch: codex/public-paper-search
+Author thread: 01a0efcc-2062-7d01-b687-10d249b56cbe (local Codex app thread; active after delivery)
+Requested model: gpt-6.1-sol; reasoning effort: high
+Checkout: D:/Web_mining_20261/scholargraph/.worktrees/public-sol/scholargraph
+Branch: codex/public-search-sol
+Parent input target: 749baf104b33058aa1128a985aa40c2f7584b88d (W2 checkpoint)
+Dependencies: EXT-04A DONE, EXT-04B DONE, EXT-05A DONE (UI is immutable parent input)
+Reviewer: GEMINI, fresh context after immutable delivery
+
+Owned paths:
+src/scholargraph/public_search/service.py
+src/scholargraph/api/public_routes.py
+src/scholargraph/api/app.py
+scripts/search_public.py
+configs/public_search.json
+tests/unit/test_public_service.py
+tests/integration/test_public_routes.py
+tests/integration/test_public_cli.py
+management/public_search/logs/SOL/EXT-05B-W3-084.md
+management/public_search/packets/SOL/EXT-05B-W3-084.md
+
+Acceptance and constraints are in docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-05B and the worker packet. No board/state/HANDOFF edits by worker; no changes to GEMINI/MUSE owned files. Stop at REVIEW with commit SHA, packet, tests and adversarial evidence. Do not open EXT-06.
