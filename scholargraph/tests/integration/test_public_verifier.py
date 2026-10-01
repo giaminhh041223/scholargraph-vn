@@ -148,7 +148,10 @@ def _assert_rejected(root: Path, path: Path, manifest: dict, expected_reason: st
     result = _run(root, path)
     assert result.returncode == 1, (result.stdout, result.stderr)
     assert "Traceback" not in result.stderr
-    report = json.loads((root / "out.json").read_text(encoding="utf-8"))
+    # Unsafe preflight inputs must fail before output writes; stdout is the CLI report.
+    report = json.loads(result.stdout)
+    if (root / "out.json").exists():
+        assert json.loads((root / "out.json").read_text(encoding="utf-8")) == report
     assert report["status"] == "INSUFFICIENT_EVIDENCE"
     if expected_reason:
         assert expected_reason in report["message"], report
@@ -353,4 +356,31 @@ def test_pilot_summary_rederived_from_strict_envelopes(tmp_path: Path, mutation:
         manifest["sha256"][run["stdout_path"]] = _digest(stdout)
     _write(tmp_path / relative, report)
     manifest["sha256"][relative] = _digest(tmp_path / relative)
+    _assert_rejected(tmp_path, path, manifest, reason)
+
+
+@pytest.mark.parametrize("resource", ["config.json", "evidence/stdout-0.json"])
+def test_omitted_dynamic_pilot_input_stays_protected_from_output(tmp_path: Path, resource: str) -> None:
+    path, manifest = synthetic_manifest(tmp_path)
+    manifest["required_files"].remove(resource)
+    del manifest["sha256"][resource]
+    _write(path, manifest)
+    before = {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}
+    result = _run(tmp_path, path, output_json=tmp_path / resource)
+    assert result.returncode == 1 and "Traceback" not in result.stderr
+    report = json.loads(result.stdout)
+    assert report["status"] == "INSUFFICIENT_EVIDENCE"
+    assert "overlaps protected input" in report["message"]
+    assert not (tmp_path / "out.md").exists()  # unsafe output stops all report writes
+    assert all(p.read_bytes() == value for p, value in before.items())
+
+
+@pytest.mark.parametrize("resource,reason", [("config.json", "pilot config must be a required hashed input"),
+    ("evidence/stdout-0.json", "pilot stdout must be a required hashed input")])
+def test_omitted_dynamic_pilot_input_rejected_without_output_collision(
+    tmp_path: Path, resource: str, reason: str,
+) -> None:
+    path, manifest = synthetic_manifest(tmp_path)
+    manifest["required_files"].remove(resource)
+    del manifest["sha256"][resource]
     _assert_rejected(tmp_path, path, manifest, reason)

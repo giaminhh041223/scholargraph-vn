@@ -140,7 +140,9 @@ def _validate_pilot(root: Path, report: dict, status: str, hashes: dict[str, str
         raise ValueError("pilot report status mismatch")
     if not isinstance(report.get("code_commit"), str) or not re.fullmatch(r"[0-9a-f]{40}", report["code_commit"]):
         raise ValueError("pilot code_commit missing or invalid")
-    _hash_file(root, report.get("config_path"), report.get("config_sha256"), hashes)
+    if report.get("config_path") not in hashes:
+        raise ValueError("pilot config must be a required hashed input")
+    _hash_file(root, report["config_path"], report.get("config_sha256"), hashes)
     queries = report.get("approved_queries")
     if (not isinstance(queries, list) or len(queries) < 5
         or any(not isinstance(q, str) or not q.strip() for q in queries) or len(set(queries)) != len(queries)):
@@ -156,7 +158,9 @@ def _validate_pilot(root: Path, report: dict, status: str, hashes: dict[str, str
     for run in runs:
         if not isinstance(run, dict) or run.get("query") not in queries:
             raise ValueError("pilot run query mismatch")
-        _hash_file(root, run.get("stdout_path"), run.get("stdout_sha256"), hashes)
+        if run.get("stdout_path") not in hashes:
+            raise ValueError("pilot stdout must be a required hashed input")
+        _hash_file(root, run["stdout_path"], run.get("stdout_sha256"), hashes)
         if run.get("encoding") not in {"utf-8", "cp1252"}:
             raise ValueError("pilot encoding missing or unsupported")
         raw_json = _safe_path(root, run["stdout_path"]).read_bytes().decode(run["encoding"])
@@ -231,6 +235,29 @@ def _guard_outputs(root: Path, manifest_path: Path, manifest: dict, outputs: lis
     protected = {manifest_path}
     for relative in manifest.get("required_files", []):
         protected.add(_safe_path(root, relative))
+    acceptance = manifest.get("acceptance")
+    if isinstance(acceptance, dict):
+        for name, row in acceptance.items():
+            if not isinstance(row, dict):
+                continue
+            for relative in row.get("evidence_paths", []):
+                protected.add(_safe_path(root, relative))
+            if isinstance(row.get("report_path"), str):
+                report_path = _safe_path(root, row["report_path"])
+                protected.add(report_path)
+                if name == "pilot" and report_path.is_file():
+                    expected_hashes = manifest.get("sha256")
+                    if isinstance(expected_hashes, dict) and row["report_path"] in expected_hashes:
+                        _hash_file(root, row["report_path"], expected_hashes[row["report_path"]], {})
+                    pilot = json.loads(report_path.read_text(encoding="utf-8"))
+                    if isinstance(pilot, dict):
+                        if isinstance(pilot.get("config_path"), str):
+                            protected.add(_safe_path(root, pilot["config_path"]))
+                        runs = pilot.get("runs")
+                        if isinstance(runs, list):
+                            for run in runs:
+                                if isinstance(run, dict) and isinstance(run.get("stdout_path"), str):
+                                    protected.add(_safe_path(root, run["stdout_path"]))
     core = _safe_path(root, manifest.get("core_root", "."))
     freeze_info = manifest.get("core_freeze")
     if isinstance(freeze_info, dict) and isinstance(freeze_info.get("manifest"), str):

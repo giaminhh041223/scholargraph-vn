@@ -67,3 +67,10 @@ Nested freeze data map negative case: PASS (missing frozen JSONL produces exit 1
 Lệnh cuối: `\.venv\Scripts\python.exe -m pytest -q tests/integration/test_public_verifier.py tests/integration/test_public_adversarial.py` — **77 passed, 2 warnings in 78.60s**, exit **0** (70 verifier + 7 adversarial). Các warnings là deprecation FastAPI/Starlette, không lỗi assertion.
 
 Đã dừng viết để coordinator pin. Không commit; không sửa board/state/HANDOFF hoặc artifacts report/pilot. Pilot live/evidence operational final chỉ coordinator cung cấp từ runs thật.
+
+## Checkpoint R2 — bảo vệ dynamic inputs — 2026-10-01
+
+- Reviewer R2 phát hiện P1: config/stdout pilot có thể bị bỏ khỏi `required_files` và bị report output ghi đè. Coordinator sửa preflight bảo vệ mọi path acceptance/report/config/stdout; validator yêu cầu dynamic pilot inputs là required hashed inputs.
+- Worker chỉ thêm 4 regression cases trong `test_public_verifier.py`, toàn bộ temp synthetic: (1–2) config/stdout bị bỏ khỏi required hashes và output JSON trỏ vào chính file đó; (3–4) config/stdout bị bỏ khỏi required hashes nhưng outputs hợp lệ. Mỗi case bắt CLI exit 1, không traceback, expected failure reason và toàn bộ input bytes bất biến. Collision cases xác minh report Markdown chưa được ghi do preflight chặn.
+- Lệnh focused duy nhất: `\.venv\Scripts\python.exe -m pytest -q tests/integration/test_public_verifier.py -k omitted_dynamic_pilot_input` — **4 passed, 70 deselected in 2.63s**, exit **0**. Không chạy lại full suite 77.
+- Đã dừng ghi; coordinator pin/re-review. Không sửa verifier production, board, core hoặc reports.
