@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "passed": 8,
+  "failed": 0,
+  "exit_code": 0,
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest -q tests/integration/test_public_adversarial.py tests/integration/test_public_cli.py::test_cli_json_is_utf8_under_legacy_windows_encoding -p no:cacheprovider",
+  "duration_seconds": 7.2,
+  "source": "actual exec result 430012",
+  "coverage": "7 E2E/adversarial cases plus UTF-8 subprocess; full module matrix in regression 523 cases"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "passed": 77,
+  "failed": 0,
+  "exit_code": 0,
+  "duration_seconds": 78.6,
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest -q tests/integration/test_public_adversarial.py tests/integration/test_public_verifier.py -p no:cacheprovider",
+  "source": "actual helper ext06_validation final run;70 verifier+7adversarial"
+}

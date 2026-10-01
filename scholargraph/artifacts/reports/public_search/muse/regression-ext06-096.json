@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest -q tests/unit/test_public_contracts.py tests/unit/test_public_transport.py tests/unit/test_public_openalex.py tests/unit/test_public_arxiv.py tests/unit/test_public_fusion.py tests/unit/test_public_store.py tests/unit/test_public_export.py tests/unit/test_public_service.py tests/unit/test_public_ui.py tests/integration/test_public_adversarial.py tests/integration/test_public_verifier.py tests/integration/test_public_routes.py tests/integration/test_public_cli.py tests/integration/test_api.py tests/integration/test_ui.py tests/unit/test_graph_ui.py tests/unit/test_demo_export.py -p no:cacheprovider",
+  "passed": 523,
+  "failed": 0,
+  "exit_code": 0,
+  "duration_seconds": 153.0,
+  "source": "Actual exec session 82695 completion; CLI encoding added separately: focused session 7f15de 12 passed/exit0",
+  "core_freeze_after": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  }
+}
