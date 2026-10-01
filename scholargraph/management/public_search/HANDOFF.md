@@ -1,3 +1,15 @@
+# Tích hợp hoàn tất — 2026-10-01T23:13:32.489133+07:00
+
+**Master local đã nhận public search; human gate PASS_USER_CONFIRMED;14task phaseA DONE.**
+
+- Merge fast-forward83358a9→3b61cfc. [Gate106](reviews/COORDINATOR/INTEGRATION-FINAL-GATE-106.md), [approval](HUMAN_APPROVAL-106.json), [kiểm sau merge](../../artifacts/reports/public_search/sol/integration-106.json).
+-96testPASS;155requiredhashesPASS;33corefreeze giữ nguyên. Regression630 đã có, code không đổi; fullrerunNOT_RUN. Cảnhbáo2dependencydeprecated giữ nhưlog, không thêmdependency.
+- [Hướng dẫn](../../docs/public_search/USER_GUIDE.md), [gói bàn giao](../../docs/public_search/RELEASE_PACKET.md), [demo](../../docs/public_search/DEMO.md). Download do user xácnhận, không bịa captureagent.
+- Không còn bước phaseA; chỉ xử lý bug nếu được báo. EXT09/10DEFERRED; mainSG030/033 chưa hoàn thànhhuman researchgates. Không push/publication. Branchworkers được giữ nguyên, không xóa checkout/data.
+- Bằng chứngFINAL_PACKET_INDEX105 được giữ nhưsnapshot cũ; dùng FINAL_PACKET_INDEX106 để đối chiếu tài liệu đã cậpnhật humanapproval.
+
+## Lịch sử trước tích hợp
+
 # Human gate106 — 2026-10-01T23:10:58.246939+07:00
 
 Người dùng xác nhận demo/download và chấp thuận tích hợp; [approval](HUMAN_APPROVAL-106.json). Coordinator đang fast-forward master, sau đó kiểm continuity và ghi closeout. PhaseBDEFERRED; SG030/033 giữ nguyên.

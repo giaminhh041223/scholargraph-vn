@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T23:10:58.246939+07:00",
-  "stage": "human_approved_integration_in_progress",
+  "updated_at": "2026-10-01T23:13:32.489133+07:00",
+  "stage": "integrated_local_master_complete",
   "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
@@ -20,7 +20,8 @@
     "EXT-08"
   ],
   "next_steps": {
-    "COORDINATOR": "Fast-forward master; check hashes/imports/targeted tests/checker; record actual integration"
+    "COORDINATOR": "Scope complete; no further authorized phaseA work",
+    "PHASE_B": "EXT09/10 deferred until a new assignment"
   },
   "last_session_log": "management/public_search/logs/SESSION-20261001-106-CODEX.md",
   "worker_execution_observed": true,
@@ -126,8 +127,50 @@
     "final_project_checker": {
       "exit_code": 0,
       "main_task_count": 53,
-      "markdown_links": 563,
+      "markdown_links": 580,
       "main_gates_unchanged": true
+    },
+    "integration106": {
+      "status": "PASS",
+      "checked_at": "2026-10-01T23:12:07.626918+07:00",
+      "required_resources": 155,
+      "core_freeze": {
+        "files_checked": 33,
+        "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+      },
+      "code_equality_paths": [
+        "src/scholargraph/api/app.py",
+        "src/scholargraph/api/public_routes.py",
+        "ui/templates/search.html",
+        "ui/static/public_search.js",
+        "src/scholargraph/public_search/service.py",
+        "scripts/search_public.py"
+      ],
+      "code_target": "66264a7",
+      "api_import_routes": "PASS",
+      "branch": "master",
+      "master_before": "83358a9",
+      "integrated_head": "3b61cfc7713c363c8d3175c6572e9afa31bed12f",
+      "merge": "FAST_FORWARD",
+      "targeted_tests": {
+        "passed": 96,
+        "failed": 0,
+        "exit_code": 0,
+        "duration_seconds": 5.38,
+        "warnings": 2,
+        "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_public_contracts.py tests/integration/test_public_routes.py tests/unit/test_public_ui_paging.py -q -p no:cacheprovider --basetemp .tmp/merge-106-tests"
+      },
+      "project_checker": {
+        "exit_code": 0,
+        "main_task_count": 53,
+        "local_links": 567,
+        "core_human_gate_warning": "SG034 awaits SG033; unchanged"
+      },
+      "initial_helper_failure": "Route introspection assumed every app.routes item has path; _IncludedRouter does not. Corrected inspection uses actual APIRoute + generated OpenAPI; no product change.",
+      "human_approval": "management/public_search/HUMAN_APPROVAL-106.json",
+      "full_regression_prior": 630,
+      "full_regression_rerun": "NOT_RUN; code identical, existing report retained",
+      "phaseB": "DEFERRED"
     }
   },
   "pause_after_current_round": false,
@@ -168,7 +211,7 @@
   },
   "GEMINI": "Antigravity runner bị từ chối trước report; không có verdict",
   "final_release_gate": {
-    "status": "APPROVED_PENDING_INTEGRATION",
+    "status": "PASS_APPROVED_INTEGRATED",
     "two_source_operational": "PASS_RECOVERY_COHORT",
     "human_demo": "PASS_USER_CONFIRMED",
     "scope_change_to_one_source": false,
@@ -176,10 +219,12 @@
     "live_cohort_code_commit": "ca0344d",
     "regression_code_commit": "66264a7",
     "browser_saved_download": "PASS_USER_CONFIRMED",
-    "master_merge": "AUTHORIZED_PENDING_EXECUTION",
+    "master_merge": "INTEGRATED_LOCAL_MASTER",
     "documentation_review": "PASS_SOL_FALLBACK",
     "cache_p95_proposal_met": false,
     "browser_saved_download_agent_observation": "NOT_VERIFIED",
-    "approval_record": "management/public_search/HUMAN_APPROVAL-106.json"
+    "approval_record": "management/public_search/HUMAN_APPROVAL-106.json",
+    "integrated_head": "3b61cfc7713c363c8d3175c6572e9afa31bed12f",
+    "integration_report": "artifacts/reports/public_search/sol/integration-106.json"
   }
 }

@@ -2,7 +2,7 @@
 
 ## Xác nhận cập nhật106
 
-Người dùng đã trả lời **“Đã kiểm các bước và đồng ý tích hợp”**, xác nhận demo tìm kiếm/lưu bài/mở JSON-BibTeX và cho phép tích hợp cục bộ. [Approval106](../../management/public_search/HUMAN_APPROVAL-106.json) lưu bằng chứng. Human demo và tệp download là **PASS_USER_CONFIRMED**. Quan sát download tự động cũ vẫn NOT_VERIFIED; không suy mọi kịch bản lỗi live đã xảy ra. Các mục PENDING bên dưới là lịch sử trước xác nhận, không phải gate hiện tại. Merge đã được cho phép, coordinator đang thực hiện; phaseB vẫn DEFERRED, core human gates giữ nguyên.
+Người dùng đã trả lời **“Đã kiểm các bước và đồng ý tích hợp”**, xác nhận demo tìm kiếm/lưu bài/mở JSON-BibTeX và cho phép tích hợp cục bộ. [Approval106](../../management/public_search/HUMAN_APPROVAL-106.json) lưu bằng chứng. Human demo và tệp download là **PASS_USER_CONFIRMED**. Quan sát download tự động cũ vẫn NOT_VERIFIED; không suy mọi kịch bản lỗi live đã xảy ra. Các mục PENDING bên dưới là lịch sử trước xác nhận, không phải gate hiện tại. Đã tích hợp fast-forward vào master local tại `3b61cfc`; [kiểm sau merge](../../artifacts/reports/public_search/sol/integration-106.json) PASS (96 tests, 155 resource hashes, freeze33). phaseB vẫn DEFERRED, core human gates giữ nguyên.
 
 
 Module tìm metadata qua API OpenAlex và arXiv, hợp nhất thứ hạng, lưu snapshot, lưu bài vào thư viện cục bộ và xuất JSON/BibTeX. Truy cập giao diện tại `/public/ui`; `/public` là readiness JSON. Đây là phần mở rộng trên nhánh `codex/public-paper-search`.

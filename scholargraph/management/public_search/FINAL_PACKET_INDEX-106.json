@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-10-01T23:13:32.489133+07:00",
+  "branch": "master",
+  "integrated_head": "3b61cfc7713c363c8d3175c6572e9afa31bed12f",
+  "code_tested": "66264a7",
+  "human_demo": "PASS_USER_CONFIRMED",
+  "master_merge": "INTEGRATED_LOCAL_MASTER",
+  "phaseB": "DEFERRED",
+  "previous_index": "FINAL_PACKET_INDEX-105.json retained historical, docs changed after approval",
+  "files": {
+    "docs/public_search/USER_GUIDE.md": "d8f1fe8894ec06a0c66a026e2cb1cc16e392c63b66ce41952b88a18bd79b23b2",
+    "docs/public_search/DEMO.md": "cce93e3d40ac3c6f0a5d35c3b2fbd1365161cf47a977047aa0ddfc0577c9102a",
+    "docs/public_search/RELEASE_PACKET.md": "a8b3f79854661e3de346f91ce15a6d2ffa43bbe9543ba831cfcffb0310c88a57",
+    "management/public_search/HUMAN_APPROVAL-106.json": "801186affbed81e13b269d9869ac94c5dde2d10af87ba5390823761fd7a7b47e",
+    "artifacts/reports/public_search/sol/integration-106.json": "1dd20bf168095137432b19efdc230fbf823b8686a73d1cbfa954cbb683b97cfd",
+    "management/public_search/reviews/COORDINATOR/INTEGRATION-FINAL-GATE-106.md": "1a0c9449ede797fae2d6f64e157b61b0572fde2322618558200ac7f62959d77f",
+    "management/public_search/W5-FINAL-104.json": "c7242cf5dbd621b31d32698a6a08693211a64a491b5f5b332c606887860cc258"
+  }
+}

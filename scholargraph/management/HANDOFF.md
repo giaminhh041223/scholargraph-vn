@@ -1,3 +1,7 @@
+# Public search đã tích hợp — 2026-10-01T23:13:32.489133+07:00
+
+Nhánh mở rộng đã fast-forward vào master local theo xác nhận demo/save/JSON-BibTeX của người dùng. [Handoff extension](public_search/HANDOFF.md), [gate106](public_search/reviews/COORDINATOR/INTEGRATION-FINAL-GATE-106.md).96tests sau merge PASS;155resourcehashes và33corefreeze khớp. Mainboard SG030/033 và H1–H3 giữ nguyên; xác nhận public demo không xác nhận labels/evaluation nghiên cứu. EXT09/10DEFERRED. Next coretask vẫn theo phần G4 dưới đây.
+
 # Bàn giao ScholarGraph
 
 NEXT_TASK: SG-034

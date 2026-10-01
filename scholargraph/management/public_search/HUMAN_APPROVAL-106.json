@@ -11,7 +11,9 @@
   "basis": "USER_CONFIRMED, not independently captured browser download",
   "candidate_head": "0df4d48",
   "master_before": "83358a9",
-  "merge_status": "AUTHORIZED_PENDING_EXECUTION",
+  "merge_status": "INTEGRATED_LOCAL_MASTER",
   "phaseB": "DEFERRED",
-  "core_human_gates": "unchanged"
+  "core_human_gates": "unchanged",
+  "integrated_head": "3b61cfc7713c363c8d3175c6572e9afa31bed12f",
+  "verification_report": "artifacts/reports/public_search/sol/integration-106.json"
 }

@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-01T23:12:07.626918+07:00",
+  "required_resources": 155,
+  "core_freeze": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "code_equality_paths": [
+    "src/scholargraph/api/app.py",
+    "src/scholargraph/api/public_routes.py",
+    "ui/templates/search.html",
+    "ui/static/public_search.js",
+    "src/scholargraph/public_search/service.py",
+    "scripts/search_public.py"
+  ],
+  "code_target": "66264a7",
+  "api_import_routes": "PASS",
+  "branch": "master",
+  "master_before": "83358a9",
+  "integrated_head": "3b61cfc7713c363c8d3175c6572e9afa31bed12f",
+  "merge": "FAST_FORWARD",
+  "targeted_tests": {
+    "passed": 96,
+    "failed": 0,
+    "exit_code": 0,
+    "duration_seconds": 5.38,
+    "warnings": 2,
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests/unit/test_public_contracts.py tests/integration/test_public_routes.py tests/unit/test_public_ui_paging.py -q -p no:cacheprovider --basetemp .tmp/merge-106-tests"
+  },
+  "project_checker": {
+    "exit_code": 0,
+    "main_task_count": 53,
+    "local_links": 567,
+    "core_human_gate_warning": "SG034 awaits SG033; unchanged"
+  },
+  "initial_helper_failure": "Route introspection assumed every app.routes item has path; _IncludedRouter does not. Corrected inspection uses actual APIRoute + generated OpenAPI; no product change.",
+  "human_approval": "management/public_search/HUMAN_APPROVAL-106.json",
+  "full_regression_prior": 630,
+  "full_regression_rerun": "NOT_RUN; code identical, existing report retained",
+  "phaseB": "DEFERRED"
+}
