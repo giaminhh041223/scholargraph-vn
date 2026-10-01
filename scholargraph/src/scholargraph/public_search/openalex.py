@@ -81,8 +81,10 @@ def _reject_label_metadata(value):
         if any(key.casefold() in {"qrels", "labels", "held_out", "heldout", "test_labels", "dev_labels"}
                for key in value):
             raise OpenAlexSchemaError("label/held-out metadata forbidden")
-        for child in value.values():
-            _reject_label_metadata(child)
+        for key, child in value.items():
+            # Abstract dictionary keys are words in the paper, not label fields.
+            if key != "abstract_inverted_index":
+                _reject_label_metadata(child)
     elif type(value) is list:
         for child in value:
             _reject_label_metadata(child)

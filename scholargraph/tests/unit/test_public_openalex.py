@@ -86,6 +86,14 @@ def test_mapping_and_provenance():
     assert title_only.field_provenance["landing_url"][0].raw_field == "id"
 
 
+def test_abstract_inverted_index_words_are_not_treated_as_leakage_labels():
+    row = payload()
+    row["results"] = [dict(row["results"][0], abstract_inverted_index={"labels": [0], "graph": [1]})]
+    row["meta"] = dict(row["meta"], count=1, per_page=1, next_cursor=None)
+    parsed = parse_page(body(row), retrieved_at=NOW)
+    assert parsed.records[0].abstract == "labels graph"
+
+
 @pytest.mark.parametrize("doi, expected", [
     (None, None), (" DOI: 10.1234/CASE ", "10.1234/case"),
     ("https://dx.doi.org/10.1234/Case", "10.1234/case"),
