@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "executor": "COORDINATOR",
+  "code_commit": "66264a7",
+  "scope": "Exact documented export helper in fresh isolated initialized empty store; no network; includes missing config/overwrite refusal. Demo snippet syntax only, not a new server run.",
+  "rows": [
+    {
+      "args": [
+        "scripts/search_public.py",
+        "init-storage"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 56,
+      "stdout_sha256": "fb154e8932fdcf86a7d3f258abd57eb99e95ceb657e5a7cb8a7365e7ee5f459c",
+      "stderr_bytes": 0
+    },
+    {
+      "args": [
+        "scripts/search_public.py",
+        "library",
+        "--offset",
+        "0",
+        "--limit",
+        "50"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 60,
+      "stdout_sha256": "c02d83db4895e61f657ea24a704adf7ee9e3bf3a2ddb7dd03d6a4eacf905fc52",
+      "stderr_bytes": 0
+    },
+    {
+      "args": [
+        "export_helper.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "args": [
+        "export_helper.py"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 296
+    },
+    {
+      "args": [
+        "scripts/search_public.py",
+        "--config",
+        "configs/khong_ton_tai.json",
+        "library"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 283
+    },
+    {
+      "args": [
+        "scripts/search_public.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 380,
+      "stdout_sha256": "d4fbfd491a940b3da95df1b43b3368e7f1b0a5ec32836c227da52b28e109d4c5",
+      "stderr_bytes": 0
+    }
+  ],
+  "outputs": [
+    {
+      "name": "library.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "name": "library.bib",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "helper_sha256": "224196ec0d44973434fab1daddbcedd9af3cb41370f1130cf9ac69ee7d9be197",
+  "demo_snippet_compile": "PASS",
+  "fresh_dependency_install": "NOT_RUN",
+  "temp_project": ".tmp/ext08-command-105"
+}
