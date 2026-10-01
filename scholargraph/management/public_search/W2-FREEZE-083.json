@@ -23,7 +23,7 @@
     "sol_adversarial_probe": {"passed": 7, "failed": 0, "exit_code": 0, "evidence_local": "data/public_search/control/w2-083/sol-ui-probe.log"},
     "muse_independent_probes": {"passed": 130, "failed": 0, "exit_code": 0, "evidence": "management/public_search/reviews/MUSE/probes-ui-r5-083/"},
     "w2_combined_suite": {"passed": 446, "failed": 0, "exit_code": 0, "duration_seconds": 68.43, "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"},
-    "core_checker": {"passed": true, "exit_code": 0, "task_count": 53, "markdown_links": 497}
+    "core_checker": {"passed": true, "exit_code": 0, "task_count": 53, "markdown_links": 500}
   },
   "sha256": {
     "ui/static/public_search.js": "bfa2649da7bbf22507d389a8bc341a8eabf3e2778f4ed23860c6d6d7f4f2b0e5",

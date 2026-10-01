@@ -52,7 +52,7 @@
     "core_checker": {
       "exit_code": 0,
       "task_count": 53,
-      "markdown_links": 497
+      "markdown_links": 500
     },
     "w1_combined_tests": {
       "passed": 362,

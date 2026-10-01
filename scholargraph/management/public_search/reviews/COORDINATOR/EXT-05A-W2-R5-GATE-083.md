@@ -14,7 +14,7 @@
 - SOL adversarial probe: **7 passed, 0 failed, exit 0**, log `data/public_search/control/w2-083/sol-ui-probe.log`.
 - MUSE independent probes: **130/130**, `management/public_search/reviews/MUSE/probes-ui-r5-083/`.
 - W2 parent combined suite (UI + fusion + frozen contracts/transport/adapters/store/export): **446 passed, 0 failed, exit 0**, log `data/public_search/control/w2-083/parent-w2-combined.log`.
-- Core checker: exit 0, 53 tasks, 497 Markdown links.
+- Core checker: exit 0, 53 tasks, 500 Markdown links.
 
 ## Scope and limitations
 
