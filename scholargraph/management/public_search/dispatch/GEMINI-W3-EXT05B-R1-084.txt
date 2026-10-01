@@ -1,0 +1,32 @@
+Bạn là GEMINI reviewer fresh-context cho EXT-05B/W3 trong ScholarGraph. Đây là review độc lập trên immutable target, không sửa implementation.
+
+Target parent checkout: D:/Web_mining_20261/scholargraph
+Target HEAD: b304bf4 (exact SOL delivery imported from 66aad9b)
+Requested model: gemini-3.8-flash-high, reasoning high. Ghi actual runtime nếu quan sát được; không coi prompt là bằng chứng runtime.
+
+Đọc AGENTS.md, management/public_search/state.json, HANDOFF.md, tasks.json, DECISIONS.md, docs/PUBLIC_PAPER_SEARCH_TASKS.md EXT-05B, docs/public_search/CONTRACT.md, W1/W2 freeze manifests. Đọc packet/log SOL EXT-05B-W3-084. Không sửa board/state/HANDOFF hay source implementation.
+
+Review target owned by SOL:
+- src/scholargraph/public_search/service.py
+- src/scholargraph/api/public_routes.py
+- src/scholargraph/api/app.py additive router
+- scripts/search_public.py
+- tests/unit/test_public_service.py
+- tests/integration/test_public_routes.py
+- tests/integration/test_public_cli.py
+- configs/public_search.json (verify only)
+
+Review criteria:
+1. Config/auth/source-policy/resource/schema failures are explicit; no silent fallback or swallowed errors. Shared deadline/transport and bounded fan-out. Partial source failure must be non-2xx and preserve snapshot evidence; refresh bypasses cache and refresh failure never returns stale success.
+2. Store lifecycle uses explicit init-storage/initialize_store; normal service uses open_existing; missing/corrupt/evidence DB must fail without rebuild; init must not read offline corpus/labels.
+3. Search/results/library/export routes and CLI use contract 1.0.0 consistently; CLI valid empty exit 0, invalid/missing/partial failure exit 1; subprocess stderr has no traceback or secret. Library/export never call network.
+4. Adversarial tests must cover missing config/auth/policy, malformed source, missing/corrupt store, TTL refresh, mixed truth table and CLI exit behavior. Check leakage and exact envelope truth table.
+5. Do not claim live upstream success; synthetic fixtures are synthetic. Run the focused suite and bounded negative probes yourself in target checkout. Preserve any failing command as evidence.
+
+Write only:
+- management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md
+- management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md
+- optional probe artifacts under management/public_search/reviews/GEMINI/probes-ext05b-r1-084/
+Do not patch code. Report base/target SHA, commands, counts, exit codes, findings with severity/path/line/evidence/expected/actual, not-run and limitations. Verdict exactly PASS, CHANGES_REQUIRED, or INSUFFICIENT_EVIDENCE. If a contract mismatch requires change, stop and report it; do not modify contract.
+
+Dispatch time: 2026-10-01T09:42:00+07:00. Fresh context is required; do not reuse prior EXT-05A review evidence.

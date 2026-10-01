@@ -1,10 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T09:14:20+07:00",
-  "stage": "w3_ext05b_in_progress",
-  "active_tasks": [
-    "EXT-05B"
-  ],
+  "updated_at": "2026-10-01T09:42:40+07:00",
+  "stage": "w3_ext05b_review",
+  "active_tasks": [],
   "authorized_tasks": [
     "EXT-01A",
     "EXT-01B",
@@ -17,12 +15,12 @@
     "EXT-05B"
   ],
   "next_steps": {
-    "COORDINATOR": "Theo dõi SOL EXT-05B; chỉ chuyển REVIEW sau packet/commit immutable; sau đó giao GEMINI fresh review; chưa mở EXT-06",
-    "SOL": "Đang triển khai EXT-05B service/routes/app/CLI trong checkout riêng, reasoning high",
-    "GEMINI": "Chờ target EXT-05B immutable để fresh review high",
-    "MUSE": "Idle sau EXT-05A R5 PASS; chưa giao EXT-06"
+    "COORDINATOR": "Gemini đang review fresh EXT-05B target b304bf4; giữ target immutable; sau verdict mới gate",
+    "SOL": "Delivery 66aad9b đã nhập parent; author thread dừng vì usage limit, không còn quyền sửa target",
+    "GEMINI": "Đang fresh review EXT-05B, chỉ ghi report/log/probes",
+    "MUSE": "Idle sau EXT-05A R5 PASS; EXT-06 chưa mở"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-085-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-086-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -106,7 +104,19 @@
   "pause_after_current_round": false,
   "pause_requested_at": "2026-09-30T09:12:28.966462+07:00",
   "pause_scope": "Usercontinue revokespriorpause; currentW1roundcompleted, noautomaticpause",
-  "active_review_assignments": [],
+  "active_review_assignments": [
+    {
+      "task_id": "EXT-05B",
+      "reviewer": "GEMINI",
+      "dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
+      "session_id": 24435,
+      "target_head": "b304bf4",
+      "status": "RUNNING",
+      "model_requested": "gemini-3.8-flash-high",
+      "reasoning_effort_requested": "high",
+      "runtime_model_observed": null
+    }
+  ],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/W2-FINISH-083.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
@@ -115,31 +125,7 @@
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
-  "active_assignments": [
-    {
-      "task_id": "EXT-05B",
-      "owner": "SOL",
-      "dispatch_id": "DISPATCH-W3-084-SOL",
-      "session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
-      "claimed_paths": [
-        "src/scholargraph/public_search/service.py",
-        "src/scholargraph/api/public_routes.py",
-        "src/scholargraph/api/app.py",
-        "scripts/search_public.py",
-        "configs/public_search.json",
-        "tests/unit/test_public_service.py",
-        "tests/integration/test_public_routes.py",
-        "tests/integration/test_public_cli.py",
-        "management/public_search/logs/SOL/EXT-05B-W3-084.md",
-        "management/public_search/packets/SOL/EXT-05B-W3-084.md"
-      ],
-      "input_head": "749baf104b33058aa1128a985aa40c2f7584b88d",
-      "model_requested": "gpt-6.1-sol",
-      "reasoning_effort_requested": "high",
-      "runtime_model_observed": null,
-      "status": "RUNNING"
-    }
-  ],
+  "active_assignments": [],
   "w1_freeze": {
     "manifest": "management/public_search/W1-FREEZE-081.json",
     "accepted_at": "2026-09-30T16:55:10.814044+07:00"

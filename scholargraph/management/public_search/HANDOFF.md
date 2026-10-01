@@ -1,3 +1,10 @@
+# W3 084 — EXT-05B chuyển REVIEW, GEMINI đang review fresh (2026-10-01T09:42:40+07:00)
+
+- SOL delivery `66aad9b0751bad10ef7222685977f6c03d0ab5a3` đã nhập parent tại `b304bf4`; packet/log và 451-test evidence tồn tại.
+- SOL app thread dừng do usage limit sau implementation trước closeout; coordinator đã hoàn thiện boundary fixes/test/packet trong checkout cô lập và ghi rõ limitation, không coi runtime model là đã xác minh.
+- Gemini fresh review đang chạy qua runner exec `24435`, target immutable `b304bf4`, requested `gemini-3.8-flash-high/high`; dispatch `management/public_search/dispatch/GEMINI-W3-EXT05B-R1-084.txt`. Chỉ report/log/probes được ghi.
+- Chưa mở EXT-06 và chưa đổi DONE. Bước kế tiếp: nhận verdict Gemini, kiểm report/probes, chạy gate coordinator; nếu PASS mới chuyển DONE.
+
 # W3 084 — EXT-05B đang được SOL triển khai (2026-10-01T09:14:20+07:00)
 
 - User đã giao tiếp tục sau W2 freeze; coordinator mở EXT-05B, chưa mở EXT-06.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T09:14:20+07:00",
+  "updated_at": "2026-10-01T09:42:40+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -538,7 +538,7 @@
     {
       "id": "EXT-05B",
       "title": "Service, routes, CLI và tích hợp ứng dụng",
-      "status": "IN_PROGRESS",
+      "status": "REVIEW",
       "proposed_owner": "SOL",
       "proposed_reviewer": "GEMINI",
       "dependencies": [
@@ -546,7 +546,18 @@
         "EXT-04B"
       ],
       "session_id": "DISPATCH-W3-084-SOL",
-      "evidence": [],
+      "evidence": [
+        "management/public_search/dispatch/SOL-W3-EXT05B-084.txt",
+        "src/scholargraph/public_search/service.py",
+        "src/scholargraph/api/public_routes.py",
+        "src/scholargraph/api/app.py",
+        "scripts/search_public.py",
+        "tests/unit/test_public_service.py",
+        "tests/integration/test_public_routes.py",
+        "tests/integration/test_public_cli.py",
+        "management/public_search/packets/SOL/EXT-05B-W3-084.md",
+        "management/public_search/logs/SOL/EXT-05B-W3-084.md"
+      ],
       "owner": "SOL",
       "dispatch_id": "DISPATCH-W3-084-SOL",
       "dispatch_file": "management/public_search/dispatch/SOL-W3-EXT05B-084.txt",
@@ -563,17 +574,40 @@
         "management/public_search/packets/SOL/EXT-05B-W3-084.md"
       ],
       "input_head": "749baf104b33058aa1128a985aa40c2f7584b88d",
-      "author_execution_session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
+      "author_execution_session_id": "01a0f53c-c138-7a53-b2c1-57fad4e48b5a",
       "runtime": {
         "session_id": "01a0efcc-2062-7d01-b687-10d249b56cbe",
         "model_requested": "gpt-6.1-sol",
         "reasoning_effort_requested": "high",
         "runtime_model_observed": null
       },
-      "dispatch_state": "author_active",
+      "dispatch_state": "author_delivery_review_in_progress",
       "review_verdict": null,
       "unresolved_findings": [],
-      "next_action": "SOL triển khai và bàn giao immutable; sau đó Gemini fresh review"
+      "next_action": "GEMINI fresh review immutable target; coordinator giữ code không sửa",
+      "delivered_head": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
+      "author_execution_status": "FAILED_USAGE_LIMIT_AFTER_IMPLEMENTATION_BEFORE_COMMIT_CLOSEOUT",
+      "coordinator_takeover": true,
+      "verification": {
+        "public_search_tests": {
+          "passed": 451,
+          "failed": 0,
+          "exit_code": 0,
+          "evidence_local": "checkout .worktrees/public-sol/scholargraph; imported exact to parent"
+        },
+        "focused_new_tests": {
+          "passed": 21,
+          "failed": 0,
+          "exit_code": 0
+        },
+        "base_head": {
+          "base": "791bb8c43faa96c0b2161080ab89fe93e1a6b6e1",
+          "delivery": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
+          "parent": "b304bf4"
+        }
+      },
+      "review_dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
+      "review_dispatch_file": "management/public_search/dispatch/GEMINI-W3-EXT05B-R1-084.txt"
     },
     {
       "id": "EXT-06",
@@ -752,6 +786,25 @@
         "tests/integration/test_public_routes.py",
         "tests/integration/test_public_cli.py"
       ]
+    },
+    {
+      "session_id": "DISPATCH-W3-084-GEMINI-R1",
+      "kind": "coordinator_dispatch_fresh_review",
+      "issued_at": "2026-10-01T09:42:40+07:00",
+      "worker": "GEMINI",
+      "task_id": "EXT-05B",
+      "status": "RUNNING",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-W3-084-GEMINI.md",
+      "actual_model": null,
+      "worker_execution_session_id": 24435,
+      "model_requested": "gemini-3.8-flash-high",
+      "reasoning_effort_requested": "high",
+      "target_head": "b304bf4",
+      "claimed_paths": [
+        "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/reviews/GEMINI/probes-ext05b-r1-084/"
+      ]
     }
   ],
   "current_round_assignments": [
@@ -858,7 +911,26 @@
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
   "resumed_from": "paused_after_w0_r1_by_user",
   "pause_reason": "Prior pause revoked by user continue",
-  "active_review_assignments": [],
+  "active_review_assignments": [
+    {
+      "task_id": "EXT-05B",
+      "reviewer": "GEMINI",
+      "dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
+      "session_id": 24435,
+      "started_at": "2026-10-01T09:42:40+07:00",
+      "target_head": "b304bf4",
+      "target_delivery": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
+      "review_paths": [
+        "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/reviews/GEMINI/probes-ext05b-r1-084/"
+      ],
+      "model_requested": "gemini-3.8-flash-high",
+      "reasoning_effort_requested": "high",
+      "runtime_model_observed": null,
+      "status": "RUNNING"
+    }
+  ],
   "round_closeout": {
     "round": "W1",
     "closed_at": "2026-09-30T16:55:10.814044+07:00",
