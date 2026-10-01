@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T09:42:40+07:00",
+  "updated_at": "2026-10-01T09:47:30+07:00",
   "branch": "codex/public-paper-search",
   "mode": "w2_authoring",
   "coordinator": "current_chat_extension_only",
@@ -584,7 +584,7 @@
       "dispatch_state": "author_delivery_review_in_progress",
       "review_verdict": null,
       "unresolved_findings": [],
-      "next_action": "GEMINI fresh review immutable target; coordinator giữ code không sửa",
+      "next_action": "Fresh fallback reviewer SOL high đang review; verdict chưa có",
       "delivered_head": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
       "author_execution_status": "FAILED_USAGE_LIMIT_AFTER_IMPLEMENTATION_BEFORE_COMMIT_CLOSEOUT",
       "coordinator_takeover": true,
@@ -606,8 +606,24 @@
           "parent": "b304bf4"
         }
       },
-      "review_dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
-      "review_dispatch_file": "management/public_search/dispatch/GEMINI-W3-EXT05B-R1-084.txt"
+      "review_dispatch_id": "DISPATCH-W3-084-FRESH-FALLBACK",
+      "review_dispatch_file": "management/public_search/dispatch/FRESH-FALLBACK-EXT05B-R1-084.txt",
+      "review_attempts": [
+        {
+          "dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
+          "worker": "GEMINI",
+          "runner_exec_session": 24435,
+          "status": "FAILED_REQUIRED_ACTION_DENIED",
+          "evidence": "data/public_search/control/runs/73924792-28d4-4df3-8d48-934ab2f80761/summary.json"
+        },
+        {
+          "dispatch_id": "DISPATCH-W3-084-FRESH-FALLBACK",
+          "worker": "SOL_FRESH_FALLBACK",
+          "agent": "/root/review_ext05b_fresh",
+          "status": "RUNNING",
+          "reason": "Gemini Antigravity denied before report; independent fresh review needed"
+        }
+      ]
     },
     {
       "id": "EXT-06",
@@ -805,6 +821,23 @@
         "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
         "management/public_search/reviews/GEMINI/probes-ext05b-r1-084/"
       ]
+    },
+    {
+      "session_id": "DISPATCH-W3-084-FRESH-FALLBACK",
+      "kind": "coordinator_dispatch_fresh_review_fallback",
+      "issued_at": "2026-10-01T09:47:30+07:00",
+      "worker": "SOL_FRESH_FALLBACK",
+      "task_id": "EXT-05B",
+      "status": "RUNNING",
+      "log_path": "management/public_search/logs/COORDINATOR/DISPATCH-W3-084-FRESH-FALLBACK.md",
+      "actual_model": "gpt-6.1-sol",
+      "reasoning_effort_requested": "high",
+      "target_head": "b304bf4",
+      "claimed_paths": [
+        "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
+        "management/public_search/reviews/GEMINI/probes-ext05b-r1-084/"
+      ]
     }
   ],
   "current_round_assignments": [
@@ -914,10 +947,10 @@
   "active_review_assignments": [
     {
       "task_id": "EXT-05B",
-      "reviewer": "GEMINI",
-      "dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
-      "session_id": 24435,
-      "started_at": "2026-10-01T09:42:40+07:00",
+      "reviewer": "SOL_FRESH_FALLBACK",
+      "dispatch_id": "DISPATCH-W3-084-FRESH-FALLBACK",
+      "agent": "/root/review_ext05b_fresh",
+      "started_at": "2026-10-01T09:47:30+07:00",
       "target_head": "b304bf4",
       "target_delivery": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
       "review_paths": [
@@ -925,10 +958,11 @@
         "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
         "management/public_search/reviews/GEMINI/probes-ext05b-r1-084/"
       ],
-      "model_requested": "gemini-3.8-flash-high",
+      "model_requested": "gpt-6.1-sol",
       "reasoning_effort_requested": "high",
-      "runtime_model_observed": null,
-      "status": "RUNNING"
+      "runtime_model_observed": "gpt-6.1-sol",
+      "status": "RUNNING",
+      "fallback_from": "GEMINI required-action denied"
     }
   ],
   "round_closeout": {

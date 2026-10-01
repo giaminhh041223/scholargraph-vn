@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T09:42:40+07:00",
+  "updated_at": "2026-10-01T09:47:30+07:00",
   "stage": "w3_ext05b_review",
   "active_tasks": [],
   "authorized_tasks": [
@@ -15,12 +15,12 @@
     "EXT-05B"
   ],
   "next_steps": {
-    "COORDINATOR": "Gemini đang review fresh EXT-05B target b304bf4; giữ target immutable; sau verdict mới gate",
+    "COORDINATOR": "Gemini Antigravity attempt failed before report; fresh SOL high fallback reviewer đang kiểm target b304bf4; giữ REVIEW",
     "SOL": "Delivery 66aad9b đã nhập parent; author thread dừng vì usage limit, không còn quyền sửa target",
     "GEMINI": "Đang fresh review EXT-05B, chỉ ghi report/log/probes",
     "MUSE": "Idle sau EXT-05A R5 PASS; EXT-06 chưa mở"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-086-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-087-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -107,14 +107,14 @@
   "active_review_assignments": [
     {
       "task_id": "EXT-05B",
-      "reviewer": "GEMINI",
-      "dispatch_id": "DISPATCH-W3-084-GEMINI-R1",
-      "session_id": 24435,
+      "reviewer": "SOL_FRESH_FALLBACK",
+      "dispatch_id": "DISPATCH-W3-084-FRESH-FALLBACK",
+      "agent": "/root/review_ext05b_fresh",
       "target_head": "b304bf4",
       "status": "RUNNING",
-      "model_requested": "gemini-3.8-flash-high",
+      "model_requested": "gpt-6.1-sol",
       "reasoning_effort_requested": "high",
-      "runtime_model_observed": null
+      "fallback_from": "GEMINI required-action denied"
     }
   ],
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
@@ -148,5 +148,6 @@
       "EXT-04B",
       "EXT-05A"
     ]
-  }
+  },
+  "GEMINI": "Antigravity runner bị từ chối trước report; không có verdict"
 }

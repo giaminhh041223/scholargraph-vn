@@ -1,0 +1,1 @@
+Fresh review fallback dispatch for EXT-05B. Original Gemini runner exec 24435 failed with required-action denial before report. Target immutable b304bf4. Reviewer /root/review_ext05b_fresh; requested gpt-6.1-sol/high. Review only; no implementation or board edits.

@@ -1,3 +1,9 @@
+# W3 084 — fallback fresh review đang chạy (2026-10-01T09:47:30+07:00)
+
+- Gemini Antigravity runner exec 24435 bị `required action denied` trước khi tạo report; run summary đã lưu, không có PASS.
+- Để không tự review, đã giao fresh fallback reviewer `/root/review_ext05b_fresh` bằng gpt-6.1-sol/high; target immutable `b304bf4`; chỉ ghi review/log/probes trong namespace GEMINI và phải ghi rõ model fallback.
+- EXT-05B vẫn REVIEW; EXT-06 chưa mở.
+
 # W3 084 — EXT-05B chuyển REVIEW, GEMINI đang review fresh (2026-10-01T09:42:40+07:00)
 
 - SOL delivery `66aad9b0751bad10ef7222685977f6c03d0ab5a3` đã nhập parent tại `b304bf4`; packet/log và 451-test evidence tồn tại.
