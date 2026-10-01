@@ -1,0 +1,8 @@
+{
+  "status": "INSUFFICIENT_EVIDENCE",
+  "kind": "required_resource",
+  "message": "manifest is missing",
+  "exit_code": 1,
+  "executor": "COORDINATOR",
+  "capture": "Recorded from actual verifier command output during setup104; verifier did not save a report before safe output validation."
+}

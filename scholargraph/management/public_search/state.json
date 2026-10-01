@@ -1,11 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01T13:52:04.795523+07:00",
-  "stage": "w5_snapshot_prepared",
+  "updated_at": "2026-10-01T14:33:03.915243+07:00",
+  "stage": "w6_documentation",
   "active_tasks": [
-    "EXT-07S",
-    "EXT-07G",
-    "EXT-07M"
+    "EXT-08"
   ],
   "authorized_tasks": [
     "EXT-01A",
@@ -24,12 +22,11 @@
     "EXT-08"
   ],
   "next_steps": {
-    "COORDINATOR": "Pin immutable snapshot, dispatch native MUSE/GEMINI + fresh SOL audit; browser exports unresolved",
-    "SOL": "EXT-07G arxiv/UI fresh audit high",
-    "GEMINI": "EXT-07M storage/evidence native high; terminal NOT_RUN if denied",
-    "MUSE": "EXT-07S backend audit native xhigh"
+    "GEMINI": "Write EXT08 three docs file-only; no production changes",
+    "MUSE": "Review docs after immutable delivery",
+    "COORDINATOR": "Check docs/commands and final human checklist"
   },
-  "last_session_log": "management/public_search/logs/SESSION-20261001-101-CODEX.md",
+  "last_session_log": "management/public_search/logs/SESSION-20261001-104-CODEX.md",
   "worker_execution_observed": true,
   "last_verification": {
     "checked_at": "2026-10-01T09:15:00+07:00",
@@ -108,6 +105,17 @@
       "failed": 0,
       "exit_code": 0,
       "evidence_local": "data/public_search/control/w2-083/parent-ui-node.log"
+    },
+    "w5_final": {
+      "report": "artifacts/reports/public_search/sol/regression-w5-104.json",
+      "passed": 630,
+      "failed": 0,
+      "exit_code": 0,
+      "core_freeze_files": 33,
+      "verifier": "artifacts/reports/public_search/muse/validation-w5-104.json",
+      "verifier_exit_code": 0,
+      "adversarial": 7,
+      "code_commit": "66264a7"
     }
   },
   "pause_after_current_round": false,
@@ -117,24 +125,19 @@
   "paused_at": "2026-09-30T11:32:14.507259+07:00",
   "gate_report": "management/public_search/reviews/COORDINATOR/EXT-06-W4-GATE-100.md",
   "resumed_at": "2026-09-30T13:26:34.697333+07:00",
-  "next_task_id": "EXT-07S",
+  "next_task_id": "EXT-08",
   "w0_freeze": {
     "accepted_at": "2026-09-30T13:40:28.824876+07:00",
     "manifest": "management/public_search/W0-FREEZE-081.json"
   },
   "active_assignments": [
     {
-      "task_id": "EXT-05A-LIBRARY-DELTA",
+      "task_id": "EXT-08",
       "owner": "GEMINI_NATIVE",
-      "status": "RUNNING",
-      "runner_exec_session": 68532,
+      "status": "DISPATCH_READY",
       "model_requested": "gemini-3.8-flash-high",
       "effort_requested": "high",
-      "dispatch_file": "management/public_search/dispatch/GEMINI-UI-LIBRARY-FIX-101.txt",
-      "claimed_paths": [
-        ".worktrees/public-gemini/scholargraph/ui/static/public_search.js",
-        ".worktrees/public-gemini/scholargraph/tests/fixtures/public_search/gemini/ui/"
-      ]
+      "session_id": "72a98e4d-a715-430f-914f-de71cd20481f"
     }
   ],
   "w1_freeze": {
@@ -163,7 +166,7 @@
   "GEMINI": "Antigravity runner bị từ chối trước report; không có verdict",
   "final_release_gate": {
     "status": "PENDING",
-    "two_source_operational": "FAIL",
+    "two_source_operational": "PASS_RECOVERY_COHORT",
     "human_demo": "PENDING",
     "scope_change_to_one_source": false
   }

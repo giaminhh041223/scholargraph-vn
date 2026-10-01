@@ -1,3 +1,11 @@
+# Checkpoint104 — W5 DONE, EXT08 đang làm
+
+630 regression PASS; verifier7PASS,33 core hashes giữ nguyên. Ba audit và third-check đóng; xem [gate104](reviews/COORDINATOR/EXT-07-W5-GATE-104.md). EXT08 Gemini file-only author→Muse narrative review→coordinator đóng packet. Preview localhost8011 đã restart code66264a7. Human demo/download file PENDING; cacheP95 0.567s vượt proposal;6 historical failures giữ nguyên. Không merge master, không mở EXT09/10.
+
+# W5 checkpoint103 — fixes/re-review
+
+UI6a5d4e1fixed3SOLfindings,25testsPASS; backendSOLfix103activeforMUSEelapsedNone/CLIexit2findings. Gemini125tests+corruptDBPASSexecutedbycoordinator, R3nativependingthirdcheck. NativeMUSEfileonlyreportfollowup. Nextcollect/pinbackendfix→MUSErerun/crossreports→3auditDONE→EXT08docs. HumanPENDING; cacheP95.567sproposalnotmet; historicalfailuresretained. Localdemo127.0.0.1:8011keptforhuman, browserdownloadfileproofNOT_RUN.
+
 # Checkpoint W5 — UI fix + recovery102
 
 Targeted routes/UI24PASS. Gemini file-only delivery nhập và coordinator sửa serializer sources/error/harness/UTF8. Recovery102 verifierPASS,10successful two-source runs; cacheP950.567s chưa đạt500ms. History6FAIL giữ nguyên. Bước kế tiếp: pin commit và giao 3 audit EXT07 trên cùng snapshot; browser export download timeout cần kiểm. Human demoPENDING. Server127.0.0.1:8011 PID11128, pilotstore riêng.

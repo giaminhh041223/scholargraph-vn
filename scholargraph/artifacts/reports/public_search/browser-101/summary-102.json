@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "method": "real localhost API read-only export; not browser download proof",
+  "entries": 6,
+  "exports": {
+    "json": {
+      "status": 200,
+      "bytes": 52353,
+      "sha256": "3d6df2f6fd0c7c71365321c16c64ffcabf21f1a52bbbc5d38e206fd1a08a1d5b",
+      "path": "artifacts/reports/public_search/browser-101/library-api-102.json"
+    },
+    "bibtex": {
+      "status": 200,
+      "bytes": 4628,
+      "sha256": "9d78dafc61711a21538e40984e9c08b71e82b78e3805de649a0f70cede59e9b5",
+      "path": "artifacts/reports/public_search/browser-101/library-api-102.bib"
+    }
+  },
+  "browser": "5 approved queries cached both sources, save/list6entries and export success banners observed; download event timed out in tool; saved file not independently confirmed",
+  "screenshots": [
+    "artifacts/reports/public_search/browser-101/library-success.jpg",
+    "artifacts/reports/public_search/browser-101/two-source-success.jpg"
+  ],
+  "human_demo": "PENDING"
+}

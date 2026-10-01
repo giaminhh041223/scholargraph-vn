@@ -1,0 +1,9 @@
+# W5 audit/fix/checkpoint103
+
+- Pin7726c83; SOL freshaudit EXT07G102 CHANGES_REQUIRED3findings. Rootfix6a5d4e1,25targetedPASS, SOLR2rerun12independentcasesPASS reported; report pendingclosure.
+- Gemini native initialRunCommanddenied, fileonly R1 probeImportError SearchResultRecord wrongAPI; notproductbug. R2 runner actual coordinator125pytestPASS74.75s+independentcorruptDBPASS/CLI0. R3 requested removeunmeasuredlatencycausalclaim; no inprocess/startupdecomposition measurement. OldR1/R2 preserved.
+- NativeMUSE runner47e769...FAILtoolpermission readrootAGENTS/write.tmp denied. Actualsomeallowedtestcommands completed; workertextreported F01elapsedNone fallback violatesattemptedcontract, F02argparseexit2. SOL authorfix103 nowrunning. FileonlyMUSEreportfollowup same session ongoing, no permission expansion/bypass.
+- Browser five approved queries bothsourcescachedPASS; save/list6entries (oldcohort5+1arxiv). ExportJSON/BibTeXUIbanner success, NodeBlob1click/revoke independentlyverifiedSOL; filedownloadproofNOT_RUN dueCUAdownloadeventtimeout. ActuallocalhostAPI exports200/6entries bytes52353+4628/hash in browser-101/summary-102.json. Eight CLI documentation commandsPASS including tempinit/library and missingconfigCLI1; firsthelperbad data_root.tmp rejectedCLI1, corrected isolatedprojecttmp notproductbug.
+- Recovery102current10two-source successes, oldhistory26=20success6partialFAIL; readiness101separate. CacheP95.5674156s>500msproposal retained; no sustainedavailability orrelevanceclaim. Operationalgateawaitsthreeauditclosure; humanPENDING.
+- check_project.ps1 PASS53tasks509links; mainboardunchangedpendingSG030/033.
+- Next executable: collectSOLbackendfix+nativeMUSEreport; rootpinfix; MUSEre-review+crossreportchecks; EXT08 onlyafterall3auditsDONE; packagehumanchecklist, nevermergemasterwithoutactualdemoapproval.

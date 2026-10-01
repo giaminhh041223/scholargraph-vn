@@ -1,0 +1,52 @@
+[
+  {
+    "query": "knowledge graph",
+    "snapshot": "Snapshot #ps-1039af03e9134d119997804398d8bade · Thu thập: 2026-10-01T06:38:27.400037Z · Hết hạn: 2026-10-02T06:38:27.400037Zcached_fresh",
+    "sources": "arXivsuccessSố bài: 3 · Thời gian: 0.91s · Lọc: noneOpenAlexsuccessSố bài: 3 · Thời gian: 1.55s · Lọc: none",
+    "titles": [
+      "Knowledge Graph Embedding by Translating on Hyperplanes",
+      "A Multi-Agent System for Semantic Mapping of Relational Data to Knowledge Graphs",
+      "Learning Entity and Relation Embeddings for Knowledge Graph Completion"
+    ]
+  },
+  {
+    "query": "graph neural network",
+    "snapshot": "Snapshot #ps-fcb42fee9f1c46a9806fd1b38c9e64d2 · Thu thập: 2026-10-01T06:38:30.301192Z · Hết hạn: 2026-10-02T06:38:30.301192Zcached_fresh",
+    "sources": "arXivsuccessSố bài: 3 · Thời gian: 0.98s · Lọc: noneOpenAlexsuccessSố bài: 3 · Thời gian: 1.33s · Lọc: none",
+    "titles": [
+      "The Graph Neural Network Model",
+      "A Tutorial about Random Neural Networks in Supervised Learning",
+      "Learning Universal Graph Neural Network Embeddings With Aid Of Transfer Learning"
+    ]
+  },
+  {
+    "query": "information retrieval",
+    "snapshot": "Snapshot #ps-f12ee2a270f14828ad14f6322b5400b2 · Thu thập: 2026-10-01T06:38:33.237667Z · Hết hạn: 2026-10-02T06:38:33.237667Zcached_fresh",
+    "sources": "arXivsuccessSố bài: 3 · Thời gian: 0.88s · Lọc: noneOpenAlexsuccessSố bài: 3 · Thời gian: 1.41s · Lọc: none",
+    "titles": [
+      "Lightweight and Direct Document Relevance Optimization for Generative Information Retrieval",
+      "Introduction to information retrieval",
+      "Overcoming low-utility facets for complex answer retrieval"
+    ]
+  },
+  {
+    "query": "scientific document search",
+    "snapshot": "Snapshot #ps-07263e1fecd3416ea1bf4fedccbe55fe · Thu thập: 2026-10-01T06:38:36.562455Z · Hết hạn: 2026-10-02T06:38:36.562455Zcached_fresh",
+    "sources": "arXivsuccessSố bài: 3 · Thời gian: 0.97s · Lọc: noneOpenAlexsuccessSố bài: 3 · Thời gian: 1.76s · Lọc: none",
+    "titles": [
+      "IPPOG : Bridging the gap between science education at school and modern scientific research",
+      "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+      "Acronym Identification and Disambiguation Shared Tasks for Scientific Document Understanding"
+    ]
+  },
+  {
+    "query": "Vietnamese natural language processing",
+    "snapshot": "Snapshot #ps-b76211560ff645a08472407c0d4bda15 · Thu thập: 2026-10-01T06:38:39.480750Z · Hết hạn: 2026-10-02T06:38:39.480750Zcached_fresh",
+    "sources": "arXivsuccessSố bài: 3 · Thời gian: 1.08s · Lọc: noneOpenAlexsuccessSố bài: 3 · Thời gian: 1.50s · Lọc: none",
+    "titles": [
+      "An Open Natural Language Processing Development Framework for EHR-based Clinical Research: A case demonstration using the National COVID Cohort Collaborative (N3C)",
+      "VnCoreNLP: A Vietnamese Natural Language Processing Toolkit",
+      "A Comprehensive Review of State-of-The-Art Methods for Java Code Generation from Natural Language Text"
+    ]
+  }
+]

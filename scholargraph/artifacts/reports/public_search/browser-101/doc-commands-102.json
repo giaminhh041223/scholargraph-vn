@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "d4fbfd491a940b3da95df1b43b3368e7f1b0a5ec32836c227da52b28e109d4c5",
+      "bytes": 380
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph\\.tmp\\ext08-command-6935jboe",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\.tmp\\ext08-command-6935jboe\\config.json",
+        "init-storage"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "fb154e8932fdcf86a7d3f258abd57eb99e95ceb657e5a7cb8a7365e7ee5f459c",
+      "bytes": 56
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "D:\\Web_mining_20261\\scholargraph\\scripts\\search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph\\.tmp\\ext08-command-6935jboe",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\.tmp\\ext08-command-6935jboe\\config.json",
+        "library"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c02d83db4895e61f657ea24a704adf7ee9e3bf3a2ddb7dd03d6a4eacf905fc52",
+      "bytes": 60
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "D:\\Web_mining_20261\\scholargraph\\.tmp\\ext08-command-6935jboe\\missing.json",
+        "library"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "data/public_search/muse/pilot_ext06/config.json",
+        "library"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "de6535420aaf00eba5fe9cdb5134e3c57f4eb6ffcb9ba2363d9a16d9aaa3afc2",
+      "bytes": 54607
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "data/public_search/muse/pilot_ext06/config.json",
+        "export",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "f9ac432bd86c91fd60b2e1aab1c8b91ae28243c1e71e55949bfd76979e76f3a4",
+      "bytes": 52355
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "data/public_search/muse/pilot_ext06/config.json",
+        "export",
+        "--format",
+        "bibtex"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "9d78dafc61711a21538e40984e9c08b71e82b78e3805de649a0f70cede59e9b5",
+      "bytes": 4628
+    },
+    {
+      "command": [
+        "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+        "scripts/search_public.py",
+        "--project-root",
+        "D:\\Web_mining_20261\\scholargraph",
+        "--config",
+        "data/public_search/muse/pilot_ext06/config.json",
+        "results",
+        "ps-1039af03e9134d119997804398d8bade"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "dfcc139cf27073eec3a8990ad41964f831b72b0ed5de4ad830bf7250418c76a3",
+      "bytes": 51746
+    }
+  ],
+  "scope": "actual CLI help/init/read-only library/export/results and missingconfig exit1; no new network"
+}

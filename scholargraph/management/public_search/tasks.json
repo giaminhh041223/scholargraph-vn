@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "scope": "public_search_extension",
-  "updated_at": "2026-10-01T13:03:56+07:00",
+  "updated_at": "2026-10-01T14:33:03.915243+07:00",
   "branch": "codex/public-paper-search",
-  "mode": "w2_authoring",
+  "mode": "w6_documentation",
   "coordinator": "current_chat_extension_only",
   "task_cards": "docs/PUBLIC_PAPER_SEARCH_TASKS.md",
   "handoff": "management/public_search/HANDOFF.md",
@@ -78,17 +78,12 @@
   },
   "active_assignments": [
     {
-      "task_id": "EXT-05A-LIBRARY-DELTA",
+      "task_id": "EXT-08",
       "owner": "GEMINI_NATIVE",
-      "status": "RUNNING",
-      "runner_exec_session": 68532,
+      "status": "DISPATCH_READY",
       "model_requested": "gemini-3.8-flash-high",
       "effort_requested": "high",
-      "dispatch_file": "management/public_search/dispatch/GEMINI-UI-LIBRARY-FIX-101.txt",
-      "claimed_paths": [
-        ".worktrees/public-gemini/scholargraph/ui/static/public_search.js",
-        ".worktrees/public-gemini/scholargraph/tests/fixtures/public_search/gemini/ui/"
-      ]
+      "session_id": "72a98e4d-a715-430f-914f-de71cd20481f"
     }
   ],
   "tasks": [
@@ -506,7 +501,11 @@
         "management/public_search/worker_packets/gemini-ui-w2-r4-packet.md",
         "management/public_search/reviews/SOL/UI-W2-AUDIT-083.md",
         "management/public_search/reviews/MUSE/EXT-05A-W2-R5-083.md",
-        "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md"
+        "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md",
+        "management/public_search/reviews/SOL/EXT-07G-W5-R2-103.md",
+        "management/public_search/reviews/MUSE/EXT-07G-CONSISTENCY-104.md",
+        "management/public_search/W5-FINAL-104.json",
+        "artifacts/reports/public_search/sol/regression-w5-104.json"
       ],
       "owner": "GEMINI",
       "dispatch_file": "management/public_search/dispatch/GEMINI-W2-082.txt",
@@ -544,10 +543,14 @@
           "evidence_local": "data/public_search/control/w2-083/parent-w2-combined.log"
         }
       },
-      "review_verdict": "PASS_fresh_MUSE_R5",
-      "completed_at": "2026-10-01T09:15:00+07:00",
+      "review_verdict": "PASS",
+      "completed_at": "2026-10-01T14:33:03.915243+07:00",
       "gate_report": "management/public_search/reviews/COORDINATOR/EXT-05A-W2-R5-GATE-083.md",
-      "fix_dispatch": "management/public_search/dispatch/GEMINI-W2-R4-FIX-083.txt"
+      "fix_dispatch": "management/public_search/dispatch/GEMINI-W2-R4-FIX-083.txt",
+      "review_target": "66264a7",
+      "reopened_reason": "EXT07G102 pagination/race/identity findings fixed; SOL re-review running",
+      "unresolved_findings": [],
+      "next_action": "W5 accepted in tested scope; human integration gate remains pending"
     },
     {
       "id": "EXT-05B",
@@ -570,7 +573,11 @@
         "tests/integration/test_public_routes.py",
         "tests/integration/test_public_cli.py",
         "management/public_search/packets/SOL/EXT-05B-W3-084.md",
-        "management/public_search/logs/SOL/EXT-05B-W3-084.md"
+        "management/public_search/logs/SOL/EXT-05B-W3-084.md",
+        "management/public_search/reviews/MUSE/EXT-07S-W5-R2-104.md",
+        "management/public_search/reviews/GEMINI/EXT-07S-CONSISTENCY-104.md",
+        "management/public_search/W5-FINAL-104.json",
+        "artifacts/reports/public_search/sol/regression-w5-104.json"
       ],
       "owner": "SOL",
       "dispatch_id": "DISPATCH-W3-084-SOL",
@@ -596,9 +603,9 @@
         "runtime_model_observed": null
       },
       "dispatch_state": "completed_reviewed_integrated",
-      "review_verdict": "PASS_fallback_independent",
+      "review_verdict": "PASS",
       "unresolved_findings": [],
-      "next_action": "EXT-06 ready; no live/pilot claim",
+      "next_action": "W5 accepted in tested scope; human integration gate remains pending",
       "delivered_head": "66aad9b0751bad10ef7222685977f6c03d0ab5a3",
       "author_execution_status": "FAILED_USAGE_LIMIT_AFTER_IMPLEMENTATION_BEFORE_COMMIT_CLOSEOUT",
       "coordinator_takeover": true,
@@ -656,7 +663,10 @@
         "management/public_search/reviews/GEMINI/EXT-05B-W3-R1-084.md",
         "management/public_search/logs/GEMINI/EXT-05B-W3-R1-084.md",
         "management/public_search/reviews/COORDINATOR/EXT-05B-W3-FINAL-GATE-084.md"
-      ]
+      ],
+      "reopened_reason": "NativeMUSE found attempted fallback elapsedNone and argparse errors exit2; author /root/fix_ext07s_103",
+      "review_target": "66264a7",
+      "completed_at": "2026-10-01T14:33:03.915243+07:00"
     },
     {
       "id": "EXT-06",
@@ -703,43 +713,81 @@
     {
       "id": "EXT-07S",
       "title": "Audit tích hợp backend của SOL",
-      "status": "TODO",
+      "status": "DONE",
       "proposed_owner": "MUSE",
       "proposed_reviewer": "GEMINI",
       "dependencies": [
         "EXT-06"
       ],
       "session_id": null,
-      "evidence": []
+      "evidence": [
+        "management/public_search/reviews/MUSE/EXT-07S-W5-R2-104.md",
+        "management/public_search/reviews/GEMINI/EXT-07S-CONSISTENCY-104.md",
+        "management/public_search/W5-FINAL-104.json",
+        "artifacts/reports/public_search/sol/regression-w5-104.json"
+      ],
+      "target_head": "7726c83",
+      "started_at": "2026-10-01T13:54:34.963123+07:00",
+      "review_verdict": "PASS",
+      "review_target": "66264a7",
+      "unresolved_findings": [],
+      "completed_at": "2026-10-01T14:33:03.915243+07:00",
+      "next_action": "W5 accepted in tested scope; human integration gate remains pending"
     },
     {
       "id": "EXT-07G",
       "title": "Audit tích hợp UI và arXiv của GEMINI",
-      "status": "TODO",
+      "status": "DONE",
       "proposed_owner": "SOL",
       "proposed_reviewer": "MUSE",
       "dependencies": [
         "EXT-06"
       ],
       "session_id": null,
-      "evidence": []
+      "evidence": [
+        "management/public_search/reviews/SOL/EXT-07G-W5-R2-103.md",
+        "management/public_search/reviews/MUSE/EXT-07G-CONSISTENCY-104.md",
+        "management/public_search/W5-FINAL-104.json",
+        "artifacts/reports/public_search/sol/regression-w5-104.json"
+      ],
+      "target_head": "7726c83",
+      "started_at": "2026-10-01T13:54:34.963123+07:00",
+      "review_verdict": "PASS",
+      "review_target": "66264a7",
+      "unresolved_findings": [],
+      "completed_at": "2026-10-01T14:33:03.915243+07:00",
+      "next_action": "W5 accepted in tested scope; human integration gate remains pending"
     },
     {
       "id": "EXT-07M",
       "title": "Audit tích hợp storage và test evidence của MUSE",
-      "status": "TODO",
+      "status": "DONE",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "SOL",
       "dependencies": [
         "EXT-06"
       ],
       "session_id": null,
-      "evidence": []
+      "evidence": [
+        "management/public_search/reviews/GEMINI/EXT-07M-W5-R3-103.md",
+        "management/public_search/reviews/SOL/EXT-07M-CONSISTENCY-103.md",
+        "management/public_search/W5-FINAL-104.json",
+        "artifacts/reports/public_search/sol/regression-w5-104.json"
+      ],
+      "target_head": "7726c83",
+      "started_at": "2026-10-01T13:54:34.963123+07:00",
+      "review_report": "management/public_search/reviews/GEMINI/EXT-07M-W5-R3-103.md",
+      "execution_evidence": "artifacts/reports/public_search/gemini/ext07m-execution-103.json",
+      "review_verdict": "PASS",
+      "review_target": "66264a7",
+      "unresolved_findings": [],
+      "completed_at": "2026-10-01T14:33:03.915243+07:00",
+      "next_action": "W5 accepted in tested scope; human integration gate remains pending"
     },
     {
       "id": "EXT-08",
       "title": "Tài liệu demo, review packet và bàn giao",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "proposed_owner": "GEMINI",
       "proposed_reviewer": "MUSE",
       "dependencies": [
@@ -747,8 +795,15 @@
         "EXT-07G",
         "EXT-07M"
       ],
-      "session_id": null,
-      "evidence": []
+      "session_id": "72a98e4d-a715-430f-914f-de71cd20481f",
+      "evidence": [],
+      "owner": "GEMINI_NATIVE",
+      "claimed_paths": [
+        "docs/public_search/USER_GUIDE.md",
+        "docs/public_search/DEMO.md",
+        "docs/public_search/RELEASE_PACKET.md"
+      ],
+      "started_at": "2026-10-01T14:33:03.915243+07:00"
     },
     {
       "id": "EXT-09",

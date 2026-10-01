@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "command": "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe -m pytest -q tests/unit/test_public_contracts.py tests/unit/test_public_transport.py tests/unit/test_public_openalex.py tests/unit/test_public_arxiv.py tests/unit/test_public_fusion.py tests/unit/test_public_store.py tests/unit/test_public_export.py tests/unit/test_public_service.py tests/unit/test_public_ui.py tests/unit/test_public_ui_paging.py tests/integration/test_public_adversarial.py tests/integration/test_public_verifier.py tests/integration/test_public_routes.py tests/integration/test_public_cli.py tests/integration/test_api.py tests/integration/test_ui.py tests/unit/test_graph_ui.py tests/unit/test_demo_export.py -p no:cacheprovider --basetemp D:\\Web_mining_20261\\scholargraph\\.tmp\\final-regression-104\\pytest",
+  "passed": 630,
+  "failed": 0,
+  "exit_code": 0,
+  "duration_seconds": 321.2840059000009,
+  "code_commit": "66264a72ff3d921b1b47200bdae311ffab932310",
+  "core_freeze_before": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "core_freeze_after": {
+    "files_checked": 33,
+    "freeze_sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "stdout_path": ".tmp/final-regression-104/stdout.log",
+  "stderr_path": ".tmp/final-regression-104/stderr.log",
+  "scope": "final public/offline API/UI/graph/export integration; synthetic network fixtures, real frozen core read-only",
+  "command_argv": [
+    "D:\\Web_mining_20261\\scholargraph\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_public_contracts.py",
+    "tests/unit/test_public_transport.py",
+    "tests/unit/test_public_openalex.py",
+    "tests/unit/test_public_arxiv.py",
+    "tests/unit/test_public_fusion.py",
+    "tests/unit/test_public_store.py",
+    "tests/unit/test_public_export.py",
+    "tests/unit/test_public_service.py",
+    "tests/unit/test_public_ui.py",
+    "tests/unit/test_public_ui_paging.py",
+    "tests/integration/test_public_adversarial.py",
+    "tests/integration/test_public_verifier.py",
+    "tests/integration/test_public_routes.py",
+    "tests/integration/test_public_cli.py",
+    "tests/integration/test_api.py",
+    "tests/integration/test_ui.py",
+    "tests/unit/test_graph_ui.py",
+    "tests/unit/test_demo_export.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "D:\\Web_mining_20261\\scholargraph\\.tmp\\final-regression-104\\pytest"
+  ]
+}

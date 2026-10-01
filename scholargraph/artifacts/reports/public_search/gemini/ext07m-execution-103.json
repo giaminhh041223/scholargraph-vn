@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "executor": "COORDINATOR",
+  "native_GEMINI_execution": "NOT_RUN/runtime command denied",
+  "command": "PYTHONPATH=src .venv/Scripts/python.exe .tmp/ext07m-102/probes_r2.py",
+  "command_exit_code": 0,
+  "pytest_passed": 125,
+  "pytest_failed": 0,
+  "duration_seconds": 74.75,
+  "warnings": 2,
+  "independent_probe": {
+    "status": "PASS",
+    "detail": "Corrupt DB refused rebuild and sentinel bytes remained 100% intact"
+  },
+  "scope": "storage/export/verifier/adversarial; no network; synthetic temp; modules unchanged7726c83..6a5d4e1",
+  "script_sha256": "fae63ac202710c6eb903c386784b15bc278bfa496f3cd1351089d26ab8bcefb1",
+  "checked_at": "2026-10-01T14:11:53.525898+07:00"
+}
