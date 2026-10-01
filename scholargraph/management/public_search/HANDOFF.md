@@ -1,3 +1,9 @@
+# W3 084 — short fresh review fallback đang chạy (2026-10-01T09:57:30+07:00)
+
+- Lượt Gemini Antigravity bị từ chối; fallback trước không tạo artifact nên đã dừng.
+- Fresh short reviewer `/root/review_ext05b_short` đang rà target immutable `b304bf4`; chỉ ghi report/log theo namespace GEMINI, không sửa code.
+- EXT-05B vẫn REVIEW, EXT-06 chưa mở.
+
 # W3 084 — fallback fresh review đang chạy (2026-10-01T09:47:30+07:00)
 
 - Gemini Antigravity runner exec 24435 bị `required action denied` trước khi tạo report; run summary đã lưu, không có PASS.

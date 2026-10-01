@@ -1,0 +1,1 @@
+Fresh short review fallback for EXT-05B; target b304bf4; reviewer /root/review_ext05b_short; gpt-6.1-sol/high; review only. Gemini runner denied and prior fallback interrupted; no code edits.
