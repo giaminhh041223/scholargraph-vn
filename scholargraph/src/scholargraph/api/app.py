@@ -17,10 +17,12 @@ from scholargraph.api.graph_service import (
     read_manifest_snapshot,
 )
 from scholargraph.api.service import SearchService, ServiceError
+from scholargraph.api.public_routes import router as public_router
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 app = FastAPI(title="ScholarGraph VN", version="0.1.0")
+app.include_router(public_router)
 app.mount("/static", StaticFiles(directory=PROJECT_ROOT / "ui" / "static"), name="static")
 app.mount("/graph-static", StaticFiles(directory=PROJECT_ROOT / "ui" / "graph"),
           name="graph-static")
