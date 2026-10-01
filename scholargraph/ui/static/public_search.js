@@ -37,6 +37,7 @@
   let envFetch = typeof fetch !== "undefined" ? fetch.bind(typeof window !== "undefined" ? window : globalThis) : null;
 
   let currentSearchSeq = 0;
+  let currentSnapshotSeq = 0;
   let activeSearchAbortController = null;
 
   let currentLibrarySeq = 0;
@@ -1347,6 +1348,7 @@
    */
   function renderSearchResults(envelope, isRefresh) {
     if (!envDocument) return;
+    ++currentSnapshotSeq; // Invalidate pages pending for an earlier display.
     clearBanners();
 
     // 1. Quota warnings (HTTP 503)
@@ -1671,6 +1673,7 @@
     if (!envDocument || !displayedSnapshot || displayedSnapshot.snapshot_id !== snapshotId) return;
 
     const seq = currentSearchSeq;
+    const pageSeq = ++currentSnapshotSeq;
     const offset = (targetPage - 1) * SNAPSHOT_PAGE_SIZE;
     const limit = SNAPSHOT_PAGE_SIZE;
     const endpoint = "/public/results/" + encodeURIComponent(snapshotId) + "?offset=" + offset + "&limit=" + limit;
@@ -1685,22 +1688,29 @@
       }
 
       const res = await envFetch(endpoint, fetchOpts);
-      if (!res.ok) {
-        throw new Error("Lỗi khi tải trang snapshot (HTTP " + res.status + ")");
-      }
       const data = await res.json();
 
       // Nếu có query mới đã kích hoạt, bỏ qua kết quả trang cũ
-      if (seq !== currentSearchSeq) return;
+      if (seq !== currentSearchSeq || pageSeq !== currentSnapshotSeq) return;
 
       validateEnvelope(data);
+      if (data.overall === "failed" || !data.snapshot) {
+        throw new Error("HTTP " + res.status + ": " + data.errors.map(e => "[" + e.kind + "] " + e.message).join("; "));
+      }
+      if (!res.ok && data.overall !== "partial_failure") {
+        throw new Error("Lỗi khi tải trang snapshot (HTTP " + res.status + ")");
+      }
+      if (data.snapshot.snapshot_id !== snapshotId) {
+        throw new Error("Phản hồi trang không khớp snapshot_id yêu cầu");
+      }
       displayedSnapshot = data.snapshot;
+      renderSnapshotBanner(data);
       currentSnapshotPage = targetPage;
 
       renderHitsList(displayedSnapshot.fusion.hits, data.overall, displayedSnapshot.fusion.counts.excluded_by_year, currentSnapshotPage);
       renderSnapshotPagination(displayedSnapshot);
     } catch (err) {
-      if (seq !== currentSearchSeq) return;
+      if (seq !== currentSearchSeq || pageSeq !== currentSnapshotSeq) return;
       if (err.name === "AbortError") return;
       addBanner("error", "Chuyển trang thất bại: " + err.message);
     }
