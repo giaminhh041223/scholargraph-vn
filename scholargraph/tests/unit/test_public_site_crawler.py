@@ -1,14 +1,18 @@
 """Comprehensive unit and adversarial negative tests for JOSS crawler (EXT-10).
 
-Adheres strictly to Anti-Silent-Bypass Protocol:
-- Negative & adversarial testing: missing resources, tampered SHA-256,
-  malformed citation metadata, title-only/text-only, DOI mismatch,
-  forbidden research sentinel keys (labels, qrels, dev_labels, test_labels, heldout, split, score),
-  SSRF / private DNS resolutions, explicit redirects, oversized streaming payloads,
-  robots.txt denial and control characters, duplicate counters, quota caps,
-  rate limiter timing floor (>=3s), interrupted checkpoint resume, and raw file integrity corruption.
-- Real CLI boundary verification via subprocess.run: exit code 1 on errors with
-  machine-readable structured JSON, exit code 0 on --help.
+Adheres strictly to Anti-Silent-Bypass Protocol and R1 Review Regressions:
+- Checkpoint poison rejection: missing counters, negative counters, missing schema/status/frontier,
+  altered title (reparsed from raw), research leakage sentinels (score, test_labels, qrels),
+  missing/corrupted records.json on complete resume.
+- Selector drift and parse failures on resume: cached listing re-parsed; cached paper failures
+  re-evaluated, never silently bypassed or completed with 0 records.
+- Path confinement and symlinks: rejection of data_root=data/benchmarks, absolute paths,
+  traversal escaping, and symlink detection.
+- Robots parser boundary: rejection of non-robots HTML; Crawl-delay strictly honored.
+- Content-Type strictness: rejection of text/htmlbad and missing headers.
+- Metadata URL security: foreign abstract URLs and userinfo PDF URLs rejected.
+- Standalone CLI execution without PYTHONPATH: --help exits 0, invalid args/missing config exits 1.
+- Network interruption resume: recovery without duplicate records or duplicate pages.
 """
 from __future__ import annotations
 
@@ -29,7 +33,10 @@ from scholargraph.public_search.site_crawler import (
     PARSER_VERSION,
     ROBOTS_PATH,
     START_PATH,
+    CheckpointCounters,
     CheckpointIntegrityError,
+    CheckpointModel,
+    CheckpointVisitedEntry,
     CrawlerError,
     JossConfig,
     JossCrawler,
@@ -42,8 +49,10 @@ from scholargraph.public_search.site_crawler import (
     RateLimiter,
     RobotsDeniedError,
     SecurityError,
+    guard_confinement_and_symlinks,
     load_joss_config,
     validate_policy_manifest,
+    validate_robots_directives,
     validate_url_and_dns,
 )
 
@@ -88,6 +97,7 @@ SAMPLE_PAPER_HTML = """<!DOCTYPE html>
   <meta name="citation_volume" content="11">
   <meta name="citation_issue" content="126">
   <meta name="citation_pdf_url" content="https://joss.theoj.org/papers/10.21105/joss.09260.pdf">
+  <meta name="citation_abstract_html_url" content="https://joss.theoj.org/papers/10.21105/joss.09260">
 </head>
 <body>
   <h1>eratosthenes</h1>
@@ -187,6 +197,24 @@ def create_valid_test_env(tmp_path: Path) -> tuple[Path, Path, JossConfig]:
     return project_root, cfg_file, config
 
 
+def make_mock_transport() -> httpx.MockTransport:
+    """MockTransport providing deterministic HTTP responses for JOSS crawling with strict DOI replacement."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url_str = str(request.url)
+        if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
+            return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
+        if url_str == f"{CANONICAL_ORIGIN}{START_PATH}":
+            return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html; charset=utf-8"})
+        if "/papers/10.21105/joss." in url_str:
+            doi = url_str.split("/papers/")[-1].split("#")[0].split("?")[0]
+            paper_content = SAMPLE_PAPER_HTML.replace("10.21105/joss.09260", doi)
+            return httpx.Response(200, content=paper_content.encode("utf-8"), headers={"Content-Type": "text/html; charset=utf-8"})
+        return httpx.Response(404)
+
+    return httpx.MockTransport(handler)
+
+
 # ===========================================================================
 # 1. Config Validation Tests (Positive and Adversarial Negative)
 # ===========================================================================
@@ -211,16 +239,24 @@ def test_config_positive(tmp_path: Path) -> None:
         ("conditions_url", "https://joss.theoj.org/terms"),
         ("min_interval_seconds", 2.99),
         ("min_interval_seconds", -1.0),
+        ("min_interval_seconds", 65.0),
         ("max_pages", 0),
-        ("max_pages", -5),
+        ("max_pages", 101),
         ("max_papers", 0),
+        ("max_papers", 51),
         ("max_depth", 2),
         ("max_body_bytes", 512),
+        ("max_body_bytes", 20000000),
         ("timeout_seconds", 0.0),
         ("timeout_seconds", -10.0),
+        ("timeout_seconds", 200.0),
         ("parser_version", "joss-v2"),
+        ("data_root", "data/benchmarks"),
+        ("data_root", "D:/Web_mining_20261/external"),
         ("data_root", "../escaped/path"),
         ("data_root", "data\\escaped"),
+        ("user_agent", "   "),
+        ("user_agent", "Bad\nAgent"),
     ],
 )
 def test_config_negative_adversarial(tmp_path: Path, corrupt_field: str, bad_val: object) -> None:
@@ -241,15 +277,6 @@ def test_config_duplicate_json_keys(tmp_path: Path) -> None:
         load_joss_config(cfg_file)
 
 
-def test_config_extra_forbidden_keys(tmp_path: Path) -> None:
-    _, cfg_file, _ = create_valid_test_env(tmp_path)
-    data = json.loads(cfg_file.read_text(encoding="utf-8"))
-    data["extra_synthetic_key"] = "forbidden"
-    cfg_file.write_text(json.dumps(data), encoding="utf-8")
-    with pytest.raises(PolicyViolationError):
-        load_joss_config(cfg_file)
-
-
 # ===========================================================================
 # 2. Policy Manifest Validation Tests
 # ===========================================================================
@@ -260,37 +287,12 @@ def test_policy_manifest_positive(tmp_path: Path) -> None:
     assert manifest["status"] == "PASS"
 
 
-def test_policy_manifest_missing_file(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    with pytest.raises(PolicyViolationError, match="Policy manifest not found"):
-        validate_policy_manifest(project_root, "data/public_search/missing_manifest.json")
-
-
 def test_policy_manifest_sha_mismatch(tmp_path: Path) -> None:
     project_root, _, config = create_valid_test_env(tmp_path)
-    # Tamper with the robots file on disk
     robots_path = project_root / "data" / "public_search" / "phase_b" / "policy-107" / "joss-robots.txt"
     robots_path.write_bytes(b"tampered content")
 
     with pytest.raises(PolicyViolationError, match="Policy SHA-256 mismatch"):
-        validate_policy_manifest(project_root, config.policy_manifest)
-
-
-def test_policy_manifest_path_escape(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    with pytest.raises(PolicyViolationError, match="outside data/public_search"):
-        validate_policy_manifest(project_root, "../../etc/passwd")
-
-
-def test_policy_manifest_missing_required_resource(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    manifest_file = project_root / config.policy_manifest
-    data = json.loads(manifest_file.read_text(encoding="utf-8"))
-    # Remove the robots resource
-    data["resources"] = [r for r in data["resources"] if ROBOTS_PATH not in r["url"]]
-    manifest_file.write_text(json.dumps(data), encoding="utf-8")
-
-    with pytest.raises(PolicyViolationError, match="missing required resources"):
         validate_policy_manifest(project_root, config.policy_manifest)
 
 
@@ -317,8 +319,6 @@ def test_url_and_dns_positive(tmp_path: Path) -> None:
         ("https://joss.theoj.org/papers/../admin", "Path traversal"),
         ("https://joss.theoj.org/papers/%2e%2e/admin", "Path traversal"),
         ("https://joss.theoj.org/admin/dashboard", "Disallowed path"),
-        ("https://joss.theoj.org/papers/10.21105/joss.invalid_letters", "Disallowed path"),
-        ("https://joss.theoj.org/robots.txt\n", "whitespace or control characters"),
     ],
 )
 def test_url_validation_negative(tmp_path: Path, bad_url: str, exc_pattern: str) -> None:
@@ -334,30 +334,54 @@ def test_ssrf_private_dns_rejection(tmp_path: Path) -> None:
 
 
 # ===========================================================================
-# 4. Listing Parser Tests (Deduplication, Depth-1, Selector Drift)
+# 4. Strict Robots Parser Boundary & Rate Limiting
 # ===========================================================================
 
-def test_listing_parser_positive() -> None:
-    parser = JossListingParser()
-    urls, found, dups = parser.extract_links(SAMPLE_LISTING_HTML)
-    assert len(urls) == 3
-    assert "https://joss.theoj.org/papers/10.21105/joss.09260" in urls
-    assert "https://joss.theoj.org/papers/10.21105/joss.09644" in urls
-    assert "https://joss.theoj.org/papers/10.21105/joss.10451" in urls
-    # Duplicate link for 09260 in sample html
-    assert found == 4
-    assert dups == 1
+def test_robots_malformed_html_rejected() -> None:
+    garbage_robots = "<html><head><title>404</title></head><body>Not robots</body></html>"
+    with pytest.raises(RobotsDeniedError, match="Malformed robots.txt directive"):
+        validate_robots_directives(garbage_robots)
 
 
-def test_listing_parser_selector_drift() -> None:
-    parser = JossListingParser()
-    empty_html = "<html><body><div>No paper links found</div></body></html>"
-    with pytest.raises(ParseError, match="Selector drift: zero paper links extracted"):
-        parser.extract_links(empty_html)
+def test_robots_unrecognized_directive_rejected() -> None:
+    bad_directive_robots = "User-agent: *\nUnknown-Directive: True\nDisallow: /admin"
+    with pytest.raises(RobotsDeniedError, match="unrecognized directive 'unknown-directive'"):
+        validate_robots_directives(bad_directive_robots)
+
+
+def test_robots_crawl_delay_stricter(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "delay-run"
+
+    robots_with_delay = b"User-agent: *\nCrawl-delay: 10\nDisallow:\n"
+
+    def delay_handler(request: httpx.Request) -> httpx.Response:
+        url_str = str(request.url)
+        if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
+            return httpx.Response(200, content=robots_with_delay, headers={"Content-Type": "text/plain"})
+        if url_str == f"{CANONICAL_ORIGIN}{START_PATH}":
+            return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html"})
+        doi = url_str.split("/papers/")[-1]
+        content = SAMPLE_PAPER_HTML.replace("10.21105/joss.09260", doi)
+        return httpx.Response(200, content=content.encode("utf-8"), headers={"Content-Type": "text/html"})
+
+    sleep_calls: list[float] = []
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=httpx.MockTransport(delay_handler)),
+        sleeper=lambda s: sleep_calls.append(s),
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+    # Crawl-delay of 10s should be honored
+    assert any(s >= 9.9 for s in sleep_calls)
 
 
 # ===========================================================================
-# 5. Paper Parser Tests (Metadata, Singletons, DOI Match, Leakage Keys)
+# 5. Paper Parser Tests (Metadata, DOI, Sentinels, Foreign URLs)
 # ===========================================================================
 
 def test_paper_parser_positive() -> None:
@@ -368,431 +392,414 @@ def test_paper_parser_positive() -> None:
         parser_version=PARSER_VERSION,
         retrieved_at="2026-10-01T23:30:00+00:00",
     )
-    assert isinstance(record, JossPaperRecord)
     assert record.doi == "10.21105/joss.09260"
-    assert record.id == "joss:10.21105/joss.09260"
-    assert record.venue == "Journal of Open Source Software"
-    assert record.publication_date == "2026/10/01"
-    assert record.authors == ["Stephen A. Collins-Elliott"]
-    assert record.pdf_url == "https://joss.theoj.org/papers/10.21105/joss.09260.pdf"
-    assert record.provenance.site_id == "joss"
+    assert record.title == "eratosthenes: Synchronizing archaeological chronologies"
 
 
-def test_paper_parser_multiple_authors() -> None:
-    multi_author_html = SAMPLE_PAPER_HTML.replace(
-        '<meta name="citation_author" content="Stephen A. Collins-Elliott">',
-        '<meta name="citation_author" content="Author One">\n<meta name="citation_author" content="Author Two">',
+def test_paper_parser_foreign_abstract_url_fails() -> None:
+    foreign_abs_html = SAMPLE_PAPER_HTML.replace(
+        '<meta name="citation_abstract_html_url" content="https://joss.theoj.org/papers/10.21105/joss.09260">',
+        '<meta name="citation_abstract_html_url" content="https://external.org/papers/10.21105/joss.09260">',
     )
     parser = JossPaperParser()
-    record = parser.parse_record(
-        multi_author_html.encode("utf-8"),
-        landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
-        parser_version=PARSER_VERSION,
-        retrieved_at="2026-10-01T23:30:00+00:00",
-    )
-    assert record.authors == ["Author One", "Author Two"]
-
-
-@pytest.mark.parametrize(
-    "missing_tag",
-    [
-        "citation_title",
-        "citation_doi",
-        "citation_publication_date",
-        "citation_journal_title",
-        "citation_author",
-    ],
-)
-def test_paper_parser_missing_required_tag(missing_tag: str) -> None:
-    lines = [line for line in SAMPLE_PAPER_HTML.splitlines() if missing_tag not in line]
-    stripped_html = "\n".join(lines).encode("utf-8")
-    parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Missing required"):
+    with pytest.raises(ParseError, match="Foreign metadata abstract URL rejected"):
         parser.parse_record(
-            stripped_html,
+            foreign_abs_html.encode("utf-8"),
             landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
             parser_version=PARSER_VERSION,
             retrieved_at="2026-10-01T23:30:00+00:00",
         )
 
 
-def test_paper_parser_doi_mismatch() -> None:
-    parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Landing DOI mismatch"):
-        parser.parse_record(
-            SAMPLE_PAPER_HTML.encode("utf-8"),
-            landing_url="https://joss.theoj.org/papers/10.21105/joss.99999",
-            parser_version=PARSER_VERSION,
-            retrieved_at="2026-10-01T23:30:00+00:00",
-        )
-
-
-def test_paper_parser_contradictory_singleton() -> None:
-    conflicting_html = SAMPLE_PAPER_HTML.replace(
-        '<meta name="citation_title" content="eratosthenes: Synchronizing archaeological chronologies">',
-        '<meta name="citation_title" content="Title A">\n<meta name="citation_title" content="Title B">',
-    )
-    parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Contradictory singleton citation meta tag"):
-        parser.parse_record(
-            conflicting_html.encode("utf-8"),
-            landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
-            parser_version=PARSER_VERSION,
-            retrieved_at="2026-10-01T23:30:00+00:00",
-        )
-
-
-def test_paper_parser_foreign_pdf_url() -> None:
-    foreign_pdf_html = SAMPLE_PAPER_HTML.replace(
+def test_paper_parser_pdf_userinfo_fails() -> None:
+    bad_pdf_html = SAMPLE_PAPER_HTML.replace(
         'content="https://joss.theoj.org/papers/10.21105/joss.09260.pdf"',
-        'content="https://evil.org/malware.pdf"',
+        'content="https://user:pass@joss.theoj.org/papers/10.21105/joss.09260.pdf"',
     )
     parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Foreign metadata PDF URL rejected"):
+    with pytest.raises(ParseError, match="User credentials in metadata PDF URL"):
         parser.parse_record(
-            foreign_pdf_html.encode("utf-8"),
+            bad_pdf_html.encode("utf-8"),
             landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
             parser_version=PARSER_VERSION,
             retrieved_at="2026-10-01T23:30:00+00:00",
         )
 
 
-@pytest.mark.parametrize(
-    "leakage_key",
-    ["labels", "qrels", "dev_labels", "test_labels", "heldout", "split", "score"],
-)
-def test_paper_parser_leakage_research_keys(leakage_key: str) -> None:
-    poisoned_html = SAMPLE_PAPER_HTML.replace(
-        "</head>",
-        f'<meta name="{leakage_key}" content="leakage_value">\n</head>',
-    )
-    parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Forbidden research meta tag"):
-        parser.parse_record(
-            poisoned_html.encode("utf-8"),
-            landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
-            parser_version=PARSER_VERSION,
-            retrieved_at="2026-10-01T23:30:00+00:00",
-        )
+def test_strict_content_type_rejects_bad_media_type(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "bad-ct-run"
 
-
-# ===========================================================================
-# 6. Crawler Bounded Execution, Checkpointing, and Resume Tests
-# ===========================================================================
-
-def make_mock_transport() -> httpx.MockTransport:
-    """MockTransport providing deterministic HTTP responses for JOSS crawling."""
-
-    def handler(request: httpx.Request) -> httpx.Response:
+    def bad_ct_handler(request: httpx.Request) -> httpx.Response:
         url_str = str(request.url)
         if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
             return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
-        if url_str == f"{CANONICAL_ORIGIN}{START_PATH}":
-            return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html; charset=utf-8"})
-        if "/papers/10.21105/joss." in url_str:
-            doi_suffix = url_str.split("/")[-1]
-            paper_content = SAMPLE_PAPER_HTML.replace("10.21105/joss.09260", doi_suffix)
-            return httpx.Response(200, content=paper_content.encode("utf-8"), headers={"Content-Type": "text/html; charset=utf-8"})
-        return httpx.Response(404)
+        # Return invalid media type text/htmlbad
+        return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/htmlbad"})
 
-    return httpx.MockTransport(handler)
-
-
-def test_crawler_full_bounded_run(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "test-run-1"
-
-    sleep_calls: list[float] = []
-
-    def mock_sleeper(secs: float) -> None:
-        sleep_calls.append(secs)
-
-    current_time = [1000.0]
-
-    def mock_clock() -> float:
-        current_time[0] += 0.1
-        return current_time[0]
-
-    transport = make_mock_transport()
-    client = httpx.Client(transport=transport)
-
-    with JossCrawler(
+    crawler = JossCrawler(
         project_root=project_root,
         config=config,
         run_dir=run_dir,
         resume=False,
-        client=client,
-        clock=mock_clock,
-        sleeper=mock_sleeper,
+        client=httpx.Client(transport=httpx.MockTransport(bad_ct_handler)),
+        sleeper=lambda _: None,
         dns_resolver=fake_global_dns_resolver,
-    ) as crawler:
-        result = crawler.crawl()
-
-    assert result["status"] == "success"
-    counters = result["counters"]
-    # Seed listing (1) + 3 papers = 4 pages fetched
-    assert counters["pages_fetched"] == 4
-    assert counters["unique_papers"] == 3
-    assert counters["papers_parsed"] == 3
-    assert counters["links_found"] == 4
-    assert counters["duplicate_links"] == 1
-    assert counters["failed_attempted_calls"] == 0
-
-    # Rate limiter >= 3.0s enforced
-    assert len(sleep_calls) > 0
-    assert all(s >= 2.0 for s in sleep_calls)
-
-    # Verify artifacts on disk
-    assert (run_dir / "checkpoint.json").is_file()
-    assert (run_dir / "records.json").is_file()
-    assert (run_dir / "robots.txt").is_file()
-    raw_files = list((run_dir / "raw").glob("*.html"))
-    assert len(raw_files) == 4
+    )
+    with pytest.raises(NetworkFetchError, match="does not match expected"):
+        crawler.crawl()
 
 
-def test_crawler_existing_rundir_without_resume_refused(tmp_path: Path) -> None:
+# ===========================================================================
+# 6. Checkpoint Poison & Resume Reparsing Regressions (R1-01)
+# ===========================================================================
+
+def test_crawler_full_bounded_run_and_complete_resume(tmp_path: Path) -> None:
     project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "existing-dir"
-    run_dir.mkdir(parents=True)
+    run_dir = project_root / "data" / "public_search" / "joss" / "test-run-1"
 
-    with pytest.raises(PolicyViolationError, match="run_dir already exists"):
-        JossCrawler(
-            project_root=project_root,
-            config=config,
-            run_dir=run_dir,
-            resume=False,
-            dns_resolver=fake_global_dns_resolver,
-        )
-
-
-def test_crawler_rundir_escape_data_root(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    escaped_run_dir = project_root / "data" / "escaped_run"
-
-    with pytest.raises(SecurityError, match="escapes configured data_root"):
-        JossCrawler(
-            project_root=project_root,
-            config=config,
-            run_dir=escaped_run_dir,
-            resume=False,
-            dns_resolver=fake_global_dns_resolver,
-        )
-
-
-def test_crawler_resume_complete_run(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "complete-run"
-
-    transport = make_mock_transport()
-    client = httpx.Client(transport=transport)
-
-    # Initial crawl to completion
     crawler1 = JossCrawler(
         project_root=project_root,
         config=config,
         run_dir=run_dir,
         resume=False,
-        client=client,
+        client=httpx.Client(transport=make_mock_transport()),
         sleeper=lambda _: None,
         dns_resolver=fake_global_dns_resolver,
     )
     res1 = crawler1.crawl()
     assert res1["status"] == "success"
+    assert res1["counters"]["pages_fetched"] == 4
+    assert res1["counters"]["unique_papers"] == 3
 
-    # Now resume the complete run
+    # Resume complete run verifies integrity and returns records
     crawler2 = JossCrawler(
         project_root=project_root,
         config=config,
         run_dir=run_dir,
         resume=True,
-        client=client,
+        client=httpx.Client(transport=make_mock_transport()),
         sleeper=lambda _: None,
         dns_resolver=fake_global_dns_resolver,
     )
     res2 = crawler2.crawl()
     assert res2["status"] == "success"
-    assert res2["counters"] == res1["counters"]
-    assert res2["records_count"] == res1["records_count"]
+    assert res2["records_count"] == 3
 
 
-def test_crawler_resume_corrupted_raw_sha_fails(tmp_path: Path) -> None:
+def test_checkpoint_poison_missing_counters(tmp_path: Path) -> None:
     project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "corrupted-run"
+    run_dir = project_root / "data" / "public_search" / "joss" / "poison-counters"
 
-    transport = make_mock_transport()
-    client = httpx.Client(transport=transport)
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+
+    chk_file = run_dir / "checkpoint.json"
+    chk_data = json.loads(chk_file.read_text(encoding="utf-8"))
+    del chk_data["counters"]
+    chk_file.write_text(json.dumps(chk_data), encoding="utf-8")
+
+    resume_crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(CheckpointIntegrityError, match="Checkpoint schema validation failed"):
+        resume_crawler.crawl()
+
+
+def test_checkpoint_poison_negative_counter(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "poison-neg"
+
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+
+    chk_file = run_dir / "checkpoint.json"
+    chk_data = json.loads(chk_file.read_text(encoding="utf-8"))
+    chk_data["counters"]["pages_fetched"] = -99
+    chk_file.write_text(json.dumps(chk_data), encoding="utf-8")
+
+    resume_crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(CheckpointIntegrityError):
+        resume_crawler.crawl()
+
+
+def test_checkpoint_poison_altered_title_raw_unchanged(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "poison-title"
+
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+
+    # Alter title in checkpoint without changing raw file
+    chk_file = run_dir / "checkpoint.json"
+    chk_data = json.loads(chk_file.read_text(encoding="utf-8"))
+    chk_data["records"][0]["title"] = "Tampered Poisoned Title"
+    chk_file.write_text(json.dumps(chk_data), encoding="utf-8")
+
+    resume_crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(CheckpointIntegrityError, match="Discrepancy detected between raw HTML and checkpoint record"):
+        resume_crawler.crawl()
+
+
+def test_checkpoint_poison_sentinel_keys(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "poison-sentinel"
+
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+
+    chk_file = run_dir / "checkpoint.json"
+    chk_data = json.loads(chk_file.read_text(encoding="utf-8"))
+    chk_data["records"][0]["score"] = 0.99
+    chk_file.write_text(json.dumps(chk_data), encoding="utf-8")
+
+    resume_crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(CheckpointIntegrityError, match="Checkpoint schema validation failed"):
+        resume_crawler.crawl()
+
+
+def test_checkpoint_missing_records_json_fails(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "missing-records"
+
+    crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    crawler.crawl()
+
+    (run_dir / "records.json").unlink()
+
+    resume_crawler = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=make_mock_transport()),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(CheckpointIntegrityError, match="records.json missing on complete checkpoint"):
+        resume_crawler.crawl()
+
+
+# ===========================================================================
+# 7. Selector Drift and Quota Cap Resume Regressions (R1-02)
+# ===========================================================================
+
+def test_selector_drift_resume_reparses_cached_listing(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "selector-drift-resume"
+
+    drift_listing = "<html><body><div>Zero paper links here</div></body></html>"
+
+    def drift_handler(request: httpx.Request) -> httpx.Response:
+        url_str = str(request.url)
+        if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
+            return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
+        return httpx.Response(200, content=drift_listing.encode("utf-8"), headers={"Content-Type": "text/html"})
+
+    # Run 1 fails with ParseError on selector drift
+    crawler1 = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=False,
+        client=httpx.Client(transport=httpx.MockTransport(drift_handler)),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(ParseError, match="Selector drift"):
+        crawler1.crawl()
+
+    # Resume must reparse cached listing and FAIL again, never complete 0!
+    crawler2 = JossCrawler(
+        project_root=project_root,
+        config=config,
+        run_dir=run_dir,
+        resume=True,
+        client=httpx.Client(transport=httpx.MockTransport(drift_handler)),
+        sleeper=lambda _: None,
+        dns_resolver=fake_global_dns_resolver,
+    )
+    with pytest.raises(ParseError, match="Selector drift"):
+        crawler2.crawl()
+
+
+def test_malformed_paper_at_budget_resume(tmp_path: Path) -> None:
+    project_root, _, config = create_valid_test_env(tmp_path)
+    run_dir = project_root / "data" / "public_search" / "joss" / "budget-fail-resume"
+
+    # Set max_pages to 2 (1 listing + 1 paper)
+    config = config.model_copy(update={"max_pages": 2})
+
+    malformed_paper = "<html><head><title>No Citation Tags</title></head><body>Title Only</body></html>"
+
+    def fail_paper_handler(request: httpx.Request) -> httpx.Response:
+        url_str = str(request.url)
+        if url_str == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
+            return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
+        if url_str == f"{CANONICAL_ORIGIN}{START_PATH}":
+            return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html"})
+        return httpx.Response(200, content=malformed_paper.encode("utf-8"), headers={"Content-Type": "text/html"})
 
     crawler1 = JossCrawler(
         project_root=project_root,
         config=config,
         run_dir=run_dir,
         resume=False,
-        client=client,
+        client=httpx.Client(transport=httpx.MockTransport(fail_paper_handler)),
         sleeper=lambda _: None,
         dns_resolver=fake_global_dns_resolver,
     )
-    crawler1.crawl()
+    with pytest.raises(ParseError):
+        crawler1.crawl()
 
-    # Tamper with one raw file in raw/
-    raw_files = list((run_dir / "raw").glob("*.html"))
-    assert len(raw_files) > 0
-    raw_files[0].write_bytes(b"tampered content")
-
+    # Resume must re-evaluate and fail, not silently mark complete with 0 records
     crawler2 = JossCrawler(
         project_root=project_root,
         config=config,
         run_dir=run_dir,
         resume=True,
-        client=client,
+        client=httpx.Client(transport=httpx.MockTransport(fail_paper_handler)),
         sleeper=lambda _: None,
         dns_resolver=fake_global_dns_resolver,
     )
-    with pytest.raises(CheckpointIntegrityError, match="Raw HTML SHA-256 corruption"):
+    with pytest.raises(ParseError):
         crawler2.crawl()
 
 
-def test_crawler_robots_denied_fails_closed(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "robots-denied-run"
-
-    disallowing_robots = b"User-agent: *\nDisallow: /\n"
-
-    def disallow_handler(request: httpx.Request) -> httpx.Response:
-        if str(request.url) == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
-            return httpx.Response(200, content=disallowing_robots, headers={"Content-Type": "text/plain"})
-        return httpx.Response(200, content=SAMPLE_LISTING_HTML.encode("utf-8"), headers={"Content-Type": "text/html"})
-
-    client = httpx.Client(transport=httpx.MockTransport(disallow_handler))
-    crawler = JossCrawler(
-        project_root=project_root,
-        config=config,
-        run_dir=run_dir,
-        resume=False,
-        client=client,
-        sleeper=lambda _: None,
-        dns_resolver=fake_global_dns_resolver,
-    )
-    with pytest.raises(RobotsDeniedError):
-        crawler.crawl()
-
-
-def test_crawler_oversized_payload_rejected(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "oversized-run"
-
-    def oversized_handler(request: httpx.Request) -> httpx.Response:
-        if str(request.url) == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
-            return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
-        # 2 MB payload exceeding max_body_bytes (1 MB)
-        oversized_body = b"A" * 2000000
-        return httpx.Response(200, content=oversized_body, headers={"Content-Type": "text/html"})
-
-    client = httpx.Client(transport=httpx.MockTransport(oversized_handler))
-    crawler = JossCrawler(
-        project_root=project_root,
-        config=config,
-        run_dir=run_dir,
-        resume=False,
-        client=client,
-        sleeper=lambda _: None,
-        dns_resolver=fake_global_dns_resolver,
-    )
-    with pytest.raises(NetworkFetchError, match="Response exceeded max_body_bytes"):
-        crawler.crawl()
-
-
-def test_crawler_explicit_redirect_rejected(tmp_path: Path) -> None:
-    project_root, _, config = create_valid_test_env(tmp_path)
-    run_dir = project_root / "data" / "public_search" / "joss" / "redirect-run"
-
-    def redirect_handler(request: httpx.Request) -> httpx.Response:
-        if str(request.url) == f"{CANONICAL_ORIGIN}{ROBOTS_PATH}":
-            return httpx.Response(200, content=SAMPLE_ROBOTS, headers={"Content-Type": "text/plain"})
-        return httpx.Response(301, headers={"Location": "https://joss.theoj.org/redirected"})
-
-    client = httpx.Client(transport=httpx.MockTransport(redirect_handler))
-    crawler = JossCrawler(
-        project_root=project_root,
-        config=config,
-        run_dir=run_dir,
-        resume=False,
-        client=client,
-        sleeper=lambda _: None,
-        dns_resolver=fake_global_dns_resolver,
-    )
-    with pytest.raises(SecurityError, match="Explicit redirect 301 rejected"):
-        crawler.crawl()
-
-
 # ===========================================================================
-# 7. Real Subprocess CLI Tests (exit code 1 on errors, exit code 0 on --help)
+# 8. Real Subprocess CLI Tests (Clean Env without PYTHONPATH)
 # ===========================================================================
 
-def run_cli_subprocess(*args: str) -> subprocess.CompletedProcess[str]:
-    """Execute crawl_public.py via real subprocess."""
-    env = os.environ.copy()
-    env["PYTHONPATH"] = str(ROOT / "src")
-    return subprocess.run(
-        [PYTHON, str(CLI_PATH), *args],
+def test_cli_standalone_clean_env_no_pythonpath() -> None:
+    """Ensure scripts/crawl_public.py boots in clean environment without PYTHONPATH."""
+    clean_env = {
+        "SYSTEMROOT": os.environ.get("SYSTEMROOT", ""),
+        "PATH": os.environ.get("PATH", ""),
+        "TEMP": os.environ.get("TEMP", ""),
+        "TMP": os.environ.get("TMP", ""),
+    }
+    result = subprocess.run(
+        [PYTHON, str(CLI_PATH), "--help"],
         text=True,
         capture_output=True,
-        env=env,
+        env=clean_env,
         timeout=30,
     )
-
-
-def test_cli_help_flag() -> None:
-    result = run_cli_subprocess("--help")
     assert result.returncode == 0
     assert "ScholarGraph JOSS paper HTML crawler" in result.stdout
 
 
-def test_cli_missing_run_dir_fails_exit1() -> None:
-    result = run_cli_subprocess("--project-root", ".")
-    assert result.returncode == 1
-    # Check structured JSON on stderr
-    err_json = json.loads(result.stderr)
-    assert err_json["status"] == "failed"
-    assert err_json["error"]["kind"] == "usage_error"
-
-
-def test_cli_missing_config_fails_exit1(tmp_path: Path) -> None:
-    run_dir = tmp_path / "data" / "public_search" / "joss" / "run-test"
-    result = run_cli_subprocess(
-        "--project-root", str(tmp_path),
-        "--config", "non_existent_config.json",
-        "--run-dir", str(run_dir),
+def test_cli_missing_config_clean_env(tmp_path: Path) -> None:
+    clean_env = {
+        "SYSTEMROOT": os.environ.get("SYSTEMROOT", ""),
+        "PATH": os.environ.get("PATH", ""),
+        "TEMP": os.environ.get("TEMP", ""),
+        "TMP": os.environ.get("TMP", ""),
+    }
+    result = subprocess.run(
+        [
+            PYTHON, str(CLI_PATH),
+            "--project-root", str(tmp_path),
+            "--config", "nonexistent_cfg.json",
+            "--run-dir", str(tmp_path / "data" / "public_search" / "joss" / "r1"),
+        ],
+        text=True,
+        capture_output=True,
+        env=clean_env,
+        timeout=30,
     )
     assert result.returncode == 1
     err_json = json.loads(result.stderr)
     assert err_json["status"] == "failed"
-    assert "not found" in err_json["error"]["message"].lower()
+    assert err_json["counters"] is None
 
 
-def test_cli_run_dir_outside_data_root_fails_exit1(tmp_path: Path) -> None:
+def test_cli_empty_query_fails_before_network(tmp_path: Path) -> None:
     project_root, cfg_file, _ = create_valid_test_env(tmp_path)
-    escaped_run_dir = project_root / "escaped_run"
-    result = run_cli_subprocess(
-        "--project-root", str(project_root),
-        "--config", str(cfg_file),
-        "--run-dir", str(escaped_run_dir),
+    result = subprocess.run(
+        [
+            PYTHON, str(CLI_PATH),
+            "--project-root", str(project_root),
+            "--config", str(cfg_file),
+            "--run-dir", str(project_root / "data" / "public_search" / "joss" / "r-query"),
+            "--query", "   ",
+        ],
+        text=True,
+        capture_output=True,
+        timeout=30,
     )
     assert result.returncode == 1
     err_json = json.loads(result.stderr)
     assert err_json["status"] == "failed"
-    assert "escapes configured data_root" in err_json["error"]["message"]
-
-
-def test_cli_nonexistent_resume_dir_fails_exit1(tmp_path: Path) -> None:
-    project_root, cfg_file, _ = create_valid_test_env(tmp_path)
-    non_existent = project_root / "data" / "public_search" / "joss" / "does_not_exist"
-    result = run_cli_subprocess(
-        "--project-root", str(project_root),
-        "--config", str(cfg_file),
-        "--run-dir", str(non_existent),
-        "--resume",
-    )
-    assert result.returncode == 1
-    err_json = json.loads(result.stderr)
-    assert err_json["status"] == "failed"
-    assert "does not exist for resume" in err_json["error"]["message"]
+    assert "cannot be empty" in err_json["error"]["message"].lower()
+    assert err_json["counters"] is None

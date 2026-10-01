@@ -2,7 +2,7 @@
 """Production CLI for bounded JOSS site crawling (EXT-10).
 
 Usage:
-  python scripts/crawl_public.py --project-root . --config configs/public_site_joss.json --run-dir data/public_search/joss/run-01 [--resume] [--query "topic"]
+  python scripts/crawl_public.py --project-root . --config configs/public_site_joss.json --run-dir data/public_search/joss/runs/run-01 [--resume] [--query "topic"]
 """
 from __future__ import annotations
 
@@ -10,6 +10,11 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
+# Bootstrap project root src directory before any scholargraph imports
+_SRC = Path(__file__).resolve().parents[1] / "src"
+if str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
 
 from scholargraph.public_search.site_crawler import (
     CrawlerError,
@@ -30,14 +35,7 @@ class _ArgumentParser(argparse.ArgumentParser):
                 "kind": "usage_error",
                 "message": f"CLI argument error: {message}",
             },
-            "counters": {
-                "pages_fetched": 0,
-                "links_found": 0,
-                "duplicate_links": 0,
-                "papers_parsed": 0,
-                "unique_papers": 0,
-                "failed_attempted_calls": 0,
-            },
+            "counters": None,
         }
         print(json.dumps(err_payload, ensure_ascii=False), file=sys.stderr)
         sys.exit(1)
@@ -81,6 +79,14 @@ def main(argv: list[str] | None = None) -> int:
     run_dir: Path | None = None
 
     try:
+        # Validate query parameter before any network or crawler action
+        if args.query is not None:
+            q_raw = args.query.strip()
+            if not q_raw:
+                raise ValueError("Query cannot be empty or whitespace only")
+            if len(q_raw) > 500:
+                raise ValueError("Query length exceeds maximum limit of 500 characters")
+
         project_root = Path(args.project_root).resolve()
         cfg_arg = Path(args.config)
         cfg_path = cfg_arg if cfg_arg.is_absolute() else (project_root / cfg_arg).resolve()
@@ -104,8 +110,8 @@ def main(argv: list[str] | None = None) -> int:
             q_clean = args.query.strip().lower()
             matching_records = [
                 rec for rec in result["records"]
-                if q_clean in str(rec.get("title", "")).lower()
-                or any(q_clean in str(a).lower() for a in rec.get("authors", []))
+                if q_clean in str(rec["title"]).lower()
+                or any(q_clean in str(a).lower() for a in rec["authors"])
             ]
             result["records"] = matching_records
             result["records_count"] = len(matching_records)
@@ -115,18 +121,7 @@ def main(argv: list[str] | None = None) -> int:
 
     except Exception as exc:
         err_kind = getattr(exc, "kind", type(exc).__name__)
-        counters = (
-            dict(crawler.counters)
-            if crawler is not None and hasattr(crawler, "counters")
-            else {
-                "pages_fetched": 0,
-                "links_found": 0,
-                "duplicate_links": 0,
-                "papers_parsed": 0,
-                "unique_papers": 0,
-                "failed_attempted_calls": 1,
-            }
-        )
+        counters = crawler.counters.model_dump() if crawler is not None and hasattr(crawler, "counters") else None
         err_payload = {
             "status": "failed",
             "site_id": "joss",

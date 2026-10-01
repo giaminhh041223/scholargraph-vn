@@ -1,14 +1,20 @@
 """Bounded HTML crawler for JOSS published papers (EXT-10).
 
-Adheres strictly to Anti-Silent-Bypass Protocol:
+Adheres strictly to Anti-Silent-Bypass Protocol and R1 Review Findings:
 - Strict schema validation with no silent .get defaults or fallback.
 - Mandatory negative/adversarial guards: missing resources, malformed metadata,
   forbidden research keys (labels/qrels/dev_labels/test_labels/heldout/split/score),
   SSRF / private DNS resolution, oversized payloads, robots disallow, redirect rejection.
 - Atomic checkpoints with SHA-256 verification and resume integrity checking.
+- Reparsing of raw HTML on resume to prevent metadata tampering.
+- Strict data_root confinement to public JOSS namespace and symlink escape guarding.
+- Strict robots parser rejecting unparseable garbage directives and honoring Crawl-delay.
+- Monotonic rate limiting floor (>=3.0s).
+- Bounded overall request streaming deadlines and exact Content-Type media matching.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import html.parser
 import ipaddress
@@ -36,11 +42,18 @@ ROBOTS_PATH = "/robots.txt"
 CONDITIONS_PATH = "/about"
 PARSER_VERSION = "joss-citation-1.0.0"
 MIN_INTERVAL_SECONDS_FLOOR = 3.0
+DATA_ROOT_CANONICAL = "data/public_search/joss"
+
 PAPER_PATH_REGEX = re.compile(r"^/papers/10\.21105/joss\.(\d+)$")
 PAPER_URL_REGEX = re.compile(r"^https://joss\.theoj\.org/papers/10\.21105/joss\.(\d+)$")
+DOI_REGEX = re.compile(r"^10\.21105/joss\.(\d+)$")
 
 FORBIDDEN_METADATA_KEYS = frozenset({
     "labels", "qrels", "dev_labels", "test_labels", "heldout", "split", "score"
+})
+
+VALID_ROBOTS_DIRECTIVES = frozenset({
+    "user-agent", "allow", "disallow", "crawl-delay", "request-rate", "sitemap", "host"
 })
 
 
@@ -95,7 +108,7 @@ class CheckpointIntegrityError(CrawlerError):
 # ---------------------------------------------------------------------------
 
 class JossConfig(BaseModel):
-    """Strict configuration model for JOSS site crawler."""
+    """Strict configuration model for JOSS site crawler with finite sane upper bounds."""
     model_config = ConfigDict(strict=True, extra="forbid", frozen=True)
 
     schema_version: int
@@ -150,25 +163,34 @@ class JossConfig(BaseModel):
             raise ValueError(f"conditions_url must be exactly '{CANONICAL_ORIGIN}{CONDITIONS_PATH}'")
         return v
 
+    @field_validator("user_agent")
+    @classmethod
+    def validate_user_agent(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("user_agent must be non-blank")
+        if any(ord(c) < 32 or ord(c) == 127 for c in v):
+            raise ValueError("user_agent cannot contain control characters or newlines")
+        return v
+
     @field_validator("min_interval_seconds")
     @classmethod
     def validate_min_interval(cls, v: float) -> float:
-        if not math.isfinite(v) or v < MIN_INTERVAL_SECONDS_FLOOR:
-            raise ValueError(f"min_interval_seconds must be finite and >= {MIN_INTERVAL_SECONDS_FLOOR}")
+        if not math.isfinite(v) or v < MIN_INTERVAL_SECONDS_FLOOR or v > 60.0:
+            raise ValueError(f"min_interval_seconds must be finite between {MIN_INTERVAL_SECONDS_FLOOR} and 60.0")
         return v
 
     @field_validator("max_pages")
     @classmethod
     def validate_max_pages(cls, v: int) -> int:
-        if type(v) is not int or v < 1:
-            raise ValueError("max_pages must be an integer >= 1")
+        if type(v) is not int or v < 1 or v > 100:
+            raise ValueError("max_pages must be an integer between 1 and 100")
         return v
 
     @field_validator("max_papers")
     @classmethod
     def validate_max_papers(cls, v: int) -> int:
-        if type(v) is not int or v < 1:
-            raise ValueError("max_papers must be an integer >= 1")
+        if type(v) is not int or v < 1 or v > 50:
+            raise ValueError("max_papers must be an integer between 1 and 50")
         return v
 
     @field_validator("max_depth")
@@ -181,15 +203,15 @@ class JossConfig(BaseModel):
     @field_validator("max_body_bytes")
     @classmethod
     def validate_max_body_bytes(cls, v: int) -> int:
-        if type(v) is not int or v < 1024:
-            raise ValueError("max_body_bytes must be an integer >= 1024")
+        if type(v) is not int or v < 1024 or v > 10485760:
+            raise ValueError("max_body_bytes must be an integer between 1024 and 10485760 (10 MB)")
         return v
 
     @field_validator("timeout_seconds")
     @classmethod
     def validate_timeout_seconds(cls, v: float) -> float:
-        if not math.isfinite(v) or v <= 0.0:
-            raise ValueError("timeout_seconds must be a finite positive float")
+        if not math.isfinite(v) or v < 0.5 or v > 120.0:
+            raise ValueError("timeout_seconds must be a finite float between 0.5 and 120.0")
         return v
 
     @field_validator("parser_version")
@@ -202,12 +224,15 @@ class JossConfig(BaseModel):
     @field_validator("data_root")
     @classmethod
     def validate_data_root(cls, v: str) -> str:
-        if ".." in v or "\\" in v or v.startswith("/"):
-            raise ValueError("data_root must be a safe relative path without traversal")
-        return v
+        norm = v.strip()
+        if "\\" in norm or ":" in norm or norm.startswith("/") or ".." in norm or "%2e" in norm.lower():
+            raise ValueError("data_root must be a clean relative path without drive letters, backslashes, or traversal")
+        if norm != DATA_ROOT_CANONICAL and not norm.startswith(f"{DATA_ROOT_CANONICAL}/"):
+            raise ValueError(f"data_root must be '{DATA_ROOT_CANONICAL}' or a descendant within that public namespace")
+        return norm
 
 
-def _check_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+def check_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
     d: dict[str, object] = {}
     for k, v in pairs:
         if k in d:
@@ -222,7 +247,7 @@ def load_joss_config(path: Path) -> JossConfig:
         raise PolicyViolationError(f"Config file not found: {path}")
     raw_text = path.read_text(encoding="utf-8")
     try:
-        data = json.loads(raw_text, object_pairs_hook=_check_duplicate_keys)
+        data = json.loads(raw_text, object_pairs_hook=check_duplicate_keys)
     except Exception as exc:
         raise PolicyViolationError(f"Invalid JSON in config {path}: {exc}") from exc
     try:
@@ -246,6 +271,24 @@ class JossProvenance(BaseModel):
     retrieved_at: str
     meta_fields: list[str]
 
+    @field_validator("raw_sha256")
+    @classmethod
+    def validate_sha(cls, v: str) -> str:
+        if not re.match(r"^[0-9a-f]{64}$", v):
+            raise ValueError("raw_sha256 must be a valid 64-character lowercase hex string")
+        return v
+
+    @field_validator("retrieved_at")
+    @classmethod
+    def validate_retrieved_at(cls, v: str) -> str:
+        try:
+            dt = datetime.fromisoformat(v)
+            if dt.tzinfo is None:
+                raise ValueError("retrieved_at must be an aware datetime with timezone")
+        except Exception as exc:
+            raise ValueError(f"Invalid ISO-8601 retrieved_at: {v}") from exc
+        return v
+
 
 class JossPaperRecord(BaseModel):
     """Immutable output record for a single JOSS published paper."""
@@ -263,6 +306,73 @@ class JossPaperRecord(BaseModel):
     retrieved_at: str
     parser_version: str
     provenance: JossProvenance
+
+    @field_validator("doi")
+    @classmethod
+    def validate_doi(cls, v: str) -> str:
+        if not DOI_REGEX.match(v):
+            raise ValueError(f"Malformed DOI: {v}")
+        return v
+
+    @field_validator("title", "venue")
+    @classmethod
+    def validate_non_empty_str(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Field cannot be empty")
+        return v
+
+    @field_validator("authors")
+    @classmethod
+    def validate_authors(cls, v: list[str]) -> list[str]:
+        if not v or not any(a.strip() for a in v):
+            raise ValueError("authors cannot be empty")
+        return v
+
+
+# ---------------------------------------------------------------------------
+# Strict Checkpoint Models
+# ---------------------------------------------------------------------------
+
+class CheckpointVisitedEntry(BaseModel):
+    model_config = ConfigDict(strict=True, extra="forbid", frozen=True)
+    url: str
+    raw_sha256: str
+    type: Literal["listing", "paper", "robots"]
+    retrieved_at: str
+    parser_version: str
+    config_hash: str
+
+
+class CheckpointCounters(BaseModel):
+    model_config = ConfigDict(strict=True, extra="forbid", frozen=True)
+    pages_fetched: int
+    links_found: int
+    duplicate_links: int
+    papers_parsed: int
+    unique_papers: int
+    failed_attempted_calls: int
+
+    @field_validator("pages_fetched", "links_found", "duplicate_links", "papers_parsed", "unique_papers", "failed_attempted_calls")
+    @classmethod
+    def check_non_negative(cls, v: int) -> int:
+        if type(v) is not int or v < 0:
+            raise ValueError("counter must be a non-negative integer")
+        return v
+
+
+class CheckpointModel(BaseModel):
+    model_config = ConfigDict(strict=True, extra="forbid", frozen=True)
+    schema_version: int
+    site_id: Literal["joss"]
+    config_hash: str
+    status: Literal["running", "failed", "complete"]
+    created_at: str
+    updated_at: str
+    frontier: list[str]
+    visited: list[CheckpointVisitedEntry]
+    records: list[JossPaperRecord]
+    counters: CheckpointCounters
+    error: dict[str, str] | None
 
 
 # ---------------------------------------------------------------------------
@@ -282,7 +392,7 @@ def validate_policy_manifest(project_root: Path, manifest_rel_path: str) -> dict
         raise PolicyViolationError(f"Policy manifest not found: {manifest_path}")
 
     try:
-        data = json.loads(manifest_path.read_text(encoding="utf-8"), object_pairs_hook=_check_duplicate_keys)
+        data = json.loads(manifest_path.read_text(encoding="utf-8"), object_pairs_hook=check_duplicate_keys)
     except Exception as exc:
         raise PolicyViolationError(f"Invalid policy manifest JSON: {exc}") from exc
 
@@ -392,6 +502,9 @@ def validate_url_and_dns(
 
     # Resolve and inspect DNS IPs
     ips = dns_resolver(parsed.hostname)
+    if not ips:
+        raise SecurityError(f"DNS resolver returned no IP addresses for {parsed.hostname}")
+
     for ip_str in ips:
         try:
             ip_obj = ipaddress.ip_address(ip_str)
@@ -407,6 +520,40 @@ def validate_url_and_dns(
             or ip_obj.is_unspecified
         ):
             raise SecurityError(f"SSRF protection: Disallowed non-global IP resolved ({ip_str}) for {parsed.hostname}")
+
+
+# ---------------------------------------------------------------------------
+# Strict Robots Parser Boundary
+# ---------------------------------------------------------------------------
+
+def validate_robots_directives(robots_text: str) -> tuple[float | None, list[str]]:
+    """Validate robots.txt syntax strictly; accept comments, reject unparseable directives."""
+    crawl_delay: float | None = None
+    clean_lines: list[str] = []
+
+    for line_idx, line in enumerate(robots_text.splitlines(), start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            clean_lines.append(stripped)
+            continue
+        if ":" not in stripped:
+            raise RobotsDeniedError(f"Malformed robots.txt directive at line {line_idx}: missing ':' in '{stripped}'")
+        prefix, _, val = stripped.partition(":")
+        directive = prefix.strip().lower()
+        if directive not in VALID_ROBOTS_DIRECTIVES:
+            raise RobotsDeniedError(f"Malformed robots.txt directive at line {line_idx}: unrecognized directive '{directive}'")
+        clean_val = val.strip()
+        if directive == "crawl-delay":
+            try:
+                cd = float(clean_val)
+                if cd < 0:
+                    raise ValueError
+                crawl_delay = cd if crawl_delay is None else max(crawl_delay, cd)
+            except ValueError:
+                raise RobotsDeniedError(f"Malformed Crawl-delay numeric value: '{clean_val}'") from None
+        clean_lines.append(f"{directive}: {clean_val}")
+
+    return crawl_delay, clean_lines
 
 
 # ---------------------------------------------------------------------------
@@ -568,17 +715,34 @@ class JossPaperParser(html.parser.HTMLParser):
         if not clean_authors:
             raise ParseError("All citation_author values are empty")
 
-        # Nullable PDF URL
+        # Nullable PDF URL with strict URL validation
         pdf_url = self._get_singleton("citation_pdf_url", required=False)
         if pdf_url:
             pdf_parsed = urllib.parse.urlsplit(pdf_url)
             if pdf_parsed.scheme != "https" or pdf_parsed.hostname != "joss.theoj.org":
                 raise ParseError(f"Foreign metadata PDF URL rejected: '{pdf_url}'")
+            if pdf_parsed.username or pdf_parsed.password:
+                raise ParseError(f"User credentials in metadata PDF URL: '{pdf_url}'")
+            if pdf_parsed.port not in (None, 443):
+                raise ParseError(f"Non-standard port in metadata PDF URL: '{pdf_url}'")
             if ".." in pdf_parsed.path or "\\" in pdf_parsed.path:
                 raise ParseError(f"Path traversal in metadata PDF URL: '{pdf_url}'")
 
+        # citation_abstract_html_url checked for foreign host
+        abs_url = self._get_singleton("citation_abstract_html_url", required=False)
+        if abs_url:
+            abs_parsed = urllib.parse.urlsplit(abs_url)
+            if abs_parsed.scheme != "https" or abs_parsed.hostname != "joss.theoj.org":
+                raise ParseError(f"Foreign metadata abstract URL rejected: '{abs_url}'")
+            if abs_parsed.username or abs_parsed.password:
+                raise ParseError(f"User credentials in metadata abstract URL: '{abs_url}'")
+            if abs_parsed.port not in (None, 443):
+                raise ParseError(f"Non-standard port in metadata abstract URL: '{abs_url}'")
+            if ".." in abs_parsed.path or "\\" in abs_parsed.path:
+                raise ParseError(f"Path traversal in metadata abstract URL: '{abs_url}'")
+
         # Other optional singletons checked for contradictory conflict
-        for opt_key in ("citation_volume", "citation_issue", "citation_firstpage", "citation_issn", "citation_abstract_html_url"):
+        for opt_key in ("citation_volume", "citation_issue", "citation_firstpage", "citation_issn"):
             self._get_singleton(opt_key, required=False)
 
         provenance = JossProvenance(
@@ -607,28 +771,33 @@ class JossPaperParser(html.parser.HTMLParser):
 
 
 # ---------------------------------------------------------------------------
-# Rate Limiting & Sequential Fetching
+# Rate Limiting & Sequential Fetching with Monotonic Clock
 # ---------------------------------------------------------------------------
 
 class RateLimiter:
-    """Sequential rate limiter enforcing >= 3.0s interval between HTTP requests."""
+    """Sequential rate limiter enforcing >= 3.0s (or stricter robots Crawl-delay) using monotonic clock."""
 
     def __init__(
         self,
         min_interval_seconds: float,
-        clock: Callable[[], float] = time.time,
+        clock: Callable[[], float] = time.monotonic,
         sleeper: Callable[[float], None] = time.sleep,
     ) -> None:
-        self.min_interval = min_interval_seconds
+        self.base_interval = min_interval_seconds
+        self.effective_interval = min_interval_seconds
         self.clock = clock
         self.sleeper = sleeper
         self.last_call_timestamp: float = 0.0
 
+    def set_crawl_delay(self, crawl_delay: float | None) -> None:
+        if crawl_delay is not None and crawl_delay > self.effective_interval:
+            self.effective_interval = crawl_delay
+
     def wait(self) -> None:
         now = self.clock()
         elapsed = now - self.last_call_timestamp
-        if self.last_call_timestamp > 0.0 and elapsed < self.min_interval:
-            to_sleep = self.min_interval - elapsed
+        if self.last_call_timestamp > 0.0 and elapsed < self.effective_interval:
+            to_sleep = self.effective_interval - elapsed
             self.sleeper(to_sleep)
         self.last_call_timestamp = self.clock()
 
@@ -638,48 +807,94 @@ def stream_bounded_fetch(
     url: str,
     config: JossConfig,
     rate_limiter: RateLimiter,
-    expected_content_type_prefix: str,
+    expected_content_type: str,
     dns_resolver: Callable[[str], list[str]] = default_dns_resolver,
+    clock: Callable[[], float] = time.monotonic,
 ) -> tuple[bytes, str]:
-    """Perform security checks, rate-limited GET request, streaming body up to max_body_bytes."""
+    """Perform security checks, rate-limited GET request, streaming body up to max_body_bytes within deadline."""
     validate_url_and_dns(url, config, dns_resolver=dns_resolver)
     rate_limiter.wait()
 
+    start_monotonic = clock()
+    deadline = start_monotonic + config.timeout_seconds
+
     try:
+        # Strictly enforce follow_redirects=False on every request
         request = client.build_request("GET", url, headers={"User-Agent": config.user_agent})
-        response = client.send(request, stream=True)
+        response = client.send(request, stream=True, follow_redirects=False)
     except Exception as exc:
         raise NetworkFetchError(f"Network error fetching {url}: {exc}") from exc
 
     try:
-        # Explicit redirects are rejected
         if response.status_code in (301, 302, 303, 307, 308):
             raise SecurityError(f"Explicit redirect {response.status_code} rejected for {url}")
 
         if response.status_code != 200:
             raise NetworkFetchError(f"HTTP {response.status_code} fetching {url}")
 
-        content_type = response.headers.get("content-type", "").lower()
-        if not content_type.startswith(expected_content_type_prefix.lower()):
+        raw_ct = response.headers.get("content-type")
+        if raw_ct is None:
+            raise NetworkFetchError(f"Missing Content-Type header fetching {url}")
+        base_media_type = raw_ct.split(";")[0].strip().lower()
+        if base_media_type != expected_content_type.lower():
             raise NetworkFetchError(
-                f"Content-Type '{content_type}' does not match expected prefix '{expected_content_type_prefix}' for {url}"
+                f"Content-Type '{base_media_type}' does not match expected '{expected_content_type}' for {url}"
             )
+
+        content_length_header = response.headers.get("content-length")
+        if content_length_header is not None:
+            if not content_length_header.strip().isdigit():
+                raise NetworkFetchError(f"Malformed Content-Length header: '{content_length_header}'")
+            if int(content_length_header.strip()) > config.max_body_bytes:
+                raise NetworkFetchError(
+                    f"Content-Length ({content_length_header}) exceeds max_body_bytes ({config.max_body_bytes}) for {url}"
+                )
 
         body_buffer = bytearray()
         for chunk in response.iter_bytes():
+            if clock() > deadline:
+                raise NetworkFetchError(f"Total response deadline ({config.timeout_seconds}s) exceeded while fetching {url}")
             body_buffer.extend(chunk)
             if len(body_buffer) > config.max_body_bytes:
                 raise NetworkFetchError(
                     f"Response exceeded max_body_bytes ({config.max_body_bytes}) fetching {url}"
                 )
-        return bytes(body_buffer), content_type
+        return bytes(body_buffer), base_media_type
     finally:
         response.close()
 
 
 # ---------------------------------------------------------------------------
-# Checkpoint and Persistence Logic
+# Path Confinement & Atomic Checkpoint
 # ---------------------------------------------------------------------------
+
+def guard_confinement_and_symlinks(project_root: Path, run_dir: Path, config: JossConfig) -> tuple[Path, Path]:
+    """Verify paths are strictly within permitted public namespace and contain no symlinks."""
+    proj_resolved = project_root.resolve()
+    permitted_public = (proj_resolved / DATA_ROOT_CANONICAL).resolve()
+    target_data_root = (proj_resolved / config.data_root).resolve()
+
+    try:
+        target_data_root.relative_to(permitted_public)
+    except ValueError:
+        raise SecurityError(f"data_root '{config.data_root}' escapes permitted public root '{permitted_public}'")
+
+    run_resolved = run_dir.resolve()
+    try:
+        run_resolved.relative_to(target_data_root)
+    except ValueError:
+        raise SecurityError(f"run_dir '{run_dir}' escapes configured data_root '{target_data_root}'")
+
+    if run_resolved == target_data_root or run_resolved == permitted_public:
+        raise SecurityError("run_dir cannot be the data_root or public namespace itself")
+
+    # Guard against symlinks in critical paths
+    for p in (run_dir, run_dir / "raw", run_dir / "checkpoint.json", run_dir / "records.json"):
+        if p.is_symlink():
+            raise SecurityError(f"Symlink detected at '{p}'")
+
+    return proj_resolved, run_resolved
+
 
 def write_atomic_checkpoint(run_dir: Path, checkpoint_data: dict[str, object]) -> None:
     """Atomically write checkpoint JSON file using a temp file and os.replace."""
@@ -706,13 +921,12 @@ class JossCrawler:
         run_dir: Path,
         resume: bool = False,
         client: httpx.Client | None = None,
-        clock: Callable[[], float] = time.time,
+        clock: Callable[[], float] = time.monotonic,
         sleeper: Callable[[float], None] = time.sleep,
         dns_resolver: Callable[[str], list[str]] = default_dns_resolver,
     ) -> None:
-        self.project_root = project_root.resolve()
+        self.project_root, self.run_dir = guard_confinement_and_symlinks(project_root, run_dir, config)
         self.config = config
-        self.run_dir = run_dir.resolve()
         self.resume = resume
         self.clock = clock
         self.sleeper = sleeper
@@ -724,34 +938,31 @@ class JossCrawler:
             follow_redirects=False,
         )
         self.rate_limiter = RateLimiter(config.min_interval_seconds, clock=clock, sleeper=sleeper)
-
-        # Enforce output roots constrained beneath project's config data_root
-        data_root_base = (self.project_root / config.data_root).resolve()
-        try:
-            self.run_dir.relative_to(data_root_base)
-        except ValueError:
-            raise SecurityError(f"run_dir '{self.run_dir}' escapes configured data_root '{data_root_base}'")
-
-        if self.run_dir == data_root_base:
-            raise SecurityError("run_dir cannot be the data_root directory itself")
+        self.config_hash = hashlib.sha256(self.config.model_dump_json().encode("utf-8")).hexdigest()
 
         if not self.resume:
             if self.run_dir.exists():
                 raise PolicyViolationError(f"run_dir already exists: '{self.run_dir}'. Use --resume to resume.")
             self.run_dir.mkdir(parents=True, exist_ok=False)
             (self.run_dir / "raw").mkdir(exist_ok=True)
+            (self.run_dir / "robots").mkdir(exist_ok=True)
+            self.created_at = datetime.now(timezone.utc).isoformat()
         else:
             if not self.run_dir.exists():
                 raise PolicyViolationError(f"run_dir does not exist for resume: '{self.run_dir}'")
+            self.created_at = ""
 
-        self.counters = {
-            "pages_fetched": 0,
-            "links_found": 0,
-            "duplicate_links": 0,
-            "papers_parsed": 0,
-            "unique_papers": 0,
-            "failed_attempted_calls": 0,
-        }
+        self.counters = CheckpointCounters(
+            pages_fetched=0,
+            links_found=0,
+            duplicate_links=0,
+            papers_parsed=0,
+            unique_papers=0,
+            failed_attempted_calls=0,
+        )
+        self.frontier: list[str] = []
+        self.visited: list[CheckpointVisitedEntry] = []
+        self.records: list[JossPaperRecord] = []
 
     def close(self) -> None:
         if self._own_client:
@@ -763,17 +974,47 @@ class JossCrawler:
     def __exit__(self, exc_type: object, exc_val: object, exc_tb: object) -> None:
         self.close()
 
+    def _save_checkpoint(
+        self,
+        status: Literal["running", "failed", "complete"],
+        error: dict[str, str] | None = None,
+    ) -> None:
+        """Centralized helper to save atomic checkpoint with consistent invariant counters."""
+        now = datetime.now(timezone.utc).isoformat()
+        data = {
+            "schema_version": 1,
+            "site_id": "joss",
+            "config_hash": self.config_hash,
+            "status": status,
+            "created_at": self.created_at,
+            "updated_at": now,
+            "frontier": list(self.frontier),
+            "visited": [v.model_dump() for v in self.visited],
+            "records": [r.model_dump() for r in self.records],
+            "counters": self.counters.model_dump(),
+            "error": error,
+        }
+        write_atomic_checkpoint(self.run_dir, data)
+
     def _fetch_robots(self) -> tuple[urllib.robotparser.RobotFileParser, bytes]:
-        """Fetch and parse live robots.txt; verify user agent access."""
-        raw_bytes, _ = stream_bounded_fetch(
-            self.client,
-            self.config.robots_url,
-            self.config,
-            self.rate_limiter,
-            expected_content_type_prefix="text/plain",
-            dns_resolver=self.dns_resolver,
-        )
-        # Check control characters (except carriage return, newline, tab)
+        """Fetch live robots.txt, parse directives strictly, honor Crawl-delay, and save attempt."""
+        try:
+            raw_bytes, _ = stream_bounded_fetch(
+                self.client,
+                self.config.robots_url,
+                self.config,
+                self.rate_limiter,
+                expected_content_type="text/plain",
+                dns_resolver=self.dns_resolver,
+                clock=self.clock,
+            )
+        except Exception as exc:
+            self.counters = self.counters.model_copy(
+                update={"failed_attempted_calls": self.counters.failed_attempted_calls + 1}
+            )
+            self._save_checkpoint("failed", error={"kind": type(exc).__name__, "message": str(exc)})
+            raise
+
         for b in raw_bytes:
             if b < 32 and b not in (9, 10, 13):
                 raise RobotsDeniedError(f"Control characters detected in robots.txt: byte {b}")
@@ -783,231 +1024,226 @@ class JossCrawler:
         except UnicodeDecodeError as exc:
             raise RobotsDeniedError(f"robots.txt is not valid UTF-8: {exc}") from exc
 
-        rfp = urllib.robotparser.RobotFileParser()
-        rfp.parse(text.splitlines())
+        crawl_delay, clean_lines = validate_robots_directives(text)
+        self.rate_limiter.set_crawl_delay(crawl_delay)
 
-        # Save live robots bytes in run_dir
+        rfp = urllib.robotparser.RobotFileParser()
+        rfp.parse(clean_lines)
+
+        # Save latest and immutable historical attempt
+        robots_sha = hashlib.sha256(raw_bytes).hexdigest()
         (self.run_dir / "robots.txt").write_bytes(raw_bytes)
+        robots_dir = self.run_dir / "robots"
+        robots_dir.mkdir(exist_ok=True)
+        timestamp_slug = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        (robots_dir / f"robots_{robots_sha[:16]}_{timestamp_slug}.txt").write_bytes(raw_bytes)
+
         return rfp, raw_bytes
 
-    def _verify_checkpoint_integrity(self, checkpoint: dict[str, object], expected_config_hash: str) -> None:
-        """Verify checkpoint JSON schema, config hash, and raw artifact SHA-256 integrity."""
-        if checkpoint.get("config_hash") != expected_config_hash:
+    def _verify_checkpoint_integrity(self) -> CheckpointModel:
+        """Strictly validate checkpoint JSON, counters invariants, and reparse raw HTML to guard against tampering."""
+        chk_path = self.run_dir / "checkpoint.json"
+        if not chk_path.is_file():
+            raise CheckpointIntegrityError(f"Cannot resume: checkpoint not found at {chk_path}")
+
+        try:
+            raw_data = json.loads(chk_path.read_text(encoding="utf-8"), object_pairs_hook=check_duplicate_keys)
+        except Exception as exc:
+            raise CheckpointIntegrityError(f"Corrupt checkpoint JSON: {exc}") from exc
+
+        try:
+            chk = CheckpointModel.model_validate(raw_data)
+        except Exception as exc:
+            raise CheckpointIntegrityError(f"Checkpoint schema validation failed: {exc}") from exc
+
+        if chk.config_hash != self.config_hash:
             raise CheckpointIntegrityError("Checkpoint config_hash does not match current configuration")
 
-        visited = checkpoint.get("visited")
-        if not isinstance(visited, list):
-            raise CheckpointIntegrityError("Checkpoint visited list missing or malformed")
+        # Verify counter invariants
+        expected_pages_fetched = len([v for v in chk.visited if v.type in ("listing", "paper")])
+        if chk.counters.pages_fetched != expected_pages_fetched:
+            raise CheckpointIntegrityError(
+                f"Counter invariant failed: pages_fetched ({chk.counters.pages_fetched}) != visited HTML ({expected_pages_fetched})"
+            )
+        if chk.counters.unique_papers != len(chk.records) or chk.counters.papers_parsed != len(chk.records):
+            raise CheckpointIntegrityError("Counter invariant failed: unique_papers/papers_parsed != records count")
 
+        # Verify raw HTML existence, SHA-256 match, and reparse metadata
         raw_dir = self.run_dir / "raw"
-        for v in visited:
-            if not isinstance(v, dict):
-                raise CheckpointIntegrityError("Malformed visited entry in checkpoint")
-            raw_sha = v.get("raw_sha256")
-            if not isinstance(raw_sha, str):
-                raise CheckpointIntegrityError("Visited entry missing raw_sha256")
-            raw_path = raw_dir / f"{raw_sha}.html"
-            if not raw_path.is_file():
-                raise CheckpointIntegrityError(f"Raw HTML missing on disk: {raw_path}")
-            computed_sha = hashlib.sha256(raw_path.read_bytes()).hexdigest()
-            if computed_sha.lower() != raw_sha.lower():
-                raise CheckpointIntegrityError(f"Raw HTML SHA-256 corruption for {raw_path}")
+        for v in chk.visited:
+            if v.type == "robots":
+                continue
+            raw_file = raw_dir / f"{v.raw_sha256}.html"
+            if not raw_file.is_file():
+                raise CheckpointIntegrityError(f"Referenced raw HTML missing on disk: {raw_file}")
+            actual_sha = hashlib.sha256(raw_file.read_bytes()).hexdigest()
+            if actual_sha.lower() != v.raw_sha256.lower():
+                raise CheckpointIntegrityError(f"Raw HTML SHA-256 corruption detected for {raw_file}")
 
-        records = checkpoint.get("records")
-        if not isinstance(records, list):
-            raise CheckpointIntegrityError("Checkpoint records list missing or malformed")
-        for rec in records:
-            if not isinstance(rec, dict):
-                raise CheckpointIntegrityError("Malformed record in checkpoint")
-            rec_sha = rec.get("raw_sha256")
-            if not isinstance(rec_sha, str):
-                raise CheckpointIntegrityError("Record missing raw_sha256")
-            rec_path = raw_dir / f"{rec_sha}.html"
-            if not rec_path.is_file():
-                raise CheckpointIntegrityError(f"Record referenced raw HTML missing on disk: {rec_path}")
+        for rec in chk.records:
+            raw_file = raw_dir / f"{rec.raw_sha256}.html"
+            if not raw_file.is_file():
+                raise CheckpointIntegrityError(f"Record raw file missing on disk: {raw_file}")
+            raw_bytes = raw_file.read_bytes()
+            # Reparse to ensure no metadata was altered in checkpoint
+            parser = JossPaperParser()
+            try:
+                reparsed = parser.parse_record(
+                    raw_bytes,
+                    landing_url=rec.landing_url,
+                    parser_version=rec.parser_version,
+                    retrieved_at=rec.retrieved_at,
+                )
+            except Exception as exc:
+                raise CheckpointIntegrityError(f"Reparsing raw HTML for record {rec.doi} failed: {exc}") from exc
+
+            if (
+                reparsed.id != rec.id
+                or reparsed.doi != rec.doi
+                or reparsed.title != rec.title
+                or reparsed.authors != rec.authors
+                or reparsed.publication_date != rec.publication_date
+                or reparsed.venue != rec.venue
+                or reparsed.pdf_url != rec.pdf_url
+            ):
+                raise CheckpointIntegrityError(f"Discrepancy detected between raw HTML and checkpoint record for {rec.doi}")
+
+        if chk.status == "complete":
+            records_file = self.run_dir / "records.json"
+            if not records_file.is_file():
+                raise CheckpointIntegrityError("records.json missing on complete checkpoint")
+            try:
+                rec_json = json.loads(records_file.read_text(encoding="utf-8"), object_pairs_hook=check_duplicate_keys)
+                if not isinstance(rec_json, list):
+                    raise ValueError
+                file_records = [JossPaperRecord.model_validate(r) for r in rec_json]
+            except Exception as exc:
+                raise CheckpointIntegrityError(f"records.json malformed or invalid: {exc}") from exc
+            if file_records != chk.records:
+                raise CheckpointIntegrityError("records.json does not match checkpoint records")
+
+        return chk
 
     def crawl(self) -> dict[str, object]:
         """Execute the JOSS crawler workflow or resume an existing run."""
         # 1. Validate policy manifest
         validate_policy_manifest(self.project_root, self.config.policy_manifest)
 
-        config_hash = hashlib.sha256(self.config.model_dump_json().encode("utf-8")).hexdigest()
-        checkpoint_path = self.run_dir / "checkpoint.json"
-
-        # 2. Check for resume
-        frontier: list[str] = []
-        visited: list[dict[str, str]] = []
-        records: list[dict[str, object]] = []
-
+        # 2. Handle resume or fresh initialization
         if self.resume:
-            if not checkpoint_path.is_file():
-                raise CheckpointIntegrityError(f"Cannot resume: checkpoint not found at {checkpoint_path}")
-            try:
-                checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
-            except Exception as exc:
-                raise CheckpointIntegrityError(f"Corrupt checkpoint JSON: {exc}") from exc
+            chk = self._verify_checkpoint_integrity()
+            self.created_at = chk.created_at
+            self.counters = chk.counters
+            self.visited = list(chk.visited)
+            self.records = list(chk.records)
+            self.frontier = list(chk.frontier)
 
-            self._verify_checkpoint_integrity(checkpoint, config_hash)
-
-            # Restore counters
-            saved_counters = checkpoint.get("counters", {})
-            if isinstance(saved_counters, dict):
-                for k in self.counters:
-                    if k in saved_counters and isinstance(saved_counters[k], int):
-                        self.counters[k] = saved_counters[k]
-
-            visited = list(checkpoint.get("visited", []))
-            records = list(checkpoint.get("records", []))
-            frontier = list(checkpoint.get("frontier", []))
-
-            # If checkpoint was already complete, refresh robots and return existing records
-            if checkpoint.get("status") == "complete":
+            # If checkpoint was complete, reload robots and verify access for all items
+            if chk.status == "complete":
                 rfp, _ = self._fetch_robots()
                 if not rfp.can_fetch(self.config.user_agent, self.config.start_url):
-                    raise RobotsDeniedError("Robots disallows start_url on resume")
+                    raise RobotsDeniedError("Robots disallows start_url on complete resume")
+                for rec in self.records:
+                    if not rfp.can_fetch(self.config.user_agent, rec.landing_url):
+                        raise RobotsDeniedError(f"Robots now disallows cached record: {rec.landing_url}")
                 return {
                     "status": "success",
                     "site_id": "joss",
                     "run_dir": str(self.run_dir),
-                    "counters": dict(self.counters),
-                    "records_count": len(records),
-                    "records": records,
+                    "counters": self.counters.model_dump(),
+                    "records_count": len(self.records),
+                    "records": [r.model_dump(mode="json") for r in self.records],
                 }
 
-        # 3. Always refresh/fetch live robots.txt on new invocation or incomplete resume
+            # If resuming an interrupted or failed run, reparse cached listing to detect selector drift
+            listing_entries = [v for v in self.visited if v.type == "listing"]
+            if listing_entries:
+                listing_file = self.run_dir / "raw" / f"{listing_entries[0].raw_sha256}.html"
+                listing_parser = JossListingParser()
+                extracted_urls, found_cnt, dup_cnt = listing_parser.extract_links(
+                    listing_file.read_bytes().decode("utf-8")
+                )
+                visited_paper_urls = {v.url for v in self.visited if v.type == "paper"}
+                self.frontier = [u for u in extracted_urls if u not in visited_paper_urls]
+
+        # Fetch live robots
         rfp, _ = self._fetch_robots()
         if not rfp.can_fetch(self.config.user_agent, self.config.start_url):
+            self._save_checkpoint("failed", error={"kind": "RobotsDeniedError", "message": "Robots disallows start_url"})
             raise RobotsDeniedError(f"robots.txt disallows user-agent '{self.config.user_agent}' for seed URL")
 
-        # Initial checkpoint for fresh run
         if not self.resume:
-            frontier = [self.config.start_url]
-            initial_checkpoint = {
-                "schema_version": 1,
-                "site_id": "joss",
-                "config_hash": config_hash,
-                "status": "running",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "updated_at": datetime.now(timezone.utc).isoformat(),
-                "frontier": frontier,
-                "visited": visited,
-                "records": records,
-                "counters": dict(self.counters),
-                "error": None,
-            }
-            write_atomic_checkpoint(self.run_dir, initial_checkpoint)
+            self.frontier = [self.config.start_url]
+            self._save_checkpoint("running")
 
         raw_dir = self.run_dir / "raw"
+        visited_urls = {v.url for v in self.visited}
 
-        # 4. Fetch listing page if not yet visited
-        visited_urls = {v["url"] for v in visited}
+        # 3. Fetch listing page if not yet visited
         if self.config.start_url not in visited_urls:
+            retrieved_at = datetime.now(timezone.utc).isoformat()
             try:
                 listing_bytes, _ = stream_bounded_fetch(
                     self.client,
                     self.config.start_url,
                     self.config,
                     self.rate_limiter,
-                    expected_content_type_prefix="text/html",
+                    expected_content_type="text/html",
                     dns_resolver=self.dns_resolver,
+                    clock=self.clock,
                 )
-                self.counters["pages_fetched"] += 1
             except Exception as exc:
-                self.counters["failed_attempted_calls"] += 1
-                fail_data = {
-                    "schema_version": 1,
-                    "site_id": "joss",
-                    "config_hash": config_hash,
-                    "status": "failed",
-                    "created_at": datetime.now(timezone.utc).isoformat(),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                    "frontier": frontier,
-                    "visited": visited,
-                    "records": records,
-                    "counters": dict(self.counters),
-                    "error": {"kind": type(exc).__name__, "message": str(exc)},
-                }
-                write_atomic_checkpoint(self.run_dir, fail_data)
+                self.counters = self.counters.model_copy(
+                    update={"failed_attempted_calls": self.counters.failed_attempted_calls + 1}
+                )
+                self._save_checkpoint("failed", error={"kind": type(exc).__name__, "message": str(exc)})
                 raise
 
             listing_sha = hashlib.sha256(listing_bytes).hexdigest()
             (raw_dir / f"{listing_sha}.html").write_bytes(listing_bytes)
-            visited.append({
-                "url": self.config.start_url,
-                "raw_sha256": listing_sha,
-                "type": "listing",
-            })
-            visited_urls.add(self.config.start_url)
 
-            # Parse listing to discover depth-1 paper links
+            self.visited.append(CheckpointVisitedEntry(
+                url=self.config.start_url,
+                raw_sha256=listing_sha,
+                type="listing",
+                retrieved_at=retrieved_at,
+                parser_version=self.config.parser_version,
+                config_hash=self.config_hash,
+            ))
+            visited_urls.add(self.config.start_url)
+            self.counters = self.counters.model_copy(
+                update={"pages_fetched": self.counters.pages_fetched + 1}
+            )
+
+            # Parse listing (Selector drift raises ParseError)
             listing_parser = JossListingParser()
             try:
                 extracted_urls, found_cnt, dup_cnt = listing_parser.extract_links(listing_bytes.decode("utf-8"))
             except Exception as exc:
-                fail_data = {
-                    "schema_version": 1,
-                    "site_id": "joss",
-                    "config_hash": config_hash,
-                    "status": "failed",
-                    "created_at": datetime.now(timezone.utc).isoformat(),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                    "frontier": frontier,
-                    "visited": visited,
-                    "records": records,
-                    "counters": dict(self.counters),
-                    "error": {"kind": type(exc).__name__, "message": str(exc)},
-                }
-                write_atomic_checkpoint(self.run_dir, fail_data)
+                self._save_checkpoint("failed", error={"kind": type(exc).__name__, "message": str(exc)})
                 raise
 
-            self.counters["links_found"] += found_cnt
-            self.counters["duplicate_links"] += dup_cnt
+            self.counters = self.counters.model_copy(
+                update={
+                    "links_found": self.counters.links_found + found_cnt,
+                    "duplicate_links": self.counters.duplicate_links + dup_cnt,
+                }
+            )
+            self.frontier = [u for u in extracted_urls if u not in visited_urls]
+            self._save_checkpoint("running")
 
-            # Frontier is populated with discovered paper URLs
-            frontier = [u for u in extracted_urls if u not in visited_urls]
-
-            # Update checkpoint after listing fetch
-            checkpoint_update = {
-                "schema_version": 1,
-                "site_id": "joss",
-                "config_hash": config_hash,
-                "status": "running",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "updated_at": datetime.now(timezone.utc).isoformat(),
-                "frontier": frontier,
-                "visited": visited,
-                "records": records,
-                "counters": dict(self.counters),
-                "error": None,
-            }
-            write_atomic_checkpoint(self.run_dir, checkpoint_update)
-
-        # 5. Fetch and parse paper pages up to quota
-        while frontier and (
-            self.counters["pages_fetched"] < self.config.max_pages
-            and self.counters["unique_papers"] < self.config.max_papers
+        # 4. Fetch and parse papers up to budget
+        while self.frontier and (
+            self.counters.pages_fetched < self.config.max_pages
+            and self.counters.unique_papers < self.config.max_papers
         ):
-            paper_url = frontier.pop(0)
+            paper_url = self.frontier.pop(0)
             if paper_url in visited_urls:
                 continue
 
-            # Check robots permission
             if not rfp.can_fetch(self.config.user_agent, paper_url):
-                self.counters["failed_attempted_calls"] += 1
-                fail_data = {
-                    "schema_version": 1,
-                    "site_id": "joss",
-                    "config_hash": config_hash,
-                    "status": "failed",
-                    "created_at": datetime.now(timezone.utc).isoformat(),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                    "frontier": [paper_url] + frontier,
-                    "visited": visited,
-                    "records": records,
-                    "counters": dict(self.counters),
-                    "error": {"kind": "RobotsDeniedError", "message": f"Robots disallows {paper_url}"},
-                }
-                write_atomic_checkpoint(self.run_dir, fail_data)
+                self.frontier.insert(0, paper_url)
+                self._save_checkpoint("failed", error={"kind": "RobotsDeniedError", "message": f"Robots disallows {paper_url}"})
                 raise RobotsDeniedError(f"Robots disallows paper URL: {paper_url}")
 
             retrieved_at = datetime.now(timezone.utc).isoformat()
@@ -1017,109 +1253,72 @@ class JossCrawler:
                     paper_url,
                     self.config,
                     self.rate_limiter,
-                    expected_content_type_prefix="text/html",
+                    expected_content_type="text/html",
                     dns_resolver=self.dns_resolver,
+                    clock=self.clock,
                 )
-                self.counters["pages_fetched"] += 1
             except Exception as exc:
-                self.counters["failed_attempted_calls"] += 1
-                fail_data = {
-                    "schema_version": 1,
-                    "site_id": "joss",
-                    "config_hash": config_hash,
-                    "status": "failed",
-                    "created_at": datetime.now(timezone.utc).isoformat(),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                    "frontier": [paper_url] + frontier,
-                    "visited": visited,
-                    "records": records,
-                    "counters": dict(self.counters),
-                    "error": {"kind": type(exc).__name__, "message": str(exc)},
-                }
-                write_atomic_checkpoint(self.run_dir, fail_data)
+                self.counters = self.counters.model_copy(
+                    update={"failed_attempted_calls": self.counters.failed_attempted_calls + 1}
+                )
+                self.frontier.insert(0, paper_url)
+                self._save_checkpoint("failed", error={"kind": type(exc).__name__, "message": str(exc)})
                 raise
 
             paper_sha = hashlib.sha256(paper_bytes).hexdigest()
             (raw_dir / f"{paper_sha}.html").write_bytes(paper_bytes)
 
+            self.visited.append(CheckpointVisitedEntry(
+                url=paper_url,
+                raw_sha256=paper_sha,
+                type="paper",
+                retrieved_at=retrieved_at,
+                parser_version=self.config.parser_version,
+                config_hash=self.config_hash,
+            ))
+            visited_urls.add(paper_url)
+            self.counters = self.counters.model_copy(
+                update={"pages_fetched": self.counters.pages_fetched + 1}
+            )
+
+            # Parse paper
             parser = JossPaperParser()
             try:
-                parsed_record = parser.parse_record(
+                record = parser.parse_record(
                     paper_bytes,
                     landing_url=paper_url,
                     parser_version=self.config.parser_version,
                     retrieved_at=retrieved_at,
                 )
             except Exception as exc:
-                self.counters["failed_attempted_calls"] += 1
-                fail_data = {
-                    "schema_version": 1,
-                    "site_id": "joss",
-                    "config_hash": config_hash,
-                    "status": "failed",
-                    "created_at": datetime.now(timezone.utc).isoformat(),
-                    "updated_at": datetime.now(timezone.utc).isoformat(),
-                    "frontier": [paper_url] + frontier,
-                    "visited": visited,
-                    "records": records,
-                    "counters": dict(self.counters),
-                    "error": {"kind": type(exc).__name__, "message": str(exc)},
-                }
-                write_atomic_checkpoint(self.run_dir, fail_data)
+                self._save_checkpoint("failed", error={"kind": type(exc).__name__, "message": str(exc)})
                 raise
 
-            self.counters["papers_parsed"] += 1
-            self.counters["unique_papers"] += 1
-            rec_dict = parsed_record.model_dump(mode="json")
-            records.append(rec_dict)
+            self.records.append(record)
+            self.counters = self.counters.model_copy(
+                update={
+                    "papers_parsed": self.counters.papers_parsed + 1,
+                    "unique_papers": self.counters.unique_papers + 1,
+                }
+            )
+            self._save_checkpoint("running")
 
-            visited.append({
-                "url": paper_url,
-                "raw_sha256": paper_sha,
-                "type": "paper",
-            })
-            visited_urls.add(paper_url)
+        # 5. Mark complete and save records.json atomically
+        records_tmp = self.run_dir / "records.json.tmp"
+        records_target = self.run_dir / "records.json"
+        with open(records_tmp, "w", encoding="utf-8") as f:
+            json.dump([r.model_dump(mode="json") for r in self.records], f, indent=2, ensure_ascii=False)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(records_tmp, records_target)
 
-            checkpoint_step = {
-                "schema_version": 1,
-                "site_id": "joss",
-                "config_hash": config_hash,
-                "status": "running",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "updated_at": datetime.now(timezone.utc).isoformat(),
-                "frontier": frontier,
-                "visited": visited,
-                "records": records,
-                "counters": dict(self.counters),
-                "error": None,
-            }
-            write_atomic_checkpoint(self.run_dir, checkpoint_step)
-
-        # 6. Mark complete and save records snapshot JSON
-        final_checkpoint = {
-            "schema_version": 1,
-            "site_id": "joss",
-            "config_hash": config_hash,
-            "status": "complete",
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "updated_at": datetime.now(timezone.utc).isoformat(),
-            "frontier": frontier,
-            "visited": visited,
-            "records": records,
-            "counters": dict(self.counters),
-            "error": None,
-        }
-        write_atomic_checkpoint(self.run_dir, final_checkpoint)
-
-        records_file = self.run_dir / "records.json"
-        with open(records_file, "w", encoding="utf-8") as f:
-            json.dump(records, f, indent=2, ensure_ascii=False)
+        self._save_checkpoint("complete")
 
         return {
             "status": "success",
             "site_id": "joss",
             "run_dir": str(self.run_dir),
-            "counters": dict(self.counters),
-            "records_count": len(records),
-            "records": records,
+            "counters": self.counters.model_dump(),
+            "records_count": len(self.records),
+            "records": [r.model_dump(mode="json") for r in self.records],
         }
