@@ -83,11 +83,16 @@ def paper_url(value: str) -> str:
 
 def research_key(value: str) -> bool:
     normalized = re.sub(r"[^a-z0-9]", "", value.casefold())
-    words = re.sub(r"([a-z])([A-Z])", r"\1_\2", value).casefold()
-    tokens = set(re.split(r"[^a-z0-9]+", words))
-    return (normalized in {"label", "labels", "qrels", "devlabels", "testlabels", "heldout", "split", "splits", "score"}
-            or bool(tokens & {"label", "labels", "qrels", "heldout", "split", "splits", "score", "scores"})
-            or any(token in normalized for token in ("qrels", "testlabels", "devlabels", "heldout", "datasetsplit")))
+    # Field aliases, not substrings: public HTML aria-label/data-label are accessibility/UI fields.
+    for prefix in ("citation", "research"):
+        if normalized.startswith(prefix):
+            normalized = normalized[len(prefix):]
+    return normalized in {
+        "label", "labels", "qrels", "qrelspath", "heldout", "heldoutlabels", "score", "scores",
+        "split", "splits", "splitid", "datasetsplit",
+        "trainlabel", "trainlabels", "devlabel", "devlabels", "testlabel", "testlabels",
+        "trainsplit", "devsplit", "testsplit", "traintestsplit",
+    }
 
 
 def reject_research_keys(value):

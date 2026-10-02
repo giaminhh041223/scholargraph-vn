@@ -1068,3 +1068,20 @@ runpy.run_path(sys.argv[0],run_name="__main__")
     cp = checkpoint(run); cp["schema_version"] = 42; (run / "checkpoint.json").write_text(json.dumps(cp), encoding="utf-8")
     proc = subprocess.run(args, env=env, capture_output=True, text=True, encoding="utf-8", timeout=30)
     assert proc.returncode == 1 and json.loads(proc.stderr)["counters"] is None
+
+
+def test_r4_public_accessibility_attributes_are_not_research_labels():
+    html = SAMPLE_PAPER_HTML + '<button aria-label="Download paper" data-label="Public action" data-toggle="modal">Read</button>'
+    record = JossPaperParser().parse_record(html.encode(), CANONICAL_ORIGIN + "/papers/10.21105/joss.09260",
+                                          PARSER_VERSION, "2026-10-02T09:42:00+07:00")
+    assert record.title.startswith("eratosthenes") and record.doi == "10.21105/joss.09260"
+
+
+@pytest.mark.parametrize("sentinel", ["test_labels", "qrels", "train_split", "testSplit", "research_labels", "citation_test_labels"])
+@pytest.mark.parametrize("boundary", ["attribute", "metadata"])
+def test_r4_accessibility_with_real_research_sentinel_still_fails(sentinel, boundary):
+    html = SAMPLE_PAPER_HTML + '<button aria-label="Download" data-label="Action">Read</button>'
+    html += ('<div ' + sentinel + '="poison"></div>') if boundary == "attribute" else ('<meta name="' + sentinel + '" content="poison">')
+    with pytest.raises(ParseError, match="Forbidden research"):
+        JossPaperParser().parse_record(html.encode(), CANONICAL_ORIGIN + "/papers/10.21105/joss.09260",
+                                      PARSER_VERSION, "2026-10-02T09:42:00+07:00")
