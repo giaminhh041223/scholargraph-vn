@@ -402,7 +402,7 @@ def test_paper_parser_foreign_abstract_url_fails() -> None:
         '<meta name="citation_abstract_html_url" content="https://external.org/papers/10.21105/joss.09260">',
     )
     parser = JossPaperParser()
-    with pytest.raises(ParseError, match="Foreign metadata abstract URL rejected"):
+    with pytest.raises(ParseError, match="Foreign metadata URL rejected"):
         parser.parse_record(
             foreign_abs_html.encode("utf-8"),
             landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
@@ -417,7 +417,7 @@ def test_paper_parser_pdf_userinfo_fails() -> None:
         'content="https://user:pass@joss.theoj.org/papers/10.21105/joss.09260.pdf"',
     )
     parser = JossPaperParser()
-    with pytest.raises(ParseError, match="User credentials in metadata PDF URL"):
+    with pytest.raises(ParseError, match="User credentials in metadata URL"):
         parser.parse_record(
             bad_pdf_html.encode("utf-8"),
             landing_url="https://joss.theoj.org/papers/10.21105/joss.09260",
@@ -573,6 +573,7 @@ def test_checkpoint_poison_altered_title_raw_unchanged(tmp_path: Path) -> None:
     chk_data = json.loads(chk_file.read_text(encoding="utf-8"))
     chk_data["records"][0]["title"] = "Tampered Poisoned Title"
     chk_file.write_text(json.dumps(chk_data), encoding="utf-8")
+    (run_dir / "records.json").write_text(json.dumps(chk_data["records"]), encoding="utf-8")
 
     resume_crawler = JossCrawler(
         project_root=project_root,
@@ -803,3 +804,267 @@ def test_cli_empty_query_fails_before_network(tmp_path: Path) -> None:
     assert err_json["status"] == "failed"
     assert "cannot be empty" in err_json["error"]["message"].lower()
     assert err_json["counters"] is None
+
+
+# R3 reproductions: all temporary fixtures are synthetic, never live data.
+class AdvancingClock:
+    def __init__(self):
+        self.now = 1000.0
+    def __call__(self):
+        return self.now
+    def sleep(self, seconds):
+        self.now += seconds
+
+
+def offline_crawler(root, config, run_dir, *, resume=False, handler=None, dns=fake_global_dns_resolver, clock=None):
+    tick = clock if clock is not None else AdvancingClock()
+    return JossCrawler(root, config, run_dir, resume=resume,
+                       client=httpx.Client(transport=httpx.MockTransport(handler) if handler is not None else make_mock_transport()),
+                       clock=tick, sleeper=tick.sleep, dns_resolver=dns)
+
+
+def checkpoint(run_dir):
+    return json.loads((run_dir / "checkpoint.json").read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize("mode", ["schema", "timestamp", "time_order", "hash", "parser", "visited_time", "visited_hash", "visited_url",
+                                   "provenance", "meta_fields", "links", "duplicate", "frontier", "premature_complete", "records_corrupt", "raw_missing", "raw_corrupt", "labels"])
+def test_r3_semantic_poison_before_http(tmp_path, mode):
+    root, _, config = create_valid_test_env(tmp_path)
+    run_dir = root / config.data_root / "run"
+    offline_crawler(root, config, run_dir).crawl()
+    cp = checkpoint(run_dir)
+    if mode == "schema": cp["schema_version"] = 42
+    elif mode == "timestamp": cp["created_at"] = "INVALID"
+    elif mode == "time_order": cp["created_at"] = "2099-01-01T00:00:00+00:00"
+    elif mode == "hash": cp["config_hash"] = "not-a-hash"
+    elif mode == "parser": cp["records"][0]["parser_version"] = "evil"
+    elif mode == "visited_time": cp["visited"][1]["retrieved_at"] = "1900-01-01T00:00:00+00:00"
+    elif mode == "visited_hash": cp["visited"][1]["config_hash"] = "0" * 64
+    elif mode == "visited_url": cp["visited"][1]["url"] = "https://foreign.org/paper"
+    elif mode == "provenance": cp["records"][0]["provenance"]["raw_sha256"] = "0" * 64
+    elif mode == "meta_fields": cp["records"][0]["provenance"]["meta_fields"] = ["citation_fake"]
+    elif mode == "links": cp["counters"].update(links_found=0, duplicate_links=100)
+    elif mode == "duplicate":
+        cp["records"].append(copy.deepcopy(cp["records"][0])); cp["visited"].append(copy.deepcopy(cp["visited"][1]))
+        cp["counters"].update(pages_fetched=5, papers_parsed=4, unique_papers=4)
+    elif mode == "frontier": cp["frontier"] = ["https://foreign.org/paper"]
+    elif mode == "premature_complete":
+        cp["records"] = cp["records"][:1]; cp["visited"] = cp["visited"][:2]
+        cp["fetch_attempts"] = cp["fetch_attempts"][:3]
+        cp["frontier"] = [CANONICAL_ORIGIN + "/papers/10.21105/joss.09644", CANONICAL_ORIGIN + "/papers/10.21105/joss.10451"]
+        cp["counters"].update(pages_fetched=2, papers_parsed=1, unique_papers=1)
+    elif mode == "raw_missing": (run_dir / "raw" / (cp["visited"][1]["raw_sha256"] + ".html")).unlink()
+    elif mode == "raw_corrupt": (run_dir / "raw" / (cp["visited"][1]["raw_sha256"] + ".html")).write_bytes(b"POISON")
+    elif mode == "labels": cp["records"][0]["provenance"]["meta_fields"] = ["test_labels"]
+    (run_dir / "checkpoint.json").write_text(json.dumps(cp), encoding="utf-8")
+    (run_dir / "records.json").write_text("POISON" if mode == "records_corrupt" else json.dumps(cp["records"]), encoding="utf-8")
+    calls = []
+    def no_http(request):
+        calls.append(str(request.url))
+        raise AssertionError("poison must fail before HTTP")
+    with pytest.raises(CheckpointIntegrityError):
+        offline_crawler(root, config, run_dir, resume=True, handler=no_http).crawl()
+    assert calls == []
+
+
+@pytest.mark.parametrize("max_pages", [2, 5])
+def test_r3_cached_unparsed_paper_never_refetched_or_completed(tmp_path, max_pages):
+    root, _, config = create_valid_test_env(tmp_path)
+    config = JossConfig.model_validate({**config.model_dump(), "max_pages": max_pages})
+    run = root / config.data_root / "run"
+    calls = []
+    normal = make_mock_transport()
+    def handler(req):
+        calls.append(str(req.url))
+        if req.url.path not in (ROBOTS_PATH, START_PATH):
+            return httpx.Response(200, headers={"content-type": "text/html"}, content=b"<title>title-only</title>")
+        return normal.handle_request(req)
+    with pytest.raises(ParseError):
+        offline_crawler(root, config, run, handler=handler).crawl()
+    before = checkpoint(run)
+    assert before["status"] == "failed" and before["counters"]["pages_fetched"] == 2
+    assert before["counters"]["failed_attempted_calls"] == 0
+    assert len(calls) == 3
+    calls.clear()
+    with pytest.raises(ParseError):
+        offline_crawler(root, config, run, resume=True, handler=handler).crawl()
+    assert calls == [] and checkpoint(run) == before
+
+
+def test_r3_network_interruption_resume_exact_counts(tmp_path):
+    root, _, config = create_valid_test_env(tmp_path)
+    run = root / config.data_root / "run"
+    calls = []
+    normal = make_mock_transport()
+    failed = False
+    def handler(req):
+        nonlocal failed
+        calls.append(str(req.url))
+        if str(req.url).endswith("joss.09644") and not failed:
+            failed = True
+            raise httpx.ConnectError("synthetic interruption")
+        return normal.handle_request(req)
+    with pytest.raises(NetworkFetchError):
+        offline_crawler(root, config, run, handler=handler).crawl()
+    initial = checkpoint(run)
+    assert initial["counters"]["pages_fetched"] == 2 and initial["counters"]["failed_attempted_calls"] == 1
+    result = offline_crawler(root, config, run, resume=True, handler=handler).crawl()
+    assert result["http_attempts"] == 7 and result["http_successes"] == 6
+    assert result["counters"] == dict(pages_fetched=4, links_found=4, duplicate_links=1, papers_parsed=3, unique_papers=3, failed_attempted_calls=1)
+    assert calls.count(CANONICAL_ORIGIN + "/papers/10.21105/joss.09260") == 1
+    assert calls.count(CANONICAL_ORIGIN + START_PATH) == 1
+    assert calls.count(CANONICAL_ORIGIN + ROBOTS_PATH) == 2
+    assert checkpoint(run)["created_at"] == initial["created_at"]
+
+
+@pytest.mark.parametrize("robots", [b"<html>garbage</html>", b"User-agent: *\nCrawl-delay: nan\n", b"User-agent: *\nCrawl-delay: inf\n",
+                                    b"User-agent: *\nRequest-rate: broken\n", b"User-agent: *\nRequest-rate: 0/3\n", b"\xff", b"User-agent: *\nDisallow: /\n"])
+def test_r3_robots_failure_retains_bytes_and_checkpoint(tmp_path, robots):
+    root, _, config = create_valid_test_env(tmp_path)
+    run = root / config.data_root / "run"
+    def handler(req):
+        assert req.url.path == ROBOTS_PATH
+        return httpx.Response(200, content=robots, headers={"content-type": "text/plain"})
+    with pytest.raises(RobotsDeniedError):
+        offline_crawler(root, config, run, handler=handler).crawl()
+    cp = checkpoint(run)
+    assert cp["status"] == "failed" and cp["counters"]["failed_attempted_calls"] == 0
+    attempts = cp["fetch_attempts"]
+    assert len(attempts) == 1 and attempts[0]["attempted"] and attempts[0]["success"]
+    assert (run / attempts[0]["raw_path"]).read_bytes() == robots
+    assert attempts[0]["raw_sha256"] == hashlib.sha256(robots).hexdigest()
+
+
+def test_r3_request_rate_conservative_and_robots_history_unique(tmp_path):
+    root, _, config = create_valid_test_env(tmp_path)
+    run = root / config.data_root / "run"
+    tick = AdvancingClock(); starts = []
+    normal = make_mock_transport()
+    def handler(req):
+        starts.append(tick())
+        if req.url.path == ROBOTS_PATH:
+            return httpx.Response(200, content=b"User-agent: *\nRequest-rate: 2/20\nDisallow:\n", headers={"content-type":"text/plain"})
+        return normal.handle_request(req)
+    offline_crawler(root, config, run, handler=handler, clock=tick).crawl()
+    assert all(b - a >= 10 for a, b in zip(starts, starts[1:]))
+    offline_crawler(root, config, run, resume=True, handler=handler, clock=tick).crawl()
+    files = list((run / "robots").glob("*.txt"))
+    assert len(files) == 2 and files[0].name != files[1].name
+
+
+def test_r3_dns_preflight_zero_http_attempts(tmp_path):
+    root, _, config = create_valid_test_env(tmp_path)
+    run = root / config.data_root / "run"
+    calls = []
+    def forbidden(req):
+        calls.append(req); raise AssertionError("must not send")
+    with pytest.raises(SecurityError):
+        offline_crawler(root, config, run, dns=fake_private_dns_resolver, handler=forbidden).crawl()
+    cp = checkpoint(run)
+    assert calls == [] and cp["counters"]["failed_attempted_calls"] == 0
+    assert cp["fetch_attempts"][0]["attempted"] is False and cp["fetch_attempts"][0]["raw_path"] is None
+
+
+@pytest.mark.parametrize("tag", ["citation_title", "citation_doi", "citation_author", "citation_journal_title", "citation_publication_date"])
+def test_r3_each_required_citation_missing(tmp_path, tag):
+    import re
+    raw = re.sub(r'\s*<meta name="' + tag + r'"[^>]+>', "", SAMPLE_PAPER_HTML).encode()
+    with pytest.raises(ParseError):
+        JossPaperParser().parse_record(raw, CANONICAL_ORIGIN + "/papers/10.21105/joss.09260", PARSER_VERSION, "2026-10-01T23:30:00+07:00")
+
+
+@pytest.mark.parametrize("mode", ["doi", "calendar", "singleton", "mixed_blank_author", "label", "timestamp", "parser"])
+def test_r3_parser_adversarial_metadata(mode):
+    raw = SAMPLE_PAPER_HTML; timestamp = "2026-10-01T23:30:00+07:00"; version = PARSER_VERSION
+    if mode == "doi": raw = raw.replace('name="citation_doi" content="10.21105/joss.09260"', 'name="citation_doi" content="10.21105/joss.99999"')
+    elif mode == "calendar": raw = raw.replace("2026/10/01", "2026/02/30")
+    elif mode == "singleton": raw += '<meta name="citation_title" content="CONFLICT">'
+    elif mode == "mixed_blank_author": raw += '<meta name="citation_author" content=" ">'
+    elif mode == "label": raw += '<meta name="test_labels" content="1">'
+    elif mode == "timestamp": timestamp = "INVALID"
+    elif mode == "parser": version = "evil"
+    with pytest.raises(ParseError):
+        JossPaperParser().parse_record(raw.encode(), CANONICAL_ORIGIN + "/papers/10.21105/joss.09260", version, timestamp)
+
+
+@pytest.mark.parametrize("mode", ["bodycap", "redirect", "duplicate_header", "deadline"])
+def test_r3_transport_bounds(tmp_path, mode):
+    from scholargraph.public_search.site_crawler import stream_bounded_fetch
+    root, _, config = create_valid_test_env(tmp_path)
+    tick = AdvancingClock(); audit = {}
+    class Body(httpx.SyncByteStream):
+        def __iter__(self):
+            if mode == "deadline": tick.now += config.timeout_seconds + 1
+            yield b"x" * (config.max_body_bytes + 1 if mode == "bodycap" else 20)
+    headers = [("content-type", "text/plain")]
+    if mode == "duplicate_header": headers.append(("content-type", "text/plain"))
+    with httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(302 if mode == "redirect" else 200, headers=headers, stream=Body()))) as client:
+        with pytest.raises((NetworkFetchError, SecurityError)):
+            stream_bounded_fetch(client, config.robots_url, config, RateLimiter(3.0, clock=tick, sleeper=tick.sleep), "text/plain",
+                                 dns_resolver=fake_global_dns_resolver, clock=tick, attempt_audit=audit)
+    assert audit["attempted"] is True
+    if mode == "bodycap": assert len(audit["body"]) == config.max_body_bytes and audit["complete_body"] is False
+
+
+@pytest.mark.parametrize("resource", ["joss-robots.txt", "joss-about.txt", "joss-list.txt", "joss-paper.txt"])
+def test_r3_missing_policy_raw_failed_checkpoint(tmp_path, resource):
+    root, _, config = create_valid_test_env(tmp_path)
+    (root / config.policy_manifest).parent.joinpath(resource).unlink()
+    run = root / config.data_root / "run"
+    with pytest.raises(PolicyViolationError):
+        offline_crawler(root, config, run).crawl()
+    cp = checkpoint(run)
+    assert cp["status"] == "failed" and cp["fetch_attempts"] == [] and cp["counters"]["failed_attempted_calls"] == 0
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows native junction required")
+@pytest.mark.parametrize("location", ["base", "raw", "robots", "ancestor"])
+def test_r3_native_windows_junction_rejected(tmp_path, location):
+    root, _, config = create_valid_test_env(tmp_path)
+    target = tmp_path / "outside-project"; target.mkdir(); (target / "sentinel").write_bytes(b"unchanged")
+    base = root / config.data_root
+    run = base / "run"
+    if location in {"raw", "robots"}:
+        run.mkdir(parents=True); junction = run / location
+    elif location == "ancestor":
+        base.mkdir(parents=True); junction = base / "linked"; run = junction / "run"
+    else: junction = base
+    quote = lambda value: "'" + str(value).replace("'", "''") + "'"
+    command = "New-Item -ItemType Junction -Path " + quote(junction) + " -Target " + quote(target) + " | Out-Null"
+    proc = subprocess.run(["powershell", "-NoProfile", "-Command", command], capture_output=True, text=True, timeout=30)
+    assert proc.returncode == 0, proc.stderr
+    assert junction.is_junction() and not junction.is_symlink()
+    with pytest.raises(SecurityError):
+        offline_crawler(root, config, run, resume=location in {"raw", "robots"})
+    assert (target / "sentinel").read_bytes() == b"unchanged" and not (target / "run").exists()
+
+
+def test_r3_real_cli_subprocess_poison_and_cached_parse(tmp_path):
+    root, cfg, config = create_valid_test_env(tmp_path)
+    run = root / config.data_root / "run"
+    normal = make_mock_transport()
+    def bad(req):
+        if req.url.path not in {ROBOTS_PATH, START_PATH}:
+            return httpx.Response(200, headers={"content-type":"text/html"}, content=b"<title>only</title>")
+        return normal.handle_request(req)
+    with pytest.raises(ParseError): offline_crawler(root, config, run, handler=bad).crawl()
+    code = '''import httpx,runpy,sys
+from scholargraph.public_search import site_crawler as m
+original=m.JossCrawler
+class Offline(original):
+ def __init__(self, **kw):
+  def forbid(req): raise AssertionError("Cached parse/poison must fail before HTTP")
+  super().__init__(**kw, client=httpx.Client(transport=httpx.MockTransport(forbid)), dns_resolver=lambda _: ["93.184.216.34"], sleeper=lambda _:None)
+m.JossCrawler=Offline
+sys.argv=sys.argv[1:]
+runpy.run_path(sys.argv[0],run_name="__main__")
+'''
+    env = dict(os.environ); env["PYTHONPATH"] = str(ROOT / "src")
+    args = [PYTHON, "-c", code, str(CLI_PATH), "--project-root", str(root), "--config", str(cfg), "--run-dir", str(run), "--resume"]
+    proc = subprocess.run(args, env=env, capture_output=True, text=True, encoding="utf-8", timeout=30)
+    assert proc.returncode == 1
+    result = json.loads(proc.stderr); assert result["error"]["kind"] == "parse_error" and result["counters"]["pages_fetched"] == 2
+    cp = checkpoint(run); cp["schema_version"] = 42; (run / "checkpoint.json").write_text(json.dumps(cp), encoding="utf-8")
+    proc = subprocess.run(args, env=env, capture_output=True, text=True, encoding="utf-8", timeout=30)
+    assert proc.returncode == 1 and json.loads(proc.stderr)["counters"] is None

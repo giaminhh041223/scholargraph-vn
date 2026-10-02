@@ -87,12 +87,12 @@ def main(argv: list[str] | None = None) -> int:
             if len(q_raw) > 500:
                 raise ValueError("Query length exceeds maximum limit of 500 characters")
 
-        project_root = Path(args.project_root).resolve()
+        project_root = Path(args.project_root).absolute()
         cfg_arg = Path(args.config)
-        cfg_path = cfg_arg if cfg_arg.is_absolute() else (project_root / cfg_arg).resolve()
+        cfg_path = cfg_arg if cfg_arg.is_absolute() else project_root / cfg_arg
 
         run_arg = Path(args.run_dir)
-        run_dir = run_arg if run_arg.is_absolute() else (project_root / run_arg).resolve()
+        run_dir = run_arg if run_arg.is_absolute() else project_root / run_arg
 
         config = load_joss_config(cfg_path)
         crawler = JossCrawler(
@@ -121,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
 
     except Exception as exc:
         err_kind = getattr(exc, "kind", type(exc).__name__)
-        counters = crawler.counters.model_dump() if crawler is not None and hasattr(crawler, "counters") else None
+        counters = crawler.counters.model_dump() if crawler is not None and crawler.checkpoint_loaded else None
         err_payload = {
             "status": "failed",
             "site_id": "joss",
