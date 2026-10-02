@@ -1,0 +1,22 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/unit/test_public_crossref.py",
+    "tests/unit/test_public_site_crawler.py",
+    "tests/unit/test_public_contracts.py",
+    "tests/integration/test_public_routes.py",
+    "tests/unit/test_public_ui_paging.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    ".tmp/phaseb107"
+  ],
+  "elapsed_wall_seconds": 48.50424599999678,
+  "exit_code": 0,
+  "code_commit": "e627fc551fcb917fb6d96890a8ac9fcaf46ce087",
+  "stdout_sha256": "5fd49de8d91e019e559837b1ecbaa503da5213c001acef876022cdf9d94701a7"
+}

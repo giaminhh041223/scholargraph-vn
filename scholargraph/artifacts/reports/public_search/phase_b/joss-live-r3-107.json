@@ -1,0 +1,36 @@
+{
+  "status": "FAIL",
+  "code_commit": "e627fc551fcb917fb6d96890a8ac9fcaf46ce087",
+  "cases": [
+    {
+      "mode": "new",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/crawl_public.py",
+        "--project-root",
+        ".",
+        "--config",
+        "configs/public_site_joss.json",
+        "--run-dir",
+        "data/public_search/joss/runs/live-r3-107"
+      ],
+      "exit_code": 1,
+      "elapsed_wall_seconds": 7.541371600003913,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "fb839c9ab9fb9390e043538c21ff9a7136b688a3bee5abdcd386a0d20a7d4275",
+      "status": "failed",
+      "counters": {
+        "pages_fetched": 2,
+        "links_found": 40,
+        "duplicate_links": 20,
+        "papers_parsed": 0,
+        "unique_papers": 0,
+        "failed_attempted_calls": 0
+      },
+      "error": {
+        "kind": "parse_error",
+        "message": "Forbidden research attribute 'aria-label' detected in paper HTML"
+      }
+    }
+  ]
+}

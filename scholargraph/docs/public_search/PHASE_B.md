@@ -1,6 +1,6 @@
 # Giai đoạn B — Crossref và quét HTML JOSS
 
-Trạng thái: đang triển khai EXT-09/EXT-10; chưa có gate nghiệm thu.
+Trạng thái: EXT-09 DONE (98 tests PASS, Muse review độc lập PASS); EXT-10 đang sửa R3, chưa nghiệm thu live. [Demo CLI](PHASE_B_DEMO.md).
 
 ## Phạm vi
 

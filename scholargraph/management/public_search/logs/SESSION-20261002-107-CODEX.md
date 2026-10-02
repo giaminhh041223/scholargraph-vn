@@ -23,3 +23,10 @@ Dispatch hai implementation không trùng file; chạy tests phá hủy/CLI và 
 - EXT09DONE: MusefreshR1PASS/fileonly + SOLnarrativeCROSSREFpostpilotPASS; codefaf97a5,98testsPASS/root11.28s,5live=3success2HTTP404, originalunchanged.
 - GeminiR2a75e389: root59PASS1FAIL4.67s; independentSOL59PASS1FAIL6.16s. Sixfindings/threeP1 remain; .tmp/jr2107 repros copied into artifacts.
 - SOLauthor /root/crossref_phase_b_107 đã nhậnR3 (issued then immediately recorded); narrowfivepaths, Gemini stopped. Reviewer /root/review_joss_phase_b_107 stopped. No phaseBmastermerge.
+
+## Phản hồi nhãn người
+User: “2 ng label chưa xong chờ nhé”. Giữ SG033 chờ hai người; không tự chấm/không mở test evaluation. Không suy SG030 đã được duyệt. Tiếp tục public crawler; không tạo automation hoặc poll nhãn.
+
+## R3 pin và live
+- e627fc5 R3codepinned; root regression309PASS46.87s/CLI0,2deprecationwarnings, bao gồm213phaseB+96v1continuity.
+- LiveJOSSR3FAIL:robots/listing/firstpaper200, pages2/links40/duplicate20/records0/failedHTTP0; parser falselyrejects aria-label. Historicalrun/raw/reportpreserved, SOLnarrowR4fixassigned afterregressionstopped. Listingfirst08883 thay đổi thật, không pin giả first09260.

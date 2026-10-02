@@ -884,7 +884,7 @@
       "session_id": "/root/crossref_phase_b_107",
       "evidence": [],
       "owner": "SOL",
-      "dispatch_state": "running_r3_fix",
+      "dispatch_state": "running_r4_live_fix",
       "claimed_paths": [
         "src/scholargraph/public_search/site_crawler.py",
         "scripts/crawl_public.py",
@@ -905,13 +905,22 @@
       ],
       "author_fix_exec_session": 85582,
       "unresolved_findings": [
-        "R2-01",
-        "R2-02",
-        "R2-03",
-        "R2-04",
-        "R2-05",
-        "R2-06"
-      ]
+        "LIVE-R3-ARIA-LABEL"
+      ],
+      "delivered_head": "e627fc5",
+      "coordinator_regression": {
+        "passed": 309,
+        "exit_code": 0,
+        "duration_seconds": 46.87,
+        "report": "artifacts/reports/public_search/phase_b/phase-b-regression-107.json"
+      },
+      "live_pilot": {
+        "status": "FAIL",
+        "report": "artifacts/reports/public_search/phase_b/joss-live-r3-107.json",
+        "reason": "aria-label accessibility attribute misclassified as research label",
+        "html_pages": 2,
+        "records": 0
+      }
     }
   ],
   "dispatch_sessions": [

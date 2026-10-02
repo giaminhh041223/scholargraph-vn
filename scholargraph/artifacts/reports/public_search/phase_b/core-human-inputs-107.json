@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-10-01T17:11:59.618073+00:00",
+  "labels_file": "data/annotations/vn_labels.jsonl",
+  "rows": 662,
+  "non_null_labels": 0,
+  "non_null_annotators": 0,
+  "main_board_unchanged": true,
+  "scope": "Only availability/counters checked; no test labels used for public search. User asked for two dev annotation files + SG030 human review note; pending reply.",
+  "user_reply": "2 ng label chưa xong chờ nhé",
+  "user_reply_recorded_at": "2026-10-01T17:22:08.737662+00:00",
+  "next_action": "Wait for two human annotators; continue public crawler only. Do not synthesize labels or confirm SG030 from this reply."
+}

@@ -1,3 +1,9 @@
+# Checkpoint live R3 — crawler sửa R4
+
+CrossrefDONE. JOSSR3codee627fc5/root309PASS46.87s, nhưng liveFAIL do aria-label bị coi là researchlabel; raw/report giữ tại [liveR3](../../artifacts/reports/public_search/phase_b/joss-live-r3-107.json). SOL /root/crossref_phase_b_107 đãnhậnnarrowR4fix, regression đãdừng trướcedit. Next: nhậnR4→pin→pilotmới (không overwriteR3)→reviewđộc lập→gate/docs. Userxácnhận hai ngườilabelchưaxong/chờ; coregatesgiữnguyên.
+
+## Lịch sử
+
 # Checkpoint R3 — 2026-10-02T00:06:36.062427+07:00
 
 EXT09DONE (MusecodePASS, SOLnarrativePASS;98roottests;5livecalls3success2HTTP404). EXT10IN_PROGRESS, ownerSOLauthorR3 /root/crossref_phase_b_107; GeminiR2 đã dừng. Snapshot a75e389 có59PASS1FAIL, [sixfindingR2](reviews/SOL/EXT10-107-R2.md), bao gồm Windowsjunction thật và poisonCLIexit0. ReviewerSOL riêngđãdừng. Next: thuR3/pytest→pin→JOSSlive→review/fix→docs/gate. [Log107](logs/SESSION-20261002-107-CODEX.md). MainSG030/033 cầnngười, phaseBchưa merge.

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "site_id": "joss",
+  "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422",
+  "status": "failed",
+  "created_at": "2026-10-02T02:42:23.554540+00:00",
+  "updated_at": "2026-10-02T02:42:30.365955+00:00",
+  "frontier": [
+    "https://joss.theoj.org/papers/10.21105/joss.08883",
+    "https://joss.theoj.org/papers/10.21105/joss.09260",
+    "https://joss.theoj.org/papers/10.21105/joss.09644",
+    "https://joss.theoj.org/papers/10.21105/joss.10451",
+    "https://joss.theoj.org/papers/10.21105/joss.10973",
+    "https://joss.theoj.org/papers/10.21105/joss.11339",
+    "https://joss.theoj.org/papers/10.21105/joss.10530",
+    "https://joss.theoj.org/papers/10.21105/joss.10963",
+    "https://joss.theoj.org/papers/10.21105/joss.11293",
+    "https://joss.theoj.org/papers/10.21105/joss.10335",
+    "https://joss.theoj.org/papers/10.21105/joss.10900",
+    "https://joss.theoj.org/papers/10.21105/joss.10811",
+    "https://joss.theoj.org/papers/10.21105/joss.10867",
+    "https://joss.theoj.org/papers/10.21105/joss.10410",
+    "https://joss.theoj.org/papers/10.21105/joss.11072",
+    "https://joss.theoj.org/papers/10.21105/joss.09686",
+    "https://joss.theoj.org/papers/10.21105/joss.08972",
+    "https://joss.theoj.org/papers/10.21105/joss.11126",
+    "https://joss.theoj.org/papers/10.21105/joss.10692",
+    "https://joss.theoj.org/papers/10.21105/joss.10067"
+  ],
+  "visited": [
+    {
+      "url": "https://joss.theoj.org/papers/published.html",
+      "raw_sha256": "9a86877e81d77aebb5dd1ddc487215e2e4bb17b86d4a654c889a0b97e1ad23d3",
+      "type": "listing",
+      "retrieved_at": "2026-10-02T02:42:27.520105+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422"
+    },
+    {
+      "url": "https://joss.theoj.org/papers/10.21105/joss.08883",
+      "raw_sha256": "d17c21553d6ad58c4360f3fecf3c4a2cf39daef308580fa490ffef224ccd4c67",
+      "type": "paper",
+      "retrieved_at": "2026-10-02T02:42:30.341241+00:00",
+      "parser_version": "joss-citation-1.0.0",
+      "config_hash": "0e6c2feb005fdd33eb584460b839f2137a5b2aa666caccf9c0da707f7f93c422"
+    }
+  ],
+  "records": [],
+  "counters": {
+    "pages_fetched": 2,
+    "links_found": 40,
+    "duplicate_links": 20,
+    "papers_parsed": 0,
+    "unique_papers": 0,
+    "failed_attempted_calls": 0
+  },
+  "error": {
+    "kind": "parse_error",
+    "message": "Forbidden research attribute 'aria-label' detected in paper HTML"
+  },
+  "fetch_attempts": [
+    {
+      "attempt_id": "8441b4e8-ad1e-4c21-86c3-398bbbe1f435",
+      "url": "https://joss.theoj.org/robots.txt",
+      "retrieved_at": "2026-10-02T02:42:24.628764+00:00",
+      "attempted": true,
+      "success": true,
+      "status_code": 200,
+      "raw_path": "robots/8441b4e8-ad1e-4c21-86c3-398bbbe1f435.txt",
+      "raw_sha256": "2f15987e4606501202b9d337085439339e53a374e3d194847192c12f85ba78f8",
+      "complete_body": true,
+      "error_kind": null
+    },
+    {
+      "attempt_id": "95562aec-2f81-47b7-ab1a-1beea91d7b2a",
+      "url": "https://joss.theoj.org/papers/published.html",
+      "retrieved_at": "2026-10-02T02:42:27.520105+00:00",
+      "attempted": true,
+      "success": true,
+      "status_code": 200,
+      "raw_path": "raw/9a86877e81d77aebb5dd1ddc487215e2e4bb17b86d4a654c889a0b97e1ad23d3.html",
+      "raw_sha256": "9a86877e81d77aebb5dd1ddc487215e2e4bb17b86d4a654c889a0b97e1ad23d3",
+      "complete_body": true,
+      "error_kind": null
+    },
+    {
+      "attempt_id": "1faae87b-463c-44fb-986e-38cfcc05e78b",
+      "url": "https://joss.theoj.org/papers/10.21105/joss.08883",
+      "retrieved_at": "2026-10-02T02:42:30.341241+00:00",
+      "attempted": true,
+      "success": true,
+      "status_code": 200,
+      "raw_path": "raw/d17c21553d6ad58c4360f3fecf3c4a2cf39daef308580fa490ffef224ccd4c67.html",
+      "raw_sha256": "d17c21553d6ad58c4360f3fecf3c4a2cf39daef308580fa490ffef224ccd4c67",
+      "complete_body": true,
+      "error_kind": null
+    }
+  ]
+}

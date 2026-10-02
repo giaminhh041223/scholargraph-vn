@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-02T00:06:36.062427+07:00",
-  "stage": "phase_b_crossref_done_crawler_r3",
+  "updated_at": "2026-10-02T09:43:49.616694+07:00",
+  "stage": "phase_b_joss_live_parser_fix_r4",
   "active_tasks": [
     "EXT-10"
   ],
@@ -24,8 +24,8 @@
     "EXT-10"
   ],
   "next_steps": {
-    "SOL": "AuthorR3 fix sixR2 blockers + execute tests; reviewer separateSOL idle untilsnapshot",
-    "COORDINATOR": "Pin testedR3→JOSSlive→independentreview→packet; preserve corehuman gates"
+    "SOL": "Narrow R4 aria-label parser fix + regression; R3codee627fc5/root309PASS but liveFAIL",
+    "COORDINATOR": "Collect R4→pin→newlive cohort→independent review; historical FAIL retained"
   },
   "last_session_log": "management/public_search/logs/SESSION-20261002-107-CODEX.md",
   "worker_execution_observed": true,

@@ -1,0 +1,17 @@
+{
+  "status": "failed",
+  "site_id": "joss",
+  "run_dir": "D:\\Web_mining_20261\\scholargraph\\data\\public_search\\joss\\runs\\live-r3-107",
+  "error": {
+    "kind": "parse_error",
+    "message": "Forbidden research attribute 'aria-label' detected in paper HTML"
+  },
+  "counters": {
+    "pages_fetched": 2,
+    "links_found": 40,
+    "duplicate_links": 20,
+    "papers_parsed": 0,
+    "unique_papers": 0,
+    "failed_attempted_calls": 0
+  }
+}
