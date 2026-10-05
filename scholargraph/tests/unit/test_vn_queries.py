@@ -14,14 +14,21 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = PROJECT_ROOT / "data" / "annotations" / "vn_query_manifest.json"
+# v1 (SG-031) and v2 (ADR-023, redrafted to match the OpenAlex corpus topics).
+MANIFESTS = {
+    "vn": PROJECT_ROOT / "data" / "annotations" / "vn_query_manifest.json",
+    "vn2": PROJECT_ROOT / "data" / "annotations" / "v2" / "vn_query_manifest.json",
+}
 
 
-@pytest.fixture(scope="module")
-def manifest() -> dict:
-    if not MANIFEST.is_file():
-        pytest.fail(f"Missing VN query manifest: {MANIFEST}")
-    return json.loads(MANIFEST.read_text(encoding="utf-8"))
+@pytest.fixture(scope="module", params=sorted(MANIFESTS))
+def manifest(request) -> dict:
+    path = MANIFESTS[request.param]
+    if not path.is_file():
+        pytest.fail(f"Missing VN query manifest: {path}")
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    doc["_ns"] = request.param
+    return doc
 
 
 def test_status_is_explicitly_approved(manifest):
@@ -50,9 +57,10 @@ def test_intent_families_do_not_span_splits(manifest):
 
 
 def test_query_ids_use_vn_namespace(manifest):
+    ns = manifest["_ns"]
     for q in manifest["queries"]:
         qid = q["query_id"]
-        assert qid.startswith("vn:dev:") or qid.startswith("vn:test:")
+        assert qid == f"{ns}:{q['split']}:{qid.rsplit(':', 1)[1]}"
         # disjoint from BEIR qrels ID namespaces by construction
         assert not qid.startswith("beir:")
 
@@ -60,7 +68,10 @@ def test_query_ids_use_vn_namespace(manifest):
 def test_every_query_has_text_and_domain(manifest):
     for q in manifest["queries"]:
         assert isinstance(q["text_vi"], str) and len(q["text_vi"].strip()) >= 15
-        assert q["topic_domain"] in ("biomed", "scientometrics")
+        if manifest["_ns"] == "vn":
+            assert q["topic_domain"] in ("biomed", "scientometrics")
+        else:
+            assert isinstance(q["topic_domain"], str) and q["topic_domain"]
         assert isinstance(q["intent_family"], str) and q["intent_family"]
 
 

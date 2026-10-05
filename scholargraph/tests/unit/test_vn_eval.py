@@ -157,6 +157,24 @@ def test_vn_eval_freeze_dev_and_eval_test_happy_path(tmp_path: Path) -> None:
     # 3. Simulate human owner approval and run eval-test
     frozen["human_approved"] = True
     fx["frozen"].write_text(json.dumps(frozen), encoding="utf-8")
+
+    # 3a. A different pool than the one pinned at freeze-dev (e.g. v1 vs v2, ADR-023) -> exit 1
+    other_pool = tmp_path / "other_pool.json"
+    other_pool.write_bytes(fx["pool"].read_bytes() + b" ")
+    res_swap = _run_cli(
+        [
+            "--phase", "eval-test",
+            "--labels", str(fx["labels"]),
+            "--pool", str(other_pool),
+            "--methods-config", str(fx["methods"]),
+            "--frozen-out", str(fx["frozen"]),
+            "--report-dir", str(fx["report_dir"]),
+            "--rankings-json", str(fx["rankings"]),
+        ]
+    )
+    assert res_swap.returncode == 1
+    assert "not the pool pinned" in res_swap.stderr
+    assert not (fx["report_dir"] / "vn_results.json").exists()
     res_test = _run_cli(
         [
             "--phase", "eval-test",

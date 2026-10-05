@@ -394,6 +394,8 @@ def main(argv: list[str] | None = None) -> int:
                 "Refusing eval-test: configs/frozen_vn.json does not have human_approved=true "
                 "(requires GM-5 review + human owner approval first)."
             )
+        if frozen_doc["pins"]["vn_pool_sha256"] != _sha256(pool_path):
+            return fail(f"Refusing eval-test: {pool_path} is not the pool pinned at freeze-dev (vn_pool_sha256).")
         selected_method = frozen_doc.get("selected_default_method")
         if selected_method not in POOL_METHODS:
             return fail(f"Invalid selected_default_method in frozen_vn.json: {selected_method!r}")

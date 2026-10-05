@@ -394,9 +394,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </label>
     <label>Tập (Split):
       <select id="splitFilter">
-        <option value="dev">1. Dev (219 cặp — chấm trước)</option>
-        <option value="test">2. Test (443 cặp — sau freeze SG-034)</option>
-        <option value="all">Tất cả (662 cặp)</option>
+        <option value="dev">1. Dev (@@DEV@@ cặp — chấm trước)</option>
+        <option value="test">2. Test (@@TEST@@ cặp — sau freeze SG-034)</option>
+        <option value="all">Tất cả (@@ALL@@ cặp)</option>
       </select>
     </label>
     <label>Hiển thị:
@@ -415,11 +415,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <aside class="sidebar">
     <div class="progress-box">
       <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;">
-        <span id="progressLabel">Tiến độ: 0 / 219</span>
+        <span id="progressLabel">Tiến độ: 0 / @@DEV@@</span>
         <span id="progressPct">0%</span>
       </div>
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-      <div style="font-size:11.5px;color:#64748b;" id="overallStats">Dev: 0/219 | Test: 0/443</div>
+      <div style="font-size:11.5px;color:#64748b;" id="overallStats">Dev: 0/@@DEV@@ | Test: 0/@@TEST@@</div>
     </div>
     <div class="pair-list" id="pairList"></div>
   </aside>
@@ -471,7 +471,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <summary style="font-weight:600;cursor:pointer;">Hướng dẫn nhanh & Quy tắc gán nhãn (ANNOTATION_GUIDE SG-031/SG-033)</summary>
       <ul style="margin:8px 0 0 18px;padding:0;">
         <li><strong>Làm mù hoàn toàn (Blinded):</strong> Thứ tự bài báo đã được xáo trộn ngẫu nhiên (`seed=20260915`) và ẩn hoàn toàn tên thuật toán/điểm số.</li>
-        <li><strong>Chấm độc lập:</strong> Thành viên A và Thành viên B chấm riêng (không xem nhãn của nhau). Chấm xong <strong>219 cặp Dev</strong> trước → bấm <em>"Tải xuống JSONL"</em> gửi lại để tính hệ số đồng thuận Kappa và khóa cấu hình <code>SG-034</code> → sau đó mới chấm <strong>443 cặp Test</strong>.</li>
+        <li><strong>Chấm độc lập:</strong> Thành viên A và Thành viên B chấm riêng (không xem nhãn của nhau). Chấm xong <strong>@@DEV@@ cặp Dev</strong> trước → bấm <em>"Tải xuống JSONL"</em> gửi lại để tính hệ số đồng thuận Kappa và khóa cấu hình <code>SG-034</code> → sau đó mới chấm <strong>@@TEST@@ cặp Test</strong>.</li>
         <li><strong>Phím tắt:</strong> Bấm phím <code>0</code>, <code>1</code>, <code>2</code>, hoặc <code>U</code> để gán nhãn và tự động chuyển sang cặp tiếp theo; phím mũi tên <code>←</code> / <code>→</code> để lùi/tiến. Tiến độ được tự động lưu vào trình duyệt (<code>localStorage</code>).</li>
       </ul>
     </details>
@@ -560,7 +560,7 @@ function renderSidebar() {
 
   const devDone = ALL_PAIRS.filter(p => p.split === 'dev' && getRecord(p).label !== null).length;
   const testDone = ALL_PAIRS.filter(p => p.split === 'test' && getRecord(p).label !== null).length;
-  document.getElementById('overallStats').textContent = `Người chấm ${state.annotator} (${state.round}) — Dev: ${devDone}/219 | Test: ${testDone}/443`;
+  document.getElementById('overallStats').textContent = `Người chấm ${state.annotator} (${state.round}) — Dev: ${devDone}/@@DEV@@ | Test: ${testDone}/@@TEST@@`;
 
   const listEl = document.getElementById('pairList');
   listEl.innerHTML = '';
@@ -696,7 +696,7 @@ document.getElementById('exportSplitBtn').onclick = () => {
   const blob = new Blob([lines.join('\\n') + '\\n'], { type: 'application/x-jsonlines;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `vn_labels_${state.annotator}_${state.splitFilter}.jsonl`;
+  a.download = `@@NS@@_labels_${state.annotator}_${state.splitFilter}.jsonl`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -756,13 +756,13 @@ renderAll();
 
 GUIDE_MD = r"""# Hướng dẫn Gán nhãn Độc lập Truy vấn Tiếng Việt — `SG-033`
 
-Bộ công cụ này đã đóng gói sẵn toàn bộ **30 câu hỏi tiếng Việt** (`10 dev = 219 cặp`, `20 test = 443 cặp`) kèm **tiêu đề + tóm tắt (abstract) đầy đủ** của từng bài báo ứng viên trong một file giao diện duy nhất chạy offline trên trình duyệt.
+Bộ công cụ này đã đóng gói sẵn toàn bộ **@@Q@@ câu hỏi tiếng Việt** (`@@QDEV@@ dev = @@DEV@@ cặp`, `@@QTEST@@ test = @@TEST@@ cặp`) kèm **tiêu đề + tóm tắt (abstract) có trong OpenAlex** của từng bài báo ứng viên (@@NOABS@@ / @@ALL@@ cặp không có abstract — chỉ chấm theo tiêu đề, dùng `U` nếu không đủ thông tin) trong một file giao diện duy nhất chạy offline trên trình duyệt.
 
 ---
 
 ## 1. Cách mở công cụ và gán nhãn (Không cần cài đặt Python)
 
-1. Giải nén file `vn_labeling_kit_SG033.zip` ra một thư mục trên máy tính.
+1. Giải nén file `@@ZIP@@` ra một thư mục trên máy tính.
 2. Nhấp đúp mở file **`label_tool.html`** bằng trình duyệt bất kỳ (Chrome, Edge, Firefox, Brave...).
 3. Trên thanh công cụ màu đen ở góc trên:
    - **Người chấm:**
@@ -770,8 +770,8 @@ Bộ công cụ này đã đóng gói sẵn toàn bộ **30 câu hỏi tiếng V
      - Nếu bạn là Thành viên B: chọn **`Thành viên B (Annotator B)`**.
    - **Vòng chấm:** Giữ mặc định là **`Độc lập (independent)`**.
    - **Tập (Split):**
-     - **BƯỚC 1 (Làm ngay):** Chọn **`1. Dev (219 cặp — chấm trước)`**.
-     - **BƯỚC 2 (Sau khi nhóm đã chạy khóa cấu hình `SG-034`):** Chọn **`2. Test (443 cặp — sau freeze SG-034)`**.
+     - **BƯỚC 1 (Làm ngay):** Chọn **`1. Dev (@@DEV@@ cặp — chấm trước)`**.
+     - **BƯỚC 2 (Sau khi nhóm đã chạy khóa cấu hình `SG-034`):** Chọn **`2. Test (@@TEST@@ cặp — sau freeze SG-034)`**.
 
 ---
 
@@ -782,37 +782,57 @@ Bộ công cụ này đã đóng gói sẵn toàn bộ **30 câu hỏi tiếng V
 - **Phím `2` (`2 — Liên quan trực tiếp`):** Bài báo trả lời trực tiếp và đúng trọng tâm toàn bộ câu hỏi.
 - **Phím `U` (`unjudged — Không đủ thông tin`):** Chỉ dùng khi bài báo khuyết abstract và riêng tiêu đề không đủ để kết luận (ghi ngắn gọn lý do vào ô Note).
 
+> **Lưu ý:** dòng "Bản dịch tham khảo (Opus-MT)" là bản dịch máy và có thể sai nghĩa. Luôn chấm theo **câu hỏi tiếng Việt**.
+
 > **Mẹo thao tác nhanh:** Bạn có thể bấm trực tiếp phím **`0`**, **`1`**, **`2`**, **`U`** trên bàn phím để chấm và tự động nhảy sang bài tiếp theo; dùng phím mũi tên **`←` / `→`** để quay lại hoặc tiến lên. Mọi thao tác được lưu tự động vào trình duyệt (`localStorage`).
 
 ---
 
 ## 3. Xuất file kết quả gửi lại cho nhóm
 
-1. Khi chấm đủ `219 / 219` cặp của tập **Dev**, bấm nút màu xanh **`Tải xuống JSONL (Tập đang chọn)`** ở góc trên bên phải:
-   - Thành viên A sẽ nhận được file `vn_labels_A_dev.jsonl`.
-   - Thành viên B sẽ nhận được file `vn_labels_B_dev.jsonl`.
+1. Khi chấm đủ `@@DEV@@ / @@DEV@@` cặp của tập **Dev**, bấm nút màu xanh **`Tải xuống JSONL (Tập đang chọn)`** ở góc trên bên phải:
+   - Thành viên A sẽ nhận được file `@@NS@@_labels_A_dev.jsonl`.
+   - Thành viên B sẽ nhận được file `@@NS@@_labels_B_dev.jsonl`.
 2. Gửi file `.jsonl` đó về máy chính để chạy kiểm tra độ đồng thuận (Cohen's Kappa) và khóa cấu hình Dev (`SG-034`):
    ```powershell
-   .\.venv\Scripts\python.exe scripts\manage_vn_labels.py merge --file-a vn_labels_A_dev.jsonl --file-b vn_labels_B_dev.jsonl --output data/annotations/vn_labels_dev.jsonl
-   .\.venv\Scripts\python.exe scripts\score_vn_agreement.py --labels data/annotations/vn_labels_dev.jsonl
+   .\.venv\Scripts\python.exe scripts\manage_vn_labels.py merge --file-a @@NS@@_labels_A_dev.jsonl --file-b @@NS@@_labels_B_dev.jsonl --output @@ANN@@/vn_labels_dev.jsonl
+   .\.venv\Scripts\python.exe scripts\score_vn_agreement.py --labels @@ANN@@/vn_labels_dev.jsonl
    ```
-3. Sau khi phân xử các cặp lệch nhãn (nếu có) và chạy `--phase freeze-dev`, hai thành viên tiếp tục chấm **443 cặp Test** và xuất `vn_labels_A_test.jsonl` / `vn_labels_B_test.jsonl`.
+3. Sau khi phân xử các cặp lệch nhãn (nếu có) và chạy `--phase freeze-dev`, hai thành viên tiếp tục chấm **@@TEST@@ cặp Test** và xuất `@@NS@@_labels_A_test.jsonl` / `@@NS@@_labels_B_test.jsonl`.
 """
 
 
 def build_kit(pool_path: Path, works_path: Path, out_dir: Path, zip_path: Path) -> dict[str, Any]:
     enriched = _build_enriched_pool(pool_path, works_path)
+    namespaces = {p["query_id"].split(":")[0] for p in enriched["pools"]}
+    if len(namespaces) != 1:
+        raise ValueError(f"Pool mixes query-ID namespaces {sorted(namespaces)}; one query set per kit")
+    ns = namespaces.pop()
+    n_pairs = {s: sum(len(p["candidates"]) for p in enriched["pools"] if p["split"] == s) for s in ("dev", "test")}
+    n_queries = {s: sum(1 for p in enriched["pools"] if p["split"] == s) for s in ("dev", "test")}
+    try:
+        ann_dir = pool_path.resolve().parent.relative_to(ROOT).as_posix()
+    except ValueError:
+        ann_dir = pool_path.resolve().parent.as_posix()
+    fill = {"@@DEV@@": str(n_pairs["dev"]), "@@TEST@@": str(n_pairs["test"]),
+            "@@ALL@@": str(n_pairs["dev"] + n_pairs["test"]), "@@QDEV@@": str(n_queries["dev"]),
+            "@@QTEST@@": str(n_queries["test"]), "@@Q@@": str(n_queries["dev"] + n_queries["test"]),
+            "@@NOABS@@": str(sum(1 for p in enriched["pools"] for c in p["candidates"] if not c["abstract"])),
+            "@@NS@@": ns, "@@ZIP@@": zip_path.name, "@@ANN@@": ann_dir}
     out_dir.mkdir(parents=True, exist_ok=True)
     tpl_dir = out_dir / "templates"
     tpl_dir.mkdir(parents=True, exist_ok=True)
 
+    html_content, guide_content = HTML_TEMPLATE, GUIDE_MD
+    for k, v in fill.items():
+        html_content, guide_content = html_content.replace(k, v), guide_content.replace(k, v)
     pool_json_str = json.dumps(enriched, ensure_ascii=False)
-    html_content = HTML_TEMPLATE.replace("__POOL_JSON_PLACEHOLDER__", pool_json_str)
+    html_content = html_content.replace("__POOL_JSON_PLACEHOLDER__", pool_json_str)
     html_path = out_dir / "label_tool.html"
     html_path.write_text(html_content, encoding="utf-8")
 
     guide_path = out_dir / "HUONG_DAN_GAN_NHAN.md"
-    guide_path.write_text(GUIDE_MD, encoding="utf-8")
+    guide_path.write_text(guide_content, encoding="utf-8")
 
     for ann in ("A", "B"):
         for split_name in ("dev", "test"):
@@ -834,7 +854,7 @@ def build_kit(pool_path: Path, works_path: Path, out_dir: Path, zip_path: Path) 
                             ensure_ascii=False,
                         )
                     )
-            (tpl_dir / f"vn_labels_{ann}_{split_name}.jsonl").write_text(
+            (tpl_dir / f"{ns}_labels_{ann}_{split_name}.jsonl").write_text(
                 "\n".join(rows) + "\n", encoding="utf-8"
             )
 
@@ -842,11 +862,10 @@ def build_kit(pool_path: Path, works_path: Path, out_dir: Path, zip_path: Path) 
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for file_path in sorted(out_dir.rglob("*")):
             if file_path.is_file():
-                arcname = f"vn_labeling_kit_SG033/{file_path.relative_to(out_dir).as_posix()}"
+                arcname = f"{out_dir.name}/{file_path.relative_to(out_dir).as_posix()}"
                 zf.write(file_path, arcname=arcname)
 
-    dev_pairs = sum(len(p["candidates"]) for p in enriched["pools"] if p["split"] == "dev")
-    test_pairs = sum(len(p["candidates"]) for p in enriched["pools"] if p["split"] == "test")
+    dev_pairs, test_pairs = n_pairs["dev"], n_pairs["test"]
     return {
         "status": "OK",
         "kit_dir": str(out_dir),

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-09-29T12:20:00+07:00",
+  "updated_at": "2026-10-06T00:30:00+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1083,14 +1083,19 @@
         "data/annotations/vn_query_manifest.json",
         "docs/ANNOTATION_GUIDE.md",
         "tests/unit/test_vn_queries.py",
-        "management/logs/SESSION-20260917-053.md"
+        "management/logs/SESSION-20260917-053.md",
+        "data/annotations/v2/vn_query_manifest.json",
+        "management/DECISIONS.md#ADR-023",
+        "management/logs/SESSION-20261005-075.md"
       ],
       "verification": [
         "2026-09-17T23:35+07:00: draft manifest 30 queries (10 dev / 20 test; 5 dev pilot) per Protocol v1 counts; intent families wholly assigned to one split (no paraphrase overlap); query texts drafted from topic taxonomy, not from qrels docs; duplicate-text check in tests.",
         "2026-09-17T23:35+07:00: pytest tests/unit/test_vn_queries.py 6/6 PASS.",
         "2026-09-17: docs/ANNOTATION_GUIDE.md rubric 0/1/2 with worked examples, unjudged rule, 2-annotator kappa workflow per protocol pool/labels config.",
         "PENDING HUMAN GATE (routing human_approval_required=true; card assigns query writing to the two members): project owner must review/edit the draft queries, then approval recorded in manifest provenance.human_approval before SG-032/SG-033 consume.",
-        "2026-09-17T23:55:00+07:00: human approval gate satisfied — project owner approved all 30 queries without edits via in-session question tool ('Duyệt nguyên bản 30 query'); manifest status updated to approved_no_edits with approval recorded in provenance.human_approval. SG-032/SG-033 may consume."
+        "2026-09-17T23:55:00+07:00: human approval gate satisfied — project owner approved all 30 queries without edits via in-session question tool ('Duyệt nguyên bản 30 query'); manifest status updated to approved_no_edits with approval recorded in provenance.human_approval. SG-032/SG-033 may consume.",
+        "2026-10-05T23:44:36+07:00: ADR-023 — bộ query v2 (namespace vn2:) thay v1 cho đánh giá vì nhãn dev v1 cho 6/10 query không có cặp dương nào (corpus là IR/web mining, query v1 là y sinh/trắc lượng). Agent soạn nháp từ số đếm topic tổng hợp, không từ qrels/tài liệu; split hệ thống phân tầng seed 20260915. Chủ dự án duyệt nguyên bản 30 query v2 qua AskUserQuestion ('Duyệt nguyên bản 30 query'); ghi ở provenance.human_approval. Manifest v1 giữ nguyên.",
+        "2026-10-06: pytest tests/unit/test_vn_queries.py 12/12 PASS (v1 + v2)."
       ],
       "claimed_paths": [],
       "note": ""
@@ -1142,7 +1147,7 @@
       "status": "IN_PROGRESS",
       "role": "H",
       "owner": "coordinator/worker-single-chat (tooling only; labels by 2 members)",
-      "session_id": "SESSION-20260921-064",
+      "session_id": "SESSION-20261005-075",
       "estimate_human_hours": 16,
       "dependencies": [
         "SG-025",
@@ -1157,21 +1162,40 @@
         "data/annotations/vn_pool_provenance.json",
         "data/annotations/vn_labels.jsonl",
         "tests/unit/test_vn_pool.py",
-        "management/logs/SESSION-20260921-064.md"
+        "management/logs/SESSION-20260921-064.md",
+        "data/annotations/v2/vn_pool.json",
+        "data/annotations/v2/vn_pool_provenance.json",
+        "data/annotations/v2/vn_labels.jsonl",
+        "data/annotations/v1_dev_labels_raw/",
+        "scripts/manage_vn_labels.py",
+        "tests/unit/test_manage_vn_labels.py",
+        "management/DECISIONS.md#ADR-023",
+        "management/logs/SESSION-20261005-075.md",
+        "scripts/run_vn_eval.py",
+        "tests/unit/test_vn_eval.py",
+        "docs/SUBMISSION_CHECKLIST.md"
       ],
       "verification": [
         "2026-09-21T22:00:00+07:00: Pool mu 30 query (10 dev/20 test), 662 cap duy nhat (<=900, khong can cat giam): top-10 x 3 methods (translated_bm25, multilingual_dense_e5, vn_hybrid_rrf) tren OpenAlex 18.250 works, dedup, shuffle seed 20260915, khong method/score trong dong pool.",
         "2026-09-21T22:00:00+07:00: Template vn_labels.jsonl 662 dong label=null + score_vn_agreement.py (kappa co trong so, raw agreement, confusion; exit 1 khi chua xong). pytest tests/unit/test_vn_pool.py 6/6 PASS.",
-        "PENDING HUMAN WORK: 2 nguoi cham dev pool truoc (SG-034 chon default) roi test pool; kappa truoc adjudication; agent khong bao gio bia nhan."
+        "PENDING HUMAN WORK: 2 nguoi cham dev pool truoc (SG-034 chon default) roi test pool; kappa truoc adjudication; agent khong bao gio bia nhan.",
+        "2026-10-05: Nhãn dev v1 thô của A/B (219 dòng mỗi file) được kiểm tra: A có 1 null (vn:dev:009/W4403990196) + 3 unjudged không note → merge exit 1 (đúng). 438 nhãn: 427×0, 6×1, 1×2; 6/10 query dev không có cặp dương. Preview không chính thức: 210/215 trùng, weighted kappa 0.241 (nghịch lý kappa do prevalence). Lưu nguyên byte tại data/annotations/v1_dev_labels_raw/; không dùng để đánh giá (ADR-023).",
+        "2026-10-05: Pool v2 (ADR-023): build_vn_pool.py --manifest/--cache/--out-dir; 30 pool, 679 cặp (dev 227/test 452), depth 10, cùng 3 method + seed 20260915; v1 pool/manifest/cache và configs/frozen_main.json không đổi.",
+        "2026-10-06: Kit v2 artifacts/vn_labeling_kit_SG033_v2.zip — số đếm/namespace/tên file xuất (vn2_labels_{A|B}_{split}.jsonl) tính từ pool; 74/679 cặp thiếu abstract được nêu trong hướng dẫn. Template 227/452 dòng label=null.",
+        "2026-10-06: pytest test_vn_pool.py 13/13, test_manage_vn_labels.py 4/4 PASS — gồm adversarial: manifest draft/thiếu human_approval/29 query, cache thiếu query/lệch text_vi/mất file → exit 1 và không ghi output; kit pool trộn namespace → exit 1, không tạo thư mục.",
+        "2026-10-06: run_vn_eval.py eval-test exit 1 khi --pool khác pins.vn_pool_sha256 (chống trộn pool v1/v2); test_vn_eval.py 5/5 PASS. docs/SUBMISSION_CHECKLIST.md Bước 2 trỏ lệnh v2.",
+        "PENDING HUMAN WORK (v2): A/B chấm độc lập 227 cặp dev (nên làm 5 query pilot dev:001–005 trước) → merge → score_vn_agreement (kappa trước phân xử) → phân xử → SG-034 freeze-dev → chấm 452 cặp test. Agent không bao giờ bịa nhãn."
       ],
       "claimed_paths": [
         "scripts/build_vn_pool.py",
         "scripts/score_vn_agreement.py",
         "data/annotations/vn_pool.json",
         "tests/unit/test_vn_pool.py",
-        "management/logs/SESSION-20260921-064.md"
+        "management/logs/SESSION-20260921-064.md",
+        "scripts/manage_vn_labels.py",
+        "data/annotations/v2/"
       ],
-      "note": "Agent: pool mu + scaffolding. Nhan + kappa + adjudication: 2 nguoi (gate)."
+      "note": "Agent: pool mù + kit + công cụ. Nhãn + kappa + phân xử: 2 người (gate). Bộ query hiện hành là v2 (ADR-023)."
     },
     {
       "id": "SG-034",

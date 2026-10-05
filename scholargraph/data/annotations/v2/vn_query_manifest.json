@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "vn_query_manifest",
+  "task_id": "SG-031",
+  "query_set_version": "v2",
+  "supersedes": "data/annotations/vn_query_manifest.json (v1, archived; see ADR-023)",
+  "created_at": "2026-10-05T23:30:00+07:00",
+  "status": "approved_no_edits",
+  "protocol_reference": {
+    "query_counts": {
+      "dev": 10,
+      "test": 20,
+      "total": 30
+    },
+    "split_rule": "query_family_intent_groups_no_paraphrase_overlap",
+    "dev_annotation_pilot_queries": 5,
+    "labels_scale": [
+      0,
+      1,
+      2
+    ]
+  },
+  "provenance": {
+    "drafted_by": "Claude Code session SESSION-20261005-075 (agent draft for the human gate)",
+    "method": "Intent families drafted from AGGREGATE OpenAlex primary_topic counts of the frozen corpus (data/processed/openalex/works.jsonl, 18,251 works; top topics: Information Retrieval and Search Behavior 1586, Topic Modeling 1286, Recommender Systems 481, Complex Network Analysis 454, Advanced Text Analysis 451, ...); allocation roughly proportional to topic mass. NOT derived from any qrels entry or corpus document: no individual title/abstract was consulted. Each intent family is assigned wholly to one split.",
+    "split_assignment": "Stratified systematic random split, rng=random.Random(20260915): families grouped by topic_domain (groups in drafted order), shuffled within each group, concatenated; dev = every 3rd family starting at offset rng.randrange(3)=0; rest -> test. Query IDs numbered by drafted order within split; annotation_pilot = first 5 dev IDs. Not hand-picked.",
+    "reason": "v1 dev labels (2026-10-05) showed topic mismatch with the corpus: 6/10 dev queries had no pair graded >=1 by either annotator.",
+    "human_approval": {
+      "approver": "project owner (both members represented by single owner account)",
+      "decision": "Duyệt nguyên bản 30 query",
+      "method": "in-session question tool (AskUserQuestion) in SESSION-20261005-075, answer recorded verbatim",
+      "approved_at": "2026-10-05T23:44:36+07:00",
+      "edits": "none"
+    }
+  },
+  "counts": {
+    "dev": 10,
+    "test": 20,
+    "total": 30,
+    "pilot_dev": 5
+  },
+  "queries": [
+    {
+      "query_id": "vn2:dev:001",
+      "split": "dev",
+      "intent_family": "ir-dense-vs-sparse-ood",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Mô hình truy hồi dày dựa trên BERT có vượt trội BM25 khi truy vấn thuộc miền khác với dữ liệu huấn luyện không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn2:dev:002",
+      "split": "dev",
+      "intent_family": "ir-pseudo-relevance-feedback",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Mở rộng truy vấn bằng phản hồi giả liên quan có cải thiện độ chính xác của kết quả tìm kiếm không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn2:dev:003",
+      "split": "dev",
+      "intent_family": "tm-short-text",
+      "topic_domain": "topic-modeling",
+      "text_vi": "Làm thế nào để mô hình hóa chủ đề hiệu quả trên văn bản ngắn như bài đăng mạng xã hội?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn2:dev:004",
+      "split": "dev",
+      "intent_family": "tm-coherence-evaluation",
+      "topic_domain": "topic-modeling",
+      "text_vi": "Các độ đo coherence tự động có phản ánh đúng đánh giá của con người về chất lượng chủ đề không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn2:dev:005",
+      "split": "dev",
+      "intent_family": "rec-gnn-vs-cf",
+      "topic_domain": "recommender-systems",
+      "text_vi": "Mạng nơ-ron đồ thị có cải thiện chất lượng gợi ý so với lọc cộng tác truyền thống không?",
+      "annotation_pilot": true
+    },
+    {
+      "query_id": "vn2:dev:006",
+      "split": "dev",
+      "intent_family": "net-community-detection",
+      "topic_domain": "complex-network-analysis",
+      "text_vi": "Thuật toán nào phát hiện cộng đồng hiệu quả trong mạng xã hội quy mô lớn?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:dev:007",
+      "split": "dev",
+      "intent_family": "text-summarization-extractive-abstractive",
+      "topic_domain": "natural-language-processing",
+      "text_vi": "Tóm tắt văn bản tự động theo hướng trích rút và theo hướng sinh tóm lược khác nhau về chất lượng như thế nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:dev:008",
+      "split": "dev",
+      "intent_family": "sent-aspect-based",
+      "topic_domain": "sentiment-analysis",
+      "text_vi": "Phân tích cảm xúc theo từng khía cạnh trong đánh giá sản phẩm được thực hiện như thế nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:dev:009",
+      "split": "dev",
+      "intent_family": "gnn-oversmoothing",
+      "topic_domain": "graph-neural-networks",
+      "text_vi": "Vì sao mạng nơ-ron đồ thị nhiều tầng bị hiện tượng làm mượt quá mức và có cách nào khắc phục?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:dev:010",
+      "split": "dev",
+      "intent_family": "sci-coauthorship-productivity",
+      "topic_domain": "scientometrics",
+      "text_vi": "Mạng lưới đồng tác giả ảnh hưởng như thế nào đến năng suất và tác động nghiên cứu của nhà khoa học?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:001",
+      "split": "test",
+      "intent_family": "ir-cross-lingual-retrieval",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Làm thế nào để tìm kiếm tài liệu tiếng Anh bằng câu truy vấn viết bằng một ngôn ngữ khác?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:002",
+      "split": "test",
+      "intent_family": "ir-query-reformulation-behavior",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Người dùng thay đổi cách đặt truy vấn như thế nào khi kết quả tìm kiếm ban đầu không đáp ứng nhu cầu?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:003",
+      "split": "test",
+      "intent_family": "ir-rag-hallucination",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Kết hợp truy hồi tài liệu với mô hình ngôn ngữ lớn có giúp giảm hiện tượng bịa thông tin khi trả lời câu hỏi không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:004",
+      "split": "test",
+      "intent_family": "ir-learning-to-rank-features",
+      "topic_domain": "information-retrieval",
+      "text_vi": "Các phương pháp học xếp hạng sử dụng những đặc trưng nào để sắp xếp kết quả tìm kiếm?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:005",
+      "split": "test",
+      "intent_family": "tm-embedding-vs-lda",
+      "topic_domain": "topic-modeling",
+      "text_vi": "Mô hình chủ đề dựa trên embedding của mô hình ngôn ngữ có tạo ra chủ đề mạch lạc hơn LDA không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:006",
+      "split": "test",
+      "intent_family": "tm-dynamic-topics",
+      "topic_domain": "topic-modeling",
+      "text_vi": "Làm sao theo dõi sự thay đổi của các chủ đề theo thời gian trong một tập văn bản lớn?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:007",
+      "split": "test",
+      "intent_family": "rec-cold-start",
+      "topic_domain": "recommender-systems",
+      "text_vi": "Làm thế nào để gợi ý sản phẩm cho người dùng mới chưa có lịch sử tương tác?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:008",
+      "split": "test",
+      "intent_family": "rec-popularity-bias",
+      "topic_domain": "recommender-systems",
+      "text_vi": "Hệ thống gợi ý có thiên lệch về các sản phẩm phổ biến không và làm sao giảm thiên lệch đó?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:009",
+      "split": "test",
+      "intent_family": "net-link-prediction",
+      "topic_domain": "complex-network-analysis",
+      "text_vi": "Dự đoán liên kết trong mạng phức hợp dựa trên những đặc trưng cấu trúc nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:010",
+      "split": "test",
+      "intent_family": "net-influential-spreaders",
+      "topic_domain": "complex-network-analysis",
+      "text_vi": "Làm thế nào để xác định các nút có ảnh hưởng lớn nhất đến sự lan truyền thông tin trong mạng?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:011",
+      "split": "test",
+      "intent_family": "text-lowresource-classification",
+      "topic_domain": "text-analysis",
+      "text_vi": "Mô hình transformer tiền huấn luyện có cải thiện phân loại văn bản khi có rất ít dữ liệu gán nhãn không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:012",
+      "split": "test",
+      "intent_family": "text-keyphrase-extraction",
+      "topic_domain": "text-analysis",
+      "text_vi": "Các phương pháp tự động trích xuất từ khóa từ bài báo khoa học hoạt động như thế nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:013",
+      "split": "test",
+      "intent_family": "web-usage-mining",
+      "topic_domain": "web-data-mining",
+      "text_vi": "Làm thế nào để khai thác dữ liệu nhật ký truy cập web nhằm hiểu hành vi duyệt web của người dùng?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:014",
+      "split": "test",
+      "intent_family": "sent-low-resource-languages",
+      "topic_domain": "sentiment-analysis",
+      "text_vi": "Phân tích cảm xúc cho các ngôn ngữ ít tài nguyên gặp những khó khăn gì và giải quyết ra sao?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:015",
+      "split": "test",
+      "intent_family": "misinfo-fake-news-detection",
+      "topic_domain": "misinformation",
+      "text_vi": "Các mô hình học máy phát hiện tin giả trên mạng xã hội dựa vào những tín hiệu nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:016",
+      "split": "test",
+      "intent_family": "misinfo-spread-dynamics",
+      "topic_domain": "misinformation",
+      "text_vi": "Tin giả có lan truyền trên mạng xã hội nhanh và rộng hơn tin thật không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:017",
+      "split": "test",
+      "intent_family": "xai-explanations-trust",
+      "topic_domain": "explainable-ai",
+      "text_vi": "Các phương pháp giải thích mô hình học máy như SHAP hay LIME có giúp người dùng tin tưởng dự đoán hơn không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:018",
+      "split": "test",
+      "intent_family": "kg-completion-embeddings",
+      "topic_domain": "semantic-web-ontologies",
+      "text_vi": "Các phương pháp embedding đồ thị tri thức dự đoán quan hệ còn thiếu giữa các thực thể như thế nào?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:019",
+      "split": "test",
+      "intent_family": "biomed-entity-recognition",
+      "topic_domain": "biomedical-text-mining",
+      "text_vi": "Mô hình ngôn ngữ chuyên ngành y sinh có nhận dạng tên thuốc và tên bệnh trong văn bản khoa học tốt hơn mô hình đa dụng không?",
+      "annotation_pilot": false
+    },
+    {
+      "query_id": "vn2:test:020",
+      "split": "test",
+      "intent_family": "spam-phishing-detection",
+      "topic_domain": "spam-phishing-detection",
+      "text_vi": "Học máy phát hiện email lừa đảo dựa trên những đặc trưng nào?",
+      "annotation_pilot": false
+    }
+  ]
+}

@@ -69,7 +69,7 @@ def _make_pool_and_works(tmp_path: Path) -> tuple[Path, Path]:
 
 def test_build_kit_and_merge_happy_path(tmp_path: Path) -> None:
     pool_p, works_p = _make_pool_and_works(tmp_path)
-    kit_dir = tmp_path / "kit"
+    kit_dir = tmp_path / "vn_labeling_kit_SG033"
     zip_path = tmp_path / "kit.zip"
 
     res = _run_cli(
@@ -161,3 +161,42 @@ def test_merge_rejects_null_and_provenance_and_mismatch_exit_1(tmp_path: Path) -
     res_mismatch = _run_cli(["merge", "--file-a", str(fa), "--file-b", str(fb), "--output", str(out)])
     assert res_mismatch.returncode == 1
     assert "Pair mismatch" in res_mismatch.stderr
+
+
+def _rewrite_pool_ids(pool_p: Path, ids: list[str]) -> None:
+    doc = json.loads(pool_p.read_text(encoding="utf-8"))
+    for pool, qid in zip(doc["pools"], ids):
+        pool["query_id"] = qid
+    pool_p.write_text(json.dumps(doc), encoding="utf-8")
+
+
+def test_build_kit_v2_namespace_counts_and_filenames(tmp_path: Path) -> None:
+    pool_p, works_p = _make_pool_and_works(tmp_path)
+    _rewrite_pool_ids(pool_p, ["vn2:dev:001", "vn2:test:001"])
+    kit_dir = tmp_path / "vn_labeling_kit_SG033_v2"
+    zip_path = tmp_path / "vn_labeling_kit_SG033_v2.zip"
+    res = _run_cli(["build-kit", "--pool", str(pool_p), "--works", str(works_p),
+                    "--out-dir", str(kit_dir), "--zip-out", str(zip_path)])
+    assert res.returncode == 0, res.stderr
+    html = (kit_dir / "label_tool.html").read_text(encoding="utf-8")
+    guide = (kit_dir / "HUONG_DAN_GAN_NHAN.md").read_text(encoding="utf-8")
+    assert "@@" not in html and "@@" not in guide
+    assert "Dev (1 cặp" in html and "Tất cả (2 cặp)" in html
+    assert "vn2_labels_${state.annotator}" in html
+    assert "`1 dev = 1 cặp`" in guide and "vn2_labels_A_dev.jsonl" in guide
+    assert "vn_labeling_kit_SG033_v2.zip" in guide
+    with zipfile.ZipFile(zip_path) as zf:
+        names = zf.namelist()
+    assert "vn_labeling_kit_SG033_v2/templates/vn2_labels_B_test.jsonl" in names
+    assert not any("/vn_labels_" in n for n in names)
+
+
+def test_build_kit_rejects_mixed_namespaces_exit_1(tmp_path: Path) -> None:
+    pool_p, works_p = _make_pool_and_works(tmp_path)
+    _rewrite_pool_ids(pool_p, ["vn:dev:001", "vn2:test:001"])
+    kit_dir = tmp_path / "kit_mixed"
+    res = _run_cli(["build-kit", "--pool", str(pool_p), "--works", str(works_p),
+                    "--out-dir", str(kit_dir), "--zip-out", str(tmp_path / "mixed.zip")])
+    assert res.returncode == 1
+    assert "namespaces" in res.stderr
+    assert not kit_dir.exists() and not (tmp_path / "mixed.zip").exists()

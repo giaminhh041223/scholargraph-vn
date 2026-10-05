@@ -30,20 +30,23 @@
 2. Chuyển trạng thái `SG-030` từ `REVIEW` $\to$ `DONE` trong `management/tasks.json`.
 
 ### Bước 2 — Cổng `H-2` & `SG-034` (`SG-033` $\to$ `SG-034` — Gán nhãn Tiếng Việt & Đóng băng VN)
-1. **Gán nhãn Dev trước (`219` cặp):** Hai thành viên gán nhãn độc lập (`0`, `1`, `2`, hoặc `"unjudged"`, `annotator = "A"` và `"B"`, `round = "independent"`) cho 10 truy vấn `dev` trong `data/annotations/vn_labels.jsonl`.
-2. **Đo độ đồng thuận trước thảo luận:**
+> Bộ query hiện hành là **v2** (`vn2:`, [ADR-023](../management/DECISIONS.md)). Nhãn v1 không dùng cho đánh giá. Mặc định của các script vẫn trỏ v1, nên luôn truyền đường dẫn v2 như dưới đây.
+
+1. **Gán nhãn Dev trước (`227` cặp):** Hai thành viên mở `label_tool.html` trong `artifacts/vn_labeling_kit_SG033_v2.zip` (xem `HUONG_DAN_GAN_NHAN.md`) và chấm độc lập 10 truy vấn `dev` (nên làm 5 query pilot `vn2:dev:001`–`005` trước). Kết quả xuất ra là `vn2_labels_A_dev.jsonl` / `vn2_labels_B_dev.jsonl`.
+2. **Gộp và đo độ đồng thuận trước thảo luận:**
    ```powershell
-   .\.venv\Scripts\python.exe scripts\score_vn_agreement.py
+   .\.venv\Scripts\python.exe scripts\manage_vn_labels.py merge --file-a vn2_labels_A_dev.jsonl --file-b vn2_labels_B_dev.jsonl --output data/annotations/v2/vn_labels_dev.jsonl
+   .\.venv\Scripts\python.exe scripts\score_vn_agreement.py --labels data/annotations/v2/vn_labels_dev.jsonl
    ```
 3. **Phân xử bất đồng trên Dev (`round = "adjudicated"`) và chạy khóa cấu hình Dev (`SG-034`):**
    ```powershell
-   .\.venv\Scripts\python.exe scripts\run_vn_eval.py --phase freeze-dev
+   .\.venv\Scripts\python.exe scriptsun_vn_eval.py --phase freeze-dev --pool data/annotations/v2/vn_pool.json --labels data/annotations/v2/vn_labels_dev.jsonl
    ```
    Kiểm tra `configs/frozen_vn.json`, đặt `"human_approved": true` sau khi duyệt.
-4. **Gán nhãn Test (`443` cặp) và chấm điểm Test một lần (`SG-034`):**
+4. **Gán nhãn Test (`452` cặp) và chấm điểm Test một lần (`SG-034`):** Gộp `vn2_labels_{A,B}_test.jsonl` và phân xử như bước 2–3, sau đó chạy `eval-test` với **cùng** `--pool`. Nếu pool khác với pool đã ghim lúc freeze, lệnh sẽ exit 1.
    ```powershell
-   .\.venv\Scripts\python.exe scripts\run_vn_eval.py --phase eval-test
-   .\.venv\Scripts\python.exe scripts\build_evidence_index.py
+   .\.venv\Scripts\python.exe scriptsun_vn_eval.py --phase eval-test --pool data/annotations/v2/vn_pool.json --labels data/annotations/v2/vn_labels_test.jsonl
+   .\.venv\Scripts\python.exe scriptsuild_evidence_index.py
    ```
    Cập nhật bảng Track C trong [final_report.md](../reports/final_report.md) và [CLAIMS_CHECKLIST.md](CLAIMS_CHECKLIST.md), sau đó đóng `SG-033` và `SG-034` sang `DONE`.
 

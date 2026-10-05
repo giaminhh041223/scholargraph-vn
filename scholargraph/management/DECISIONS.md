@@ -244,3 +244,41 @@ Người dùng đã xác nhận demo/save/mở JSON-BibTeX và đồng ý tích 
 ### ADR-022 — Làm rõ ranh giới contract B
 
 Pilot B bàn giao CLI sidecar/collection riêng, trường thư mục tương ứng title/authors/DOI/venue/landing URL và provenance/raw. Thay dòng normalize cùng API trong bản plan sơ bộ: frozen v1 chỉ OpenAlex/arXiv, chưa nhập JOSS/Crossref vào search/library UI. Mở rộng enum/API/UI là task contract upgrade mới khi được giao, không tự coi CLI là UIintegration. Crawler→Crossref nối DOI, không truyền JossPaperRecord vào --record-json yêu cầu PaperRecordv1. Đây là quyết định triển khai hẹp để giữ releaseA đang được dùng; ghi rõ trong packet.
+
+
+## ADR-023 — 2026-10-05 — Bộ 30 câu hỏi VN v2 khớp chủ đề corpus OpenAlex (SG-031/SG-033)
+
+**Trạng thái:** accepted. Chủ dự án chọn phương án (b) và duyệt nguyên bản 30 query v2 qua AskUserQuestion trong SESSION-20261005-075 (2026-10-05T23:44:36+07:00).
+
+**Căn cứ (nhãn dev v1 thô của A/B, chưa phân xử):**
+- Mỗi file có 219 dòng. A có 1 nhãn `null` (`vn:dev:009`/`W4403990196`) và 3 nhãn `unjudged` không kèm note. B không có dòng nào thiếu.
+- Tổng hợp 438 nhãn: 427 nhãn `0`, 6 nhãn `1`, 1 nhãn `2`. Có 6/10 query dev (004–009) mà cả hai người đều không chấm cặp nào ≥1.
+- Trên 215 cặp cả hai cùng chấm số, 210 cặp trùng nhau. Bản xem trước không chính thức cho weighted kappa 0.241. Đây là nghịch lý kappa do tỉ lệ dương quá thấp.
+- Nguyên nhân: v1 hỏi về y sinh/trắc lượng khoa học, trong khi corpus OpenAlex (18.251 works, topic ghim T10286 + mở rộng trích dẫn) chủ yếu thuộc IR/web mining.
+- Không ghép (merge) được nhãn v1 (exit 1 do có nhãn null). Hai file thô được lưu nguyên byte làm bằng chứng tại `data/annotations/v1_dev_labels_raw/`:
+  - A sha256 `099ea1c5…a998`
+  - B sha256 `7d3e997b…8660`
+
+**Quyết định:**
+1. **Bộ query v2.** Agent soạn nháp 30 query từ số đếm topic tổng hợp của corpus, KHÔNG suy ra từ qrels hay tài liệu cụ thể nào.
+   - Chia split theo cách hệ thống có phân tầng, seed `20260915`. Intent family không vượt split; 5 query pilot thuộc dev.
+   - Namespace `vn2:` để không trùng khóa với v1.
+   - Đường dẫn: `data/annotations/v2/` (manifest, pool, provenance, template nhãn), cache dịch `data/processed/vn/translations_cache_v2.json` (sha `72b9e44e…0f92`).
+2. **Giữ nguyên các file v1 và main freeze.** Không sửa:
+   - `data/processed/vn/translations_cache.json` (sha `0ccd119d…bf5c`, đang được ghim trong `configs/frozen_main.json`)
+   - manifest, pool và nhãn v1
+   - `configs/frozen_main.json`
+   
+   SHA của manifest/cache v2 được ghi trong `inputs` của pool v2 và sẽ được ghi vào `frozen_vn.json` khi chạy SG-034.
+3. **Pool v2.** `build_vn_pool.py` nhận thêm `--manifest`, `--cache`, `--out-dir` (mặc định vẫn là đường dẫn v1). Bổ sung FAIL khi `text_vi` trong cache lệch với manifest.
+   - Kết quả: 30 pool, 679 cặp (dev 227 / test 452), depth 10, cùng 3 phương pháp và cùng seed như v1.
+4. **Kit gán nhãn v2.** `manage_vn_labels.py build-kit` tính số cặp/query, namespace, tên zip và số cặp thiếu abstract trực tiếp từ pool. File xuất có dạng `vn2_labels_{A|B}_{split}.jsonl`. Pool trộn nhiều namespace → FAIL.
+   - Kit tại `artifacts/vn_labeling_kit_SG033_v2.zip`, không phải nguồn sự thật, có thể build lại.
+5. **Chất lượng dịch máy.** Opus-MT dịch sai một số query v2 (dev:001, dev:007, test:017). Bản dịch chỉ là tham khảo; người chấm luôn chấm theo câu tiếng Việt.
+   - Pool vẫn có nhánh dense e5 đa ngữ chạy trực tiếp trên câu tiếng Việt.
+   - Hạn chế này phải được nêu trong báo cáo SG-034.
+
+**Hệ quả:**
+- Nhãn v1 không được dùng cho đánh giá; chỉ giữ làm bằng chứng cho quyết định này.
+- SG-033 làm lại trên v2: A/B chấm độc lập 227 cặp dev → merge → `score_vn_agreement.py` → phân xử → SG-034 `freeze-dev` (chạy với `--pool data/annotations/v2/vn_pool.json --labels data/annotations/v2/vn_labels_dev.jsonl`) → sau đó mới chấm test.
+- Nên chấm 5 query pilot (dev:001–005) trước để kiểm tra tỉ lệ dương.

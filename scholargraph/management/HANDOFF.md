@@ -6,6 +6,24 @@ Nhánh mở rộng đã fast-forward vào master local theo xác nhận demo/sav
 
 NEXT_TASK: SG-034
 
+## SG-033 làm lại trên bộ query v2 (ADR-023) — 2026-10-06T00:30:00+07:00
+
+- **Vì sao:** nhãn dev v1 của A/B có 6/10 query không có cặp dương nào (427/434 nhãn số là 0), vì query v1 là y sinh/trắc lượng còn corpus là IR/web mining. A có 1 null nên merge v1 exit 1 (đúng). File thô lưu nguyên byte tại `data/annotations/v1_dev_labels_raw/`, không dùng để đánh giá.
+- **Đã làm ([log 075](logs/SESSION-20261005-075.md)):**
+  - Bộ 30 query v2 `vn2:` đã được chủ dự án duyệt nguyên bản.
+  - Pool v2: 679 cặp (dev 227/test 452) tại `data/annotations/v2/`.
+  - Kit `artifacts/vn_labeling_kit_SG033_v2.zip`, file xuất `vn2_labels_{A|B}_{split}.jsonl`.
+  - v1 và `configs/frozen_main.json` không đổi. Test liên quan PASS.
+- **Lưu ý:** bản dịch Opus-MT sai ở dev:001, dev:007 và test:017 → người chấm luôn chấm theo câu tiếng Việt. 74/679 cặp không có abstract.
+- **Bước tiếp theo (người):**
+  1. A/B chấm độc lập 227 cặp dev (5 query pilot dev:001–005 trước).
+  2. Merge vào `data/annotations/v2/vn_labels_dev.jsonl`, rồi chạy `score_vn_agreement.py` trước khi phân xử.
+  3. Phân xử, rồi chạy SG-034 `freeze-dev` với **tham số tường minh** `--pool data/annotations/v2/vn_pool.json --labels data/annotations/v2/vn_labels_dev.jsonl` (mặc định của `run_vn_eval.py` vẫn trỏ v1).
+  4. Chấm test.
+- **Thêm (bảo vệ khỏi trộn v1/v2):** `run_vn_eval.py --phase eval-test` giờ exit 1 nếu `--pool` khác `pins.vn_pool_sha256` đã ghim lúc freeze-dev (có test). Đã cập nhật Bước 2 của `docs/SUBMISSION_CHECKLIST.md` sang lệnh v2.
+- **Còn lệch (để SG-043/SG-044 sửa khi chốt báo cáo, cần chủ dự án duyệt):** `reports/final_report.md`, `docs/CLAIMS_CHECKLIST.md` (CLM-008), `reports/defense_slides.md`, `docs/DEFENSE_QA.md` và `docs/REPRODUCE.md` vẫn ghi pool v1 662 cặp (219/443) → phải đổi sang v2 679 cặp (227/452) và nêu ADR-023.
+- **Chưa làm:** `scripts/check_project.ps1` (người dùng chạy).
+
 ## G4 Phần Agent Hoàn tất (`CX-3`, `CX-4`, `GM-6` sẵn sàng 100%; chờ cổng con người `H-1`..`H-3`) — 2026-09-29T16:19:00+07:00
 
 - **CX-3 (`SG-034` CLI — [log 073](logs/SESSION-20260929-073-CODEX.md)):** Đã xây dựng [run_vn_eval.py](../scripts/run_vn_eval.py) với 2 pha tách biệt (`--phase freeze-dev` chỉ đọc dev, chọn cấu hình qua `select_best` và ghi `configs/frozen_vn.json` với `human_approved=false`; `--phase eval-test` bắt buộc `human_approved=true` rồi mới chấm test 1 lần và xuất `vn_results.json/.md`). Kèm 5 kiểm thử đơn vị & phá hủy trong [test_vn_eval.py](../tests/unit/test_vn_eval.py).

@@ -14,7 +14,8 @@ Outputs:
   data/annotations/vn_pool.json            (blinded pools + metadata)
   data/annotations/vn_pool_provenance.json  (sealed method mapping, SG-034 only)
   data/annotations/vn_labels.jsonl          (empty template for the members)
-Usage: build_vn_pool.py [--depth 10] [--seed 20260915]
+Usage: build_vn_pool.py [--depth 10] [--seed 20260915] [--manifest M] [--cache C] [--out-dir D]
+(defaults = v1 paths; query set v2 per ADR-023 passes data/annotations/v2/... explicitly)
 Exit 1 on any fatal problem (unapproved manifest, incomplete cache, drift).
 """
 
@@ -51,22 +52,25 @@ def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def load_inputs() -> tuple[list[dict], dict[str, dict], dict]:
+def load_inputs(manifest_path: Path, cache_path: Path) -> tuple[list[dict], dict[str, dict], dict]:
     from scholargraph.retrieval.cross_lingual import load_approved_manifest
 
-    manifest = load_approved_manifest(ROOT / "data/annotations/vn_query_manifest.json")
+    manifest = load_approved_manifest(manifest_path)
     if manifest.get("status") != "approved_no_edits":
         raise RuntimeError(
             f"Query manifest not human-approved (status={manifest.get('status')!r}); refusing pool.")
     queries = manifest["queries"]
     if len(queries) != 30:
         raise RuntimeError(f"Expected 30 approved queries, got {len(queries)}")
-    cache = json.loads((ROOT / "data/processed/vn/translations_cache.json").read_text(encoding="utf-8"))
+    cache = json.loads(cache_path.read_text(encoding="utf-8"))
     entries = cache.get("entries", {})
     missing = [q["query_id"] for q in queries if q["query_id"] not in entries
                or not str(entries[q["query_id"]].get("text_en", "")).strip()]
     if missing:
         raise RuntimeError(f"Translation cache incomplete for {len(missing)} queries")
+    drift = [q["query_id"] for q in queries if entries[q["query_id"]].get("text_vi") != q["text_vi"]]
+    if drift:
+        raise RuntimeError(f"Translation cache text_vi differs from manifest for {drift[:3]}")
     for q in queries:
         if not str(q.get("text_vi", "")).strip():
             raise RuntimeError(f"Empty text_vi for {q['query_id']}")
@@ -131,10 +135,10 @@ def retrieve_multilingual_dense(queries: list[dict]) -> tuple[dict[str, list[str
                  "model_id": cfg["model_id"], "revision": cfg["revision"]}
 
 
-def build_pools(depth: int, seed: int) -> dict:
+def build_pools(depth: int, seed: int, manifest_path: Path, cache_path: Path) -> dict:
     if depth < 1 or depth > 100:
         raise RuntimeError(f"Pool depth must be within [1, 100], got {depth!r}")
-    queries, entries, manifest = load_inputs()
+    queries, entries, manifest = load_inputs(manifest_path, cache_path)
     bm25_orders, bm25_info = retrieve_translated_bm25(queries, entries)
     dense_orders, dense_info = retrieve_multilingual_dense(queries)
     from scholargraph.retrieval.hybrid import rrf_fuse
@@ -182,20 +186,23 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Build blinded VN pools (SG-033 tooling)")
     ap.add_argument("--depth", type=int, default=10)
     ap.add_argument("--seed", type=int, default=POOL_SEED)
+    ap.add_argument("--manifest", default="data/annotations/vn_query_manifest.json")
+    ap.add_argument("--cache", default="data/processed/vn/translations_cache.json")
+    ap.add_argument("--out-dir", default="data/annotations")
     args = ap.parse_args(argv)
     try:
         if args.seed != POOL_SEED:
             raise RuntimeError(f"Pool seed pinned to {POOL_SEED}; refusing {args.seed}")
         t0 = time.time()
-        built = build_pools(args.depth, args.seed)
-        outdir = ROOT / "data" / "annotations"
+        manifest_path, cache_path, outdir = (ROOT / args.manifest, ROOT / args.cache, ROOT / args.out_dir)
+        built = build_pools(args.depth, args.seed, manifest_path, cache_path)
         for name in ("vn_pool.json", "vn_pool_provenance.json", "vn_labels.jsonl"):
             if (outdir / name).exists():
                 raise RuntimeError(
                     f"Refusing to overwrite {name} (labels may already be filled); "
                     "move it aside with a versioned name first.")
-        manifest_sha = _sha(ROOT / "data/annotations/vn_query_manifest.json")
-        cache_sha = _sha(ROOT / "data/processed/vn/translations_cache.json")
+        manifest_sha = _sha(manifest_path)
+        cache_sha = _sha(cache_path)
         meta = {"schema_version": 1, "task_id": TASK_ID, "module_version": MODULE_VERSION,
                 "generated_at": datetime.now(timezone.utc).isoformat(),
                 "methods": list(POOL_METHODS), "depth": args.depth, "seed": args.seed,
@@ -203,8 +210,8 @@ def main(argv: list[str] | None = None) -> int:
                 "blinding_note": "Pool rows carry no method/score provenance. "
                                  "Provenance lives ONLY in vn_pool_provenance.json, "
                                  "which must stay hidden until SG-034 analysis.",
-                "inputs": {"vn_query_manifest_sha256": manifest_sha,
-                           "translations_cache_sha256": cache_sha},
+                "inputs": {"vn_query_manifest": args.manifest, "vn_query_manifest_sha256": manifest_sha,
+                           "translations_cache": args.cache, "translations_cache_sha256": cache_sha},
                 "counts": {"queries": len(built["pools"]),
                            "dev": sum(1 for p in built["pools"] if p["split"] == "dev"),
                            "test": sum(1 for p in built["pools"] if p["split"] == "test"),
