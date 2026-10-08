@@ -1,0 +1,29 @@
+{
+  "status": "PASS_SCHEMA_COVERAGE_ONLY",
+  "pairs": 227,
+  "queries": 10,
+  "missing_abstracts": 22,
+  "labels": {
+    "1": 106,
+    "0": 80,
+    "unjudged": 22,
+    "2": 19
+  },
+  "checkpoints": {
+    "vn2_dev_001.jsonl": 26,
+    "vn2_dev_002.jsonl": 24,
+    "vn2_dev_003.jsonl": 25,
+    "vn2_dev_004.jsonl": 24,
+    "vn2_dev_005.jsonl": 21,
+    "vn2_dev_006.jsonl": 18,
+    "vn2_dev_007.jsonl": 25,
+    "vn2_dev_008.jsonl": 22,
+    "vn2_dev_009.jsonl": 22,
+    "vn2_dev_010.jsonl": 20
+  },
+  "output_sha256": "10d376b3c7a818e2a9954770150af2d7cfcaae42e46433f9d69f3557f1d3e294",
+  "independent": true,
+  "human_comparison": "not_run",
+  "machine_B_comparison": "not_run",
+  "scope": "machine experiment; not SG-033 human completion"
+}

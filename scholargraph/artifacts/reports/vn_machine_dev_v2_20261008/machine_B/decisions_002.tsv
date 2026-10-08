@@ -1,0 +1,24 @@
+unjudged|Thiếu abstract; không thể kết luận từ tên nghiên cứu chatbot.
+1|Đánh giá click và query quá khứ trong feedback phiên tìm kiếm, khác phản hồi giả liên quan.
+unjudged|Không có abstract để xác định kỹ thuật và hiệu quả truy hồi.
+1|Implicit feedback từ người dùng cải thiện xếp hạng web 31%, chưa kiểm tra mở rộng query bằng PRF.
+1|So query expansion tự động/tương tác bằng feedback người dùng; không xác lập PRF.
+1|Neural metasearch dùng relevance feedback người dùng để tăng precision, khác PRF query expansion.
+1|Metasearch dựa tương tác và feedback người dùng, không đo mở rộng truy vấn PRF.
+2|PRF từ corpus ngoài cải thiện NDCG@10 cho sparse/dense trên sáu tập zero-shot.
+0|Phân tích false positive trong phát hiện xâm nhập CAN xe, không nghiên cứu tìm kiếm thông tin.
+0|So độ đúng câu trả lời ChatGPT/Google, không kiểm tra PRF hay mở rộng query.
+1|Feedback câu hỏi/ý nghĩa/khái niệm cải thiện truy hồi, có kết hợp PRF nhưng không tách hiệu quả PRF.
+1|Feedback tương tác cải thiện QA sau triển khai, không mở rộng query bằng giả liên quan.
+1|Khảo sát gợi ý tìm kiếm liên quan dùng feedback và knowledge graph, thiếu đánh giá PRF.
+1|Cá nhân hóa xếp hạng qua feedback người dùng bằng RL, khác mở rộng query PRF.
+1|Dự đoán intent/query từ feedback dương và âm người dùng, không đánh giá PRF.
+0|Tóm tắt trích rút bằng học sâu/RL/MMR, không đánh giá kết quả tìm kiếm PRF.
+1|RLPS tăng chất lượng cá nhân hóa từ feedback thời gian thực, không dùng giả liên quan mở rộng query.
+1|Mô hình hành vi/click dự đoán sở thích kết quả, không đánh giá PRF query expansion.
+1|Lọc metadata tăng tỷ lệ tài liệu liên quan trong RAG, khác cơ chế PRF mở rộng truy vấn.
+1|Bảng tag hỗ trợ mở rộng phạm vi tìm kiếm tương tác, không đo PRF.
+1|Đo độ tin cậy feedback click/query reformulation; không đánh giá mở rộng bằng PRF.
+1|Query expansion dùng embedding cải thiện khảo sát người dùng, chưa có phản hồi giả liên quan.
+1|Relevance feedback với thông tin liên quan một phần tăng hiệu quả, không xác nhận PRF query expansion.
+1|Lọc spam tăng precision các run web/feedback, chưa đo đóng góp mở rộng query PRF.

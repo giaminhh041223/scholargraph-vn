@@ -1,0 +1,24 @@
+1|NND tương quan đánh giá người tốt hơn metric NLG, nhưng không đo coherence của topic model.
+0|Chấm ý tưởng bài luận bằng concept map, không kiểm định coherence chủ đề với đánh giá người.
+0|Đánh giá kỹ năng trị liệu từ speech/language, khác chất lượng topic model.
+unjudged|Không có abstract để xác định nội dung đánh giá subtopic.
+1|Dùng hai coherence metric cho topic giải thích recommendation, chưa đối chiếu đánh giá con người.
+0|Đo chất lượng tóm tắt bằng ROUGE, không kiểm định topic coherence với người.
+0|Người đánh giá câu trả lời và gaze/highlighting, không đánh giá chủ đề hoặc coherence metric.
+1|Coherence metric và human evaluation cùng đánh giá caption, nhưng khác topic model và không đo tương quan trực tiếp.
+unjudged|Thiếu abstract; không suy nội dung từ tiêu đề hội thảo.
+unjudged|Thiếu abstract để đánh giá properties/coherence và quan hệ với nhãn người.
+2|Coherence từ mạng co-occurrence kiểm định thống kê tương quan human judgement hơn metric hiện có trên corpus thật.
+1|Dùng entropy làm bằng chứng coherence của nhóm khi thiếu ground truth, không xác minh human topic quality.
+0|Tạo nhãn bài luận Arab bằng phối hợp human–AI, không kiểm định topic coherence.
+0|Thông báo mời bài về tương tác thông tin, không có thí nghiệm metric chủ đề.
+0|So mô hình phát hiện xe, không có đánh giá chất lượng chủ đề.
+0|Đánh giá độ tin cậy tài nguyên QA TREC, khác coherence topic và phán xét người.
+1|Metric domainness tương quan đánh giá người về corpus miền, khác coherence của topic model.
+1|Kiểm định hạn chế neural discourse coherence qua bốn nhiệm vụ, khác topic coherence/human quality.
+1|Đề xuất specificity/noise dial đo topic quality và hữu ích retrieval, chưa đối chiếu đánh giá người.
+1|ROUGE là proxy thô và human preferences cải thiện summary, không kiểm định coherence topic.
+0|Kiểm lỗi annotation NLP và knowledge extraction bằng gold người, không đo topic coherence.
+1|Đánh giá summary của người chịu ảnh hưởng nhân khẩu học, chưa xét coherence topic tự động.
+1|Metric NDCG cho LLM gần ranking oracle hơn, khác topic coherence và không có human judgement trực tiếp.
+0|Xếp hạng ảnh hưởng microblog bằng interest similarity/dissemination, không đánh giá coherence chủ đề.

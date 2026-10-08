@@ -1,0 +1,82 @@
+{
+  "synthetic": true,
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "valid_title_only_unjudged",
+      "exit_code": 0
+    },
+    {
+      "case": "null",
+      "exit_code": 1
+    },
+    {
+      "case": "bool",
+      "exit_code": 1
+    },
+    {
+      "case": "out_of_bounds",
+      "exit_code": 1
+    },
+    {
+      "case": "title_only_graded",
+      "exit_code": 1
+    },
+    {
+      "case": "test_split",
+      "exit_code": 1
+    },
+    {
+      "case": "human_identity",
+      "exit_code": 1
+    },
+    {
+      "case": "leakage",
+      "exit_code": 1
+    },
+    {
+      "case": "empty_reason",
+      "exit_code": 1
+    },
+    {
+      "case": "missing_required_field",
+      "exit_code": 1
+    },
+    {
+      "case": "duplicate_pair",
+      "exit_code": 1
+    },
+    {
+      "case": "malformed_json",
+      "exit_code": 1
+    },
+    {
+      "case": "missing_label_file",
+      "exit_code": 1
+    },
+    {
+      "case": "missing_title",
+      "exit_code": 1
+    },
+    {
+      "case": "missing_query_text",
+      "exit_code": 1
+    },
+    {
+      "case": "malformed_abstract",
+      "exit_code": 1
+    },
+    {
+      "case": "input_test_split",
+      "exit_code": 1
+    },
+    {
+      "case": "input_leakage",
+      "exit_code": 1
+    },
+    {
+      "case": "missing_input_resource",
+      "exit_code": 1
+    }
+  ]
+}

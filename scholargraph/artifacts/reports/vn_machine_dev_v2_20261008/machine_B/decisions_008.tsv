@@ -1,0 +1,22 @@
+2|Topic model tách co-occurrence câu/document để nhận diện thuộc tính sản phẩm, inference network dự đoán rating từng thuộc tính.
+1|Phân biệt sentiment coarse/fine-grained trong product reviews, nhưng abstract bị cắt trước giải pháp cụ thể.
+1|Tutorial ML/deep learning sentiment trên review e-commerce Brazil, chưa mô tả phân tích theo khía cạnh.
+0|Ưu tiên yêu cầu cảm xúc/usability trong thiết kế sản phẩm, không sentiment mining review.
+0|Text/network analysis chuẩn học tập cảm xúc CASEL, không review sản phẩm.
+0|Đo cảm xúc khuôn mặt trong tìm kiếm tương tác, không ABSA review sản phẩm.
+unjudged|Không có abstract để xác định cách sentiment analysis.
+2|Fine-tune BERT/Bi-GRU trích sentiment khía cạnh từ 10.021 review Việt, sau đó XGBoost dự đoán satisfaction.
+1|Xếp review theo helpfulness gồm emotional intensity/specificity, không phân loại sentiment từng khía cạnh.
+1|Biểu diễn sentiment heterogeneous theo thời gian để quyết định sản phẩm, chưa mô tả extraction sentiment từng aspect.
+1|Survey kỹ thuật trích khía cạnh ngầm phục vụ ABSA, chưa mô tả bước xác định polarity theo khía cạnh.
+1|Information gain tìm từ khách quan tâm và đo satisfaction theo review/rating, chưa ABSA rõ ràng.
+0|LeCAR retrieval specification ô tô từ query/context, không sentiment của review.
+2|MABST kết hợp Albert/DistillBERT/Electra/XLNet để trích sentiment khía cạnh đa ngôn ngữ review mỹ phẩm.
+unjudged|Abstract rỗng; không suy phương pháp từ tiêu đề preference sản phẩm.
+unjudged|Abstract rỗng; chưa đủ thông tin về sentiment/clustering review.
+0|Dự đoán effort phần mềm từ UML/regression, không cảm xúc đánh giá sản phẩm.
+1|Survey aspect extraction supervised/unsupervised/semi-supervised và metric, chỉ giải quyết bước extraction của ABSA.
+unjudged|Không có abstract để đánh giá quy trình NLP review.
+2|CESC kết hợp word segmentation, LSTM sentiment và LDA feature clustering để tìm thuộc tính/attitude review sản phẩm.
+1|MAN self/position attention trích sentiment aspect/overall từ review TripAdvisor không tag; khác miền review sản phẩm.
+2|LDA trích topic review phim, BERT phân loại sentiment gắn topic để biểu diễn feature sản phẩm/người dùng.

@@ -1,3 +1,17 @@
+# Máy chấm dev v2 đã hoàn tất — 2026-10-08T13:49:39.757091+07:00
+
+Hai subagent chấm độc lập 227 cặp dev v2 mỗi agent; [báo cáo](../artifacts/reports/vn_machine_dev_v2_20261008/REPORT.md), [CSV bất đồng](../artifacts/reports/vn_machine_dev_v2_20261008/disagreements.csv), [log108](logs/SESSION-20261008-108-CODEX.md). 196/205 cặp có nhãn số trùng (95,61%), kappa0,931;22cặp cùngunjudged,9bấtđồng. Hai context cùng requested SOL/high, runtime telemetryunknown; không là gold/humanlabels. 7protected hashes giữ nguyên. Agentsđãdừng, experimentcompleted.
+
+**Next:** A/B người chấm devv2 độc lập theo kit; khi có cùng227cặp mới đối chiếu human–machine. Nhãnngười v1 không dùng để so v2. SG033IN_PROGRESS, SG034TODO và maincoregates giữ nguyên. Không tune/freeze/evaltest từnhãnmáy. CheckerPASS sau sửa metadata cũ và enum session; chi tiếtlog108.
+
+## Lịch sử checkpoint thử nghiệm
+
+# Thử nghiệm máy chấm dev v2 — 2026-10-08T13:45:27.926917+07:00
+
+Người dùng yêu cầu hai subagent chấm độc lập 227 cặp dev v2. Experiment nằm [artifacts/reports/vn_machine_dev_v2_20261008](../artifacts/reports/vn_machine_dev_v2_20261008); [SESSION-20261008-108-CODEX](logs/SESSION-20261008-108-CODEX.md). Hai machine raters đang chạy, mỗi agent chỉ ghi file riêng; không thay human SG-033/SG-034. Input có 22 abstract thiếu → unjudged. Next: nhận hai file → kiểm/đo agreement → báo cáo. Human v2 chưa có, không so trực tiếp nhãn v1.
+
+## Bàn giao trước thử nghiệm
+
 # Public search đã tích hợp — 2026-10-01T23:13:32.489133+07:00
 
 Nhánh mở rộng đã fast-forward vào master local theo xác nhận demo/save/JSON-BibTeX của người dùng. [Handoff extension](public_search/HANDOFF.md), [gate106](public_search/reviews/COORDINATOR/INTEGRATION-FINAL-GATE-106.md).96tests sau merge PASS;155resourcehashes và33corefreeze khớp. Mainboard SG030/033 và H1–H3 giữ nguyên; xác nhận public demo không xác nhận labels/evaluation nghiên cứu. EXT09/10DEFERRED. Next coretask vẫn theo phần G4 dưới đây.

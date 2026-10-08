@@ -1,0 +1,12 @@
+{
+  "status": "PASS_COUNTS_AND_HASHES",
+  "graded_n": 205,
+  "independent_kappa": 0.9307198377830348,
+  "human_correctness": "NOT_MEASURED",
+  "checker": {
+    "exit_code": 0,
+    "tasks": 53,
+    "local_links": 603,
+    "warning": "SG-034 awaits SG-033"
+  }
+}

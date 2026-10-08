@@ -1,0 +1,20 @@
+unjudged|Abstract rỗng; không suy mức liên quan từ title giao thông.
+1|Số tác giả/uy tín/quốc gia hợp tác liên quan citation impact theo ngành, chưa đo cấu trúc đồng tác giả và năng suất.
+0|Ảnh hưởng early adopters trong GitHub, không nghiên cứu năng suất/tác động khoa học.
+1|Đo khoảng cách xã hội/địa lý/nhận thức trong collaboration và khả năng hợp tác, chưa đo năng suất/citation impact.
+unjudged|Không có abstract để kết luận nội dung diffusion sản phẩm.
+unjudged|Thiếu abstract; không suy nội dung từ title chatbot.
+1|Dùng dịch vụ thông tin tăng lượng/chất lượng công việc nhà khoa học Ghana, chưa xét mạng đồng tác giả.
+1|Tổng quan/visualization mạng hợp tác/citation hỗ trợ đánh giá R&D, chưa xác định ảnh hưởng tới năng suất và impact.
+1|So h-index/PageRank và tình huống ranking ngược trên citation graph, không ảnh hưởng mạng đồng tác giả.
+0|Centrality website/originality ảnh hưởng upvote Reddit, không tác động nghiên cứu nhà khoa học.
+1|Kết hợp text và mạng đồng tác giả theo dõi topic hiếm/drift, chưa đo năng suất hay tác động nghiên cứu.
+1|So độ nhạy metric năng suất và visual citation network, chưa xét ảnh hưởng mạng đồng tác giả.
+1|TAP mô hình Author–Conference–Topic/co-author đánh giá ảnh hưởng theo topic, chưa đo quan hệ với năng suất.
+unjudged|Abstract rỗng; không đủ thông tin về PageRank/tác động tác giả.
+unjudged|Không có abstract để đánh giá nghiên cứu altmetric nhà khoa học.
+1|RelRank trên co-author network tìm tác giả nổi bật theo venue, chưa đo mạng ảnh hưởng năng suất/impact thế nào.
+0|Slot-filling query e-commerce bằng distant supervision, không nghiên cứu mạng khoa học.
+1|Gender composition của tác giả liên quan citation impact, chưa phân tích cấu trúc mạng đồng tác giả/năng suất.
+1|Mô tả hợp tác CHIIR và citation theo resource sharing/design, chưa đo ảnh hưởng co-author network lên năng suất.
+unjudged|Abstract rỗng; không suy thuật toán CiteRank hay kết quả từ title.

@@ -1,0 +1,25 @@
+1|Sửa reference lâm sàng tăng faithfulness/informativeness/fluency, chưa so tóm tắt trích rút và sinh.
+0|So semantic network văn bản cybersecurity, không đánh giá chất lượng tóm tắt.
+0|Tổng quan keyword extraction, không đối chiếu hai hướng tóm tắt văn bản.
+1|Transformer/RL tóm tắt sinh đạt ROUGE/F1 tốt hơn baselines, chưa so cụ thể với trích rút.
+1|Hai thuật toán trích rút embedding đạt ROUGE tốt, thiếu đối chiếu hướng sinh.
+0|Bàn phê bình nguồn thông tin và tính xác thực, không thuật toán tóm tắt tự động.
+0|Text style transfer bảo toàn nội dung, không so chất lượng tóm tắt.
+1|FigSum++ trích câu cho figure biomedical cải thiện F-measure, chưa có hướng sinh.
+1|Hybrid trích rút rồi seq2seq sinh tận dụng hai hướng và kết quả cạnh tranh, chưa mô tả chênh lệch chất lượng cụ thể.
+0|Cải thiện độ tự nhiên bản dịch máy, không đánh giá tóm tắt.
+0|Phát hiện deception xuyên văn hóa bằng linguistic features/BERT, không tóm tắt.
+0|Systematic review automatic term extraction, khác hai hướng tóm tắt.
+0|So query expansion có/không relevance feedback, không tóm tắt.
+1|Nêu trích câu so với sinh phrase mới và tổng quan extractive, thiếu so sánh chất lượng.
+0|Nhận diện tội danh từ fact và nhãn câu, không đánh giá tóm tắt.
+1|Abstractive opinion summary sinh câu mới fluent/coherent, nhưng không báo so chất lượng với extractive.
+0|Keyword classification phục vụ retrieval, không đánh giá tóm tắt.
+1|Trích rút học sâu/RL/MMR có ROUGE trên CNN/Baomoi, thiếu đối chiếu hướng sinh.
+1|Kết hợp trích rút với sinh nhằm giảm lặp/mâu thuẫn và tăng performance nhẹ, chưa so hai hướng riêng.
+0|So LSA/CA cho text mining và authorship, không chất lượng tóm tắt.
+0|So GPT-2/Markov về style và entropy văn bản sinh, không tóm tắt.
+0|Indexing tài liệu từ cited titles và similarity, không so hai hướng tóm tắt.
+1|Mô tả extractive chọn câu đúng ngữ pháp và abstractive sinh câu mới, nhưng nghiên cứu chỉ đánh giá extractive ranking.
+0|Đánh giá knowledge extraction/annotation NLP với gold người, không chất lượng tóm tắt.
+1|GA/SA/hybrid trích rút đo ROUGE/readability/cohesion, chưa so hướng sinh.

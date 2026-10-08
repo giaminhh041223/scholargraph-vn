@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment": "machine_dev_v2",
+  "annotator_type": "machine",
+  "experimental": true,
+  "split": "dev",
+  "pair_count": 227,
+  "query_count": 10,
+  "abstract_missing": 22,
+  "input_sha256": {
+    "input/vn2_dev_001.jsonl": "2ad86fd98e179a3ef1b4123131f60c851805103f0619a2014e31f92fe2dd0a40",
+    "input/vn2_dev_002.jsonl": "01ab9c9b335550cfb86b952c12de2d352e56558335c089a1101bf640a51770b1",
+    "input/vn2_dev_003.jsonl": "d44e869f69e8ddfbc9fa17e2370b58af2af2eba535cf9803f642c640046431f9",
+    "input/vn2_dev_004.jsonl": "b45ae9c286db5711429f993a068c93553d186d984a0b4f3cdd999c97de5262e3",
+    "input/vn2_dev_005.jsonl": "18b4bf1c01a168415d65c757883c674fc5ef248c0c3913a682d8b96ca8ae5a69",
+    "input/vn2_dev_006.jsonl": "e3bad39fb8ff25e9f730c667c13949a2054b6b88e0e343882cc4b2e9628cc6a5",
+    "input/vn2_dev_007.jsonl": "48a3d76d69f006eaa7b110eda253927bc0f51841f4d7137e0a30ec9e64a5d01a",
+    "input/vn2_dev_008.jsonl": "67b21d9a769fdc97c971335f062d7218e401758d87a44d09114bbeab264b7703",
+    "input/vn2_dev_009.jsonl": "3f7b6c6f872dd232e7d2bd255f113bd811f4a85a53218470a287c6c0883d6ea5",
+    "input/vn2_dev_010.jsonl": "778adec83c71bf7760d11bfdb4ccd3696c98aa7f487bad2838f27b56119915e5"
+  },
+  "protected_sha256": {
+    "data/annotations/v2/vn_labels.jsonl": "e1aacfdd544dc26c0cbc7b701ad94caa86516ee7e66bfccbad6bd115f08ae0ce",
+    "data/annotations/v2/vn_pool.json": "9dee7c9e1926e8bb7790d71a1d2ffae431beff8de1288535ab1da407ca36991d",
+    "data/annotations/v2/vn_query_manifest.json": "4b75753ef42d8eb6fb44dd1f8a2874569f8a076b9543fbd261fecaa0d06cdb15",
+    "data/annotations/vn_labels.jsonl": "381027315b84096017e45731bbc199e2e2f9cafa3b54e101e48fcd7b6ad0b011",
+    "data/annotations/v1_dev_labels_raw/vn_labels_A_dev.jsonl": "099ea1c5dcb8de59025bf95244b1845c9810f2fcb4c5aad206685605e8dda998",
+    "data/annotations/v1_dev_labels_raw/vn_labels_B_dev.jsonl": "7d3e997b6169820d29a6b855c46eb1adb456d6a5c8c1fc275be8400001ad8660",
+    "configs/frozen_main.json": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557"
+  },
+  "kit_sha256": "28cb8df0b001f49f1f9f8edd1125d7d074be93ad3022c461b70e76c8546abbf0",
+  "human_comparison": "NOT_MEASURED: available human exports are v1, not the v2 dev pairs",
+  "use": "exploratory only; not human labels, adjudication, freeze, tuning or test evaluation"
+}

@@ -1,0 +1,61 @@
+{
+  "status": "PASS_VALIDATION_GUARDS_ONLY",
+  "cases": [
+    {
+      "case": "valid_227_pairs",
+      "exit_code": 0,
+      "output": "PASS_SCHEMA_COVERAGE_ONLY 227"
+    },
+    {
+      "case": "missing_labels_file",
+      "exit_code": 1,
+      "output": "FAIL: missing required file: D:\\Web_mining_20261\\scholargraph\\artifacts\\reports\\vn_machine_dev_v2_20261008\\machine_A\\adversarial_b77s5qv9\\absent.jsonl"
+    },
+    {
+      "case": "missing_pair",
+      "exit_code": 1,
+      "output": "FAIL: missing required output pairs"
+    },
+    {
+      "case": "label_outside_range",
+      "exit_code": 1,
+      "output": "FAIL: invalid label"
+    },
+    {
+      "case": "missing_required_note",
+      "exit_code": 1,
+      "output": "FAIL: wrong output schema"
+    },
+    {
+      "case": "test_split_leakage",
+      "exit_code": 1,
+      "output": "FAIL: unknown or leaked split pair"
+    },
+    {
+      "case": "duplicate_pair",
+      "exit_code": 1,
+      "output": "FAIL: duplicate output pair"
+    },
+    {
+      "case": "title_only_numeric_label",
+      "exit_code": 1,
+      "output": "FAIL: title-only requires unjudged"
+    },
+    {
+      "case": "missing_title_in_input",
+      "exit_code": 1,
+      "output": "FAIL: missing title"
+    },
+    {
+      "case": "label_leakage_in_input",
+      "exit_code": 1,
+      "output": "FAIL: label leakage in input"
+    },
+    {
+      "case": "missing_query_file",
+      "exit_code": 1,
+      "output": "FAIL: missing required file: D:\\Web_mining_20261\\scholargraph\\artifacts\\reports\\vn_machine_dev_v2_20261008\\machine_A\\adversarial_b77s5qv9\\input\\vn2_dev_010.jsonl"
+    }
+  ],
+  "label_semantic_correctness": "not_tested"
+}

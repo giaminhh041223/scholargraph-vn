@@ -1,0 +1,18 @@
+2|LB-SAM kết hợp beam search/annealing/modularity, thử 12 mạng thật/6 synthetic và nêu scale tới mạng tỷ nút.
+1|Đề xuất PSCAN song song kết hợp LDA cho Twitter lớn, nhưng abstract chưa báo hiệu quả đánh giá.
+1|Theo dõi cộng đồng theo preference bốn năm social news, chưa phân tích scalability hay thuật toán tốt nhất.
+2|IACD dựa lực hút nút xử lý phân cộng đồng nhanh/chính xác trên nhiều mạng thật/synthetic và vượt baseline.
+0|LDA phân tích xu hướng bài báo về sustainability/social media, không phát hiện cộng đồng mạng.
+0|Phát hiện phương tiện giao thông bằng học sâu, không phát hiện cộng đồng xã hội.
+1|Thuật toán tìm cộng đồng/vị trí theo query trên location social network, khác phân cộng đồng toàn mạng lớn.
+1|TISSA chọn seed ảnh hưởng theo triangle và tránh community detection, không trả lời thuật toán phân cộng đồng.
+2|1DA dùng lực hút cạnh và dịch đỉnh đạt độ phức tạp gần tuyến tính, modularity/NMI tốt trên mạng lớn.
+1|Khảo sát kỹ thuật community detection/recommendation, chưa nêu kết luận hiệu quả trên mạng quy mô lớn.
+1|So sáu thuật toán cộng đồng trên Twitter/bốn graph, nhưng chưa kết luận hiệu quả khi scale lớn.
+1|IM2-SE dùng entropy để tìm nút ảnh hưởng giữa nhiều mạng, khác nhiệm vụ phát hiện cộng đồng.
+1|DMCS/GCS tìm cộng đồng chứa query và co-clustering, khác phân cộng đồng toàn mạng xã hội lớn.
+1|LPA density peak cải thiện ổn định/số vòng lặp trên mạng thật/synthetic, chưa xác lập scalability mạng lớn.
+2|LPAE trong EIDEP phát hiện overlapping community hiệu quả cho social network lớn, được so thuật toán trên Twitter.
+1|Random wandering cải thiện LPA và nêu lợi thế gần tuyến tính, chưa xác nhận thử mạng lớn.
+0|Sách bàn cơ chế bất công cấu trúc, không cung cấp thuật toán phát hiện cộng đồng.
+1|Dùng Louvain phân cộng đồng mạng nhạc để đối chiếu genre, chưa đánh giá hiệu quả mạng xã hội lớn.

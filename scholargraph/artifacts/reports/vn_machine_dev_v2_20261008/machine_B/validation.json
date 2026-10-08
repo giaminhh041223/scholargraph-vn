@@ -1,0 +1,94 @@
+{
+  "pairs": 227,
+  "queries": 10,
+  "missing_abstracts": 22,
+  "labels": {
+    "1": 113,
+    "0": 74,
+    "unjudged": 22,
+    "2": 18
+  },
+  "coverage_exact": true,
+  "duplicate_pairs": 0,
+  "negative_tests": [
+    {
+      "case": "missing_file",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: [Errno 2] No such file or directory: 'D:\\\\Web_mining_20261\\\\scholargraph\\\\artifacts\\\\reports\\\\vn_machine_dev_v2_20261008\\\\machine_B\\\\adversarial_dvjg27as\\\\input\\\\vn2_dev_001.jsonl'"
+    },
+    {
+      "case": "malformed_json",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    },
+    {
+      "case": "title_missing",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: 'title'"
+    },
+    {
+      "case": "text_only",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Missing title"
+    },
+    {
+      "case": "abstract_missing_field",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: 'abstract'"
+    },
+    {
+      "case": "abstract_wrong_type",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Malformed abstract/missing flag"
+    },
+    {
+      "case": "score_out_of_range",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Invalid label"
+    },
+    {
+      "case": "title_only_judged",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Title-only pair has judged label"
+    },
+    {
+      "case": "missing_note",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Missing judgment rationale"
+    },
+    {
+      "case": "duplicate_pair",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Duplicate or unexpected output pair/split"
+    },
+    {
+      "case": "unexpected_test_split",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Duplicate or unexpected output pair/split"
+    },
+    {
+      "case": "human_annotator",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Invalid experimental annotator metadata"
+    },
+    {
+      "case": "missing_pair",
+      "exit_code": 1,
+      "passed": true,
+      "error": "FAIL: Output coverage differs from input"
+    }
+  ],
+  "scope": "Only supplied title/abstract/query_vi; independent machine experiment; not human SG-033 or correctness evaluation."
+}

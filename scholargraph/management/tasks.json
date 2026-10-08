@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-10-06T00:30:00+07:00",
+  "updated_at": "2026-10-08T13:49:39.757091+07:00",
   "tasks": [
     {
       "id": "SG-000",
@@ -1085,7 +1085,7 @@
         "tests/unit/test_vn_queries.py",
         "management/logs/SESSION-20260917-053.md",
         "data/annotations/v2/vn_query_manifest.json",
-        "management/DECISIONS.md#ADR-023",
+        "management/DECISIONS.md",
         "management/logs/SESSION-20261005-075.md"
       ],
       "verification": [
@@ -1169,11 +1169,15 @@
         "data/annotations/v1_dev_labels_raw/",
         "scripts/manage_vn_labels.py",
         "tests/unit/test_manage_vn_labels.py",
-        "management/DECISIONS.md#ADR-023",
+        "management/DECISIONS.md",
         "management/logs/SESSION-20261005-075.md",
         "scripts/run_vn_eval.py",
         "tests/unit/test_vn_eval.py",
-        "docs/SUBMISSION_CHECKLIST.md"
+        "docs/SUBMISSION_CHECKLIST.md",
+        "management/logs/SESSION-20261008-108-CODEX.md",
+        "artifacts/reports/vn_machine_dev_v2_20261008/manifest.json",
+        "artifacts/reports/vn_machine_dev_v2_20261008/REPORT.md",
+        "artifacts/reports/vn_machine_dev_v2_20261008/agreement.json"
       ],
       "verification": [
         "2026-09-21T22:00:00+07:00: Pool mu 30 query (10 dev/20 test), 662 cap duy nhat (<=900, khong can cat giam): top-10 x 3 methods (translated_bm25, multilingual_dense_e5, vn_hybrid_rrf) tren OpenAlex 18.250 works, dedup, shuffle seed 20260915, khong method/score trong dong pool.",
@@ -1184,7 +1188,9 @@
         "2026-10-06: Kit v2 artifacts/vn_labeling_kit_SG033_v2.zip — số đếm/namespace/tên file xuất (vn2_labels_{A|B}_{split}.jsonl) tính từ pool; 74/679 cặp thiếu abstract được nêu trong hướng dẫn. Template 227/452 dòng label=null.",
         "2026-10-06: pytest test_vn_pool.py 13/13, test_manage_vn_labels.py 4/4 PASS — gồm adversarial: manifest draft/thiếu human_approval/29 query, cache thiếu query/lệch text_vi/mất file → exit 1 và không ghi output; kit pool trộn namespace → exit 1, không tạo thư mục.",
         "2026-10-06: run_vn_eval.py eval-test exit 1 khi --pool khác pins.vn_pool_sha256 (chống trộn pool v1/v2); test_vn_eval.py 5/5 PASS. docs/SUBMISSION_CHECKLIST.md Bước 2 trỏ lệnh v2.",
-        "PENDING HUMAN WORK (v2): A/B chấm độc lập 227 cặp dev (nên làm 5 query pilot dev:001–005 trước) → merge → score_vn_agreement (kappa trước phân xử) → phân xử → SG-034 freeze-dev → chấm 452 cặp test. Agent không bao giờ bịa nhãn."
+        "PENDING HUMAN WORK (v2): A/B chấm độc lập 227 cặp dev (nên làm 5 query pilot dev:001–005 trước) → merge → score_vn_agreement (kappa trước phân xử) → phân xử → SG-034 freeze-dev → chấm 452 cặp test. Agent không bao giờ bịa nhãn.",
+        "2026-10-08T13:45:27.926917+07:00: Người dùng yêu cầu hai subagent thử chấm dev v2. Experiment riêng machine_A/machine_B, 227 cặp mỗi agent, context mới cùng requested SOL/high; không thay nhãn người/không đóng human gate. Đang chấm; so với human v2 chưa đo.",
+        "2026-10-08T13:49:39.757091+07:00: Thử nghiệm máy độc lập hoàn tất 227 cặp/agent, A 80/106/19/22 và B 74/113/18/22 theo 0/1/2/unjudged; 196/205 nhãn số trùng (95.6098%), weighted kappa0.9307198378, 9 bất đồng;22 cùng unjudged. Schema/coverage/hash+19 CLI probes (18negative exit1) PASS;7protected hashes giữ nguyên. Không so human vì v1 khác v2; không đóng SG-033 hoặc dùng cho SG-034."
       ],
       "claimed_paths": [
         "scripts/build_vn_pool.py",

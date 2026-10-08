@@ -1,0 +1,230 @@
+{
+  "status": "PASS_VALIDATION",
+  "experimental": true,
+  "annotator_type": "machine",
+  "pair_count": 227,
+  "graded_pairs": 205,
+  "unjudged_either": 22,
+  "both_unjudged": 22,
+  "exact_graded": 196,
+  "raw_agreement_graded": 0.9560975609756097,
+  "linearly_weighted_kappa": 0.9307198377830347,
+  "all_label_matches": 218,
+  "disagreement_count": 9,
+  "distribution": {
+    "A": {
+      "0": 80,
+      "1": 106,
+      "2": 19,
+      "unjudged": 22
+    },
+    "B": {
+      "0": 74,
+      "1": 113,
+      "2": 18,
+      "unjudged": 22
+    }
+  },
+  "confusion_including_unjudged": {
+    "0": {
+      "0": 74,
+      "1": 6,
+      "2": 0,
+      "unjudged": 0
+    },
+    "1": {
+      "0": 0,
+      "1": 105,
+      "2": 1,
+      "unjudged": 0
+    },
+    "2": {
+      "0": 0,
+      "1": 2,
+      "2": 17,
+      "unjudged": 0
+    },
+    "unjudged": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "unjudged": 22
+    }
+  },
+  "per_query": [
+    {
+      "query_id": "vn2:dev:001",
+      "query_vi": "Mô hình truy hồi dày dựa trên BERT có vượt trội BM25 khi truy vấn thuộc miền khác với dữ liệu huấn luyện không?",
+      "pairs": 26,
+      "disagreements": 2,
+      "A": {
+        "1": 17,
+        "0": 9
+      },
+      "B": {
+        "1": 19,
+        "0": 7
+      }
+    },
+    {
+      "query_id": "vn2:dev:002",
+      "query_vi": "Mở rộng truy vấn bằng phản hồi giả liên quan có cải thiện độ chính xác của kết quả tìm kiếm không?",
+      "pairs": 24,
+      "disagreements": 0,
+      "A": {
+        "unjudged": 2,
+        "1": 18,
+        "2": 1,
+        "0": 3
+      },
+      "B": {
+        "unjudged": 2,
+        "1": 18,
+        "2": 1,
+        "0": 3
+      }
+    },
+    {
+      "query_id": "vn2:dev:003",
+      "query_vi": "Làm thế nào để mô hình hóa chủ đề hiệu quả trên văn bản ngắn như bài đăng mạng xã hội?",
+      "pairs": 25,
+      "disagreements": 0,
+      "A": {
+        "2": 7,
+        "unjudged": 4,
+        "0": 5,
+        "1": 9
+      },
+      "B": {
+        "2": 7,
+        "unjudged": 4,
+        "0": 5,
+        "1": 9
+      }
+    },
+    {
+      "query_id": "vn2:dev:004",
+      "query_vi": "Các độ đo coherence tự động có phản ánh đúng đánh giá của con người về chất lượng chủ đề không?",
+      "pairs": 24,
+      "disagreements": 0,
+      "A": {
+        "1": 10,
+        "0": 10,
+        "unjudged": 3,
+        "2": 1
+      },
+      "B": {
+        "1": 10,
+        "0": 10,
+        "unjudged": 3,
+        "2": 1
+      }
+    },
+    {
+      "query_id": "vn2:dev:005",
+      "query_vi": "Mạng nơ-ron đồ thị có cải thiện chất lượng gợi ý so với lọc cộng tác truyền thống không?",
+      "pairs": 21,
+      "disagreements": 2,
+      "A": {
+        "0": 8,
+        "1": 12,
+        "unjudged": 1
+      },
+      "B": {
+        "0": 6,
+        "1": 14,
+        "unjudged": 1
+      }
+    },
+    {
+      "query_id": "vn2:dev:006",
+      "query_vi": "Thuật toán nào phát hiện cộng đồng hiệu quả trong mạng xã hội quy mô lớn?",
+      "pairs": 18,
+      "disagreements": 3,
+      "A": {
+        "2": 5,
+        "1": 8,
+        "0": 5
+      },
+      "B": {
+        "2": 4,
+        "1": 11,
+        "0": 3
+      }
+    },
+    {
+      "query_id": "vn2:dev:007",
+      "query_vi": "Tóm tắt văn bản tự động theo hướng trích rút và theo hướng sinh tóm lược khác nhau về chất lượng như thế nào?",
+      "pairs": 25,
+      "disagreements": 0,
+      "A": {
+        "1": 11,
+        "0": 14
+      },
+      "B": {
+        "1": 11,
+        "0": 14
+      }
+    },
+    {
+      "query_id": "vn2:dev:008",
+      "query_vi": "Phân tích cảm xúc theo từng khía cạnh trong đánh giá sản phẩm được thực hiện như thế nào?",
+      "pairs": 22,
+      "disagreements": 2,
+      "A": {
+        "2": 5,
+        "1": 8,
+        "0": 5,
+        "unjudged": 4
+      },
+      "B": {
+        "2": 5,
+        "1": 8,
+        "0": 5,
+        "unjudged": 4
+      }
+    },
+    {
+      "query_id": "vn2:dev:009",
+      "query_vi": "Vì sao mạng nơ-ron đồ thị nhiều tầng bị hiện tượng làm mượt quá mức và có cách nào khắc phục?",
+      "pairs": 22,
+      "disagreements": 0,
+      "A": {
+        "0": 18,
+        "1": 2,
+        "unjudged": 2
+      },
+      "B": {
+        "0": 18,
+        "1": 2,
+        "unjudged": 2
+      }
+    },
+    {
+      "query_id": "vn2:dev:010",
+      "query_vi": "Mạng lưới đồng tác giả ảnh hưởng như thế nào đến năng suất và tác động nghiên cứu của nhà khoa học?",
+      "pairs": 20,
+      "disagreements": 0,
+      "A": {
+        "unjudged": 6,
+        "1": 11,
+        "0": 3
+      },
+      "B": {
+        "unjudged": 6,
+        "1": 11,
+        "0": 3
+      }
+    }
+  ],
+  "human_comparison": "NOT_MEASURED: available human exports are v1, not the v2 dev pairs",
+  "limits": [
+    "Two independent contexts, same requested model gpt-6.1-sol / high; not independent model families.",
+    "No human-v2 labels available; agreement is not accuracy.",
+    "Only provided title/abstract judged; dev only, no adjudication or retrieval evaluation."
+  ],
+  "output_sha256": {
+    "A": "10d376b3c7a818e2a9954770150af2d7cfcaae42e46433f9d69f3557f1d3e294",
+    "B": "2919d339f48d9e1c6476e01ad967e3bae153c7d76e2bcb06baf4000fcc3c4744"
+  }
+}

@@ -1,0 +1,26 @@
+1|So sánh BM25 với BioBERT/MedCPT trong QA y sinh, chưa kiểm tra truy vấn khác miền huấn luyện.
+1|Nêu BERT dùng sẵn kém trong tìm sáng chế và cách thích nghi; truy hồi dày còn là hướng nghiên cứu tiếp theo.
+1|Triển khai PLM trong tìm kiếm web và cải thiện hiệu quả, chưa đối chiếu BM25 khi chuyển miền.
+1|Ranker transformer kém khi dùng trực tiếp ở y khoa và cần dữ liệu thích nghi, nhưng không đánh giá dense với BM25 ngoài miền.
+1|DR-BERT thích nghi miền và tối ưu xếp hạng MS MARCO, chưa có phép so BM25 trên truy vấn ngoài miền.
+1|Đánh giá kiến trúc passage BERT trên hai tập truy hồi, chưa xác định chuyển miền huấn luyện hay so dense/BM25.
+1|So embedding BERT với LLM2Vec trên sáu tập; không có BM25 hoặc thiết kế chuyển miền.
+0|Trích xuất quan hệ y sinh bằng BERT, không đánh giá truy hồi tài liệu.
+0|Dự báo đóng băng đường dây bằng XGBoost, không liên quan truy hồi BERT/BM25.
+1|Cải tiến BM25 trên truy hồi y sinh, không so sánh với dense BERT khi chuyển miền.
+1|Query expansion bằng skip-gram vượt BM25, nhưng không dùng dense BERT hoặc thử khác miền.
+0|Khảo sát người dùng dịch vụ tìm tài liệu trực tuyến, không đánh giá mô hình BERT/BM25.
+1|Dense dùng sẵn thua BM25 trên dữ liệu luật và fine-tuning cải thiện; chưa xác nhận BERT hay thiết kế khác miền huấn luyện.
+0|Thiết kế dịch vụ phổ biến thông tin thư mục, không so sánh thuật toán BERT và BM25.
+0|So sánh diễn ngôn khởi nghiệp Mỹ/Trung Quốc bằng topic modeling, không đánh giá truy hồi.
+0|Đo độ bao phủ của cơ sở dữ liệu thư mục, không so sánh BERT với BM25.
+1|RAG web cải thiện QA và truy vấn phức tạp, chưa có so sánh dense BERT/BM25 ngoài miền.
+1|BM25 dẫn hướng truy hồi sparse học được để giảm độ trễ, không đánh giá dense BERT chuyển miền.
+1|BM25 và neural reranking cho Hindi–Anh vượt baseline, nhưng không kiểm tra dense BERT khác miền.
+1|BERT y khoa và các cách bổ sung tri thức bằng retrieval không cải thiện NLI; khác nhiệm vụ so dense/BM25 ngoài miền.
+1|Đánh giá generative retrieval trên corpus thay đổi với BM25/dense, khác câu hỏi BERT chuyển miền truy vấn.
+0|So tìm kiếm xác suất với Boolean trên MEDLARS, không có BERT hoặc BM25 chuyển miền.
+1|Thích nghi miền cho sinh query hội thoại dùng phản hồi RAG/BM25, khác đánh giá dense BERT.
+1|Giải thích mô hình xác suất BM25/BM25F, không kiểm chứng BERT dense trên miền mới.
+1|So kỹ thuật negative sampling cho dense đa ngôn ngữ ở in/OOD và zero-shot; không đối chiếu hiệu quả BERT với truy hồi BM25.
+1|Cải tiến BM25 bằng co-word/Cuckoo trên y sinh, chưa có dense BERT hoặc thử khác miền.

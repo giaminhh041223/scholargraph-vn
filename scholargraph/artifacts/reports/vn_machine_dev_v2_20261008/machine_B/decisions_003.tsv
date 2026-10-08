@@ -1,0 +1,25 @@
+2|Dùng topic model hai giai đoạn với SBERT trên 900 nghìn tweet để xử lý độ ngắn và quy mô dữ liệu.
+2|So năm phương pháp trên văn bản xã hội ngắn; LDA/NMF cho topic có ý nghĩa và kết quả tốt.
+unjudged|Abstract rỗng; không đủ thông tin về topic modeling tiếng Việt.
+2|BERTopic kết hợp tri thức pre-cluster và giảm l2 từ ít gặp để giảm sparsity; Macro-F1 tốt hơn baseline.
+2|Gộp tweet theo cộng đồng retweet trước LDA tăng chất lượng cluster, retrieval và thời gian chạy.
+0|Nghiên cứu thương hiệu tuyển dụng và giá trị doanh nghiệp qua review/post, không đề xuất topic model ngắn.
+unjudged|Không có abstract để đánh giá phương pháp phân tích bài đăng.
+1|Phân tích theme Facebook theo thai kỳ và phân loại random forest, chưa hướng dẫn topic modeling hiệu quả.
+unjudged|Thiếu abstract; không suy quan hệ topic modeling từ title chatbot.
+1|Topic model đa ngôn ngữ bằng deep NLP trên bài báo/comment, chưa xử lý đặc thù văn bản ngắn.
+0|Phát hiện phương tiện giao thông bằng YOLO/CenterNet/DETR, không mô hình hóa chủ đề văn bản.
+1|ViSoBERT và clustering semantic nhóm sự kiện Facebook, nhưng chủ yếu classification/tracking có giám sát.
+1|Dùng graph chuyển topic để phân tích chú ý trong WhatsApp, không trình bày cải tiến topic model văn bản ngắn.
+0|Đề cập blogging/social media trong kỹ nghệ phần mềm, không nêu phương pháp topic modeling.
+0|Mô tả video access to knowledge, không phân tích chủ đề văn bản ngắn.
+1|LDA tìm 17 topic Weibo sau word segmentation, chưa kiểm chứng hiệu quả phương pháp cho độ ngắn.
+unjudged|Không có abstract để đánh giá thuật toán trên bài đăng.
+1|Universal Sentence Encoder và FCNN phân loại suicidal/non-suicidal, khác topic modeling.
+2|Dùng embedding và k-Means bán tự động để khắc phục sparsity/context của tweet, gán topic với confidence.
+2|BERTopic gom bài Reddit thành topic coherent và ánh xạ câu theo theme nghiên cứu, minh họa hai case.
+1|Graph-to-sequence sinh keyword chủ đề cho văn bản ngắn, không trực tiếp suy topic model toàn corpus.
+2|DV-BTM kết hợp embedding toàn cục/Wordnet cục bộ và tối ưu hai view, cải thiện coherence/classification.
+1|Semantic Subset Matching gom microblog và phát hiện tin thật/giả, khác mô hình hóa chủ đề.
+0|Tóm tắt trích rút CNN/Baomoi bằng RL/MMR, không nghiên cứu topic modeling văn bản ngắn.
+1|Text mining trích theme từ 1045 tweet sự kiện, chưa mô tả giải pháp tăng hiệu quả topic model.

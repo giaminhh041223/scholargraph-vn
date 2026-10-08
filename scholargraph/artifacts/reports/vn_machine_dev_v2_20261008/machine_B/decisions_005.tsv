@@ -1,0 +1,21 @@
+0|Mô phỏng trí nhớ mạng neuron sinh học, không đánh giá recommendation hay collaborative filtering.
+1|Knowledge graph tăng đa dạng/giải thích recommendation, không nêu GNN hay so CF truyền thống.
+0|Ensemble neural cải thiện classification ảnh, không có hệ gợi ý GNN.
+1|Graph VAE cải thiện link prediction/clustering và scalability, chưa thử hệ gợi ý với CF.
+0|Query reformulation hợp tác với KNRM/BERT cho retrieval, không đánh giá recommendation GNN.
+1|MLP neural CF pairwise cải thiện BPR, chưa dùng graph neural network.
+1|Nêu thành công GNN-based CF và nhìn recommendation như link prediction, thiếu kết quả so CF truyền thống cụ thể.
+1|Diffusion trên mạng hai phía vượt CF về accuracy/hit rate, nhưng không phải GNN.
+1|Image recommender dùng CNN/attention/user network vượt baselines, chưa xác định GNN và CF truyền thống.
+0|Machine learning cá nhân hóa giá bán trong mặc cả, không đánh giá hệ gợi ý GNN.
+1|KGCFRec dùng GNN hai kênh tăng recommendation trên ba tập, nhưng abstract chưa xác định baseline CF truyền thống.
+1|GNN đa dạng hóa gợi ý user giữ accuracy, chưa so trực tiếp CF truyền thống.
+1|GCN xử lý feature thiếu cải thiện node classification/link prediction, chưa đánh giá recommendation.
+0|Phát hiện xe qua YOLO/DETR/CenterNet, không liên quan GNN recommendation.
+1|Clustering graph bằng random walk/neural đạt hiệu quả, chưa thử gợi ý với CF.
+1|Sinh query suggestion tăng coverage, không dùng GNN hay so lọc cộng tác.
+1|Neural graph CF dự đoán tương tác RNA, khác nhiệm vụ chất lượng gợi ý người dùng.
+1|RL tăng chất lượng query suggestion e-commerce, không so GNN với CF.
+1|GNN tăng retrieval điều luật, khác recommendation và CF truyền thống.
+0|Tóm tắt văn bản trích rút bằng học sâu/RL/MMR, không hệ gợi ý GNN.
+unjudged|Abstract rỗng; không thể suy cách tăng đa dạng recommendation từ title.

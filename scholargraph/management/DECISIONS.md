@@ -282,3 +282,9 @@ Pilot B bàn giao CLI sidecar/collection riêng, trường thư mục tương �
 - Nhãn v1 không được dùng cho đánh giá; chỉ giữ làm bằng chứng cho quyết định này.
 - SG-033 làm lại trên v2: A/B chấm độc lập 227 cặp dev → merge → `score_vn_agreement.py` → phân xử → SG-034 `freeze-dev` (chạy với `--pool data/annotations/v2/vn_pool.json --labels data/annotations/v2/vn_labels_dev.jsonl`) → sau đó mới chấm test.
 - Nên chấm 5 query pilot (dev:001–005) trước để kiểm tra tỉ lệ dương.
+
+## ADR-024 — 2026-10-08 — Thử nghiệm hai máy chấm dev v2
+
+Người dùng yêu cầu hai subagent thử gán nhãn hai file dev để xem máy chấm và sau này so với người. Chấp nhận thử nghiệm riêng trên 227 cặp dev v2, hai context mới dùng cùng model yêu cầu gpt-6.1-sol/high, không chia sẻ nhãn. Kết quả ghi rõ `machine_A`/`machine_B`, `annotator_type=machine`, `experimental=true`; lưu tại `artifacts/reports/vn_machine_dev_v2_20261008/`, không nhập vào annotations chính thức, không gọi là nhãn người và không đóng human gate SG-033.
+
+Đầu vào là query tiếng Việt + title/abstract trong kit mù; không đọc bản dịch, provenance hệ thống, qrels, test hoặc nhãn người. Title-only bắt buộc `unjudged`. Coordinator kiểm coverage/hash/schema, đo agreement giữa máy trước mọi phân xử. Vì nhãn người hiện có thuộc v1, chưa đo so sánh người–máy trên v2. Agreement giữa hai context cùng model không chứng minh độ đúng hoặc tính độc lập giữa model families. Muốn đối chiếu cần nhãn người trên cùng query–doc v2.

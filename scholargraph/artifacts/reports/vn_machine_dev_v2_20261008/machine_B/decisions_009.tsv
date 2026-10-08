@@ -1,0 +1,22 @@
+0|Tấn công mạng đa nguồn qua Sylvester/influence function, không phân tích oversmoothing GNN nhiều tầng.
+0|Preference neural network một hidden layer cho label ranking, không GNN oversmoothing.
+0|NLP/sentiment/clustering nhận diện depression trên social posts, không GNN sâu.
+1|Contrastive graph views dùng neighbor/diffusion tăng representation, chưa giải thích oversmoothing hay cách sửa khi tăng tầng.
+0|Multi-task/multi-scene ranking quảng cáo giảm coupling, không GNN oversmoothing.
+1|AutoProNE chọn graph filter smoothing tối ưu representation, chưa giải thích over-smoothing nhiều tầng hoặc mitigation cụ thể.
+0|So YOLO/CenterNet/DETR phát hiện xe, không GNN oversmoothing.
+0|Mô hình truyền thông chính trị deliberative, không mạng neural đồ thị.
+0|Đa dạng hóa sách/tài nguyên học đường, không GNN nhiều tầng.
+0|Cascade bandit giảm exposure bias recommendation, khác oversmoothing GNN.
+0|Lịch sử explainable AI, không phân tích GNN sâu/oversmoothing.
+0|Online learning to rank tăng ảnh hưởng bài đăng, không xử lý oversmoothing.
+unjudged|Abstract rỗng; không đủ thông tin từ title chatbot.
+unjudged|Không có abstract; không thể đánh giá nội dung tài liệu transparencies.
+0|Tutorial retrievability và bias tìm kiếm, không GNN oversmoothing.
+0|Khảo sát trưởng thành chuyển đổi số doanh nghiệp Brazil, không GNN.
+0|Subgroup preference neural dùng một middle layer cho ranking label, không oversmoothing graph.
+0|Giao diện stopping criteria mua sắm, không nghiên cứu GNN sâu.
+0|XGBoost nhận dạng lũ sông Đà, không oversmoothing graph neural.
+0|Alternating minimization thao túng mạng và hội tụ, không GNN message passing/oversmoothing.
+0|Đo giảm visibility website y tế trên Google, không GNN nhiều tầng.
+0|ParaX tối ưu throughput deep learning CPU qua memory/scheduling, khác oversmoothing GNN.

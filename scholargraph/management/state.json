@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-10-06T00:30:00+07:00",
+  "updated_at": "2026-10-08T13:49:39.757091+07:00",
   "phase": "M7",
   "stage": "g4_agent_deliverables_complete_awaiting_human_gates_vn_v2_relabel",
   "active_tasks": [
@@ -9,8 +9,8 @@
     "SG-033"
   ],
   "next_task_id": "SG-034",
-  "last_session_id": "SESSION-20261005-075",
-  "last_session_log": "management/logs/SESSION-20261005-075.md",
+  "last_session_id": "SESSION-20261008-108-CODEX",
+  "last_session_log": "management/logs/SESSION-20261008-108-CODEX.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",
@@ -62,5 +62,17 @@
     "exit_code": 0,
     "task_count": 53,
     "scope": "G0-G4 agent work 100% complete: CX-3/CX-4 tooling (run_vn_eval.py, build_evidence_index.py, compare_reproduction.py, generate_figures.py, verify_claims.py) + 15 new unit/adversarial tests (total 749 passed) + GM-6 drafts (final_report.md, CLAIMS_CHECKLIST.md, defense_slides.md, DEFENSE_QA.md, SUBMISSION_CHECKLIST.md, release_audit.md). Awaiting human gates H-1 (SG-030), H-2 (SG-033), H-3 (SG-034..SG-045)."
+  },
+  "active_experiments": [],
+  "last_machine_experiment": {
+    "experiment_id": "machine_dev_v2_20261008",
+    "status": "completed_exploratory",
+    "report": "artifacts/reports/vn_machine_dev_v2_20261008/REPORT.md",
+    "pairs_per_agent": 227,
+    "graded_pairs": 205,
+    "agreement": 0.9560975609756097,
+    "weighted_kappa": 0.9307198377830347,
+    "human_comparison": "NOT_MEASURED",
+    "human_gate_satisfied": false
   }
 }
