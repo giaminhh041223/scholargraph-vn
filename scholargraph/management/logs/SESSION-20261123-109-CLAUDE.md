@@ -107,3 +107,10 @@ Không sửa: `test_ui.py::test_static_served_offline` (lỗi có từ trước,
 - Người dùng cung cấp nhóm gồm **4 thành viên** (kèm MSSV), giảng viên Nguyễn Kiêm Hiếu, mã lớp 175886; đã điền vào progress report. Các câu "both members / the second member" đổi thành "two members / the group / a member who did not run the experiments". Lưu ý: `state.json` vẫn ghi `human_members: 2` (giả định lập kế hoạch cũ); chưa sửa board vì không thuộc phạm vi được giao.
 - Còn trống: tên trường, khoa, số nhóm, link repo. PDF vẫn 3 trang.
 
+## Checkpoint 5 — đưa code lên GitHub (người dùng: "Đẩy code lên git luôn"; chọn Public, bỏ file bài giảng; tự `gh auth login`)
+
+- Commit `c58eada` (15 file của phiên) và `942d587` (bỏ theo dõi `extracted_L01.txt`, `L05-LinkAnalysis-01.pdf.txt`, thêm vào `.gitignore`; file vẫn ở máy, các commit cũ vẫn chứa chúng).
+- Trước khi push đã quét: blob lớn nhất 12,1 MB (dưới giới hạn GitHub), không có file `.env`/khóa, các chuỗi giống secret đều là dữ liệu kiểm thử giả. Email tác giả commit sẽ hiện công khai (người dùng đã được báo).
+- `gh repo create scholargraph-vn --public` → https://github.com/giaminhh041223/scholargraph-vn ; `git push -u origin HEAD:main`. Remote `main` = `942d587` (đã đối chiếu `git ls-remote`). Không push các nhánh khác. Nhánh local `codex/public-search-phase-b` giờ theo dõi `origin/main`.
+- Không đưa lên: `reports/progress/` (có MSSV), nhãn thô `vn_labels_*` ở gốc, slide/tài liệu môn học, `bn/`, 3 file docs phase B và review R4 chưa commit của phiên trước.
+- Progress report: điền link repo, xuất lại `Group14_ProgressReport.pdf`, 3 trang, không còn placeholder.
