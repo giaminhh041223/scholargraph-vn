@@ -11,6 +11,10 @@ Checks:
      appear in reports/final_report.md or docs/CLAIMS_CHECKLIST.md.
   5. While Track C VN status is 'chua_do', report explicitly states 'chưa đo' /
      'SG-033' and does not invent Track C test scores.
+  6. The nDCG@10 bootstrap CIs behind CLM-001..CLM-004 appear in both documents
+     exactly as stored in table_6_paired_bootstrap (4 decimals, signed).
+
+Not checked: any other number (secondary metrics, robustness buckets, counts).
 
 Anti-Silent-Bypass: exits 1 on any missing file, missing claim ID, missing
 primary metric, or forbidden pattern.
@@ -31,6 +35,13 @@ FORBIDDEN_PATTERNS = (
     (re.compile(r"\bp-value\s*=\s*0\.\d+", re.IGNORECASE), "forbidden numeric p-value claim"),
     (re.compile(r"\bwe achieve state-of-the-art\b", re.IGNORECASE), "forbidden SOTA claim"),
     (re.compile(r"\bđạt chuẩn state-of-the-art\b", re.IGNORECASE), "forbidden SOTA claim"),
+)
+CLAIM_CI_KEYS = (
+    "scifact__dense-vs-bm25__nDCG@10",
+    "scidocs__dense-vs-bm25__nDCG@10",
+    "scifact__hybrid-vs-dense__nDCG@10",
+    "scidocs__hybrid-vs-dense__nDCG@10",
+    "openalex__ppr_best-vs-global_control__nDCG@10",
 )
 
 
@@ -89,6 +100,18 @@ def verify_documents(
     missing_numbers = [label for label, num_str in required_numbers if num_str not in report_text]
     if missing_numbers:
         raise ValueError(f"final_report.md missing primary metric values: {missing_numbers}")
+
+    # Bootstrap CIs behind CLM-001..CLM-004 must be quoted exactly as measured in both documents.
+    t6 = tables.get("table_6_paired_bootstrap") or {}
+    missing_ci: list[str] = []
+    for key in CLAIM_CI_KEYS:
+        row = t6[key]
+        ci = f"[{float(row['ci_low']):+.4f}, {float(row['ci_high']):+.4f}]"
+        for text_name, text_body in (("final_report.md", report_text), ("CLAIMS_CHECKLIST.md", checklist_text)):
+            if ci not in text_body:
+                missing_ci.append(f"{text_name}: {key} {ci}")
+    if missing_ci:
+        raise ValueError(f"bootstrap CI not quoted as measured: {missing_ci}")
 
     for text_name, text_body in (("final_report.md", report_text), ("CLAIMS_CHECKLIST.md", checklist_text)):
         for regex, reason in FORBIDDEN_PATTERNS:

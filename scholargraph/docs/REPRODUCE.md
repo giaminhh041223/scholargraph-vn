@@ -29,7 +29,8 @@ snapshot models, notebooks, CLI modules và file demo — thiếu gì báo FAIL 
 
 ```powershell
 $env:PYTHONPATH='src'
-# Kiểm thử toàn suite (kỳ vọng 734 passed)
+# Kiểm thử toàn suite. Mốc SG-041 (29/09): 734 passed. Sau khi thêm public search, suite có 1613 test
+# (thu thập ngày 23/11); kết quả chạy mới nhất và 1 lỗi test_ui đã biết: management/logs/SESSION-20261123-109-CLAUDE.md
 .venv\Scripts\python.exe -m pytest tests -q
 # Final runs đã seal — KHÔNG chạy lại để "cải thiện số"; chỉ kiểm tra registry:
 .venv\Scripts\python.exe scripts/run_final.py --only registry
@@ -50,6 +51,7 @@ graph UI). API/UI chạy local, không CDN, không gọi mạng (xem SG-038 offl
 
 ## 5. Track C (tiếng Việt) — cần nhãn người
 
-Pool mù ở `data/annotations/vn_pool.json` (662 cặp). Hai thành viên chấm theo
+Pool mù của bộ truy vấn v2 ở `data/annotations/v2/vn_pool.json` (679 cặp: 227 dev / 452 test;
+bộ v1 662 cặp đã ngừng dùng, xem ADR-023). Hai thành viên chấm theo
 `docs/ANNOTATION_GUIDE.md`, chạy `scripts/score_vn_agreement.py` TRƯỚC thảo luận,
 rồi SG-034 mới chạy được. Agent không gán nhãn thay người.

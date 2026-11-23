@@ -107,3 +107,29 @@ def test_verify_claims_rejects_altered_metric_exit_1(tmp_path: Path) -> None:
     )
     assert res.returncode == 1
     assert "missing primary metric values" in res.stderr
+
+
+def test_verify_claims_rejects_stale_bootstrap_ci_exit_1(tmp_path: Path) -> None:
+    """Regression: the draft once quoted [-0.0246, -0.0148] instead of the measured SCIDOCS hybrid-vs-dense CI."""
+    measured = "[-0.0273, -0.0122]"
+    report = REPORT_PATH.read_text(encoding="utf-8")
+    assert measured in report
+    bad_report = tmp_path / "bad_report.md"
+    bad_report.write_text(report.replace(measured, "[-0.0246, -0.0148]"), encoding="utf-8")
+    res = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--evidence-index",
+            str(EVIDENCE_PATH),
+            "--report",
+            str(bad_report),
+            "--checklist",
+            str(CHECKLIST_PATH),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert res.returncode == 1
+    assert "bootstrap CI not quoted as measured" in res.stderr

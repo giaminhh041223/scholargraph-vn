@@ -8,10 +8,10 @@
 
 ### Câu 1: Làm thế nào nhóm đảm bảo không có rò rỉ dữ liệu (data leakage) khi đánh giá dự đoán trích dẫn trên đồ thị OpenAlex (Track B)?
 - **Trả lời:**
-  1. **Cắt theo thời gian (Temporal Split):** Các bài báo truy vấn (`dev` và `test`, mỗi tập 200 bài) đều có năm xuất bản $\ge 2025$.
-  2. **Ẩn cạnh đích (`Held-out Edges`):** Toàn bộ các cạnh trích dẫn đi ra từ các bài truy vấn (`source = query_doc_id`) bị tách làm nhãn kiểm tra (`qrels`) và bị xóa hoàn toàn khỏi đồ thị huấn luyện trước khi tính Global PageRank hay Personalized PageRank (`src/scholargraph/graph/build.py`).
-  3. **Cấm cạnh ngược thời gian & tự khớp:** Mọi cạnh từ bài mới sang bài xuất bản muộn hơn và mọi kết quả trùng chính bài truy vấn (`self-match`) đều bị loại bỏ và kiểm tra tự động tại ranh giới đánh giá (`ProtocolEvaluator` trong `src/scholargraph/evaluation/metrics.py`).
-  4. **Bằng chứng kiểm toán:** `artifacts/final_test/leakage_B_openalex.json` ghi nhận `0` cạnh ẩn bị lọt vào đồ thị.
+  1. **Cắt theo thời gian (Temporal Split):** 100 bài truy vấn dev thuộc năm 2024 và 200 bài truy vấn test thuộc năm 2025; ứng viên của mỗi truy vấn chỉ gồm bài có năm không lớn hơn năm bài truy vấn.
+  2. **Ẩn cạnh đích (`Held-out Edges`):** Với mỗi bài truy vấn, khoảng 20% tham chiếu (ít nhất 1, chọn tất định theo băm với seed `20260915`) được tách làm nhãn kiểm tra; tổng cộng 330 cạnh. Các cạnh này và cạnh ngược tương ứng bị xóa khỏi đồ thị trước khi tính Global PageRank hay Personalized PageRank (`src/scholargraph/graph/build.py`); đồ thị còn 26.186 trong 26.516 cạnh.
+  3. **Loại tự khớp và tham chiếu đã biết:** Kết quả trùng chính bài truy vấn (`self-match`) và các tham chiếu đã quan sát bị loại khỏi ứng viên, kiểm tra tại ranh giới đánh giá (`ProtocolEvaluator` trong `src/scholargraph/evaluation/metrics.py`).
+  4. **Bằng chứng kiểm toán:** `artifacts/reports/graph_audit.json` (`PASS`, 15 kiểm tra) ghi nhận `0` cạnh giữ lại còn sót trong đồ thị đã che ở cả hai chiều.
 
 ### Câu 2: Vì sao có sự chênh lệch giữa tổng số nút đồ thị OpenAlex (`18.251` bài) và số bài trong chỉ mục văn bản `openalex_core_text` (`18.250` bài)?
 - **Trả lời:** Bài báo `openalex:W126924136` trong dữ liệu gốc khuyết hoàn toàn cả `title` lẫn `abstract` (chuỗi văn bản rỗng). Theo nguyên tắc chống nuốt lỗi ngầm và quyết định kiến trúc `ADR-017`, hệ thống không tạo vector giả cho văn bản rỗng mà loại trừ tường minh bài này khỏi không gian truy hồi văn bản (`18.250` bài), đồng thời ghi nhận rõ ID `openalex:W126924136` trong `data/manifests/openalex_core_text.json` và `artifacts/reports/encoding_profile.json`.
@@ -39,14 +39,14 @@
 
 ### Câu 7: Tại sao trên cả SciFact và SCIDOCS, kết quả thực nghiệm lại cho thấy Hybrid RRF ($k=60$) đạt `nDCG@10` thấp hơn Dense đơn lẻ (`CLM-003`)?
 - **Trả lời:**
-  - Số liệu thực tế: Trên SciFact test, Dense đạt `0.7404` còn Hybrid đạt `0.7204` ($\Delta = -0.0200$, 95% CI `[-0.0469, +0.0066]`). Trên SCIDOCS test, Dense đạt `0.2172` còn Hybrid đạt `0.1976` ($\Delta = -0.0197$, 95% CI `[-0.0246, -0.0148]`).
+  - Số liệu thực tế: Trên SciFact test, Dense đạt `0.7404` còn Hybrid đạt `0.7204` ($\Delta = -0.0200$, 95% CI `[-0.0469, +0.0066]`). Trên SCIDOCS test, Dense đạt `0.2172` còn Hybrid đạt `0.1976` ($\Delta = -0.0197$, 95% CI `[-0.0273, -0.0122]`).
   - Tuy nhiên, trên SciFact, `Recall@100` của Hybrid (`0.9693`) vẫn cao hơn cả Dense (`0.9667`) và BM25 (`0.8892`).
-  - **Giải thích cơ chế:** RRF với trọng số bằng nhau rất tốt để **mở rộng độ phủ ứng viên ở độ sâu 100** (`Recall@100`), nhưng ở **top-10 (`nDCG@10`)**, khi bộ truy hồi từ vựng (BM25: `0.6647` / `0.1521`) yếu hơn quá xa so với bộ truy hồi ngữ nghĩa (Dense: `0.7404` / `0.2172`), các tài liệu nhiễu đứng hạng 1–2 của BM25 nhận điểm RRF cao và chen vào top-5, đẩy các tài liệu đúng ngữ nghĩa ở hạng 4–8 của Dense xuống dưới.
+  - **Giải thích cơ chế (giả thuyết, chưa có phép đo riêng):** RRF với trọng số bằng nhau rất tốt để **mở rộng độ phủ ứng viên ở độ sâu 100** (`Recall@100`), nhưng ở **top-10 (`nDCG@10`)**, khi bộ truy hồi từ vựng (BM25: `0.6647` / `0.1521`) yếu hơn quá xa so với bộ truy hồi ngữ nghĩa (Dense: `0.7404` / `0.2172`), các tài liệu nhiễu đứng hạng 1–2 của BM25 nhận điểm RRF cao và chen vào top-5, đẩy các tài liệu đúng ngữ nghĩa ở hạng 4–8 của Dense xuống dưới.
 
 ### Câu 8: Điều gì xảy ra khi người dùng nhập truy vấn tiếng Việt vào API ở chế độ `hybrid` nhưng BM25 không khớp được từ tiếng Anh nào?
 - **Trả lời:**
   - Ở tầng đánh giá nghiên cứu (`hybrid.py`), `rrf_fuse` nghiêm cấm đầu vào rỗng để bắt lỗi đường ống.
-  - Ở tầng phục vụ ứng dụng (`src/scholargraph/api/service.py`, commit `dcca385`), nếu một trong hai nhánh (BM25 hoặc Dense) trả về danh sách rỗng, dịch vụ không trả lỗi HTTP 500 và cũng **không giả vờ đã chạy hybrid đầy đủ**, mà chuyển về nhánh còn lại kèm nhãn phương pháp minh bạch: `hybrid+fallback-dense-only` (hoặc `hybrid+fallback-lexical-only`). Nếu cả hai cùng rỗng, trả về danh sách rỗng `200 OK` với nhãn `hybrid+both-sides-empty`. Cả 3 nhánh đều được kiểm thử trong `tests/integration/test_api.py`.
+  - Ở tầng phục vụ ứng dụng (`src/scholargraph/api/service.py`, commit `dcca385`), nếu một trong hai nhánh (BM25 hoặc Dense) trả về danh sách rỗng, dịch vụ không trả lỗi HTTP 500 và cũng **không giả vờ đã chạy hybrid đầy đủ**, mà chuyển về nhánh còn lại kèm nhãn phương pháp có hậu tố minh bạch: `+fallback-dense-only` (hoặc `+fallback-lexical-only`). Nếu cả hai cùng rỗng, trả về danh sách rỗng `200 OK` với hậu tố `+both-sides-empty`. Cả 3 nhánh đều được kiểm thử trong `tests/integration/test_api.py`.
 
 ---
 
@@ -59,15 +59,17 @@
   - Ở **Seeded PPR**, vector dịch chuyển $\mathbf{v}_q$ chỉ tập trung trọng số dương (chuẩn hóa tổng bằng 1) vào các bài báo hạt giống có điểm tương đồng văn bản cao nhất với truy vấn $q$ (ví dụ $A$ và $B$). Khi lặp công thức $\mathbf{p}^{(t+1)} = \alpha P^\top \mathbf{p}^{(t)} + (1-\alpha)\mathbf{v}_q$, xác suất sẽ chảy từ hạt giống $A, B$ sang bài $C$ (được cả $A$ và $B$ trích dẫn theo chủ đề của truy vấn $q$) mạnh hơn nhiều so với một bài nổi tiếng ở chủ đề khác.
 
 ### Câu 10: Vì sao trên Track B OpenAlex (`test200`), Seeded PPR (`nDCG@10 = 0.1004`) lại không vượt được đối chứng Global PageRank (`0.1082`, 95% CI chứa 0 — `CLM-004`)?
-- **Trả lời:** Có ba nguyên nhân thực nghiệm rõ ràng:
-  1. **Nút cổ chai từ tập ứng viên `C100`:** Cả PPR và Global PageRank chỉ tái xếp hạng trên cùng 100 ứng viên đầu do văn bản lấy ra (`Recall@100 = 0.2325`). Hơn 76% bài được trích dẫn thật đã bị mất trước khi bước đồ thị chạy.
-  2. **Đồ thị cực thưa ở biên thời gian 2025:** Trong 200 truy vấn kiểm tra, có tới 145 truy vấn mà bài đích có bậc trích dẫn vào bằng 0 (`max_pos_in_deg = 0`).
-  3. **Nhiễu hạt giống (Seed Noise):** Khi truy vấn là bài báo mới năm 2025, top-k văn bản có nhiều bài nhiễu; PPR khuếch đại lân cận của các hạt giống nhiễu này, trong khi Global PageRank ưu tiên ổn định các bài báo kinh điển có uy tín toàn cục. Tuy nhiên, khi tách riêng nhóm bài đích có bậc trích dẫn thấp (`low_deg`, $n=27$ trong `robustness.json`), PPR vẫn nhỉnh hơn nhẹ Global PageRank (`0.0680` so với `0.0642`).
+- **Trả lời:** Một điều đã đo và hai cách giải thích chưa kiểm chứng:
+  1. **Đã đo — nút cổ chai từ tập ứng viên `C100`:** Cả PPR và Global PageRank chỉ tái xếp hạng trên cùng 100 ứng viên đầu do văn bản lấy ra; `Recall@100` trung bình chỉ `0.2325`, nên phần lớn bài được trích dẫn thật đã mất trước khi bước đồ thị chạy.
+  2. **Giả thuyết — đồ thị thưa ở biên thời gian:** bài đích có ít hoặc không có cạnh vào trong đồ thị đã che. Hiện chưa có số đo về bậc vào của bài đích; không nêu con số khi trả lời.
+  3. **Giả thuyết — nhiễu hạt giống (Seed Noise):** top-k văn bản của bài truy vấn mới có nhiều bài nhiễu; PPR khuếch đại lân cận của các hạt giống này, trong khi Global PageRank ưu tiên ổn định các bài có uy tín toàn cục.
+  - **Phân tích thăm dò theo bậc của bài truy vấn** (`robustness.json`, không có CI): nhóm bậc thấp ($n=121$) PPR `0.0807`, Global PageRank `0.0902`; nhóm bậc cao ($n=36$) PPR `0.1276`, Global PageRank `0.1252`. Số liệu này không cho thấy PPR có lợi thế ở nhóm bậc thấp.
 
-### Câu 11: Tại sao việc tăng hệ số ưu tiên bài mới ($\lambda \in \{0.01, 0.03, 0.10\}$) trong Ablation A1 lại làm giảm đơn điệu `nDCG@10` (`CLM-005`)?
+### Câu 11: Tại sao việc tăng hệ số suy giảm theo tuổi ($\lambda \in \{0.01, 0.03, 0.10\}$) trong Ablation A1 lại làm giảm đơn điệu `nDCG@10` (`CLM-005`)?
 - **Trả lời:**
-  - Điểm tuổi bài báo $\tilde{s}_{\text{age}}(d) = \exp(-\text{decay} \cdot \max(0, 2026 - \text{year}(d)))$ đạt cực đại bằng $1.0$ cho các bài báo mới xuất bản (2025–2026) và giảm dần cho các bài báo cũ.
-  - Tuy nhiên, hành vi trích dẫn thực tế trong khoa học có tính tích lũy: các bài báo năm 2025 vẫn trích dẫn tỷ lệ lớn các công trình nền tảng (foundational papers) xuất bản từ 2018–2023. Khi tăng $\lambda$ từ $0.0$ lên $0.10$, điểm cộng độ mới đẩy các bài báo năm 2025 chưa được kiểm chứng lên top-10 và đẩy các bài nền tảng xuống dưới, khiến `nDCG@10` của PPR giảm từ `0.1004` xuống `0.0673`. Điều này chứng minh **tăng mức độ hiển thị bài mới (recency exposure) không đồng nghĩa với tăng độ liên quan hay sự công bằng (fairness)**.
+  - Sau khi trộn điểm văn bản và đồ thị, điểm được nhân với $\exp(-\lambda \cdot \max(0, \text{year}(q) - \text{year}(d)))$. Mốc là năm xuất bản của bài truy vấn, không phải năm hiện tại: bài cùng năm với bài truy vấn giữ nguyên điểm, bài càng cũ càng bị giảm; $\lambda = 0$ là đối chứng không điều chỉnh.
+  - Đã đo: khi tăng $\lambda$ từ $0.0$ lên $0.10$ tại $\gamma = 0.3$, `nDCG@10` của PPR giảm từ `0.1004` xuống `0.0673` và của Global PageRank từ `0.1082` xuống `0.0740`.
+  - Cách giải thích (giả thuyết, chưa có phép đo riêng): bài truy vấn trích dẫn nhiều công trình cũ hơn nó, nên hạ điểm bài cũ làm các bài được trích dẫn thật rơi khỏi top-10. Kết luận an toàn: **ưu tiên bài mới không đồng nghĩa với tăng độ liên quan hay sự công bằng (fairness)**.
 
 ---
 
@@ -83,15 +85,15 @@
 
 ### Câu 14: Thế nào là thiên lệch đánh giá theo pool (pooled judgment bias) trong `SG-033` và làm sao nhóm giảm thiểu thiên lệch khi hai người gán nhãn?
 - **Trả lời:**
-  - Khi kho dữ liệu có `18.250` bài báo, con người không thể chấm hết $30 \times 18.250$ cặp mà chỉ chấm tập hợp nhất (pool) top-10 của 3 phương pháp đại diện (`662` cặp duy nhất). Các bài báo không lọt vào pool mặc định bị tính độ liên quan bằng 0 khi tính metric (hoặc được theo dõi qua `unjudged_ratio@10`).
-  - Để tránh thiên lệch xác nhận (confirmation bias), `scripts/build_vn_pool.py` loại bỏ hoàn toàn tên hệ thống và điểm số khỏi `data/annotations/vn_pool.json` và xáo trộn ngẫu nhiên thứ tự ứng viên với `seed = 20260915`. Hai thành viên chấm hoàn toàn độc lập (`round = independent`), đo hệ số đồng thuận $\kappa$ có trọng số tuyến tính (`scripts/score_vn_agreement.py`) **trước khi** thảo luận phân xử (`round = adjudicated`).
+  - Khi kho dữ liệu có `18.250` bài báo, con người không thể chấm hết $30 \times 18.250$ cặp mà chỉ chấm tập hợp nhất (pool) top-10 của 3 phương pháp đại diện (`679` cặp duy nhất ở bộ truy vấn v2, `ADR-023`). Các bài báo không lọt vào pool mặc định bị tính độ liên quan bằng 0 khi tính metric (hoặc được theo dõi qua `unjudged_ratio@10`).
+  - Để tránh thiên lệch xác nhận (confirmation bias), `scripts/build_vn_pool.py` loại bỏ hoàn toàn tên hệ thống và điểm số khỏi `data/annotations/v2/vn_pool.json` và xáo trộn ngẫu nhiên thứ tự ứng viên với `seed = 20260915`. Hai thành viên chấm hoàn toàn độc lập (`round = independent`), đo hệ số đồng thuận $\kappa$ có trọng số tuyến tính (`scripts/score_vn_agreement.py`) **trước khi** thảo luận phân xử (`round = adjudicated`).
 
 ### Câu 15: Trong báo cáo hiệu năng `SG-040`, tại sao một số phương pháp vượt ngân sách `500ms/query` và nhóm xử lý thế nào?
 - **Trả lời:**
   - Ngân sách `500ms/query` là mục tiêu đo đạc thực tế, không phải ràng buộc để cắt giảm ngầm chất lượng.
   - Trên SciFact (`5.183` bài), mọi phương pháp đều dưới `500ms` (`Hybrid P95 = 41.5ms`).
   - Trên SCIDOCS (`25.657` bài), tìm kiếm vector `Dense` chỉ mất `P95 = 9.1ms` nhờ phép nhân ma trận NumPy được tối ưu SIMD/BLAS, nhưng `BM25` cài đặt bằng vòng lặp từ điển Python thuần có `P95 = 1510.9ms` ở các truy vấn dài nhiều từ phổ biến.
-  - Trên Track B OpenAlex, việc chạy `C100` kèm phép lặp vô hướng `PPR` trên đồ thị mất trung bình `1683.5ms` (`P95 = 2380.4ms`). Nhóm báo cáo trung thực toàn bộ các con số vượt ngân sách trong `artifacts/reports/performance.md` và Hình 4.
+  - Trên Track B OpenAlex, việc chạy `C100` kèm phép lặp vô hướng `PPR` trên đồ thị mất trung bình `1683.5ms` (`P95 = 2380.4ms`). Cỡ mẫu đo nhỏ: 20 truy vấn SciFact, 10 truy vấn SCIDOCS, 5 truy vấn Track B. Nhóm báo cáo trung thực toàn bộ các con số vượt ngân sách trong `artifacts/reports/performance.md` và Hình 4.
 
 ---
 
@@ -108,10 +110,10 @@
      - *Input:* Hai danh sách xếp hạng không rỗng (`lexical_ids`, `dense_ids`), hằng số $k > 0$ (mặc định $60$), độ sâu `final_depth`.
      - *Output:* Danh sách từ điển chứa `doc_id`, `rrf_score`, `lexical_rank`, `dense_rank`.
      - *Chế độ lỗi:* Ném `ValueError` nếu một trong hai danh sách rỗng, có ID trùng lặp trong cùng một danh sách, hoặc $k \le 0$.
-  3. **`graph/ppr.py` (`seeded_ppr`):**
-     - *Input:* Đồ thị trích dẫn có hướng (đã ẩn cạnh test), tập hạt giống kèm trọng số dương, hệ số cản $\alpha = 0.85$, ngưỡng hội tụ `tol`.
-     - *Output:* Từ điển ánh xạ `node_id -> ppr_score` chuẩn hóa tổng xác suất bằng 1.
-     - *Chế độ lỗi:* Từ chối nếu hạt giống có trọng số âm/tổng bằng 0 hoặc $\alpha \notin (0, 1)$.
+  3. **`graph/ppr.py` (`build_teleport`, `personalized_pagerank`):**
+     - *Input:* Danh sách nút và cạnh ra của đồ thị có hướng (đã che cạnh giữ lại), vector teleport dựng từ tối đa 20 hạt giống `{doc_id, rrf}` có trọng số dương, hệ số cản $\alpha = 0.85$, ngưỡng hội tụ `tol`, số vòng lặp tối đa.
+     - *Output:* Bộ ba (`node_id -> ppr_score` chuẩn hóa tổng bằng 1, số vòng lặp, phần dư).
+     - *Chế độ lỗi:* Ném `GraphDataError` nếu tập hạt giống rỗng, trùng lặp, nằm ngoài đồ thị đã che hoặc có trọng số không dương/không hữu hạn; nếu $\alpha \notin (0, 1)$; nếu cạnh trỏ tới nút lạ; hoặc nếu không hội tụ trong số vòng lặp cho phép.
   4. **`evaluation/metrics.py` (`ProtocolEvaluator`):**
      - *Input:* Kết quả xếp hạng `runs`, nhãn `qrels`, tập `query_ids` đã khóa, tập `corpus_ids`, tập `eligible_ids`.
      - *Output:* 5 chỉ số (`nDCG@10`, `Recall@100`, `MRR@10`, `MAP@100`, `P@5`) từng truy vấn và trung bình vĩ mô (macro-average), kèm biên bản kiểm toán (`audit`).

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-10-08T13:49:39.757091+07:00",
+  "updated_at": "2026-11-23T17:18:53+07:00",
   "mode": "logical_lanes_only_no_threads_created",
   "single_writer_coordinator": "C",
   "active_assignments": [
@@ -1281,6 +1281,18 @@
         "/root/machine_label_a_v2",
         "/root/machine_label_b_v2"
       ]
+    },
+    {
+      "session_id": "SESSION-20261123-109-CLAUDE",
+      "chat_id": "C",
+      "app_thread_id": null,
+      "task_ids": [],
+      "actual_model": "claude-fable-5-2",
+      "actual_reasoning": null,
+      "log_path": "management/logs/SESSION-20261123-109-CLAUDE.md",
+      "status": "completed",
+      "role": "coordinator_worker_progress_report_and_final_report_reconciliation",
+      "claimed_paths": []
     }
   ],
   "lanes": [

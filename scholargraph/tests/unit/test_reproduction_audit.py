@@ -202,3 +202,70 @@ def test_generate_figures_happy_and_missing_exits_1(tmp_path: Path) -> None:
         check=False,
     )
     assert res_bad.returncode == 1
+
+
+def _copy_evidence_inputs(dst_root: Path) -> None:
+    """Minimal project root holding exactly the inputs build_evidence_index.py requires."""
+    import shutil
+
+    rels = ["configs/frozen_main.json", "data/annotations/v2/vn_pool.json"] + [
+        f"artifacts/reports/{name}.json"
+        for name in (
+            "main_run_registry", "ablation", "ablation_age", "ablation_rrfk",
+            "robustness", "statistics", "performance",
+        )
+    ]
+    for rel in rels:
+        (dst_root / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / rel, dst_root / rel)
+
+
+def _run_evidence(project_root: Path, out: Path) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(EVIDENCE_SCRIPT), "--project-root", str(project_root), "--output", str(out)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def test_evidence_index_claim_text_is_derived_and_lf(tmp_path: Path) -> None:
+    _copy_evidence_inputs(tmp_path)
+    out = tmp_path / "out.json"
+    res = _run_evidence(tmp_path, out)
+    assert res.returncode == 0, res.stderr
+    raw = out.read_bytes()
+    assert b"\r\n" not in raw
+    doc = json.loads(raw.decode("utf-8"))
+    claims = {c["claim_id"]: c for c in doc["claims"]}
+    for cid, lo_key, hi_key in (
+        ("CLM-002", "ci_low", "ci_high"),
+        ("CLM-003", "scidocs_ci_low", "scidocs_ci_high"),
+    ):
+        m = claims[cid]["metrics"]
+        assert f"[{m[lo_key]:+.4f}, {m[hi_key]:+.4f}]" in claims[cid]["statement_vi"]
+    pairs = doc["tables"]["table_3_track_c_vn"]["pool_pairs"]
+    assert pairs["dev"] + pairs["test"] == pairs["total"]
+    assert f"{pairs['total']} cặp" in claims["CLM-008"]["statement_vi"]
+
+
+def test_evidence_index_missing_vn_pool_exits_1(tmp_path: Path) -> None:
+    _copy_evidence_inputs(tmp_path)
+    (tmp_path / "data" / "annotations" / "v2" / "vn_pool.json").unlink()
+    res = _run_evidence(tmp_path, tmp_path / "out.json")
+    assert res.returncode == 1
+    assert "FAIL:" in res.stderr and "vn_pool.json" in res.stderr
+    assert not (tmp_path / "out.json").exists()
+
+
+def test_evidence_index_rejects_claim_wording_contradicting_stats(tmp_path: Path) -> None:
+    _copy_evidence_inputs(tmp_path)
+    stats_path = tmp_path / "artifacts" / "reports" / "statistics.json"
+    stats = json.loads(stats_path.read_text(encoding="utf-8"))
+    for row in stats["comparisons"]:
+        if (row["dataset"], row["comparison"], row["metric"]) == ("scifact", "hybrid-vs-dense", "nDCG@10"):
+            row["ci_excludes_zero"] = True  # claim text says this CI contains 0
+    stats_path.write_text(json.dumps(stats), encoding="utf-8")
+    res = _run_evidence(tmp_path, tmp_path / "out.json")
+    assert res.returncode == 1
+    assert "CLM-003 scifact" in res.stderr

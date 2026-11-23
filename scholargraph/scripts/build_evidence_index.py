@@ -49,6 +49,33 @@ def _load_json(path: Path) -> dict[str, Any]:
     return data
 
 
+def _ci(row: dict[str, Any]) -> str:
+    """Format a bootstrap CI exactly as the report cites it; never hand-typed."""
+    return f"[{float(row['ci_low']):+.4f}, {float(row['ci_high']):+.4f}]"
+
+
+def _expect_ci_excludes_zero(row: dict[str, Any], expected: bool, label: str) -> None:
+    if bool(row["ci_excludes_zero"]) is not expected:
+        raise ValueError(
+            f"{label}: claim wording assumes ci_excludes_zero={expected}, statistics.json says {row['ci_excludes_zero']!r}"
+        )
+
+
+def _vn_pool_pair_counts(project_root: Path) -> dict[str, int]:
+    """Pair counts of the current VN evaluation pool (query set v2, ADR-023)."""
+    pool = _load_json(project_root / "data" / "annotations" / "v2" / "vn_pool.json")
+    counts = {"dev": 0, "test": 0}
+    for q in pool["pools"]:
+        if q["split"] not in counts:
+            raise ValueError(f"Unexpected VN pool split {q['split']!r} for {q['query_id']}")
+        counts[q["split"]] += len(q["candidates"])
+    total = counts["dev"] + counts["test"]
+    if total != int(pool["counts"]["unique_pairs"]):
+        raise ValueError(f"VN pool pair count {total} != counts.unique_pairs {pool['counts']['unique_pairs']}")
+    counts["total"] = total
+    return counts
+
+
 def build_index(project_root: Path) -> dict[str, Any]:
     freeze_path = project_root / "configs" / "frozen_main.json"
     freeze_sha = _sha256(freeze_path)
@@ -123,6 +150,7 @@ def build_index(project_root: Path) -> dict[str, Any]:
     if len(comparisons_by_key) != 24:
         raise ValueError(f"Expected 24 paired bootstrap comparisons, got {len(comparisons_by_key)}")
 
+    vn_pairs = _vn_pool_pair_counts(project_root)
     vn_results_path = reports_dir / "vn_results.json"
     if vn_results_path.is_file():
         vn_doc = _load_json(vn_results_path)
@@ -138,7 +166,12 @@ def build_index(project_root: Path) -> dict[str, Any]:
     else:
         track_c_entry = {
             "status": "chua_do",
-            "pending_human_gate": "SG-033 (2 human annotators label 219 dev + 443 test pairs) -> SG-034",
+            "pending_human_gate": (
+                f"SG-033 (2 human annotators label {vn_pairs['dev']} dev + {vn_pairs['test']} test pairs "
+                "of VN query set v2, ADR-023) -> SG-034"
+            ),
+            "pool": "data/annotations/v2/vn_pool.json",
+            "pool_pairs": vn_pairs,
             "metrics": None,
         }
 
@@ -147,12 +180,17 @@ def build_index(project_root: Path) -> dict[str, Any]:
     scifact_hybrid_dense = comparisons_by_key["scifact__hybrid-vs-dense__nDCG@10"]
     scidocs_hybrid_dense = comparisons_by_key["scidocs__hybrid-vs-dense__nDCG@10"]
     openalex_ppr_global = comparisons_by_key["openalex__ppr_best-vs-global_control__nDCG@10"]
+    _expect_ci_excludes_zero(scifact_dense_bm25, True, "CLM-001")
+    _expect_ci_excludes_zero(scidocs_dense_bm25, True, "CLM-002")
+    _expect_ci_excludes_zero(scifact_hybrid_dense, False, "CLM-003 scifact")
+    _expect_ci_excludes_zero(scidocs_hybrid_dense, True, "CLM-003 scidocs")
+    _expect_ci_excludes_zero(openalex_ppr_global, False, "CLM-004")
 
     claims = [
         {
             "claim_id": "CLM-001",
             "category": "positive_finding",
-            "statement_vi": "Trên SciFact test (n=300), Dense (BGE-base-en-v1.5) đạt nDCG@10 = 0.7404, vượt BM25 (0.6647) với chênh lệch tuyệt đối +0.0757 (95% paired bootstrap CI [+0.0405, +0.1115], không chứa 0).",
+            "statement_vi": f"Trên SciFact test (n=300), Dense (BGE-base-en-v1.5) đạt nDCG@10 = 0.7404, vượt BM25 (0.6647) với chênh lệch tuyệt đối +0.0757 (95% paired bootstrap CI {_ci(scifact_dense_bm25)}, không chứa 0).",
             "source_file": "artifacts/reports/statistics.json",
             "run_ids": [
                 track_a_table["scifact__dense"]["run_id"],
@@ -170,7 +208,7 @@ def build_index(project_root: Path) -> dict[str, Any]:
         {
             "claim_id": "CLM-002",
             "category": "positive_finding",
-            "statement_vi": "Trên SCIDOCS test (n=1000), Dense đạt nDCG@10 = 0.2172, vượt BM25 (0.1521) với chênh lệch tuyệt đối +0.0652 (95% paired bootstrap CI [+0.0558, +0.0748], không chứa 0).",
+            "statement_vi": f"Trên SCIDOCS test (n=1000), Dense đạt nDCG@10 = 0.2172, vượt BM25 (0.1521) với chênh lệch tuyệt đối +0.0652 (95% paired bootstrap CI {_ci(scidocs_dense_bm25)}, không chứa 0).",
             "source_file": "artifacts/reports/statistics.json",
             "run_ids": [
                 track_a_table["scidocs__dense"]["run_id"],
@@ -188,7 +226,7 @@ def build_index(project_root: Path) -> dict[str, Any]:
         {
             "claim_id": "CLM-003",
             "category": "negative_finding",
-            "statement_vi": "Kết quả âm 1 (Hybrid RRF k=60 vs Dense): Trên SciFact test, Hybrid RRF đạt nDCG@10 = 0.7204, thấp hơn Dense (0.7404) với delta -0.0200 (95% CI [-0.0469, +0.0066], chứa 0). Trên SCIDOCS test, Hybrid RRF đạt nDCG@10 = 0.1976, thấp hơn Dense (0.2172) với delta -0.0197 (95% CI [-0.0246, -0.0148], không chứa 0). Ghép BM25 trọng số bằng nhau kéo tụt top-10 khi BM25 yếu hơn hẳn Dense.",
+            "statement_vi": f"Kết quả âm 1 (Hybrid RRF k=60 vs Dense): Trên SciFact test, Hybrid RRF đạt nDCG@10 = 0.7204, thấp hơn Dense (0.7404) với delta -0.0200 (95% CI {_ci(scifact_hybrid_dense)}, chứa 0). Trên SCIDOCS test, Hybrid RRF đạt nDCG@10 = 0.1976, thấp hơn Dense (0.2172) với delta -0.0197 (95% CI {_ci(scidocs_hybrid_dense)}, không chứa 0). Ghép BM25 trọng số bằng nhau kéo tụt top-10 khi BM25 yếu hơn hẳn Dense.",
             "source_file": "artifacts/reports/statistics.json",
             "run_ids": [
                 track_a_table["scifact__hybrid"]["run_id"],
@@ -210,7 +248,7 @@ def build_index(project_root: Path) -> dict[str, Any]:
         {
             "claim_id": "CLM-004",
             "category": "negative_finding",
-            "statement_vi": "Kết quả âm 2 (Track B Seeded PPR vs Global PageRank trên OpenAlex test200): Nhánh cấu hình đóng băng ppr_age_best_g0.3_l0.0 đạt nDCG@10 = 0.1004, không vượt đối chứng global_pagerank_control (0.1082); chênh lệch tuyệt đối -0.0078 với 95% paired bootstrap CI [-0.0198, +0.0021] chứa 0 (Recall@100 cùng bằng 0.2325 trên tập ứng viên C100).",
+            "statement_vi": f"Kết quả âm 2 (Track B Seeded PPR vs Global PageRank trên OpenAlex test200): Nhánh cấu hình đóng băng ppr_age_best_g0.3_l0.0 đạt nDCG@10 = 0.1004, không vượt đối chứng global_pagerank_control (0.1082); chênh lệch tuyệt đối -0.0078 với 95% paired bootstrap CI {_ci(openalex_ppr_global)} chứa 0 (Recall@100 cùng bằng 0.2325 trên tập ứng viên C100).",
             "source_file": "artifacts/reports/main_run_registry.json",
             "run_ids": ["b_trials_test:ppr_age_best_g0.3_l0.0", "b_trials_test:global_pagerank_control"],
             "metrics": {
@@ -271,8 +309,8 @@ def build_index(project_root: Path) -> dict[str, Any]:
         {
             "claim_id": "CLM-008",
             "category": "pending_human_gate",
-            "statement_vi": "Track C (Truy vấn tiếng Việt xuyên ngữ): Đã hoàn tất 30 truy vấn (10 dev / 20 test), bộ nhớ đệm dịch máy (Opus-MT vi-en) và pool mù 662 cặp (SG-031..SG-033 tooling), nhưng CHƯA báo cáo điểm đánh giá cuối cùng vì đang chờ 2 thành viên con người gán nhãn độc lập (SG-033) và duyệt freeze VN (SG-034).",
-            "source_file": "artifacts/reports/main_run_registry.json",
+            "statement_vi": f"Track C (Truy vấn tiếng Việt xuyên ngữ): Đã hoàn tất 30 truy vấn v2 (10 dev / 20 test, ADR-023), bộ nhớ đệm dịch máy (Opus-MT vi-en) và pool mù {vn_pairs['total']} cặp ({vn_pairs['dev']} dev / {vn_pairs['test']} test; SG-031..SG-033 tooling), nhưng CHƯA báo cáo điểm đánh giá cuối cùng vì đang chờ 2 thành viên con người gán nhãn độc lập (SG-033) và duyệt freeze VN (SG-034).",
+            "source_file": "data/annotations/v2/vn_pool.json",
             "run_ids": [],
             "metrics": track_c_entry["metrics"],
         },
@@ -337,7 +375,8 @@ def main(argv: list[str] | None = None) -> int:
         out_path = Path(args.output) if Path(args.output).is_absolute() else proot / args.output
         payload = build_index(proot)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        # LF on every platform: the committed artifact is LF and the repo disables EOL conversion.
+        out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         print(
             json.dumps(
                 {

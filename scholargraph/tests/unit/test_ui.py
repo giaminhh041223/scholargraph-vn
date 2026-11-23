@@ -36,16 +36,46 @@ def test_index_renders_template(client):
     assert "beir-scifact-frozen" in body and "5183" in body
 
 
+def _absolute_urls_outside_comment_lines(text: str) -> list[str]:
+    """Lines that contain an absolute http(s) URL, ignoring whole-line comments.
+
+    A whole-line comment cannot load anything, so prose such as
+    "require an http:// or https:// prefix" in public_search.js is allowed.
+    Any URL in code, strings, markup or trailing comments is still reported.
+    """
+    hits = []
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        if stripped.startswith(("//", "/*", "*")):
+            continue
+        if "http://" in line or "https://" in line:
+            hits.append(stripped)
+    return hits
+
+
+def test_absolute_url_scan_ignores_only_whole_line_comments():
+    assert _absolute_urls_outside_comment_lines("// needs http:// or https://\n/* see https://x */\n * https://y") == []
+    for bad in (
+        'fetch("https://cdn.example/lib.js");',
+        "@import url(http://fonts.example/a.css);",
+        '<script src="https://cdn.example/x.js"></script>',
+        'load(); // fallback https://cdn.example',
+    ):
+        assert _absolute_urls_outside_comment_lines(bad) == [bad], bad
+
+
 def test_static_served_offline(client):
     r = client.get("/static/app.js")
     assert r.status_code == 200
     js = r.text
     assert "fetch(" in js
     static_dir = PROJECT_ROOT / "ui" / "static"
+    scanned = 0
     for f in static_dir.iterdir():
         if f.suffix in {".js", ".css", ".html"}:
-            assert "http://" not in f.read_text(encoding="utf-8"), f.name
-            assert "https://" not in f.read_text(encoding="utf-8"), f.name
+            scanned += 1
+            assert _absolute_urls_outside_comment_lines(f.read_text(encoding="utf-8")) == [], f.name
+    assert scanned >= 4  # app.js, style.css, public_search.js, public_search.css
 
 
 def test_health_real_counts(client):

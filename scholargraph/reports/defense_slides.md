@@ -16,15 +16,15 @@
 
 ## Slide 2 — Bốn Câu hỏi Nghiên cứu & Thiết kế 3 Nhánh Đánh giá (1:00 – 2:15)
 - **Track A (Text Retrieval — BEIR):** SciFact (`5.183` bài, `300` test queries) & SCIDOCS (`25.657` bài, `1.000` test queries).
-- **Track B (Citation Graph Reranking — OpenAlex):** `18.251` nút đồ thị (`18.250` bài có văn bản sau khi loại tường minh 1 bài rỗng `W126924136` theo `ADR-017`), `200` truy vấn dev + `200` truy vấn test xuất bản năm $\ge 2025$.
-- **Track C (Cross-Lingual Vietnamese Pilot):** `30` truy vấn tiếng Việt (`10` dev / `20` test) trên kho `18.250` bài tiếng Anh; pool mù top-10 (`662` cặp) ẩn nguồn phương pháp.
+- **Track B (Citation Graph Reranking — OpenAlex):** `18.251` nút đồ thị (`18.250` bài có văn bản sau khi loại tường minh 1 bài rỗng `W126924136` theo `ADR-017`), `100` truy vấn dev (năm 2024) + `200` truy vấn test (năm 2025).
+- **Track C (Cross-Lingual Vietnamese Pilot):** `30` truy vấn tiếng Việt (`10` dev / `20` test) trên kho `18.250` bài tiếng Anh; pool mù top-10 của bộ truy vấn v2 (`679` cặp, `ADR-023`) ẩn nguồn phương pháp.
 
 ---
 
 ## Slide 3 — Giao thức Chống Rò rỉ và Đóng băng Trước Test (`SG-016`, `SG-027`) (2:15 – 3:30)
 - **Chống rò rỉ đồ thị (Track B):**
-  - Toàn bộ cạnh trích dẫn đi ra từ các bài truy vấn năm $\ge 2025$ bị tách làm nhãn ẩn (`held-out edges`), không nằm trong ma trận kề khi tính PageRank/PPR.
-  - Cấm tuyệt đối cạnh trích dẫn ngược thời gian và tự khớp (`self-match`).
+  - Với mỗi bài truy vấn, khoảng 20% tham chiếu (ít nhất 1) được giữ lại làm nhãn ẩn (`held-out edges`); tổng cộng 330 cạnh bị che theo cả hai chiều, đồ thị còn 26.186 trong 26.516 cạnh và kiểm toán ghi nhận 0 cạnh sót.
+  - Ứng viên chỉ gồm bài có năm không lớn hơn năm bài truy vấn; loại tự khớp (`self-match`) và các tham chiếu đã quan sát.
 - **Đóng băng cấu hình (`configs/frozen_main.json`):**
   - Khóa SHA-256 của 33 tệp dữ liệu, chỉ mục và manifest (`sha256 = 34159fb1...7557`) tại commit `e959f68` **trước khi** mở tập `test`.
   - Chọn siêu tham số Track B ($\gamma=0.3, \lambda=0.0$) hoàn toàn trên tập `dev` (`SG-026`, 20 cấu hình).
@@ -37,8 +37,8 @@
   - Ngữ nghĩa: `BAAI/bge-base-en-v1.5` ($d=768$, chuẩn hóa $L_2$, `ExactDenseIndex`).
   - Hợp nhất: $\text{RRF}(d) = \frac{1}{60 + r_{\text{BM25}}(d)} + \frac{1}{60 + r_{\text{Dense}}(d)}$.
 - **Tầng 2 (Graph Reranking trên tập ứng viên `C100`):**
-  - Chuẩn hóa min-max theo từng truy vấn: $S(q,d) = (1-\gamma)\tilde{s}_{\text{text}} + \gamma\tilde{s}_{\text{graph}} + \lambda\tilde{s}_{\text{age}}$.
-  - Xử lý suy biến minh bạch ở API (`dcca385`): Khi một nhánh rỗng, trả về nhánh còn lại kèm nhãn `hybrid+fallback-dense-only` hoặc `hybrid+fallback-lexical-only` (không che giấu, không lỗi 500).
+  - Chuẩn hóa min-max theo từng truy vấn: $F(q,d) = (1-\gamma)\tilde{s}_{\text{text}} + \gamma\tilde{s}_{\text{graph}}$, rồi nhân hệ số tuổi $S = F \cdot e^{-\lambda \max(0,\ \text{year}(q)-\text{year}(d))}$.
+  - Xử lý suy biến minh bạch ở API (`dcca385`): Khi một nhánh rỗng, trả về nhánh còn lại kèm nhãn phương pháp có hậu tố `+fallback-dense-only` hoặc `+fallback-lexical-only` (không che giấu, không lỗi 500).
 
 ---
 
@@ -47,9 +47,9 @@
   - **SciFact Test ($n=300$):** `TF-IDF = 0.6327` | `BM25 = 0.6647` | **`Dense = 0.7404`** | `Hybrid RRF = 0.7204`.
   - **SCIDOCS Test ($n=1000$):** `BM25 = 0.1521` | **`Dense = 0.2172`** | `Hybrid RRF = 0.1976`.
 - **Ý nghĩa thống kê (`B=10.000` paired bootstrap):**
-  - `Dense vs BM25`: `+0.0757` trên SciFact (`CI [+0.0405, +0.1115]`) và `+0.0652` trên SCIDOCS (`CI [+0.0558, +0.0748]`).
-  - **Kết quả âm 1 (`Hybrid vs Dense`):** `-0.0200` trên SciFact (`CI [-0.0469, +0.0066]`, chứa 0) và `-0.0197` trên SCIDOCS (`CI [-0.0246, -0.0148]`).
-  - **Lý do:** RRF trọng số bằng nhau đẩy các bài khớp từ khóa bề mặt ở top-3 của BM25 vượt lên trên các bài đúng ngữ nghĩa ở hạng 4–10 của Dense.
+  - `Dense vs BM25`: `+0.0757` trên SciFact (`CI [+0.0405, +0.1115]`) và `+0.0652` trên SCIDOCS (`CI [+0.0549, +0.0753]`).
+  - **Kết quả âm 1 (`Hybrid vs Dense`):** `-0.0200` trên SciFact (`CI [-0.0469, +0.0066]`, chứa 0) và `-0.0197` trên SCIDOCS (`CI [-0.0273, -0.0122]`).
+  - **Cách giải thích (giả thuyết, chưa có phép đo riêng):** RRF trọng số bằng nhau đẩy các bài khớp từ khóa bề mặt ở top-3 của BM25 vượt lên trên các bài đúng ngữ nghĩa ở hạng 4–10 của Dense.
 
 ---
 
@@ -59,34 +59,36 @@
   - `global_pagerank_control` (Đối chứng): `nDCG@10 = 0.1082`, `Recall@100 = 0.2325`, `MRR@10 = 0.0991`.
 - **Kết quả âm 2 (`CLM-004`):**
   - Chênh lệch `PPR - Global PR` là `-0.0078` với 95% CI `[-0.0198, +0.0021]` **chứa 0**.
-  - **Giải thích:** (1) Trần ứng viên `C100` chỉ giữ được `23.25%` bài trích dẫn thật; (2) `145/200` truy vấn có bài đích bậc vào bằng 0 trên đồ thị huấn luyện; (3) Hạt giống văn bản nhiễu làm PPR lan truyền xác suất ra vùng lân cận sai, trong khi Global PageRank ưu tiên ổn định các bài báo kinh điển.
+  - **Đã đo:** `Recall@100` trung bình của tập ứng viên `C100` chỉ `0.2325`, nên phần lớn bài trích dẫn thật không tới được bước đồ thị.
+  - **Cách giải thích (giả thuyết, chưa có phép đo riêng):** hạt giống văn bản nhiễu làm PPR lan truyền xác suất ra vùng lân cận sai, trong khi Global PageRank ưu tiên ổn định các bài báo kinh điển. Chưa có số đo về bậc vào của bài đích.
 
 ---
 
 ## Slide 7 — Nghiên cứu Cắt bỏ (Ablation A1 & A3) và Độ bền vững (7:45 – 9:15)
 - **Ablation A1 — Điều chỉnh tuổi bài báo ($\lambda \in \{0.0, 0.01, 0.03, 0.1\}$ tại $\gamma=0.3$):**
   - **Kết quả âm 3 (`CLM-005`):** `nDCG@10` của PPR giảm đơn điệu: `0.1004` ($\lambda=0$) $\to$ `0.0977` ($\lambda=0.01$) $\to$ `0.0883` ($\lambda=0.03$) $\to$ `0.0673` ($\lambda=0.10$).
-  - Tăng điểm cho bài mới làm tụt hạng các bài báo nền tảng được trích dẫn nhiều.
+  - Hệ số $e^{-\lambda\cdot\text{tuổi}}$ hạ điểm các bài cũ hơn bài truy vấn, trong đó có các bài nền tảng.
 - **Ablation A3 — Độ nhạy hằng số RRF $k \in \{30, 60, 100\}$ (`CLM-006`):**
   - SciFact `nDCG@10`: `0.7224` / `0.7204` / `0.7202` — hầu như bất biến.
-- **Phân rã bậc đồ thị (Robustness R2):**
-  - Ở nhóm bài đích bậc thấp (`low_deg`, $n=27$), PPR nhỉnh hơn nhẹ Global PR (`0.0680` vs `0.0642`), nhưng thua ở nhóm bậc cao (`high_deg`, $n=28$: `0.3881` vs `0.4226`).
+- **Phân rã theo bậc của bài truy vấn (Robustness R2, thăm dò, không có CI):**
+  - Nhóm bậc thấp (`low_degree`, $n=121$): PPR `0.0807`, Global PR `0.0902`. Nhóm bậc cao (`high_degree`, $n=36$): PPR `0.1276`, Global PR `0.1252`.
 
 ---
 
 ## Slide 8 — Phân tích 24 Ca Lỗi Điển hình (`SG-030`) (9:15 – 10:30)
-- **3 nhóm nguyên nhân lỗi chính từ 24 Error Packets (`docs/ERROR_ANALYSIS.md`):**
-  1. *Đa nghĩa từ vựng (Lexical Polysemy):* BM25 bắt trúng từ chung (`"cell"`, `"treatment"`, `"network"`) nhưng sai ngữ cảnh sinh học/mạng máy tính.
-  2. *Rớt ứng viên từ vòng 1 (`Candidate Pool Miss`):* Bài báo trích dẫn thực tế dùng thuật ngữ thế hệ cũ nên rớt khỏi top-100 văn bản (`C100`), khiến tầng đồ thị không bao giờ nhìn thấy.
-  3. *Nút cô lập trong đồ thị cắt theo thời gian:* Bài báo đích mới xuất bản sát mốc cắt chưa kịp tích lũy cạnh vào (`in-degree = 0`).
+- **24 Error Packets (`docs/ERROR_ANALYSIS.md`):** 12 ca SciFact, 6 ca SCIDOCS, 6 ca Track B. Ví dụ cụ thể sẽ lấy từ packets sau khi hai thành viên đọc (`H-1`).
+- **3 giả thuyết làm việc, chờ `H-1` xác nhận hoặc bác bỏ:**
+  1. *Trùng từ khóa bề mặt:* BM25 xếp cao bài trùng từ nhưng không liên quan về nội dung, kéo RRF xuống.
+  2. *Rớt ứng viên từ vòng 1 (`Candidate Pool Miss`):* bài trích dẫn thật không vào top-100 văn bản (`C100`, `Recall@100 = 0.2325`), tầng đồ thị không nhìn thấy.
+  3. *Đồ thị cục bộ thưa:* bài đích có ít hoặc không có cạnh vào trong đồ thị đã che (chưa có số đo).
 
 ---
 
 ## Slide 9 — Track C: Truy vấn Tiếng Việt Xuyên ngữ (`SG-031`..`SG-034`) (10:30 – 11:30)
 - **Thiết kế chống thiên lệch:**
-  - `30` truy vấn tiếng Việt thực tế (10 dev / 20 test) chia theo 10 nhóm chủ đề.
+  - `30` truy vấn tiếng Việt v2 (10 dev / 20 test), mỗi truy vấn một `intent_family`, 15 miền chủ đề; AI soạn nháp từ thống kê chủ đề của corpus, chủ dự án duyệt nguyên bản (`ADR-023`). Bộ v1 đã ngừng dùng vì lệch chủ đề với corpus.
   - 3 phương pháp tạo pool top-10: `translated_bm25` (dịch bằng `Helsinki-NLP/opus-mt-vi-en`), `multilingual_dense` (`intfloat/multilingual-e5-base`), và `vn_hybrid_rrf`.
-  - Pool mù `662` cặp (`219` dev / `443` test) xóa sạch tên phương pháp và điểm số (`vn_pool.json`).
+  - Pool mù `679` cặp (`227` dev / `452` test) xóa sạch tên phương pháp và điểm số (`data/annotations/v2/vn_pool.json`).
 - **Trạng thái hiện tại (`CLM-008`):** Đang chờ 2 thành viên hoàn tất gán nhãn độc lập (`SG-033`) trước khi chạy `scripts/run_vn_eval.py` để khóa cấu hình trên dev và chấm test 1 lần (`SG-034`).
 
 ---
@@ -95,16 +97,16 @@
 - **Môi trường đo:** CPU Intel 12 luồng, RAM cục bộ, không dùng GPU (`performance.json`).
 - **Bộ nhớ & Khởi động lạnh:** Peak RSS tiến trình lạnh `895.0 MB`; nạp stack độc lập `~14.6s` (`/health` live sau `~28.2s`).
 - **Độ trễ Warm Per-Query so với ngân sách mục tiêu `500ms`:**
-  - **SciFact (`5.183` bài):** Đạt mục tiêu (`BM25 P95 = 40.2ms`, `Hybrid P95 = 41.5ms`).
-  - **SCIDOCS (`25.657` bài):** `Dense search P95 = 9.1ms`, nhưng `BM25 P95 = 1510.9ms` (vượt 500ms do danh sách đảo Python thuần).
-  - **Track B (`C100 + PPR`):** Trung bình `1683.5ms` (`P95 = 2380.4ms` — vượt ngân sách 500ms, báo cáo trung thực).
+  - **SciFact (`5.183` bài, $n=20$ truy vấn):** Đạt mục tiêu (`BM25 P95 = 40.2ms`, `Hybrid P95 = 41.5ms`).
+  - **SCIDOCS (`25.657` bài, $n=10$ truy vấn):** `Dense search P95 = 9.1ms`, nhưng `BM25 P95 = 1510.9ms` (vượt 500ms do danh sách đảo Python thuần).
+  - **Track B (`C100 + PPR`, $n=5$ truy vấn):** Trung bình `1683.5ms` (`P95 = 2380.4ms` — vượt ngân sách 500ms, báo cáo trung thực).
 
 ---
 
 ## Slide 11 — Đóng gói Tái lập, Kiểm thử Phá hủy & Minh bạch AI (`SG-041`..`SG-052`) (12:45 – 14:00)
 - **Tái lập một lệnh:**
   - `requirements.lock` (80 gói khóa cứng), `python scripts/verify_release.py` (kiểm 33 SHA-256), `scripts/run_demo.ps1` (13/13 kiểm tra offline PASS).
-- **746 kiểm thử tự động (`pytest`):**
+- **749 kiểm thử tự động pass ở lần chạy toàn bộ ghi nhận ngày 29/09 (`pytest`):**
   - Bao gồm kiểm thử phá hủy chống nuốt lỗi ngầm (`exit 1` khi thiếu dữ liệu/split/nhãn) và cô lập tuyệt đối dữ liệu đã freeze (`SG-052`).
 - **Minh bạch AI:** Công khai rõ phần code/audit do AI hỗ trợ và các cổng bắt buộc do hai thành viên con người thực hiện (`H-1`, `H-2`, `H-3`).
 
@@ -114,9 +116,9 @@
 - **3 bài học cốt lõi:**
   1. Dense (`BGE-base`) vượt xa BM25 trên văn bản khoa học, nhưng ghép RRF không trọng số với BM25 yếu hơn sẽ làm giảm `nDCG@10`.
   2. Trên đồ thị trích dẫn thưa cắt theo thời gian, Seeded PPR trên `C100` bị giới hạn bởi `Recall@100 = 0.2325` và không vượt Global PageRank.
-  3. Cộng điểm ưu tiên bài mới ($\lambda > 0$) đánh đổi trực tiếp với việc làm tụt hạng các bài báo nền tảng.
+  3. Giảm điểm theo tuổi bài báo ($\lambda > 0$) làm `nDCG@10` giảm đơn điệu; cấu hình được chọn không dùng điều chỉnh tuổi.
 - **Chuyển sang Demo trực tiếp (5 phút theo [DEMO_SCRIPT.md](../docs/DEMO_SCRIPT.md)):**
   1. Truy vấn tiếng Anh trên SciFact (`Dense` vs `Hybrid`).
-  2. Truy vấn tiếng Việt không trùng từ khóa tiếng Anh $\to$ quan sát nhãn trung thực `hybrid+fallback-dense-only`.
+  2. Truy vấn tiếng Việt không trùng từ khóa tiếng Anh $\to$ quan sát nhãn phương pháp có hậu tố `+fallback-dense-only`.
   3. Khám phá đồ thị trích dẫn lân cận (`SG-037`) và xuất trích dẫn BibTeX/JSON khi ngắt mạng (`SG-038`).
   - *Phương án dự phòng mất sự cố máy:* Mở trực tiếp các báo cáo tĩnh `artifacts/reports/offline_smoke.md`, `ui_smoke.md`, `graph_ui_smoke.md` và chạy `python scripts/export_references.py` trên CLI.

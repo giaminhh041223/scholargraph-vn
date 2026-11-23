@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "ScholarGraph VN",
-  "updated_at": "2026-10-08T13:49:39.757091+07:00",
+  "updated_at": "2026-11-23T17:18:53+07:00",
   "phase": "M7",
   "stage": "g4_agent_deliverables_complete_awaiting_human_gates_vn_v2_relabel",
   "active_tasks": [
@@ -9,8 +9,8 @@
     "SG-033"
   ],
   "next_task_id": "SG-034",
-  "last_session_id": "SESSION-20261008-108-CODEX",
-  "last_session_log": "management/logs/SESSION-20261008-108-CODEX.md",
+  "last_session_id": "SESSION-20261123-109-CLAUDE",
+  "last_session_log": "management/logs/SESSION-20261123-109-CLAUDE.md",
   "handoff_path": "management/HANDOFF.md",
   "task_registry_path": "management/tasks.json",
   "model_routing_path": "management/model_routing.json",

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "task_id": "SG-042",
   "module_version": "sg042-1.0.0",
-  "generated_at": "2026-09-29T09:06:49.703772+00:00",
+  "generated_at": "2026-11-23T10:25:56.937684+00:00",
   "freeze_manifest": {
     "path": "configs/frozen_main.json",
     "sha256": "34159fb133594633530c08390b259ea6efd7e024a384cb2c25092bf6e4797557",
@@ -154,7 +154,13 @@
     },
     "table_3_track_c_vn": {
       "status": "chua_do",
-      "pending_human_gate": "SG-033 (2 human annotators label 219 dev + 443 test pairs) -> SG-034",
+      "pending_human_gate": "SG-033 (2 human annotators label 227 dev + 452 test pairs of VN query set v2, ADR-023) -> SG-034",
+      "pool": "data/annotations/v2/vn_pool.json",
+      "pool_pairs": {
+        "dev": 227,
+        "test": 452,
+        "total": 679
+      },
       "metrics": null
     },
     "table_4_ablation_age": {
@@ -1036,7 +1042,7 @@
     {
       "claim_id": "CLM-002",
       "category": "positive_finding",
-      "statement_vi": "Trên SCIDOCS test (n=1000), Dense đạt nDCG@10 = 0.2172, vượt BM25 (0.1521) với chênh lệch tuyệt đối +0.0652 (95% paired bootstrap CI [+0.0558, +0.0748], không chứa 0).",
+      "statement_vi": "Trên SCIDOCS test (n=1000), Dense đạt nDCG@10 = 0.2172, vượt BM25 (0.1521) với chênh lệch tuyệt đối +0.0652 (95% paired bootstrap CI [+0.0549, +0.0753], không chứa 0).",
       "source_file": "artifacts/reports/statistics.json",
       "run_ids": [
         "RUN-20260921-104021-dense-scidocs-test",
@@ -1054,7 +1060,7 @@
     {
       "claim_id": "CLM-003",
       "category": "negative_finding",
-      "statement_vi": "Kết quả âm 1 (Hybrid RRF k=60 vs Dense): Trên SciFact test, Hybrid RRF đạt nDCG@10 = 0.7204, thấp hơn Dense (0.7404) với delta -0.0200 (95% CI [-0.0469, +0.0066], chứa 0). Trên SCIDOCS test, Hybrid RRF đạt nDCG@10 = 0.1976, thấp hơn Dense (0.2172) với delta -0.0197 (95% CI [-0.0246, -0.0148], không chứa 0). Ghép BM25 trọng số bằng nhau kéo tụt top-10 khi BM25 yếu hơn hẳn Dense.",
+      "statement_vi": "Kết quả âm 1 (Hybrid RRF k=60 vs Dense): Trên SciFact test, Hybrid RRF đạt nDCG@10 = 0.7204, thấp hơn Dense (0.7404) với delta -0.0200 (95% CI [-0.0469, +0.0066], chứa 0). Trên SCIDOCS test, Hybrid RRF đạt nDCG@10 = 0.1976, thấp hơn Dense (0.2172) với delta -0.0197 (95% CI [-0.0273, -0.0122], không chứa 0). Ghép BM25 trọng số bằng nhau kéo tụt top-10 khi BM25 yếu hơn hẳn Dense.",
       "source_file": "artifacts/reports/statistics.json",
       "run_ids": [
         "RUN-20260921-103415-hybrid-scifact-test",
@@ -1146,8 +1152,8 @@
     {
       "claim_id": "CLM-008",
       "category": "pending_human_gate",
-      "statement_vi": "Track C (Truy vấn tiếng Việt xuyên ngữ): Đã hoàn tất 30 truy vấn (10 dev / 20 test), bộ nhớ đệm dịch máy (Opus-MT vi-en) và pool mù 662 cặp (SG-031..SG-033 tooling), nhưng CHƯA báo cáo điểm đánh giá cuối cùng vì đang chờ 2 thành viên con người gán nhãn độc lập (SG-033) và duyệt freeze VN (SG-034).",
-      "source_file": "artifacts/reports/main_run_registry.json",
+      "statement_vi": "Track C (Truy vấn tiếng Việt xuyên ngữ): Đã hoàn tất 30 truy vấn v2 (10 dev / 20 test, ADR-023), bộ nhớ đệm dịch máy (Opus-MT vi-en) và pool mù 679 cặp (227 dev / 452 test; SG-031..SG-033 tooling), nhưng CHƯA báo cáo điểm đánh giá cuối cùng vì đang chờ 2 thành viên con người gán nhãn độc lập (SG-033) và duyệt freeze VN (SG-034).",
+      "source_file": "data/annotations/v2/vn_pool.json",
       "run_ids": [],
       "metrics": null
     }

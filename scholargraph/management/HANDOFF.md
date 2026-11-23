@@ -1,3 +1,16 @@
+# Progress report và đối chiếu final_report — 2026-11-23T17:18:53+07:00
+
+Phiên [109](logs/SESSION-20261123-109-CLAUDE.md) (Claude, một chat kiêm coordinator+worker). Không đổi trạng thái task hay human gate nào.
+
+- **Progress report môn học:** `reports/progress/Group14_ProgressReport.pdf` (3 trang; nhóm 14, 4 thành viên, GV Nguyễn Kiêm Hiếu, lớp 175886), nguồn `reports/progress/Group14_ProgressReport.html`. Thư mục này KHÔNG commit (có MSSV; PDF bị `.gitignore` chặn). Còn thiếu link repo.
+- **`reports/final_report.md` đã sửa 37 vị trí cho khớp artifact** theo yêu cầu "Sửa luôn" của người dùng: 3 CI, số query dev/test, năm cắt, mô tả che cạnh, công thức tuổi (nhân exp, mốc năm bài truy vấn), dev nDCG 0.1310, nhóm bậc Track B, số gói lỗi 12/6/6, mô tả audit rò rỉ, pool v2 679 cặp, nguồn gốc truy vấn VN (agent soạn nháp, chủ dự án duyệt), số test 749. `verify_claims.py` PASS sau sửa. Chi tiết trong log 109.
+- **Checkpoint 2 (cùng phiên, người dùng trả lời "Sửa tiếp"):** các file mang cùng số sai đã sửa. `scripts/build_evidence_index.py` giờ sinh CI của CLM-001..004 và số cặp pool VN từ `statistics.json` / `data/annotations/v2/vn_pool.json` (không còn chuỗi viết tay), kiểm `ci_excludes_zero` khớp lời văn, ghi file LF; `artifacts/reports/evidence_index.json` sinh lại (đổi đúng: statement CLM-002/003/008, source_file CLM-008, table_3, generated_at). `scripts/verify_claims.py` thêm kiểm 5 CI trong cả report và checklist. Đã sửa `docs/CLAIMS_CHECKLIST.md`, `reports/defense_slides.md`, `docs/DEFENSE_QA.md`, `docs/REPRODUCE.md`. Thêm 4 test (1 verifier, 3 generator; có negative exit 1).
+- **Vẫn chưa làm:** các lời giải thích cơ chế trong report/slides/Q&A chỉ được gắn nhãn giả thuyết, chưa có phép đo; `docs/SUBMISSION_CHECKLIST.md`, `docs/DEMO_SCRIPT.md` và các tài liệu khác chưa được rà.
+- **Test:** toàn suite trên trạng thái cuối (`PYTHONPATH=src .venv/Scripts/python.exe -m pytest tests -q -p no:cacheprovider`): **1614 passed, 0 failed** (307 s). Lỗi `test_ui.py::test_static_served_offline` có từ trước đã sửa ở test (dương tính giả do chú thích trong `public_search.js`; JS được ghim hash nên không sửa). Lưu ý: chạy suite phải đặt `PYTHONPATH=src`, nếu không 20 test CLI của `test_public_fusion.py` fail vì không import được `scholargraph`.
+- **Next:** người dùng điền 3 placeholder (số nhóm, thành viên, link repo) vào progress report và nộp; commit các thay đổi phiên 109 khi người dùng đồng ý. Core vẫn như dưới: SG-033 chờ nhãn người v2, NEXT_TASK SG-034.
+
+## Lịch sử trước phiên 109
+
 # Máy chấm dev v2 đã hoàn tất — 2026-10-08T13:49:39.757091+07:00
 
 Hai subagent chấm độc lập 227 cặp dev v2 mỗi agent; [báo cáo](../artifacts/reports/vn_machine_dev_v2_20261008/REPORT.md), [CSV bất đồng](../artifacts/reports/vn_machine_dev_v2_20261008/disagreements.csv), [log108](logs/SESSION-20261008-108-CODEX.md). 196/205 cặp có nhãn số trùng (95,61%), kappa0,931;22cặp cùngunjudged,9bấtđồng. Hai context cùng requested SOL/high, runtime telemetryunknown; không là gold/humanlabels. 7protected hashes giữ nguyên. Agentsđãdừng, experimentcompleted.
