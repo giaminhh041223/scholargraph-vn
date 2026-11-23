@@ -54,3 +54,8 @@ page_20.png
 # bn workspace extras
 tmp/
 .tmp/
+
+# Course lecture material (copyright of the course); kept locally, not published
+*.pdf.txt
+extracted_L*.txt
+L0*-*.txt
